@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+<<<<<<< HEAD
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -37,6 +38,15 @@ const appRouter : Routes = [
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRouter)
+=======
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule
+>>>>>>> c444a65cfbcf54f440a8bdf2b9b6591ea4bd9aea
   ],
   providers: [],
   bootstrap: [AppComponent]

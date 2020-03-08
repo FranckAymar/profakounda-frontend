@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+<<<<<<< HEAD
               "src/styles.css",
               "src/assets/css/font-awesome.min.css",
               "src/assets/css/materialize.css",
@@ -37,6 +38,11 @@
               "src/assets/js/materialize.min.js",
               "src/assets/js/custom.js"
             ]
+=======
+              "src/styles.css"
+            ],
+            "scripts": []
+>>>>>>> c444a65cfbcf54f440a8bdf2b9b6591ea4bd9aea
           },
           "configurations": {
             "production": {

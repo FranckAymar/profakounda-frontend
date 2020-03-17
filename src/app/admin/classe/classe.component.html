@@ -13,12 +13,15 @@
                     <thead>
                         <tr>
                             <th>Libelle</th>
+                            <th>Cycle</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <span *ngIf="classes.length == 0">Aucun élément</span>
                         <tr *ngFor="let classe of classes">
                             <td>{{classe.libelle}}</td>
+                            <td>{{classe.cycle.libelle}}</td>
                             <td><button type="button" class="btn btn-primary"> Modifier</button></td>
                             <td><button type="button" class="btn btn-danger">Supprimer</button></td>
                         </tr>

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ClasseService } from './classe.service';
+import { FiliereService } from './filiere.service';
 
-describe('ClasseService', () => {
+describe('FiliereService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ClasseService = TestBed.get(ClasseService);
+    const service: FiliereService = TestBed.get(FiliereService);
     expect(service).toBeTruthy();
   });
 });

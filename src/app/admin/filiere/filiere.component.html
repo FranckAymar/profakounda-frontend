@@ -1,1 +1,31 @@
-<p>filiere works!</p>
+<!--== User Details ==-->
+<div class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <h4>Filiere</h4>
+        </div>
+        <div class="tab-inn">
+            <div class="table-responsive table-desi">
+                <button type="button" class="btn btn-primary">
+                    Ajouter
+                </button>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Libelle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <span *ngIf="filieres.length == 0">Aucun élément</span>
+                        <tr *ngFor="let filiere of filieres">
+                            <td>{{filiere.libelle}}</td>
+                            <td><button type="button" class="btn btn-primary"> Modifier</button></td>
+                            <td><button type="button" class="btn btn-danger">Supprimer</button></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

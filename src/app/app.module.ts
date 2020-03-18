@@ -11,6 +11,7 @@ import { DashboardHomeComponent } from './dashboard-home/dashboard-home.componen
 import { ClasseComponent } from './admin/classe/classe.component';
 import { CycleComponent } from './admin/cycle/cycle.component';
 import { FiliereComponent } from './admin/filiere/filiere.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const appRouter : Routes = [
@@ -36,7 +37,7 @@ const appRouter : Routes = [
      FiliereComponent
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(appRouter)
+    BrowserModule, RouterModule.forRoot(appRouter), HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

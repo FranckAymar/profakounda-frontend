@@ -6,7 +6,7 @@
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Ajouter
                 </button>
                 <table class="table table-hover">
@@ -15,16 +15,17 @@
                             <th>Libelle</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                         <span *ngIf="filieres.length == 0">Aucun élément</span>
                         <tr *ngFor="let filiere of filieres">
                             <td>{{filiere.libelle}}</td>
-                            <td><button type="button" class="btn btn-primary"> Modifier</button></td>
+                            <td><button type="button" class="btn btn-primary" > Modifier</button></td>
                             <td><button type="button" class="btn btn-danger">Supprimer</button></td>
                         </tr>
 
                     </tbody>
                 </table>
+                <button type="button" class="btn btn-danger"> danger</button>
             </div>
         </div>
     </div>

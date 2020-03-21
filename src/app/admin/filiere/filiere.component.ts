@@ -9,7 +9,7 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class FiliereComponent implements OnInit {
 
-
+  
   filieres  = [] ;
 
   constructor(private filiereService : FiliereService) { }
@@ -18,7 +18,7 @@ export class FiliereComponent implements OnInit {
 
     this.onFetchFiliere() ;
   }
-
+ 
   onFetchFiliere() {
 
     this.filiereService.fetchFilieres().subscribe(

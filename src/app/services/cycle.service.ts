@@ -14,5 +14,7 @@ export class CycleService {
 fetchCycles() : Observable<any>   {
 
   return this.httpClient.get(URL.recupererCycle);
+
+  
 }
 }

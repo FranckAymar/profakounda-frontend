@@ -18,4 +18,30 @@ fetchClasses() : Observable<any>   {
   return this.httpClient.get(URL.recupererClasse);
 }
  
+
+saveClasse(classe : Classe): Observable<any> {
+
+  //Nouvelle enregistrement
+  
+    if(classe.id === null) {
+
+      return this.httpClient.post(URL.enregistrerClasse, classe);
+    }
+    
+    //Modification
+    else {
+
+      return  this.httpClient.post(URL.modifierClassse, classe);
+
+    }
+
+}
+
+deleteClasse (id : number) : Observable<any> {
+
+  return  this.httpClient.post(URL.supprimerClasse , id);
+
+}
+
+
 }

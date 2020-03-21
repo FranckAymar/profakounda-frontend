@@ -24,4 +24,12 @@ onSaveCycle(cycle:Cycle){
 onDeleteCycle(cycle:Cycle){
   return this.httpClient.post(URL.supprimerCycle,cycle);
 }
+
+getCycle(cycle:Cycle){
+  return this.httpClient.post(URL.retrouverCycleParId,cycle);
+}
+updateCycle(cycle:Cycle){
+  return this.httpClient.post(URL.modifierCycle,cycle);
+}
+
 }

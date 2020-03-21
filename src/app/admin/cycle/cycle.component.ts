@@ -14,6 +14,8 @@ export class CycleComponent implements OnInit {
 
   cycles = [];
   erreur :string;
+  cycle1:Cycle = new Cycle(0,"");
+  cycle:Cycle = new Cycle(0,"");
   constructor(private cycleService : CycleService) { }
 
   ngOnInit() {
@@ -41,15 +43,30 @@ export class CycleComponent implements OnInit {
   }
 
   onSaveCycle(formData){
-    const cycle = new Cycle(0,formData['libelle']);
-    this.cycleService.onSaveCycle(cycle)
+    this.cycleService.onSaveCycle(formData)
     .subscribe(
       (response)=>{
-      
+        this.cycle = new Cycle(0,"");
+        document.getElementById('ajouterCycle').click();
         this.onFetchCycles();
       },
       (error)=>{
         console.log('Une erreure à survenue: '+ error);
+      }
+    )
+  }
+
+  onUpdateCycle(formData){
+    const  c = formData;
+    this.cycleService.updateCycle(c)
+    .subscribe(
+      (response)=>{
+        this.cycle1 = new Cycle(0,"");
+        document.getElementById('updateCycle').click();
+        this.onFetchCycles();
+      },
+      (error)=>{
+        console.log("Une erreur s'est produite: "+error);
       }
     )
   }
@@ -61,6 +78,22 @@ export class CycleComponent implements OnInit {
       (reponse)=>{
         this.erreur = reponse['error'];
         this.onFetchCycles();
+      },
+      (erreur)=>{
+        console.log("Une erreur s'est produite: "+erreur);
+      }
+    )
+  }
+
+
+  getCycle(id:number){
+    const cycle = new Cycle(id,"");
+    this.cycleService.getCycle(cycle)
+    .subscribe(
+      (reponse)=>{
+       this.cycle1.id = reponse["id"];
+       this.cycle1.libelle = reponse["libelle"]
+       console.log(this.cycle1);
       },
       (erreur)=>{
         console.log("Une erreur s'est produite: "+erreur);

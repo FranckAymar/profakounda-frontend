@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {FormsModule} from '@angular/forms'
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -37,7 +37,8 @@ const appRouter : Routes = [
      FiliereComponent
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(appRouter), HttpClientModule
+    BrowserModule, RouterModule.forRoot(appRouter), HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

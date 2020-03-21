@@ -11,5 +11,7 @@ export const URL = {
     recupererFiliere :  consts.host+ consts.nameProject +'filieres'   ,
     
     //RecupererCycle
-    recupererCycle : consts.host+ consts.nameProject +'cycles'   
+    recupererCycle : consts.host+ consts.nameProject +'cycles'   ,
+    enregistrerCycle:consts.host+ consts.nameProject +'enregistrerCycle',
+    supprimerCycle:consts.host+ consts.nameProject +'deleteCycle'
 }

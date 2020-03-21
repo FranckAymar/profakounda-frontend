@@ -13,5 +13,7 @@ export const URL = {
     //RecupererCycle
     recupererCycle : consts.host+ consts.nameProject +'cycles'   ,
     enregistrerCycle:consts.host+ consts.nameProject +'enregistrerCycle',
-    supprimerCycle:consts.host+ consts.nameProject +'deleteCycle'
+    supprimerCycle:consts.host+ consts.nameProject +'deleteCycle',
+    retrouverCycleParId:consts.host+ consts.nameProject +'getCycle',
+    modifierCycle:consts.host+ consts.nameProject +'updateCycle'
 }

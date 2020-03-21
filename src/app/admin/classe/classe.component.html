@@ -6,7 +6,8 @@
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
-                <button (click) = "initialisation()" type="button" data-toggle="modal" data-target="#ajouterClasse" class="btn btn-primary">
+                <button (click)="initialisation()" type="button" data-toggle="modal" data-target="#ajouterClasse"
+                    class="btn btn-primary">
                     Ajouter
                 </button>
                 <table class="table table-hover">
@@ -22,8 +23,10 @@
                         <tr *ngFor="let classe of classes">
                             <td>{{classe.libelle}}</td>
                             <td>{{classe.cycle.libelle}}</td>
-                            <td><button (click) = "onLoadClass(classe)" data-toggle="modal" data-target="#ajouterClasse" type="button" class="btn btn-primary"> Modifier</button></td>
-                            <td><button (click) = "onDeleteClasse(classe.id)" type="button" class="btn btn-danger">Supprimer</button></td>
+                            <td><button (click)="onLoadClass(classe)" data-toggle="modal" data-target="#ajouterClasse"
+                                    type="button" class="btn btn-primary"> Modifier</button></td>
+                            <td><button (click)="onDeleteClasse(classe.id)" type="button"
+                                    class="btn btn-danger">Supprimer</button></td>
                         </tr>
 
                     </tbody>
@@ -47,21 +50,22 @@
                 </button>
             </div>
             <div class="modal-body">
+                <!-- Libelle-->
                 <form [formGroup]="classForm" (ngSubmit)="onSaveClasse()">
                     <div class="form-group">
-                        <label for="libelle" >Libelle:</label>
-                        <input [(ngModel)] = "classe.libelle" formControlName="libelle" 
-                                type="text" id="libelle" name="libelle" required
-                                >
+                        <label for="libelle">Libelle:</label>
+                        <input [(ngModel)]="classe.libelle" formControlName="libelle" type="text" id="libelle"
+                            name="libelle" required>
                     </div>
+                    <!-- Cycle-->
                     <div class="form-group">
-                        <label for="cycle" >Cycle :</label>
-                        <select class="form-control"  id="cycle" [(ngModel)] = "classe.cycleId"  
-                                formControlName="cycleId">
+                        <label for="cycle">Cycle :</label>
+                        <select class="form-control" id="cycle" [(ngModel)]="classe.cycleId" formControlName="cycleId" required>
                             <option *ngFor="let cycle of cycles" [ngValue]="cycle.id">{{cycle.libelle}}</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <!-- Btn submit-->
+                    <button [disabled]="classForm.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
             </div>
             <div class="modal-footer">

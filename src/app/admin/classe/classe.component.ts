@@ -2,7 +2,7 @@ import { CycleService } from './../../services/cycle.service';
 import { ClasseService } from './../../services/classe.service';
 import { Classe } from './../../model/classe';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { timer } from 'rxjs';
 
 @Component({
@@ -35,8 +35,8 @@ export class ClasseComponent implements OnInit {
     this.classForm = this.formBuilder.group({
 
       id: [null],
-      cycleId: [null],
-      libelle: [null],
+      cycleId: [null, Validators.required],
+      libelle: [null, Validators.required],
 
     });
 

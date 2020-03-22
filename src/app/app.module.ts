@@ -12,13 +12,17 @@ import { ClasseComponent } from './admin/classe/classe.component';
 import { CycleComponent } from './admin/cycle/cycle.component';
 import { FiliereComponent } from './admin/filiere/filiere.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ForfaitComponent } from './admin/forfait/forfait.component';
 
 
 const appRouter : Routes = [
   {path: 'admin/dashboard-home', component  : DashboardHomeComponent},
   {path: 'admin/classe', component  : ClasseComponent},
   {path: 'admin/cycle', component  : CycleComponent},
-  {path: 'admin/filiere', component  : FiliereComponent}
+  {path: 'admin/filiere', component  : FiliereComponent}, 
+  {path: 'admin/forfait', component  : ForfaitComponent}, 
+
+  
 
   
 ] ;
@@ -34,7 +38,8 @@ const appRouter : Routes = [
      DashboardHomeComponent,
      ClasseComponent,
      CycleComponent,
-     FiliereComponent
+     FiliereComponent,
+     ForfaitComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRouter), HttpClientModule,

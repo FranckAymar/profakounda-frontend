@@ -18,5 +18,11 @@ export const URL = {
     enregistrerCycle:consts.host+ consts.nameProject +'enregistrerCycle',
     supprimerCycle:consts.host+ consts.nameProject +'deleteCycle',
     retrouverCycleParId:consts.host+ consts.nameProject +'getCycle',
-    modifierCycle:consts.host+ consts.nameProject +'updateCycle'
+    modifierCycle:consts.host+ consts.nameProject +'updateCycle',
+
+    //Forfait
+    recupererForfaits : consts.host+ consts.nameProject +'recupererForfait',
+    enregistrerForfait : consts.host+ consts.nameProject +'enregistrerForfait' ,
+    supprimerForfait : consts.host+ consts.nameProject +'supprimerForfait',
+    modifierForfait :  consts.host+ consts.nameProject +'modifierForfait'
 }

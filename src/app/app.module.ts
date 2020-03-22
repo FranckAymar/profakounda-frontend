@@ -13,6 +13,8 @@ import { CycleComponent } from './admin/cycle/cycle.component';
 import { FiliereComponent } from './admin/filiere/filiere.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ForfaitComponent } from './admin/forfait/forfait.component';
+import { NiveauComponent } from './admin/niveau/niveau.component';
+import { NiveauService } from './services/niveau.service';
 
 
 const appRouter : Routes = [
@@ -21,8 +23,7 @@ const appRouter : Routes = [
   {path: 'admin/cycle', component  : CycleComponent},
   {path: 'admin/filiere', component  : FiliereComponent}, 
   {path: 'admin/forfait', component  : ForfaitComponent}, 
-
-  
+  {path: 'admin/niveau', component  : NiveauComponent},
 
   
 ] ;
@@ -39,13 +40,16 @@ const appRouter : Routes = [
      ClasseComponent,
      CycleComponent,
      FiliereComponent,
-     ForfaitComponent
+     ForfaitComponent,
+     NiveauComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRouter), HttpClientModule,
     FormsModule, ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    NiveauService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

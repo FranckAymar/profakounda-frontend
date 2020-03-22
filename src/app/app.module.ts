@@ -12,12 +12,15 @@ import { ClasseComponent } from './admin/classe/classe.component';
 import { CycleComponent } from './admin/cycle/cycle.component';
 import { FiliereComponent } from './admin/filiere/filiere.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NiveauComponent } from './admin/niveau/niveau.component';
+import { NiveauService } from './services/niveau.service';
 
 
 const appRouter : Routes = [
   {path: 'admin/dashboard-home', component  : DashboardHomeComponent},
   {path: 'admin/classe', component  : ClasseComponent},
   {path: 'admin/cycle', component  : CycleComponent},
+  {path: 'admin/niveau', component  : NiveauComponent},
   {path: 'admin/filiere', component  : FiliereComponent}
 
   
@@ -34,13 +37,16 @@ const appRouter : Routes = [
      DashboardHomeComponent,
      ClasseComponent,
      CycleComponent,
-     FiliereComponent
+     FiliereComponent,
+     NiveauComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRouter), HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    NiveauService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

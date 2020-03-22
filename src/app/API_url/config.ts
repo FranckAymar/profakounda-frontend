@@ -10,10 +10,16 @@ export const URL = {
     //Recuperer Filiere
     recupererFiliere :  consts.host+ consts.nameProject +'filieres'   ,
     
-    //RecupererCycle
+    //Cycle
     recupererCycle : consts.host+ consts.nameProject +'cycles'   ,
     enregistrerCycle:consts.host+ consts.nameProject +'enregistrerCycle',
     supprimerCycle:consts.host+ consts.nameProject +'deleteCycle',
     retrouverCycleParId:consts.host+ consts.nameProject +'getCycle',
-    modifierCycle:consts.host+ consts.nameProject +'updateCycle'
+    modifierCycle:consts.host+ consts.nameProject +'updateCycle',
+    //Niveau
+    recupererNiveau : consts.host+ consts.nameProject +'niveaux'   ,
+    enregistrerNiveau:consts.host+ consts.nameProject +'enregistrerNiveau',
+    supprimerNiveau:consts.host+ consts.nameProject +'deleteNiveau',
+    retrouverNiveauParId:consts.host+ consts.nameProject +'getNiveau',
+    modifierNiveau:consts.host+ consts.nameProject +'updateNiveau'
 }

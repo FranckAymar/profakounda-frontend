@@ -11,10 +11,13 @@ export const URL = {
     enregistrerClasse : consts.host+ consts.nameProject +'enregistrerClasse'   ,
     supprimerClasse : consts.host+ consts.nameProject +'supprimerClasse' ,
     modifierClassse :  consts.host+ consts.nameProject +'modifierClasse' ,
-    //Recuperer Filiere
-    recupererFiliere :  consts.host+consts.nameProject+'filieres'   ,
+    //URL des Filieres
+    recupererFiliere :  consts.host+consts.nameProject+'filieres' ,
+    enregistrerFiliere : consts.host+ consts.nameProject +'enregistrerFiliere',
+    modifierFiliere:  consts.host+ consts.nameProject +'modifierFiliere' ,
+    supprimerFiliere:  consts.host+ consts.nameProject +'supprimerFiliere' ,
     
     //RecupererCycle
     recupererCycle : consts.host+ consts.nameProject +'cycles'   
 
-}
+} 

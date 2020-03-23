@@ -38,6 +38,25 @@ export class FiliereComponent implements OnInit {
 
   }
 
+  onLoadFiliere(filiereLoad: any) {
+
+    this.initialisation() ;
+    this.classForm.patchValue({
+      id: filiereLoad.id
+    });
+    this.filiere.libelle = filiereLoad.libelle;
+    this.filiere.id = filiereLoad.id;
+  }
+
+  initialisation() {
+
+    this.filiere = {id:null,libelle:""} ;
+    this.classForm.patchValue({
+      id: null
+    });
+    this.message = "" ;
+
+  }
   //recuperer les filieres
   onFetchFiliere() {
 
@@ -66,7 +85,7 @@ export class FiliereComponent implements OnInit {
 
         this.onFetchFiliere();
         this.message = "Enregistrement effectué avec succès"
-        this.filiere={};
+        this.initialisation();
       },
       (error) => {
 

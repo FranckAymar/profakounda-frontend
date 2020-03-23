@@ -26,7 +26,7 @@ const adminRouter : Routes = [
   {path: 'admin', component  : AdminMainComponent,
     children : [
       {
-        path : '',
+        path : 'dashboard',
         component : DashboardHomeComponent
         
       },

@@ -1,4 +1,4 @@
-import { Filiere } from './../../model/filiere';
+import { Filiere } from '../model/filiere';
 import { FiliereService } from '../services/filiere.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';

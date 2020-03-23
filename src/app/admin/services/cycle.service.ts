@@ -2,7 +2,7 @@ import { URL } from '../../API_url/config';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cycle } from '../../model/cycle.model';
+import { Cycle } from '../model/cycle.model';
 
 @Injectable({
   providedIn: 'root'

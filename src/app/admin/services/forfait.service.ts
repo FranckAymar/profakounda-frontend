@@ -1,4 +1,4 @@
-import { Forfait } from '../../model/forfait';
+import { Forfait } from '../model/forfait';
 import { URL } from '../../API_url/config';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';

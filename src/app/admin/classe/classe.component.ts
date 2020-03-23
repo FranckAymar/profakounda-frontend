@@ -92,9 +92,7 @@ export class ClasseComponent implements OnInit {
       (response) => {
 
         this.onFetchClasses();
-        alert('Supprimer avec succès')
-
-
+        alert('Supprimer avec succès');
 
       },
       (error) => {

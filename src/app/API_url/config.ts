@@ -23,6 +23,12 @@ export const URL = {
     supprimerCycle:consts.host+ consts.nameProject +'deleteCycle',
     retrouverCycleParId:consts.host+ consts.nameProject +'getCycle',
     modifierCycle:consts.host+ consts.nameProject +'updateCycle',
+
+    //Forfait
+    recupererForfaits : consts.host+ consts.nameProject +'recupererForfait',
+    enregistrerForfait : consts.host+ consts.nameProject +'enregistrerForfait' ,
+    supprimerForfait : consts.host+ consts.nameProject +'supprimerForfait',
+    modifierForfait :  consts.host+ consts.nameProject +'modifierForfait',
     //Niveau
     recupererNiveau : consts.host+ consts.nameProject +'niveaux'   ,
     enregistrerNiveau:consts.host+ consts.nameProject +'enregistrerNiveau',

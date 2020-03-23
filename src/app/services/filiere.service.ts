@@ -27,9 +27,9 @@ modifierFiliere(filiere : Filiere): Observable<any> {
       return this.httpClient.post(URL.modifierFiliere, filiere);
     }
  // suppression
-supprimerFiliere(id:number): Observable<any> {
+supprimerFiliere(filiere: Filiere): Observable<any> {
 
-      return this.httpClient.post(URL.supprimerFiliere, id);
+      return this.httpClient.post(URL.supprimerFiliere,filiere);
     }    
 
 }

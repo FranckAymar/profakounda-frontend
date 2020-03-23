@@ -66,7 +66,7 @@ export class FiliereComponent implements OnInit {
 
         this.onFetchFiliere();
         this.message = "Enregistrement effectué avec succès"
-
+        this.filiere={};
       },
       (error) => {
 
@@ -78,5 +78,26 @@ export class FiliereComponent implements OnInit {
 
 
   }
-  
+
+  ondeleteFiliere(id:number) {
+
+    const fil = new Filiere(id,"");
+    this.filiereService.supprimerFiliere(fil).subscribe(
+     (response) => {
+
+
+        this.onFetchFiliere();
+        alert("suppression  effectué avec succès");
+      },
+      (error) => {
+
+        console.log("Une erreur est survenue"+error);
+
+      }
+
+    );
+
+
   }
+
+}

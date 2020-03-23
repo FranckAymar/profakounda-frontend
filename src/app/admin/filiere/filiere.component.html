@@ -20,7 +20,7 @@
                         <tr *ngFor="let filiere of filieres">
                             <td>{{filiere.libelle}}</td>
                             <td><button type="button" class="btn btn-primary" > Modifier</button></td>
-                            <td><button type="button" class="btn btn-danger">Supprimer</button></td>
+                            <td><button type="button"  (click)="ondeleteFiliere(filiere.id)"class="btn btn-danger">Supprimer</button></td>
                         </tr>
 
                     </tbody> 

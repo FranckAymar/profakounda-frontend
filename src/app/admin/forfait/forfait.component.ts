@@ -1,7 +1,7 @@
-import { ForfaitService } from './../../services/forfait.service';
+import { ForfaitService } from '../services/forfait.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Forfait } from 'src/app/model/forfait';
+import { Forfait } from 'src/app/admin/model/forfait';
 
 @Component({
   selector: 'app-forfait',

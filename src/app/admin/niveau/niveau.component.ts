@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NiveauService } from 'src/app/services/niveau.service';
-import { Niveau } from 'src/app/model/niveau.model';
+import { NiveauService } from 'src/app/admin/services/niveau.service';
+import { Niveau } from 'src/app/admin/model/niveau.model';
 
 @Component({
   selector: 'app-niveau',

@@ -1,9 +1,8 @@
-export class Filiere {
+export class Filiere{
 
-
-    constructor(public id : number,
-                public libelle : string) {
-                    
-                }
+    constructor(
+        public id?: number,
+        public libelle?: string,
+    ) {}
 
 }

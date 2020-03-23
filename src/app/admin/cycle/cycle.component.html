@@ -6,12 +6,9 @@
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
-                <button type="button" data-toggle="modal" data-target="#ajouterCycle" class="btn btn-primary">
+                <button type="button" class="btn btn-primary">
                     Ajouter
                 </button>
-                <div style="margin-top: 2em;" *ngIf="erreur" class="alert alert-danger">
-                    {{erreur}}
-                </div>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -21,10 +18,9 @@
                     <tbody>
                         <span *ngIf="cycles.length == 0">Aucun élément</span>
                         <tr *ngFor="let cycle of cycles">
-                           
                             <td>{{cycle.libelle}}</td>
-                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateCycle" (click)="getCycle(cycle.id)"> Modifier</button></td>
-                            <td><button type="button" class="btn btn-danger" (click)="deleteCycle(cycle.id)">Supprimer</button></td>
+                            <td><button type="button" class="btn btn-primary"> Modifier</button></td>
+                            <td><button type="button" class="btn btn-danger">Supprimer</button></td>
                         </tr>
 
                     </tbody>
@@ -33,55 +29,3 @@
         </div>
     </div>
 </div>
-
-
-<div class="modal fade" id="ajouterCycle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Enregistrer un cycle</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form  (ngSubmit)="onSaveCycle(cycle)" #f="ngForm">
-                <div class="form-group">
-                    <label for="libelle" class="control-label">Libelle:</label>
-                    <input type="text" id="libelle" name="libelle" [(ngModel)]="cycle.libelle" required class="form-control">
-                </div>
-                <button  type="submit" [disabled] = "f.invalid" class="btn btn-primary">Enregistrer</button>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="modal fade" id="updateCycle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modifier le cycle</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form  (ngSubmit)="onUpdateCycle(cycle1)" #f2="ngForm">
-                <div class="form-group">
-                    <label for="libelle" class="control-label">Libelle:</label>
-                    <input type="text" id="libelle" name="libelle" [(ngModel)]="cycle1.libelle" required class="form-control">
-                </div>
-                <button  type="submit" [disabled] = "f2.invalid" class="btn btn-primary m-1">Enregistrer</button>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-        </div>
-      </div>
-    </div>
-  </div>

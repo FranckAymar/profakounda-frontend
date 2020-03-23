@@ -34,7 +34,7 @@ saveClasse(classe : Classe): Observable<any> {
       return  this.httpClient.post(URL.modifierClassse, classe);
 
     }
-
+   
 }
 
 deleteClasse (id : number) : Observable<any> {

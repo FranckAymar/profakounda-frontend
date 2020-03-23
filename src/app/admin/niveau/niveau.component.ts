@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NiveauService } from 'src/app/services/niveau.service';
+import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { Niveau } from 'src/app/model/niveau.model';
 
 @Component({

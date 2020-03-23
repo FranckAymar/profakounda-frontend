@@ -1,4 +1,4 @@
-import { CycleService } from './../../services/cycle.service';
+import { CycleService } from '../services/cycle.service';
 import { Component, OnInit } from '@angular/core';
 import { Cycle } from 'src/app/model/cycle.model';
 

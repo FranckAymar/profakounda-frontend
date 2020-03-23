@@ -1,5 +1,5 @@
-import { Classe } from './../model/classe';
-import { URL } from './../API_url/config';
+import { Classe } from '../../model/classe';
+import { URL } from '../../API_url/config';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';

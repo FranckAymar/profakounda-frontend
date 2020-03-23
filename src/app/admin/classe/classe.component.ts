@@ -1,5 +1,5 @@
-import { CycleService } from './../../services/cycle.service';
-import { ClasseService } from './../../services/classe.service';
+import { CycleService } from '../services/cycle.service';
+import { ClasseService } from '../services/classe.service';
 import { Classe } from './../../model/classe';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';

@@ -1,9 +1,9 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NiveauService } from 'src/app/services/niveau.service';
-import { ForfaitService } from './../services/forfait.service';
-import { FiliereService } from './../services/filiere.service';
-import { ClasseService } from './../services/classe.service';
-import { CycleService } from './../services/cycle.service';
+import { NiveauService } from 'src/app/admin/services/niveau.service';
+import { ForfaitService } from './services/forfait.service';
+import { FiliereService } from './services/filiere.service';
+import { ClasseService } from './services/classe.service';
+import { CycleService } from './services/cycle.service';
 import { Routes, RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NiveauComponent } from './niveau/niveau.component';

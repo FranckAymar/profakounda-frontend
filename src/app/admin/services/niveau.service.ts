@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { URL } from '../API_url/config';
-import { Niveau } from '../model/niveau.model';
+import { URL } from '../../API_url/config';
+import { Niveau } from '../../model/niveau.model';
 
 @Injectable()
 export class NiveauService{

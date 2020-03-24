@@ -12,4 +12,5 @@ export class AnoncesFormationComponent implements OnInit {
   ngOnInit() {
   }
 
+
 }

@@ -21,6 +21,8 @@
             <tr>
               <th>Nombre de requêtes</th>
               <th>Période de validité</th>
+              <th>date de creation</th> 
+              <th>date de modification</th>
 
             </tr>
           </thead>
@@ -29,8 +31,10 @@
             <tr *ngFor="let forfait of forfaits">
 
               <td>{{forfait.nbreRequete}}</td>
-              <td>{{forfait.nbreJour}}</td>
-
+              <td>{{forfait.nbreJour}}</td> 
+              <td>{{forfait.dateCreation|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+              <td>{{forfait.dateModification|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                            
               <td><button (click) = "onLoadForfait(forfait)" type="button" class="btn btn-primary" 
                           data-toggle="modal" 
                           data-target="#ajouterForfait">

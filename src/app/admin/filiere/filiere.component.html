@@ -13,12 +13,17 @@
                     <thead>
                         <tr>
                             <th>Libelle</th>
+                            <th>date de creation</th> 
+                            <th>date de modification</th>
+
                         </tr>
                     </thead>
                     <tbody> 
                         <span *ngIf="filieres.length == 0">Aucun élément</span>
                         <tr *ngFor="let filiere of filieres">
                             <td>{{filiere.libelle}}</td>
+                            <td>{{filiere.dateCreation|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                            <td>{{filiere.dateModification|date:"yyyy-MM-dd HH:mm:ss"}}</td>
                             <td><button (click)="onLoadFiliere(filiere)" data-toggle="modal" data-target="#modalAjouter" type="button" class="btn btn-primary" > Modifier</button></td>
                             <td><button type="button"  (click)="ondeleteFiliere(filiere.id)"class="btn btn-danger">Supprimer</button></td>
                         </tr>

@@ -34,5 +34,7 @@ export const URL = {
     enregistrerNiveau:consts.host+ consts.nameProject +'enregistrerNiveau',
     supprimerNiveau:consts.host+ consts.nameProject +'deleteNiveau',
     retrouverNiveauParId:consts.host+ consts.nameProject +'getNiveau',
-    modifierNiveau:consts.host+ consts.nameProject +'updateNiveau'
+    modifierNiveau:consts.host+ consts.nameProject +'updateNiveau',
+    //Particulier
+    enregistrerParticulier : consts.host+ consts.nameProject +'enregistrerParticulier'
 }

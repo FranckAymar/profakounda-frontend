@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router'
 import { AdminMainComponent } from './admin/admin-main/admin-main.component';
 import { HomeComponent } from './home/home.component';
+import { ParticulierService } from './home/services/particulier.service';
 
 
 const appRouter : Routes = [
@@ -31,7 +32,7 @@ const appRouter : Routes = [
     
   ],
   providers: [
-   
+   ParticulierService
   ],
   bootstrap: [AppComponent]
 })

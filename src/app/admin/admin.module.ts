@@ -19,6 +19,7 @@ import { CycleComponent } from './cycle/cycle.component';
 import { ForfaitComponent } from './forfait/forfait.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminMainComponent } from './admin-main/admin-main.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 
@@ -60,6 +61,11 @@ const adminRouter : Routes = [
         component : NiveauComponent
         
       },
+      {
+        path : 'editprofil',
+        component : EditProfileComponent
+        
+      },
 
 
     ]},
@@ -78,7 +84,8 @@ const adminRouter : Routes = [
                 NavbarComponent,
                 NiveauComponent,
                 SidebarComponent,
-                AdminMainComponent  ],
+                AdminMainComponent,
+                EditProfileComponent  ],
   imports: [
     CommonModule, 
     RouterModule.forChild(adminRouter),

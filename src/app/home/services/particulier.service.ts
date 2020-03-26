@@ -1,11 +1,20 @@
 import { URL } from 'src/app/API_url/config';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import {  Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ParticulierService{
+
+    
     constructor(private httpClient:HttpClient){}
     saveParticulier(data){
        return this.httpClient.post(URL.enregistrerParticulier,data);
     }
+
+    modifierParticulier(formData:FormData){
+        return this.httpClient.post(URL.modifierParticulier,formData);
+    }
+
+    
 }

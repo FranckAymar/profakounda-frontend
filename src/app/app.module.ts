@@ -9,19 +9,23 @@ import { HomeComponent } from './home/home.component';
 import { ParticulierService } from './home/services/particulier.service';
 
 
+
+
 const appRouter : Routes = [
   { path: '',  redirectTo : '/home',
     pathMatch : 'full'
   },{
     path :'admin', redirectTo :'/admin'
+  },
+  {
+    path :'customers', redirectTo :'/customers'
   }
  
 ] ;
 
 @NgModule({
   declarations: [
-    AppComponent,
-   
+    AppComponent
     
   ],
   imports: [

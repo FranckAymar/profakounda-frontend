@@ -15,14 +15,18 @@
                         <tr>
                             <th>Libelle</th>
                             <th>Cycle</th>
+                            <th>date de creation</th> 
+                            <th>date de modification</th>
 
                         </tr>
-                    </thead>
+                    </thead> 
                     <tbody>
                         <span *ngIf="classes.length == 0">Aucun élément</span>
                         <tr *ngFor="let classe of classes">
                             <td>{{classe.libelle}}</td>
                             <td>{{classe.cycle.libelle}}</td>
+                            <td>{{classe.dateCreation|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                            <td>{{classe.dateModification|date:"yyyy-MM-dd HH:mm:ss"}}</td>
                             <td><button (click)="onLoadClass(classe)" data-toggle="modal" data-target="#ajouterClasse"
                                     type="button" class="btn btn-primary"> Modifier</button></td>
                             <td><button (click)="onDeleteClasse(classe.id)" type="button"

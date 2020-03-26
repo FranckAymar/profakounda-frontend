@@ -17,12 +17,17 @@
                     <thead>
                         <tr>
                             <th>Libelle</th>
+                            <th>date de creation</th> 
+                            <th>date de modification</th>
                         </tr>
+
                     </thead>
                     <tbody>
                         <span *ngIf="cycles.length == 0">Aucun élément</span>
                         <tr *ngFor="let cycle of cycles">
                             <td>{{cycle.libelle}}</td>
+                            <td>{{cycle.dateCreation|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                            <td>{{cycle.dateModification|date:"yyyy-MM-dd HH:mm:ss"}}</td>
                             <td><button type="button" data-toggle="modal" data-target="#updateCycle" (click)="getCycle(cycle.id)" class="btn btn-primary"> Modifier</button></td>
                             <td><button type="button" (click)="deleteCycle(cycle.id)" class="btn btn-danger">Supprimer</button></td>
                         </tr>

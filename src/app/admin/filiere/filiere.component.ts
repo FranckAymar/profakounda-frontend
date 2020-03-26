@@ -6,19 +6,18 @@ import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-filiere',
-  templateUrl: './filiere.component.html',
+  templateUrl: './filiere.component.html',  
   styleUrls: ['./filiere.component.css']
 })
 export class FiliereComponent implements OnInit {
 
-  
-  filieres  = [] ;
-  filiere : Filiere ={};
-  message : string;
+  filieres=[] ;
+  filiere: Filiere ={}; 
+  message: string;
 
-  classForm: FormGroup
+  classForm: FormGroup;
 
-  constructor(private filiereService : FiliereService,
+  constructor(private filiereService: FiliereService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {

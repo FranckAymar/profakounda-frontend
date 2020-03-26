@@ -16,12 +16,16 @@
                     <thead>
                         <tr>
                             <th>Libelle</th>
+                            <th>date de creation</th> 
+                            <th>date de modification</th>            
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let niveau of niveaux">
                            
                             <td>{{niveau.libelle}}</td>
+                            <td>{{niveau.dateCreation|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                            <td>{{niveau.dateModification|date:"yyyy-MM-dd HH:mm:ss"}}</td>
                             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateNiveau" (click)="getNiveau(niveau.id)"> Modifier</button></td>
                             <td><button type="button" class="btn btn-danger" (click)="deleteNiveau(niveau.id)">Supprimer</button></td>
                         </tr>

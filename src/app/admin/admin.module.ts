@@ -1,3 +1,4 @@
+import { RoleGuard } from './../role.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { ForfaitService } from './services/forfait.service';
@@ -24,7 +25,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 const adminRouter : Routes = [
-  {path: 'admin', component  : AdminMainComponent,
+  {path: 'admin', component  : AdminMainComponent , canActivate : [RoleGuard], data : { role : 'ROLE_ADMIN'},
     children : [
       {
         path : 'dashboard',

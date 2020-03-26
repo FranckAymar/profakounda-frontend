@@ -1,11 +1,15 @@
+import { ErrorPageModule } from './error-page/error-page.module';
+import { SignInGuard } from './sign-in.guard';
+import { RoleGuard } from './role.guard';
+import { XhrInterceptor } from './XhrInterceptor';
 import { HomeModule } from './home/home.module';
 import { AdminModule } from './admin/admin.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router'
-import { AdminMainComponent } from './admin/admin-main/admin-main.component';
-import { HomeComponent } from './home/home.component';
+import { ParticulierService } from './home/services/particulier.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 const appRouter : Routes = [
@@ -13,9 +17,12 @@ const appRouter : Routes = [
     pathMatch : 'full'
   },{
     path :'admin', redirectTo :'/admin'
+  },{
+    path: "**", redirectTo :'/error404'
   }
  
 ] ;
+
 
 @NgModule({
   declarations: [
@@ -27,11 +34,15 @@ const appRouter : Routes = [
     BrowserModule, 
     AdminModule,
     HomeModule,
-    RouterModule.forRoot(appRouter) 
+    ErrorPageModule,
+    RouterModule.forRoot(appRouter)
     
   ],
   providers: [
-   
+   ParticulierService, 
+   { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
+   RoleGuard,
+   SignInGuard
   ],
   bootstrap: [AppComponent]
 })

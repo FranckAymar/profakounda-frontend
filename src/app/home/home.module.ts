@@ -1,4 +1,6 @@
-import { RouterModule } from '@angular/router';
+import { SignInGuard } from './../sign-in.guard';
+import { SignInService } from './services/sign-in.service';
+import { RouterModule, CanActivate } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home.component';
 import { NgModule, Component } from '@angular/core';
@@ -26,11 +28,11 @@ const homeRouter = [
       },
       {
         path : 'sign-in',
-        component : SignInComponent
+        component : SignInComponent, canActivate : [SignInGuard]
         
       },
       {
-        path : 'sign-up',
+        path : 'sign-up', canActivate : [SignInGuard],
         component : SignUpComponent
         
       },
@@ -56,7 +58,9 @@ const homeRouter = [
     RouterModule.forChild(homeRouter),
     HttpClientModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule  ],
+  providers : [
+    SignInService
   ]
 })
 export class HomeModule { }

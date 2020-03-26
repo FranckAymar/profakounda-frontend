@@ -1,3 +1,4 @@
+import { SignInService } from './../services/sign-in.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderHomeComponent implements OnInit {
 
-  constructor() { }
+
+  authenticated : boolean;
+
+
+  constructor(private signInService : SignInService) { }
+
 
   ngOnInit() {
+    //Vérifie si l'utilisateur est connecté
+    this.authenticated = this.signInService.isLogged() ;
   }
 
 }

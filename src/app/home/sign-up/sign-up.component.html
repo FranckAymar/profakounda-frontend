@@ -1,0 +1,84 @@
+<!-- REGISTER SECTION -->
+<section style="background: #002147;">
+    <div id="modal2">
+        <div class="log-in-pop">
+            <div class="log-in-pop-left">
+                <h1>Bienvenu...</h1>
+                <p>Vous êtes un enseignant et vous n'avez pas de compte? Creer votre compte.Cela ne vous prendra que quelques minutes</p>
+                <h4>Login with social media</h4>
+                <ul>
+                    <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-google"></i> Google+</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="log-in-pop-right">
+                <h4 style="margin:auto;width:10em;">Inscription</h4>
+                <div *ngIf="error" class="alert alert-danger">
+                    {{error}}
+                </div>
+                <form [formGroup] = "userForm" (ngSubmit)="onSaveParticulier()" class="s12">
+                    
+                    <div>
+                        <div class="input-field s12">
+                            <input   type="text" formControlName="nom" class="validate">
+                            <label>Nom</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-field s12">
+                            <input   type="text" formControlName="prenoms" class="validate">
+                            <label>Prenoms</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-field s12">
+                            <input   type="text" formControlName="telephone" class="validate">
+                            <label>Téléphone</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-field s12">
+                            <input   type="email" formControlName="email" class="validate">
+                            <label>Email</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-field s12">
+                            <input formControlName="lieuHabitation" required  type="text" class="validate">
+                            <label>Lieu d'Habitation</label>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>
+                                <div class="input-field s12">
+                                    <input   type="password"  formControlName="password" class="validate">
+                                    <label>mot de passe</label>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="col-md-6">
+                            <div>
+                                <div class="input-field s12">
+                                    <input type="password"  (ngModelChange) ="changement()" formControlName="passwordConfirm"   class="validate">
+                                    <label>confirmez le mot de passe</label>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span *ngIf="message" [ngStyle]="{color:getColor()}" >{{message}}</span>
+                    <button type="submit" [disabled]="invalidation || userForm.invalid" class="btn btn-info btn-block">Enregistrer</button>
+                   
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

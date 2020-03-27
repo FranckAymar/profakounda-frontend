@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ParticulierService } from 'src/app/home/services/particulier.service';
 import { Router } from '@angular/router';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { SignInService } from 'src/app/home/services/sign-in.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -22,7 +23,7 @@ export class EditProfileComponent implements OnInit {
   filieres=[] ;
   niveaux = [];
   userForm : FormGroup;
-  constructor(private filiereService :FiliereService,private niveauService:NiveauService,private particulierService:ParticulierService,private router:Router,private formBuilder:FormBuilder) { }
+  constructor(private filiereService :FiliereService,private niveauService:NiveauService,private particulierService:ParticulierService,private router:Router,private formBuilder:FormBuilder,private signInService:SignInService) { }
 
   ngOnInit() {
     this.onFetchNiveaux();
@@ -30,6 +31,7 @@ export class EditProfileComponent implements OnInit {
     this.formInitialisation();
   }
   formInitialisation(){
+    console.log(sessionStorage.getItem(this.signInService.USERNAME));
     this.userForm = this.formBuilder.group({
       id:null,
       nom:['',Validators.required],
@@ -53,6 +55,7 @@ export class EditProfileComponent implements OnInit {
 
   private prepareSave(): any {
     let input = new FormData();
+    let username = sessionStorage.getItem(this.signInService.USERNAME) ;
     input.append('nom', this.userForm.get('nom').value);
     input.append('prenoms', this.userForm.get('prenoms').value);
     input.append('telephone', this.userForm.get('telephone').value);
@@ -61,6 +64,7 @@ export class EditProfileComponent implements OnInit {
     input.append('filiere', this.userForm.get('filiere').value);
     input.append('niveau', this.userForm.get('niveau').value);
     input.append('password', this.userForm.get('password').value);
+    input.append('username', username);
     input.append('photo', this.userForm.get('photo').value);
     return input;
   }

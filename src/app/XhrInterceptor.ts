@@ -14,10 +14,11 @@ export class XhrInterceptor implements HttpInterceptor {
 
     let token = sessionStorage.getItem(this.signInService.TOKEN) ;
 
-
+    
     if (token) {
         const authReq = req.clone({
             headers: new HttpHeaders({
+               
                 'Content-Type': 'application/json',
                 'Authorization': `Basic ${token}`
                 
@@ -25,6 +26,7 @@ export class XhrInterceptor implements HttpInterceptor {
             
         });
         //console.log('token :' + token);
+        console.log("Xhr token: "+token);
         return next.handle(authReq);
     } else {
         return next.handle(req);

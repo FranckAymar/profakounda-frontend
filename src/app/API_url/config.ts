@@ -37,5 +37,8 @@ export const URL = {
     modifierNiveau:consts.host+ consts.nameProject +'admin/updateNiveau',
     //Particulier
     enregistrerParticulier : consts.host+ consts.nameProject +'enregistrerParticulier',
-    modifierParticulier : consts.host+ consts.nameProject +'modifierParticulier'
+    modifierParticulier : consts.host+ consts.nameProject +'modifierParticulier',
+    //SIGN IN
+    login : consts.host+ consts.nameProject +'login',
+    recupererInformationsCompte : consts.host+ consts.nameProject +'compte'
 }

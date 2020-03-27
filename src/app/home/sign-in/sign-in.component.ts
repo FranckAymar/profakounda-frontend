@@ -62,7 +62,7 @@ export class SignInComponent implements OnInit {
 
     this.user.username = this.loginForm.value['username'];
     this.user.password = this.loginForm.value['password'];
-
+    console.log(sessionStorage.getItem(this.TOKEN));
     this.signInService.login(this.user).subscribe(
 
  
@@ -94,7 +94,7 @@ export class SignInComponent implements OnInit {
             this.signInService.logout();
 
             //Pas encore fonctionnel
-            //this.router.navigateByUrl('/customers');
+           this.router.navigateByUrl('/customers');
 
           }
 

@@ -1,9 +1,8 @@
 import { UserModel } from './../models/UserModel';
 import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
 import { URL } from 'src/app/API_url/config';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import {  HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'

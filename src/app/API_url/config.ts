@@ -39,7 +39,7 @@ export const URL = {
     enregistrerParticulier : consts.host+ consts.nameProject +'enregistrerParticulier',
 
 
-    //Retrouver les information
+    //Retrouver les informations de l'utilisateur courant
     recupererInformationsCompte : consts.host+ consts.nameProject +'compte',
 
     //login

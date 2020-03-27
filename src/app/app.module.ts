@@ -12,11 +12,16 @@ import { ParticulierService } from './home/services/particulier.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
+
+
 const appRouter : Routes = [
   { path: '',  redirectTo : '/home',
     pathMatch : 'full'
   },{
     path :'admin', redirectTo :'/admin'
+  },
+  {
+    path :'customers', redirectTo :'/customers'
   },{
     path: "**", redirectTo :'/error404'
   }
@@ -26,8 +31,7 @@ const appRouter : Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,
-   
+    AppComponent
     
   ],
   imports: [

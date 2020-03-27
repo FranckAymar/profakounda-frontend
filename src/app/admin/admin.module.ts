@@ -67,9 +67,21 @@ const adminRouter : Routes = [
         component : EditProfileComponent
         
       },
+      
 
 
     ]},
+    {path: 'customers', component  : AdminMainComponent,
+    
+      children : [
+        {
+        path : 'editprofil',
+        component : EditProfileComponent
+        
+        }
+      
+    ]
+  }
 ] ;
 
 

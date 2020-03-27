@@ -31,7 +31,6 @@ formInitialisation(){
   })
 }
 changement(){
-  console.log(this.userForm.value['password']);
   if(this.userForm.value['password']===this.userForm.value['passwordConfirm'])
   {
     this.invalidation = false;

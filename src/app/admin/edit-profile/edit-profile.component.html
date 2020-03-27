@@ -4,66 +4,62 @@
         <div class="col-md-12">
         <div class="box-inn-sp admin-form">
                 <div class="inn-title">
-                    <h4>Editer</h4>
-                    <p>Here you can edit your website basic details URL, Phone, Email, Address, User and password and more</p>
+                    <img style="width: 10em;height: 10em;" src="../../assets/images/placeholder.jpg" alt="">
+                    <div style="float: right;">
+                        <h4 style="background-color: red;">Editer profil</h4>
+                    </div>
                 </div>
+
                 <div class="tab-inn">
-                    <form>
+
+                    <form [formGroup] = "userForm" (ngSubmit)="onUpdateParticulier()">
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="first_name" type="text" class="validate" required>
-                                <label for="first_name" class="">Website Title</label>
+                                <input  id="first_name" type="text"  formControlName="nom" class="validate" />
+                                <label for="first_name" class="">Nom</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="last_name" type="text" class="validate" required>
-                                <label for="last_name" class="">Website descriptions</label>
+                                <input id="last_name" formControlName="prenoms" type="text" class="validate" />
+                                <label for="last_name" class="">Prenoms</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="phone" type="number" class="validate" required>
-                                <label for="phone">Phone number</label>
+                                <input id="phone" type="text" formControlName="telephone"  class="validate" />
+                                <label for="phone">Téléphone</label>
                             </div>
                             <div class="input-field col s6">
-                                <input type="text" class="validate" required>
-                                <label for="cphone" class="">Email is</label>
+                                <input type="email" id="email" formControlName="email" class="validate" />
+                                <label for="email" class="">Email</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="city" type="text" class="validate">
-                                <label for="city" class="">City</label>
+                                <input id="city" formControlName="lieuHabitation" type="text" class="validate">
+                                <label for="city" class="">Lieu d'Habitation</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="country" type="text" class="validate">
-                                <label for="country" class="">Country</label>
+                                <input id="country" formControlName="niveau" type="text" class="validate">
+                                <label for="country" class="">Niveau d'etude</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="password" type="password" class="validate">
-                                <label for="password" class="">Password</label>
+                                <input id="password" formControlName="filiere" type="text" class="validate">
+                                <label for="password" class="">Filiere</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="password1" type="password" class="validate">
-                                <label for="password1" class="">Confirm Password</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input type="text" class="validate">
-                                <label>Website</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <input type="text" class="validate">
-                                <label>Website blog</label>
+                                <input id="password1" formControlName="password" type="password" class="validate">
+                                <label for="password1" class="">Mot de passe</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <i class="waves-effect waves-light btn-large waves-input-wrapper" style=""><input type="submit" class="waves-button-input"></i>
+                                <input type="file" (change)="onFileChange($event)" #fileInput class="validate">
                             </div>
+                            
                         </div>
+                        <button type="submit" [disabled]="userForm.invalid" class="btn btn-outline-info">Enregistrer</button>
                     </form>
                 </div>
             </div>

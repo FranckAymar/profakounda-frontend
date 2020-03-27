@@ -26,12 +26,13 @@ export class EditProfileComponent implements OnInit {
   constructor(private filiereService :FiliereService,private niveauService:NiveauService,private particulierService:ParticulierService,private router:Router,private formBuilder:FormBuilder,private signInService:SignInService) { }
 
   ngOnInit() {
+    
+
     this.onFetchNiveaux();
     this.onFetchFiliere();
     this.formInitialisation();
   }
   formInitialisation(){
-    console.log(sessionStorage.getItem(this.signInService.USERNAME));
     this.userForm = this.formBuilder.group({
       id:null,
       nom:['',Validators.required],
@@ -54,8 +55,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   private prepareSave(): any {
+
+    console.log(sessionStorage.getItem(this.signInService.USERNAME));
+
     let input = new FormData();
-    let username = sessionStorage.getItem(this.signInService.USERNAME) ;
+    //let username = sessionStorage.getItem(this.signInService.USERNAME) ;
     input.append('nom', this.userForm.get('nom').value);
     input.append('prenoms', this.userForm.get('prenoms').value);
     input.append('telephone', this.userForm.get('telephone').value);
@@ -64,7 +68,7 @@ export class EditProfileComponent implements OnInit {
     input.append('filiere', this.userForm.get('filiere').value);
     input.append('niveau', this.userForm.get('niveau').value);
     input.append('password', this.userForm.get('password').value);
-    input.append('username', username);
+    input.append('username', 'franck');
     input.append('photo', this.userForm.get('photo').value);
     return input;
   }

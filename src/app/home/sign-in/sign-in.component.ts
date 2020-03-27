@@ -81,6 +81,8 @@ export class SignInComponent implements OnInit {
           sessionStorage.setItem(this.TOKEN, token);
           sessionStorage.setItem(this.USERNAME, username);
 
+          console.log(sessionStorage.getItem(this.USERNAME));
+          
 
           //Si l'utilisateur est un admin
           if (authorities === 'ROLE_ADMIN') {
@@ -89,11 +91,8 @@ export class SignInComponent implements OnInit {
 
             //Si c'est un particulier
           } else {
-
-            alert('Réussi : Particulier pas encore disponible');
-            this.signInService.logout();
-
-            //Pas encore fonctionnel
+          
+          //Pas encore fonctionnel
            this.router.navigateByUrl('/customers');
 
           }

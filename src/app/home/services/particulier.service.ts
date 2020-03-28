@@ -18,6 +18,9 @@ export class ParticulierService{
     rechercherParticulier(username:String){
         return this.httpClient.post(URL.rechercherParticulier,username);
     }
+    getPhoto(id:number){
+        return this.httpClient.post(URL.getPhoto,id);
+    }
 
     
 }

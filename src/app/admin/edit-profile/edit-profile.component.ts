@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FiliereService } from '../services/filiere.service';
 import { NiveauService } from '../services/niveau.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -6,7 +6,7 @@ import { ParticulierService } from 'src/app/home/services/particulier.service';
 import { Router } from '@angular/router';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { SignInService } from 'src/app/home/services/sign-in.service';
-
+import { consts } from '../../API_url/const'
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -18,7 +18,8 @@ export class EditProfileComponent implements OnInit {
 
 
   loading: boolean = false;
-
+   @Input() id:number;
+   @Input() url:string ;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
   niveaux = [];
@@ -26,33 +27,31 @@ export class EditProfileComponent implements OnInit {
   constructor(private filiereService :FiliereService,private niveauService:NiveauService,private particulierService:ParticulierService,private router:Router,private formBuilder:FormBuilder,private signInService:SignInService) { }
 
   ngOnInit() {
-    
+    this.rechercherPaticulierConnecter();
+    this.rechercherPaticulierConnecter();
     this.rechercherPaticulierConnecter();
     this.onFetchNiveaux();
     this.onFetchFiliere();
-    this.formInitialisation();
   }
 
-  formInitialisation(){
-    this.userForm = this.formBuilder.group({
-      id:null,
-      nom:['',Validators.required],
-      prenoms:['',Validators.required],
-      telephone:['',Validators.required],
-      email:['',[Validators.required,Validators.email]],
-      lieuHabitation:['',Validators.required],
-      filiere:[''],
-      niveau:[''],
-      password:['',Validators.required],
-      photo:null
-    })
-  }
+  
 
   rechercherPaticulierConnecter(){
     this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (reponse)=>{
-console.log("Utilisateur en ligne.....");
+       this.id = reponse['id'];
+       this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
+        this.userForm = this.formBuilder.group({
+          nom:[reponse['nom'],Validators.required],
+          prenoms:[reponse['prenoms'],Validators.required],
+          telephone:[reponse['telephone'],Validators.required],
+          lieuHabitation:[reponse['lieuHabitation'],Validators.required],
+          filiere:reponse['filiere'],
+          niveau:reponse['niveau'],
+          password:[reponse['password'],Validators.required],
+          photo:null
+        })
       },
       (error)=>{
         console.log("Une erreur s'est produite: "+error);
@@ -76,7 +75,6 @@ console.log("Utilisateur en ligne.....");
     input.append('nom', this.userForm.get('nom').value);
     input.append('prenoms', this.userForm.get('prenoms').value);
     input.append('telephone', this.userForm.get('telephone').value);
-    input.append('email', this.userForm.get('email').value);
     input.append('lieuHabitation', this.userForm.get('lieuHabitation').value);
     input.append('filiere', this.userForm.get('filiere').value);
     input.append('niveau', this.userForm.get('niveau').value);
@@ -112,7 +110,7 @@ console.log("Utilisateur en ligne.....");
         console.log(response);
         alert(response['success']); 
         this.clearFile();
-        this.formInitialisation();
+        this.rechercherPaticulierConnecter();
       },
       (error)=>{
         console.log("Une erreur s'est produite: "+error);

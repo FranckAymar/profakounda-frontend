@@ -11,5 +11,5 @@ describe('RoleGuard', () => {
 
   it('should ...', inject([AdminGuard], (guard: AdminGuard) => {
     expect(guard).toBeTruthy();
-  }));
+  })); 
 });

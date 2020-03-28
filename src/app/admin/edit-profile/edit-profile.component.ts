@@ -27,11 +27,12 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit() {
     
-
+    this.rechercherPaticulierConnecter();
     this.onFetchNiveaux();
     this.onFetchFiliere();
     this.formInitialisation();
   }
+
   formInitialisation(){
     this.userForm = this.formBuilder.group({
       id:null,
@@ -45,6 +46,18 @@ export class EditProfileComponent implements OnInit {
       password:['',Validators.required],
       photo:null
     })
+  }
+
+  rechercherPaticulierConnecter(){
+    this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
+    .subscribe(
+      (reponse)=>{
+console.log("Utilisateur en ligne.....");
+      },
+      (error)=>{
+        console.log("Une erreur s'est produite: "+error);
+      }
+    )
   }
 
   onFileChange(event) {
@@ -68,7 +81,7 @@ export class EditProfileComponent implements OnInit {
     input.append('filiere', this.userForm.get('filiere').value);
     input.append('niveau', this.userForm.get('niveau').value);
     input.append('password', this.userForm.get('password').value);
-    input.append('username', 'franck');
+    input.append('username', sessionStorage.getItem(this.signInService.USERNAME));
     input.append('photo', this.userForm.get('photo').value);
     return input;
   }
@@ -97,6 +110,7 @@ export class EditProfileComponent implements OnInit {
     .subscribe(
       (response)=>{
         console.log(response);
+        alert(response['success']); 
         this.clearFile();
         this.formInitialisation();
       },

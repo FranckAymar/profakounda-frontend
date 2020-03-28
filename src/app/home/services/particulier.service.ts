@@ -15,6 +15,9 @@ export class ParticulierService{
     modifierParticulier(formData:FormData){
         return this.httpClient.post(URL.modifierParticulier,formData);
     }
+    rechercherParticulier(username:String){
+        return this.httpClient.post(URL.rechercherParticulier,username);
+    }
 
     
 }

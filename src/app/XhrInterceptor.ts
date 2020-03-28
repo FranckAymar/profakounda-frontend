@@ -19,7 +19,7 @@ export class XhrInterceptor implements HttpInterceptor {
         const authReq = req.clone({
             headers: new HttpHeaders({
                
-                'Content-Type': 'application/json',
+               
                 'Authorization': `Basic ${token}`
                 
             })

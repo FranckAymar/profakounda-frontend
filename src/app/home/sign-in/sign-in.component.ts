@@ -1,6 +1,6 @@
-import { UserModel } from './../models/UserModel';
+import { UserModel } from '../models/UserModel';
 import { Router } from '@angular/router';
-import { SignInService } from './../services/sign-in.service';
+import { SignInService } from '../services/sign-in.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -81,27 +81,21 @@ export class SignInComponent implements OnInit {
           sessionStorage.setItem(this.TOKEN, token);
           sessionStorage.setItem(this.USERNAME, username);
 
-          console.log(sessionStorage.getItem(this.USERNAME));
-          
-
+         console.log(sessionStorage.getItem(this.USERNAME));
+     
           //Si l'utilisateur est un admin
           if (authorities === 'ROLE_ADMIN') {
 
             this.router.navigateByUrl('/admin');
-
-            //Si c'est un particulier
+            
           } else {
           
-          //Pas encore fonctionnel
            this.router.navigateByUrl('/customers');
-
           }
-
 
           this.isFailed = false;
 
         } else {
-          //Authentification échouée
           this.isFailed = true;
           console.log(response.response);
         }

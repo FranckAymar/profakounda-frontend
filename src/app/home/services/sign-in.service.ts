@@ -1,4 +1,4 @@
-import { UserModel } from './../models/UserModel';
+import { UserModel } from '../models/UserModel';
 import { Observable } from 'rxjs';
 import { URL } from 'src/app/API_url/config';
 import { Injectable } from '@angular/core';

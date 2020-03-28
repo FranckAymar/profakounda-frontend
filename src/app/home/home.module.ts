@@ -1,9 +1,9 @@
-import { SignInGuard } from './../sign-in.guard';
+import { SignInGuard } from '../guard/sign-in.guard';
 import { SignInService } from './services/sign-in.service';
-import { RouterModule, CanActivate } from '@angular/router';
+import { RouterModule,  } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './home.component';
-import { NgModule, Component } from '@angular/core';
+import { HomeComponent } from './home-main/home.component';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';

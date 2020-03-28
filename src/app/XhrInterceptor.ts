@@ -5,10 +5,7 @@ import { HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders, HttpEvent } fro
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
-
   constructor(private signInService: SignInService){}
-
-
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 

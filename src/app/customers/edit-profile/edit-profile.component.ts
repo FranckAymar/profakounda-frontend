@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { FiliereService } from '../services/filiere.service';
-import { NiveauService } from '../services/niveau.service';
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ParticulierService } from 'src/app/home/services/particulier.service';
 import { Router } from '@angular/router';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { SignInService } from 'src/app/home/services/sign-in.service';
 import { consts } from '../../API_url/const'
+import { FiliereService } from 'src/app/admin/services/filiere.service';
+import { NiveauService } from 'src/app/admin/services/niveau.service';
+
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -132,6 +134,6 @@ export class EditProfileComponent implements OnInit {
         
       }
     )
-
-  }
+  
+}
 }

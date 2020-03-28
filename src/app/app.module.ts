@@ -1,6 +1,7 @@
+import { CustomersModule } from './customers/customers.module';
 import { ErrorPageModule } from './error-page/error-page.module';
-import { SignInGuard } from './sign-in.guard';
-import { RoleGuard } from './role.guard';
+import { SignInGuard } from './guard/sign-in.guard';
+import { AdminGuard } from './guard/admin.guard';
 import { XhrInterceptor } from './XhrInterceptor';
 import { HomeModule } from './home/home.module';
 import { AdminModule } from './admin/admin.module';
@@ -38,6 +39,7 @@ const appRouter : Routes = [
     BrowserModule, 
     AdminModule,
     HomeModule,
+    CustomersModule,
     ErrorPageModule,
     RouterModule.forRoot(appRouter)
     
@@ -45,7 +47,7 @@ const appRouter : Routes = [
   providers: [
    ParticulierService, 
    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
-   RoleGuard,
+   AdminGuard,
    SignInGuard
   ],
   bootstrap: [AppComponent]

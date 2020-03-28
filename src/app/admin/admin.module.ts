@@ -1,4 +1,4 @@
-import { RoleGuard } from './../role.guard';
+import { AdminGuard } from '../guard/admin.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { ForfaitService } from './services/forfait.service';
@@ -20,15 +20,15 @@ import { CycleComponent } from './cycle/cycle.component';
 import { ForfaitComponent } from './forfait/forfait.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminMainComponent } from './admin-main/admin-main.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
+
 
 
 
 const adminRouter : Routes = [
-  {path: 'admin', component  : AdminMainComponent , canActivate : [RoleGuard], data : { role : 'ROLE_ADMIN'},
+  {path: 'admin', component  : AdminMainComponent , canActivate : [AdminGuard], data : { role : 'ROLE_ADMIN'},
     children : [
       {
-        path : 'dashboard',
+        path : '',
         component : DashboardHomeComponent
         
       },
@@ -61,27 +61,12 @@ const adminRouter : Routes = [
         path : 'niveau',
         component : NiveauComponent
         
-      },
-      {
-        path : 'editprofil',
-        component : EditProfileComponent
-        
-      },
+      }
       
 
 
-    ]},
-    {path: 'customers', component  : AdminMainComponent,
-    
-      children : [
-        {
-        path : 'editprofil',
-        component : EditProfileComponent
-        
-        }
-      
-    ]
-  }
+    ]}
+
 ] ;
 
 
@@ -97,8 +82,7 @@ const adminRouter : Routes = [
                 NavbarComponent,
                 NiveauComponent,
                 SidebarComponent,
-                AdminMainComponent,
-                EditProfileComponent  ],
+                AdminMainComponent ],
   imports: [
     CommonModule, 
     RouterModule.forChild(adminRouter),

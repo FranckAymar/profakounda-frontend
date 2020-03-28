@@ -1,4 +1,4 @@
-import { SignInService } from './../services/sign-in.service';
+import { SignInService } from '../services/sign-in.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

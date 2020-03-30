@@ -69,6 +69,7 @@ getColor(){
        
         if(response["success"])
         {
+          alert('Inscription effectuée avec succès.');
           this.router.navigate(["/home/sign-in"]);
         }
        

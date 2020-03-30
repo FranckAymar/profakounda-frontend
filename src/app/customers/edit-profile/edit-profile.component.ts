@@ -29,6 +29,7 @@ export class EditProfileComponent implements OnInit {
   constructor(private filiereService :FiliereService,private niveauService:NiveauService,private particulierService:ParticulierService,private router:Router,private formBuilder:FormBuilder,private signInService:SignInService) { }
 
   ngOnInit() {
+    this.init();
     this.rechercherPaticulierConnecter();
     this.rechercherPaticulierConnecter();
     this.rechercherPaticulierConnecter();
@@ -37,7 +38,18 @@ export class EditProfileComponent implements OnInit {
   }
 
   
-
+init(){
+  this.userForm = this.formBuilder.group({
+    nom:['',Validators.required],
+    prenoms:['',Validators.required],
+    telephone:['',Validators.required],
+    lieuHabitation:['',Validators.required],
+    filiere:'',
+    niveau:'',
+    password:['',Validators.required],
+    photo:null
+  })
+}
   rechercherPaticulierConnecter(){
     this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
     .subscribe(
@@ -73,7 +85,6 @@ export class EditProfileComponent implements OnInit {
     console.log(sessionStorage.getItem(this.signInService.USERNAME));
 
     let input = new FormData();
-    //let username = sessionStorage.getItem(this.signInService.USERNAME) ;
     input.append('nom', this.userForm.get('nom').value);
     input.append('prenoms', this.userForm.get('prenoms').value);
     input.append('telephone', this.userForm.get('telephone').value);
@@ -109,10 +120,11 @@ export class EditProfileComponent implements OnInit {
     this.particulierService.modifierParticulier(formModel)
     .subscribe(
       (response)=>{
-        console.log(response);
-        alert(response['success']); 
-        this.clearFile();
+        alert("Enregistrement effectuée avec succès."); 
         this.rechercherPaticulierConnecter();
+        window.location.reload(false);
+        this.clearFile();
+       
       },
       (error)=>{
         console.log("Une erreur s'est produite: "+error);

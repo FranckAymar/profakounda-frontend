@@ -1,7 +1,8 @@
 import { SignInService } from '../../home/services/sign-in.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { ParticulierService } from 'src/app/home/services/particulier.service';
+import { consts } from '../../API_url/const'
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -9,12 +10,28 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+  @Input() id:number;
+  @Input() url:string ;
   constructor(private signInService : SignInService , 
-              private router : Router) { }
+              private router : Router,private particulierService:ParticulierService) { }
 
   ngOnInit() {
+    this.rechercherPaticulierConnecter();
   }
 
+
+  rechercherPaticulierConnecter(){
+    this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
+    .subscribe(
+      (reponse)=>{
+       this.id = reponse['id'];
+       this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
+      },
+      (error)=>{
+        console.log("Une erreur s'est produite: "+error);
+      }
+    )
+  }
 
 
   logout() {

@@ -120,7 +120,7 @@ init(){
     this.particulierService.modifierParticulier(formModel)
     .subscribe(
       (response)=>{
-        alert("Enregistrement effectuée avec succès."); 
+        alert("Modification effectuée avec succès."); 
         this.rechercherPaticulierConnecter();
         window.location.reload(false);
         this.clearFile();

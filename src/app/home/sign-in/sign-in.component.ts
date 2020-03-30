@@ -1,4 +1,3 @@
-import { UserModel } from '../models/UserModel';
 import { Router } from '@angular/router';
 import { SignInService } from '../services/sign-in.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -16,14 +15,6 @@ export class SignInComponent implements OnInit {
   TOKEN = 'TOKEN';
   USERNAME = 'USERNAME';
   AUHORITY = 'AUTHORITY';
-
-
-  credentials = {
-    username: '',
-    password: ''
-  };
-
-  user: UserModel = {};
 
 
   loginForm: FormGroup;
@@ -60,31 +51,29 @@ export class SignInComponent implements OnInit {
 
   onLogin() {
 
-    this.user.username = this.loginForm.value['username'];
-    this.user.password = this.loginForm.value['password'];
-    console.log(sessionStorage.getItem(this.TOKEN));
-    this.signInService.login(this.user).subscribe(
+    let username = this.loginForm.value['username'];
+    let password = this.loginForm.value['password'];
+    
+    let token = btoa(username + ':' + password);
+   
+    this.signInService.login(token).subscribe(
 
  
       (response) => {
 
 
-        if (response.code == 0) {
+          let authorities = response.authorities ;    
+          let authority = authorities[0].authority;
 
-
-
-          let authorities = 'ROLE_' + response.response[0].libelle;
-          let token = btoa(this.user.username + ':' + this.user.password);
-          let username = this.user.username;
-
-          sessionStorage.setItem(this.AUHORITY, authorities);
+          //Sauvegarde du token
           sessionStorage.setItem(this.TOKEN, token);
+            //Sauvegarde de l'authorité
+          sessionStorage.setItem(this.AUHORITY, authority);
+            //Sauvegarde du username
           sessionStorage.setItem(this.USERNAME, username);
-
-         console.log(sessionStorage.getItem(this.USERNAME));
      
           //Si l'utilisateur est un admin
-          if (authorities === 'ROLE_ADMIN') {
+          if (authority === 'ROLE_ADMIN') {
 
             this.router.navigateByUrl('/admin');
             
@@ -93,22 +82,14 @@ export class SignInComponent implements OnInit {
            this.router.navigateByUrl('/customers');
           }
 
-          this.isFailed = false;
-
-        } else {
-          this.isFailed = true;
-          console.log(response.response);
-        }
-
       },
 
       (error) => {
-        console.log(error);
+        this.isFailed = true ;
 
       }
 
-
-    )
+   )
   }
 
 }

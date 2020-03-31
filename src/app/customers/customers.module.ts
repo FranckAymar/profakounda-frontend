@@ -10,6 +10,7 @@ import { ContentCustomersComponent } from './content-customers/content-customers
 import { CustomerMainComponent } from './customer-main/customer-main.component';
 import { CustomersGuard } from '../guard/customers.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { PropositionFormationComponent } from './proposition-formation/proposition-formation.component';
 
 
 const customersRouter : Routes = [
@@ -26,7 +27,12 @@ const customersRouter : Routes = [
       path : 'editprofil',
       component : EditProfileComponent
       
-      }
+      },
+      {
+        path : 'formations',
+        component : PropositionFormationComponent
+        
+        }
   
 ]
 }] ;
@@ -39,7 +45,7 @@ const customersRouter : Routes = [
      DashboardCustomersComponent, 
      ContentCustomersComponent, 
      EditProfileComponent, 
-     CustomerMainComponent],
+     CustomerMainComponent, PropositionFormationComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(customersRouter),

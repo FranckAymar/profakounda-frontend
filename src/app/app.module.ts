@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router'
 import { ParticulierService } from './home/services/particulier.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -41,7 +42,8 @@ const appRouter : Routes = [
     HomeModule,
     CustomersModule,
     ErrorPageModule,
-    RouterModule.forRoot(appRouter)
+    RouterModule.forRoot(appRouter),
+    BrowserAnimationsModule
     
   ],
   providers: [

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { ParticulierService } from 'src/app/home/services/particulier.service';
 import { Router } from '@angular/router';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
@@ -8,6 +8,9 @@ import { SignInService } from 'src/app/home/services/sign-in.service';
 import { consts } from '../../API_url/const'
 import { FiliereService } from 'src/app/admin/services/filiere.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
+import {map, startWith} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import {MdAutocomplete} from 'md-autocomplete';
 
 @Component({
   selector: 'app-edit-profile',
@@ -21,11 +24,12 @@ export class EditProfileComponent implements OnInit {
 
   loading: boolean = false;
    @Input() id:number;
-   @Input() url:string ;
+   @Input() url:string ; 
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
   niveaux = [];
   userForm : FormGroup;
+  
   constructor(private filiereService :FiliereService,private niveauService:NiveauService,private particulierService:ParticulierService,private router:Router,private formBuilder:FormBuilder,private signInService:SignInService) { }
 
   ngOnInit() {
@@ -37,7 +41,7 @@ export class EditProfileComponent implements OnInit {
     this.onFetchFiliere();
   }
 
-  
+ 
 init(){
   this.userForm = this.formBuilder.group({
     nom:['',Validators.required],
@@ -50,6 +54,8 @@ init(){
     photo:null
   })
 }
+
+
   rechercherPaticulierConnecter(){
     this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
     .subscribe(

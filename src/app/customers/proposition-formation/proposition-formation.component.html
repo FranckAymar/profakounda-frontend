@@ -6,7 +6,7 @@
         <div class="tab-inn">
             <div class="table-responsive table-desi">
                
-                <button  type="button" data-toggle="modal" data-target="#ajouterClasse"
+                <button  type="button" data-toggle="modal" data-target="#niveauEnseigne"
                     class="btn btn-primary">
                     Niveau enseigné
                 </button>
@@ -23,7 +23,8 @@
                     <thead>
                         <tr>
                             <th>Niveau enseigné</th>
-                            
+                            <th>Coût minimum</th>
+                            <th>Coût Maximum</th>
 
                         </tr>
                     </thead> 
@@ -31,32 +32,79 @@
                        
                         <tr>
                             <td>Terminale</td>
+                            <td>10.000 Eco</td>
+                            <td>80.000 Eco</td>
                            
-                            <td><button class="btn btn-warning">Coût</button></td>
+                            
                         </tr>
                         <tr>
                             <td>Seconde C</td>
-                           
-                            <td><button class="btn btn-warning">Coût</button></td>
+                            <td>10.000 Eco</td>
+                            <td>80.000 Eco</td>
+                            
                         </tr>
                         <tr>
                             <td>Première</td>
-                          
-                            <td><button class="btn btn-warning">Coût</button></td>
+                            <td>10.000 Eco</td>
+                            <td>80.000 Eco</td>
+                            
                         </tr>
                         <tr>
                             <td>Troisième</td>
+                            <td>10.000 Eco</td>
+                            <td>80.000 Eco</td>
                             
-                            <td><button class="btn btn-warning">Coût</button></td>
                         </tr>
                         <tr>
                             <td>CM2</td>
-                            
-                            <td><button class="btn btn-warning">Coût</button></td>
+                            <td>10.000 Eco</td>
+                            <td>80.000 Eco</td>
+                           
                         </tr>
 
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="niveauEnseigne" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">AJOUTER UN NIVEAU</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Libelle-->
+                <form [formGroup]="classForm" (ngSubmit)="onSaveClasse()">
+                    <div class="form-group">
+                        <label for="niveau">Designation du niveau:</label>
+                        <input  formControlName="designationNiveau" type="text" id="niveau"
+                            name="designationNiveau" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="prixMin">Prix min:</label>
+                            <input  formControlName="prixMin" type="text" id="prixMin"
+                            name="prixMin" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="prixMax">Prix max:</label>
+                            <input  formControlName="prixMax" type="text" id="prixMax"
+                            name="prixMax" required>
+                        </div>
+                    </div>
+                    <button [disabled]="classForm.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>

@@ -50,7 +50,7 @@ init(){
     lieuHabitation:['',Validators.required],
     filiere:'',
     niveau:'',
-    password:['',Validators.required],
+    password:[''],
     photo:null
   })
 }
@@ -69,7 +69,7 @@ init(){
           lieuHabitation:[reponse['lieuHabitation'],Validators.required],
           filiere:reponse['filiere'],
           niveau:reponse['niveau'],
-          password:[reponse['password'],Validators.required],
+         
           photo:null
         })
       },

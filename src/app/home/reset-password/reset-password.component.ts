@@ -36,10 +36,10 @@ export class ResetPasswordComponent implements OnInit {
 
     this.resetPasswordForm = this.formBuilder.group({
       password : [null , Validators.required],
-      confirmmPassword : [null, Validators.required],
+      confirmPassword : [null, Validators.required],
     },
       {
-        validator : PasswordMatch('password' , 'confirmmPassword')
+        validator : PasswordMatch('password' , 'confirmPassword')
       }
 
     );
@@ -89,11 +89,20 @@ verifyToken(token) {
 
 onResetPassword() {
 
+  console.log('test');
+  
   this.resetPassService.resetPassword(this.resetPasswordForm.value, this.token).subscribe(
+
+
+    
 
     (resp)=> {
       
+      console.log(resp);
+      
       if(resp.code === 0) {
+
+        console.log('test');
 
         alert("Renitialisation effectuée avec succès") ;
         this.router.navigateByUrl('/home/sign-in');

@@ -26,6 +26,8 @@ export class ResetPasswordService {
 
   resetPassword(passwordReset : PasswordResetModel ,token : string) : Observable<any> {
 
+    console.log('service');
+    
     return this.httpClient.post(URL.resetPassword + "/" + token, passwordReset ) ;
 
 

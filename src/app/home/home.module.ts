@@ -1,9 +1,10 @@
+import { ResetPasswordService } from './services/reset-password.service';
 import { SignInGuard } from '../guard/sign-in.guard';
 import { SignInService } from './services/sign-in.service';
 import { RouterModule,  } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home-main/home.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -13,6 +14,7 @@ import { FooterHomeComponent } from './footer-home/footer-home.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SliderHomeComponent } from './slider-home/slider-home.component';
 import { HeaderHomeComponent } from './header-home/header-home.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 const homeRouter = [
@@ -40,7 +42,15 @@ const homeRouter = [
         path : 'forgot-password',
         component : ForgotPasswordComponent
         
+      },
+      
+      {
+        path : 'reset-password/:token',
+        component : ResetPasswordComponent
+        
+        
       }
+
 
 
     ]
@@ -52,7 +62,7 @@ const homeRouter = [
 
 
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent, HomeComponent, AnoncesFormationComponent, FooterHomeComponent, ForgotPasswordComponent, SliderHomeComponent, HeaderHomeComponent],
+  declarations: [SignInComponent, SignUpComponent, HomeComponent, AnoncesFormationComponent, FooterHomeComponent, ForgotPasswordComponent, SliderHomeComponent, HeaderHomeComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(homeRouter),
@@ -60,7 +70,7 @@ const homeRouter = [
     FormsModule, 
     ReactiveFormsModule  ],
   providers : [
-    SignInService
+    SignInService, ResetPasswordService
   ]
 })
 export class HomeModule { }

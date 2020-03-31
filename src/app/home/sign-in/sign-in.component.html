@@ -30,12 +30,16 @@
                             <input formControlName="username" type="text" data-ng-model="name" class="validate">
                             <label>Adresse e-mail</label>
                         </div>
+                        <div *ngIf="loginForm.controls.username.errors?.email" class="invalid-feedback">
+                            Adresse e-mail non valide
+                        </div>
                     </div>
                     <div>
                         <div class="input-field s12">
                             <input formControlName="password" type="password" class="validate">
                             <label>Password</label>
                         </div>
+    
                     </div>
                     <div>
                         <div class="s12 log-ch-bx">

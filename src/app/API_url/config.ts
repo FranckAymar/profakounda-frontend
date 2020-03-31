@@ -42,5 +42,10 @@ export const URL = {
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
+
+
+    //Reset password
+    forgotPassword : consts.host+ consts.nameProject +'forgot-password' ,
+    resetPassword : consts.host+ consts.nameProject +'reset-password' ,
     
 }

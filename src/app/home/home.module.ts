@@ -28,7 +28,7 @@ const homeRouter = [
       },
       {
         path : 'sign-in',
-        component : SignInComponent, canActivate : [SignInGuard]
+        component : SignInComponent , canActivate : [SignInGuard]
         
       },
       {

@@ -12,6 +12,7 @@ import { RouterModule, Routes} from '@angular/router'
 import { ParticulierService } from './home/services/particulier.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PropositionFormationService } from './customers/services/propositionFormation.service';
 
 
 
@@ -47,7 +48,8 @@ const appRouter : Routes = [
     
   ],
   providers: [
-   ParticulierService, 
+   ParticulierService,
+   PropositionFormationService, 
    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
    AdminGuard,
    SignInGuard

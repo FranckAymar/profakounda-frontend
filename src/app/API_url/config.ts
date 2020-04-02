@@ -47,5 +47,13 @@ export const URL = {
     //Reset password
     forgotPassword : consts.host+ consts.nameProject +'forgot-password' ,
     resetPassword : consts.host+ consts.nameProject +'reset-password' ,
-    
+    // Proposition de formation liens
+    enregsitrerNiveauForme: consts.host+ consts.nameProject +'particulier/enregistrerContrat' ,
+    modifierNiveauForme: consts.host+ consts.nameProject +'particulier/modifierContrat' ,
+    enregistrerModule: consts.host+ consts.nameProject +'particulier/enregistrerModule' ,
+    rechercherNiveauEnseignes: consts.host+ consts.nameProject +'particulier/contrats' ,
+    getContrat: consts.host+ consts.nameProject +'particulier/getContrat',
+    deleteContrat: consts.host+ consts.nameProject +'particulier/deleteContrat',
+    rechercherDisponibilites: consts.host+ consts.nameProject +'particulier/recupererdisponibilites' ,
+    enregistrerDisponibilte: consts.host+ consts.nameProject +'particulier/enregistrerdisponibilite' ,
 }

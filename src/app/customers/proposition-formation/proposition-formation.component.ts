@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NiveauForme } from '../models/NiveauForme.model';
+import { Module } from '../models/formation.model';
+import { Disponibilite } from '../models/Disponibite.model';
+import { SignInService } from 'src/app/home/services/sign-in.service';
+import { NiveauService } from 'src/app/admin/services/niveau.service';
+import { PropositionFormationService } from '../services/propositionFormation.service';
 
 @Component({
   selector: 'app-proposition-formation',
@@ -7,9 +14,149 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PropositionFormationComponent implements OnInit {
 
-  constructor() { }
+  @Input() edit:boolean = false;
+  niveaux=[];
+  niveauxEnseignes: any = [];
+  disponibilites: any = [];
+  niveauForme:NiveauForme = new NiveauForme(0,'',null,null,sessionStorage.getItem(this.signInService.USERNAME));
+  module:Module = new Module('',sessionStorage.getItem(this.signInService.USERNAME));
+  disponibilite:Disponibilite = new Disponibilite('','','',sessionStorage.getItem(this.signInService.USERNAME));
+  constructor(private signInService:SignInService,private niveauService:NiveauService,private propositionFormationService:PropositionFormationService) { }
 
   ngOnInit() {
+    this.onFetchNiveaux();
+    this.onFetchLevelTeach();
+    this.rechercherDisponibilte();
+    }
+
+    addNiveau(){
+      this.edit = false;
+      this.niveauForme = new NiveauForme(0,'',null,null,sessionStorage.getItem(this.signInService.USERNAME));
+    }
+
+  onFetchNiveaux() {
+    this.niveauService.fetchNiveaux().subscribe(
+      (response)=> {
+        this.niveaux = response;
+        console.log(response);
+      },
+
+      (error)=> {
+
+        console.log("Une erreur est survenue");
+        
+      }
+
+    )
+
+  }
+  onSaveLevelTeach(object){
+    if(!this.edit)
+    {
+      this.propositionFormationService.onSaveNiveauEnseigne(object)
+    .subscribe(
+      (response)=>{
+        this.niveauForme = new NiveauForme(0,'',null,null,sessionStorage.getItem(this.signInService.USERNAME));
+        this.onFetchLevelTeach();
+        document.getElementById('niveauEnseigne').click();
+
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+    }
+    else
+    {
+      this.propositionFormationService.onUpdateNiveauEnseigne(object)
+    .subscribe(
+      (response)=>{
+        this.niveauForme = new NiveauForme(0,'',null,null,sessionStorage.getItem(this.signInService.USERNAME));
+        this.onFetchLevelTeach();
+        document.getElementById('niveauEnseigne').click();
+
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+    }
+    
+  }
+  onSaveModule(data){
+    this.propositionFormationService.onSaveModule(data)
+    .subscribe(
+      (response)=>{
+       this.module = new Module('',sessionStorage.getItem(this.signInService.USERNAME));
+        document.getElementById('modules').click();
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
   }
 
+  getContrat(id){
+    this.edit = true;
+    this.propositionFormationService.getContratById(id)
+    .subscribe(
+      (response)=>{
+        this.niveauForme = new NiveauForme(response['id'],response['niveau'],response['prixMin'],response['prixMax'],sessionStorage.getItem(this.signInService.USERNAME))
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+
+  }
+
+  deleteContrat(id){
+    this.edit = true;
+    this.propositionFormationService.deleteContratById(id)
+    .subscribe(
+      (response)=>{
+        this.onFetchLevelTeach();
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+
+  }
+
+  onFetchLevelTeach(){
+    this.propositionFormationService.onFetchLevelTeach(sessionStorage.getItem(this.signInService.USERNAME))
+    .subscribe(
+      (response)=>{
+        this.niveauxEnseignes = response;
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+  }
+  rechercherDisponibilte(){
+    this.propositionFormationService.rechercherDisponibilites(sessionStorage.getItem(this.signInService.USERNAME))
+    .subscribe(
+      (response)=>{
+        this.disponibilites = response;
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+  }
+  onSaveDisponibilite(data){
+    this.propositionFormationService.onSaveDisponibilte(data)
+    .subscribe(
+      (response)=>{
+        this.disponibilite = new Disponibilite('','','',sessionStorage.getItem(this.signInService.USERNAME));
+       this.rechercherDisponibilte();
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+  }
+  
 }

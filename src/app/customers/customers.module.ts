@@ -1,5 +1,7 @@
+import { ParticulierService } from 'src/app/customers/services/particulier.service';
+import { PropositionFormationService } from './services/propositionFormation.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Routes,  RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -13,39 +15,48 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PropositionFormationComponent } from './proposition-formation/proposition-formation.component';
 
 
-const customersRouter : Routes = [
-  
-  {path: 'customers', component  : CustomerMainComponent, canActivate : [CustomersGuard], data : { role : 'ROLE_PARTICULIER'},
-    
-  children : [
-    {
-    path : '',
-    component : DashboardCustomersComponent
-    
-    },
-    {
-      path : 'editprofil',
-      component : EditProfileComponent
-      
+const customersRouter: Routes = [
+
+  {
+    path: 'customers', component: CustomerMainComponent, canActivate: [CustomersGuard], data: { role: 'ROLE_PARTICULIER' },
+
+    children: [
+      {
+        path: '',
+        component: DashboardCustomersComponent
+
       },
       {
-        path : 'formations',
-        component : PropositionFormationComponent
-        
-        }
-  
-]
-}] ;
+        path: 'editprofil',
+        component: EditProfileComponent
+
+      },
+      {
+        path: 'formations',
+        component: PropositionFormationComponent
+
+      }
+
+    ]
+  }];
 
 
 
 @NgModule({
   declarations: [NavbarComponent,
-     SidebarComponent, 
-     DashboardCustomersComponent, 
-     ContentCustomersComponent, 
-     EditProfileComponent, 
-     CustomerMainComponent, PropositionFormationComponent],
+    SidebarComponent,
+    DashboardCustomersComponent,
+    ContentCustomersComponent,
+    EditProfileComponent,
+    CustomerMainComponent, PropositionFormationComponent],
+
+  providers: [
+
+  ParticulierService,
+  PropositionFormationService,
+
+  ],
+
   imports: [
     CommonModule,
     RouterModule.forChild(customersRouter),

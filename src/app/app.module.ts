@@ -1,3 +1,4 @@
+import { FormationsModule } from './formations/formations.module';
 import { CustomersModule } from './customers/customers.module';
 import { ErrorPageModule } from './error-page/error-page.module';
 import { SignInGuard } from './guard/sign-in.guard';
@@ -9,7 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injectable } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router'
-import { ParticulierService } from './home/services/particulier.service';
+import { ParticulierService } from './customers/services/particulier.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PropositionFormationService } from './customers/services/propositionFormation.service';
@@ -25,6 +26,9 @@ const appRouter : Routes = [
   },
   {
     path :'customers', redirectTo :'/customers'
+  } ,
+  {
+    path :'formations', redirectTo :'/formations'
   },{
     path: "**", redirectTo :'/error404'
   }
@@ -42,14 +46,13 @@ const appRouter : Routes = [
     AdminModule,
     HomeModule,
     CustomersModule,
+    FormationsModule,
     ErrorPageModule,
     RouterModule.forRoot(appRouter),
     BrowserAnimationsModule
     
   ],
-  providers: [
-   ParticulierService,
-   PropositionFormationService, 
+  providers: [ 
    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
    AdminGuard,
    SignInGuard

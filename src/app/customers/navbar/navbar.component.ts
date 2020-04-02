@@ -1,7 +1,7 @@
 import { SignInService } from '../../home/services/sign-in.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ParticulierService } from 'src/app/home/services/particulier.service';
+import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { consts } from '../../API_url/const'
 @Component({
   selector: 'app-navbar',

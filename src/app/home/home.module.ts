@@ -62,7 +62,16 @@ const homeRouter = [
 
 
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent, HomeComponent, AnoncesFormationComponent, FooterHomeComponent, ForgotPasswordComponent, SliderHomeComponent, HeaderHomeComponent, ResetPasswordComponent],
+  declarations: [SignInComponent, 
+    SignUpComponent, 
+    HomeComponent, 
+    AnoncesFormationComponent, 
+    FooterHomeComponent, 
+    ForgotPasswordComponent, 
+    SliderHomeComponent, 
+    HeaderHomeComponent, 
+    ResetPasswordComponent, 
+   ],
   imports: [
     CommonModule,
     RouterModule.forChild(homeRouter),

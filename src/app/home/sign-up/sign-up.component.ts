@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ParticulierService } from '../services/particulier.service';
+import { ParticulierService } from '../../customers/services/particulier.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { Particulier } from '../models/Particulier.model';

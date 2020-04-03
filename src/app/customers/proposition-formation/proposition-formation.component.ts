@@ -186,6 +186,11 @@ export class PropositionFormationComponent implements OnInit {
   }
 
   
+  setZoom(event) {
+    
+    this.zoom = event ;
+    
+  }
 
   changeRaduis(radius) {
 

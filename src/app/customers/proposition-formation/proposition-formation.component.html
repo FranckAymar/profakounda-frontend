@@ -249,19 +249,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                
-                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"
-                (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)">
 
-                <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="true"
-                    [fillColor]="red" [radius]="radius" (radiusChange)="changeRaduis($event)">
-                </agm-circle>
-            </agm-map>
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+                    (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)"
+                    (zoomChange)="setZoom($event)">
+
+                    <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="true"
+                        [fillColor]="red" [radius]="radius" (radiusChange)="changeRaduis($event)">
+                    </agm-circle>
+                </agm-map>
 
 
             </div>
             <div class="modal-footer">
-                <button (click)="onSaveCoordMap()" type="button" class="btn btn-success" data-dismiss="modal">Enregitrer</button>
+                <button (click)="onSaveCoordMap()" type="button" class="btn btn-success"
+                    data-dismiss="modal">Enregitrer</button>
                 <button type="button" class=" btn btn-danger" data-dismiss="modal">Fermer</button>
             </div>
         </div>

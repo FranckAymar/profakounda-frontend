@@ -207,7 +207,7 @@
                             <tbody>
                                 <tr *ngFor="let d of disponibilites">
                                     <td>{{d.jour}}</td>
-                                    <td><span *ngFor="let i of d.intervals">{{i.heureDebut}}-{{i.heureFin}};&nbsp;</span></td>
+                                    <td><span  *ngFor="let i of d.intervals">{{i.heureDebut}}-{{i.heureFin}};&nbsp;</span></td>
                                    
                                     <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
                                 </tr>

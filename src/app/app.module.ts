@@ -10,10 +10,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injectable } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router'
-import { ParticulierService } from './customers/services/particulier.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PropositionFormationService } from './customers/services/propositionFormation.service';
 
 
 
@@ -49,12 +47,9 @@ const appRouter : Routes = [
     FormationsModule,
     ErrorPageModule,
     RouterModule.forRoot(appRouter),
-<<<<<<< HEAD
-    
-=======
-    BrowserAnimationsModule
->>>>>>> master
-    
+    BrowserAnimationsModule,
+        
+  
   ],
   providers: [ 
    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },

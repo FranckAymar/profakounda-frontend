@@ -47,6 +47,7 @@ export const URL = {
     //Reset password
     forgotPassword : consts.host+ consts.nameProject +'forgot-password' ,
     resetPassword : consts.host+ consts.nameProject +'reset-password' ,
+    
     // Proposition de formation liens
     enregsitrerNiveauForme: consts.host+ consts.nameProject +'particulier/enregistrerContrat' ,
     modifierNiveauForme: consts.host+ consts.nameProject +'particulier/modifierContrat' ,
@@ -56,4 +57,6 @@ export const URL = {
     deleteContrat: consts.host+ consts.nameProject +'particulier/deleteContrat',
     rechercherDisponibilites: consts.host+ consts.nameProject +'particulier/recupererdisponibilites' ,
     enregistrerDisponibilte: consts.host+ consts.nameProject +'particulier/enregistrerdisponibilite' ,
+    enregistrerCoordMap : consts.host+ consts.nameProject +'particulier/enregistrerzoneintervention'
+
 }

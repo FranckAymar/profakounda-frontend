@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { HomeModule } from './../home/home.module';
 import { DetailsAnnonceComponent } from './details-annonce/details-annonce.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -42,6 +43,10 @@ const formationsRouter = [
     HttpClientModule,
     FormsModule, 
     ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCdrVoDFD_XTsAxUo2-VH0HTLX5IrdfC_E'
+    }) 
+    
   ]
 })
 export class FormationsModule { }

@@ -16,3 +16,7 @@ i{
 .ng-invalid{
     border-color: red;
 }
+
+agm-map {
+    height: 400px;
+  }

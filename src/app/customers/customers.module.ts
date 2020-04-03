@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { PropositionFormationService } from './services/propositionFormation.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -61,7 +62,10 @@ const customersRouter: Routes = [
     CommonModule,
     RouterModule.forChild(customersRouter),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCdrVoDFD_XTsAxUo2-VH0HTLX5IrdfC_E'
+    }),
   ]
 })
 export class CustomersModule { }

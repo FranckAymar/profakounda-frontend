@@ -1,3 +1,4 @@
+import { CoordMapModel } from './../models/CoordModel';
 import { HttpClient } from '@angular/common/http';
 import { URL } from 'src/app/API_url/config';
 
@@ -27,5 +28,13 @@ export class PropositionFormationService{
     }
     onSaveDisponibilte(data){
         return this.httpClient.post(URL.enregistrerDisponibilte,data);
+     }
+
+
+     //Save CoordMap
+     saveCoordMap(coordMap : CoordMapModel) {
+
+        return this.httpClient.post(URL.enregistrerCoordMap, coordMap) ;
+
      }
 }

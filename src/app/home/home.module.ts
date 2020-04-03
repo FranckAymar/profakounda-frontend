@@ -15,8 +15,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { SliderHomeComponent } from './slider-home/slider-home.component';
 import { HeaderHomeComponent } from './header-home/header-home.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { MapsComponent } from './maps/maps.component';
-import {AgmCoreModule} from '@agm/core'
 
 const homeRouter = [
 
@@ -48,22 +46,10 @@ const homeRouter = [
       {
         path : 'reset-password/:token',
         component : ResetPasswordComponent
-        
-        
-      },
-      {
-        path : 'maps',
-        component : MapsComponent
-        
-        
+             
       }
-
-
-
-    ]
-
+   ]
   }
-
 ]
 
 
@@ -77,7 +63,8 @@ const homeRouter = [
     ForgotPasswordComponent, 
     SliderHomeComponent, 
     HeaderHomeComponent, 
-    ResetPasswordComponent, 
+    ResetPasswordComponent,
+   
    ],
   imports: [
     CommonModule,
@@ -85,9 +72,7 @@ const homeRouter = [
     HttpClientModule,
     FormsModule, 
     ReactiveFormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCdrVoDFD_XTsAxUo2-VH0HTLX5IrdfC_E'
-    })  ],
+     ],
   providers : [
     SignInService, ResetPasswordService
   ]

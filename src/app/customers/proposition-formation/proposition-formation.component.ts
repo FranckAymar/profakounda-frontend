@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CoordMapModel } from './../models/CoordModel';
+import { Component, OnInit, Input, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { NiveauForme } from '../models/NiveauForme.model';
 import { Module } from '../models/formation.model';
 import { Disponibilite } from '../models/Disponibite.model';
 import { SignInService } from 'src/app/home/services/sign-in.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { PropositionFormationService } from '../services/propositionFormation.service';
+
 
 @Component({
   selector: 'app-proposition-formation',
@@ -21,7 +22,21 @@ export class PropositionFormationComponent implements OnInit {
   niveauForme:NiveauForme = new NiveauForme(0,'',null,null,sessionStorage.getItem(this.signInService.USERNAME));
   module:Module = new Module('',sessionStorage.getItem(this.signInService.USERNAME));
   disponibilite:Disponibilite = new Disponibilite('','','',sessionStorage.getItem(this.signInService.USERNAME));
-  constructor(private signInService:SignInService,private niveauService:NiveauService,private propositionFormationService:PropositionFormationService) { }
+ 
+  //Variable for map
+
+  lat: number = 5.338390;
+  lng: number = -4.097748;
+  radius : number = 1000
+  zoom : number = 15 ; 
+ 
+
+  coordMapModel : CoordMapModel ;
+
+  constructor(private signInService:SignInService,
+    private niveauService:NiveauService,
+    private propositionFormationService:PropositionFormationService,
+    ) { }
 
   ngOnInit() {
     this.onFetchNiveaux();
@@ -158,5 +173,46 @@ export class PropositionFormationComponent implements OnInit {
       }
     )
   }
+
+
+
+  //Function for map
+
+  ajoutMarqueur(lat : number, lng : number) {
+     
+    this.lat = lat ;
+    this.lng = lng ;
+    
+  }
+
   
+
+  changeRaduis(radius) {
+
+    this.radius = radius ;
+    
+  }
+
+
+  onSaveCoordMap() {
+
+    this.coordMapModel  = new CoordMapModel(this.zoom, this.lat, this.lng , this.radius) ;
+
+    this.propositionFormationService.saveCoordMap(this.coordMapModel).subscribe(
+
+      (resp) => {
+          console.log(resp);
+          
+      },
+
+      (error) => {
+
+        console.log(error);
+        
+      }
+    )
+
+
+  }
+
 }

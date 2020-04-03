@@ -16,7 +16,6 @@ import { SliderHomeComponent } from './slider-home/slider-home.component';
 import { HeaderHomeComponent } from './header-home/header-home.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
-
 const homeRouter = [
 
 
@@ -47,28 +46,33 @@ const homeRouter = [
       {
         path : 'reset-password/:token',
         component : ResetPasswordComponent
-        
-        
+             
       }
-
-
-
-    ]
-
+   ]
   }
-
 ]
 
 
 
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent, HomeComponent, AnoncesFormationComponent, FooterHomeComponent, ForgotPasswordComponent, SliderHomeComponent, HeaderHomeComponent, ResetPasswordComponent],
+  declarations: [SignInComponent, 
+    SignUpComponent, 
+    HomeComponent, 
+    AnoncesFormationComponent, 
+    FooterHomeComponent, 
+    ForgotPasswordComponent, 
+    SliderHomeComponent, 
+    HeaderHomeComponent, 
+    ResetPasswordComponent,
+   
+   ],
   imports: [
     CommonModule,
     RouterModule.forChild(homeRouter),
     HttpClientModule,
     FormsModule, 
-    ReactiveFormsModule  ],
+    ReactiveFormsModule,
+     ],
   providers : [
     SignInService, ResetPasswordService
   ]

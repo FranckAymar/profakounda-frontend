@@ -5,20 +5,25 @@
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
-               
-                <button (click)="addNiveau()"  type="button" data-toggle="modal" data-target="#niveauEnseigne"
+
+                <button (click)="addNiveau()" type="button" data-toggle="modal" data-target="#niveauEnseigne"
                     class="btn btn-primary">
                     Niveau enseigné
                 </button>
-                <button  style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#modules"
-                class="btn btn-info">
-                Modules enseignés
+                <button style="margin-left: 1em;" (click)="addModule()" type="button" data-toggle="modal" data-target="#modules"
+                    class="btn btn-info">
+                    Modules enseignés
                 </button>
-                <button  style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#disponibilite"
+                <button style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#disponibilite"
                     class="btn btn-outline-success">
                     Disponibilités
                 </button>
-               
+                <button style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
+                    class="btn btn-outline-dark">
+                    Zone Intervention
+                </button>
+
+
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -27,18 +32,20 @@
                             <th>Coût Maximum</th>
 
                         </tr>
-                    </thead> 
+                    </thead>
                     <tbody>
-                       
+
                         <tr *ngFor="let n of niveauxEnseignes">
                             <td>{{n.niveau}}</td>
                             <td>{{n.prixMin}} Eco</td>
                             <td>{{n.prixMax}} Eco</td>
-                            <td><button data-toggle="modal" data-target="#niveauEnseigne" (click)="getContrat(n.id)" class="updateButton"><i class="fa fa-edit"></i></button></td>
-                            <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i class="fa fa-times"></i></button></td>
-                            
+                            <td><button data-toggle="modal" data-target="#niveauEnseigne" (click)="getContrat(n.id)"
+                                    class="updateButton"><i class="fa fa-edit"></i></button></td>
+                            <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i
+                                        class="fa fa-times"></i></button></td>
+
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -59,27 +66,29 @@
             </div>
             <div class="modal-body">
                 <!-- Libelle-->
-               
+
                 <form (ngSubmit)="onSaveLevelTeach(niveauForme)" #f="ngForm">
                     <div class="form-group">
                         <label for="DesignationNiveau">Niveau:</label>
-                            <input   name="designationNiveau" required [(ngModel)]="niveauForme.designationNiveau" type="text" id="DesignationNiveau"
-                            />
+                        <input name="designationNiveau" required [(ngModel)]="niveauForme.designationNiveau" type="text"
+                            id="DesignationNiveau" />
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label for="prixMin">Prix min:</label>
-                            <input   name="prixMin" required [(ngModel)]="niveauForme.prixMin" type="number" id="prixMin"
-                            />
+                            <input name="prixMin" required [(ngModel)]="niveauForme.prixMin" type="number"
+                                id="prixMin" />
                         </div>
                         <div class="col-md-6">
                             <label for="prixMax">Prix max:</label>
-                            <input   name="prixMax" type="number"  [(ngModel)]="niveauForme.prixMax" id="prixMax"
-                            required/>
+                            <input name="prixMax" type="number" [(ngModel)]="niveauForme.prixMax" id="prixMax"
+                                required />
                         </div>
                     </div>
-                    <button *ngIf="!edit" [disabled]="f.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
-                    <button *ngIf="edit" [disabled]="f.invalid" type="submit" class="btn btn-success">Enregistrer</button>
+                    <button *ngIf="!edit" [disabled]="f.invalid" type="submit"
+                        class="btn btn-primary">Enregistrer</button>
+                    <button *ngIf="edit" [disabled]="f.invalid" type="submit"
+                        class="btn btn-success">Enregistrer</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -90,8 +99,7 @@
 </div>
 
 
-<div class="modal fade" id="modules" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="modules" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -103,13 +111,15 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <form  (ngSubmit)="onSaveModule(module)" #f2="ngForm">
+                        <form (ngSubmit)="onSaveModule(module)" #f2="ngForm">
                             <div class="form-group">
                                 <label for="module">Designation du module:</label>
-                                <input  name="designation" [(ngModel)]="module.designation" type="text" id="module"
-                                     required>
+                                <input name="designation" [(ngModel)]="module.designation" type="text" id="module"
+                                    required>
                             </div>
-                            <button [disabled]="f2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button *ngIf="!editModule" [disabled]="f2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button *ngIf="editModule" [disabled]="f2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
+                            <button *ngIf="editModule" style="margin-left: 1em;" (click)="addModule()" type="submit" class="btn btn-danger">Annuler</button>
                         </form>
                     </div>
                     <div class="col-md-6" style="height: 17em; overflow: auto;">
@@ -118,35 +128,21 @@
                                 <tr>
                                     <th style="font-weight: bold;">Désignation</th>
                                 </tr>
-                            </thead> 
+                            </thead>
                             <tbody>
-                                <tr>
-                                    <td>MATHEMATIQUE</td>
-                                    <td><button class="updateButton"><i class="fa fa-edit"></i></button></td>
-                                    <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
+                                <tr *ngFor="let m of modules">
+                                    <td>{{m.module.libelle}}</td>
+                                    <td><button (click)="getModule(m.id)" class="updateButton"><i class="fa fa-edit"></i></button></td>
+                                    <td><button (click)="deleteModule(m.id)" class="deleteButton"><i class="fa fa-times"></i></button></td>
                                 </tr>
-                                <tr>
-                                    <td>PHYSIQUE</td>
-                                    <td><button class="updateButton"><i class="fa fa-edit"></i></button></td>
-                                    <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td>SVT</td>
-                                    <td><button class="updateButton"><i class="fa fa-edit"></i></button></td>
-                                    <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td>ANGLAIS</td>
-                                    <td><button class="updateButton"><i class="fa fa-edit"></i></button></td>
-                                    <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
-                                </tr>
+                         
                                 <tr>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
@@ -172,28 +168,27 @@
                         <form #f3="ngForm" (ngSubmit)="onSaveDisponibilite(disponibilite)">
                             <div class="form-group">
                                 <label for="jour">JOUR:</label>
-                                <input  name="jour" [(ngModel)]="disponibilite.jour" type="text" id="jour"
-                                     required>
+                                <input name="jour" [(ngModel)]="disponibilite.jour" type="text" id="jour" required>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="heureDebut">De:</label>
-                                        <input  name="heureDebut" type="time" id="heureDebut"
+                                        <input name="heureDebut" type="time" id="heureDebut"
                                             [(ngModel)]="disponibilite.heureDebut" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="heureFin">A:</label>
-                                        <input  [(ngModel)]="disponibilite.heureFin" type="time" id="heureFin"
+                                        <input [(ngModel)]="disponibilite.heureFin" type="time" id="heureFin"
                                             name="heureFin" />
                                     </div>
                                 </div>
                             </div>
-                            
-                            
-                            <button  type="submit" [disabled]="f3.invalid" class="btn btn-primary">Enregistrer</button>
+
+
+                            <button type="submit" [disabled]="f3.invalid" class="btn btn-primary">Enregistrer</button>
                         </form>
                     </div>
                     <div class="col-md-8" style="height: 17em; overflow: auto;">
@@ -201,9 +196,9 @@
                             <thead>
                                 <tr>
                                     <th style="font-weight: bold;">Disponible</th>
-                                    
+
                                 </tr>
-                            </thead> 
+                            </thead>
                             <tbody>
                                 <tr *ngFor="let d of disponibilites">
                                     <td>{{d.jour}}</td>
@@ -211,17 +206,49 @@
                                    
                                     <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
                                 </tr>
-                                
-                                
-                                
+
+
+
                             </tbody>
                         </table>
                     </div>
                 </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="zoneIntervention" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Veuillez manier le cercle pour préciser votre zone
+                    d'intervention</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+                (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)">
+
+                <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="true"
+                    [fillColor]="red" [radius]="radius" (radiusChange)="changeRaduis($event)">
+                </agm-circle>
+            </agm-map>
+
+
+            </div>
+            <div class="modal-footer">
+                <button (click)="onSaveCoordMap()" type="button" class="btn btn-success" data-dismiss="modal">Enregitrer</button>
+                <button type="button" class=" btn btn-danger" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>

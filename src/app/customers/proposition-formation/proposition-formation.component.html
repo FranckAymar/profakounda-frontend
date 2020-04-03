@@ -10,7 +10,7 @@
                     class="btn btn-primary">
                     Niveau enseigné
                 </button>
-                <button style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#modules"
+                <button style="margin-left: 1em;" (click)="addModule()" type="button" data-toggle="modal" data-target="#modules"
                     class="btn btn-info">
                     Modules enseignés
                 </button>
@@ -117,7 +117,9 @@
                                 <input name="designation" [(ngModel)]="module.designation" type="text" id="module"
                                     required>
                             </div>
-                            <button [disabled]="f2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button *ngIf="!editModule" [disabled]="f2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button *ngIf="editModule" [disabled]="f2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
+                            <button *ngIf="editModule" style="margin-left: 1em;" (click)="addModule()" type="submit" class="btn btn-danger">Annuler</button>
                         </form>
                     </div>
                     <div class="col-md-6" style="height: 17em; overflow: auto;">
@@ -128,26 +130,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>MATHEMATIQUE</td>
-                                    <td><button class="updateButton"><i class="fa fa-edit"></i></button></td>
-                                    <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
+                                <tr *ngFor="let m of modules">
+                                    <td>{{m.module.libelle}}</td>
+                                    <td><button (click)="getModule(m.id)" class="updateButton"><i class="fa fa-edit"></i></button></td>
+                                    <td><button (click)="deleteModule(m.id)" class="deleteButton"><i class="fa fa-times"></i></button></td>
                                 </tr>
-                                <tr>
-                                    <td>PHYSIQUE</td>
-                                    <td><button class="updateButton"><i class="fa fa-edit"></i></button></td>
-                                    <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td>SVT</td>
-                                    <td><button class="updateButton"><i class="fa fa-edit"></i></button></td>
-                                    <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td>ANGLAIS</td>
-                                    <td><button class="updateButton"><i class="fa fa-edit"></i></button></td>
-                                    <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
-                                </tr>
+                         
                                 <tr>
                                 </tr>
                             </tbody>
@@ -214,10 +202,8 @@
                             <tbody>
                                 <tr *ngFor="let d of disponibilites">
                                     <td>{{d.jour}}</td>
-                                    <td><span
-                                            *ngFor="let i of d.intervals">{{i.heureDebut}}-{{i.heureFin}};&nbsp;</span>
-                                    </td>
-
+                                    <td><span  *ngFor="let i of d.intervals">{{i.heureDebut}}-{{i.heureFin}};&nbsp;</span></td>
+                                   
                                     <td><button class="deleteButton"><i class="fa fa-times"></i></button></td>
                                 </tr>
 

@@ -16,11 +16,13 @@ import { PropositionFormationService } from '../services/propositionFormation.se
 export class PropositionFormationComponent implements OnInit {
 
   @Input() edit:boolean = false;
+  @Input() editModule:boolean = false;
   niveaux=[];
   niveauxEnseignes: any = [];
   disponibilites: any = [];
+  modules: any = [];
   niveauForme:NiveauForme = new NiveauForme(0,'',null,null,sessionStorage.getItem(this.signInService.USERNAME));
-  module:Module = new Module('',sessionStorage.getItem(this.signInService.USERNAME));
+  module:Module = new Module(0,'',sessionStorage.getItem(this.signInService.USERNAME));
   disponibilite:Disponibilite = new Disponibilite('','','',sessionStorage.getItem(this.signInService.USERNAME));
  
   //Variable for map
@@ -42,11 +44,16 @@ export class PropositionFormationComponent implements OnInit {
     this.onFetchNiveaux();
     this.onFetchLevelTeach();
     this.rechercherDisponibilte();
+    this.rechercherModules();
     }
 
     addNiveau(){
       this.edit = false;
       this.niveauForme = new NiveauForme(0,'',null,null,sessionStorage.getItem(this.signInService.USERNAME));
+    }
+    addModule(){
+      this.editModule = false;
+      this.module = new Module(0,'',sessionStorage.getItem(this.signInService.USERNAME));
     }
 
   onFetchNiveaux() {
@@ -99,16 +106,33 @@ export class PropositionFormationComponent implements OnInit {
     
   }
   onSaveModule(data){
-    this.propositionFormationService.onSaveModule(data)
-    .subscribe(
-      (response)=>{
-       this.module = new Module('',sessionStorage.getItem(this.signInService.USERNAME));
-        document.getElementById('modules').click();
-      },
-      (error)=>{
-        console.log("Erreur : "+error);
-      }
-    )
+    if(!this.editModule)
+    {
+        this.propositionFormationService.onSaveModule(data)
+      .subscribe(
+        (response)=>{
+        this.module = new Module(0,'',sessionStorage.getItem(this.signInService.USERNAME));
+        this.rechercherModules();
+        },
+        (error)=>{
+          console.log("Erreur enregistrement du module : "+error);
+        }
+      )
+    }
+    else{
+      this.propositionFormationService.onUpdateModule(data)
+      .subscribe(
+        (response)=>{
+        this.module = new Module(0,'',sessionStorage.getItem(this.signInService.USERNAME));
+        this.editModule = false;
+        this.rechercherModules();
+        },
+        (error)=>{
+          console.log("Erreur enregistrement du module : "+error);
+        }
+      )
+    }
+    
   }
 
   getContrat(id){
@@ -124,6 +148,21 @@ export class PropositionFormationComponent implements OnInit {
     )
 
   }
+  getModule(id){
+    this.editModule = true;
+    this.propositionFormationService.getModuleById(id)
+    .subscribe(
+      (response)=>{
+        this.module = new Module(response['id'],response['designation'],sessionStorage.getItem(this.signInService.USERNAME));
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+
+  }
+
+  
 
   deleteContrat(id){
     this.edit = true;
@@ -131,6 +170,19 @@ export class PropositionFormationComponent implements OnInit {
     .subscribe(
       (response)=>{
         this.onFetchLevelTeach();
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+
+  }
+
+  deleteModule(id){
+    this.propositionFormationService.deleteModuleById(id)
+    .subscribe(
+      (response)=>{
+        this.rechercherModules();
       },
       (error)=>{
         console.log("Erreur : "+error);
@@ -155,6 +207,19 @@ export class PropositionFormationComponent implements OnInit {
     .subscribe(
       (response)=>{
         this.disponibilites = response;
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+  }
+  rechercherModules(){
+    this.propositionFormationService.rechercherModules(sessionStorage.getItem(this.signInService.USERNAME))
+    .subscribe(
+      (response)=>{
+        this.modules = response;
+        console.log("Modules: ");
+        console.log(response);
       },
       (error)=>{
         console.log("Erreur : "+error);

@@ -20,14 +20,27 @@ export class PropositionFormationService{
      getContratById(id:Number){
         return this.httpClient.post(URL.getContrat,id);
     }
+    getModuleById(id:Number){
+        return this.httpClient.post(URL.getModule,id);
+    }
     deleteContratById(id:Number){
         return this.httpClient.post(URL.deleteContrat,id);
+    }
+    
+    deleteModuleById(id:Number){
+        return this.httpClient.post(URL.deleteModule,id);
     }
     rechercherDisponibilites(username:String){
         return this.httpClient.post(URL.rechercherDisponibilites,username);
     }
+    rechercherModules(username:String){
+        return this.httpClient.post(URL.rechercherModule,username);
+    }
     onSaveDisponibilte(data){
         return this.httpClient.post(URL.enregistrerDisponibilte,data);
+     }
+     onUpdateModule(data){
+        return this.httpClient.post(URL.modifierModule,data);
      }
 
 

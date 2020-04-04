@@ -3,7 +3,7 @@ import { ClasseService } from '../services/classe.service';
 import { Classe } from '../model/classe';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { timer } from 'rxjs';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-classe',

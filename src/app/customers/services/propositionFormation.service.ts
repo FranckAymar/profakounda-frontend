@@ -39,6 +39,9 @@ export class PropositionFormationService{
     onSaveDisponibilte(data){
         return this.httpClient.post(URL.enregistrerDisponibilte,data);
      }
+     onSaveListJourHeure(data){
+        return this.httpClient.post(URL.enregistrerListJourHeure,data);
+     }
      onUpdateModule(data){
         return this.httpClient.post(URL.modifierModule,data);
      }

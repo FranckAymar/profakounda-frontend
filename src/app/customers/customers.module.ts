@@ -49,6 +49,7 @@ const customersRouter: Routes = [
     DashboardCustomersComponent,
     ContentCustomersComponent,
     EditProfileComponent,
+    
     CustomerMainComponent, PropositionFormationComponent],
 
   providers: [

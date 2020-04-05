@@ -7,23 +7,37 @@ import { SignInService } from 'src/app/home/services/sign-in.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { PropositionFormationService } from '../services/propositionFormation.service';
 
+import {debounceTime, distinctUntilChanged, map, filter} from 'rxjs/operators';
+import { Niveau } from 'src/app/admin/model/niveau.model';
+import { Observable } from 'rxjs';
+import { Jour } from '../models/jour.model';
+import { Heure } from '../models/heure.model';
 
 @Component({
   selector: 'app-proposition-formation',
   templateUrl: './proposition-formation.component.html',
   styleUrls: ['./proposition-formation.component.css']
 })
+
 export class PropositionFormationComponent implements OnInit {
 
+  public model: Niveau;
   @Input() edit:boolean = false;
   @Input() editModule:boolean = false;
   niveaux=[];
   niveauxEnseignes: any = [];
   disponibilites: any = [];
+  hours: any = [];
+  days: any = [];
   modules: any = [];
+  heure:Heure = new Heure('','');
+  @Input() numberOfTable:number;
+
+  disponibilite:Disponibilite;
+  jour:Jour = new Jour(0,'',[]);
   niveauForme:NiveauForme = new NiveauForme(0,'',null,null,sessionStorage.getItem(this.signInService.USERNAME));
   module:Module = new Module(0,'',sessionStorage.getItem(this.signInService.USERNAME));
-  disponibilite:Disponibilite = new Disponibilite('','','',sessionStorage.getItem(this.signInService.USERNAME));
+ 
  
   //Variable for map
 
@@ -37,15 +51,20 @@ export class PropositionFormationComponent implements OnInit {
 
   constructor(private signInService:SignInService,
     private niveauService:NiveauService,
-    private propositionFormationService:PropositionFormationService,
-    ) { }
+    private propositionFormationService:PropositionFormationService
+    ) { 
+      
+    }
 
+    
   ngOnInit() {
     this.onFetchNiveaux();
     this.onFetchLevelTeach();
     this.rechercherDisponibilte();
     this.rechercherModules();
     }
+
+    
 
     addNiveau(){
       this.edit = false;
@@ -54,6 +73,17 @@ export class PropositionFormationComponent implements OnInit {
     addModule(){
       this.editModule = false;
       this.module = new Module(0,'',sessionStorage.getItem(this.signInService.USERNAME));
+    }
+    
+
+    closeModalDisponibilite(){
+      if(this.days.length != [])
+      {
+        alert('Veillez clicker sur le bouton VALIDER la validation du tableau rouge.')
+      }
+      else{
+        document.getElementById('disponibilite').click();
+      }
     }
 
   onFetchNiveaux() {
@@ -207,6 +237,9 @@ export class PropositionFormationComponent implements OnInit {
     .subscribe(
       (response)=>{
         this.disponibilites = response;
+        console.log("Rechercher Disponibilié....");
+        console.log(this.disponibilites);
+        this.days = [];
       },
       (error)=>{
         console.log("Erreur : "+error);
@@ -227,11 +260,30 @@ export class PropositionFormationComponent implements OnInit {
     )
   }
   onSaveDisponibilite(data){
-    this.propositionFormationService.onSaveDisponibilte(data)
+   this.jour.heure = this.hours;
+   this.days.push(this.jour)
+   console.log(this.days)
+   this.jour = new Jour(0,'',[]);
+   this.hours = [];
+  }
+  addHour(){
+    this.hours.push(this.heure);
+    console.log(this.hours);
+    this.heure = new Heure('','');
+  }
+
+
+  onSaveListJourHeure(){
+    this.disponibilite = new Disponibilite(this.days,sessionStorage.getItem(this.signInService.USERNAME));
+    this.propositionFormationService.onSaveListJourHeure(this.disponibilite)
     .subscribe(
       (response)=>{
-        this.disponibilite = new Disponibilite('','','',sessionStorage.getItem(this.signInService.USERNAME));
-       this.rechercherDisponibilte();
+        
+       console.log("succes");
+      console.log(response);
+      this.days = [];
+      this.rechercherDisponibilte();
+      
       },
       (error)=>{
         console.log("Erreur : "+error);

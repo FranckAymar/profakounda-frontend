@@ -61,6 +61,7 @@ export const URL = {
     modifierModule: consts.host+ consts.nameProject +'particulier/modifierModule' ,
     rechercherDisponibilites: consts.host+ consts.nameProject +'particulier/recupererdisponibilites' ,
     enregistrerDisponibilte: consts.host+ consts.nameProject +'particulier/enregistrerdisponibilite' ,
-    enregistrerCoordMap : consts.host+ consts.nameProject +'particulier/enregistrerzoneintervention'
+    enregistrerCoordMap : consts.host+ consts.nameProject +'particulier/enregistrerzoneintervention',
+    enregistrerListJourHeure: consts.host+ consts.nameProject +'particulier/enregistrerListJourHeure' ,
 
 }

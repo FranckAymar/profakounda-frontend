@@ -12,6 +12,9 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoadingComponent } from './loading/loading.component';
+import { LoadingInterceptor } from './LoadingInterceptor';
+
 
 
 
@@ -36,7 +39,8 @@ const appRouter : Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoadingComponent
     
   ],
   imports: [
@@ -52,7 +56,16 @@ const appRouter : Routes = [
   
   ],
   providers: [ 
-   { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
+   { 
+    provide: HTTP_INTERCEPTORS, 
+    useClass: XhrInterceptor, 
+    multi: true 
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoadingInterceptor,
+    multi: true
+  },
    AdminGuard,
    SignInGuard,
    

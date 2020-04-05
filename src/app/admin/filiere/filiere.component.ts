@@ -2,7 +2,6 @@ import { Filiere } from '../model/filiere';
 import { FiliereService } from '../services/filiere.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-filiere',

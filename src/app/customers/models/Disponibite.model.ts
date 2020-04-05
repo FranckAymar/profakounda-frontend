@@ -1,5 +1,5 @@
 export class Disponibilite{
-    constructor(public jour:string,public heureDebut:string,public heureFin:string,public username:string){
+    constructor(public jour:[],public username:string){
 
     }
 }

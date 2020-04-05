@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-details-annonce',
   templateUrl: './details-annonce.component.html',
@@ -15,6 +15,8 @@ export class DetailsAnnonceComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+
   }
 
 
@@ -32,5 +34,10 @@ export class DetailsAnnonceComponent implements OnInit {
     this.radius = radius ;
     
   }
+
+
+ 
+
+  
 
 }

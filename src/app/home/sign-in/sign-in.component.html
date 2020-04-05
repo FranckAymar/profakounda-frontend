@@ -23,9 +23,8 @@
                 <div *ngIf="isFailed" class="modal-header center">
                     <span class="alert alert-danger">Vérifier vos informations de connexion </span>
                 </div>
-                <form [formGroup]="loginForm" class="s12" (submit)="onLogin()">
+                <form  [formGroup]="loginForm" class="s12" (submit)="onLogin()">
                     <div>
-
                         <div class="input-field s12">
                             <input formControlName="username" type="text" data-ng-model="name" class="validate">
                             <label>Adresse e-mail</label>
@@ -39,7 +38,7 @@
                             <input formControlName="password" type="password" class="validate">
                             <label>Password</label>
                         </div>
-    
+
                     </div>
                     <div>
                         <div class="s12 log-ch-bx">
@@ -68,3 +67,6 @@
 
 
 </section>
+
+
+

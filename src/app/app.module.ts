@@ -18,7 +18,6 @@ import { LoadingInterceptor } from './LoadingInterceptor';
 
 
 
-
 const appRouter : Routes = [
   { path: '',  redirectTo : '/home',
     pathMatch : 'full'
@@ -50,7 +49,7 @@ const appRouter : Routes = [
     FormationsModule,
     ErrorPageModule,
     RouterModule.forRoot(appRouter),
-    BrowserAnimationsModule,
+  
         
   
   ],

@@ -2,21 +2,11 @@
 <section>
     <div class="pro-cover">
 
-        <agm-map 
-                [latitude]="lat" 
-                [longitude]="lng"
-                [zoom]="15"
-                (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)"
-                >
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
 
-            <agm-circle 
-                        [latitude]="lat"
-                        [longitude]="lng"
-                        [circleDraggable]="true" 
-                        [editable]="true" 
-                        [fillColor]="red"
-                        [radius]="radius"
-                        (radiusChange)="changeRaduis($event)">
+            <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="false"
+                [fillColor]="green" [strokeColor]="green" [radius]="radius" [clickable]="false"
+                (radiusChange)="changeRaduis($event)">
             </agm-circle>
         </agm-map>
 
@@ -46,7 +36,7 @@
                 <div class="udb">
 
                     <div class="udb-sec">
-                        <a href="#"><button class="btn btn-success btn-lg btn-block">Me contacter</button></a>
+                            <button class="btn btn-success btn-lg btn-block"  data-toggle="modal" data-target="#exampleModal">Me contacter</button>
                     </div>
 
                     <div class="udb-sec udb-prof">
@@ -64,61 +54,19 @@
                             <table class="bordered responsive-table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Course Name</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Status</th>
-                                        <th>Edit</th>
-                                        <th>View</th>
+                                        <th>Niveaux</th>
+                                        <th class="align-text-right">Prix Minimun(Mensuel)</th>
+                                        <th class="align-text-right">Prix Maximum(Mensuel)</th>
+
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <tr>
-                                        <td>01</td>
-                                        <td>Software Testing</td>
-                                        <td>12May 2018</td>
-                                        <td>18Aug 2018</td>
-                                        <td><span class="pro-user-act">active</span></td>
-                                        <td><a href="sdb-course-edit.html" class="pro-edit">edit</a></td>
-                                        <td><a href="sdb-course-view.html" class="pro-edit">view</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>02</td>
-                                        <td>Mechanical Design</td>
-                                        <td>05Jan 2019</td>
-                                        <td>10Feb 2019</td>
-                                        <td><span class="pro-user-act">active</span></td>
-                                        <td><a href="sdb-course-edit.html" class="pro-edit">edit</a></td>
-                                        <td><a href="sdb-course-view.html" class="pro-edit">view</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>03</td>
-                                        <td>Architecture & Planning</td>
-                                        <td>21Jun 2020</td>
-                                        <td>08Dec 2020</td>
-                                        <td><span class="pro-user-act">active</span></td>
-                                        <td><a href="sdb-course-edit.html" class="pro-edit">edit</a></td>
-                                        <td><a href="sdb-course-view.html" class="pro-edit">view</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>04</td>
-                                        <td>Board Exam Training</td>
-                                        <td>08Jun 2018</td>
-                                        <td>21Sep 2018</td>
-                                        <td><span class="pro-user-act pro-user-de-act">de-active</span></td>
-                                        <td><a href="sdb-course-edit.html" class="pro-edit">edit</a></td>
-                                        <td><a href="sdb-course-view.html" class="pro-edit">view</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>05</td>
-                                        <td>Yoga Training Classes</td>
-                                        <td>16JFeb 2018</td>
-                                        <td>26Mar 2018</td>
-                                        <td><span class="pro-user-act pro-user-de-act">de-active</span></td>
-                                        <td><a href="sdb-course-edit.html" class="pro-edit">edit</a></td>
-                                        <td><a href="sdb-course-view.html" class="pro-edit">view</a></td>
+                                        <td>Terminal</td>
+                                        <td class="align-text-right"><span class="pro-user-act">20000 FCFA</span></td>
+                                        <td class="align-text-right"><span class="pro-user-act">25000 FCFA</span></td>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -139,12 +87,12 @@
                                         <div class="sdb-cl-class">
                                             <ul>
                                                 <li>
-                                                    <div class="sdb-cl-class-tim tooltipped"  data-position="top"
-                                                        data-delay="50" data-tooltip="Class timing">
+                                                    <div class="sdb-cl-class-tim tooltipped" data-position="top"
+                                                        data-delay="50">
                                                         <span>09:30 am</span>
                                                         <span>10:15 pm</span>
                                                     </div>
-                                                    
+
                                                 </li>
                                                 <li>
                                                     <div class="sdb-cl-class-tim tooltipped" data-position="top"
@@ -153,87 +101,12 @@
                                                         <span>11:00 am</span>
                                                     </div>
                                                 </li>
-                                                <li>
-                                                    <div class="sdb-cl-class-tim">
-                                                        <span>11:00 am</span>
-                                                        <span>11:45 am</span>
-                                                    </div>
-                                                </li>
+
                                             </ul>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    <div class="sdb-cl-tim">
-                                        <div class="sdb-cl-day">
-                                            <h5>Tuesday</h5>
-                                            <span>11Sep 2018</span>
-                                        </div>
-                                        <div class="sdb-cl-class">
-                                            <ul>
-                                                <li>
-                                                    <div class="sdb-cl-class-tim tooltipped" data-position="top"
-                                                        data-delay="50" data-tooltip="Class timing">
-                                                        <span>9:30 am</span>
-                                                        <span>10:15 am</span>
-                                                    </div>
-                                                    
-                                                </li>
-                                                <li>
-                                                    <div class="sdb-cl-class-tim">
-                                                        <span>10:15 am</span>
-                                                        <span>11:00 am</span>
-                                                    </div>
-                                                  
-                                                </li>
-                                                <li>
-                                                    <div class="sdb-cl-class-tim">
-                                                        <span>11:00 am</span>
-                                                        <span>11:45 am</span>
-                                                    </div>
-                                                   
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    <div class="sdb-cl-tim">
-                                        <div class="sdb-cl-day">
-                                            <h5>Wednesday</h5>
-                                            <span>12Sep 2018</span>
-                                        </div>
-                                        <div class="sdb-cl-class">
-                                            <ul>
-                                                <li>
-                                                    <div class="sdb-cl-class-tim">
-                                                        <span>9:30 am</span>
-                                                        <span>10:15 am</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="sdb-cl-class-tim">
-                                                        <span>10:15 am</span>
-                                                        <span>11:00 am</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="sdb-cl-class-tim">
-                                                        <span>11:00 am</span>
-                                                        <span>11:45 am</span>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    <h4><span>Holiday: </span> Thursday </h4>
-                                    <p>After breakfast, proceed for tour of Dubai city. Visit Jumeirah Mosque, World
-                                        Trade Centre, Palaces and Dubai Museum. Enjoy your overnight stay at the
-                                        hotel.In the evening, enjoy a tasty dinner on the Dhow cruise.
-                                        Later, head back to the hotel for a comfortable overnight stay.</p>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -241,9 +114,51 @@
             </div>
         </div>
     </div>
+
+
+   <!--Modal de paiement-->> 
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class=" modal-dialog">
+                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">     
+                    <div class="row">
+                        <div class="col-md-12 mx-0">
+                            <form id="msform">
+                                <!-- progressbar -->
+                                <ul id="progressbar">
+                                    <li class="active" id="personal"><strong>Personal</strong></li>
+                                    <li id="payment"><strong>Payment</strong></li>
+                                    <li id="confirm"><strong>Finish</strong></li>
+                                </ul> <!-- fieldsets -->
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Personal</h2>
+                                         
+                                    </div> 
+                                    <input type="button" name="next" class="next action-button"
+                                        value="Next Step" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Payment</h2>
+                                         
+                                    </div> 
+                                    <input type="button" name="next" class="next action-button"
+                                        value="Next Step" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Finish</h2>
+                                         
+                                    </div> 
+                                    <input data-dismiss = "modal" type="button" name="next" class="next action-button"
+                                        value="Next Step" />
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 <!--SECTION END-->
-
-
-
-

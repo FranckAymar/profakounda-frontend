@@ -45,6 +45,8 @@
 /*-------------------------------------------------*/
 /* =  1.All Pages Common CSS Styles
 /*-------------------------------------------------*/
+
+
  body{
      font-family: 'Open Sans', sans-serif;
      padding-right: 0px !important;
@@ -5699,3 +5701,8 @@ padding: 6px 25px;
 .ad-log-in-con p{}
 .ad-log-in-con form{}
 .ad-log-in-con form input{}
+
+
+.align-text-right{
+    text-align: right;
+}

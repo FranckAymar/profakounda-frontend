@@ -1,3 +1,5 @@
+import { signUpvalidationService } from './services/signUp-validation.service';
+import { SignUpvalidationComponent } from './sign-upvalidation/sign-upvalidation.component';
 import { ResetPasswordService } from './services/reset-password.service';
 import { SignInGuard } from '../guard/sign-in.guard';
 import { SignInService } from './services/sign-in.service';
@@ -42,10 +44,14 @@ const homeRouter = [
         component : ForgotPasswordComponent
         
       },
-      
       {
         path : 'reset-password/:token',
         component : ResetPasswordComponent
+             
+      }, 
+      {
+        path : 'sinUp-validation/:token',
+        component : SignUpvalidationComponent
              
       }
    ]
@@ -64,6 +70,7 @@ const homeRouter = [
     SliderHomeComponent, 
     HeaderHomeComponent, 
     ResetPasswordComponent,
+    SignUpvalidationComponent
    
    ],
   imports: [
@@ -74,7 +81,7 @@ const homeRouter = [
     ReactiveFormsModule,
      ],
   providers : [
-    SignInService, ResetPasswordService
+    SignInService, ResetPasswordService, signUpvalidationService
   ]
 })
 export class HomeModule { }

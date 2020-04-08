@@ -20,13 +20,14 @@ export class SignInComponent implements OnInit {
   loginForm: FormGroup;
 
   isFailed: boolean;
-
+  errorInternet : boolean ;
 
   constructor(private signInService: SignInService,
     private router: Router,
     private formBuilder: FormBuilder) {
 
     this.isFailed = false;
+    this.errorInternet = false ;
 
   }
 
@@ -56,6 +57,9 @@ export class SignInComponent implements OnInit {
     
     let token = btoa(username + ':' + password);
    
+    try {
+      // synchronous operation
+
     this.signInService.login(token).subscribe(
 
  
@@ -85,11 +89,28 @@ export class SignInComponent implements OnInit {
       },
 
       (error) => {
-        this.isFailed = true ;
+        
+        if(error.status === 401) {
+
+          this.errorInternet = false ;
+          this.isFailed = true ;
+
+        }else{
+          this.errorInternet = true ;
+          this.isFailed = false ;
+        }
+
 
       }
 
-   )
+   );
+     
+   }
+   catch(error) {
+      console.log('error', error);
+      
+   }
+
   }
 
 }

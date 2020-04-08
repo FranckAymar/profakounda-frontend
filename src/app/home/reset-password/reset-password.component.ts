@@ -59,8 +59,6 @@ export class ResetPasswordComponent implements OnInit {
     ) ;
 
   }
-
-
 verifyToken(token) {
 
   this.resetPassService.requestToVerifyResetPassword(token).subscribe(

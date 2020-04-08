@@ -25,13 +25,14 @@
             </div>
         </div>
         <!--== MY ACCCOUNT ==-->
-        <div class="col-md-2 col-sm-3 col-xs-6">
+        <div class="col-md-2 col-sm-3 col-xs-6 dropdown">
             <!-- Dropdown Trigger -->
-            <a class='waves-effect dropdown-button top-user-pro'  data-activates='top-menu'><img src="{{url}}" alt="" />Mon compte <i class="fa fa-angle-down" aria-hidden="true"></i>
+            <a class='waves-effect dropdown-toggle top-user-pro'  type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{{url}}" alt="" />Mon compte <i class="fa fa-angle-down" aria-hidden="true"></i>
             </a>
 
             <!-- Dropdown Structure -->
-            <ul id='top-menu' class='dropdown-content top-menu-sty'>
+            <ul id='top-menu' class='top-menu-sty dropdown-menu dropdown-menu-right' aria-labelledby="dropdownMenu2">
                 <li><a routerLink="editprofil" class="waves-effect"><i class="fa fa-cogs" aria-hidden="true"></i>Editer informations</a>
                 </li>
                 <li class="divider"></li>
@@ -41,3 +42,4 @@
         </div>
     </div>
 </div>
+

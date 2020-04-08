@@ -6,10 +6,7 @@ import { Disponibilite } from '../models/Disponibite.model';
 import { SignInService } from 'src/app/home/services/sign-in.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { PropositionFormationService } from '../services/propositionFormation.service';
-
-import {debounceTime, distinctUntilChanged, map, filter} from 'rxjs/operators';
 import { Niveau } from 'src/app/admin/model/niveau.model';
-import { Observable } from 'rxjs';
 import { Jour } from '../models/jour.model';
 import { Heure } from '../models/heure.model';
 

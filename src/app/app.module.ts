@@ -14,7 +14,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingInterceptor } from './LoadingInterceptor';
-import { SignUpvalidationComponent } from './sign-upvalidation/sign-upvalidation.component';
 
 
 
@@ -41,9 +40,7 @@ const appRouter : Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent,
-    SignUpvalidationComponent
-    
+    LoadingComponent    
   ],
   imports: [
     BrowserModule, 

@@ -17,7 +17,7 @@ export class ResetPasswordService {
     return this.httpClient.post(URL.forgotPassword, username) ;
 
   }
-
+  
   requestToVerifyResetPassword(token : string ) : Observable<any> {
 
     return this.httpClient.get(URL.resetPassword + "/" + token) ;

@@ -43,6 +43,9 @@ export const URL = {
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
 
+    //sign up
+    singUpValidation:consts.host+ consts.nameProject+'sinUp-validation',
+
 
     //Reset password
     forgotPassword : consts.host+ consts.nameProject +'forgot-password' ,

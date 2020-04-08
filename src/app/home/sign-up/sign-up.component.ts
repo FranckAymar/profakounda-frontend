@@ -69,8 +69,9 @@ getColor(){
        
         if(response["success"])
         {
-          alert('Inscription effectuée avec succès.');
-          this.router.navigate(["/home/sign-in"]);
+          alert('Inscription effectuée avec succès; verifier votre mail et cliquer sur le lien de validation');
+          this.formInitialisation();
+          this.router.navigate(["/home/sign-up"]);
         }
        
       },

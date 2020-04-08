@@ -5,23 +5,29 @@
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
-
-                <button (click)="addNiveau()" type="button" data-toggle="modal" data-target="#niveauEnseigne"
-                    class="btn btn-primary">
-                    Niveau enseigné
-                </button>
-                <button style="margin-left: 1em;" (click)="addModule()" type="button" data-toggle="modal" data-target="#modules"
-                    class="btn btn-info">
-                    Modules enseignés
-                </button>
-                <button style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#disponibilite"
-                    class="btn btn-outline-success">
-                    Disponibilités
-                </button>
-                <button style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
-                    class="btn btn-outline-dark">
-                    Zone Intervention
-                </button>
+                <p>
+                    <button data-toggle="modal" data-target="#ajouterDescription" (click)="addProposition()" class="btn btn-danger btn btn-block">Description</button>
+                </p>
+             
+                <div *ngIf="proposition.description" class="row">
+                    <button (click)="addNiveau()" type="button" data-toggle="modal" data-target="#niveauEnseigne"
+                                class="btn btn-primary">
+                                Niveau enseigné
+                    </button>
+                    <button style="margin-left: 1em;" (click)="addModule()" type="button" data-toggle="modal" data-target="#modules"
+                                class="btn btn-info">
+                                Modules enseignés
+                    </button>
+                    
+                    <button style="margin-left: 1em;" (click)="addDisponibilite()" type="button" data-toggle="modal" data-target="#disponibilite"
+                        class="btn btn-outline-success">
+                        Disponibilités
+                    </button>
+                    <button style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
+                        class="btn btn-outline-dark">
+                        Zone Intervention
+                    </button>
+                </div>
 
 
                 <table class="table table-hover">
@@ -158,15 +164,18 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">MES DISPONIBITES</h5>
+                <h5 class="modal-title" id="exampleModalLabel">MES DISPONIBILITES</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <form #f3="ngForm" (ngSubmit)="onSaveDisponibilite(jour)">
+                        <form #f3="ngForm" (ngSubmit)="onSaveDisponibilite(disponibilite)">
                             <div class="form-group">
                                 <label for="jour">JOUR:</label>
-                                <input name="jour" [(ngModel)]="jour.designation" type="text" id="designation" required>
+                                <input name="jour" [(ngModel)]="disponibilite.jour" type="text" id="designation" required>
                             </div>
                             
                             <div  class="row">
@@ -184,73 +193,81 @@
                                             name="heureFin" />
                                     </div>
                                 </div>
-                                
                                 <div class="col-md-4">
-                                    <button style="margin-top:1.5em;" [disabled]="heure.heureFin=='' || heure.heureDebut=='' || jour.designation==''" (click)="addHour()" class="btn btn-success">Ajouter heure</button>
+                                    <button (click)="addHour()" [disabled]="heure.heureFin=='' || heure.heureDebut=='' || disponibilite.jour==''" style="margin-top: 1.5em;" class="btn btn-success">Ajouter heure</button>
                                 </div>
+
                             </div>
                             <div class="row">
                                 <span *ngFor="let h of hours">{{h.heureDebut}}-{{h.heureFin}} ; &nbsp;</span>
                             </div>
 
-
-                            <button type="submit" [disabled]="f3.invalid || heure.heureFin!='' || heure.heureDebut!=''" class="btn btn-primary">Enregistrer jour</button>
+                            <button type="submit" [disabled]="f3.invalid || heure.heureFin!='' || heure.heureDebut!=''" class="btn btn-primary">Enregistrer</button>
                         </form>
                     </div>
                     <div class="col-md-6" style="height: 17em; overflow: auto;">
-                        <div class="row">
-                            
-                            <div *ngIf="days.length !=0" class="col-md-6" style="padding-right: 0;">
-                                <button style="border-radius: 0.3em 0.3em 0 0 ;"  (click)="onSaveListJourHeure()" class="btn btn-info btn-block" >Valider</button>
-                                <table style="background:red;" class="table table-hover enCours">
-                                    <thead>
-                                        <tr>
-                                            <th style="font-weight: bold;">Jours</th>
-                                            <th style="font-weight: bold;">Heures</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody >
-                                        <tr *ngFor="let d of days">
-                                            <td>{{d.designation}}</td>
-                                            <td><span  *ngFor="let i of d.heure">{{i.heureDebut}}-{{i.heureFin}};&nbsp;</span></td>
-                                           
-                                            
-                                            
-                                        </tr>
-        
-        
-        
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-md-6">
-                               
-                                <table style="background:rgb(104, 172, 104);" class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th style="font-weight: bold; color: white;">Jours</th>
-                                            <th style="font-weight: bold; color: white;">Heures</th>
-        
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let d of disponibilites">
-                                            <td>{{d.designation}}</td>
-                                            <td><span  *ngFor="let i of d.heure">{{i.heureDebut}}-{{i.heureFin}};&nbsp;</span></td>
-                                           
-                                            
-                                            
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <table  class="table table-hover">
+                            <thead style="background:rgb(104, 172, 104);">
+                                <tr>
+                                    <th style="font-weight: bold; color: white;">Jours</th>
+                                    <th style="font-weight: bold; color: white;">Heures</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let d of disponibilites">
+                                    <td>{{d.jour.designation}}</td>
+                                    <td><span  *ngFor="let i of d.intervals">{{i.heureDebut}}<span *ngIf="i.heureDebut !=''">-</span>{{i.heureFin}} <a class="deleteIcon"><i *ngIf="i.heureDebut !=''"  (click)="deleteHour(i.id)" class="fa fa-times"></i></a><span *ngIf="i.heureDebut !=''">;</span>&nbsp;</span></td>
+                                    <td><button (click)="deleteDay(d.jour.id)" class="deleteButton"><i class="fa fa-times"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button"  class="btn btn-danger" (click)="closeModalDisponibilite()">Fermer</button>
+                <button type="button" data-dismiss="modal"  class="btn btn-danger">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="ajouterDescription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">DESCRITPION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="" (ngSubmit)="enregistrerProposition()" #k="ngForm">
+                            <textarea class="form-control" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+
+                            </textarea>
+                            <button [disabled]="k.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                        </form>
+                    </div>
+                    <div *ngIf="proposition.description" class="col-md-6">
+                        <div  class="card card-body">
+                            {{proposition.description}}
+
+
+                        </div>
+                        <button  (click)="modifierDescription()" class="btn btn-warning">Modifier</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-danger" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>

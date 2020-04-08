@@ -7,7 +7,6 @@ export class PropositionFormationService{
     onSaveNiveauEnseigne(data){
         return this.httpClient.post(URL.enregsitrerNiveauForme,data);
      }
-
      onSaveModule(data){
         return this.httpClient.post(URL.enregistrerModule,data);
      }
@@ -26,7 +25,12 @@ export class PropositionFormationService{
     deleteContratById(id:Number){
         return this.httpClient.post(URL.deleteContrat,id);
     }
-    
+    deleteDisponibiliteByDay(data){
+        return this.httpClient.post(URL.deleteDisponibiliteByDay,data);
+    }
+    deleteDisponibiliteByHour(id){
+        return this.httpClient.post(URL.deleteDisponibiliteByHour,id);
+    }
     deleteModuleById(id:Number){
         return this.httpClient.post(URL.deleteModule,id);
     }
@@ -46,6 +50,16 @@ export class PropositionFormationService{
         return this.httpClient.post(URL.modifierModule,data);
      }
 
+     //PROPOSITION
+     rechercherProposition(username:String){
+        return this.httpClient.post(URL.rechercherPropositions,username);
+    }
+    enregistrerProposition(data){
+        return this.httpClient.post(URL.enregsitrerProposition,data);
+     }
+     modifierProposition(data){
+        return this.httpClient.post(URL.modifierProposition,data);
+     }
 
      //Save CoordMap
      saveCoordMap(coordMap : CoordMapModel) {

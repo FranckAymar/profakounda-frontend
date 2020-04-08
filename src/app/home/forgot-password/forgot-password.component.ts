@@ -25,8 +25,6 @@ export class ForgotPasswordComponent implements OnInit {
     this.initForm() ;
   }
 
-
-
   initForm () {
 
     this.forgotPasswordForm =  this.formBuilder.group({

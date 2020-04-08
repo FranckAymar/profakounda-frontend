@@ -1,0 +1,33 @@
+<!--SECTION LOGIN, REGISTER AND FORGOT PASSWORD-->
+<section style="background: #002147;">
+    <!-- LOGIN SECTION -->
+    <div id="modal1">
+        <div class="log-in-pop">
+            <div class="log-in-pop-left">
+
+                <h1>Hello...</h1>
+                <p>Don't have an account? Create your account. It's take less then a minutes</p>
+                <h4>Login with social media</h4>
+                <ul>
+                    <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-google"></i> Google+</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="log-in-pop-right">
+                <h4>Validation de compte</h4>
+                <div *ngIf="!isValid" class="modal-header center">
+                    <span class="alert alert-warnig">Le lien a expiré</span>
+                </div>
+                <div *ngIf="isValid" class="s12" >
+                    <span class="alert alert-success">Votre compte a été activé avec succès</span>
+                  
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+</section>

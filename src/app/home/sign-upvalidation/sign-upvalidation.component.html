@@ -19,14 +19,19 @@
             </div>
             <div class="log-in-pop-right">
                 <h4>Validation de compte</h4>
-                <div *ngIf="!isValid" class="modal-header center">
-                    <span class="alert alert-warnig">Le lien a expiré</span>
+                <div *ngIf="isValid==1" class="modal-header center">
+                    <span class="alert alert-danger">Le lien est incorecte; veillez cliquer
+                        sur le lien recu dans votre mail.</span>
                 </div>
-                <div *ngIf="isValid" class="modal-header center" >
-                    <span class="alert alert-success">Votre compte a été activé avec succès</span>
-                  
+                <div *ngIf="isValid==0" class="modal-header center" >
+                    <span class="alert alert-success"> super ! Votre compte a été activé avec succès, connectez-vous svp</span>
+
                 </div>
-                    
+                <div *ngIf="isValid==2" class="modal-header center" >
+                    <span class="alert alert-warning">  Votre compte est deja activé, connectez-vous svp</span>
+
+                </div>
+                                    
             </div>
         </div>
     </div>

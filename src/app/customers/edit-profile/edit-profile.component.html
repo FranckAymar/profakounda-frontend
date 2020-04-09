@@ -5,7 +5,7 @@
         <div class="col-md-12">
         <div class="box-inn-sp admin-form">
                 <div class="inn-title">
-                    <img style="width: 10em;height: 10em;" src="{{url}}" alt="">
+                    <img style="width: 10em;height: 10em; border-radius: 0.3em;" src="{{url}}" alt="">
                     <div style="float: right;">
                         <h4 style="background-color: red;">Editer profil</h4>
                     </div>
@@ -47,8 +47,16 @@
                         </div>
                         <div class="row">
                            
-                            <div class="input-field col s6">
-                                <input id="password1" placeholder="Nouveau mot de passe" formControlName="password" type="password" class="validate">
+                            <div class="input-field col-md-6">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input id="password1" (ngModelChange) ="changeValidation()" placeholder="Nouveau mot de passe" formControlName="password" type="password" class="validate">
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="password2" (ngModelChange) ="changement()" placeholder="Confimez le mot de passe" formControlName="passwordConfirm" type="password" class="validate">
+                                    </div>
+                                </div>
+                                <span *ngIf="message && showMessage" [ngStyle]="{color:getColor()}" >{{message}}</span>
                                 
                             </div>
                             <div class="input-field col s6">
@@ -56,7 +64,7 @@
                             </div>
                         </div>
                                                 
-                        <button type="submit" [disabled]="userForm.invalid" class="btn btn-outline-info">Enregistrer</button>
+                        <button type="submit" [disabled]="invalidation || userForm.invalid" class="btn btn-outline-info">Enregistrer</button>
                     </form>
                 </div>
             </div>

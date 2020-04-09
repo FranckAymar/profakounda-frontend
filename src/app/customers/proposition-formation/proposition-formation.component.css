@@ -5,8 +5,8 @@
     background: green;
 }
 .deleteButton{
-    width: 1em;
-    height: 1em; 
+    width: 2em;
+    height: 2em; 
     color: white;
     background: red;
 }
@@ -22,4 +22,7 @@ agm-map {
   }
   .enCours tbody tr td,.enCours tbody tr td span{
       color: white !important;
+  }
+  .deleteIcon{
+      cursor: pointer !important;
   }

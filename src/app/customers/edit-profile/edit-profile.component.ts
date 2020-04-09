@@ -20,6 +20,10 @@ export class EditProfileComponent implements OnInit {
   loading: boolean = false;
    @Input() id:number;
    @Input() url:string ; 
+   @Input() invalidation:boolean = false;
+   @Input() showMessage:boolean = false;
+   message:string;
+
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
   niveaux = [];
@@ -49,10 +53,44 @@ init(){
     filiere:'',
     niveau:'',
     password:[null],
+    passwordConfirm:[null],
     photo:null
   })
 }
 
+changement(){
+  if(this.userForm.value['password']===this.userForm.value['passwordConfirm'])
+  {
+    this.invalidation = false;
+    this.showMessage = true;
+    this.message="Mots de passes identiques.";
+  }
+  else{
+    this.invalidation = true;
+    this.showMessage = true
+    this.message = "Les deux mots de passes doivent êtres identiques";
+  }
+}
+changeValidation(){
+  if(this.userForm.value['password'].length !=0)
+  {
+    this.invalidation = true;
+  }
+  else{
+    this.showMessage = false;
+    this.invalidation = false;
+  }
+ 
+}
+getColor(){
+  if(!this.invalidation){
+    return 'green';
+  }
+  else if(this.invalidation)
+  {
+    return 'red';
+  }
+}
 
   rechercherPaticulierConnecter(){
     this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))

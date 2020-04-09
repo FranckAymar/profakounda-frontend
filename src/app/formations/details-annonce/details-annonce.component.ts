@@ -1,3 +1,6 @@
+import { URL } from 'src/app/API_url/config';
+import { ActivatedRoute } from '@angular/router';
+import { DetaisFormationsService } from './../services/detais-formations.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
@@ -14,13 +17,21 @@ export class DetailsAnnonceComponent implements OnInit {
   lng: number = -4.097748;
   radius: number = 1000;
 
+  urlServer = URL.getPhoto
 
 
-  constructor(private _formBuilder: FormBuilder) { }
+  idPropositionFormation : number ;
+
+  propositionFormation = {} ;
+
+  constructor(private detaisFormationsService : DetaisFormationsService,
+              private route : ActivatedRoute) { }
 
   ngOnInit() {
 
     this.initJquerry() ;
+    this.getIdFormation();
+    this.onGetDetailPropositionFormation() ; 
   }
 
 
@@ -36,6 +47,40 @@ export class DetailsAnnonceComponent implements OnInit {
   changeRaduis(radius) {
 
     this.radius = radius;
+
+  }
+
+
+  getIdFormation() {
+
+                            
+    this.route.params.subscribe(
+
+      ( p ) =>{
+         this.idPropositionFormation = p['id'] ;
+   
+      }
+    ) ;
+
+  }
+
+
+  onGetDetailPropositionFormation() {
+
+    this.detaisFormationsService.getDetailFormation(this.idPropositionFormation).subscribe(
+
+      (resp)=> {
+       
+        this.propositionFormation = resp ;
+        
+      },
+
+
+      (error)=> {
+          console.log(error);
+          
+      }
+    )
 
   }
 

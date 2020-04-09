@@ -71,4 +71,8 @@ export const URL = {
     modifierProposition: consts.host+ consts.nameProject +'particulier/modifierProposition' ,
     deleteDisponibiliteByDay: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByDayId',
     deleteDisponibiliteByHour: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByHourId',
+
+    //Détails formations
+    listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
+    detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
 }

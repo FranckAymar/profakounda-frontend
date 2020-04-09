@@ -23,7 +23,7 @@ const formationsRouter = [
         
       },
       {
-        path : 'details-formation',
+        path : 'details-formation/:id',
         component : DetailsAnnonceComponent 
         
       }

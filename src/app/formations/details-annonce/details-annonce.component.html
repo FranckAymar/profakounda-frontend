@@ -9,25 +9,19 @@
                 (radiusChange)="changeRaduis($event)">
             </agm-circle>
         </agm-map>
-
-
     </div>
 
     <div class="stu-db">
         <div class="container pg-inn">
             <div class="col-md-3">
                 <div class="pro-user">
-                    <img src="../../assets/images/user.jpg" alt="user">
+                    <img *ngIf="propositionFormation.idParticulier" src="{{ urlServer}}/{{propositionFormation.idParticulier}}" alt="user">
                 </div>
                 <div class="pro-user-bio">
                     <ul>
                         <li>
-                            <h4>Emily Jessica</h4>
+                            <h4>{{propositionFormation.prenomParticulier}}</h4>
                         </li>
-                        <li>Student Id: ST17241</li>
-                        <li><a href="#!"><i class="fa fa-facebook"></i> Facebook: my sample</a></li>
-                        <li><a href="#!"><i class="fa fa-google-plus"></i> Google: my sample</a></li>
-                        <li><a href="#!"><i class="fa fa-twitter"></i> Twitter: my sample</a></li>
                     </ul>
                 </div>
 
@@ -40,16 +34,31 @@
                     </div>
 
                     <div class="udb-sec udb-prof">
-                        <h4><img src="../../assets/images/icon/db1.png" alt="" /> Pourquoi cette formation ?</h4>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a
-                            page when looking at its layout. The point of using Lorem Ipsum is that it has a
-                            more-or-less normal distribution of letters, as opposed
-                            to using 'Content here, content here', making it look like readable English.</p>
+                        <h4><img src="../../assets/images/icon/db1.png" alt=""/>Description</h4>
+                        <p>{{propositionFormation.description}}</p>
                     </div>
+
+                    <div class="udb-sec udb-cour">
+                        <h4><img src="../../assets/images/icon/db2.png" alt=""/> Mes Formations</h4>
+                        <div class="sdb-cours">
+                            <ul>
+                                <li *ngFor="let moduleFormation of propositionFormation.modulesFormations">
+                                    <a>
+                                        <div class="list-mig-like-com com-mar-bot-30">
+                                            <div class="list-mig-lc-img"> <img src="../../assets/images/course/3.jpg" alt=""> </div>
+                                            <div class="list-mig-lc-con">
+                                                <h5>{{moduleFormation.libelle}}</h5>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
                     <div class="udb-sec udb-cour-stat">
                         <h4><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
-                        <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default
-                            model text.The point of using Lorem Ipsummaking it look like readable English.</p>
                         <div class="pro-con-table">
                             <table class="bordered responsive-table">
                                 <thead>
@@ -62,10 +71,10 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>Terminal</td>
-                                        <td class="align-text-right"><span class="pro-user-act">20000 FCFA</span></td>
-                                        <td class="align-text-right"><span class="pro-user-act">25000 FCFA</span></td>
+                                    <tr *ngFor="let contrat of propositionFormation.contrats">
+                                        <td>{{contrat.classe.libelle}}</td>
+                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.minMontant}} FCFA</span></td>
+                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}} FCFA</span></td>
 
                                     </tr>
                                 </tbody>
@@ -74,32 +83,23 @@
                     </div>
                     <div class="udb-sec udb-time">
                         <h4><img src="../../assets/images/icon/db4.png" alt="" />Mes disponibilités</h4>
-                        <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-                            as opposed to using 'Content here, content here', making it look like readable English.</p>
+                       
                         <div class="tour_head1 udb-time-line days">
                             <ul>
-                                <li class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                <li *ngFor="let disponibilite of propositionFormation.disponibilites " class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     <div class="sdb-cl-tim">
                                         <div class="sdb-cl-day">
-                                            <h5>Today</h5>
-                                            <span>10Sep 2018</span>
+                                            <h5>{{disponibilite.jour}}</h5>
                                         </div>
                                         <div class="sdb-cl-class">
                                             <ul>
-                                                <li>
-                                                    <div class="sdb-cl-class-tim tooltipped" data-position="top"
+                                                <li *ngFor="let heure of disponibilite.heures">
+                                                    <div  class="sdb-cl-class-tim tooltipped" data-position="top"
                                                         data-delay="50">
-                                                        <span>09:30 am</span>
-                                                        <span>10:15 pm</span>
+                                                        <span>{{heure?.heureDebut}}</span>
+                                                        <span>{{heure?.heureFin}}</span>
                                                     </div>
 
-                                                </li>
-                                                <li>
-                                                    <div class="sdb-cl-class-tim tooltipped" data-position="top"
-                                                        data-delay="50" data-tooltip="Class timing">
-                                                        <span>10:15 am</span>
-                                                        <span>11:00 am</span>
-                                                    </div>
                                                 </li>
 
                                             </ul>

@@ -15,13 +15,16 @@
         <div class="container pg-inn">
             <div class="col-md-3">
                 <div class="pro-user">
-                    <img *ngIf="propositionFormation.idParticulier" src="{{ urlServer}}/{{propositionFormation.idParticulier}}" alt="user">
+                    <img *ngIf="propositionFormation.idParticulier" 
+                            src="{{ urlServer}}/{{propositionFormation.idParticulier}}" 
+                            alt="user">
                 </div>
                 <div class="pro-user-bio">
                     <ul>
                         <li>
                             <h4>{{propositionFormation.prenomParticulier}}</h4>
                         </li>
+                        <li>{{propositionFormation.niveau?.libelle}}</li>
                     </ul>
                 </div>
 

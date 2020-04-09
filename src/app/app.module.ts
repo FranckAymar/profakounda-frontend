@@ -48,7 +48,7 @@ const appRouter : Routes = [
     CustomersModule,
     FormationsModule,
     ErrorPageModule,
-    RouterModule.forRoot(appRouter),
+    RouterModule.forRoot(appRouter, {scrollPositionRestoration: 'enabled'}),
   
         
   

@@ -1,3 +1,6 @@
+import { URL } from './../../API_url/config';
+import { SignInService } from './../../home/services/sign-in.service';
+import { ParticulierService } from './../services/particulier.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  id: number;
+  urlServer = URL.getPhoto;
+  particulier = {};
+
+  constructor(private particulierService: ParticulierService,
+    private signInService: SignInService) { }
+
 
   ngOnInit() {
+
+    this.rechercherPaticulierConnecter() ;
+
   }
+
+  rechercherPaticulierConnecter() {
+    this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
+      .subscribe(
+        (reponse) => {
+          this.particulier = reponse;
+        },
+        (error) => {
+          console.log("Une erreur s'est produite: " + error);
+        }
+      )
+  }
+
 
 }

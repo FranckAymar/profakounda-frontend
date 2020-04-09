@@ -1,3 +1,6 @@
+import { URL } from 'src/app/API_url/config';
+import { ContentCustomersComponent } from './../../customers/content-customers/content-customers.component';
+import { ListFormationsService } from './../services/list-formations.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListFormationsComponent implements OnInit {
 
-  constructor() { }
+
+  propositionFormations = [] ;
+  modulesFormation = [];
+  urlServer = URL.getPhoto
+
+  constructor(private listFormationsService : ListFormationsService) { }
 
   ngOnInit() {
+
+    this.onGetListFormation() ;
+    
   }
+
+
+  onGetListFormation() {
+
+    this.listFormationsService.getListPropositionFormations().subscribe(
+
+      
+      (resp) =>{
+
+        this.propositionFormations = resp ;
+        
+
+      },
+
+      
+      (error) =>{
+
+        console.log(error);
+        
+
+      }
+    )
+
+  }
+  
 
 }

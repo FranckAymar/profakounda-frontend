@@ -25,7 +25,7 @@
                                     <li><a href="course-details.html">Google Business</a></li>
                                     <li><a href="course-details.html">Graphics Design</a></li>
                                     <li><a href="course-details.html">Networking Courses</a></li>
-                                    <li><a href="course-details.html">Information technology</a></li>
+                                    <li><a href="course-details.html">InpropositionFormation technology</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -42,75 +42,29 @@
 <!-- POPULAR COURSES -->
    <section class="pop-cour">
     <div class="container com-sp pad-bot-70">
-        <!-- <div class="row">
+         <div class="row">
             <div class="con-title">
-                <h2>Les <span>Courses</span></h2>
-                <p>Fusce id sem at ligula laoreet hendrerit venenatis sed purus. Ut pellentesque maximus lacus, nec pharetra augue.</p>
+                <h2>Les <span>Cours</span></h2>
             </div>
-        </div> -->
-        <div class="row">
-            <a href=""><div class="col-md-12">
+        </div> 
+        <div class="row" *ngFor="let propositionFormation of propositionFormations">
+            <a [routerLink]="['details-formation', propositionFormation.id]" ><div class="col-md-8">
                 <div style="border-radius: 0.3em;" class="home-top-cour">
                     <!--POPULAR COURSES IMAGE-->
-                    <div class="col-md-3"> <img src="../../assets/images/course/sm-1.jpg" alt=""> </div>
+                    <div class="col-md-3"> <img width="50" height="120" src="{{urlServer}}/{{propositionFormation.idParticulier}}" alt=""> </div>
                     <!--POPULAR COURSES: CONTENT-->
                     <div class="col-md-9 home-top-cour-desc">
                         <a href="course-details.html">
-                            <h3 style="color: red;">Braffouo Franck Aymard</h3>
+                            <h3>{{propositionFormation.prenomParticulier}}</h3>
                         </a>
-                        <h4>Cocody / Angre</h4>
-                        <p>Classes started from coming friday(21 jun 2017),total seats 72 and available seats 10</p> 
+                        <h4><span *ngFor="let moduleFomation of propositionFormation.moduleFormations">{{moduleFomation.libelle}} </span></h4>
+                        <p>{{propositionFormation.description}}</p> 
                         <div class="hom-list-share">
-                            <ul >
-                                <li style="float:right !important;display: inline;"><a href="course-details.html"><i class="fa fa-asterisk" aria-hidden="true"></i>Details</a> </li>
-                            </ul>
+                    
                         </div>
                     </div>
                 </div>
             </div></a>
            </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div style="border-radius: 0.3em;" class="home-top-cour">
-                    <!--POPULAR COURSES IMAGE-->
-                    <div class="col-md-3"> <img src="../../assets/images/course/sm-1.jpg" alt=""> </div>
-                    <!--POPULAR COURSES: CONTENT-->
-                    <div class="col-md-9 home-top-cour-desc">
-                        <a href="course-details.html">
-                            <h3 style="color: red;">Braffouo Franck Aymard</h3>
-                        </a>
-                        <h4>Cocody / Angre</h4>
-                        <p>Classes started from coming friday(21 jun 2017),total seats 72 and available seats 10</p> 
-                        <div class="hom-list-share">
-                            <ul >
-                                <li style="float:right !important;display: inline;"><a href="course-details.html"><i class="fa fa-asterisk" aria-hidden="true"></i>Details</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div style="border-radius: 0.3em;" class="home-top-cour">
-                    <!--POPULAR COURSES IMAGE-->
-                    <div class="col-md-3"> <img src="../../assets/images/course/sm-1.jpg" alt=""> </div>
-                    <!--POPULAR COURSES: CONTENT-->
-                    <div class="col-md-9 home-top-cour-desc">
-                        <a href="course-details.html">
-                            <h3 style="color: red;">Braffouo Franck Aymard</h3>
-                        </a>
-                        <h4>Technology / Space / Aerospace</h4>
-                        <p>Classes started from coming friday(21 jun 2017),total seats 72 and available seats 10</p> 
-                        <div class="hom-list-share">
-                            <ul >
-                                <li style="float:right !important;display: inline;"><a href="course-details.html"><i class="fa fa-asterisk" aria-hidden="true"></i>Details</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>

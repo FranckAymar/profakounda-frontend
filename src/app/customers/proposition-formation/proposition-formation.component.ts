@@ -11,6 +11,7 @@ import { Jour } from '../models/jour.model';
 import { Heure } from '../models/heure.model';
 import { PropositionFormation } from '../models/PropositionFormation.model';
 import { Lambda } from '../models/lambda.model';
+import { trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-proposition-formation',
@@ -230,9 +231,8 @@ export class PropositionFormationComponent implements OnInit {
       }
     )
   }
-  deleteDay(id){
-    this.lambda.id = id;
-    this.lambda.username = sessionStorage.getItem(this.signInService.USERNAME);
+  deleteDay(dayId){
+    this.lambda = new Lambda(dayId,sessionStorage.getItem(this.signInService.USERNAME));
     this.propositionFormationService.deleteDisponibiliteByDay(this.lambda)
     .subscribe(
       (response)=>{

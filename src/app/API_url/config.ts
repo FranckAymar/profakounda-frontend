@@ -45,7 +45,8 @@ export const URL = {
 
     //sign up
     singUpValidation:consts.host+ consts.nameProject+'sinUp-validation',
-
+    //Change password
+    changePassword:consts.host+ consts.nameProject+'particulier/changePassword',
 
     //Reset password
     forgotPassword : consts.host+ consts.nameProject +'forgot-password' ,

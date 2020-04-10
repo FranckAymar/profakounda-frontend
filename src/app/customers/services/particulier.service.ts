@@ -11,6 +11,9 @@ export class ParticulierService{
     saveParticulier(data){
        return this.httpClient.post(URL.enregistrerParticulier,data);
     }
+    onChangePassword(data){
+        return this.httpClient.post(URL.changePassword,data);
+     }
 
     modifierParticulier(formData:FormData){
         return this.httpClient.post(URL.modifierParticulier,formData);

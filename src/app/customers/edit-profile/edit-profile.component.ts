@@ -7,6 +7,7 @@ import { SignInService } from 'src/app/home/services/sign-in.service';
 import { consts } from '../../API_url/const'
 import { FiliereService } from 'src/app/admin/services/filiere.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
+import { PasswordModel } from '../models/PasswordModel';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -23,10 +24,11 @@ export class EditProfileComponent implements OnInit {
    @Input() invalidation:boolean = false;
    @Input() showMessage:boolean = false;
    message:string;
-
+   mes:string;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
   niveaux = [];
+  passwordModel:PasswordModel;
   userForm : FormGroup;
   passwordForm : FormGroup;
   
@@ -153,32 +155,37 @@ getColor(){
       (response)=> {
         this.niveaux = response;
       },
-
       (error)=> {
-
         console.log("Une erreur est survenue");
-        
       }
 
     )
 
   }
   changePassword(){
-    console.log(this.passwordForm.value);
-    let token = btoa(this.signInService.USERNAME + ':' + this.passwordForm.value['lastPassword']);
-    console.log("Criptage....");
-    console.log(this.passwordForm.value['lastPassword']);
-    console.log(token);
-    console.log("Token de Session...");
+    let token = btoa( sessionStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['lastPassword']);
     let sesToken = sessionStorage.getItem(this.signInService.TOKEN);
-    console.log(sesToken);
     if(token === sesToken)
     {
-      console.log("Tokens identiques");
+      let newToken = btoa( sessionStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['password']);
+      this.passwordModel = new PasswordModel(this.passwordForm.value['lastPassword'],this.passwordForm.value['password'],this.passwordForm.value['passwordConfirm'],sessionStorage.getItem(this.signInService.USERNAME));
+      this.particulierService.onChangePassword(this.passwordModel)
+    .subscribe(
+      (response)=>{
+        alert("Modification effectuée avec succès.");
+        this.initPassword();
+        sessionStorage.setItem(this.signInService.TOKEN,newToken);
+        this.mes = '';
+      },
+      (error)=>{
+        console.log("Une erreur s'est produite: "+error);
+      }
+    ) 
     }
     else
     {
-      console.log("Tokens differents");
+      this.mes = "Ancien mot de passe inexact";
+      console.log("Ancien mot de passe inexact");
     }
   }
   onUpdateParticulier(){

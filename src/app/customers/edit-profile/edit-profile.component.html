@@ -67,6 +67,7 @@
         </div>
         <div class="tab-inn">
             <form [formGroup]="passwordForm"  (ngSubmit)="changePassword()">
+                <p><span *ngIf="mes" style="color: red;" >{{mes}}</span></p>
                 <p><span *ngIf="message && showMessage" [ngStyle]="{color:getColor()}" >{{message}}</span></p>
                 <div class="row">
                     <div class="col-md-6">

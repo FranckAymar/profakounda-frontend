@@ -24,7 +24,7 @@ export class SignUpvalidationComponent implements OnInit {
   ngOnInit() {
     this.getToken();
   } 
-
+ 
   getToken() {
                         
     this.route.params.subscribe(

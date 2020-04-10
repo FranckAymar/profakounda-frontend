@@ -12,13 +12,13 @@ import { Route } from '@angular/compiler/src/core';
 export class SignUpvalidationComponent implements OnInit {
 
   token : string ;
-  isValid : boolean ;
+  isValid : number ;
 
   constructor(private signUpvalidationService:signUpvalidationService,
               private Router: Router,
               private route: ActivatedRoute ) { 
 
-                this.isValid = false ;
+                this.isValid =1 ;
               }
 
   ngOnInit() {
@@ -44,11 +44,16 @@ export class SignUpvalidationComponent implements OnInit {
         //Validation OK
         if(resp.code === 0) {
         
-          this.isValid = true ;
+          this.isValid =0;
          
-        }else {
+        }
+        else if(resp.code===2){
+          
+          this.isValid =2; 
+        }
+        else{
 
-          this.isValid = false ;
+          this.isValid = 1;
 
         }
         
@@ -56,7 +61,7 @@ export class SignUpvalidationComponent implements OnInit {
   
       (error)=> {
   
-        this.isValid = false ;
+        this.isValid = 1 ;
         console.log(error);
         
       }

@@ -2,10 +2,10 @@
     <!--== USER INFO ==-->
     <div class="sb2-12">
         <ul>
-            <li><img src="../../assets/images/placeholder.jpg" alt="">
+            <li><img *ngIf="particulier.id" src="{{urlServer}}/{{particulier.id}}" alt="">
             </li>
             <li>
-                <h5>Victoria Baker <span> Santa Ana, CA</span></h5>
+                <h5>{{particulier.nom}} {{particulier.prenom}} </h5>
             </li>
             <li></li>
         </ul>

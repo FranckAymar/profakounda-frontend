@@ -26,7 +26,7 @@
                             *ngFor="let moduleFomation of propositionFormation.moduleFormations; let i = index" [attr.data-index]="i">
                             {{moduleFomation.libelle}} <span *ngIf="propositionFormation.moduleFormations.length !== i+1">/</span>
                             </h4>
-                            <p>{{propositionFormation.description}}</p>
+                            <p class="add-three-dot">{{propositionFormation.description}}</p>
                             <div class="hom-list-share">
                                 <ul>
                                     <li><a [routerLink]="['/formations/details-formation', propositionFormation.id]"

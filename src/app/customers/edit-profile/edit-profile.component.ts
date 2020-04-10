@@ -28,6 +28,7 @@ export class EditProfileComponent implements OnInit {
   filieres=[] ;
   niveaux = [];
   userForm : FormGroup;
+  passwordForm : FormGroup;
   
   constructor(private filiereService :FiliereService,
               private niveauService:NiveauService,
@@ -41,6 +42,7 @@ export class EditProfileComponent implements OnInit {
     this.rechercherPaticulierConnecter();
     this.onFetchNiveaux();
     this.onFetchFiliere();
+    this.initPassword();
   }
 
  
@@ -52,14 +54,20 @@ init(){
     lieuHabitation:['',Validators.required],
     filiere:'',
     niveau:'',
-    password:[null],
-    passwordConfirm:[null],
     photo:null
+  })
+}
+initPassword(){
+  this.passwordForm = this.formBuilder.group({
+    lastPassword:['',Validators.required],
+    password:['',Validators.required],
+    passwordConfirm:['',Validators.required],
+    username:sessionStorage.getItem(this.signInService.USERNAME)
   })
 }
 
 changement(){
-  if(this.userForm.value['password']===this.userForm.value['passwordConfirm'])
+  if(this.passwordForm.value['password']===this.passwordForm.value['passwordConfirm'])
   {
     this.invalidation = false;
     this.showMessage = true;
@@ -72,7 +80,7 @@ changement(){
   }
 }
 changeValidation(){
-  if(this.userForm.value['password'].length !=0)
+  if(this.passwordForm.value['password'].length !=0)
   {
     this.invalidation = true;
   }
@@ -132,7 +140,6 @@ getColor(){
     input.append('lieuHabitation', this.userForm.get('lieuHabitation').value);
     input.append('filiere', this.userForm.get('filiere').value);
     input.append('niveau', this.userForm.get('niveau').value);
-    input.append('password', this.userForm.get('password').value);
     input.append('username', sessionStorage.getItem(this.signInService.USERNAME));
     input.append('photo', this.userForm.get('photo').value);
     return input;
@@ -156,12 +163,26 @@ getColor(){
     )
 
   }
+  changePassword(){
+    console.log(this.passwordForm.value);
+    let token = btoa(this.signInService.USERNAME + ':' + this.passwordForm.value['lastPassword']);
+    console.log("Criptage....");
+    console.log(this.passwordForm.value['lastPassword']);
+    console.log(token);
+    console.log("Token de Session...");
+    let sesToken = sessionStorage.getItem(this.signInService.TOKEN);
+    console.log(sesToken);
+    if(token === sesToken)
+    {
+      console.log("Tokens identiques");
+    }
+    else
+    {
+      console.log("Tokens differents");
+    }
+  }
   onUpdateParticulier(){
-    console.log('okok');
-    
     const formModel = this.prepareSave();
-    console.log('OKOKO');
-    
     this.particulierService.modifierParticulier(formModel)
     .subscribe(
       (response)=>{

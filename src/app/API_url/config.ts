@@ -76,4 +76,8 @@ export const URL = {
     //Détails formations
     listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
+
+
+    //Paiement
+    processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
 }

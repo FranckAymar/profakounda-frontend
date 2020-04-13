@@ -33,8 +33,10 @@ export class ForfaitComponent implements OnInit {
     this.forfaitForm = this.formBuilder.group({
 
       id : [null],
+      name : [null, Validators.required] ,
       nbreJour : [null, Validators.required] ,
-      nbreRequete : [null, Validators.required]
+      nbreRequete : [null, Validators.required],
+      montant : [null, Validators.required]
 
     }) ;
 
@@ -107,9 +109,10 @@ export class ForfaitComponent implements OnInit {
     this.forfaitForm.patchValue({
       id : forfaitLoad.id
     }) ;
-
+    this.forfait.name = forfaitLoad.name;
     this.forfait.nbreJour = forfaitLoad.nbreJour ;
     this.forfait.nbreRequete = forfaitLoad.nbreRequete ;
+    this.forfait.montant = forfaitLoad.montant ;
 
   }
 
@@ -118,6 +121,11 @@ export class ForfaitComponent implements OnInit {
 
     this.message = "" ;
     this.forfait = {} ;
+    this.forfaitForm.patchValue(
+      {
+        id : null
+      }
+    )
 
   }
 

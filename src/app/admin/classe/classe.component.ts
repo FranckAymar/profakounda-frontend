@@ -143,6 +143,11 @@ export class ClasseComponent implements OnInit {
 
     this.classe = {} ;
     this.message = "" ;
+    this.classForm.patchValue(
+      {
+        id : null
+      }
+    )
 
   }
 

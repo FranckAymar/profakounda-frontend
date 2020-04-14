@@ -20,7 +20,13 @@ import { CycleComponent } from './cycle/cycle.component';
 import { ForfaitComponent } from './forfait/forfait.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminMainComponent } from './admin-main/admin-main.component';
-
+import { JourComponent } from './jour/jour.component';
+import { JourService } from '../customers/services/Jour.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule } from '@angular/material';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormationService } from './services/formation.service';
+import { FormationComponent } from './formation/formation.component';
 
 
 
@@ -61,7 +67,18 @@ const adminRouter : Routes = [
         path : 'niveau',
         component : NiveauComponent
         
+      },
+      {
+        path : 'jour',
+        component : JourComponent
+        
+      },
+      {
+        path : 'formation',
+        component : FormationComponent
+        
       }
+
       
 
 
@@ -82,12 +99,21 @@ const adminRouter : Routes = [
                 NavbarComponent,
                 NiveauComponent,
                 SidebarComponent,
-                AdminMainComponent ],
+                AdminMainComponent,
+                JourComponent,
+                FormationComponent ],
   imports: [
     CommonModule, 
     RouterModule.forChild(adminRouter),
     HttpClientModule,
     FormsModule, 
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
     ReactiveFormsModule
 
 
@@ -97,7 +123,9 @@ const adminRouter : Routes = [
     CycleService,
     FiliereService,
     ForfaitService,
-    NiveauService
+    NiveauService,
+    JourService,
+    FormationService
   ]
 })
 export class AdminModule { }

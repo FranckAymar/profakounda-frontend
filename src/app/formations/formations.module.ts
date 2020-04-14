@@ -1,3 +1,4 @@
+import { FilterArrayPipe } from './list-formations/filter.pipe';
 import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { AgmCoreModule } from '@agm/core';
 import { HomeModule } from './../home/home.module';
@@ -13,7 +14,6 @@ import { HeaderFormationsComponent } from './header-formations/header-formations
 
 const formationsRouter = [
 
-
   {
     path : 'formations', component : FormationsMainComponent ,
     children : [
@@ -27,9 +27,6 @@ const formationsRouter = [
         component : DetailsAnnonceComponent 
         
       }
-
-
-
     ]
 
   }
@@ -39,6 +36,8 @@ const formationsRouter = [
 @NgModule({
   declarations: [ListFormationsComponent, FormationsMainComponent, DetailsAnnonceComponent, HeaderFormationsComponent],
   imports: [
+   
+    FilterArrayPipe,
     CommonModule,
     RouterModule.forChild(formationsRouter),
     HttpClientModule,

@@ -13,11 +13,8 @@ export class ListFormationsService {
   ) { }
 
 
-  getListPropositionFormations() : Observable<any> {
+getListPropositionFormations() : Observable<any> {
 
     return this.httpClient.get(URL.listPropositionFormations);
-  }
-
-
-
+  } 
 }

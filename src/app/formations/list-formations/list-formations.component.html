@@ -6,32 +6,14 @@
                     <form>
                         <div class="sf-type">
                             <div class="sf-input">
-                                <input type="text" id="sf-box" placeholder="Search course and discount courses">
+                                <input type="text"  class="form-contol" [(ngModel)]="v" id="sf-box" placeholder="Search course and discount courses">
                             </div>
-                            <div class="sf-list">
-                                <ul>
-                                    <li><a href="course-details.html">Accounting/Finance</a></li>
-                                    <li><a href="course-details.html">civil engineering</a></li>
-                                    <li><a href="course-details.html">Art/Design</a></li>
-                                    <li><a href="course-details.html">Marine Engineering</a></li>
-                                    <li><a href="course-details.html">Business Management</a></li>
-                                    <li><a href="course-details.html">Journalism/Writing</a></li>
-                                    <li><a href="course-details.html">Physical Education</a></li>
-                                    <li><a href="course-details.html">Political Science</a></li>
-                                    <li><a href="course-details.html">Sciences</a></li>
-                                    <li><a href="course-details.html">Statistics</a></li>
-                                    <li><a href="course-details.html">Web Design/Development</a></li>
-                                    <li><a href="course-details.html">SEO</a></li>
-                                    <li><a href="course-details.html">Google Business</a></li>
-                                    <li><a href="course-details.html">Graphics Design</a></li>
-                                    <li><a href="course-details.html">Networking Courses</a></li>
-                                    <li><a href="course-details.html">InpropositionFormation technology</a></li>
-                                </ul>
-                            </div>
+
                         </div>
                         <div class="sf-submit">
-                            <input type="submit" value="Rechercher">
+                            <input type="submit"  value="Rechercher">
                         </div>
+                     
                     </form>
                 </div>
             </div>
@@ -44,10 +26,25 @@
     <div class="container com-sp pad-bot-70">
          <div class="row">
             <div class="con-title">
-                <h2>Les <span>Cours</span></h2>
-            </div>
+                <h2>Les <span>Cours </span> </h2>
+            </div> 
+            <p>la date : {{ladate | date}}</p>
         </div> 
-        <div class="row" *ngFor="let propositionFormation of propositionFormations">
+
+    <!-- unsimple input pour verifier le filter-->
+        <div>
+            <input type="text" class="form-contol" [(ngModel)]="valeur">
+        </div>
+        <h4>{{valeur}}</h4> 
+
+        <input type="text" [(ngModel)]="filterText">
+        <ul>
+            <li *ngFor="let todo of todos | filter:filterText">
+                    {{todo}}
+            </li>
+        </ul>
+        
+        <div class="row" *ngFor="let propositionFormation of propositionFormations ">
             <a [routerLink]="['details-formation', propositionFormation.id]" ><div class="col-md-8">
                 <div style="border-radius: 0.3em;" class="home-top-cour">
                     <!--POPULAR COURSES IMAGE-->

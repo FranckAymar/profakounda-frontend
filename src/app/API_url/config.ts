@@ -40,6 +40,7 @@ export const URL = {
     modifierParticulier : consts.host+ consts.nameProject +'particulier/modifierParticulier',
     rechercherParticulier : consts.host+ consts.nameProject +'rechercherParticulierParUsername',
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
+    getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
 
@@ -92,4 +93,10 @@ export const URL = {
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
     getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier',
+    getPayments : consts.host+ consts.nameProject + 'admin/paiements',
+
+    //ParticulierProposition
+    getAllPparticulierPropositions : consts.host+ consts.nameProject + 'admin/particulierspropostions',
+
+
 }

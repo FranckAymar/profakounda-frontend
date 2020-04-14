@@ -22,4 +22,10 @@ export class PaiementService {
   }
 
 
+  getAllPayments()  : Observable<any>{
+
+    return this.httpClient.get(URL.getPayments);
+  }
+
+
 }

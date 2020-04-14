@@ -1,7 +1,6 @@
 import { PaiementService } from './../services/paiement.service';
 import { ForfaitService } from './../../admin/services/forfait.service';
 import { ParticulierService } from './../../customers/services/particulier.service';
-import { signUpvalidationService } from './../../home/services/signUp-validation.service';
 import { SignInService } from './../../home/services/sign-in.service';
 import { URL } from 'src/app/API_url/config';
 import { ActivatedRoute } from '@angular/router';

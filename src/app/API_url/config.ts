@@ -76,6 +76,8 @@ export const URL = {
     //Détails formations
     listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
+    getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier',
+
     //JOUR
     enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour',
     modifierJour : consts.host+ consts.nameProject +'modifierJour',
@@ -89,5 +91,5 @@ export const URL = {
     supprimerFormation : consts.host+ consts.nameProject +'supprimerFormation',
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
-    getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier'
+    getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier',
 }

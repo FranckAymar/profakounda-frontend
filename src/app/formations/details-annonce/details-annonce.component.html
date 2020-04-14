@@ -32,9 +32,8 @@
                 <div class="udb">
 
                     <div class="udb-sec">
-                        <button (click)="contactCustomer()" class="btn btn-success btn-lg btn-block" data-toggle="modal"
-                            data-target="#modalPayment">Me
-                            contacter</button>
+                        <button (click)="contactCustomer()" class="btn btn-success btn-lg btn-block"
+                            data-toggle="modal">Me contacter</button>
                     </div>
 
                     <div class="udb-sec udb-prof">
@@ -125,6 +124,9 @@
 
     <!--SECTION END-->
 
+
+
+    <!--Modal for Payment-->
     <div id="modalPayment" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -313,7 +315,7 @@
 
                             <div class="columns">
                                 <ul class="price">
-                                    <li class="">{{paiementDetails.forfait?.name}}</li>
+                                    <li>{{paiementDetails.forfait?.name}}</li>
                                     <li class="grey">{{paiementDetails.forfait?.montant}} FCFA</li>
                                     <li> Numéro de téléphone : {{paiementDetails?.numeroPaiement}}
                                         <br> Opérateur : {{paiementDetails?.modePaiement | uppercase}}
@@ -326,7 +328,7 @@
 
 
                             <div class="form-group">
-                                <button  data-dismiss="modal" (click)=onProcessToPayment()
+                                <button data-dismiss="modal" (click)=onProcessToPayment()
                                     class="btn btn-bg-color btn-block">Confirmer</button>
                             </div>
 
@@ -337,3 +339,37 @@
                 </div>
             </div>
         </div>
+
+    </div>
+
+
+        <!--Modal for show contact-->
+        <div id="particulierDetails" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+
+                        <div class="columns">
+                            <ul class="price">
+                                <li>Nom : <strong>{{particulierDetail.nom}}</strong></li>
+                                <li>Prénoms : <strong>{{particulierDetail.prenom}}</strong></li>
+                                <li> Numéro de téléphone : <strong>{{particulierDetail.telephone}}</strong>
+                                </li>
+                                <li>Adress e-mail : <strong>{{particulierDetail.email}}</strong></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-failed" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+ <button #openModalPayment [hidden]="true" data-toggle="modal" data-target="#modalPayment"></button>
+ <button #closeModalPayment  [hidden]="true" data-dismiss="#modalPayment"></button>
+ <button #openParticulierDetails  [hidden]="true" data-toggle="modal" data-target="#particulierDetails"></button>

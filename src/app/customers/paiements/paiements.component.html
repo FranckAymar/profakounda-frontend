@@ -9,7 +9,7 @@
                     <thead>
                         <tr>
                             <th>Forfait</th>
-                            <th>Requete restante</th>
+                            <th>Requete(s) restante(s)</th>
                             <th>Date de paiement</th>
                             <th>Date d'expiration</th>
                             <th>Status</th>
@@ -17,13 +17,13 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let paiement of paiements">
-                            <td>{{paiement.forfait.name}}</td>
+                            <td>{{paiement.nomForfait}}</td>
                             <td>{{paiement.nbreRequeteRestante}}</td>
-                            <td>{{paiement.datePaiement}}</td>
-                            <td>{{paiement.dateFin}}</td>
+                            <td>{{paiement.datePaiement |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                            <td>{{paiement.dateFin |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                             <td>
-                                <span class="label label-success">Actif</span>
-
+                                <span *ngIf="paiement.actif" class="label label-success">Actif</span>
+                                <span *ngIf="!paiement.actif" class="label label-danger">Inactif</span>
                             </td>
                     </tbody>
                 </table>

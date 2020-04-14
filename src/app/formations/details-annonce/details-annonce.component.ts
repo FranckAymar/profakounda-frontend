@@ -7,8 +7,11 @@ import { URL } from 'src/app/API_url/config';
 import { ActivatedRoute } from '@angular/router';
 import { DetaisFormationsService } from './../services/detais-formations.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as $ from 'jquery';
+
+declare var $: any;
+
 @Component({
   selector: 'app-details-annonce',
   templateUrl: './details-annonce.component.html',
@@ -16,14 +19,26 @@ import * as $ from 'jquery';
 })
 export class DetailsAnnonceComponent implements OnInit {
 
-  //boolean
+  //ViewChild
+  @ViewChild('openModalPayment',  {static: false}) openModalPayment: ElementRef<HTMLElement>;
+  @ViewChild('closeModalPayment',  {static: false}) closeModalPayment: ElementRef<HTMLElement>;
+  @ViewChild('openParticulierDetails',  {static: false}) openParticulierDetails: ElementRef<HTMLElement>;
+
+  //Variable for condition
   isFailed: boolean;
   errorInternet : boolean ;
   message  : string
   disableForfaitNextButton : boolean = false ;
+  authenticated : boolean;
 
 
-  //Forfais
+  //Model
+
+
+  idPropositionFormation : number ;
+
+  propositionFormation = {} ;
+
   forfaits = [] ;
  
   paiementDetails = {
@@ -35,6 +50,10 @@ export class DetailsAnnonceComponent implements OnInit {
     modePaiement : null
 
   }
+
+  particulierDetail = {} ;
+
+  //Map
 
   lat: number = 5.338390;
   lng: number = -4.097748;
@@ -48,11 +67,7 @@ export class DetailsAnnonceComponent implements OnInit {
   step3 : string;
   step4 : string;
  
-  authenticated : boolean;
 
-  idPropositionFormation : number ;
-
-  propositionFormation = {} ;
 
   //Form
   sigInForm : FormGroup ;
@@ -79,9 +94,11 @@ export class DetailsAnnonceComponent implements OnInit {
     this.onGetDetailPropositionFormation() ; 
     this.initSignInForm() ;
     this.initSignUpForm() ;
-    
 
+ 
+    
   }
+
 
 
   initSignInForm(){
@@ -215,8 +232,8 @@ export class DetailsAnnonceComponent implements OnInit {
 
       (resp)=>{
 
-        alert('Payement effectué')
-        console.log(resp);
+        alert('Payement effectué');
+        this.closeModalPayment.nativeElement.click() ;
       },
 
 
@@ -328,13 +345,59 @@ export class DetailsAnnonceComponent implements OnInit {
 
   contactCustomer() {
 
-    this.authenticated = this.signInService.isLogged() ;
+    let username = sessionStorage.getItem(this.signInService.USERNAME);
+
+    this.detaisFormationsService.getDetailParticulierParFormation(this.idPropositionFormation, username).subscribe(
+
+
+      (resp)=>{
+
+        console.log(resp);
+
+
+        if(resp.code === 0){
+
+          
+          this.particulierDetail =  resp.response ;
+          //Ouverture de la modal
+          this.openParticulierDetails.nativeElement.click() ;
+          
+        }
+
+
+        //L'utilisateur procède au paiement
+        else {
+          
+
+          if(resp.code === 2){
+            alert("Désolé vous avez épuisés vos demandes de contacts ! Souscrivez à nouveau !")
+          }
+
+          //Ouverture de la modal
+          this.openModalPayment.nativeElement.click() ;
+
+          this.authenticated = this.signInService.isLogged() ;
   
-    //Si l'utilisateur est déjà connecté
-    if(this.authenticated == true) {
-      this.next() ;
-      //Sinon on initialise le formulaire d'inscription ou de connexion
-    }
+          //Si l'utilisateur est déjà connecté
+          if(this.authenticated == true) {
+            this.next() ;
+          }
+
+        }
+        
+      },
+
+
+      (error)=>{
+        
+        console.log(error);
+        
+      }
+
+
+    )
+
+   
   }
 
 
@@ -364,6 +427,7 @@ export class DetailsAnnonceComponent implements OnInit {
   }
 
 
+  //Validation Input
 
   forfaitChange(){
     

@@ -21,4 +21,5 @@ export class PaiementService {
     return this.httpClient.post(URL.getPaymentParticulier, username) ;
   }
 
+
 }

@@ -11,7 +11,6 @@ import { NgModule, Injectable } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingInterceptor } from './LoadingInterceptor';
 
@@ -39,6 +38,7 @@ const appRouter : Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+
     LoadingComponent    
   ],
   imports: [

@@ -12,6 +12,7 @@ import { Heure } from '../models/heure.model';
 import { PropositionFormation } from '../models/PropositionFormation.model';
 import { Lambda } from '../models/lambda.model';
 import { trigger } from '@angular/animations';
+import { JourService } from '../services/Jour.service';
 
 @Component({
   selector: 'app-proposition-formation',
@@ -29,6 +30,7 @@ export class PropositionFormationComponent implements OnInit {
   disponibilites: any = [];
   modules: any = [];
   hours: any = [];
+  jours: any = [];
   heure:Heure = new Heure('','');
   lambda:Lambda;
   @Input() propositionFormation:PropositionFormation = new PropositionFormation(0,'',sessionStorage.getItem(this.signInService.USERNAME)); ;
@@ -50,6 +52,7 @@ export class PropositionFormationComponent implements OnInit {
 
   constructor(private signInService:SignInService,
     private niveauService:NiveauService,
+    private jourService:JourService,
     private propositionFormationService:PropositionFormationService
     ) { 
       
@@ -62,6 +65,7 @@ export class PropositionFormationComponent implements OnInit {
     this.rechercherDisponibilte();
     this.rechercherModules();
     this.rechercherProposition();
+    this.onFetchJours();
     }
     addNiveau(){
       this.edit = false;
@@ -129,6 +133,18 @@ export class PropositionFormationComponent implements OnInit {
 
     )
 
+  }
+  onFetchJours()
+  {
+    this.jourService.onFetchJours()
+    .subscribe(
+      (response)=>{
+        this.jours = response;
+      },
+      (error)=>{
+        console.log("Une erreur s'est produite: "+error);
+      }
+    )
   }
   onSaveLevelTeach(object){
     if(!this.edit)

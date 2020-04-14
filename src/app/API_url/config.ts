@@ -76,4 +76,10 @@ export const URL = {
     //Détails formations
     listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
+    //JOUR
+    enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour',
+    modifierJour : consts.host+ consts.nameProject +'modifierJour',
+    supprimerJour : consts.host+ consts.nameProject +'supprimerJour',
+    rechercherJour : consts.host+ consts.nameProject +'getJour',
+    onFetchJours : consts.host+ consts.nameProject +'jours',
 }

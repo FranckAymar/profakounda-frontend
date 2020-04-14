@@ -34,21 +34,8 @@
         </div>
     </div>
 </div>
-<div style="width: 30%;margin: auto;">
-    <form class="example-form">
-        <mat-form-field class="example-full-width">
-          <input type="text"
-                 aria-label="Number"
-                 matInput
-                 [formControl]="myControl"
-                 [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              {{option}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </form>
+<div>
+     
       
     
 </div>
@@ -70,6 +57,18 @@
                 </div>
                 <button  type="submit" [disabled] = "f.invalid" class="btn btn-primary">Enregistrer</button>
             </form>
+            <mat-form-field>
+              <input type="text"
+                     aria-label="Number"
+                     matInput
+                     [formControl]="myControl"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>

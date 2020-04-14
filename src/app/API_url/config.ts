@@ -82,4 +82,11 @@ export const URL = {
     supprimerJour : consts.host+ consts.nameProject +'supprimerJour',
     rechercherJour : consts.host+ consts.nameProject +'getJour',
     onFetchJours : consts.host+ consts.nameProject +'jours',
+    //FORMATIONS
+    enregistrerFormation : consts.host+ consts.nameProject +'enregistrerFormation',
+    modifierFormation : consts.host+ consts.nameProject +'modifierFormation',
+    onFetchFormations : consts.host+ consts.nameProject +'formations',
+    supprimerFormation : consts.host+ consts.nameProject +'supprimerFormation',
+    //Paiement
+    processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
 }

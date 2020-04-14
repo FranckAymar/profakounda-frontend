@@ -5704,3 +5704,7 @@ padding: 6px 25px;
 .align-text-right{
     text-align: right;
 }
+
+.btn-bg-color{
+  background-color: #FF5722;  
+}

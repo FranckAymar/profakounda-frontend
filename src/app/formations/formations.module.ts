@@ -1,3 +1,4 @@
+import { PaiementService } from './services/paiement.service';
 import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { AgmCoreModule } from '@agm/core';
 import { HomeModule } from './../home/home.module';
@@ -38,6 +39,10 @@ const formationsRouter = [
 
 @NgModule({
   declarations: [ListFormationsComponent, FormationsMainComponent, DetailsAnnonceComponent, HeaderFormationsComponent],
+  providers : [
+    PaiementService
+
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(formationsRouter),

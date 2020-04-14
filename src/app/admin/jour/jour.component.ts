@@ -95,27 +95,4 @@ this.jour = new Jour(0,'',[]);
   }
 
 
-  searchDay(string) {
-
-    var output = [];
-    this.jours.forEach((jour, index) => {
-      if (jour.designation.toLowerCase().indexOf(
-        string.toLowerCase()) >= 0) {
-      output.push(jour);
-      if (string.length === 0) {
-        output.length = 0;
-        console.log("JourId vide");
-      }
-
-    } else {
-      console.log("JourId vide");
-    }
-    });
-    this.filterCountry = output;
-    
-  }
-  fillTextbox7(objet) {
-   console.log(objet);
-  }
-
 }

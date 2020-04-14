@@ -25,6 +25,8 @@ import { JourService } from '../customers/services/Jour.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormationService } from './services/formation.service';
+import { FormationComponent } from './formation/formation.component';
 
 
 
@@ -70,6 +72,11 @@ const adminRouter : Routes = [
         path : 'jour',
         component : JourComponent
         
+      },
+      {
+        path : 'formation',
+        component : FormationComponent
+        
       }
 
       
@@ -94,7 +101,7 @@ const adminRouter : Routes = [
                 SidebarComponent,
                 AdminMainComponent,
                 JourComponent,
-                JourComponent ],
+                FormationComponent ],
   imports: [
     CommonModule, 
     RouterModule.forChild(adminRouter),
@@ -117,7 +124,8 @@ const adminRouter : Routes = [
     FiliereService,
     ForfaitService,
     NiveauService,
-    JourService
+    JourService,
+    FormationService
   ]
 })
 export class AdminModule { }

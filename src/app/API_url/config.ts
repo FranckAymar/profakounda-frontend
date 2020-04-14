@@ -80,4 +80,5 @@ export const URL = {
 
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
+    getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier'
 }

@@ -14,6 +14,7 @@ import { CustomerMainComponent } from './customer-main/customer-main.component';
 import { CustomersGuard } from '../guard/customers.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PropositionFormationComponent } from './proposition-formation/proposition-formation.component';
+import { PaiementsComponent } from './paiements/paiements.component';
 
 
 const customersRouter: Routes = [
@@ -36,6 +37,12 @@ const customersRouter: Routes = [
         path: 'formations',
         component: PropositionFormationComponent
 
+      },
+      
+      {
+        path: 'paiements',
+        component: PaiementsComponent
+
       }
 
     ]
@@ -50,7 +57,7 @@ const customersRouter: Routes = [
     ContentCustomersComponent,
     EditProfileComponent,
     
-    CustomerMainComponent, PropositionFormationComponent],
+    CustomerMainComponent, PropositionFormationComponent, PaiementsComponent],
 
   providers: [
 

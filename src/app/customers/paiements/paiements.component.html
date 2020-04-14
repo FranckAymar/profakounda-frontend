@@ -1,0 +1,35 @@
+<div class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <h4>Mes paiements</h4>
+        </div>
+        <div class="tab-inn">
+            <div class="table-responsive table-desi">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Forfait</th>
+                            <th>Requete restante</th>
+                            <th>Date de paiement</th>
+                            <th>Date d'expiration</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let paiement of paiements">
+                            <td>{{paiement.forfait.name}}</td>
+                            <td>{{paiement.nbreRequeteRestante}}</td>
+                            <td>{{paiement.datePaiement}}</td>
+                            <td>{{paiement.dateFin}}</td>
+                            <td>
+                                <span class="label label-success">Actif</span>
+
+                            </td>
+                            <td><a href="#!" target="_blank" class="ad-st-view">View</a></td>
+                            <td><a href="admin-page-edit.html" class="ad-st-view">Edit</a></td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

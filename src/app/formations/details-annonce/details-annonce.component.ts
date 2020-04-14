@@ -265,7 +265,7 @@ export class DetailsAnnonceComponent implements OnInit {
   }
 
 
-  //Method for Jquerry
+  //Method for stepper 
 
  next() {
 

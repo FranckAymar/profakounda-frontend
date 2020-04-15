@@ -8,6 +8,7 @@ import { DetaisFormationsService } from './../services/detais-formations.service
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as $ from 'jquery';
+import { MatAutocompleteTrigger } from '@angular/material';
 
 declare var $: any;
 
@@ -22,7 +23,9 @@ export class DetailsAnnonceComponent implements OnInit {
   @ViewChild('openModalPayment',  {static: false}) openModalPayment: ElementRef<HTMLElement>;
   @ViewChild('closeModalPayment',  {static: false}) closeModalPayment: ElementRef<HTMLElement>;
   @ViewChild('openParticulierDetails',  {static: false}) openParticulierDetails: ElementRef<HTMLElement>;
+  @ViewChild('goToSignin',  {static: false}) goToSignin: ElementRef<HTMLElement>;
 
+  
   //Variable for condition
   isFailed: boolean;
   errorInternet : boolean ;
@@ -93,9 +96,7 @@ export class DetailsAnnonceComponent implements OnInit {
     this.onGetDetailPropositionFormation() ; 
     this.initSignInForm() ;
     this.initSignUpForm() ;
-
  
-    
   }
 
 
@@ -166,6 +167,8 @@ export class DetailsAnnonceComponent implements OnInit {
   
   onSignUp(){
 
+    this.message = "" ;
+
     let particulier = this.singUpForm.value
     console.log(particulier) ;
 
@@ -173,14 +176,20 @@ export class DetailsAnnonceComponent implements OnInit {
 
       (resp) => {
 
+        console.log(resp);
+        
+
         if(resp['error'] !== null){
 
           this.message = resp['error'];
 
         }else {
 
-          this.paiementDetails.username = particulier.username ;
-          this.next() ;
+          alert("Inscription réussie ! Veuillez accéder à vos mails pour l'activation de votre compte");
+         // this.paiementDetails.username = particulier.username ;
+          //this.next() ;
+          this.goToSignin.nativeElement.click() ;
+
 
         }
 

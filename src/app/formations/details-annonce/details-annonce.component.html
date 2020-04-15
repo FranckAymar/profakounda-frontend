@@ -76,7 +76,7 @@
 
                                 <tbody>
                                     <tr *ngFor="let contrat of propositionFormation.contrats">
-                                        <td>{{contrat.classe.libelle}}</td>
+                                        <td>{{contrat.niveau.libelle}}</td>
                                         <td class="align-text-right"><span class="pro-user-act">{{contrat.minMontant}}
                                                 FCFA</span></td>
                                         <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}}
@@ -154,17 +154,14 @@
                                         <span class="alert alert-danger">Vérifier vos informations de connexion </span>
                                     </div>
                                     <form [formGroup]="sigInForm" (submit)="onSignIn()">
-                                        <div>
                                             <div class="input-field s12">
                                                 <input type="text" data-ng-model="name" class="validate"
                                                     formControlName="username">
                                                 <label>Adresse e-mail</label>
                                             </div>
-                                            <div *ngIf="" class="invalid-feedback">
+                                            <small *ngIf="sigInForm.controls.username.errors?.email" class="invalid-feedback">
                                                 Adresse e-mail non valide
-                                            </div>
-                                        </div>
-                                        <div>
+                                            </small>
                                             <div class="input-field s12">
                                                 <input type="password" data-ng-model="name" class="validate"
                                                     formControlName="password">
@@ -173,9 +170,8 @@
                                             <div *ngIf="" class="invalid-feedback">
                                                 Adresse e-mail non valide
                                             </div>
-                                        </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-bg-color btn-block">Se
+                                            <button [disabled]="sigInForm.invalid" type="submit" class="btn btn-bg-color btn-block">Se
                                                 connecter</button>
                                         </div>
 
@@ -192,12 +188,12 @@
                                         <div>
                                             <div class="input-field s12">
                                                 <input type="text" data-ng-model="name" class="validate"
-                                                    formControlName="username">
+                                                    formControlName="email">
                                                 <label>Adresse e-mail</label>
                                             </div>
-                                            <div *ngIf="" class="invalid-feedback">
+                                            <small *ngIf="singUpForm.controls.email.errors?.email" class="invalid-feedback">
                                                 Adresse e-mail non valide
-                                            </div>
+                                            </small>
                                         </div>
 
                                         <div>
@@ -206,9 +202,7 @@
                                                     formControlName="password">
                                                 <label>Mot de passe</label>
                                             </div>
-                                            <div *ngIf="" class="invalid-feedback">
-                                                Adresse e-mail non valide
-                                            </div>
+                                            
                                         </div>
                                         <div>
                                             <div class="input-field s12">
@@ -216,16 +210,16 @@
                                                     formControlName="passwordConfirm">
                                                 <label>Confirmer votre mot de passe</label>
                                             </div>
-                                            <div *ngIf="" class="invalid-feedback">
-                                                Adresse e-mail non valide
-                                            </div>
+                                            <small class="invalid-feedback" *ngIf="singUpForm.controls.passwordConfirm.errors?.passwordMatch">
+                                                Les mots de passes doivent correspondre
+                                            </small>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-bg-color btn-block">S'inscrire</button>
+                                            <button [disabled]="singUpForm.invalid" type="submit" class="btn btn-bg-color btn-block">S'inscrire</button>
                                         </div>
 
                                     </form>
-                                    <p (click)="goToSignIn()" class="text-center"><button class="btn-link">Se
+                                    <p #goToSignin (click)="goToSignIn()" class="text-center"><button class="btn-link">Se
                                             connecter</button></p>
                                 </div>
                                 <!--Forfaits-->
@@ -327,7 +321,7 @@
 
 
                             <div class="form-group">
-                                <button data-dismiss="modal" (click)=onProcessToPayment()
+                                <button (click)=onProcessToPayment()
                                     class="btn btn-bg-color btn-block">Confirmer</button>
                             </div>
 
@@ -338,6 +332,8 @@
                 </div>
             </div>
         </div>
+
+        <button #closeModalPayment  [hidden]="true" data-dismiss="modal"></button>
 
     </div>
 
@@ -370,5 +366,4 @@
 
 
  <button #openModalPayment [hidden]="true" data-toggle="modal" data-target="#modalPayment"></button>
- <button #closeModalPayment  [hidden]="true" data-dismiss="#modalPayment"></button>
  <button #openParticulierDetails  [hidden]="true" data-toggle="modal" data-target="#particulierDetails"></button>

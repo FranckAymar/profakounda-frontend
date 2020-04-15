@@ -74,12 +74,23 @@
                 <!-- Libelle-->
 
                 <form (ngSubmit)="onSaveLevelTeach(niveauForme)" #f="ngForm">
-                    <div class="form-group">
-                        <label for="DesignationNiveau">Niveau:</label>
-                        <input name="designationNiveau" required [(ngModel)]="niveauForme.designationNiveau" type="text"
-                            id="DesignationNiveau" />
+                    <div *ngIf="errorNiveaux" class="altert alert-danger">
+                        {{errorNiveaux}}
                     </div>
-                
+                    <mat-form-field>
+                        <input type="text"
+                        placeholder="Niveau"
+                            [(ngModel)]="niveauForme.designationNiveau"
+                               aria-label="Number"
+                               matInput
+                               [formControl]="myControl3"
+                               [matAutocomplete]="auto3" required>
+                        <mat-autocomplete #auto3="matAutocomplete">
+                          <mat-option *ngFor="let option of filteredOptions3 | async" [value]="option">
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
                     <div class="row">
                         <div class="col-md-6">
                             <label for="prixMin">Prix min:</label>
@@ -92,9 +103,9 @@
                                 required />
                         </div>
                     </div>
-                    <button *ngIf="!edit" [disabled]="f.invalid" type="submit"
+                    <button style="margin-top:0.5em;" *ngIf="!edit" [disabled]="f.invalid || myControl3.invalid" type="submit"
                         class="btn btn-primary">Enregistrer</button>
-                    <button *ngIf="edit" [disabled]="f.invalid" type="submit"
+                    <button style="margin-top:0.5em;" *ngIf="edit" [disabled]="f.invalid || myControl3.invalid" type="submit"
                         class="btn btn-success">Enregistrer</button>
                 </form>
             </div>
@@ -119,13 +130,30 @@
                 <div class="row">
                     <div class="col-md-6">
                         <form (ngSubmit)="onSaveModule(module)" #f2="ngForm">
-                            <div class="form-group">
+                            <div *ngIf="errorModule" class="alert alert-danger">
+                                {{errorModule}}
+                            </div>
+                            <mat-form-field>
+                                <input type="text"
+                                placeholder="Designation du module"
+                                    [(ngModel)]="module.designation"
+                                       aria-label="Number"
+                                       matInput
+                                       [formControl]="myControl2"
+                                       [matAutocomplete]="auto2" required>
+                                <mat-autocomplete #auto2="matAutocomplete">
+                                  <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
+                                    {{option}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            <!-- <div class="form-group">
                                 <label for="module">Designation du module:</label>
                                 <input name="designation" [(ngModel)]="module.designation" type="text" id="module"
                                     required>
-                            </div>
-                            <button *ngIf="!editModule" [disabled]="f2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
-                            <button *ngIf="editModule" [disabled]="f2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
+                            </div> -->
+                            <button *ngIf="!editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button *ngIf="editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
                             <button *ngIf="editModule" style="margin-left: 1em;" (click)="addModule()" type="submit" class="btn btn-danger">Annuler</button>
                         </form>
                     </div>
@@ -173,12 +201,25 @@
                 <div class="row">
                     <div class="col-md-6">
                         <form #f3="ngForm" (ngSubmit)="onSaveDisponibilite(disponibilite)">
-                            <div class="form-group">
-                                <label for="jour">JOUR:</label>
-                                <input name="jour" [(ngModel)]="disponibilite.jour" type="text" id="designation" required>
+                            <div *ngIf="errorJour" class="alert alert-danger">
+                                {{errorJour}}
                             </div>
-                            
-                            <div  class="row">
+                            <mat-form-field>
+                                <input type="text"
+                                
+                                placeholder="Jour"
+                                    [(ngModel)]="disponibilite.jour"
+                                       aria-label="Number"
+                                       matInput
+                                       [formControl]="myControl"
+                                       [matAutocomplete]="auto" required>
+                                <mat-autocomplete #auto="matAutocomplete">
+                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                              <div  class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heureDebut">De:</label>
@@ -202,7 +243,7 @@
                                 <span *ngFor="let h of hours">{{h.heureDebut}}-{{h.heureFin}} ; &nbsp;</span>
                             </div>
 
-                            <button type="submit" [disabled]="f3.invalid || heure.heureFin!='' || heure.heureDebut!=''" class="btn btn-primary">Enregistrer</button>
+                            <button type="submit" [disabled]="myControl.invalid || f3.invalid || heure.heureFin!='' || heure.heureDebut!=''" class="btn btn-primary">Enregistrer</button>
                         </form>
                     </div>
                     <div class="col-md-6" style="height: 17em; overflow: auto;">

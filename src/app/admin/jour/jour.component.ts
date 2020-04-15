@@ -13,27 +13,14 @@ import { startWith, map} from 'rxjs/operators';
 })
 export class JourComponent implements OnInit {
   jours:any = [];
+  joursString:any = [];
   filterCountry:any = [];
   jour:Jour = new Jour(0,'',[]);
   @Input() designationJour:string
   error:string;
   constructor(private jourService:JourService) { }
-  myControl = new FormControl();
-  options: string[] = ['Angular', 'ReactJs', 'VuJs'];
-  filteredOptions: Observable<string[]>;
-
   ngOnInit() {
     this.onFetchJours();
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
-  }
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
   initJour(){
 this.jour = new Jour(0,'',[]);
@@ -53,7 +40,6 @@ this.jour = new Jour(0,'',[]);
       }
     )
   }
-
   onSaveJour(){
     if(this.jour.id != 0)
     {

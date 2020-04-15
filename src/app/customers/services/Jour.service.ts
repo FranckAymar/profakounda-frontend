@@ -19,6 +19,9 @@ export class JourService{
      onFetchJours(){
         return this.httpClient.get(URL.onFetchJours);
      }
+     onFetchJoursString(){
+      return this.httpClient.get(URL.onFetchJoursString);
+   }
      rechercherJour(id:number){
         return this.httpClient.post(URL.rechercherJour,id);
      }

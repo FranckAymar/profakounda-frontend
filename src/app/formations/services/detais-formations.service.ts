@@ -20,4 +20,10 @@ export class DetaisFormationsService {
 
   }
 
+  getDetailParticulierParFormation(idPropositionFormation, username) : Observable<any> {
+
+    return this.httpClient.get(URL.getContactParticulier + "/"+ idPropositionFormation + "?username="+ username  ) ;
+
+
+  }
 }

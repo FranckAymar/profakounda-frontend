@@ -41,6 +41,7 @@ export const URL = {
     modifierParticulier : consts.host+ consts.nameProject +'particulier/modifierParticulier',
     rechercherParticulier : consts.host+ consts.nameProject +'rechercherParticulierParUsername',
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
+    getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
 
@@ -77,6 +78,8 @@ export const URL = {
     //Détails formations
     listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
+    getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier',
+
     //JOUR
     enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour',
     modifierJour : consts.host+ consts.nameProject +'modifierJour',
@@ -92,5 +95,11 @@ export const URL = {
     supprimerFormation : consts.host+ consts.nameProject +'supprimerFormation',
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
-    getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier'
+    getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier',
+    getPayments : consts.host+ consts.nameProject + 'admin/paiements',
+
+    //ParticulierProposition
+    getAllPparticulierPropositions : consts.host+ consts.nameProject + 'admin/particulierspropostions',
+
+
 }

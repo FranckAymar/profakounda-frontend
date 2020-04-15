@@ -26,10 +26,8 @@ export class PaiementsComponent implements OnInit {
 
 
       (resp)=> {
-
-        console.log(resp);
-        
-        this.paiements = resp.response ;
+  
+        this.paiements = resp ;
       },
 
       (error) => {

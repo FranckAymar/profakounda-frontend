@@ -31,6 +31,7 @@ export const URL = {
     modifierForfait :  consts.host+ consts.nameProject +'admin/modifierForfait',
     //Niveau
     recupererNiveau : consts.host+ consts.nameProject +'niveaux'   ,
+    onFetchNiveauString : consts.host+ consts.nameProject +'niveauxString' ,
     enregistrerNiveau:consts.host+ consts.nameProject +'admin/enregistrerNiveau',
     supprimerNiveau:consts.host+ consts.nameProject +'admin/deleteNiveau',
     retrouverNiveauParId:consts.host+ consts.nameProject +'admin/getNiveau',
@@ -85,10 +86,12 @@ export const URL = {
     supprimerJour : consts.host+ consts.nameProject +'supprimerJour',
     rechercherJour : consts.host+ consts.nameProject +'getJour',
     onFetchJours : consts.host+ consts.nameProject +'jours',
+    onFetchJoursString : consts.host+ consts.nameProject +'tabStringJours',
     //FORMATIONS
     enregistrerFormation : consts.host+ consts.nameProject +'enregistrerFormation',
     modifierFormation : consts.host+ consts.nameProject +'modifierFormation',
     onFetchFormations : consts.host+ consts.nameProject +'formations',
+    onFetchFormationsString : consts.host+ consts.nameProject +'formationsString',
     supprimerFormation : consts.host+ consts.nameProject +'supprimerFormation',
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',

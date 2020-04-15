@@ -9,12 +9,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardCustomersComponent } from './dashboard-customers/dashboard-customers.component';
 import { ContentCustomersComponent } from './content-customers/content-customers.component';
-
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule } from '@angular/material';
 import { CustomerMainComponent } from './customer-main/customer-main.component';
 import { CustomersGuard } from '../guard/customers.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PropositionFormationComponent } from './proposition-formation/proposition-formation.component';
 import { PaiementsComponent } from './paiements/paiements.component';
+import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 
 const customersRouter: Routes = [
@@ -71,6 +73,15 @@ const customersRouter: Routes = [
     RouterModule.forChild(customersRouter),
     FormsModule,
     ReactiveFormsModule,
+ 
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCdrVoDFD_XTsAxUo2-VH0HTLX5IrdfC_E'
     }),

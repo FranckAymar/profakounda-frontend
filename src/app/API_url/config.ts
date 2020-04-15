@@ -13,6 +13,7 @@ export const URL = {
     modifierClassse :  consts.host+ consts.nameProject +'admin/modifierClasse' ,
     //URL des Filieres
     recupererFiliere :  consts.host+consts.nameProject+'filieres' ,
+    onFetchFiliereString :  consts.host+consts.nameProject+'filieresString' ,
     enregistrerFiliere : consts.host+ consts.nameProject +'admin/enregistrerFiliere',
     modifierFiliere:  consts.host+ consts.nameProject +'admin/modifierFiliere' ,
     supprimerFiliere:  consts.host+ consts.nameProject +'admin/supprimerFiliere' ,

@@ -8,6 +8,8 @@ import { consts } from '../../API_url/const'
 import { FiliereService } from 'src/app/admin/services/filiere.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { PasswordModel } from '../models/PasswordModel';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -31,7 +33,8 @@ export class EditProfileComponent implements OnInit {
   passwordModel:PasswordModel;
   userForm : FormGroup;
   passwordForm : FormGroup;
-  
+  myControl = new FormControl();
+  filteredOptions: Observable<string[]>;
   constructor(private filiereService :FiliereService,
               private niveauService:NiveauService,
               private particulierService:ParticulierService,
@@ -45,6 +48,16 @@ export class EditProfileComponent implements OnInit {
     this.onFetchNiveaux();
     this.onFetchFiliere();
     this.initPassword();
+    this.filteredOptions = this.myControl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.filieres.filter(option => option.toLowerCase().includes(filterValue));
   }
 
  
@@ -206,13 +219,10 @@ getColor(){
   }
   //recuperer les filieres
   onFetchFiliere() {
-
-    this.filiereService.fetchFilieres().subscribe(
-
+    this.filiereService.fetchFilieresString().subscribe(
       (response)=> {
-        this.filieres = response.response ;
+        this.filieres = response ;
       },
-
       (error)=> {
 
         console.log("Une erreur est survenue");

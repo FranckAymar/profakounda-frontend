@@ -16,6 +16,10 @@ fetchFilieres() : Observable<any>   {
 
   return this.httpClient.get(URL.recupererFiliere);
 }
+fetchFilieresString() : Observable<any>   {
+
+  return this.httpClient.get(URL.onFetchFiliereString);
+}
 // enregistrement
 enregistrerFiliere(filiere : Filiere): Observable<any> {
 

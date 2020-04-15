@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as $ from 'jquery';
 import { MatAutocompleteTrigger } from '@angular/material';
+import { PasswordMatch } from 'src/app/custom-validator/password-match';
 
 declare var $: any;
 
@@ -104,7 +105,7 @@ export class DetailsAnnonceComponent implements OnInit {
   initSignInForm(){
 
     this.sigInForm = this.formBuilder.group({
-      username : [null, Validators.required],
+      username : [null,[ Validators.email, Validators.email]],
       password : [null, Validators.required]
     })
 
@@ -112,10 +113,15 @@ export class DetailsAnnonceComponent implements OnInit {
 
   initSignUpForm(){
     this.singUpForm = this.formBuilder.group({
-      username : [null, Validators.required],
+      email : [null, [ Validators.email, Validators.email]],
       password : [null, Validators.required],
-      passwordConfirm : [null, Validators.required]
-    })
+      passwordConfirm : [null, Validators.required ]
+    },
+    {
+      validator : PasswordMatch('password' , 'passwordConfirm')
+    }
+
+  );
   }
 
   onSignIn(){
@@ -124,7 +130,6 @@ export class DetailsAnnonceComponent implements OnInit {
     let password = this.sigInForm.value['password'];
     
     let token = btoa(username + ':' + password);
-    console.log(token);
     
     this.signInService.login(token).subscribe(
 
@@ -142,7 +147,46 @@ export class DetailsAnnonceComponent implements OnInit {
             //Sauvegarde du username
           sessionStorage.setItem(this.signInService.USERNAME, username);
     
-          this.next() ;
+          //Vérifier si l'utulilisateur a un forfait actif
+          this.detaisFormationsService
+          .getDetailParticulierParFormation(this.idPropositionFormation, username).subscribe(
+
+
+            (resp)=> {
+
+
+              if(resp.code === 0){
+
+                //Fermetture de la modal de paiement
+                this.closeModalPayment.nativeElement.click() ;
+
+                this.particulierDetail =  resp.response ;
+                //Ouverture de la modal de demande de contact
+                this.openParticulierDetails.nativeElement.click() ;
+                
+              }
+              //L'utilisateur procède au paiement
+              else {
+                
+                if(resp.code === 2){
+                  alert("Désolé vous avez épuisés vos demandes de contacts ! Souscrivez à nouveau !")
+                }
+
+                this.next();
+
+              }
+
+            },
+
+            (error)=>{
+
+              console.log(error);
+              
+
+            }
+
+          )
+
 
       },
 
@@ -170,24 +214,20 @@ export class DetailsAnnonceComponent implements OnInit {
     this.message = "" ;
 
     let particulier = this.singUpForm.value
-    console.log(particulier) ;
 
     this.signUpService.saveParticulier(particulier).subscribe(
 
-      (resp) => {
+      (resp) => {        
 
-        console.log(resp);
-        
-
-        if(resp['error'] !== null){
+        if(resp['error']){
 
           this.message = resp['error'];
 
-        }else {
+        }else if(resp['success'])
+        
+        {
 
           alert("Inscription réussie ! Veuillez accéder à vos mails pour l'activation de votre compte");
-         // this.paiementDetails.username = particulier.username ;
-          //this.next() ;
           this.goToSignin.nativeElement.click() ;
 
 
@@ -360,8 +400,6 @@ export class DetailsAnnonceComponent implements OnInit {
 
       (resp)=>{
 
-        console.log(resp);
-
 
         if(resp.code === 0){
 
@@ -429,7 +467,6 @@ export class DetailsAnnonceComponent implements OnInit {
 
     this.paiementDetails.modePaiement = operator;
     this.paiementDetails.numeroPaiement = '';
-    console.log(this.paiementDetails);
     
 
   }

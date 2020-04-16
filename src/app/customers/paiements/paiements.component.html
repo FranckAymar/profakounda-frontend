@@ -1,0 +1,33 @@
+<div class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <h4>Mes paiements</h4>
+        </div>
+        <div class="tab-inn">
+            <div class="table-responsive table-desi">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Forfait</th>
+                            <th>Requete(s) restante(s)</th>
+                            <th>Date de paiement</th>
+                            <th>Date d'expiration</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let paiement of paiements">
+                            <td>{{paiement.nomForfait}}</td>
+                            <td>{{paiement.nbreRequeteRestante}}</td>
+                            <td>{{paiement.datePaiement |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                            <td>{{paiement.dateFin |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                            <td>
+                                <span *ngIf="paiement.actif" class="label label-success">Actif</span>
+                                <span *ngIf="!paiement.actif" class="label label-danger">Inactif</span>
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

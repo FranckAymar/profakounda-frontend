@@ -1,0 +1,32 @@
+<div class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <h4>Tous les paiements</h4>
+        </div>
+        <div class="tab-inn">
+            <div class="table-responsive table-desi">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th></th> 
+                            <th>Souscripteur</th> 
+                            <th></th> 
+                            <th>Particullier consulté</th>
+                            <th>Date</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let pp of propositionsParticuliers">
+                            <td><span class="list-img"><img src="{{urlServer}}/{{pp.particulier.id}}" alt=""></span>
+                            <td>{{pp.particulier.nom}} {{pp.particulier.prenoms}} </td>
+                            <td><span class="list-img"><img src="{{urlServer}}/{{pp.propositionFormation.particulier.id}}" alt=""></span>
+                            <td>{{pp.propositionFormation.particulier.nom}} {{pp.propositionFormation.particulier.prenoms}}</td>
+                            <td>{{pp.dateConsultation |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

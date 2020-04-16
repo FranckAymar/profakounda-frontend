@@ -1,14 +1,18 @@
 import { PaiementService } from './../services/paiement.service';
 import { ForfaitService } from './../../admin/services/forfait.service';
 import { ParticulierService } from './../../customers/services/particulier.service';
-import { signUpvalidationService } from './../../home/services/signUp-validation.service';
 import { SignInService } from './../../home/services/sign-in.service';
 import { URL } from 'src/app/API_url/config';
 import { ActivatedRoute } from '@angular/router';
 import { DetaisFormationsService } from './../services/detais-formations.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as $ from 'jquery';
+import { MatAutocompleteTrigger } from '@angular/material';
+import { PasswordMatch } from 'src/app/custom-validator/password-match';
+
+declare var $: any;
+
 @Component({
   selector: 'app-details-annonce',
   templateUrl: './details-annonce.component.html',
@@ -16,14 +20,28 @@ import * as $ from 'jquery';
 })
 export class DetailsAnnonceComponent implements OnInit {
 
-  //boolean
+  //ViewChild
+  @ViewChild('openModalPayment',  {static: false}) openModalPayment: ElementRef<HTMLElement>;
+  @ViewChild('closeModalPayment',  {static: false}) closeModalPayment: ElementRef<HTMLElement>;
+  @ViewChild('openParticulierDetails',  {static: false}) openParticulierDetails: ElementRef<HTMLElement>;
+  @ViewChild('goToSignin',  {static: false}) goToSignin: ElementRef<HTMLElement>;
+
+  
+  //Variable for condition
   isFailed: boolean;
   errorInternet : boolean ;
   message  : string
   disableForfaitNextButton : boolean = false ;
+  authenticated : boolean;
 
 
-  //Forfais
+  //Model
+
+
+  idPropositionFormation : number ;
+
+  propositionFormation = {} ;
+
   forfaits = [] ;
  
   paiementDetails = {
@@ -35,6 +53,10 @@ export class DetailsAnnonceComponent implements OnInit {
     modePaiement : null
 
   }
+
+  particulierDetail = {} ;
+
+  //Map
 
   lat: number = 5.338390;
   lng: number = -4.097748;
@@ -48,11 +70,7 @@ export class DetailsAnnonceComponent implements OnInit {
   step3 : string;
   step4 : string;
  
-  authenticated : boolean;
 
-  idPropositionFormation : number ;
-
-  propositionFormation = {} ;
 
   //Form
   sigInForm : FormGroup ;
@@ -79,15 +97,15 @@ export class DetailsAnnonceComponent implements OnInit {
     this.onGetDetailPropositionFormation() ; 
     this.initSignInForm() ;
     this.initSignUpForm() ;
-    
-
+ 
   }
+
 
 
   initSignInForm(){
 
     this.sigInForm = this.formBuilder.group({
-      username : [null, Validators.required],
+      username : [null,[ Validators.email, Validators.email]],
       password : [null, Validators.required]
     })
 
@@ -95,10 +113,15 @@ export class DetailsAnnonceComponent implements OnInit {
 
   initSignUpForm(){
     this.singUpForm = this.formBuilder.group({
-      username : [null, Validators.required],
+      email : [null, [ Validators.email, Validators.email]],
       password : [null, Validators.required],
-      passwordConfirm : [null, Validators.required]
-    })
+      passwordConfirm : [null, Validators.required ]
+    },
+    {
+      validator : PasswordMatch('password' , 'passwordConfirm')
+    }
+
+  );
   }
 
   onSignIn(){
@@ -107,7 +130,6 @@ export class DetailsAnnonceComponent implements OnInit {
     let password = this.sigInForm.value['password'];
     
     let token = btoa(username + ':' + password);
-    console.log(token);
     
     this.signInService.login(token).subscribe(
 
@@ -125,7 +147,46 @@ export class DetailsAnnonceComponent implements OnInit {
             //Sauvegarde du username
           sessionStorage.setItem(this.signInService.USERNAME, username);
     
-          this.next() ;
+          //Vérifier si l'utulilisateur a un forfait actif
+          this.detaisFormationsService
+          .getDetailParticulierParFormation(this.idPropositionFormation, username).subscribe(
+
+
+            (resp)=> {
+
+
+              if(resp.code === 0){
+
+                //Fermetture de la modal de paiement
+                this.closeModalPayment.nativeElement.click() ;
+
+                this.particulierDetail =  resp.response ;
+                //Ouverture de la modal de demande de contact
+                this.openParticulierDetails.nativeElement.click() ;
+                
+              }
+              //L'utilisateur procède au paiement
+              else {
+                
+                if(resp.code === 2){
+                  alert("Désolé vous avez épuisés vos demandes de contacts ! Souscrivez à nouveau !")
+                }
+
+                this.next();
+
+              }
+
+            },
+
+            (error)=>{
+
+              console.log(error);
+              
+
+            }
+
+          )
+
 
       },
 
@@ -150,21 +211,25 @@ export class DetailsAnnonceComponent implements OnInit {
   
   onSignUp(){
 
+    this.message = "" ;
+
     let particulier = this.singUpForm.value
-    console.log(particulier) ;
 
     this.signUpService.saveParticulier(particulier).subscribe(
 
-      (resp) => {
+      (resp) => {        
 
-        if(resp['error'] !== null){
+        if(resp['error']){
 
           this.message = resp['error'];
 
-        }else {
+        }else if(resp['success'])
+        
+        {
 
-          this.paiementDetails.username = particulier.username ;
-          this.next() ;
+          alert("Inscription réussie ! Veuillez accéder à vos mails pour l'activation de votre compte");
+          this.goToSignin.nativeElement.click() ;
+
 
         }
 
@@ -215,8 +280,8 @@ export class DetailsAnnonceComponent implements OnInit {
 
       (resp)=>{
 
-        alert('Payement effectué')
-        console.log(resp);
+        alert('Payement effectué');
+        this.closeModalPayment.nativeElement.click() ;
       },
 
 
@@ -265,7 +330,7 @@ export class DetailsAnnonceComponent implements OnInit {
   }
 
 
-  //Method for Jquerry
+  //Method for stepper 
 
  next() {
 
@@ -328,13 +393,57 @@ export class DetailsAnnonceComponent implements OnInit {
 
   contactCustomer() {
 
-    this.authenticated = this.signInService.isLogged() ;
+    let username = sessionStorage.getItem(this.signInService.USERNAME);
+
+    this.detaisFormationsService.getDetailParticulierParFormation(this.idPropositionFormation, username).subscribe(
+
+
+      (resp)=>{
+
+
+        if(resp.code === 0){
+
+          
+          this.particulierDetail =  resp.response ;
+          //Ouverture de la modal
+          this.openParticulierDetails.nativeElement.click() ;
+          
+        }
+
+
+        //L'utilisateur procède au paiement
+        else {
+          
+
+          if(resp.code === 2){
+            alert("Désolé vous avez épuisés vos demandes de contacts ! Souscrivez à nouveau !")
+          }
+
+          //Ouverture de la modal
+          this.openModalPayment.nativeElement.click() ;
+
+          this.authenticated = this.signInService.isLogged() ;
   
-    //Si l'utilisateur est déjà connecté
-    if(this.authenticated == true) {
-      this.next() ;
-      //Sinon on initialise le formulaire d'inscription ou de connexion
-    }
+          //Si l'utilisateur est déjà connecté
+          if(this.authenticated == true) {
+            this.next() ;
+          }
+
+        }
+        
+      },
+
+
+      (error)=>{
+        
+        console.log(error);
+        
+      }
+
+
+    )
+
+   
   }
 
 
@@ -358,12 +467,12 @@ export class DetailsAnnonceComponent implements OnInit {
 
     this.paiementDetails.modePaiement = operator;
     this.paiementDetails.numeroPaiement = '';
-    console.log(this.paiementDetails);
     
 
   }
 
 
+  //Validation Input
 
   forfaitChange(){
     

@@ -17,5 +17,8 @@ export class FormationService{
      onFetchFormations(){
         return this.httpClient.get(URL.onFetchFormations);
      }
+     onFetchFormationsString(){
+      return this.httpClient.get(URL.onFetchFormationsString);
+   }
     
 }

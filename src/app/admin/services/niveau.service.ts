@@ -11,6 +11,9 @@ export class NiveauService{
     fetchNiveaux() : Observable<any>   {
         return this.httpClient.get(URL.recupererNiveau);
       }
+      fetchNiveauxString() : Observable<any>   {
+        return this.httpClient.get(URL.onFetchNiveauString);
+      }
       
       onSaveNiveau(niveau:Niveau){
        return this.httpClient.post(URL.enregistrerNiveau,niveau);

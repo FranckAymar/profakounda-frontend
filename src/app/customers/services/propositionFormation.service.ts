@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { CoordMapModel } from './../models/CoordModel';
 import { HttpClient } from '@angular/common/http';
 import { URL } from 'src/app/API_url/config';
@@ -67,4 +68,8 @@ export class PropositionFormationService{
         return this.httpClient.post(URL.enregistrerCoordMap, coordMap) ;
 
      }
+
+     rechercherAllProposition() : Observable<any>{
+        return this.httpClient.get(URL.getAllPparticulierPropositions);
+    }
 }

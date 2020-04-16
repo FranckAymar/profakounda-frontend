@@ -31,6 +31,7 @@ export const URL = {
     modifierForfait :  consts.host+ consts.nameProject +'admin/modifierForfait',
     //Niveau
     recupererNiveau : consts.host+ consts.nameProject +'niveaux'   ,
+    onFetchNiveauString : consts.host+ consts.nameProject +'niveauxString' ,
     enregistrerNiveau:consts.host+ consts.nameProject +'admin/enregistrerNiveau',
     supprimerNiveau:consts.host+ consts.nameProject +'admin/deleteNiveau',
     retrouverNiveauParId:consts.host+ consts.nameProject +'admin/getNiveau',
@@ -40,6 +41,7 @@ export const URL = {
     modifierParticulier : consts.host+ consts.nameProject +'particulier/modifierParticulier',
     rechercherParticulier : consts.host+ consts.nameProject +'rechercherParticulierParUsername',
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
+    getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
 
@@ -77,6 +79,8 @@ export const URL = {
     listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
     FilterPropositionFormation : consts.host+ consts.nameProject +'details/fiterDeFormation',
+    getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier',
+
 
     //JOUR
     enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour',
@@ -84,11 +88,20 @@ export const URL = {
     supprimerJour : consts.host+ consts.nameProject +'supprimerJour',
     rechercherJour : consts.host+ consts.nameProject +'getJour',
     onFetchJours : consts.host+ consts.nameProject +'jours',
+    onFetchJoursString : consts.host+ consts.nameProject +'tabStringJours',
     //FORMATIONS
     enregistrerFormation : consts.host+ consts.nameProject +'enregistrerFormation',
     modifierFormation : consts.host+ consts.nameProject +'modifierFormation',
     onFetchFormations : consts.host+ consts.nameProject +'formations',
+    onFetchFormationsString : consts.host+ consts.nameProject +'formationsString',
     supprimerFormation : consts.host+ consts.nameProject +'supprimerFormation',
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
+    getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier',
+    getPayments : consts.host+ consts.nameProject + 'admin/paiements',
+
+    //ParticulierProposition
+    getAllPparticulierPropositions : consts.host+ consts.nameProject + 'admin/particulierspropostions',
+
+
 }

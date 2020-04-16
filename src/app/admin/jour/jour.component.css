@@ -1,13 +1,9 @@
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
-  ::ng-deep .cdk-overlay-pane {
-    /* Do you changes here */
-      min-width:450px;
+::ng-deep .cdk-overlay-container {
+  z-index: 1050;
+ }
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea{
+   margin: 0 !important;
 }
+ .mat-input-element{
+  border-bottom: inherit;
+ }

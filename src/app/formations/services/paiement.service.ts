@@ -16,4 +16,16 @@ export class PaiementService {
 
   }
 
+  getPaymentParticulier(username) : Observable<any>  {
+
+    return this.httpClient.post(URL.getPaymentParticulier, username) ;
+  }
+
+
+  getAllPayments()  : Observable<any>{
+
+    return this.httpClient.get(URL.getPayments);
+  }
+
+
 }

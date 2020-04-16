@@ -27,6 +27,9 @@ import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
 import { BrowserModule } from '@angular/platform-browser';
 import { FormationService } from './services/formation.service';
 import { FormationComponent } from './formation/formation.component';
+import { PaiementsComponent } from './paiements/paiements.component';
+import { AllCustomersComponent } from './all-customers/all-customers.component';
+import { AllConsultationsCustomersComponent } from './all-consultations-customers/all-consultations-customers.component';
 
 
 
@@ -77,7 +80,25 @@ const adminRouter : Routes = [
         path : 'formation',
         component : FormationComponent
         
+      },
+      {
+        path : 'paiements',
+        component : PaiementsComponent
+        
       }
+      ,
+      {
+        path : 'particulierpropositions',
+        component : AllConsultationsCustomersComponent
+        
+      }
+      ,
+      {
+        path : 'customers',
+        component : AllCustomersComponent
+        
+      }
+
 
       
 
@@ -101,7 +122,10 @@ const adminRouter : Routes = [
                 SidebarComponent,
                 AdminMainComponent,
                 JourComponent,
-                FormationComponent ],
+                FormationComponent,
+                PaiementsComponent,
+                AllCustomersComponent,
+                AllConsultationsCustomersComponent ],
   imports: [
     CommonModule, 
     RouterModule.forChild(adminRouter),

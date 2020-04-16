@@ -28,11 +28,7 @@
                 <h2>Nos <span>Répétiteurs</span></h2>
             </div>
         </div> 
-
-        <input type="text">
-             {{valeur}} 
-
-      
+        
         <div class="row" *ngFor="let propositionFormation of propositionFormations">
             <a [routerLink]="['/formations/details-formation', propositionFormation.id]">
                 <div class="col-md-1"></div>

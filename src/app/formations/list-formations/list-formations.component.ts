@@ -9,24 +9,26 @@ import{ FilterArrayPipe} from './filter.pipe';
   selector: 'app-list-formations',
   templateUrl: './list-formations.component.html',
   styleUrls: ['./list-formations.component.css'],
+  providers: [FilterArrayPipe],
 })
 
 export class ListFormationsComponent implements OnInit {
   
-  private todos =[ 'tanfolo', 'sangare','franck','moussa'];
-  valeur=' ';
+  valeur="";
   ladate = new Date();
   propositionFormations = [];
   modulesFormation = [];
-  urlServer = URL.getPhoto
+  FormationFiltres=[];
+  urlServer = URL.getPhoto;
 
-  constructor(private listFormationsService : ListFormationsService) { }
+  constructor(private filterArrayPipe: FilterArrayPipe ,private listFormationsService : ListFormationsService) { }
 
   
   ngOnInit() {
-    this.onGetListFormation() ;
-    
+  this.onGetListFormation();
+  this.OnFiltreFormation(this.valeur);
   }
+
   onGetListFormation() {
 
     this.listFormationsService.getListPropositionFormations().subscribe(
@@ -35,8 +37,7 @@ export class ListFormationsComponent implements OnInit {
       (resp) =>{
 
         this.propositionFormations = resp ;
-        
-
+     
       },
 
       
@@ -50,5 +51,17 @@ export class ListFormationsComponent implements OnInit {
 
   }
   
+  OnFiltreFormation(filtre:String){
+    this.listFormationsService.getFilterFormation(filtre).subscribe(
+        
+      (reponse)=>{
+        this.propositionFormations=reponse;
+      },
+
+      (erreur)=>{
+        console.log("Une erreur s'est produite: "+erreur);
+      }
+    )
+  }
 
 }

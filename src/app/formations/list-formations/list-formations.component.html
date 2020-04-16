@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="search-form">
-                    <form>
+                    
                         <div class="sf-type">
                             <div class="sf-input">
-                                <input type="text"  class="form-contol" [(ngModel)]="v" id="sf-box" placeholder="Search course and discount courses">
+                                <input type="text"  class="form-contol" [(ngModel)]="valeur" (ngModelChange)="OnFiltreFormation(valeur)" id="sf-box" placeholder="Search courses">
                             </div>
 
                         </div>
@@ -14,7 +14,6 @@
                             <input type="submit"  value="Rechercher">
                         </div>
                      
-                    </form>
                 </div>
             </div>
         </div>
@@ -26,42 +25,48 @@
     <div class="container com-sp pad-bot-70">
          <div class="row">
             <div class="con-title">
-                <h2>Les <span>Cours </span> </h2>
-            </div> 
-            <p>la date : {{ladate | date}}</p>
+                <h2>Nos <span>Répétiteurs</span></h2>
+            </div>
         </div> 
 
-    <!-- unsimple input pour verifier le filter-->
-        <div>
-            <input type="text" class="form-contol" [(ngModel)]="valeur">
-        </div>
-        <h4>{{valeur}}</h4> 
+        <input type="text">
+             {{valeur}} 
 
-        <input type="text" [(ngModel)]="filterText">
-        <ul>
-            <li *ngFor="let todo of todos | filter:filterText">
-                    {{todo}}
-            </li>
-        </ul>
-        
-        <div class="row" *ngFor="let propositionFormation of propositionFormations ">
-            <a [routerLink]="['details-formation', propositionFormation.id]" ><div class="col-md-8">
-                <div style="border-radius: 0.3em;" class="home-top-cour">
-                    <!--POPULAR COURSES IMAGE-->
-                    <div class="col-md-3"> <img width="50" height="120" src="{{urlServer}}/{{propositionFormation.idParticulier}}" alt=""> </div>
-                    <!--POPULAR COURSES: CONTENT-->
-                    <div class="col-md-9 home-top-cour-desc">
-                        <a href="course-details.html">
-                            <h3>{{propositionFormation.prenomParticulier}}</h3>
-                        </a>
-                        <h4><span *ngFor="let moduleFomation of propositionFormation.moduleFormations">{{moduleFomation.libelle}} </span></h4>
-                        <p>{{propositionFormation.description}}</p> 
-                        <div class="hom-list-share">
-                    
+      
+        <div class="row" *ngFor="let propositionFormation of propositionFormations">
+            <a [routerLink]="['/formations/details-formation', propositionFormation.id]">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="home-top-cour">
+                        <!--POPULAR COURSES IMAGE-->
+                        <div class="col-md-2"> 
+                             <p>
+                                 <img height="100" src="{{urlServer}}/{{propositionFormation.idParticulier}}" alt="">
+                            </p>
+                        </div>
+                        <!--POPULAR COURSES: CONTENT-->
+                        <div class="col-md-10 home-top-cour-desc">
+                            <a href="course-details.html">
+                                <h3>{{propositionFormation.prenomParticulier}}</h3>
+                            </a>
+                            <h4 style="display: inline;" 
+                            *ngFor="let moduleFomation of propositionFormation.moduleFormations; let i = index" [attr.data-index]="i">
+                            {{moduleFomation.libelle}} <span *ngIf="propositionFormation.moduleFormations.length !== i+1">/</span>
+                            </h4>
+                            <p class="add-three-dot">{{propositionFormation.description}}</p>
+                            <div class="hom-list-share">
+                                <ul>
+                                    <li><a [routerLink]="['/formations/details-formation', propositionFormation.id]"
+                                        ><i class="fa fa-bar-chart" aria-hidden="true"></i> Details</a> </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+      
                 </div>
-            </div></a>
-           </div>
+                <div class="col-md-1"></div>
+
+            </a>
+        </div>
     </div>
 </section>

@@ -46,28 +46,46 @@
                             </div>
                         </div>
                         <div class="row">
-                           
-                            <div class="input-field col-md-6">
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <input id="password1" (ngModelChange) ="changeValidation()" placeholder="Nouveau mot de passe" formControlName="password" type="password" class="validate">
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <input id="password2" (ngModelChange) ="changement()" placeholder="Confimez le mot de passe" formControlName="passwordConfirm" type="password" class="validate">
-                                    </div>
-                                </div>
-                                <span *ngIf="message && showMessage" [ngStyle]="{color:getColor()}" >{{message}}</span>
-                                
-                            </div>
-                            <div class="input-field col s6">
+                            <div class="col-md-6">
                                 <input type="file" (change)="onFileChange($event)" #fileInput class="validate">
                             </div>
+                            <div class="col-md-6">
+                                <button type="submit" [disabled]="userForm.invalid" class="btn btn-outline-info btn-block">Enregistrer</button>
+                            </div>
                         </div>
-                                                
-                        <button type="submit" [disabled]="invalidation || userForm.invalid" class="btn btn-outline-info">Enregistrer</button>
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 2em;" class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <h4>Confidentialité</h4>
+        </div>
+        <div class="tab-inn">
+            <form [formGroup]="passwordForm"  (ngSubmit)="changePassword()">
+                <p><span *ngIf="mes" style="color: red;" >{{mes}}</span></p>
+                <p><span *ngIf="message && showMessage" [ngStyle]="{color:getColor()}" >{{message}}</span></p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input  class="form-control"  placeholder="Ancien mot de passe" formControlName="lastPassword" type="password" class="validate">
+                    </div>
+                    <div class="col-md-6">
+                        <input  class="form-control" (ngModelChange) ="changeValidation()" placeholder="Nouveau mot de passe" formControlName="password" type="password" class="validate"> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input  (ngModelChange) ="changement()" placeholder="Confimez le mot de passe" formControlName="passwordConfirm" type="password" class="validate">
+                    </div>
+                    <div class="input-field col s6">
+                        <button type="submit" [disabled]="invalidation || passwordForm.invalid" class="btn btn-outline-info btn-block">Enregistrer</button>
+                    </div>  
+                </div>
+            </form>
         </div>
     </div>
 </div>

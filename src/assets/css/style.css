@@ -1159,7 +1159,6 @@
  .hom-list-share {
      position: relative;
      overflow: hidden;
-     width: 100%;
      padding-top: 12px;
 }
  .hom-list-share ul {
@@ -1177,11 +1176,10 @@
      border: 1px solid #149acc;
      background: #1aa5d8;
      background: linear-gradient(to bottom, #1aa5d8, #1386b1);
-     text-transform: uppercase;
      font-weight: 700;
 }
  .hom-list-share ul li a {
-     display: block;
+     
      border: 1px solid #ececec;
      margin: 2px;
      padding: 4px 5px;
@@ -5705,4 +5703,8 @@ padding: 6px 25px;
 
 .align-text-right{
     text-align: right;
+}
+
+.btn-bg-color{
+  background-color: #FF5722;  
 }

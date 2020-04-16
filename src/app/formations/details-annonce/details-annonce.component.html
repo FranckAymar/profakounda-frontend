@@ -15,9 +15,8 @@
         <div class="container pg-inn">
             <div class="col-md-3">
                 <div class="pro-user">
-                    <img *ngIf="propositionFormation.idParticulier" 
-                            src="{{ urlServer}}/{{propositionFormation.idParticulier}}" 
-                            alt="user">
+                    <img *ngIf="propositionFormation.idParticulier"
+                        src="{{ urlServer}}/{{propositionFormation.idParticulier}}" alt="user">
                 </div>
                 <div class="pro-user-bio">
                     <ul>
@@ -33,22 +32,25 @@
                 <div class="udb">
 
                     <div class="udb-sec">
-                            <button class="btn btn-success btn-lg btn-block"  data-toggle="modal" data-target="#exampleModal">Me contacter</button>
+                        <button (click)="contactCustomer()" class="btn btn-success btn-lg btn-block" data-toggle="modal"
+                            data-target="#modalPayment">Me
+                            contacter</button>
                     </div>
 
                     <div class="udb-sec udb-prof">
-                        <h4><img src="../../assets/images/icon/db1.png" alt=""/>Description</h4>
+                        <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
                         <p>{{propositionFormation.description}}</p>
                     </div>
 
                     <div class="udb-sec udb-cour">
-                        <h4><img src="../../assets/images/icon/db2.png" alt=""/> Mes Formations</h4>
+                        <h4><img src="../../assets/images/icon/db2.png" alt="" /> Mes Formations</h4>
                         <div class="sdb-cours">
                             <ul>
                                 <li *ngFor="let moduleFormation of propositionFormation.modulesFormations">
                                     <a>
                                         <div class="list-mig-like-com com-mar-bot-30">
-                                            <div class="list-mig-lc-img"> <img src="../../assets/images/course/3.jpg" alt=""> </div>
+                                            <div class="list-mig-lc-img"> <img src="../../assets/images/course/3.jpg"
+                                                    alt=""> </div>
                                             <div class="list-mig-lc-con">
                                                 <h5>{{moduleFormation.libelle}}</h5>
                                             </div>
@@ -67,7 +69,7 @@
                                 <thead>
                                     <tr>
                                         <th>Niveaux</th>
-                                        <th class="align-text-right">Prix Minimun(Mensuel)</th>
+                                        <th class="align-text-right">Prix Minimun </th>
                                         <th class="align-text-right">Prix Maximum(Mensuel)</th>
 
                                     </tr>
@@ -76,8 +78,10 @@
                                 <tbody>
                                     <tr *ngFor="let contrat of propositionFormation.contrats">
                                         <td>{{contrat.classe.libelle}}</td>
-                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.minMontant}} FCFA</span></td>
-                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}} FCFA</span></td>
+                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.minMontant}}
+                                                FCFA</span></td>
+                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}}
+                                                FCFA</span></td>
 
                                     </tr>
                                 </tbody>
@@ -86,10 +90,11 @@
                     </div>
                     <div class="udb-sec udb-time">
                         <h4><img src="../../assets/images/icon/db4.png" alt="" />Mes disponibilités</h4>
-                       
+
                         <div class="tour_head1 udb-time-line days">
                             <ul>
-                                <li *ngFor="let disponibilite of propositionFormation.disponibilites " class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                <li *ngFor="let disponibilite of propositionFormation.disponibilites "
+                                    class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     <div class="sdb-cl-tim">
                                         <div class="sdb-cl-day">
                                             <h5>{{disponibilite.jour}}</h5>
@@ -97,7 +102,7 @@
                                         <div class="sdb-cl-class">
                                             <ul>
                                                 <li *ngFor="let heure of disponibilite.heures">
-                                                    <div  class="sdb-cl-class-tim tooltipped" data-position="top"
+                                                    <div class="sdb-cl-class-tim tooltipped" data-position="top"
                                                         data-delay="50">
                                                         <span>{{heure?.heureDebut}}</span>
                                                         <span>{{heure?.heureFin}}</span>
@@ -118,50 +123,217 @@
         </div>
     </div>
 
+    <!--SECTION END-->
 
-   <!--Modal de paiement-->> 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-        <div class=" modal-dialog">
-                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">     
-                    <div class="row">
-                        <div class="col-md-12 mx-0">
-                            <form id="msform">
-                                <!-- progressbar -->
-                                <ul id="progressbar">
-                                    <li class="active" id="personal"><strong>Personal</strong></li>
-                                    <li id="payment"><strong>Payment</strong></li>
-                                    <li id="confirm"><strong>Finish</strong></li>
-                                </ul> <!-- fieldsets -->
-                                <fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title">Personal</h2>
-                                         
-                                    </div> 
-                                    <input type="button" name="next" class="next action-button"
-                                        value="Next Step" />
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title">Payment</h2>
-                                         
-                                    </div> 
-                                    <input type="button" name="next" class="next action-button"
-                                        value="Next Step" />
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title">Finish</h2>
-                                         
-                                    </div> 
-                                    <input data-dismiss = "modal" type="button" name="next" class="next action-button"
-                                        value="Next Step" />
-                                </fieldset>
-                            </form>
+    <div id="modalPayment" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="progressbar">
+                                    <li id="step1" class="active">Connexion</li>
+                                    <li id="step2">Forfaits</li>
+                                    <li id="step3">Mode de paiement</li>
+                                    <li id="step4">Confirmation</li>
+                                </ul>
+                            </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!--Login-->
+                                <div id="content1-signin">
+                                    <div *ngIf="errorInternet" class="modal-header center">
+                                        <span class="alert alert-danger">Vérifier votre connexion à internet</span>
+                                    </div>
+                                    <div *ngIf="isFailed" class="modal-header center">
+                                        <span class="alert alert-danger">Vérifier vos informations de connexion </span>
+                                    </div>
+                                    <form [formGroup]="sigInForm" (submit)="onSignIn()">
+                                        <div>
+                                            <div class="input-field s12">
+                                                <input type="text" data-ng-model="name" class="validate"
+                                                    formControlName="username">
+                                                <label>Adresse e-mail</label>
+                                            </div>
+                                            <div *ngIf="" class="invalid-feedback">
+                                                Adresse e-mail non valide
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="input-field s12">
+                                                <input type="password" data-ng-model="name" class="validate"
+                                                    formControlName="password">
+                                                <label>Mot de passe</label>
+                                            </div>
+                                            <div *ngIf="" class="invalid-feedback">
+                                                Adresse e-mail non valide
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-bg-color btn-block">Se
+                                                connecter</button>
+                                        </div>
+
+                                    </form>
+                                    <p (click)="goToSignUp()" class="text-center"><button class="btn-link">Create an
+                                            Account</button></p>
+                                </div>
+                                <!--Inscription-->
+                                <div id="content1-signup" class="hide">
+                                    <div *ngIf="message" class="modal-header center">
+                                        <span class="alert alert-danger">{{message}}</span>
+                                    </div>
+                                    <form [formGroup]="singUpForm" (submit)="onSignUp()">
+                                        <div>
+                                            <div class="input-field s12">
+                                                <input type="text" data-ng-model="name" class="validate"
+                                                    formControlName="username">
+                                                <label>Adresse e-mail</label>
+                                            </div>
+                                            <div *ngIf="" class="invalid-feedback">
+                                                Adresse e-mail non valide
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="input-field s12">
+                                                <input type="password" data-ng-model="name" class="validate"
+                                                    formControlName="password">
+                                                <label>Mot de passe</label>
+                                            </div>
+                                            <div *ngIf="" class="invalid-feedback">
+                                                Adresse e-mail non valide
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="input-field s12">
+                                                <input type="password" data-ng-model="name" class="validate"
+                                                    formControlName="passwordConfirm">
+                                                <label>Confirmer votre mot de passe</label>
+                                            </div>
+                                            <div *ngIf="" class="invalid-feedback">
+                                                Adresse e-mail non valide
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-bg-color btn-block">S'inscrire</button>
+                                        </div>
+
+                                    </form>
+                                    <p (click)="goToSignIn()" class="text-center"><button class="btn-link">Se
+                                            connecter</button></p>
+                                </div>
+                                <!--Forfaits-->
+                                <div id="content2" class="hide">
+
+                                    <div class="tab-inn">
+                                        <div class="table-responsive table-desi">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Forfait</th>
+                                                        <th>Requêtes</th>
+                                                        <th>Valide pour :</th>
+                                                        <th>Montant</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr *ngFor="let forfait of forfaits; let i=index">
+                                                        <td>
+                                                            <input (change)="forfaitChange()" [value]="forfait"
+                                                                type="radio" name="forfait"
+                                                                [(ngModel)]="paiementDetails.forfait" class="filled-in"
+                                                                id="filled-in-box-{{i}}" />
+                                                            <label for="filled-in-box-{{i}}"></label>
+                                                        </td>
+                                                        <td>{{forfait.name}}</td>
+                                                        <td>{{forfait.nbreRequete}}</td>
+                                                        <td>{{forfait.nbreJour}} jour(s)</td>
+                                                        <td class="align-text-right"><span
+                                                                class="pro-user-act">{{forfait.montant}}
+                                                                FCFA</span></td>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <button id="nextBtnForfait" disabled (click)=next()
+                                        class="btn btn-bg-color btn-block">Suivant</button>
+
+                                </div>
+                                <!--Mode de paiement-->
+                                <div id="content3" class=" hide">
+
+                                    <div class="form-check-inline text-center">
+
+                                        <p>Choississez un opérateur :</p>
+
+                                        <input (change)="modePaiemenentValidation()" type="radio" value="mtn"
+                                            name="operateur" [(ngModel)]="paiementDetails.modePaiement"
+                                            class="filled-in" id="mtn" />
+                                        <label for="mtn">MTN CI</label>
+
+                                        <input (change)="modePaiemenentValidation()" value="moov" type="radio"
+                                            name="operateur" [(ngModel)]="paiementDetails.modePaiement"
+                                            class="filled-in" id="moov" />
+                                        <label for="moov">MOOV CI</label>
+
+                                        <input (change)="modePaiemenentValidation()" value="orange" type="radio"
+                                            name="operateur" [(ngModel)]="paiementDetails.modePaiement"
+                                            class="filled-in" id="orange" />
+                                        <label for="orange">ORANGE CI</label>
+
+                                    </div>
+
+                                    <div class="input-field s12">
+                                        <input (ngModelChange)="modePaiemenentValidation()"
+                                            [(ngModel)]="paiementDetails.numeroPaiement" type="number"
+                                            data-ng-model="name" class="validate">
+                                        <label>Entrez votre numéro</label>
+                                    </div>
+
+                                    <button id="nextBtnPaiement" disabled (click)=next()
+                                        class="btn btn-bg-color btn-block">Suivant</button>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <!--Confirmation-->
+                        <div id="content4" class="hide">
+
+
+                            <div class="columns">
+                                <ul class="price">
+                                    <li class="">{{paiementDetails.forfait?.name}}</li>
+                                    <li class="grey">{{paiementDetails.forfait?.montant}} FCFA</li>
+                                    <li> Numéro de téléphone : {{paiementDetails?.numeroPaiement}}
+                                        <br> Opérateur : {{paiementDetails?.modePaiement | uppercase}}
+                                    </li>
+                                    <li>Nombre de requêtes : {{paiementDetails.forfait?.nbreRequete}}</li>
+                                    <li>Valide pour : {{paiementDetails.forfait?.nbreJour}} Jours </li>
+
+                                </ul>
+                            </div>
+
+
+                            <div class="form-group">
+                                <button  data-dismiss="modal" (click)=onProcessToPayment()
+                                    class="btn btn-bg-color btn-block">Confirmer</button>
+                            </div>
+
+                        </div>
+
+
                     </div>
+                </div>
             </div>
         </div>
-    </div>
-
-</section>
-<!--SECTION END-->

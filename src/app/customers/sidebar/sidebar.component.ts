@@ -28,6 +28,7 @@ export class SidebarComponent implements OnInit {
     this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
       .subscribe(
         (reponse) => {
+          
           this.particulier = reponse;
         },
         (error) => {

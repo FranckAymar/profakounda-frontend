@@ -7,6 +7,7 @@ import { SignInService } from 'src/app/home/services/sign-in.service';
 import { consts } from '../../API_url/const'
 import { FiliereService } from 'src/app/admin/services/filiere.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
+import { PasswordModel } from '../models/PasswordModel';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -23,11 +24,13 @@ export class EditProfileComponent implements OnInit {
    @Input() invalidation:boolean = false;
    @Input() showMessage:boolean = false;
    message:string;
-
+   mes:string;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
   niveaux = [];
+  passwordModel:PasswordModel;
   userForm : FormGroup;
+  passwordForm : FormGroup;
   
   constructor(private filiereService :FiliereService,
               private niveauService:NiveauService,
@@ -41,6 +44,7 @@ export class EditProfileComponent implements OnInit {
     this.rechercherPaticulierConnecter();
     this.onFetchNiveaux();
     this.onFetchFiliere();
+    this.initPassword();
   }
 
  
@@ -52,14 +56,20 @@ init(){
     lieuHabitation:['',Validators.required],
     filiere:'',
     niveau:'',
-    password:[null],
-    passwordConfirm:[null],
     photo:null
+  })
+}
+initPassword(){
+  this.passwordForm = this.formBuilder.group({
+    lastPassword:['',Validators.required],
+    password:['',Validators.required],
+    passwordConfirm:['',Validators.required],
+    username:sessionStorage.getItem(this.signInService.USERNAME)
   })
 }
 
 changement(){
-  if(this.userForm.value['password']===this.userForm.value['passwordConfirm'])
+  if(this.passwordForm.value['password']===this.passwordForm.value['passwordConfirm'])
   {
     this.invalidation = false;
     this.showMessage = true;
@@ -72,7 +82,7 @@ changement(){
   }
 }
 changeValidation(){
-  if(this.userForm.value['password'].length !=0)
+  if(this.passwordForm.value['password'].length !=0)
   {
     this.invalidation = true;
   }
@@ -132,7 +142,6 @@ getColor(){
     input.append('lieuHabitation', this.userForm.get('lieuHabitation').value);
     input.append('filiere', this.userForm.get('filiere').value);
     input.append('niveau', this.userForm.get('niveau').value);
-    input.append('password', this.userForm.get('password').value);
     input.append('username', sessionStorage.getItem(this.signInService.USERNAME));
     input.append('photo', this.userForm.get('photo').value);
     return input;
@@ -146,22 +155,41 @@ getColor(){
       (response)=> {
         this.niveaux = response;
       },
-
       (error)=> {
-
         console.log("Une erreur est survenue");
-        
       }
 
     )
 
   }
+  changePassword(){
+    let token = btoa( sessionStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['lastPassword']);
+    let sesToken = sessionStorage.getItem(this.signInService.TOKEN);
+    if(token === sesToken)
+    {
+      let newToken = btoa( sessionStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['password']);
+      this.passwordModel = new PasswordModel(this.passwordForm.value['lastPassword'],this.passwordForm.value['password'],this.passwordForm.value['passwordConfirm'],sessionStorage.getItem(this.signInService.USERNAME));
+      this.particulierService.onChangePassword(this.passwordModel)
+    .subscribe(
+      (response)=>{
+        alert("Modification effectuée avec succès.");
+        this.initPassword();
+        sessionStorage.setItem(this.signInService.TOKEN,newToken);
+        this.mes = '';
+      },
+      (error)=>{
+        console.log("Une erreur s'est produite: "+error);
+      }
+    ) 
+    }
+    else
+    {
+      this.mes = "Ancien mot de passe inexact";
+      console.log("Ancien mot de passe inexact");
+    }
+  }
   onUpdateParticulier(){
-    console.log('okok');
-    
     const formModel = this.prepareSave();
-    console.log('OKOKO');
-    
     this.particulierService.modifierParticulier(formModel)
     .subscribe(
       (response)=>{

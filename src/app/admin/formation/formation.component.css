@@ -1,0 +1,15 @@
+.updateButton{
+    width: 2em;
+    height: 2em; 
+    color: white;
+    background: green;
+}
+.deleteButton{
+    width: 2em;
+    height: 2em; 
+    color: white;
+    background: red;
+}
+i{
+    background-color: inherit !important;
+}

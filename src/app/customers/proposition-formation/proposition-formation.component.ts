@@ -469,9 +469,11 @@ export class PropositionFormationComponent implements OnInit {
 
   onSaveCoordMap() {
 
+    let username = sessionStorage.getItem(this.signInService.USERNAME) ;
+
     this.coordMapModel  = new CoordMapModel(this.zoom, this.lat, this.lng , this.radius) ;
 
-    this.propositionFormationService.saveCoordMap(this.coordMapModel).subscribe(
+    this.propositionFormationService.saveCoordMap(this.coordMapModel, username).subscribe(
 
       (resp) => {
           console.log(resp);

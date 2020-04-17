@@ -1,9 +1,9 @@
-  <!--== User Details ==-->
-  <!--Class="box-inn-sp admin-form"-->
-  <div class="sb2-2-3">
+<!--== User Details ==-->
+<!--Class="box-inn-sp admin-form"-->
+<div class="sb2-2-3">
     <div class="row">
         <div class="col-md-12">
-        <div class="box-inn-sp">
+            <div class="box-inn-sp">
                 <div class="inn-title">
                     <img style="width: 10em;height: 10em; border-radius: 0.3em;" src="{{url}}" alt="">
                     <div style="float: right;">
@@ -12,79 +12,70 @@
                 </div>
                 <div class="tab-inn">
 
-                    <form  [formGroup]="userForm" (ngSubmit)="onUpdateParticulier()">
+                    <form [formGroup]="userForm" (ngSubmit)="onUpdateParticulier()">
                         <div class="row">
                             <div class="input-field col s6">
                                 <!-- <input  id="first_name" type="text" placeholder="nom"  formControlName="nom" class="validate" /> -->
-                                <mat-form-field  style="width: 34em;">          
-                                    <input matInput formControlName="nom" type="text" placeholder="Nom" >
-                                  </mat-form-field>
-                            </div>
-                            <div class="input-field col s6">
-                                <mat-form-field  style="width: 34em;">
-                                    
-                                    <input matInput formControlName="prenoms" type="text" placeholder="Prénoms" >
-                                  </mat-form-field>
-                                <!-- <input id="last_name" placeholder="prenoms" formControlName="prenoms" type="text" class="validate" /> -->
-                                
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <mat-form-field  style="width: 34em;">
-                                    
-                                    <input matInput formControlName="telephone" type="text" placeholder="Téléphone" >
-                                  </mat-form-field>
-                                <!-- <input id="phone" type="text" placeholder="telephone" formControlName="telephone"  class="validate" /> -->
-                               
-                            </div>
-                            <div class="input-field col s6">
-                                <mat-form-field  style="width: 34em;">
-                                    
-                                    <input matInput formControlName="lieuHabitation" type="text" placeholder="Lieu d'Habitation" >
-                                  </mat-form-field>
-                                <!-- <input id="city" placeholder="Lieu d'Habitation" formControlName="lieuHabitation" type="text" class="validate"> -->
-                                
-                            </div>
-                        </div>
-                        <div class="row">
-                            
-                            <div class="input-field col s6">
-                               
-                                <mat-form-field style="width: 34em;" >
-                                    <input  type="text"
-                                    formControlName="niveau"
-                                    [(ngModel)] = "niveau"
-                                    placeholder="Niveau d'étude"
-                                           aria-label="Number"
-                                           matInput
-                                           [formControl]="myControl3"
-                                           [matAutocomplete]="auto3">
-                                    <mat-autocomplete #auto3="matAutocomplete">
-                                      <mat-option *ngFor="let option of filteredOptions3 | async" [value]="option">
-                                        {{option}}
-                                      </mat-option>
-                                    </mat-autocomplete>
-                                  </mat-form-field>
-                                
-                            </div>
-                            <div class="input-field col s6">
-                                
                                 <mat-form-field style="width: 34em;">
-                                    <input type="text"
-                                    formControlName="filiere"
-                                    placeholder="Filière"
-                                    [(ngModel)] = "filire"
-                                           aria-label="Number"
-                                           matInput
-                                           [formControl]="myControl"
-                                           [matAutocomplete]="auto">
-                                    <mat-autocomplete #auto="matAutocomplete">
-                                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                        {{option}}
-                                      </mat-option>
+                                    <input matInput formControlName="nom" type="text" placeholder="Nom">
+                                </mat-form-field>
+                            </div>
+                            <div class="input-field col s6">
+                                <mat-form-field style="width: 34em;">
+
+                                    <input matInput formControlName="prenoms" type="text" placeholder="Prénoms">
+                                </mat-form-field>
+                                <!-- <input id="last_name" placeholder="prenoms" formControlName="prenoms" type="text" class="validate" /> -->
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <mat-form-field style="width: 34em;">
+
+                                    <input matInput formControlName="telephone" type="text" placeholder="Téléphone">
+                                </mat-form-field>
+                                <!-- <input id="phone" type="text" placeholder="telephone" formControlName="telephone"  class="validate" /> -->
+
+                            </div>
+                            <div class="input-field col s6">
+                                <mat-form-field style="width: 34em;">
+
+                                    <input matInput formControlName="lieuHabitation" type="text"
+                                        placeholder="Lieu d'Habitation">
+                                </mat-form-field>
+                                <!-- <input id="city" placeholder="Lieu d'Habitation" formControlName="lieuHabitation" type="text" class="validate"> -->
+
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="input-field col s6">
+
+                                <mat-form-field style="width: 34em;">
+                                    <input type="text" formControlName="niveau" [(ngModel)]="niveau"
+                                        placeholder="Niveau d'étude" aria-label="Number" matInput
+                                        [formControl]="myControl3" [matAutocomplete]="auto3">
+                                    <mat-autocomplete #auto3="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredOptions3 | async" [value]="option">
+                                            {{option}}
+                                        </mat-option>
                                     </mat-autocomplete>
-                                  </mat-form-field>
+                                </mat-form-field>
+
+                            </div>
+                            <div class="input-field col s6">
+
+                                <mat-form-field style="width: 34em;">
+                                    <input type="text" formControlName="filiere" placeholder="Filière"
+                                        [(ngModel)]="filire" aria-label="Number" matInput [formControl]="myControl"
+                                        [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
                             </div>
                         </div>
                         <div class="row">
@@ -92,7 +83,8 @@
                                 <input type="file" (change)="onFileChange($event)" #fileInput class="validate">
                             </div>
                             <div class="col-md-6">
-                                <button type="submit" [disabled]="userForm.invalid" class="btn btn-outline-info btn-block">Enregistrer</button>
+                                <button type="submit" [disabled]="userForm.invalid"
+                                    class="btn btn-outline-info btn-block ">Enregistrer</button>
                             </div>
                         </div>
                     </form>
@@ -103,33 +95,47 @@
 </div>
 
 
+<div class="sb2-2-3">
+    <div class="row">
 
-<div style="margin-top: 2em;" class="col-md-12">
-    <div class="box-inn-sp">
-        <div class="inn-title">
-            <h4>Confidentialité</h4>
-        </div>
-        <div class="tab-inn">
-            <form [formGroup]="passwordForm"  (ngSubmit)="changePassword()">
-                <p><span *ngIf="mes" style="color: red;" >{{mes}}</span></p>
-                <p><span *ngIf="message && showMessage" [ngStyle]="{color:getColor()}" >{{message}}</span></p>
-                <div class="row">
-                    <div class="col-md-6">
-                        <input  class="form-control"  placeholder="Ancien mot de passe" formControlName="lastPassword" type="password" class="validate">
-                    </div>
-                    <div class="col-md-6">
-                        <input  class="form-control" (ngModelChange) ="changeValidation()" placeholder="Nouveau mot de passe" formControlName="password" type="password" class="validate"> 
-                    </div>
+        <div style="margin-top: 2em;" class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>Confidentialité</h4>
                 </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input  (ngModelChange) ="changement()" placeholder="Confimez le mot de passe" formControlName="passwordConfirm" type="password" class="validate">
-                    </div>
-                    <div class="input-field col s6">
-                        <button type="submit" [disabled]="invalidation || passwordForm.invalid" class="btn btn-outline-info btn-block">Enregistrer</button>
-                    </div>  
+                <div class="tab-inn">
+                    <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+                        <p><span *ngIf="mes" style="color: red;">{{mes}}</span></p>
+                        <p><span *ngIf="message && showMessage" [ngStyle]="{color:getColor()}">{{message}}</span></p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input class="form-control" placeholder="Ancien mot de passe"
+                                    formControlName="lastPassword" type="password" class="validate">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" (ngModelChange)="changeValidation()"
+                                    placeholder="Nouveau mot de passe" formControlName="password" type="password"
+                                    class="validate">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <input class="form-control" (ngModelChange)="changement()" placeholder="Confimez le mot de passe"
+                                        formControlName="passwordConfirm" type="password" class="validate">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-field col s6">
+                                    <button type="submit" [disabled]="invalidation || passwordForm.invalid"
+                                        class="btn btn-outline-info btn-block">Enregistrer</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
+
     </div>
 </div>

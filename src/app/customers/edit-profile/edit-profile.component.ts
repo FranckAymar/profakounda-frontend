@@ -221,7 +221,12 @@ getColor(){
       (response)=>{
         alert("Modification effectuée avec succès."); 
         this.rechercherPaticulierConnecter();
-        window.location.reload(false);
+      
+        //Rechargementt du component courant
+        this.router.navigateByUrl('customers', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['customers/editprofil']);
+      }); 
+        // window.location.reload(false);
         this.clearFile();
        
       },

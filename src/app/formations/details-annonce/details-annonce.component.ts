@@ -61,6 +61,7 @@ export class DetailsAnnonceComponent implements OnInit {
   lat: number = 5.338390;
   lng: number = -4.097748;
   radius: number = 1000;
+  zoom : number = 14 ;
 
   urlServer = URL.getPhoto
 
@@ -316,6 +317,12 @@ export class DetailsAnnonceComponent implements OnInit {
 
       (resp)=> {
        
+        
+        this.inititalizeCoordMap(resp.rayonIntervention.latitude,
+                                 resp.rayonIntervention.longitude,
+                                 resp.rayonIntervention.rayon,
+                                 resp.rayonIntervention.zoom);
+
         this.propositionFormation = resp ;
         
       },
@@ -490,6 +497,15 @@ export class DetailsAnnonceComponent implements OnInit {
       $('#nextBtnPaiement').prop('disabled', true);
     }
     
+  }
+
+  inititalizeCoordMap(lat : number, long : number, radius : number, zoom:  number){
+
+    this.lat = lat ;
+    this.lng = long ;
+    this.radius = radius ;
+    this.zoom = zoom ;
+
   }
   
 

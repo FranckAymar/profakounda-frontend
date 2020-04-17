@@ -63,9 +63,10 @@ export class PropositionFormationService{
      }
 
      //Save CoordMap
-     saveCoordMap(coordMap : CoordMapModel) {
+     saveCoordMap(coordMap : CoordMapModel, username) {
 
-        return this.httpClient.post(URL.enregistrerCoordMap, coordMap) ;
+        let params = new HttpParams().set("username", username) ;
+        return this.httpClient.post(URL.enregistrerCoordMap, coordMap, {params : params}) ;
 
      }
 

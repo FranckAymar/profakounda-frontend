@@ -1,7 +1,7 @@
 import { URL } from 'src/app/API_url/config';
 import { ListFormationsService } from './../services/list-formations.service';
 import { Component, OnInit } from '@angular/core';
-import{ FilterArrayPipe} from './filter.pipe';
+import { FilterArrayPipe } from './filter.pipe';
 
 @Component({
   selector: 'app-list-formations',
@@ -11,79 +11,111 @@ import{ FilterArrayPipe} from './filter.pipe';
 })
 
 export class ListFormationsComponent implements OnInit {
-  
-  valeur="";
+
+
+  //Map
+
+  lat: number = 5.304001315606169;
+  lng: number = -4.049957191526247;
+  radius: number = 1000;
+  zoom: number = 11;
+
+
+  valeur = "";
   ladate = new Date();
   propositionFormations = [];
   modulesFormation = [];
-  FormationFiltres=[];
+  FormationFiltres = [];
   urlServer = URL.getPhoto;
 
-    //Nombre de données à chargées à chaque page
-    numberDataOfPage : number = 15 ;
-    //Page courante
-    page : number = 1;
-    //Taille totale des données en base de données
-    sizeData : number ;
-    //Nombre de page totals
-    totalPage : number 
-    totalPageArray : Array<any> ;
+  //Nombre de données à chargées à chaque page
+  numberDataOfPage: number = 15;
+  //Page courante
+  page: number = 1;
+  //Taille totale des données en base de données
+  sizeData: number;
+  //Nombre de page totals
+  totalPage: number
+  totalPageArray: Array<any>;
 
-  constructor(private listFormationsService : ListFormationsService) { }
+  constructor(private listFormationsService: ListFormationsService) { }
 
-  
+
   ngOnInit() {
-  this.onGetListFormation(this.page);
-  
+    this.onGetListFormation(this.page);
+
   }
 
   onGetListFormation(pageActive) {
 
-    this.page = pageActive ;
+    this.page = pageActive;
 
     this.listFormationsService.getListPropositionFormations(this.page, this.numberDataOfPage).subscribe(
 
-      
-      (resp) =>{
-        
 
-        this.sizeData = resp.totalData ;
-        
-        this.totalPage = (this.sizeData/this.numberDataOfPage) ; 
-        
-        if(this.sizeData % this.numberDataOfPage != 0){
-          this.totalPage =  Math.ceil(this.totalPage) ;
-        } 
-        
+      (resp) => {
+
+
+        this.sizeData = resp.totalData;
+
+        this.totalPage = (this.sizeData / this.numberDataOfPage);
+
+        if (this.sizeData % this.numberDataOfPage != 0) {
+          this.totalPage = Math.ceil(this.totalPage);
+        }
+
 
         this.totalPageArray = new Array(this.totalPage);
 
-        this.propositionFormations = resp.data ;
-     
+        console.log(resp.data);
+        
+
+        this.propositionFormations = resp.data;
+
       },
 
-      
-      (error) =>{
+
+      (error) => {
 
         console.log(error);
-        
+
 
       }
     )
 
   }
-  
-  OnFiltreFormation(filtre:String){
+
+  OnFiltreFormation(filtre: String) {
     this.listFormationsService.getFilterFormation(filtre).subscribe(
-        
-      (reponse)=>{
-        this.propositionFormations=reponse;
+
+      (reponse) => {
+        this.propositionFormations = reponse;
       },
 
-      (erreur)=>{
-        console.log("Une erreur s'est produite: "+erreur);
+      (erreur) => {
+        console.log("Une erreur s'est produite: " + erreur);
       }
     )
+  }
+
+
+  inititalizeCoordMap(lat: number, long: number, radius: number, zoom: number) {
+
+    this.lat = lat;
+    this.lng = long;
+    this.radius = radius;
+    this.zoom = zoom;
+
+  }
+
+  mapClick(event) {
+    console.log(event);
+    
+  }
+
+  zoomChange(event){
+    console.log(event);
+    
   }
 
 }

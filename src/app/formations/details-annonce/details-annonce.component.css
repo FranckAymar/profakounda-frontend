@@ -2,7 +2,18 @@ agm-map {
     height: 300px;
   }
 
+  .ng-invalid{
+    border-bottom-color: red !important;
+}
 
+small{
+  color: red;
+
+}
+
+  .stepper{
+    z-index: 1050;
+  }
  
   .progressbar {
     margin: 0;
@@ -18,6 +29,7 @@ agm-map {
     text-align: center;
     text-transform: uppercase;
     color: #7d7d7d;
+
   }
   .progressbar li:before {
     width: 30px;
@@ -31,6 +43,7 @@ agm-map {
     margin: 0 auto 10px auto;
     border-radius: 50%;
     background-color: white;
+
   }
   .progressbar li:after {
     width: 100%;
@@ -40,7 +53,8 @@ agm-map {
     background-color: #7d7d7d;
     top: 15px;
     left: -50%;
-    z-index: -1;
+    z-index: -1 ;
+
   }
   .progressbar li:first-child:after {
     content: none;

@@ -1,1 +1,39 @@
-<p>all-customers works!</p>
+<div class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <h4>Tous les paiements</h4>
+        </div>
+        <div class="tab-inn">
+            <div class="table-responsive table-desi">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nom Prenoms</th> 
+                            <th>Date Inscription</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of particuliers">
+                            <td><span class="list-img"><img src="{{urlServer}}/{{p.id}}" alt=""></span>
+                            <td>{{p.nom}} {{p.prenoms}} </td>
+                            <td>{{p.dateCreation |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                            <td>
+                                <span *ngIf="p.compte.enabled" class="label label-success">Actif</span>
+                                <span *ngIf="!p.compte.enabled" class="label label-danger">Inactif</span>
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pg-pagina">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#!"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                    <li *ngFor="let page of totalPageArray ; let i=index"><a href="#!">{{i+1}}</a></li>
+                    <li class="waves-effect"><a href="#!"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>

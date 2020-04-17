@@ -105,7 +105,7 @@ export class DetailsAnnonceComponent implements OnInit {
   initSignInForm(){
 
     this.sigInForm = this.formBuilder.group({
-      username : [null,[ Validators.email, Validators.email]],
+      username : [null,[ Validators.email, Validators.required]],
       password : [null, Validators.required]
     })
 
@@ -113,7 +113,7 @@ export class DetailsAnnonceComponent implements OnInit {
 
   initSignUpForm(){
     this.singUpForm = this.formBuilder.group({
-      email : [null, [ Validators.email, Validators.email]],
+      email : [null, [ Validators.email, Validators.required]],
       password : [null, Validators.required],
       passwordConfirm : [null, Validators.required ]
     },

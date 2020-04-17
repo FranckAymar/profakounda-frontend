@@ -1169,7 +1169,6 @@
      float: left;
      list-style-type: none;
      display: inline-block;
-     width: 33.333%;
 }
  .hom-list-share ul li:nth-child(1) a{
      color: #fff;
@@ -1177,6 +1176,14 @@
      background: #1aa5d8;
      background: linear-gradient(to bottom, #1aa5d8, #1386b1);
      font-weight: 700;
+}
+
+.hom-list-share ul li:nth-child(2) a{
+    color: #fff;
+    border: 1px solid #f36b3b;
+    background: #f36b3b;
+    font-weight: 700;
+    cursor: pointer;
 }
  .hom-list-share ul li a {
      

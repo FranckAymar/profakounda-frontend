@@ -2,18 +2,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="search-form">
-                    
+                <div class="search-form"> 
                         <div class="sf-type">
                             <div class="sf-input">
-                                <input type="text"  class="form-contol" [(ngModel)]="valeur" (ngModelChange)="OnFiltreFormation(valeur)" id="sf-box" placeholder="Search courses">
+                                <input type="text"  class="form-contol" [(ngModel)]="valeur" id="sf-box" placeholder="Search course and discount courses">
                             </div>
-
+                        
                         </div>
-                        <div class="sf-submit">
-                            <input type="submit"  value="Rechercher">
-                        </div>
-                     
+                        <div class="sf-submit" >   
+                            <input  type="button" id="bouton" (click)="OnFiltreFormation(valeur)" class="btn btn-danger" value="Rechercher">
+                        </div>    
                 </div>
             </div>
         </div>
@@ -31,10 +29,10 @@
         
         <div class="col-md-8">
 
+       
         <div class="row" *ngFor="let propositionFormation of propositionFormations">
 
                 <div>
-                    <a [routerLink]="['/formations/details-formation', propositionFormation.id]">
                         <div class="col-md-12">
                             <div class="home-top-cour">
                                 <!--POPULAR COURSES IMAGE-->
@@ -57,6 +55,8 @@
                                         <ul>
                                             <li><a [routerLink]="['/formations/details-formation', propositionFormation.id]"
                                                 ><i class="fa fa-bar-chart" aria-hidden="true"></i> Details</a> </li>
+                                            <li><a (click)="viewCustomerInMap(propositionFormation.rayonIntervention)"
+                                                ><i class="pull-right fa fa-map-marker" aria-hidden="true"></i>Sur la carte</a> </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -64,7 +64,6 @@
               
                         </div>
         
-                    </a>
                 </div>
          
                
@@ -81,7 +80,7 @@
             
 
             <div class="col-md-4">
-                <agm-map  [latitude]="lat" 
+                <agm-map *ngIf="propositionFormations"  [latitude]="lat" 
                         [longitude]="lng"
                         [zoom]="zoom" >
                     <agm-marker *ngFor="let pf of propositionFormations"

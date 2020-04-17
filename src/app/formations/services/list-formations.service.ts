@@ -23,10 +23,19 @@ export class ListFormationsService {
     return this.httpClient.get(URL.listPropositionFormations);
   }
 
+  
+getFilterFormation(filtre) : Observable<any> {
+    if(filtre===""){
 
-  getFilterFormation(filtre): Observable<any> {
-
-    return this.httpClient.get(URL.FilterPropositionFormation + "/" + filtre);
+      return this.httpClient.get(URL.listPropositionFormations);
+    }
+    else if(filtre===" "){
+      
+      return this.httpClient.get(URL.listPropositionFormations);
+    }
+    else{
+    return this.httpClient.get(URL.FilterPropositionFormation+ "/"+ filtre) ;
+    }
 
   }
 

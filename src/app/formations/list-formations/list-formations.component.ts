@@ -23,6 +23,8 @@ export class ListFormationsComponent implements OnInit {
 
   valeur = "";
   ladate = new Date();
+  
+
   propositionFormations = [];
   modulesFormation = [];
   FormationFiltres = [];
@@ -82,14 +84,16 @@ export class ListFormationsComponent implements OnInit {
 
       }
     )
-
+ 
   }
-
-  OnFiltreFormation(filtre: String) {
+  
+  OnFiltreFormation(filtre:String){
+    
     this.listFormationsService.getFilterFormation(filtre).subscribe(
-
-      (reponse) => {
-        this.propositionFormations = reponse;
+    
+      (reponse)=>{
+       
+        this.propositionFormations=reponse;
       },
 
       (erreur) => {
@@ -116,6 +120,13 @@ export class ListFormationsComponent implements OnInit {
   zoomChange(event){
     console.log(event);
     
+  }
+
+  viewCustomerInMap(coord){
+    this.lat = coord.latitude ;
+    this.lng = coord.longitude ;
+    this.zoom = coord.zoom ;
+    this.radius = coord.rayon ;
   }
 
 }

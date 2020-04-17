@@ -16,9 +16,16 @@ export class PaiementService {
 
   }
 
-  getPaymentParticulier(username) : Observable<any>  {
+  getPaymentParticulier(username, page?, numberDataOfPage?) : Observable<any>  {
 
-    return this.httpClient.post(URL.getPaymentParticulier, username) ;
+    if(page && numberDataOfPage){
+
+      let params = new HttpParams().set("page", page).set("total", numberDataOfPage).set("username", username) ;
+      return this.httpClient.get(URL.getPaymentParticulier, {params : params}) ;
+
+    }
+    let params = new HttpParams().set("username", username)
+    return this.httpClient.get(URL.getPaymentParticulier, {params : params}) ;
   }
 
 

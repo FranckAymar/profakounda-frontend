@@ -11,10 +11,11 @@ import { NgModule, Injectable } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingInterceptor } from './LoadingInterceptor';
-
-
+import { FilterPipe } from './filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 const appRouter : Routes = [
@@ -38,8 +39,8 @@ const appRouter : Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-
-    LoadingComponent    
+    LoadingComponent,
+    FilterPipe,    
   ],
   imports: [
     BrowserModule, 
@@ -48,6 +49,7 @@ const appRouter : Routes = [
     CustomersModule,
     FormationsModule,
     ErrorPageModule,
+    FormsModule,
     RouterModule.forRoot(appRouter, {scrollPositionRestoration: 'enabled'}),
   
         

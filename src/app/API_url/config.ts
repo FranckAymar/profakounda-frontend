@@ -78,7 +78,9 @@ export const URL = {
     //Détails formations
     listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
+    FilterPropositionFormation : consts.host+ consts.nameProject +'details/fiterDeFormation',
     getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier',
+
 
     //JOUR
     enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour',

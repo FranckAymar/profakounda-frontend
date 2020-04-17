@@ -61,6 +61,12 @@
                 <div class="col-md-1"></div>
 
             </a>
-        </div>
     </div>
+    <div class="pg-pagina">
+        <ul class="pagination">
+            <li [ngClass]="{'active': (i+1) === page }" 
+            (click)= "onGetListFormation(i+1)" *ngFor="let p of totalPageArray ; let i=index"><a>{{i+1}}</a></li>
+        </ul>
+    </div>
+</div>
 </section>

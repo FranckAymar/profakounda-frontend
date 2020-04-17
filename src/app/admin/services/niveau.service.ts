@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { URL } from '../../API_url/config';
 import { Niveau } from '../model/niveau.model';
@@ -8,8 +8,17 @@ import { Niveau } from '../model/niveau.model';
 export class NiveauService{
 
     constructor(private httpClient: HttpClient){}
-    fetchNiveaux() : Observable<any>   {
-        return this.httpClient.get(URL.recupererNiveau);
+
+
+
+    fetchNiveaux(page?, numberDataOfPage?) : Observable<any>   {
+        let params = new HttpParams().set("page", page).set("total", numberDataOfPage) ;
+        if(page && numberDataOfPage){
+          return this.httpClient.get(URL.recupererNiveau, {params : params});
+        }else {
+          return this.httpClient.get(URL.recupererNiveau);
+
+        }
       }
       fetchNiveauxString() : Observable<any>   {
         return this.httpClient.get(URL.onFetchNiveauString);

@@ -8,6 +8,8 @@ import { consts } from '../../API_url/const'
 import { FiliereService } from 'src/app/admin/services/filiere.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { PasswordModel } from '../models/PasswordModel';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -23,6 +25,8 @@ export class EditProfileComponent implements OnInit {
    @Input() url:string ; 
    @Input() invalidation:boolean = false;
    @Input() showMessage:boolean = false;
+   @Input() filiere:string;
+   @Input() niveau:string;
    message:string;
    mes:string;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
@@ -31,7 +35,10 @@ export class EditProfileComponent implements OnInit {
   passwordModel:PasswordModel;
   userForm : FormGroup;
   passwordForm : FormGroup;
-  
+  myControl = new FormControl();
+  myControl3 = new FormControl();
+  filteredOptions3: Observable<string[]>
+  filteredOptions: Observable<string[]>;
   constructor(private filiereService :FiliereService,
               private niveauService:NiveauService,
               private particulierService:ParticulierService,
@@ -45,6 +52,26 @@ export class EditProfileComponent implements OnInit {
     this.onFetchNiveaux();
     this.onFetchFiliere();
     this.initPassword();
+    this.filteredOptions = this.myControl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+    this.filteredOptions3 = this.myControl3.valueChanges
+    .pipe(
+      startWith(''),
+      map(va => this._filter3(va))
+    );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.filieres.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter3(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.niveaux.filter(option => option.toLowerCase().includes(filterValue));
   }
 
  
@@ -106,6 +133,8 @@ getColor(){
     this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (reponse)=>{
+        this.niveau = reponse['niveau'];
+        this.filiere = reponse['filiere'];
        this.id = reponse['id'];
        this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
         this.userForm.patchValue({
@@ -132,16 +161,13 @@ getColor(){
   }
 
   private prepareSave(): any {
-
-    console.log(sessionStorage.getItem(this.signInService.USERNAME));
-
     let input = new FormData();
     input.append('nom', this.userForm.get('nom').value);
     input.append('prenoms', this.userForm.get('prenoms').value);
     input.append('telephone', this.userForm.get('telephone').value);
     input.append('lieuHabitation', this.userForm.get('lieuHabitation').value);
-    input.append('filiere', this.userForm.get('filiere').value);
-    input.append('niveau', this.userForm.get('niveau').value);
+    input.append('filiere', this.filiere);
+    input.append('niveau', this.niveau);
     input.append('username', sessionStorage.getItem(this.signInService.USERNAME));
     input.append('photo', this.userForm.get('photo').value);
     return input;
@@ -151,7 +177,7 @@ getColor(){
     this.fileInput.nativeElement.value = '';
   }
   onFetchNiveaux() {
-    this.niveauService.fetchNiveaux().subscribe(
+    this.niveauService.fetchNiveauxString().subscribe(
       (response)=> {
         this.niveaux = response;
       },
@@ -206,13 +232,10 @@ getColor(){
   }
   //recuperer les filieres
   onFetchFiliere() {
-
-    this.filiereService.fetchFilieres().subscribe(
-
+    this.filiereService.fetchFilieresString().subscribe(
       (response)=> {
-        this.filieres = response.response ;
+        this.filieres = response ;
       },
-
       (error)=> {
 
         console.log("Une erreur est survenue");

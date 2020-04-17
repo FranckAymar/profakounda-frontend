@@ -32,9 +32,9 @@
                             <input formControlName="username" type="text" data-ng-model="name" class="validate">
                             <label>Adresse e-mail</label>
                         </div>
-                        <div *ngIf="loginForm.controls.username.errors?.email" class="invalid-feedback">
+                        <small *ngIf="loginForm.controls.username.errors?.email" class="invalid-feedback">
                             Adresse e-mail non valide
-                        </div>
+                        </small>
                     </div>
                     <div>
                         <div class="input-field s12">
@@ -60,7 +60,7 @@
                     </div>
                     <div>
                         <div class="input-field s12"> <a href="#" routerLink="/home/forgot-password">Forgot password</a>
-                            | <a href="#" routerLink="/home/sign-in">Create a new account</a> </div>
+                            <a href="#" routerLink="/home/sign-in">Create a new account</a> </div>
                     </div>
 
                 </form>

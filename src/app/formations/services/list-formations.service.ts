@@ -1,6 +1,6 @@
 import { URL } from 'src/app/API_url/config';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -9,14 +9,19 @@ import { Injectable } from '@angular/core';
 export class ListFormationsService {
 
   constructor(
-            private httpClient : HttpClient
+    private httpClient: HttpClient
   ) { }
 
 
-getListPropositionFormations() : Observable<any> {
+  getListPropositionFormations(page?, numberDataOfPage?): Observable<any> {
+
+    let params = new HttpParams().set("page", page).set("total", numberDataOfPage);
+    if (page && numberDataOfPage) {
+      return this.httpClient.get(URL.listPropositionFormations, { params: params });
+    }
 
     return this.httpClient.get(URL.listPropositionFormations);
-  } 
+  }
 
   
 getFilterFormation(filtre) : Observable<any> {
@@ -33,6 +38,5 @@ getFilterFormation(filtre) : Observable<any> {
     }
 
   }
-
 
 }

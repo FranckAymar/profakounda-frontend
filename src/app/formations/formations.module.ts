@@ -1,8 +1,6 @@
 import { FilterArrayPipe } from './list-formations/filter.pipe';
 import { PaiementService } from './services/paiement.service';
-import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { AgmCoreModule } from '@agm/core';
-import { HomeModule } from './../home/home.module';
 import { DetailsAnnonceComponent } from './details-annonce/details-annonce.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -35,7 +33,11 @@ const formationsRouter = [
 
 
 @NgModule({
-  declarations: [ListFormationsComponent, FormationsMainComponent, DetailsAnnonceComponent, HeaderFormationsComponent,FilterArrayPipe],
+  declarations: [ListFormationsComponent, 
+    FormationsMainComponent, 
+    DetailsAnnonceComponent,
+     HeaderFormationsComponent,
+     FilterArrayPipe],
   providers : [
     PaiementService
 

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { CoordMapModel } from './../models/CoordModel';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { URL } from 'src/app/API_url/config';
 
 export class PropositionFormationService{
@@ -69,7 +69,8 @@ export class PropositionFormationService{
 
      }
 
-     rechercherAllProposition() : Observable<any>{
-        return this.httpClient.get(URL.getAllPparticulierPropositions);
+     rechercherAllProposition(page, numberDataOfPage) : Observable<any>{
+        let params = new HttpParams().set("page", page).set("total", numberDataOfPage) ;
+        return this.httpClient.get(URL.getAllPparticulierPropositions, {params : params});
     }
 }

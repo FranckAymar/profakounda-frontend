@@ -15,7 +15,6 @@ import{ FilterArrayPipe} from './filter.pipe';
 export class ListFormationsComponent implements OnInit {
   
   valeur="";
-  ladate = new Date();
   propositionFormations = [];
   modulesFormation = [];
   FormationFiltres=[];
@@ -26,14 +25,13 @@ export class ListFormationsComponent implements OnInit {
   
   ngOnInit() {
   this.onGetListFormation();
-  this.OnFiltreFormation(this.valeur);
-  }
+  
+  } 
 
   onGetListFormation() {
 
     this.listFormationsService.getListPropositionFormations().subscribe(
 
-      
       (resp) =>{
 
         this.propositionFormations = resp ;
@@ -48,13 +46,15 @@ export class ListFormationsComponent implements OnInit {
 
       }
     )
-
+ 
   }
   
   OnFiltreFormation(filtre:String){
+    
     this.listFormationsService.getFilterFormation(filtre).subscribe(
-        
+    
       (reponse)=>{
+       
         this.propositionFormations=reponse;
       },
 

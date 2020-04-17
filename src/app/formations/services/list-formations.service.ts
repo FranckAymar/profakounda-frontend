@@ -20,9 +20,17 @@ getListPropositionFormations() : Observable<any> {
 
   
 getFilterFormation(filtre) : Observable<any> {
+    if(filtre===""){
 
+      return this.httpClient.get(URL.listPropositionFormations);
+    }
+    else if(filtre===" "){
+      
+      return this.httpClient.get(URL.listPropositionFormations);
+    }
+    else{
     return this.httpClient.get(URL.FilterPropositionFormation+ "/"+ filtre) ;
-
+    }
 
   }
 

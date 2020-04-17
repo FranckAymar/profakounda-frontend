@@ -13,11 +13,18 @@ export class ListFormationsService {
   ) { }
 
 
-  getListPropositionFormations() : Observable<any> {
+getListPropositionFormations() : Observable<any> {
 
     return this.httpClient.get(URL.listPropositionFormations);
-  }
+  } 
 
+  
+getFilterFormation(filtre) : Observable<any> {
+
+    return this.httpClient.get(URL.FilterPropositionFormation+ "/"+ filtre) ;
+
+
+  }
 
 
 }

@@ -25,6 +25,8 @@ export class EditProfileComponent implements OnInit {
    @Input() url:string ; 
    @Input() invalidation:boolean = false;
    @Input() showMessage:boolean = false;
+   @Input() filiere:string;
+   @Input() niveau:string;
    message:string;
    mes:string;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
@@ -34,6 +36,8 @@ export class EditProfileComponent implements OnInit {
   userForm : FormGroup;
   passwordForm : FormGroup;
   myControl = new FormControl();
+  myControl3 = new FormControl();
+  filteredOptions3: Observable<string[]>
   filteredOptions: Observable<string[]>;
   constructor(private filiereService :FiliereService,
               private niveauService:NiveauService,
@@ -53,11 +57,21 @@ export class EditProfileComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
+    this.filteredOptions3 = this.myControl3.valueChanges
+    .pipe(
+      startWith(''),
+      map(va => this._filter3(va))
+    );
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.filieres.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter3(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.niveaux.filter(option => option.toLowerCase().includes(filterValue));
   }
 
  
@@ -119,6 +133,8 @@ getColor(){
     this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (reponse)=>{
+        this.niveau = reponse['niveau'];
+        this.filiere = reponse['filiere'];
        this.id = reponse['id'];
        this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
         this.userForm.patchValue({
@@ -145,16 +161,13 @@ getColor(){
   }
 
   private prepareSave(): any {
-
-    console.log(sessionStorage.getItem(this.signInService.USERNAME));
-
     let input = new FormData();
     input.append('nom', this.userForm.get('nom').value);
     input.append('prenoms', this.userForm.get('prenoms').value);
     input.append('telephone', this.userForm.get('telephone').value);
     input.append('lieuHabitation', this.userForm.get('lieuHabitation').value);
-    input.append('filiere', this.userForm.get('filiere').value);
-    input.append('niveau', this.userForm.get('niveau').value);
+    input.append('filiere', this.filiere);
+    input.append('niveau', this.niveau);
     input.append('username', sessionStorage.getItem(this.signInService.USERNAME));
     input.append('photo', this.userForm.get('photo').value);
     return input;
@@ -164,7 +177,7 @@ getColor(){
     this.fileInput.nativeElement.value = '';
   }
   onFetchNiveaux() {
-    this.niveauService.fetchNiveaux().subscribe(
+    this.niveauService.fetchNiveauxString().subscribe(
       (response)=> {
         this.niveaux = response;
       },

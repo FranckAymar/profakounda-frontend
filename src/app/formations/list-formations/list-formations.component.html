@@ -5,12 +5,13 @@
                 <div class="search-form"> 
                         <div class="sf-type">
                             <div class="sf-input">
-                                <input type="text"  class="form-contol" [(ngModel)]="valeur" id="sf-box" placeholder="Search course and discount courses">
+                                <input type="text" 
+                                [(ngModel)]="valeur" id="sf-box" placeholder="Search">
                             </div>
                         
                         </div>
                         <div class="sf-submit" >   
-                            <input  type="button" id="bouton" (click)="OnFiltreFormation(valeur)" class="btn btn-danger" value="Rechercher">
+                            <input  type="submit" (click)="OnFiltreFormation(valeur)" value="Rechercher">
                         </div>    
                 </div>
             </div>

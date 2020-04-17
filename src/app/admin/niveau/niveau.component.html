@@ -33,6 +33,12 @@
                     </tbody>
                 </table>
             </div>
+            <div class="pg-pagina">
+              <ul class="pagination">
+                  <li [ngClass]="{'active': (i+1) === page }" 
+                  (click)= "onFetchNiveaux(i+1)" *ngFor="let p of totalPageArray ; let i=index"><a>{{i+1}}</a></li>
+              </ul>
+          </div>
         </div>
     </div>
 </div>

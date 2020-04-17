@@ -8,6 +8,7 @@ import { Cycle } from 'src/app/admin/model/cycle.model';
   styleUrls: ['./cycle.component.css']
 })
 export class CycleComponent implements OnInit {
+  
 
 
   cycles = [];

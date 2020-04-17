@@ -13,16 +13,45 @@ export class NiveauComponent implements OnInit {
   erreur :string;
   niveau1:Niveau = new Niveau(0,"");
   niveau:Niveau = new Niveau(0,"");
+
+        //For pagination
+
+  //Nombre de données à chargées à chaque page
+  numberDataOfPage : number = 20 ;
+  //Page courante
+  page : number = 1;
+  //Taille totale des données en base de données
+  sizeData : number ;
+  //Nombre de page totals
+  totalPage : number 
+  totalPageArray : Array<any> ;
+
   constructor(private niveauService:NiveauService) { }
 
   ngOnInit() {
-    this.onFetchNiveaux();
+    this.onFetchNiveaux(this.page);
   }
 
-  onFetchNiveaux() {
-    this.niveauService.fetchNiveaux().subscribe(
-      (response)=> {
-        this.niveaux = response;
+  onFetchNiveaux(pageActive) {
+
+    this.page = pageActive ;
+
+    this.niveauService.fetchNiveaux(this.page, this.numberDataOfPage).subscribe(
+      (resp)=> {
+
+
+        this.sizeData = resp.totalData ;
+        
+        this.totalPage = (this.sizeData/this.numberDataOfPage) ; 
+        
+        if(this.sizeData % this.numberDataOfPage != 0){
+          this.totalPage =  Math.ceil(this.totalPage) ;
+        } 
+        
+
+        this.totalPageArray = new Array(this.totalPage);
+
+        this.niveaux = resp.data;
       },
 
       (error)=> {
@@ -41,7 +70,7 @@ export class NiveauComponent implements OnInit {
       (response)=>{
         this.niveau = new Niveau(0,"");
         document.getElementById('ajouterNiveau').click();
-        this.onFetchNiveaux();
+        this.onFetchNiveaux(this.page);
       },
       (error)=>{
         console.log('Une erreure à survenue: '+ error);
@@ -56,7 +85,7 @@ export class NiveauComponent implements OnInit {
       (response)=>{
         this.niveau1 = new Niveau(0,"");
         document.getElementById('updateNiveau').click();
-        this.onFetchNiveaux();
+        this.onFetchNiveaux(this.page);
       },
       (error)=>{
         console.log("Une erreur s'est produite: "+error);
@@ -70,7 +99,7 @@ export class NiveauComponent implements OnInit {
     .subscribe(
       (reponse)=>{
         this.erreur = reponse['error'];
-        this.onFetchNiveaux();
+        this.onFetchNiveaux(this.page);
       },
       (erreur)=>{
         console.log("Une erreur s'est produite: "+erreur);

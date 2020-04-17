@@ -13,26 +13,52 @@ export class PaiementsComponent implements OnInit {
   urlServer = URL.getPhoto;
   paiements = [] ;
 
+      //For pagination
+
+  //Nombre de données à chargées à chaque page
+  numberDataOfPage : number = 20 ;
+  //Page courante
+  page : number = 1;
+  //Taille totale des données en base de données
+  sizeData : number ;
+  //Nombre de page totals
+  totalPage : number 
+  totalPageArray : Array<any> ;
+
+
+
 
   constructor(private paiementService : PaiementService) { }
 
 
   ngOnInit() {
 
-    this.onFetchPaiement() ;
+    this.onFetchPaiement(this.page) ;
   }
 
 
-  onFetchPaiement() {
+  onFetchPaiement(pageActive : number) {
 
-    this.paiementService.getAllPayments().subscribe(
+    this.page =  pageActive ;
+
+    this.paiementService.getAllPayments(this.page, this.numberDataOfPage).subscribe(
 
 
       (resp)=>{
 
-        console.log(resp);
+
+        this.sizeData = resp.totalData ;
         
-        this.paiements = resp.response ;
+        this.totalPage = (this.sizeData/this.numberDataOfPage) ; 
+        
+        if(this.sizeData % this.numberDataOfPage != 0){
+          this.totalPage =  Math.ceil(this.totalPage) ;
+        } 
+        
+
+        this.totalPageArray = new Array(this.totalPage);
+        
+        this.paiements = resp.data ;
 
       },
 

@@ -28,11 +28,9 @@
             </div>
             <div class="pg-pagina">
                 <ul class="pagination">
-                    <li class="disabled"><a href="#!"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-                    <li *ngFor="let page of totalPageArray ; let i=index"><a href="#!">{{i+1}}</a></li>
-                    <li class="waves-effect"><a href="#!"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li [ngClass]="{'active': (i+1) === page }" 
+                    (click)= "onFetchAllCustomer(i+1)" *ngFor="let p of totalPageArray ; let i=index"><a>{{i+1}}</a></li>
                 </ul>
-
             </div>
         </div>
     </div>

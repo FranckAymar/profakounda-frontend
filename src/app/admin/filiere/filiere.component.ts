@@ -10,6 +10,18 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class FiliereComponent implements OnInit {
 
+  //For pagination
+
+  //Nombre de données à chargées à chaque page
+  numberDataOfPage : number = 20 ;
+  //Page courante
+  page : number = 1;
+  //Taille totale des données en base de données
+  sizeData : number ;
+  //Nombre de page totals
+  totalPage : number 
+  totalPageArray : Array<any> ;
+
   filieres=[] ;
   filiere: Filiere ={}; 
   message: string;
@@ -21,7 +33,7 @@ export class FiliereComponent implements OnInit {
 
   ngOnInit() {
 
-    this.onFetchFiliere() ;
+    this.onFetchFiliere(this.page) ;
     this.initForm();
   }
  
@@ -56,13 +68,26 @@ export class FiliereComponent implements OnInit {
 
   }
   //recuperer les filieres
-  onFetchFiliere() {
+  onFetchFiliere(pageActive) {
 
-    this.filiereService.fetchFilieres().subscribe(
+    this.page = pageActive ;
+    
+    this.filiereService.fetchFilieres(this.page, this.numberDataOfPage).subscribe(
 
-      (response)=> {
-        this.filieres = response.response ;
-        console.log(response.response)
+      (resp)=> {
+
+        this.sizeData = resp.totalData ;
+        
+        this.totalPage = (this.sizeData/this.numberDataOfPage) ; 
+        
+        if(this.sizeData % this.numberDataOfPage != 0){
+          this.totalPage =  Math.ceil(this.totalPage) ;
+        } 
+        
+
+        this.totalPageArray = new Array(this.totalPage);
+
+        this.filieres = resp.data ;
       },
 
       (error)=> {
@@ -81,7 +106,7 @@ export class FiliereComponent implements OnInit {
 
       (response) => {
 
-        this.onFetchFiliere();
+        this.onFetchFiliere(this.page);
         this.message = "Enregistrement effectué avec succès"
         this.initialisation();
       },
@@ -103,7 +128,7 @@ export class FiliereComponent implements OnInit {
      (response) => {
 
 
-        this.onFetchFiliere();
+        this.onFetchFiliere(this.page);
         alert("suppression  effectué avec succès");
       },
       (error) => {

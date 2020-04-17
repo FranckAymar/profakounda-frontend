@@ -2,7 +2,7 @@ import { Filiere } from '../model/filiere';
 import { URL } from '../../API_url/config';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 
 @Injectable({
@@ -12,9 +12,15 @@ export class FiliereService {
   constructor(private httpClient : HttpClient) { }
 
 
-fetchFilieres() : Observable<any>   {
+fetchFilieres(page?, numberDataOfPage?) : Observable<any>   {
 
-  return this.httpClient.get(URL.recupererFiliere);
+  let params = new HttpParams().set("page", page).set("total", numberDataOfPage) ;
+  if(page && numberDataOfPage){
+    return this.httpClient.get(URL.recupererFiliere, {params : params});
+
+  }
+    return this.httpClient.get(URL.recupererFiliere);
+
 }
 // enregistrement
 enregistrerFiliere(filiere : Filiere): Observable<any> {

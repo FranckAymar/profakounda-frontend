@@ -26,7 +26,6 @@ export class ParticulierService {
     }
 
     getAllCustomers(page, numberDataOfPage): Observable<any> {
-        let headers = new Headers();
         let params = new HttpParams().set("page", page).set("total", numberDataOfPage) ;
         return this.httpClient.get(URL.getParticuliers, { params: params });
     }

@@ -12,10 +12,15 @@ export class AllCustomersComponent implements OnInit {
   urlServer = URL.getPhoto;
  
   //For pagination
-  numberDataOfPage : number = 10 ;
+
+  //Nombre de données à chargées à chaque page
+  numberDataOfPage : number = 20 ;
+  //Page courante
   page : number = 1;
+  //Taille totale des données en base de données
   sizeData : number ;
-  totalPage : number ;
+  //Nombre de page totals
+  totalPage : number 
   totalPageArray : Array<any> ;
 
   particuliers;
@@ -26,9 +31,11 @@ export class AllCustomersComponent implements OnInit {
     this.onFetchAllCustomer(this.page);
   }
 
-  onFetchAllCustomer(page){
+  onFetchAllCustomer(pageActive : number){
 
-    this.particulierService.getAllCustomers(page, this.numberDataOfPage).subscribe(
+    this.page =  pageActive ;
+
+    this.particulierService.getAllCustomers(this.page, this.numberDataOfPage).subscribe(
 
 
       (resp)=>{
@@ -43,8 +50,6 @@ export class AllCustomersComponent implements OnInit {
         
 
         this.totalPageArray = new Array(this.totalPage);
-
-        console.log(this.totalPageArray);
         
         this.particuliers = resp.data ;
 

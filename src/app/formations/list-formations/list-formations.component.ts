@@ -1,8 +1,6 @@
 import { URL } from 'src/app/API_url/config';
-import { ContentCustomersComponent } from './../../customers/content-customers/content-customers.component';
 import { ListFormationsService } from './../services/list-formations.service';
 import { Component, OnInit } from '@angular/core';
-import{Pipe , PipeTransform} from '@angular/core';
 import{ FilterArrayPipe} from './filter.pipe';
 
 @Component({
@@ -21,22 +19,46 @@ export class ListFormationsComponent implements OnInit {
   FormationFiltres=[];
   urlServer = URL.getPhoto;
 
-  constructor(private filterArrayPipe: FilterArrayPipe ,private listFormationsService : ListFormationsService) { }
+    //Nombre de données à chargées à chaque page
+    numberDataOfPage : number = 15 ;
+    //Page courante
+    page : number = 1;
+    //Taille totale des données en base de données
+    sizeData : number ;
+    //Nombre de page totals
+    totalPage : number 
+    totalPageArray : Array<any> ;
+
+  constructor(private listFormationsService : ListFormationsService) { }
 
   
   ngOnInit() {
-  this.onGetListFormation();
-  this.OnFiltreFormation(this.valeur);
+  this.onGetListFormation(this.page);
+  
   }
 
-  onGetListFormation() {
+  onGetListFormation(pageActive) {
 
-    this.listFormationsService.getListPropositionFormations().subscribe(
+    this.page = pageActive ;
+
+    this.listFormationsService.getListPropositionFormations(this.page, this.numberDataOfPage).subscribe(
 
       
       (resp) =>{
+        
 
-        this.propositionFormations = resp ;
+        this.sizeData = resp.totalData ;
+        
+        this.totalPage = (this.sizeData/this.numberDataOfPage) ; 
+        
+        if(this.sizeData % this.numberDataOfPage != 0){
+          this.totalPage =  Math.ceil(this.totalPage) ;
+        } 
+        
+
+        this.totalPageArray = new Array(this.totalPage);
+
+        this.propositionFormations = resp.data ;
      
       },
 

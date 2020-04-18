@@ -91,7 +91,9 @@ export class ListFormationsComponent implements OnInit {
     this.listFormationsService.getFilterFormation(filtre).subscribe(
     
       (reponse)=>{
-       
+        
+        console.log(reponse);
+        
         this.propositionFormations=reponse;
       },
 
@@ -122,10 +124,16 @@ export class ListFormationsComponent implements OnInit {
   }
 
   viewCustomerInMap(coord){
+    this.zoom = 9 ;
+
+    //Pour l'animations
+    setTimeout(()=>{   
     this.lat = coord.latitude ;
     this.lng = coord.longitude ;
-    this.zoom = coord.zoom ;
+    this.zoom = 13 ;
     this.radius = coord.rayon ;
+ }, 1000);
+   
   }
 
 }

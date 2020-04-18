@@ -17,6 +17,12 @@ export const URL = {
     enregistrerFiliere : consts.host+ consts.nameProject +'admin/enregistrerFiliere',
     modifierFiliere:  consts.host+ consts.nameProject +'admin/modifierFiliere' ,
     supprimerFiliere:  consts.host+ consts.nameProject +'admin/supprimerFiliere' ,
+    //URL Villes
+    recupererVilles :  consts.host+consts.nameProject+'admin/villes' ,
+    onFetchVillesString :  consts.host+consts.nameProject+'villesString' ,
+    enregistrerVille : consts.host+ consts.nameProject +'admin/enregistrerVille',
+    modifierVille:  consts.host+ consts.nameProject +'admin/modifierVille' ,
+    supprimerVille:  consts.host+ consts.nameProject +'admin/supprimerVille' ,
     
     //Cycle
     recupererCycle : consts.host+ consts.nameProject +'cycles'   ,

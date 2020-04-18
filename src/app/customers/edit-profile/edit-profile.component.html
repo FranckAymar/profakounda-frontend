@@ -17,13 +17,13 @@
                             <div class="input-field col s6">
                                 <!-- <input  id="first_name" type="text" placeholder="nom"  formControlName="nom" class="validate" /> -->
                                 <mat-form-field style="width: 34em;">
-                                    <input matInput formControlName="nom" type="text" placeholder="Nom">
+                                    <input matInput formControlName="nom" required type="text" placeholder="Nom">
                                 </mat-form-field>
                             </div>
                             <div class="input-field col s6">
                                 <mat-form-field style="width: 34em;">
 
-                                    <input matInput formControlName="prenoms" type="text" placeholder="Prénoms">
+                                    <input matInput formControlName="prenoms" required type="text" placeholder="Prénoms">
                                 </mat-form-field>
                                 <!-- <input id="last_name" placeholder="prenoms" formControlName="prenoms" type="text" class="validate" /> -->
 
@@ -33,18 +33,34 @@
                             <div class="input-field col s6">
                                 <mat-form-field style="width: 34em;">
 
-                                    <input matInput formControlName="telephone" type="text" placeholder="Téléphone">
+                                    <input matInput formControlName="telephone" required type="text" placeholder="Téléphone">
                                 </mat-form-field>
                                 <!-- <input id="phone" type="text" placeholder="telephone" formControlName="telephone"  class="validate" /> -->
 
                             </div>
                             <div class="input-field col s6">
-                                <mat-form-field style="width: 34em;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <mat-form-field style="width: 16em;">
+                                            <input type="text" required formControlName="ville" 
+                                                placeholder="Ville de résidence" aria-label="Number" matInput
+                                                [formControl]="myControl2" [matAutocomplete]="auto2">
+                                            <mat-autocomplete #auto2="matAutocomplete">
+                                                <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
+                                                    {{option}}
+                                                </mat-option>
+                                            </mat-autocomplete>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-form-field style="width: 16em;">
 
-                                    <input matInput formControlName="lieuHabitation" type="text"
-                                        placeholder="Lieu d'Habitation">
-                                </mat-form-field>
-                                <!-- <input id="city" placeholder="Lieu d'Habitation" formControlName="lieuHabitation" type="text" class="validate"> -->
+                                            <input required matInput formControlName="lieuHabitation" type="text"
+                                                placeholder="Lieu d'Habitation">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                
 
                             </div>
                         </div>
@@ -83,7 +99,7 @@
                                 <input type="file" (change)="onFileChange($event)" #fileInput class="validate">
                             </div>
                             <div class="col-md-6">
-                                <button type="submit" [disabled]="userForm.invalid"
+                                <button type="submit" [disabled]="userForm.invalid || myControl2.invalid"
                                     class="btn btn-outline-info btn-block ">Enregistrer</button>
                             </div>
                         </div>
@@ -99,7 +115,7 @@
     <div class="row">
 
         <div style="margin-top: 2em;" class="col-md-12">
-            <div class="box-inn-sp">
+            <div class="box-inn-sp admin-form">
                 <div class="inn-title">
                     <h4>Confidentialité</h4>
                 </div>
@@ -118,16 +134,14 @@
                                     class="validate">
                             </div>
                         </div>
-                        <div class="row">
+                        <div style="margin-top: 0.5em;" class="row">
                             <div class="col-md-6">
                                     <input class="form-control" (ngModelChange)="changement()" placeholder="Confimez le mot de passe"
                                         formControlName="passwordConfirm" type="password" class="validate">
                             </div>
                             <div class="col-md-6">
-                                <div class="input-field col s6">
-                                    <button type="submit" [disabled]="invalidation || passwordForm.invalid"
+                                <button type="submit" [disabled]="invalidation || passwordForm.invalid"
                                         class="btn btn-outline-info btn-block">Enregistrer</button>
-                                </div>
                             </div>
 
 

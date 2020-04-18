@@ -21,7 +21,7 @@ export class ListFormationsComponent implements OnInit {
   zoom: number = 11;
 
 
-  valeur = "";
+  valeur ="";
   ladate = new Date();
   
 
@@ -71,7 +71,6 @@ export class ListFormationsComponent implements OnInit {
 
         console.log(resp.data);
         
-
         this.propositionFormations = resp.data;
 
       },

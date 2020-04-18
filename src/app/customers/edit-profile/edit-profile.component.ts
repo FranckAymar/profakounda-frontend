@@ -10,6 +10,7 @@ import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { PasswordModel } from '../models/PasswordModel';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { VilleService } from 'src/app/admin/services/ville.service';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -32,16 +33,20 @@ export class EditProfileComponent implements OnInit {
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
   niveaux = [];
+  villes : any = [];
   passwordModel:PasswordModel;
   userForm : FormGroup;
   passwordForm : FormGroup;
   myControl = new FormControl();
+  myControl2 = new FormControl();
   myControl3 = new FormControl();
   filteredOptions3: Observable<string[]>
+  filteredOptions2: Observable<string[]>
   filteredOptions: Observable<string[]>;
   constructor(private filiereService :FiliereService,
               private niveauService:NiveauService,
               private particulierService:ParticulierService,
+              private villeService:VilleService,
               private router:Router,
               private formBuilder:FormBuilder,
               private signInService:SignInService) { }
@@ -51,6 +56,7 @@ export class EditProfileComponent implements OnInit {
     this.rechercherPaticulierConnecter();
     this.onFetchNiveaux();
     this.onFetchFiliere();
+    this.onFetchVilles();
     this.initPassword();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
@@ -61,6 +67,11 @@ export class EditProfileComponent implements OnInit {
     .pipe(
       startWith(''),
       map(va => this._filter3(va))
+    );
+    this.filteredOptions2 = this.myControl2.valueChanges
+    .pipe(
+      startWith(''),
+      map(v => this._filter2(v))
     );
   }
   private _filter(value: string): string[] {
@@ -73,6 +84,11 @@ export class EditProfileComponent implements OnInit {
 
     return this.niveaux.filter(option => option.toLowerCase().includes(filterValue));
   }
+  private _filter2(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.villes.filter(option => option.toLowerCase().includes(filterValue));
+  }
 
  
 init(){
@@ -83,6 +99,7 @@ init(){
     lieuHabitation:['',Validators.required],
     filiere:'',
     niveau:'',
+    ville:['',Validators.required],
     photo:null
   })
 }
@@ -144,6 +161,7 @@ getColor(){
           lieuHabitation: reponse['lieuHabitation'],
           filiere: reponse['filiere'],
           niveau: reponse['niveau'],
+          ville: reponse['ville'],
         
         })
       },
@@ -168,6 +186,7 @@ getColor(){
     input.append('lieuHabitation', this.userForm.get('lieuHabitation').value);
     input.append('filiere', this.filiere);
     input.append('niveau', this.niveau);
+    input.append('ville', this.myControl2.value);
     input.append('username', sessionStorage.getItem(this.signInService.USERNAME));
     input.append('photo', this.userForm.get('photo').value);
     return input;
@@ -180,6 +199,18 @@ getColor(){
     this.niveauService.fetchNiveauxString().subscribe(
       (response)=> {
         this.niveaux = response;
+      },
+      (error)=> {
+        console.log("Une erreur est survenue");
+      }
+
+    )
+
+  }
+  onFetchVilles() {
+    this.villeService.onFetchVillesString().subscribe(
+      (response)=> {
+        this.villes = response;
       },
       (error)=> {
         console.log("Une erreur est survenue");

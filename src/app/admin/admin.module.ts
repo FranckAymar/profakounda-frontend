@@ -30,6 +30,8 @@ import { FormationComponent } from './formation/formation.component';
 import { PaiementsComponent } from './paiements/paiements.component';
 import { AllCustomersComponent } from './all-customers/all-customers.component';
 import { AllConsultationsCustomersComponent } from './all-consultations-customers/all-consultations-customers.component';
+import { VilleService } from './services/ville.service';
+import { VilleComponent } from './ville/ville.component';
 
 
 
@@ -77,6 +79,11 @@ const adminRouter : Routes = [
         
       },
       {
+        path : 'ville',
+        component : VilleComponent
+        
+      },
+      {
         path : 'formation',
         component : FormationComponent
         
@@ -119,13 +126,15 @@ const adminRouter : Routes = [
                 ForfaitComponent,
                 NavbarComponent,
                 NiveauComponent,
+                VilleComponent,
                 SidebarComponent,
                 AdminMainComponent,
                 JourComponent,
                 FormationComponent,
                 PaiementsComponent,
                 AllCustomersComponent,
-                AllConsultationsCustomersComponent ],
+                AllConsultationsCustomersComponent,
+                VilleComponent ],
   imports: [
     CommonModule, 
     RouterModule.forChild(adminRouter),
@@ -149,6 +158,7 @@ const adminRouter : Routes = [
     ForfaitService,
     NiveauService,
     JourService,
+    VilleService,
     FormationService
   ]
 })

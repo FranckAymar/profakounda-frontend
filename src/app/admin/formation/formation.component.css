@@ -13,3 +13,6 @@
 i{
     background-color: inherit !important;
 }
+.ng-invalid{
+    border-color: red;
+}

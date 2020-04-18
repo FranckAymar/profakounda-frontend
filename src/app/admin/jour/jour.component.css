@@ -7,3 +7,6 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
  .mat-input-element{
   border-bottom: inherit;
  }
+ .ng-invalid{
+   border-color: red;
+}

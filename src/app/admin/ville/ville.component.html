@@ -1,0 +1,76 @@
+<div class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <h4>Villes</h4>
+        </div>
+        <div class="tab-inn">
+            <div class="table-responsive table-desi">
+                <button type="button" (click)="initVille()" data-toggle="modal" data-target="#ajouterVille" class="btn btn-primary">
+                    Ajouter
+                </button>
+                
+                <div style="margin-top: 2em;" *ngIf="error" class="alert alert-danger">
+                    {{error}}
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Designation</th>
+                            <th>Longitude</th>  
+                            <th>Latitude</th>   
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let v of villes">
+                            <td>{{v.designation}}</td>
+                            <td>{{v.longitude}}</td>
+                            <td>{{v.latitude}}</td>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ajouterVille" (click)="upDateVille(v)"> Modifier</button></td>
+                            <td><button type="button" class="btn btn-danger" (click)="supprimerVille(v.id)">Supprimer</button></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+     
+      
+    
+</div>
+
+<div class="modal fade" id="ajouterVille" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enregistrer une ville</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form  (ngSubmit)="onSaveVille()" #f="ngForm">
+                <div class="form-group">
+                    <label for="libelle" class="control-label">Désignation:</label>
+                    <input type="text"  id="libelle" name="designation" [(ngModel)]="ville.designation" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="long" class="control-label">Longitude:</label>
+                    <input type="number"  id="long" name="longitude" [(ngModel)]="ville.longitude"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="lat" class="control-label">Latitude:</label>
+                    <input type="number"  id="lat" name="latitude" [(ngModel)]="ville.latitude"  class="form-control">
+                </div>
+                <button  type="submit" [disabled] = "f.invalid" class="btn btn-primary">Enregistrer</button>
+            </form>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>

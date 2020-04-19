@@ -81,6 +81,7 @@ export class PropositionFormationComponent implements OnInit {
     this.rechercherProposition();
     this.onFetchFormations();
     this.onFetchJoursString();
+    
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -393,10 +394,16 @@ export class PropositionFormationComponent implements OnInit {
     this.propositionFormationService.rechercherProposition(sessionStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (response)=>{
+      
+        
   
-        this.proposition = new PropositionFormation(response['id'],response['description'],sessionStorage.getItem(this.signInService.USERNAME));
+        this.proposition = new PropositionFormation(response['id'],
+                                                    response['description'],
+                                                    sessionStorage.getItem(this.signInService.USERNAME),
+                                                    response['enLigne'],
+                                                    response['attenteMiseEnLigne']),
+                                                    response['refusMiseEnLigne'];
        
-
       },
       (error)=>{
         console.log("Erreur : "+error);
@@ -486,6 +493,11 @@ export class PropositionFormationComponent implements OnInit {
         
       }
     )
+
+
+  }
+
+  demandeMiseLigne(){
 
 
   }

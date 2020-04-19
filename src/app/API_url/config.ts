@@ -81,6 +81,9 @@ export const URL = {
     modifierProposition: consts.host+ consts.nameProject +'particulier/modifierProposition' ,
     deleteDisponibiliteByDay: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByDayId',
     deleteDisponibiliteByHour: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByHourId',
+    demandeMiseEnLigne : consts.host+ consts.nameProject +'particulier/demandemiseenligne',
+    mettreEnLigne : consts.host+ consts.nameProject +'admin/acceptermiseenligne',
+    refuserMiseEnLigne : consts.host+ consts.nameProject +'admin/refusermiseenligne',
 
     //Détails formations
     listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
@@ -111,4 +114,9 @@ export const URL = {
     getAllPparticulierPropositions : consts.host+ consts.nameProject + 'admin/particulierspropostions',
 
 
+    //CauseRefus
+    ajouterRefus : consts.host+ consts.nameProject + 'admin/enregistercause',
+    recupererRefus : consts.host+ consts.nameProject + 'causerefus',
+
+    
 }

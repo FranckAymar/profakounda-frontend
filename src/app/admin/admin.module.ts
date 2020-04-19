@@ -1,3 +1,4 @@
+import { CauserefusService } from './services/causerefus.service';
 import { AdminGuard } from '../guard/admin.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
@@ -32,6 +33,7 @@ import { AllCustomersComponent } from './all-customers/all-customers.component';
 import { AllConsultationsCustomersComponent } from './all-consultations-customers/all-consultations-customers.component';
 import { VilleService } from './services/ville.service';
 import { VilleComponent } from './ville/ville.component';
+import { CauserefusComponent } from './causerefus/causerefus.component';
 
 
 
@@ -104,6 +106,12 @@ const adminRouter : Routes = [
         path : 'customers',
         component : AllCustomersComponent
         
+      }, 
+      
+      {
+        path : 'causerefus',
+        component : CauserefusComponent
+        
       }
 
 
@@ -134,7 +142,8 @@ const adminRouter : Routes = [
                 PaiementsComponent,
                 AllCustomersComponent,
                 AllConsultationsCustomersComponent,
-                VilleComponent ],
+                VilleComponent,
+                CauserefusComponent ],
   imports: [
     CommonModule, 
     RouterModule.forChild(adminRouter),
@@ -159,7 +168,8 @@ const adminRouter : Routes = [
     NiveauService,
     JourService,
     VilleService,
-    FormationService
+    FormationService, 
+    CauserefusService
   ]
 })
 export class AdminModule { }

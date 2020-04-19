@@ -25,7 +25,7 @@ formInitialisation(){
     prenoms:['',Validators.required],
     telephone:['',Validators.required],
     email:['',[Validators.required,Validators.email]],
-    lieuHabitation:['',Validators.required],
+    lieuHabitation:'',
     password:['',Validators.required],
     passwordConfirm:['',Validators.required]
   })

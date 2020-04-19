@@ -28,6 +28,7 @@ export class EditProfileComponent implements OnInit {
    @Input() showMessage:boolean = false;
    @Input() filiere:string;
    @Input() niveau:string;
+   @Input() ville:string;
    message:string;
    mes:string;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
@@ -152,6 +153,7 @@ getColor(){
       (reponse)=>{
         this.niveau = reponse['niveau'];
         this.filiere = reponse['filiere'];
+        this.ville = reponse['ville'];
        this.id = reponse['id'];
        this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
         this.userForm.patchValue({
@@ -186,7 +188,7 @@ getColor(){
     input.append('lieuHabitation', this.userForm.get('lieuHabitation').value);
     input.append('filiere', this.filiere);
     input.append('niveau', this.niveau);
-    input.append('ville', this.myControl2.value);
+    input.append('ville', this.ville);
     input.append('username', sessionStorage.getItem(this.signInService.USERNAME));
     input.append('photo', this.userForm.get('photo').value);
     return input;

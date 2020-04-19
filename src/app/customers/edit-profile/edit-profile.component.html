@@ -22,7 +22,6 @@
                             </div>
                             <div class="input-field col s6">
                                 <mat-form-field style="width: 34em;">
-
                                     <input matInput formControlName="prenoms" required type="text" placeholder="Prénoms">
                                 </mat-form-field>
                                 <!-- <input id="last_name" placeholder="prenoms" formControlName="prenoms" type="text" class="validate" /> -->
@@ -42,8 +41,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <mat-form-field style="width: 16em;">
-                                            <input type="text" required formControlName="ville" 
-                                                placeholder="Ville de résidence" aria-label="Number" matInput
+                                            <input type="text" required  
+                                                placeholder="Ville de résidence" formControlName="ville" [(ngModel)]="ville" aria-label="Number" matInput
                                                 [formControl]="myControl2" [matAutocomplete]="auto2">
                                             <mat-autocomplete #auto2="matAutocomplete">
                                                 <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
@@ -55,7 +54,7 @@
                                     <div class="col-md-6">
                                         <mat-form-field style="width: 16em;">
 
-                                            <input required matInput formControlName="lieuHabitation" type="text"
+                                            <input  matInput formControlName="lieuHabitation" required type="text"
                                                 placeholder="Lieu d'Habitation">
                                         </mat-form-field>
                                     </div>
@@ -84,7 +83,7 @@
 
                                 <mat-form-field style="width: 34em;">
                                     <input type="text" formControlName="filiere" placeholder="Filière"
-                                        [(ngModel)]="filire" aria-label="Number" matInput [formControl]="myControl"
+                                        [(ngModel)]="filiere" aria-label="Number" matInput [formControl]="myControl"
                                         [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete">
                                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -99,7 +98,7 @@
                                 <input type="file" (change)="onFileChange($event)" #fileInput class="validate">
                             </div>
                             <div class="col-md-6">
-                                <button type="submit" [disabled]="userForm.invalid || myControl2.invalid"
+                                <button type="submit" [disabled]="userForm.invalid"
                                     class="btn btn-outline-info btn-block ">Enregistrer</button>
                             </div>
                         </div>

@@ -65,8 +65,7 @@ export class ListFormationsComponent implements OnInit {
         if (this.sizeData % this.numberDataOfPage != 0) {
           this.totalPage = Math.ceil(this.totalPage);
         }
-
-
+ 
         this.totalPageArray = new Array(this.totalPage);
 
         console.log(resp.data);

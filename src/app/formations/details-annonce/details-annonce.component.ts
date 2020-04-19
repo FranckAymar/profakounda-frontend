@@ -400,6 +400,7 @@ export class DetailsAnnonceComponent implements OnInit {
 
   contactCustomer() {
 
+    
     let username = sessionStorage.getItem(this.signInService.USERNAME);
 
     this.detaisFormationsService.getDetailParticulierParFormation(this.idPropositionFormation, username).subscribe(

@@ -68,6 +68,7 @@ export const URL = {
     rechercherModule: consts.host+ consts.nameProject +'particulier/modules' ,
     rechercherNiveauEnseignes: consts.host+ consts.nameProject +'particulier/contrats' ,
     getContrat: consts.host+ consts.nameProject +'particulier/getContrat',
+    getProposition: consts.host+ consts.nameProject +'particulier/getProposition',
     getModule: consts.host+ consts.nameProject +'particulier/getModule',
     deleteContrat: consts.host+ consts.nameProject +'particulier/deleteContrat',
     deleteModule: consts.host+ consts.nameProject +'particulier/deleteModule',
@@ -81,6 +82,7 @@ export const URL = {
     modifierProposition: consts.host+ consts.nameProject +'particulier/modifierProposition' ,
     deleteDisponibiliteByDay: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByDayId',
     deleteDisponibiliteByHour: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByHourId',
+    demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
 
     //Détails formations
     listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',

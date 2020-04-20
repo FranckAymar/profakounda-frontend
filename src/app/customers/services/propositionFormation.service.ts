@@ -35,8 +35,11 @@ export class PropositionFormationService{
     deleteModuleById(id:Number){
         return this.httpClient.post(URL.deleteModule,id);
     }
-    rechercherDisponibilites(username:String){
-        return this.httpClient.post(URL.rechercherDisponibilites,username);
+    rechercherDisponibilites(id:Number){
+        return this.httpClient.post(URL.rechercherDisponibilites,id);
+    }
+    demandeMiseEnLigne(id:Number){
+        return this.httpClient.post(URL.demandeMiseEnLigne,id);
     }
     rechercherModules(username:String){
         return this.httpClient.post(URL.rechercherModule,username);
@@ -54,6 +57,9 @@ export class PropositionFormationService{
      //PROPOSITION
      rechercherProposition(username:String){
         return this.httpClient.post(URL.rechercherPropositions,username);
+    }
+    getPropositionById(id:Number){
+        return this.httpClient.post(URL.getProposition,id);
     }
     enregistrerProposition(data){
         return this.httpClient.post(URL.enregsitrerProposition,data);

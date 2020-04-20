@@ -79,6 +79,7 @@ export class PropositionFormationComponent implements OnInit {
     this.rechercherProposition();
     this.onFetchFormations();
     this.onFetchJoursString();
+    
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -487,6 +488,11 @@ this.propositionFormationService.rechercherDisponibilites(id)
         
       }
     )
+
+
+  }
+
+  demandeMiseLigne(){
 
 
   }

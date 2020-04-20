@@ -6,6 +6,7 @@
     <div class="box-inn-sp">
         <div class="inn-title">
             <h5 *ngIf="p.proposition.enLigne" style="color: green;">En ligne</h5>
+            <h5 *ngIf="!p.proposition.attenteMiseEnLigne && !p.proposition.enLigne" style="color: yellow;">En édition</h5>
             <h5 *ngIf="p.proposition.attenteMiseEnLigne" style="color: red;">En attende de validation</h5>
         </div>
         <div class="tab-inn">
@@ -60,7 +61,7 @@
                     </tbody>
                 </table>
             </div>
-            <button *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne" [disabled]="!p.isContrat || !p.isModule" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning">publier</button>
+            <button *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne" [disabled]="!p.isContrat || !p.isModule" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning">Mettre en ligne</button>
         </div>
     </div>
 </div>

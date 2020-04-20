@@ -2,6 +2,10 @@
     <div class="box-inn-sp">
         <div class="inn-title">
             <h4>Mes formations</h4>
+            <span *ngIf="!proposition.enLigne"  class="label label-warning pull">Mode édition</span>
+            <span *ngIf="proposition.enLigne"  class="label label-success">En ligne</span>
+            <span *ngIf="proposition.refusMiseEnLigne"  class="label label-danger">Refusé</span>
+            <span *ngIf="proposition.attenteMiseEnLigne"  class="label label-info">En attente</span>
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
@@ -55,6 +59,11 @@
                     </tbody>
                 </table>
             </div>
+            <button click="mettreEnLigne()" style="margin-left: 1em;" type="button" 
+                        class="btn btn-success">
+                        
+                        Mettre en ligne
+            </button>
         </div>
     </div>
 </div>

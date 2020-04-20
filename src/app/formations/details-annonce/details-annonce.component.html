@@ -1,6 +1,6 @@
 <!--SECTION START-->
 <section>
-    <div class="pro-cover">
+    <div *ngIf="propositionFormation.rayonIntervention" class="pro-cover">
 
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
 

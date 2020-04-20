@@ -318,11 +318,14 @@ export class DetailsAnnonceComponent implements OnInit {
       (resp)=> {
        
         
-        this.inititalizeCoordMap(resp.rayonIntervention.latitude,
-                                 resp.rayonIntervention.longitude,
-                                 resp.rayonIntervention.rayon,
-                                 resp.rayonIntervention.zoom);
+        if(resp.rayonIntervention){
+          this.inititalizeCoordMap(resp.rayonIntervention.latitude,
+            resp.rayonIntervention.longitude,
+            resp.rayonIntervention.rayon,
+            resp.rayonIntervention.zoom);
 
+        }
+        
         this.propositionFormation = resp ;
         
       },

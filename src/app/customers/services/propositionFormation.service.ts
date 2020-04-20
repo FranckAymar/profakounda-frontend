@@ -35,11 +35,8 @@ export class PropositionFormationService{
     deleteModuleById(id:Number){
         return this.httpClient.post(URL.deleteModule,id);
     }
-    rechercherDisponibilites(id:Number){
-        return this.httpClient.post(URL.rechercherDisponibilites,id);
-    }
-    demandeMiseEnLigne(id:Number){
-        return this.httpClient.post(URL.demandeMiseEnLigne,id);
+    rechercherDisponibilites(username:String){
+        return this.httpClient.post(URL.rechercherDisponibilites,username);
     }
     rechercherModules(username:String){
         return this.httpClient.post(URL.rechercherModule,username);
@@ -58,9 +55,6 @@ export class PropositionFormationService{
      rechercherProposition(username:String){
         return this.httpClient.post(URL.rechercherPropositions,username);
     }
-    getPropositionById(id:Number){
-        return this.httpClient.post(URL.getProposition,id);
-    }
     enregistrerProposition(data){
         return this.httpClient.post(URL.enregsitrerProposition,data);
      }
@@ -69,9 +63,9 @@ export class PropositionFormationService{
      }
 
      //Save CoordMap
-     saveCoordMap(coordMap : CoordMapModel, username) {
+     saveCoordMap(coordMap : CoordMapModel, idPropostion) {
 
-        let params = new HttpParams().set("username", username) ;
+        let params = new HttpParams().set("idPropostion", idPropostion) ;
         return this.httpClient.post(URL.enregistrerCoordMap, coordMap, {params : params}) ;
 
      }
@@ -79,5 +73,18 @@ export class PropositionFormationService{
      rechercherAllProposition(page, numberDataOfPage) : Observable<any>{
         let params = new HttpParams().set("page", page).set("total", numberDataOfPage) ;
         return this.httpClient.get(URL.getAllPparticulierPropositions, {params : params});
+    }
+
+    demandeMiseEnLigne(idPrposition) : Observable<any> {
+        return this.httpClient.post(URL.demandeMiseEnLigne,idPrposition);
+    }
+
+    mettreEnLigne(idProposition) : Observable<any>{
+        return this.httpClient.post(URL.mettreEnLigne, idProposition);
+    }
+
+    refuserMiseEnLign(idProposition, idCause) : Observable<any>{
+        let params = new HttpParams().set("idProposition", idProposition).set("idCause", idCause);
+        return this.httpClient.post(URL.refuserMiseEnLigne,{params : params})
     }
 }

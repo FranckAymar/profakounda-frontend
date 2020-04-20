@@ -84,16 +84,16 @@
                         [longitude]="lng"
                         [zoom]="zoom" >
                     <agm-marker *ngFor="let pf of propositionFormations"
-                                [latitude]="pf.rayonIntervention.latitude" 
-                                [longitude]="pf.rayonIntervention.longitude">
+                                [latitude]="pf.rayonIntervention?.latitude" 
+                                [longitude]="pf.rayonIntervention?.longitude">
                 </agm-marker>
         
                     <agm-circle *ngFor="let pf of propositionFormations"
-                        [latitude]="pf.rayonIntervention.latitude" 
-                        [longitude]="pf.rayonIntervention.longitude" 
+                        [latitude]="pf.rayonIntervention?.latitude" 
+                        [longitude]="pf.rayonIntervention?.longitude" 
                         [circleDraggable]="true" [editable]="false"
                         [fillColor]="green" [strokeColor]="green" 
-                        [radius]="pf.rayonIntervention.rayon" [clickable]="false"
+                        [radius]="pf.rayonIntervention?.rayon" [clickable]="false"
                       >
                     </agm-circle>
                 </agm-map>

@@ -46,7 +46,7 @@ export class PropositionFormationComponent implements OnInit {
   proposition:PropositionFormation= new PropositionFormation(0,'',sessionStorage.getItem(this.signInService.USERNAME));
   niveauForme:NiveauForme = new NiveauForme(0,'',null,null,null,sessionStorage.getItem(this.signInService.USERNAME)); ;
   module:Module = new Module(0,'',null,sessionStorage.getItem(this.signInService.USERNAME));;
- 
+  propostionLoad = {} ;
   //Variable for map
 
   lat: number = 5.338390;
@@ -471,11 +471,9 @@ this.propositionFormationService.rechercherDisponibilites(id)
 
   onSaveCoordMap() {
 
-    let username = sessionStorage.getItem(this.signInService.USERNAME) ;
-
     this.coordMapModel  = new CoordMapModel(this.zoom, this.lat, this.lng , this.radius) ;
 
-    this.propositionFormationService.saveCoordMap(this.coordMapModel, username).subscribe(
+    this.propositionFormationService.saveCoordMap(this.coordMapModel, this.propostionLoad).subscribe(
 
       (resp) => {
           console.log(resp);
@@ -495,6 +493,10 @@ this.propositionFormationService.rechercherDisponibilites(id)
   demandeMiseLigne(){
 
 
+  }
+
+  loadPropostion(id){
+    this.propostionLoad = id ;
   }
 
 }

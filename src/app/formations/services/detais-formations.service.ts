@@ -17,9 +17,7 @@ export class DetaisFormationsService {
 
     return this.httpClient.get(URL.detailsPropositionFormation + "/"+ idPropositionFormation) ;
 
-
   }
-
   getDetailParticulierParFormation(idPropositionFormation, username) : Observable<any> {
 
     let params = new HttpParams().set("username", username) ;
@@ -27,4 +25,5 @@ export class DetaisFormationsService {
 
 
   }
+
 }

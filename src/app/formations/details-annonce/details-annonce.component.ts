@@ -173,7 +173,7 @@ export class DetailsAnnonceComponent implements OnInit {
                   alert("Désolé vous avez épuisés vos demandes de contacts ! Souscrivez à nouveau !")
                 }
 
-                this.next();
+                this.goToStep2() ;
 
               }
 
@@ -342,10 +342,8 @@ export class DetailsAnnonceComponent implements OnInit {
 
   //Method for stepper 
 
- next() {
-
-    if (this.step === 'step1') {
-      $("#content1-signin").addClass('hide');
+  goToStep2(){
+    $("#content1-signin").addClass('hide');
       $("#content1-signup").addClass('hide');
       $("#content2").removeClass('hide');
       this.step = 'step2';
@@ -354,31 +352,48 @@ export class DetailsAnnonceComponent implements OnInit {
       this.onFetchForFait() ;
 
       $("#step2").addClass("active");
+  }
 
+
+  goToStep3(){
+
+    $("#content2").addClass('hide');
+    $("#content3").removeClass('hide');
+    this.step = 'step3';
+
+    $("#step3").addClass("active");
+
+  }
+
+  goToStep4(){
+     
+    $("#content3").addClass('hide');
+    $("#content4").removeClass('hide');
+    this.step = 'step4';
+
+    $("#step4").addClass("active");
+
+    $("#nextButton").addClass("hide");
+  }
+
+ next() {
+
+    if (this.step === 'step1') {
+      
+        this.goToStep2();
 
     } 
     
     else if (this.step === 'step2') {
-      $("#content2").addClass('hide');
-      $("#content3").removeClass('hide');
-      this.step = 'step3';
-
-      $("#step3").addClass("active");
-
+    
+      this.goToStep3() ;
 
   
     }
     
     else if (this.step === 'step3') {
-      
-      $("#content3").addClass('hide');
-      $("#content4").removeClass('hide');
-      this.step = 'step4';
-
-      $("#step4").addClass("active");
-
-      $("#nextButton").addClass("hide");
      
+      this.goToStep4() ;
        
          
     }
@@ -437,7 +452,8 @@ export class DetailsAnnonceComponent implements OnInit {
   
           //Si l'utilisateur est déjà connecté
           if(this.authenticated == true) {
-            this.next() ;
+          
+            this.goToStep2() ;
           }
 
         }

@@ -61,7 +61,7 @@
                     </tbody>
                 </table>
             </div>
-            <button *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne" [disabled]="!p.isContrat || !p.isModule" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning">Mettre en ligne</button>
+            <button *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning">Mettre en ligne</button>
         </div>
     </div>
 </div>
@@ -154,11 +154,7 @@
                                   </mat-option>
                                 </mat-autocomplete>
                               </mat-form-field>
-                            <!-- <div class="form-group">
-                                <label for="module">Designation du module:</label>
-                                <input name="designation" [(ngModel)]="module.designation" type="text" id="module"
-                                    required>
-                            </div> -->
+                            
                             <button *ngIf="!editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
                             <button *ngIf="editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
                             <button *ngIf="editModule" style="margin-left: 1em;" (click)="addModule()" type="submit" class="btn btn-danger">Annuler</button>

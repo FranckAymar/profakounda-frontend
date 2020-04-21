@@ -85,7 +85,10 @@ export const URL = {
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
     mettreEnLigne : consts.host+ consts.nameProject +'admin/acceptermiseenligne',
     refuserMiseEnLigne : consts.host+ consts.nameProject +'admin/refusermiseenligne',
-
+    rechercherFomationEnLigne : consts.host+ consts.nameProject +'admin/rechercherFomationEnLigne',
+    supprimerMiseEnligne : consts.host+ consts.nameProject +'admin/supprimerMiseEnligne',
+    
+   
     //Détails formations
     listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',

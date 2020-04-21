@@ -1,17 +1,13 @@
-import { URL } from 'src/app/API_url/config';
-import { ListFormationsService } from './../services/list-formations.service';
 import { Component, OnInit } from '@angular/core';
-import { FilterArrayPipe } from './filter.pipe';
+import { FormationMangementeService } from '../services/formationMangemente.service';
+import { URL } from 'src/app/API_url/config';
 
 @Component({
-  selector: 'app-list-formations',
-  templateUrl: './list-formations.component.html',
-  styleUrls: ['./list-formations.component.css'],
-  providers: [FilterArrayPipe],
+  selector: 'app-formations-managemente',
+  templateUrl: './formations-managemente.component.html',
+  styleUrls: ['./formations-managemente.component.css']
 })
-
-export class ListFormationsComponent implements OnInit {
-
+export class FormationsManagementeComponent implements OnInit {
 
   //Map
 
@@ -19,16 +15,13 @@ export class ListFormationsComponent implements OnInit {
   lng: number = -4.049957191526247;
   radius: number = 1000;
   zoom: number = 11;
-
-
   valeur ="";
-  ladate = new Date();
-  
-
+  error:string;
   propositionFormations = [];
   modulesFormation = [];
   FormationFiltres = [];
   urlServer = URL.getPhoto;
+  FormationEnLignes: any = [];
 
   //Nombre de données à chargées à chaque page
   numberDataOfPage: number = 15;
@@ -40,11 +33,39 @@ export class ListFormationsComponent implements OnInit {
   totalPage: number
   totalPageArray: Array<any>;
 
-  constructor(private listFormationsService: ListFormationsService) { }
-
+  constructor(private formationMangementeService:FormationMangementeService) { }
 
   ngOnInit() {
     this.onGetListFormation(this.page);
+    //this.listeFormationEnligne();
+  } 
+  
+  //listeFormationEnligne() { 
+  
+   // this.formationMangementeService.onFetchFormationEnligne()
+   // .subscribe(
+    //  (response)=>{
+     //   this.FormationEnLignes = response;
+     // },
+      //(error)=>{
+      //  console.log("Une erreur s'est produite: "+error);
+      //}
+   // )
+  //}
+
+
+  supprimerMiseEnLigne(id){
+    this.formationMangementeService.supprimerMiseEnLigne(id).subscribe(
+    
+      (response)=>{
+
+        this.error = response['error'];
+        this.onGetListFormation(this.page);
+      },
+      (error)=>{
+        console.log("Error de suppression: "+error);
+      }
+    )
 
   }
 
@@ -52,7 +73,7 @@ export class ListFormationsComponent implements OnInit {
 
     this.page = pageActive;
 
-    this.listFormationsService.getListPropositionFormations(this.page, this.numberDataOfPage).subscribe(
+    this.formationMangementeService.getListPropositionFormations(this.page, this.numberDataOfPage).subscribe(
 
 
       (resp) => {
@@ -87,7 +108,7 @@ export class ListFormationsComponent implements OnInit {
   
   OnFiltreFormation(filtre:String){
     
-    this.listFormationsService.getFilterFormation(filtre).subscribe(
+    this.formationMangementeService.getFilterFormation(filtre).subscribe(
     
       (reponse)=>{
         
@@ -101,7 +122,6 @@ export class ListFormationsComponent implements OnInit {
       }
     )
   }
-
 
   inititalizeCoordMap(lat: number, long: number, radius: number, zoom: number) {
 

@@ -34,6 +34,8 @@ import { AllConsultationsCustomersComponent } from './all-consultations-customer
 import { VilleService } from './services/ville.service';
 import { VilleComponent } from './ville/ville.component';
 import { CauserefusComponent } from './causerefus/causerefus.component';
+import { FormationsManagementeComponent } from './formations-managemente/formations-managemente.component';
+import { FormationMangementeService } from './services/formationMangemente.service';
 
 
 
@@ -112,12 +114,13 @@ const adminRouter : Routes = [
         path : 'causerefus',
         component : CauserefusComponent
         
-      }
+      },
 
-
-      
-
-
+      {
+        path : 'rechercherFomationEnLigne',
+        component : FormationsManagementeComponent
+        
+      } 
     ]}
 
 ] ;
@@ -143,7 +146,8 @@ const adminRouter : Routes = [
                 AllCustomersComponent,
                 AllConsultationsCustomersComponent,
                 VilleComponent,
-                CauserefusComponent ],
+                CauserefusComponent,
+                FormationsManagementeComponent ],
   imports: [
     CommonModule, 
     RouterModule.forChild(adminRouter),
@@ -169,7 +173,8 @@ const adminRouter : Routes = [
     JourService,
     VilleService,
     FormationService, 
-    CauserefusService
+    CauserefusService,
+    FormationMangementeService
   ]
 })
 export class AdminModule { }

@@ -17,10 +17,10 @@ export class ListFormationsService {
 
     let params = new HttpParams().set("page", page).set("total", numberDataOfPage);
     if (page && numberDataOfPage) {
-      return this.httpClient.get(URL.listPropositionFormations, { params: params });
+      return this.httpClient.get(URL.rechercherFomationEnLigne, { params: params });
     }
 
-    return this.httpClient.get(URL.listPropositionFormations);
+    return this.httpClient.get(URL.rechercherFomationEnLigne);
   }
 
   

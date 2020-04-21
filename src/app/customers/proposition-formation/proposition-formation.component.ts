@@ -36,6 +36,7 @@ export class PropositionFormationComponent implements OnInit {
   modules: any = [];
   hours: any = [];
   jours: any = [];
+  propositions: any = [];
   formations: any = [];
   heure:Heure = new Heure('','');
   lambda:Lambda;
@@ -45,7 +46,7 @@ export class PropositionFormationComponent implements OnInit {
   proposition:PropositionFormation= new PropositionFormation(0,'',sessionStorage.getItem(this.signInService.USERNAME));
   niveauForme:NiveauForme = new NiveauForme(0,'',null,null,null,sessionStorage.getItem(this.signInService.USERNAME)); ;
   module:Module = new Module(0,'',null,sessionStorage.getItem(this.signInService.USERNAME));;
- 
+  propostionLoad = {} ;
   //Variable for map
 
   lat: number = 5.338390;
@@ -75,9 +76,6 @@ export class PropositionFormationComponent implements OnInit {
     
   ngOnInit() {
     this.onFetchNiveaux();
-    this.onFetchLevelTeach();
-    this.rechercherDisponibilte();
-    this.rechercherModules();
     this.rechercherProposition();
     this.onFetchFormations();
     this.onFetchJoursString();
@@ -137,23 +135,40 @@ export class PropositionFormationComponent implements OnInit {
       }
     )
   }
-    addNiveau(){
+    addNiveau(id){
       this.edit = false;
-      this.niveauForme = new NiveauForme(0,'',null,null,this.proposition.id,sessionStorage.getItem(this.signInService.USERNAME));
+      this.niveauForme = new NiveauForme(0,'',null,null,id,sessionStorage.getItem(this.signInService.USERNAME));
     }
     addHour(){
       this.hours.push(this.heure);
       this.heure = new Heure('','');
     }
-    addProposition(){
-     this.propositionFormation = new PropositionFormation(0,'',sessionStorage.getItem(this.signInService.USERNAME));
+    getProposition(proposition){
+      this.propositionFormation = new PropositionFormation(proposition.id,proposition.description,sessionStorage.getItem(this.signInService.USERNAME));
+     
     }
-    addDisponibilite(){
-      this.disponibilite = new Disponibilite('',[],this.proposition.id,sessionStorage.getItem(this.signInService.USERNAME));
+    addDisponibilite(id){
+      this.proposition= new PropositionFormation(id,'',sessionStorage.getItem(this.signInService.USERNAME));
+      this.rechercherDisponibilite(id);
+     
      }
-    addModule(){
+     rechercherDisponibilite(id){
+this.propositionFormationService.rechercherDisponibilites(id)
+    .subscribe(
+      (response)=>{
+        this.disponibilites = response;
+        this.disponibilite = new Disponibilite('',[],id,sessionStorage.getItem(this.signInService.USERNAME));
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+     }
+    addModule(m,id){
       this.editModule = false;
-      this.module = new Module(0,'',this.proposition.id,sessionStorage.getItem(this.signInService.USERNAME));
+      this.modules = m;
+      this.module = new Module(0,'',id,sessionStorage.getItem(this.signInService.USERNAME));
+      console.log(this.module);
     }
     
     enregistrerProposition(){
@@ -162,7 +177,8 @@ export class PropositionFormationComponent implements OnInit {
           this.propositionFormationService.modifierProposition(this.propositionFormation)
           .subscribe(
             (response)=>{
-              
+              alert("modification effectuée avec succès.");
+              document.getElementById('ajouterDescription').click();
               this.propositionFormation = new PropositionFormation(0,'',sessionStorage.getItem(this.signInService.USERNAME));
               this.rechercherProposition();
             },
@@ -177,6 +193,7 @@ export class PropositionFormationComponent implements OnInit {
         (response)=>{
           
           this.propositionFormation = new PropositionFormation(0,'',sessionStorage.getItem(this.signInService.USERNAME));
+          document.getElementById('ajouterDescription').click();
           this.rechercherProposition();
         },
         (error)=>{
@@ -206,16 +223,17 @@ export class PropositionFormationComponent implements OnInit {
   onSaveLevelTeach(object){
     if(!this.edit)
     {
+  
       this.propositionFormationService.onSaveNiveauEnseigne(object)
     .subscribe(
       (response)=>{
         this.errorNiveaux = response['error'];
         if(!this.errorNiveaux)
         {
-          this.niveauForme = new NiveauForme(0,'',null,null,this.proposition.id,sessionStorage.getItem(this.signInService.USERNAME));
+          this.niveauForme = new NiveauForme(0,'',null,null,0,sessionStorage.getItem(this.signInService.USERNAME));
           document.getElementById('niveauEnseigne').click();
         }
-        this.onFetchLevelTeach();
+        this.rechercherProposition();
         this.onFetchNiveaux();
       },
       (error)=>{
@@ -231,10 +249,10 @@ export class PropositionFormationComponent implements OnInit {
         this.errorNiveaux = response['error'];
         if(!this.errorNiveaux)
         {
-          this.niveauForme = new NiveauForme(0,'',null,null,this.proposition.id,sessionStorage.getItem(this.signInService.USERNAME));
+          this.niveauForme = new NiveauForme(0,'',null,null,0,sessionStorage.getItem(this.signInService.USERNAME));
           document.getElementById('niveauEnseigne').click();
         }
-        this.onFetchLevelTeach();
+        this.rechercherProposition();
         this.onFetchNiveaux();
       },
       (error)=>{
@@ -251,12 +269,13 @@ export class PropositionFormationComponent implements OnInit {
       .subscribe(
         (response)=>{
           this.errorModule = response['error'];
+          this.modules = response['modules'];
           if(!this.errorModule)
           {
-            this.module = new Module(0,'',this.proposition.id,sessionStorage.getItem(this.signInService.USERNAME));
+            this.module = new Module(0,'',response["propositionId"],sessionStorage.getItem(this.signInService.USERNAME));
           }
-        this.rechercherModules();
         this.onFetchFormations();
+        this.rechercherProposition();
         },
         (error)=>{
           console.log("Erreur enregistrement du module : "+error);
@@ -268,13 +287,14 @@ export class PropositionFormationComponent implements OnInit {
       .subscribe(
         (response)=>{
           this.errorModule = response['error'];
+          this.modules = response['modules'];
           if(!this.errorModule)
           {
-            this.module = new Module(0,'',this.proposition.id,sessionStorage.getItem(this.signInService.USERNAME));
+            this.module = new Module(0,'',response["propositionId"],sessionStorage.getItem(this.signInService.USERNAME));
             this.editModule = false;
           }
-        this.rechercherModules();
         this.onFetchFormations();
+        this.rechercherProposition();
         },
         (error)=>{
           console.log("Erreur enregistrement du module : "+error);
@@ -312,12 +332,24 @@ export class PropositionFormationComponent implements OnInit {
     )
 
   }
+  getMdemandemMiseEnLigne(id){
+    this.propositionFormationService.demandeMiseEnLigne(id)
+    .subscribe(
+      (response)=>{
+        this.rechercherProposition();
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+
+  }
 
   deleteHour(id){
     this.propositionFormationService.deleteDisponibiliteByHour(id)
     .subscribe(
       (response)=>{
-        this.rechercherDisponibilte();
+        this.rechercherDisponibilite(this.proposition.id);
         this.onFetchJoursString();
       },
       (error)=>{
@@ -326,11 +358,11 @@ export class PropositionFormationComponent implements OnInit {
     )
   }
   deleteDay(dayId){
-    this.lambda = new Lambda(dayId,sessionStorage.getItem(this.signInService.USERNAME));
+    this.lambda = new Lambda(dayId,sessionStorage.getItem(this.signInService.USERNAME),this.proposition.id);
     this.propositionFormationService.deleteDisponibiliteByDay(this.lambda)
     .subscribe(
       (response)=>{
-        this.rechercherDisponibilte();
+        this.rechercherDisponibilite(this.proposition.id);
         this.onFetchJoursString();
       },
       (error)=>{
@@ -344,7 +376,7 @@ export class PropositionFormationComponent implements OnInit {
     this.propositionFormationService.deleteContratById(id)
     .subscribe(
       (response)=>{
-        this.onFetchLevelTeach();
+        this.rechercherProposition();
         this.onFetchNiveaux();
       },
       (error)=>{
@@ -358,7 +390,8 @@ export class PropositionFormationComponent implements OnInit {
     this.propositionFormationService.deleteModuleById(id)
     .subscribe(
       (response)=>{
-        this.rechercherModules();
+        this.module = new Module(0,'',response['propositionId'],sessionStorage.getItem(this.signInService.USERNAME));
+        this.modules = response['modules'];
         this.onFetchFormations();
       },
       (error)=>{
@@ -368,42 +401,13 @@ export class PropositionFormationComponent implements OnInit {
 
   }
 
-  onFetchLevelTeach(){
-    this.propositionFormationService.onFetchLevelTeach(sessionStorage.getItem(this.signInService.USERNAME))
-    .subscribe(
-      (response)=>{
-        this.niveauxEnseignes = response;
-      },
-      (error)=>{
-        console.log("Erreur : "+error);
-      }
-    )
-  }
-  rechercherDisponibilte(){
-    this.propositionFormationService.rechercherDisponibilites(sessionStorage.getItem(this.signInService.USERNAME))
-    .subscribe(
-      (response)=>{
-        this.disponibilites = response;
-      },
-      (error)=>{
-        console.log("Erreur : "+error);
-      }
-    )
-  }
+  
   rechercherProposition(){
     this.propositionFormationService.rechercherProposition(sessionStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (response)=>{
-      
-        
-  
-        this.proposition = new PropositionFormation(response['id'],
-                                                    response['description'],
-                                                    sessionStorage.getItem(this.signInService.USERNAME),
-                                                    response['enLigne'],
-                                                    response['attenteMiseEnLigne']),
-                                                    response['refusMiseEnLigne'];
-       
+        this.propositions = response;
+        console.log(response);
       },
       (error)=>{
         console.log("Erreur : "+error);
@@ -416,27 +420,18 @@ export class PropositionFormationComponent implements OnInit {
     this.propositionFormation.id = this.proposition.id;
     this.proposition.username = sessionStorage.getItem(this.signInService.USERNAME);
   }
-  rechercherModules(){
-    this.propositionFormationService.rechercherModules(sessionStorage.getItem(this.signInService.USERNAME))
-    .subscribe(
-      (response)=>{
-        this.modules = response;
-      },
-      (error)=>{
-        console.log("Erreur : "+error);
-      }
-    )
-  }
+ 
   onSaveDisponibilite(data){
     this.disponibilite.heure = this.hours;
     this.propositionFormationService.onSaveDisponibilte(this.disponibilite)
     .subscribe(
       (response)=>{
         this.errorJour = response["error"];
-        this.disponibilite = new Disponibilite('',[],this.proposition.id,sessionStorage.getItem(this.signInService.USERNAME));
+        // this.disponibilite = new Disponibilite('',[],response["propositionId"],sessionStorage.getItem(this.signInService.USERNAME));
           this.hours =[];
-        this.rechercherDisponibilte();
+        this.rechercherDisponibilite(response["propositionId"]);
         this.onFetchJoursString();
+        this.rechercherProposition();
       
       },
       (error)=>{
@@ -476,11 +471,9 @@ export class PropositionFormationComponent implements OnInit {
 
   onSaveCoordMap() {
 
-    let username = sessionStorage.getItem(this.signInService.USERNAME) ;
-
     this.coordMapModel  = new CoordMapModel(this.zoom, this.lat, this.lng , this.radius) ;
 
-    this.propositionFormationService.saveCoordMap(this.coordMapModel, username).subscribe(
+    this.propositionFormationService.saveCoordMap(this.coordMapModel, this.propostionLoad).subscribe(
 
       (resp) => {
           console.log(resp);
@@ -500,6 +493,10 @@ export class PropositionFormationComponent implements OnInit {
   demandeMiseLigne(){
 
 
+  }
+
+  loadPropostion(id){
+    this.propostionLoad = id ;
   }
 
 }

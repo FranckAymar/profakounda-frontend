@@ -1,33 +1,35 @@
-<div class="col-md-12">
+<div style="margin:auto;width:15em">
+ <button data-toggle="modal" data-target="#addDesc" class="btn btn-info"><i class="fa fa-plus"></i> Nouvelle proposition</button>
+</div>
+
+<div *ngFor="let p of propositions" style="margin-top: 1em;"class="col-md-12">
     <div class="box-inn-sp">
         <div class="inn-title">
-            <h4>Mes formations</h4>
-            <span *ngIf="!proposition.enLigne"  class="label label-warning pull">Mode édition</span>
-            <span *ngIf="proposition.enLigne"  class="label label-success">En ligne</span>
-            <span *ngIf="proposition.refusMiseEnLigne"  class="label label-danger">Refusé</span>
-            <span *ngIf="proposition.attenteMiseEnLigne"  class="label label-info">En attente</span>
+            <h5 *ngIf="p.proposition.enLigne" style="color: green;">En ligne</h5>
+            <h5 *ngIf="!p.proposition.attenteMiseEnLigne && !p.proposition.enLigne" style="color: yellow;">En édition</h5>
+            <h5 *ngIf="p.proposition.attenteMiseEnLigne" style="color: red;">En attende de validation</h5>
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
                 <p>
-                    <button data-toggle="modal" data-target="#ajouterDescription" (click)="addProposition()" class="btn btn-danger btn btn-block">Description</button>
+                    <button data-toggle="modal" data-target="#ajouterDescription" (click)="getProposition(p.proposition)" class="btn btn-danger btn btn-block">Description</button>
                 </p>
              
-                <div *ngIf="proposition.description" class="row">
-                    <button (click)="addNiveau()" type="button" data-toggle="modal" data-target="#niveauEnseigne"
+                <div  class="row">
+                    <button (click)="addNiveau(p.proposition.id)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
                                 class="btn btn-primary">
                                 Niveau enseigné
                     </button>
-                    <button style="margin-left: 1em;" (click)="addModule()" type="button" data-toggle="modal" data-target="#modules"
+                    <button style="margin-left: 1em;" (click)="addModule(p.modules,p.proposition.id)" type="button" data-toggle="modal" data-target="#modules"
                                 class="btn btn-info">
                                 Modules enseignés
                     </button>
                     
-                    <button style="margin-left: 1em;" (click)="addDisponibilite()" type="button" data-toggle="modal" data-target="#disponibilite"
+                    <button style="margin-left: 1em;" (click)="addDisponibilite(p.proposition.id)" type="button" data-toggle="modal" data-target="#disponibilite"
                         class="btn btn-outline-success">
                         Disponibilités
                     </button>
-                    <button style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
+                    <button (click)="loadPropostion(p.proposition.id)" style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
                         class="btn btn-outline-dark">
                         Zone Intervention
                     </button>
@@ -45,10 +47,10 @@
                     </thead>
                     <tbody>
 
-                        <tr *ngFor="let n of niveauxEnseignes">
-                            <td>{{n.niveau}}</td>
-                            <td>{{n.prixMin}} Eco</td>
-                            <td>{{n.prixMax}} Eco</td>
+                        <tr *ngFor="let n of p.contrats">
+                            <td>{{n.niveau.libelle}}</td>
+                            <td>{{n.minMontant}} Eco</td>
+                            <td>{{n.maxMontant}} Eco</td>
                             <td><button data-toggle="modal" data-target="#niveauEnseigne" (click)="getContrat(n.id)"
                                     class="updateButton"><i class="fa fa-edit"></i></button></td>
                             <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i
@@ -59,11 +61,7 @@
                     </tbody>
                 </table>
             </div>
-            <button click="mettreEnLigne()" style="margin-left: 1em;" type="button" 
-                        class="btn btn-success">
-                        
-                        Mettre en ligne
-            </button>
+            <button *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning">Mettre en ligne</button>
         </div>
     </div>
 </div>
@@ -156,11 +154,7 @@
                                   </mat-option>
                                 </mat-autocomplete>
                               </mat-form-field>
-                            <!-- <div class="form-group">
-                                <label for="module">Designation du module:</label>
-                                <input name="designation" [(ngModel)]="module.designation" type="text" id="module"
-                                    required>
-                            </div> -->
+                            
                             <button *ngIf="!editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
                             <button *ngIf="editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
                             <button *ngIf="editModule" style="margin-left: 1em;" (click)="addModule()" type="submit" class="btn btn-danger">Annuler</button>
@@ -296,24 +290,37 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form action="" (ngSubmit)="enregistrerProposition()" #k="ngForm">
-                            <textarea class="form-control" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+                <form action="" (ngSubmit)="enregistrerProposition()" #k="ngForm">
+                    <textarea class="form-control" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+                        {{proposition.description}}
+                    </textarea>
+                    <button [disabled]="k.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-                            </textarea>
-                            <button [disabled]="k.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
-                        </form>
-                    </div>
-                    <div *ngIf="proposition.description" class="col-md-6">
-                        <div  class="card card-body">
-                            {{proposition.description}}
+<div class="modal fade" id="addDesc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">DESCRITPION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" (ngSubmit)="enregistrerProposition()" #l="ngForm">
+                    <textarea class="form-control" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
 
-
-                        </div>
-                        <button  (click)="modifierDescription()" class="btn btn-warning">Modifier</button>
-                    </div>
-                </div>
+                    </textarea>
+                    <button  [disabled]="l.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
 
             </div>
             <div class="modal-footer">

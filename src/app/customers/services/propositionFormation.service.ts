@@ -63,9 +63,9 @@ export class PropositionFormationService{
      }
 
      //Save CoordMap
-     saveCoordMap(coordMap : CoordMapModel, username) {
+     saveCoordMap(coordMap : CoordMapModel, idPropostion) {
 
-        let params = new HttpParams().set("username", username) ;
+        let params = new HttpParams().set("idPropostion", idPropostion) ;
         return this.httpClient.post(URL.enregistrerCoordMap, coordMap, {params : params}) ;
 
      }
@@ -73,5 +73,18 @@ export class PropositionFormationService{
      rechercherAllProposition(page, numberDataOfPage) : Observable<any>{
         let params = new HttpParams().set("page", page).set("total", numberDataOfPage) ;
         return this.httpClient.get(URL.getAllPparticulierPropositions, {params : params});
+    }
+
+    demandeMiseEnLigne(idPrposition) : Observable<any> {
+        return this.httpClient.post(URL.demandeMiseEnLigne,idPrposition);
+    }
+
+    mettreEnLigne(idProposition) : Observable<any>{
+        return this.httpClient.post(URL.mettreEnLigne, idProposition);
+    }
+
+    refuserMiseEnLign(idProposition, idCause) : Observable<any>{
+        let params = new HttpParams().set("idProposition", idProposition).set("idCause", idCause);
+        return this.httpClient.post(URL.refuserMiseEnLigne,{params : params})
     }
 }

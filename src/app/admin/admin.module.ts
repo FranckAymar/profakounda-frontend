@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { PropostionFormationsAdminService } from './services/propostion-formations-admin.service';
 import { CauserefusService } from './services/causerefus.service';
 import { AdminGuard } from '../guard/admin.guard';
@@ -38,6 +39,7 @@ import { CauserefusComponent } from './causerefus/causerefus.component';
 import { FormationsManagementeComponent } from './formations-managemente/formations-managemente.component';
 import { FormationMangementeService } from './services/formationMangemente.service';
 import { PropostionFormationsAdminComponent } from './propostion-formations-admin/propostion-formations-admin.component';
+import { DetailsPropostionFormationAdminComponent } from './details-propostion-formation-admin/details-propostion-formation-admin.component';
 
 
 
@@ -122,7 +124,14 @@ const adminRouter : Routes = [
         path : 'propositonsformations',
         component : PropostionFormationsAdminComponent
         
-      } 
+      },
+
+      {
+        path : 'propositonsformations/:id',
+        component : DetailsPropostionFormationAdminComponent
+        
+      }  
+
     ]}
 
 ] ;
@@ -150,7 +159,8 @@ const adminRouter : Routes = [
                 VilleComponent,
                 CauserefusComponent,
                 FormationsManagementeComponent,
-                PropostionFormationsAdminComponent ],
+                PropostionFormationsAdminComponent,
+                DetailsPropostionFormationAdminComponent ],
   imports: [
     CommonModule, 
     RouterModule.forChild(adminRouter),
@@ -163,7 +173,10 @@ const adminRouter : Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCdrVoDFD_XTsAxUo2-VH0HTLX5IrdfC_E'
+    }) ,
 
 
   ], 

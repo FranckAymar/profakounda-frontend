@@ -23,6 +23,12 @@ export class PropostionFormationsAdminService {
 
   }
 
+  fetchPropositionParId(idProposition): Observable<any> {
+    
+    return this.httpClient.get(URL.recupererAllPropostionFormation+ "/"+ idProposition );
+
+  }
+
 
   mettreEnLigne(idProposition): Observable<any> {
     return this.httpClient.post(URL.mettreEnLigne, idProposition);
@@ -30,7 +36,7 @@ export class PropostionFormationsAdminService {
 
   refuserMiseEnLigne(idProposition, idCause): Observable<any> {
     let params = new HttpParams().set("idProposition", idProposition).set("idCause", idCause);
-    return this.httpClient.post(URL.refuserMiseEnLigne, { params: params })
+    return this.httpClient.post(URL.refuserMiseEnLigne, null,{ params: params });
   }
 
 }

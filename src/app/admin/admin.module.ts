@@ -1,3 +1,4 @@
+import { PropostionFormationsAdminService } from './services/propostion-formations-admin.service';
 import { CauserefusService } from './services/causerefus.service';
 import { AdminGuard } from '../guard/admin.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +37,7 @@ import { VilleComponent } from './ville/ville.component';
 import { CauserefusComponent } from './causerefus/causerefus.component';
 import { FormationsManagementeComponent } from './formations-managemente/formations-managemente.component';
 import { FormationMangementeService } from './services/formationMangemente.service';
+import { PropostionFormationsAdminComponent } from './propostion-formations-admin/propostion-formations-admin.component';
 
 
 
@@ -117,8 +119,8 @@ const adminRouter : Routes = [
       },
 
       {
-        path : 'rechercherFomationEnLigne',
-        component : FormationsManagementeComponent
+        path : 'propositonsformations',
+        component : PropostionFormationsAdminComponent
         
       } 
     ]}
@@ -147,7 +149,8 @@ const adminRouter : Routes = [
                 AllConsultationsCustomersComponent,
                 VilleComponent,
                 CauserefusComponent,
-                FormationsManagementeComponent ],
+                FormationsManagementeComponent,
+                PropostionFormationsAdminComponent ],
   imports: [
     CommonModule, 
     RouterModule.forChild(adminRouter),
@@ -174,7 +177,8 @@ const adminRouter : Routes = [
     VilleService,
     FormationService, 
     CauserefusService,
-    FormationMangementeService
+    FormationMangementeService,
+    PropostionFormationsAdminService
   ]
 })
 export class AdminModule { }

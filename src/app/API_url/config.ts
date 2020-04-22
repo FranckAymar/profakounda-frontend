@@ -85,12 +85,11 @@ export const URL = {
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
     mettreEnLigne : consts.host+ consts.nameProject +'admin/acceptermiseenligne',
     refuserMiseEnLigne : consts.host+ consts.nameProject +'admin/refusermiseenligne',
-    rechercherFomationEnLigne : consts.host+ consts.nameProject +'admin/rechercherFomationEnLigne',
     supprimerMiseEnligne : consts.host+ consts.nameProject +'admin/supprimerMiseEnligne',
     
    
     //Détails formations
-    listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
+    listPropositionFormationsEnligne : consts.host+ consts.nameProject +'details/listpropositionsenligne',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
     FilterPropositionFormation : consts.host+ consts.nameProject +'details/fiterDeFormation',
     getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier',
@@ -122,5 +121,8 @@ export const URL = {
     ajouterRefus : consts.host+ consts.nameProject + 'admin/enregistercause',
     recupererRefus : consts.host+ consts.nameProject + 'causerefus',
 
-    
+
+    //Administration propostion de formation
+    recupererAllPropostionFormation :  consts.host+ consts.nameProject + 'admin/propositions',
+
 }

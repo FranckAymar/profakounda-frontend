@@ -56,7 +56,8 @@ export class SignInComponent implements OnInit {
     let password = this.loginForm.value['password'];
     
     let token = btoa(username + ':' + password);
-    console.log(token);
+    console.log(sessionStorage.getItem(this.signInService.TOKEN));
+    
     
     try {
       // synchronous operation

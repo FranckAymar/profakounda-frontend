@@ -406,8 +406,8 @@ this.propositionFormationService.rechercherDisponibilites(id)
     this.propositionFormationService.rechercherProposition(sessionStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (response)=>{
+        
         this.propositions = response;
-        console.log(response);
       },
       (error)=>{
         console.log("Erreur : "+error);

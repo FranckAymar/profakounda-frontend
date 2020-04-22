@@ -40,7 +40,7 @@ const appRouter : Routes = [
   declarations: [
     AppComponent,
     LoadingComponent,
-    FilterPipe,    
+    FilterPipe,
   ],
   imports: [
     BrowserModule, 

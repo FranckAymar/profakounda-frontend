@@ -57,7 +57,7 @@ export class FormationsManagementeComponent implements OnInit {
   supprimerMiseEnLigne(id){
     this.formationMangementeService.supprimerMiseEnLigne(id).subscribe(
     
-      (response)=>{
+      (response)=>{ 
 
         this.error = response['error'];
         this.onGetListFormation(this.page);

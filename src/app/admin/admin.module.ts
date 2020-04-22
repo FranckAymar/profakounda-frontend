@@ -117,7 +117,7 @@ const adminRouter : Routes = [
       },
 
       {
-        path : 'rechercherFomationEnLigne',
+        path : 'rechercherFormationEnLigne',
         component : FormationsManagementeComponent
         
       } 

@@ -1,8 +1,9 @@
 <div class="search-top">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="search-form"> 
+                    
                         <div class="sf-type">
                             <div class="sf-input">
                                 <input type="text" 
@@ -15,6 +16,34 @@
                         </div>    
                 </div>
             </div>
+            <div class="col-md-4 ">
+                <!-- Dropdown Trigger -->
+              <!--<div class="col-md-10 col-sm-3 col-xs-6 dropdown"> 
+                <a class='waves-effect dropdown-button top-user-pro'   type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-cogs" aria-hidden="true"></i>  Gerer formations<i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+              </div>
+                !-- Dropdown Structure --
+                <ul id='top-menu' class='top-menu-sty dropdown-menu dropdown-menu-right'>
+                    <li><a routerLink="editprofil" class="waves-effect"><i class="fa fa-cogs" aria-hidden="true"></i>Editer informations</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a (click) ="logout()" class="ho-dr-con-last waves-effect"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+            -->
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-cogs" aria-hidden="true"></i> Dropdown button <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </div>
+              </div>
         </div>
     </div>
 </div> 
@@ -46,7 +75,7 @@
                                     <a href="course-details.html">
                                         <h3>{{propositionFormation.prenomParticulier}}</h3>
                                     </a>
-                                    <h4 style="display: inline;" 
+                                    <h4 style="display: inline;"  
                                     *ngFor="let moduleFomation of propositionFormation.moduleFormations; let i = index" [attr.data-index]="i">
                                     {{moduleFomation.libelle}} <span *ngIf="propositionFormation.moduleFormations.length !== i+1">/</span>
                                     </h4>
@@ -79,7 +108,7 @@
                     (click)= "onGetListFormation(i+1)" *ngFor="let p of totalPageArray ; let i=index"><a>{{i+1}}</a></li>
                 </ul>
             </div>
-
+ 
         </div>
             
 

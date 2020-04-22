@@ -1,7 +1,10 @@
+import { URL } from 'src/app/API_url/config';
+import { CauserefusService } from './../services/causerefus.service';
 import { PropostionFormationsAdminService } from './../services/propostion-formations-admin.service';
 import { Component, OnInit } from '@angular/core';
 
 import * as $ from 'jquery';
+import { MatGridTileHeaderCssMatStyler } from '@angular/material';
 
 @Component({
   selector: 'app-propostion-formations-admin',
@@ -18,17 +21,56 @@ export class PropostionFormationsAdminComponent implements OnInit {
 		 *  
 		 */
 
-     test ;
+    critereFiltre : number ;
+    idPropositionCourante : number ;
+    causeRefusId : number;
+
+    detailsPropositionFormation = {} ;
 
 
-  propositionsFormations = [] ;
+    propositionsFormations = [] ;
+    causeRefusTab = [];
 
-  constructor(private propostionFormService : PropostionFormationsAdminService) { }
+
+      //Map
+
+  lat: number = 5.338390;
+  lng: number = -4.097748;
+  radius: number = 1000;
+  zoom : number = 14 ;
+
+  urlServer = URL.getPhoto
+
+
+  constructor(private propostionFormService : PropostionFormationsAdminService,
+            private refusService : CauserefusService) { }
 
   ngOnInit() {
     //Rechercher toute les formations
     this.onFetchPropositionFormation() ;
+    this.onFetchCauseRefus() ;
+    
 
+  }
+
+
+ 
+
+  onFetchCauseRefus(){
+
+    this.refusService.fetchRefus().subscribe(
+
+      (resp)=>{
+
+        this.causeRefusTab = resp ;
+      },
+
+      (error)=>{
+
+        console.log(error);
+        
+      }
+    )
   }
 
 
@@ -48,6 +90,8 @@ export class PropostionFormationsAdminComponent implements OnInit {
   }
   
   onFetchPropositionFormation(critereFiltre? : number){
+
+    
     this.propostionFormService.fetchProposition(critereFiltre).subscribe(
 
 
@@ -65,5 +109,50 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
     )
   }
+
+
+  onAccorderMiseEnLigne(idProposition){
+    this.propostionFormService.mettreEnLigne(idProposition).subscribe(
+
+
+      (resp)=>{
+        
+        this.onFetchPropositionFormation(this.critereFiltre)
+
+      },
+      (error)=>{
+          console.log(error);
+          
+      }
+      
+
+    )
+  }
+
+  prepareToRefusEnLigne(idProposition){
+    this.idPropositionCourante = idProposition ;
+  }
+
+  onRefuserMiseEnLigne(){
+
+    this.propostionFormService.refuserMiseEnLigne(this.idPropositionCourante, this.causeRefusId).subscribe(
+
+
+      (resp)=>{
+        alert("Refus validé") ;
+        document.getElementById('closeModalChoixRefus').click() ;
+        this.onFetchPropositionFormation(this.critereFiltre) ;
+      },
+      (error)=>{
+
+        console.log(error);
+        
+      }
+      
+    )
+  }
+
+
+
 
 }

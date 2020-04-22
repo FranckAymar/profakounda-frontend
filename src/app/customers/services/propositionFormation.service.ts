@@ -79,12 +79,4 @@ export class PropositionFormationService{
         return this.httpClient.post(URL.demandeMiseEnLigne,idPrposition);
     }
 
-    mettreEnLigne(idProposition) : Observable<any>{
-        return this.httpClient.post(URL.mettreEnLigne, idProposition);
-    }
-
-    refuserMiseEnLign(idProposition, idCause) : Observable<any>{
-        let params = new HttpParams().set("idProposition", idProposition).set("idCause", idCause);
-        return this.httpClient.post(URL.refuserMiseEnLigne,{params : params})
-    }
 }

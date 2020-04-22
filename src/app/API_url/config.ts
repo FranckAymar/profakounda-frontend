@@ -83,14 +83,11 @@ export const URL = {
     deleteDisponibiliteByDay: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByDayId',
     deleteDisponibiliteByHour: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByHourId',
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
-    mettreEnLigne : consts.host+ consts.nameProject +'admin/acceptermiseenligne',
-    refuserMiseEnLigne : consts.host+ consts.nameProject +'admin/refusermiseenligne',
-    rechercherFomationEnLigne : consts.host+ consts.nameProject +'admin/rechercherFormationEnLigne',
-    supprimerMiseEnligne : consts.host+ consts.nameProject +'admin/supprimerMiseEnligne',
+    
     
    
     //Détails formations
-    listPropositionFormations : consts.host+ consts.nameProject +'details/listpropositions',
+    listPropositionFormationsEnligne : consts.host+ consts.nameProject +'details/listpropositionsenligne',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
     FilterPropositionFormation : consts.host+ consts.nameProject +'details/fiterDeFormation',
     getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier',
@@ -109,6 +106,7 @@ export const URL = {
     onFetchFormations : consts.host+ consts.nameProject +'formations',
     onFetchFormationsString : consts.host+ consts.nameProject +'formationsString',
     supprimerFormation : consts.host+ consts.nameProject +'supprimerFormation',
+ 
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
     getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier',
@@ -122,5 +120,11 @@ export const URL = {
     ajouterRefus : consts.host+ consts.nameProject + 'admin/enregistercause',
     recupererRefus : consts.host+ consts.nameProject + 'causerefus',
 
-    
+
+    //Administration propostion de formation
+    recupererAllPropostionFormation :  consts.host+ consts.nameProject + 'admin/propositions',
+    mettreEnLigne : consts.host+ consts.nameProject +'admin/acceptermiseenligne',
+    refuserMiseEnLigne : consts.host+ consts.nameProject +'admin/refusermiseenligne',
+    supprimerMiseEnligne : consts.host+ consts.nameProject +'admin/supprimerMiseEnligne',
+
 }

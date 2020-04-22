@@ -29,7 +29,8 @@
                 <form  [formGroup]="loginForm" class="s12" (submit)="onLogin()">
                     <div>
                         <div class="input-field s12">
-                            <input formControlName="username" type="text" data-ng-model="name" class="validate">
+                            <input formControlName="username" type="text" data-ng-model="name" class="validate" 
+                            autocomplete="email">
                             <label>Adresse e-mail</label>
                         </div>
                         <small *ngIf="loginForm.controls.username.errors?.email" class="invalid-feedback">

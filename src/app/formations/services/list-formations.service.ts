@@ -17,21 +17,21 @@ export class ListFormationsService {
 
     let params = new HttpParams().set("page", page).set("total", numberDataOfPage);
     if (page && numberDataOfPage) {
-      return this.httpClient.get(URL.rechercherFomationEnLigne, { params: params });
+      return this.httpClient.get(URL.listPropositionFormationsEnligne, { params: params });
     }
 
-    return this.httpClient.get(URL.rechercherFomationEnLigne);
+    return this.httpClient.get(URL.listPropositionFormationsEnligne);
   }
 
   
 getFilterFormation(filtre) : Observable<any> {
     if(filtre===""){
 
-      return this.httpClient.get(URL.listPropositionFormations);
+      return this.httpClient.get(URL.listPropositionFormationsEnligne);
     }
     else if(filtre===" "){
       
-      return this.httpClient.get(URL.listPropositionFormations);
+      return this.httpClient.get(URL.listPropositionFormationsEnligne);
     }
     else{
     return this.httpClient.get(URL.FilterPropositionFormation+ "/"+ filtre) ;

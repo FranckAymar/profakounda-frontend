@@ -83,9 +83,7 @@ export const URL = {
     deleteDisponibiliteByDay: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByDayId',
     deleteDisponibiliteByHour: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByHourId',
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
-    mettreEnLigne : consts.host+ consts.nameProject +'admin/acceptermiseenligne',
-    refuserMiseEnLigne : consts.host+ consts.nameProject +'admin/refusermiseenligne',
-    supprimerMiseEnligne : consts.host+ consts.nameProject +'admin/supprimerMiseEnligne',
+    
     
    
     //Détails formations
@@ -108,6 +106,7 @@ export const URL = {
     onFetchFormations : consts.host+ consts.nameProject +'formations',
     onFetchFormationsString : consts.host+ consts.nameProject +'formationsString',
     supprimerFormation : consts.host+ consts.nameProject +'supprimerFormation',
+ 
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
     getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier',
@@ -124,5 +123,8 @@ export const URL = {
 
     //Administration propostion de formation
     recupererAllPropostionFormation :  consts.host+ consts.nameProject + 'admin/propositions',
+    mettreEnLigne : consts.host+ consts.nameProject +'admin/acceptermiseenligne',
+    refuserMiseEnLigne : consts.host+ consts.nameProject +'admin/refusermiseenligne',
+    supprimerMiseEnligne : consts.host+ consts.nameProject +'admin/supprimerMiseEnligne',
 
 }

@@ -6,11 +6,15 @@
     <div class="box-inn-sp">
         <div class="inn-title">
             <h5 *ngIf="p.proposition.enLigne" style="color: green;">En ligne</h5>
-            <h5 *ngIf="!p.proposition.attenteMiseEnLigne && !p.proposition.enLigne && !p.proposition.refusMiseEnLigne"
-                 style="color: yellow;">En édition</h5>
+            <h5 *ngIf="!p.proposition.attenteMiseEnLigne && 
+                        !p.proposition.enLigne && 
+                        !p.proposition.refusMiseEnLigne &&
+                        !p.proposition.suppressionMiseEnLigne"
+                        style="color: yellow;">En édition</h5>
             <h5 *ngIf="p.proposition.attenteMiseEnLigne" style="color: red;">En attende de validation</h5>
             <h5 *ngIf="p.proposition.refusMiseEnLigne" style="color:darkorange;" 
                 data-toggle="tooltip" data-placement="right" title="{{p.proposition.causeRefus?.details}}">Refusée</h5>
+                <h5 *ngIf="p.proposition.suppressionMiseEnLigne" style="color: red;">Hors-ligne</h5>
 
         </div>
         <div class="tab-inn">

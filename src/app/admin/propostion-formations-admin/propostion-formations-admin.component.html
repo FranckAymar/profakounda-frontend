@@ -72,9 +72,11 @@
                                     </button>
                                     <ul id='top-menu' class='top-menu-sty dropdown-menu dropdown-menu-right'>
                                         <li><a (click)="onAccorderMiseEnLigne(p.id)"
-                                            [ngClass]="{isDisabled: !p.attenteMiseEnLigne 
-                                                                    &&!p.enLigne 
-                                                                    &&!p.refusMiseEnLigne
+                                            [ngClass]="{isDisabled: !p.attenteMiseEnLigne &&
+                                                                    !p.enLigne &&
+                                                                    !p.refusMiseEnLigne &&
+                                                                    !p.suppressionMiseEnLigne
+
                                                                     }"
                                             [routerLink]="[p.id]"
                                                  class="waves-effect">Détails</a>
@@ -86,7 +88,8 @@
                                                 class="waves-effect">Mettre en ligne</a>
                                         </li>
                                         <li class="divider"></li>
-                                        <li><a data-toggle="modal" data-target="#ajouterRefus" (click)="prepareToRefusEnLigne(p.id)"
+                                        <li><a data-toggle="modal" data-target="#ajouterRefus"
+                                             (click)="prepareToRefusEnLigne(p.id)"
                                              [ngClass]="{isDisabled: !p.attenteMiseEnLigne }" 
                                              class="ho-dr-con-last waves-effect">Refuser Mise en ligne</a>
                                         </li>

@@ -19,14 +19,12 @@ export class ListFormationsService {
     if (page && numberDataOfPage) {
       return this.httpClient.get(URL.listPropositionFormationsEnligne, { params: params });
     }
-
     return this.httpClient.get(URL.listPropositionFormationsEnligne);
   }
 
   
 getFilterFormation(filtre) : Observable<any> {
     if(filtre===""){
-
       return this.httpClient.get(URL.listPropositionFormationsEnligne);
     }
     else if(filtre===" "){
@@ -34,9 +32,8 @@ getFilterFormation(filtre) : Observable<any> {
       return this.httpClient.get(URL.listPropositionFormationsEnligne);
     }
     else{
-    return this.httpClient.get(URL.FilterPropositionFormation+ "/"+ filtre) ;
+      return this.httpClient.get(URL.FilterPropositionFormation+ "/"+ filtre) ;
     }
-
   }
 
 }

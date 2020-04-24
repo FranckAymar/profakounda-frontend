@@ -127,4 +127,7 @@ export const URL = {
     refuserMiseEnLigne : consts.host+ consts.nameProject +'admin/refusermiseenligne',
     supprimerMiseEnligne : consts.host+ consts.nameProject +'admin/supprimerMiseEnligne',
 
+    //Dashboard
+    recupererDashBoard : consts.host+ consts.nameProject + 'admin/dashboard'
+
 }

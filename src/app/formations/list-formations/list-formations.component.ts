@@ -44,8 +44,12 @@ export class ListFormationsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.onGetListFormation(this.page);
 
+   this.onGetListFormation(this.page);
+
+   this.OnFormationFiltre(this.page);
+
+    
   }
 
   onGetListFormation(pageActive) {
@@ -56,7 +60,6 @@ export class ListFormationsComponent implements OnInit {
 
 
       (resp) => {
-
 
         this.sizeData = resp.totalData;
 
@@ -71,7 +74,6 @@ export class ListFormationsComponent implements OnInit {
         console.log(resp.data);
         
         this.propositionFormations = resp.data;
-
       },
 
 
@@ -85,15 +87,46 @@ export class ListFormationsComponent implements OnInit {
  
   }
   
-  OnFiltreFormation(filtre:String){
+  OnFiltreFormation(filtre:String){  
     
     this.listFormationsService.getFilterFormation(filtre).subscribe(
     
       (reponse)=>{
-        
         console.log(reponse);
         
         this.propositionFormations=reponse;
+      },
+
+      (erreur) => {
+        console.log("Une erreur s'est produite: " + erreur);
+      }
+    )
+  }
+
+
+
+  OnFormationFiltre(pageActive){
+
+    this.page = pageActive;
+    
+    this.listFormationsService.getFormationFiltrer(this.page, this.numberDataOfPage).subscribe(
+    
+      (reponse)=>{
+
+        this.sizeData = reponse.totalData;
+
+        this.totalPage = (this.sizeData / this.numberDataOfPage);
+
+        if (this.sizeData % this.numberDataOfPage != 0) {
+          this.totalPage = Math.ceil(this.totalPage);
+        }
+ 
+        this.totalPageArray = new Array(this.totalPage);
+
+        
+        console.log(reponse.data);
+        
+        this.propositionFormations=reponse.data;
       },
 
       (erreur) => {

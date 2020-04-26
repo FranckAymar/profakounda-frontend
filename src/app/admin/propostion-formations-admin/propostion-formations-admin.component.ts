@@ -119,6 +119,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
       (resp)=>{
         
+        alert("mise en ligne accordé") ;
         this.onFetchPropositionFormation(this.critereFiltre)
 
       },

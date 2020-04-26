@@ -1,5 +1,6 @@
 import { SignInService } from '../services/sign-in.service';
 import { Component, OnInit } from '@angular/core';
+import { ListFormationsService } from 'src/app/formations/services/list-formations.service';
 
 @Component({
   selector: 'app-header-home',
@@ -8,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderHomeComponent implements OnInit {
 
-
+  valeur="";
+  propositionFormations = [] ;
   authenticated : boolean;
 
 
-  constructor(private signInService : SignInService) { }
+  constructor(private signInService : SignInService,private listFormationsService : ListFormationsService) { }
 
 
   ngOnInit() {
@@ -20,4 +22,19 @@ export class HeaderHomeComponent implements OnInit {
     this.authenticated = this.signInService.isLogged() ;
   }
 
+  OnFiltreFormation(filtre:String){  
+   
+    this.listFormationsService.getFilterFormation(filtre).subscribe(
+    
+      (reponse)=>{
+        console.log(reponse);
+        
+        this.propositionFormations=reponse;
+      },
+
+      (erreur) => {
+        console.log("Une erreur s'est produite: " + erreur);
+      }
+    )
+  }
 }

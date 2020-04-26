@@ -71,7 +71,7 @@
                                         Action
                                     </button>
                                     <ul id='top-menu' class='top-menu-sty dropdown-menu dropdown-menu-right'>
-                                        <li><a (click)="onAccorderMiseEnLigne(p.id)"
+                                        <li><a
                                             [ngClass]="{isDisabled: !p.attenteMiseEnLigne &&
                                                                     !p.enLigne &&
                                                                     !p.refusMiseEnLigne &&
@@ -135,7 +135,7 @@
                     </div>
                     <button (click)="onRefuserMiseEnLigne()" type="submit" class="btn btn-primary">Enregistrer</button>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer"> 
                 <button id="closeModalChoixRefus" type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
             </div>
         </div>

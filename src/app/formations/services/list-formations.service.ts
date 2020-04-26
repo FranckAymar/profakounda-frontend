@@ -12,7 +12,6 @@ export class ListFormationsService {
     private httpClient: HttpClient
   ) { }
 
-
   getListPropositionFormations(page?, numberDataOfPage?): Observable<any> {
 
     let params = new HttpParams().set("page", page).set("total", numberDataOfPage);
@@ -24,6 +23,7 @@ export class ListFormationsService {
 
   
 getFilterFormation(filtre) : Observable<any> {
+  
     if(filtre===""){
       return this.httpClient.get(URL.listPropositionFormationsEnligne);
     }
@@ -36,4 +36,15 @@ getFilterFormation(filtre) : Observable<any> {
     }
   }
 
+  getFormationFiltrer(page?, numberDataOfPage?) : Observable<any> {
+  
+    let params = new HttpParams().set("page", page).set("total", numberDataOfPage);
+    if (page && numberDataOfPage) {
+      return this.httpClient.get(URL.Formationfiltre, { params: params });
+    }
+    return this.httpClient.get(URL.Formationfiltre);
+  }
+
 }
+
+

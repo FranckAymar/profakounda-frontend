@@ -11,7 +11,7 @@ export class AnoncesFormationComponent implements OnInit {
 
   valeur="";
   propositionFormations = [] ;
-  urlServer = URL.getPhoto ;
+  urlServer = URL.getPhoto;
 
   //Nombre de données à chargées à chaque page
   numberDataOfPage: number = 15;
@@ -55,25 +55,7 @@ export class AnoncesFormationComponent implements OnInit {
 
   }
 
-  OnFiltreFormation(filtre:String){  
-    
-    this.listFormationsService.getFilterFormation(filtre).subscribe(
-    
-      (reponse)=>{
-        
-        console.log(reponse);
-        
-        this.propositionFormations=reponse;
-        //this.onGetListFormations(this.page);
-      },
-
-      (erreur) => {
-        console.log("Une erreur s'est produite: " + erreur);
-      }
-    )
-  }
-
-  onGetListFormations(pageActive) {
+  onGetListFormationPlus(pageActive) {
 
     this.page = pageActive;
 
@@ -81,7 +63,6 @@ export class AnoncesFormationComponent implements OnInit {
 
 
       (resp) => {
-
 
         this.sizeData = resp.totalData;
 

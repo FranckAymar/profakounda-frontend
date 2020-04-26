@@ -75,11 +75,13 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
 
   supprimerMiseEnLigne(id){
+
+    confirm('Etes vous sur de cette action ?') ;
+
     this.propostionFormService.supprimerMiseEnLigne(id).subscribe(
     
       (response)=>{ 
-        alert("operation effectuée avec succès")
-        this.onFetchPropositionFormation() ;
+        this.onFetchPropositionFormation(this.critereFiltre) ;
          
       },
       (error)=>{

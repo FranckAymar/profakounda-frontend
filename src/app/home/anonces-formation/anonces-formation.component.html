@@ -6,20 +6,6 @@
                 <h2>Nos <span>Répétiteurs</span></h2>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="search-form"> 
-                <div class="sf-type">
-                    <div class="sf-input">
-                        <input type="text" 
-                        [(ngModel)]="valeur" id="sf-box" placeholder="Search">
-                    </div>
-                
-                </div>
-                <div class="sf-submit" >   
-                    <input  type="submit" (click)="OnFiltreFormation(valeur)" value="Rechercher">
-                </div>    
-        </div>
-        </div>
         <div class="row" *ngFor="let propositionFormation of propositionFormations">
             <a [routerLink]="['/formations/details-formation', propositionFormation.id]">
                 <div class="col-md-1"></div>
@@ -64,13 +50,11 @@
             </a>
         </div>
         <div class="con-title">
-            <a [routerLink]="['/formations']" >
+            <a [routerLink]="['/formations']" (click)="onGetListFormationPlus(1)">
                 <p>Voir plus ...</p>
             </a>
         </div>
-
-
        
-    </div>
+    </div> 
 </section>
 

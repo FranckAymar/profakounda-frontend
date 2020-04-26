@@ -314,5 +314,29 @@
             </div>
         </div>
     </div>
+    <div class="search-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="search-form">
+                       
+                            <div class="sf-type">
+                                <div class="sf-input">
+                                    <input type="text" id="sf-box" [(ngModel)]="expression" placeholder="Vous cherchez une formation ?">
+                                </div>
+                            </div>
+                            <div class="sf-submit">
+                                <a [routerLink]="['/formations']" >
+                                    <input type="submit" (click)="OnFiltreFormation(expression)" value="Search Course"> 
+                                </a> 
+                               
+                            </div>
+                           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 <!--END HEADER SECTION-->

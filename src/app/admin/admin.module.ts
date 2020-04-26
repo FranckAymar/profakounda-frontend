@@ -36,7 +36,6 @@ import { AllConsultationsCustomersComponent } from './all-consultations-customer
 import { VilleService } from './services/ville.service';
 import { VilleComponent } from './ville/ville.component';
 import { CauserefusComponent } from './causerefus/causerefus.component';
-import { FormationsManagementeComponent } from './formations-managemente/formations-managemente.component';
 import { FormationMangementeService } from './services/formationMangemente.service';
 import { PropostionFormationsAdminComponent } from './propostion-formations-admin/propostion-formations-admin.component';
 import { DetailsPropostionFormationAdminComponent } from './details-propostion-formation-admin/details-propostion-formation-admin.component';
@@ -158,7 +157,7 @@ const adminRouter : Routes = [
                 AllConsultationsCustomersComponent,
                 VilleComponent,
                 CauserefusComponent,
-                FormationsManagementeComponent,
+                
                 PropostionFormationsAdminComponent,
                 DetailsPropostionFormationAdminComponent ],
   imports: [

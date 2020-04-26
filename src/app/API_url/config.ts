@@ -91,7 +91,8 @@ export const URL = {
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
     FilterPropositionFormation : consts.host+ consts.nameProject +'details/fiterDeFormation',
     getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier',
-
+    Formationfiltre : consts.host+ consts.nameProject  + 'details/formationFiltre',
+    
 
     //JOUR
     enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour',
@@ -106,7 +107,7 @@ export const URL = {
     onFetchFormations : consts.host+ consts.nameProject +'formations',
     onFetchFormationsString : consts.host+ consts.nameProject +'formationsString',
     supprimerFormation : consts.host+ consts.nameProject +'supprimerFormation',
- 
+  
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
     getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier',

@@ -1,3 +1,4 @@
+import { Particulier } from './../../home/models/Particulier.model';
 import { PaiementService } from './../services/paiement.service';
 import { ForfaitService } from './../../admin/services/forfait.service';
 import { ParticulierService } from './../../customers/services/particulier.service';
@@ -40,7 +41,19 @@ export class DetailsAnnonceComponent implements OnInit {
 
   idPropositionFormation : number ;
 
-  propositionFormation = {} ;
+  propositionFormation = {
+    idParticulier : null ,
+    rayonIntervention : null,
+    prenomParticulier : null,
+    niveau : null,
+    description : null,
+    modulesFormations : null,
+    contrats : null,
+    disponibilites : null,
+    
+    
+
+  } ;
 
   forfaits = [] ;
  
@@ -54,7 +67,7 @@ export class DetailsAnnonceComponent implements OnInit {
 
   }
 
-  particulierDetail = {} ;
+  particulierDetail : Particulier = {} ;
 
   //Map
 

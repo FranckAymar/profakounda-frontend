@@ -1,3 +1,4 @@
+import { Particulier } from './../../home/models/Particulier.model';
 import { URL } from './../../API_url/config';
 import { SignInService } from './../../home/services/sign-in.service';
 import { ParticulierService } from './../services/particulier.service';
@@ -12,7 +13,7 @@ export class SidebarComponent implements OnInit {
 
   id: number;
   urlServer = URL.getPhoto;
-  particulier = {};
+  particulier : Particulier
 
   constructor(private particulierService: ParticulierService,
     private signInService: SignInService) { }

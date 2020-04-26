@@ -7,7 +7,7 @@
             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 
             <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="false"
-                [fillColor]="green" [strokeColor]="green" [radius]="radius" [clickable]="false"
+                 [radius]="radius" [clickable]="false"
                 (radiusChange)="changeRaduis($event)">
             </agm-circle>
         </agm-map>
@@ -357,7 +357,7 @@
                     <div class="columns">
                         <ul class="price">
                             <li>Nom : <strong>{{particulierDetail.nom}}</strong></li>
-                            <li>Prénoms : <strong>{{particulierDetail.prenom}}</strong></li>
+                            <li>Prénoms : <strong>{{particulierDetail.prenoms}}</strong></li>
                             <li> Numéro de téléphone : <strong>{{particulierDetail.telephone}}</strong>
                             </li>
                             <li>Adress e-mail : <strong>{{particulierDetail.email}}</strong></li>

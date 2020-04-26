@@ -165,7 +165,7 @@
                             
                             <button *ngIf="!editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
                             <button *ngIf="editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
-                            <button *ngIf="editModule" style="margin-left: 1em;" (click)="addModule()" type="submit" class="btn btn-danger">Annuler</button>
+                            <button *ngIf="editModule" style="margin-left: 1em;"  type="submit" class="btn btn-danger">Annuler</button>
                         </form>
                     </div>
                     <div class="col-md-6" style="height: 17em; overflow: auto;">
@@ -357,7 +357,7 @@
                     (zoomChange)="setZoom($event)">
 
                     <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="true"
-                        [fillColor]="red" [radius]="radius" (radiusChange)="changeRaduis($event)">
+                        [radius]="radius" (radiusChange)="changeRaduis($event)">
                     </agm-circle>
                 </agm-map>
 

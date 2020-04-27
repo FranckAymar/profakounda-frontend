@@ -1,3 +1,4 @@
+import { Particulier } from './../../home/models/Particulier.model';
 import { PaiementService } from './../services/paiement.service';
 import { ForfaitService } from './../../admin/services/forfait.service';
 import { ParticulierService } from './../../customers/services/particulier.service';
@@ -40,7 +41,19 @@ export class DetailsAnnonceComponent implements OnInit {
 
   idPropositionFormation : number ;
 
-  propositionFormation = {} ;
+  propositionFormation = {
+    idParticulier : null ,
+    rayonIntervention : null,
+    prenomParticulier : null,
+    niveau : null,
+    description : null,
+    modulesFormations : null,
+    contrats : null,
+    disponibilites : null,
+    
+    
+
+  } ;
 
   forfaits = [] ;
  
@@ -50,11 +63,12 @@ export class DetailsAnnonceComponent implements OnInit {
     forfaitId : null,
     username : null,
     numeroPaiement : null,
-    modePaiement : null
+    modePaiement : null,
+    token : null
 
   }
 
-  particulierDetail = {} ;
+  particulierDetail : Particulier = {} ;
 
   //Map
 
@@ -273,6 +287,11 @@ export class DetailsAnnonceComponent implements OnInit {
   //Proceder au payement
   onProcessToPayment() {
 
+    if(this.paiementDetails.modePaiement === "MOMO_SKAN" || this.paiementDetails.modePaiement === "MOOV_SKAN"){
+      alert('Pas encore disponible') ;
+      return ;
+    }
+
     this.paiementDetails.username = sessionStorage.getItem(this.signInService.USERNAME) ;
     this.paiementDetails.forfaitId = this.paiementDetails.forfait.id ;
 
@@ -281,8 +300,15 @@ export class DetailsAnnonceComponent implements OnInit {
 
       (resp)=>{
 
-        alert('Payement effectué');
-        this.closeModalPayment.nativeElement.click() ;
+        if(resp.code == 0){
+          alert('Payement effectué');
+         this.closeModalPayment.nativeElement.click() ;
+        }else{
+          alert("Une erreur s'est produite pendant le paiement, vérifiez votre numéro de téléphone ou votre code d'activation");
+
+        }
+
+        
       },
 
 
@@ -376,6 +402,17 @@ export class DetailsAnnonceComponent implements OnInit {
     $("#nextButton").addClass("hide");
   }
 
+  goToStep5(){
+     
+    $("#content4").addClass('hide');
+    $("#content5").removeClass('hide');
+    this.step = 'step5';
+
+    $("#step5").addClass("active");
+
+    $("#nextButton").addClass("hide");
+  }
+
  next() {
 
     if (this.step === 'step1') {
@@ -394,6 +431,12 @@ export class DetailsAnnonceComponent implements OnInit {
     else if (this.step === 'step3') {
      
       this.goToStep4() ;
+       
+         
+    }
+    else if (this.step === 'step4') {
+     
+      this.goToStep5() ;
        
          
     }

@@ -1,8 +1,14 @@
 <div style="margin-top: 2.5em;" class="sb2-1">
     <!--== USER INFO ==-->
+<<<<<<< HEAD
     <div  class="sb2-12">
         <ul>
             <li><img *ngIf="particulier.id" src="{{urlServer}}/{{particulier.id}}" alt="">
+=======
+    <div class="sb2-12">
+        <ul *ngIf="particulier">
+            <li><img  src="{{urlServer}}/{{particulier.id}}" alt="">
+>>>>>>> c4b085efec480a9d8eaf20f4f4fa8b6795ba5158
             </li>
             <li>
                 <h5>{{particulier.nom}} {{particulier.prenoms}} </h5>

@@ -23,7 +23,7 @@ formInitialisation(){
   this.userForm = this.formBuilder.group({
     nom:['',Validators.required],
     prenoms:['',Validators.required],
-    telephone:['',Validators.required],
+    telephone:[''],
     email:['',[Validators.required,Validators.email]],
     lieuHabitation:'',
     password:['',Validators.required],
@@ -56,7 +56,7 @@ getColor(){
       formData['nom'],
       formData['prenoms'],
       formData['email'],
-      formData['telephone'],
+      '',
       formData['lieuHabitation'],
       formData['password'],
       formData['passwordConfirm']

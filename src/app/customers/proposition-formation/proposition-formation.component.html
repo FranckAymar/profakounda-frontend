@@ -1,5 +1,5 @@
 <div style="margin:auto;width:15em">
- <button data-toggle="modal" data-target="#addDesc" class="btn btn-info"><i class="fa fa-plus"></i> Nouvelle proposition</button>
+ <button data-toggle="modal" (click)="adProposition()" data-target="#addDesc" class="btn btn-info"><i class="fa fa-plus"></i> Nouvelle proposition</button>
 </div>
 
 <div *ngFor="let p of propositions" style="margin-top: 1em;"class="col-md-12">
@@ -299,9 +299,14 @@
             </div>
             <div class="modal-body">
                 <form action="" (ngSubmit)="enregistrerProposition()" #k="ngForm">
-                    <textarea class="form-control" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+                    <textarea placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" maxChars="1000" class="form-control" (ngModelChange)="changeDescritpion()" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
                         {{proposition.description}}
                     </textarea>
+                    <div class="form-group">
+                        <label for="tel">Téléphone:</label>
+                        <input  required name="telephone" type="text" id="tel"
+                            [(ngModel)]="propositionFormation.telephone" />
+                    </div>
                     <button [disabled]="k.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
             </div> 
@@ -324,9 +329,14 @@
             </div>
             <div class="modal-body">
                 <form action="" (ngSubmit)="enregistrerProposition()" #l="ngForm">
-                    <textarea class="form-control" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+                    <textarea class="form-control" placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
 
                     </textarea>
+                    <div class="form-group">
+                        <label for="tel">Téléphone:</label>
+                        <input  required name="telephone" type="text" id="tel"
+                            [(ngModel)]="propositionFormation.telephone" />
+                    </div>
                     <button  [disabled]="l.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
 

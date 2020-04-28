@@ -6,12 +6,12 @@
                         <div class="sf-type">
                             <div class="sf-input">
                                 <input type="text" 
-                                [(ngModel)]="valeur" id="sf-box" placeholder="Search">
+                                [(ngModel)]="criterRecherche" id="sf-box" placeholder="Search">
                             </div>
                         
                         </div>
                         <div class="sf-submit" >   
-                            <input  type="submit" (click)="OnFiltreFormation(valeur)" value="Rechercher">
+                            <input  type="submit" (click)="OnFiltreFormationSearch(criterRecherche)" value="Rechercher">
                         </div>    
                 </div>
             </div>
@@ -86,7 +86,7 @@
                     <agm-marker *ngFor="let pf of propositionFormations"
                                 [latitude]="pf.rayonIntervention?.latitude" 
                                 [longitude]="pf.rayonIntervention?.longitude">
-                </agm-marker>
+                    </agm-marker>
         
                     <agm-circle *ngFor="let pf of propositionFormations"
                         [latitude]="pf.rayonIntervention?.latitude" 

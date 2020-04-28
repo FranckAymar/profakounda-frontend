@@ -10,6 +10,7 @@ import { ListFormationsComponent } from './list-formations/list-formations.compo
 import { FormationsMainComponent } from './formations-main/formations-main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderFormationsComponent } from './header-formations/header-formations.component';
+import { EditProfileComponent } from '../customers/edit-profile/edit-profile.component';
 
 const formationsRouter = [
 
@@ -25,7 +26,13 @@ const formationsRouter = [
         path : 'details-formation/:id',
         component : DetailsAnnonceComponent 
         
+      },
+      {
+        path : ':value',
+        component : ListFormationsComponent 
+        
       }
+
     ]
 
   }

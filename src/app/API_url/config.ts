@@ -90,9 +90,7 @@ export const URL = {
     listPropositionFormationsEnligne : consts.host+ consts.nameProject +'details/listpropositionsenligne',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
     FilterPropositionFormation : consts.host+ consts.nameProject +'details/fiterDeFormation',
-    getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier',
-    Formationfiltre : consts.host+ consts.nameProject  + 'details/formationFiltre',
-    
+    getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier', 
 
     //JOUR
     enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour',

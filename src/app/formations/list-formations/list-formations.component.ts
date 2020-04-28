@@ -2,6 +2,7 @@ import { URL } from 'src/app/API_url/config';
 import { ListFormationsService } from './../services/list-formations.service';
 import { Component, OnInit } from '@angular/core';
 import { FilterArrayPipe } from './filter.pipe';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-formations',
@@ -21,9 +22,8 @@ export class ListFormationsComponent implements OnInit {
   zoom: number = 11;
 
 
-  valeur ="";
+  criterRecherche="";
   ladate = new Date();
-  
 
   propositionFormations = [];
   modulesFormation = [];
@@ -40,18 +40,17 @@ export class ListFormationsComponent implements OnInit {
   totalPage: number
   totalPageArray: Array<any>;
 
-  constructor(private listFormationsService: ListFormationsService) { }
+
+  constructor(private listFormationsService: ListFormationsService,private route: ActivatedRoute) { }
 
 
   ngOnInit() {
-
+    this.getvalue();
    this.onGetListFormation(this.page);
+   this.OnFiltreFormation();
+   
 
-   this.OnFormationFiltre(this.page);
-
-    
   }
-
   onGetListFormation(pageActive) {
 
     this.page = pageActive;
@@ -87,9 +86,9 @@ export class ListFormationsComponent implements OnInit {
  
   }
   
-  OnFiltreFormation(filtre:String){  
-    
-    this.listFormationsService.getFilterFormation(filtre).subscribe(
+  OnFiltreFormation(){  
+
+      this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
     
       (reponse)=>{
         console.log(reponse);
@@ -103,37 +102,21 @@ export class ListFormationsComponent implements OnInit {
     )
   }
 
-
-
-  OnFormationFiltre(pageActive){
-
-    this.page = pageActive;
+  OnFiltreFormationSearch(criterRecherche:String){  
     
-    this.listFormationsService.getFormationFiltrer(this.page, this.numberDataOfPage).subscribe(
-    
-      (reponse)=>{
+    this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
+  
+    (reponse)=>{
+      console.log(reponse);
+      
+      this.propositionFormations=reponse;
+    },
 
-        this.sizeData = reponse.totalData;
-
-        this.totalPage = (this.sizeData / this.numberDataOfPage);
-
-        if (this.sizeData % this.numberDataOfPage != 0) {
-          this.totalPage = Math.ceil(this.totalPage);
-        }
- 
-        this.totalPageArray = new Array(this.totalPage);
-
-        
-        console.log(reponse.data);
-        
-        this.propositionFormations=reponse.data;
-      },
-
-      (erreur) => {
-        console.log("Une erreur s'est produite: " + erreur);
-      }
-    )
-  }
+    (erreur) => {
+      console.log("Une erreur s'est produite: " + erreur);
+    }
+  )
+}
 
 
   inititalizeCoordMap(lat: number, long: number, radius: number, zoom: number) {
@@ -166,6 +149,20 @@ export class ListFormationsComponent implements OnInit {
     this.radius = coord.rayon ;
  }, 1000);
    
+  }
+
+  //Recuperer criterRecherche dans l'URL
+  getvalue() {
+
+                            
+    this.route.params.subscribe(
+
+      ( variable ) =>{
+         this.criterRecherche= variable['value'] ;
+   
+      }
+    ) ;
+
   }
 
 }

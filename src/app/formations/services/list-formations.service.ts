@@ -23,7 +23,10 @@ export class ListFormationsService {
 
   
 getFilterFormation(filtre) : Observable<any> {
-  
+
+  if(filtre==undefined){
+    return this.httpClient.get(URL.listPropositionFormationsEnligne);
+  }
     if(filtre===""){
       return this.httpClient.get(URL.listPropositionFormationsEnligne);
     }
@@ -34,15 +37,6 @@ getFilterFormation(filtre) : Observable<any> {
     else{
       return this.httpClient.get(URL.FilterPropositionFormation+ "/"+ filtre) ;
     }
-  }
-
-  getFormationFiltrer(page?, numberDataOfPage?) : Observable<any> {
-  
-    let params = new HttpParams().set("page", page).set("total", numberDataOfPage);
-    if (page && numberDataOfPage) {
-      return this.httpClient.get(URL.Formationfiltre, { params: params });
-    }
-    return this.httpClient.get(URL.Formationfiltre);
   }
 
 }

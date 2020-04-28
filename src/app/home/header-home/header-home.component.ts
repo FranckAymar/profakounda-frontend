@@ -9,7 +9,7 @@ import { ListFormationsService } from 'src/app/formations/services/list-formatio
 })
 export class HeaderHomeComponent implements OnInit {
 
-  valeur="";
+  expression="";
   propositionFormations = [] ;
   authenticated : boolean;
 
@@ -20,21 +20,5 @@ export class HeaderHomeComponent implements OnInit {
   ngOnInit() {
     //Vérifie si l'utilisateur est connecté
     this.authenticated = this.signInService.isLogged() ;
-  }
-
-  OnFiltreFormation(filtre:String){  
-   
-    this.listFormationsService.getFilterFormation(filtre).subscribe(
-    
-      (reponse)=>{
-        console.log(reponse);
-        
-        this.propositionFormations=reponse;
-      },
-
-      (erreur) => {
-        console.log("Une erreur s'est produite: " + erreur);
-      }
-    )
   }
 }

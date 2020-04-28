@@ -1,8 +1,8 @@
-<div class="sb2-1">
+<div style="margin-top: 2.5em;" class="sb2-1">
     <!--== USER INFO ==-->
     <div class="sb2-12">
-        <ul>
-            <li><img *ngIf="particulier.id" src="{{urlServer}}/{{particulier.id}}" alt="">
+        <ul *ngIf="particulier">
+            <li><img  src="{{urlServer}}/{{particulier.id}}" alt="">
             </li>
             <li>
                 <h5>{{particulier.nom}} {{particulier.prenoms}} </h5>
@@ -17,8 +17,6 @@
             </li>
             <li><a href="#" routerLink="formations">Proposition de formation</a></li>
             <li><a href="#" routerLink="paiements">Mes paiements</a></li>
-
-
         </ul>
     </div>
 </div> 

@@ -11,7 +11,19 @@ export class DashboardHomeComponent implements OnInit {
 
   urlServer = URL.getPhoto;
 
-  detailsDahboard = {} ;
+  detailsDahboard = {
+    nombreParticuliers : null,
+    nombrePaiements : null,
+    nombreProfilsConsultes : null,
+    nombrepropositionsEnAttenteValidation : null,
+    paiements : null,
+    particuliers : null ,
+    profilsConsultes : null,
+    prpositionsEnAttenteValidation : null ,
+    
+
+
+  } ;
 
   constructor(private dashboardService : DashboardService) { }
 

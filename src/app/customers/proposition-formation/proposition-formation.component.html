@@ -1,5 +1,5 @@
-<div style="margin:auto;width:15em">
- <button data-toggle="modal" data-target="#addDesc" class="btn btn-info"><i class="fa fa-plus"></i> Nouvelle proposition</button>
+<div style="margin:auto;width:15em;margin-top: 1em;">
+ <button data-toggle="modal" (click)="adProposition()" data-target="#addDesc" class="btn btn-info"><i class="fa fa-plus"></i> Nouvelle proposition</button>
 </div>
 
 <div *ngFor="let p of propositions" style="margin-top: 1em;"class="col-md-12">
@@ -22,54 +22,61 @@
                 <p>
                     <button data-toggle="modal" data-target="#ajouterDescription" (click)="getProposition(p.proposition)" class="btn btn-danger btn btn-block">Description</button>
                 </p>
-             
                 <div  class="row">
-                    <button (click)="addNiveau(p.proposition.id)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
-                                class="btn btn-primary">
+                    <div style="margin-top: 0.5em !important;" class="col-md-3">
+                        <button (click)="addNiveau(p.proposition.id)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
+                                class="btn btn-primary btn-block">
                                 Niveau enseigné
-                    </button>
-                    <button style="margin-left: 1em;" (click)="addModule(p.modules,p.proposition.id)" type="button" data-toggle="modal" data-target="#modules"
-                                class="btn btn-info">
+                        </button>
+                    </div>
+                    <div style="margin-top: 0.5em !important;" class="col-md-3">
+                        <button  style="margin-left: 1em;" (click)="addModule(p.modules,p.proposition.id)" type="button" data-toggle="modal" data-target="#modules"
+                                class="btn btn-info btn-block">
                                 Modules enseignés
-                    </button>
-                    
-                    <button style="margin-left: 1em;" (click)="addDisponibilite(p.proposition.id)" type="button" data-toggle="modal" data-target="#disponibilite"
-                        class="btn btn-outline-success">
+                        </button>
+                    </div>
+                    <div style="margin-top: 0.5em !important;" class="col-md-3">
+                        <button style="margin-left: 1em;" (click)="addDisponibilite(p.proposition.id)" type="button" data-toggle="modal" data-target="#disponibilite"
+                        class="btn btn-outline-success btn-block">
                         Disponibilités
-                    </button>
-                    <button (click)="loadPropostion(p.proposition.id)" style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
-                        class="btn btn-outline-dark">
+                        </button>
+                    </div>
+                    <div  style="margin-top: 0.5em !important;" class="col-md-3">
+                        <button  (click)="loadPropostion(p.proposition.id)" style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
+                        class="btn btn-outline-dark btn-block">
                         Zone Intervention
-                    </button>
+                        </button>   
+                    </div>
                 </div>
-
-
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Niveau enseigné</th>
-                            <th>Coût minimum</th>
-                            <th>Coût Maximum</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr *ngFor="let n of p.contrats">
-                            <td>{{n.niveau.libelle}}</td>
-                            <td>{{n.minMontant}} Eco</td>
-                            <td>{{n.maxMontant}} Eco</td>
-                            <td><button data-toggle="modal" data-target="#niveauEnseigne" (click)="getContrat(n.id)"
-                                    class="updateButton"><i class="fa fa-edit"></i></button></td>
-                            <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i
-                                        class="fa fa-times"></i></button></td>
-
-                        </tr>
-
-                    </tbody>
-                </table>
+                <div style="width: 100%; overflow: auto;">
+                    <table  class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Niveau enseigné</th>
+                                <th>Coût minimum</th>
+                                <th>Coût Maximum</th>
+    
+                            </tr>
+                        </thead>
+                        <tbody>
+    
+                            <tr *ngFor="let n of p.contrats">
+                                <td>{{n.niveau.libelle}}</td>
+                                <td>{{n.minMontant}} Eco</td>
+                                <td>{{n.maxMontant}} Eco</td>
+                                <td><button data-toggle="modal" data-target="#niveauEnseigne" (click)="getContrat(n.id)"
+                                        class="updateButton"><i class="fa fa-edit"></i></button></td>
+                                <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i
+                                            class="fa fa-times"></i></button></td>
+    
+                            </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+                
             </div>
-            <button *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning">Mettre en ligne</button>
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
         </div>
     </div>
 </div>
@@ -165,7 +172,7 @@
                             
                             <button *ngIf="!editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
                             <button *ngIf="editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
-                            <button *ngIf="editModule" style="margin-left: 1em;" (click)="addModule()" type="submit" class="btn btn-danger">Annuler</button>
+                            <button *ngIf="editModule" style="margin-left: 1em;"  type="submit" class="btn btn-danger">Annuler</button>
                         </form>
                     </div>
                     <div class="col-md-6" style="height: 17em; overflow: auto;">
@@ -253,8 +260,12 @@
                             <div class="row">
                                 <span *ngFor="let h of hours">{{h.heureDebut}}-{{h.heureFin}} ; &nbsp;</span>
                             </div>
-
-                            <button type="submit" [disabled]="myControl.invalid || f3.invalid || heure.heureFin!='' || heure.heureDebut!=''" class="btn btn-primary">Enregistrer</button>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button style="margin: 0.3em;" type="submit" [disabled]="myControl.invalid || f3.invalid || heure.heureFin!='' || heure.heureDebut!=''" class="btn btn-primary">Enregistrer</button>
+                                </div>
+                            </div>
+                            
                         </form>
                     </div>
                     <div class="col-md-6" style="height: 17em; overflow: auto;">
@@ -299,9 +310,14 @@
             </div>
             <div class="modal-body">
                 <form action="" (ngSubmit)="enregistrerProposition()" #k="ngForm">
-                    <textarea class="form-control" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+                    <textarea placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" maxChars="1000" class="form-control" (ngModelChange)="changeDescritpion()" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
                         {{proposition.description}}
                     </textarea>
+                    <div class="form-group">
+                        <label for="tel">Téléphone:</label>
+                        <input  required name="telephone" type="text" id="tel"
+                            [(ngModel)]="propositionFormation.telephone" />
+                    </div>
                     <button [disabled]="k.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
             </div> 
@@ -324,9 +340,14 @@
             </div>
             <div class="modal-body">
                 <form action="" (ngSubmit)="enregistrerProposition()" #l="ngForm">
-                    <textarea class="form-control" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+                    <textarea class="form-control" placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
 
                     </textarea>
+                    <div class="form-group">
+                        <label for="tel">Téléphone:</label>
+                        <input  required name="telephone" type="text" id="tel"
+                            [(ngModel)]="propositionFormation.telephone" />
+                    </div>
                     <button  [disabled]="l.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
 
@@ -357,7 +378,7 @@
                     (zoomChange)="setZoom($event)">
 
                     <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="true"
-                        [fillColor]="red" [radius]="radius" (radiusChange)="changeRaduis($event)">
+                        [radius]="radius" (radiusChange)="changeRaduis($event)">
                     </agm-circle>
                 </agm-map>
 

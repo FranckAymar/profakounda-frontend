@@ -31,6 +31,7 @@ export class PropositionFormationComponent implements OnInit {
   @Input() editModule:boolean = false;
   joursString:any = [];
   niveaux=[];
+  descriptionHasChange:boolean = false;
   niveauxEnseignes: any = [];
   disponibilites: any = [];
   modules: any = [];
@@ -40,10 +41,10 @@ export class PropositionFormationComponent implements OnInit {
   formations: any = [];
   heure:Heure = new Heure('','');
   lambda:Lambda;
-  @Input() propositionFormation:PropositionFormation = new PropositionFormation(0,'',sessionStorage.getItem(this.signInService.USERNAME)); ;
+  @Input() propositionFormation:PropositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME)); ;
   @Input() numberOfTable:number;
   disponibilite:Disponibilite = new Disponibilite('',[],null,sessionStorage.getItem(this.signInService.USERNAME));
-  proposition:PropositionFormation= new PropositionFormation(0,'',sessionStorage.getItem(this.signInService.USERNAME));
+  proposition:PropositionFormation= new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
   niveauForme:NiveauForme = new NiveauForme(0,'',null,null,null,sessionStorage.getItem(this.signInService.USERNAME)); ;
   module:Module = new Module(0,'',null,sessionStorage.getItem(this.signInService.USERNAME));;
   propostionLoad = {} ;
@@ -111,6 +112,12 @@ export class PropositionFormationComponent implements OnInit {
   
       return this.niveaux.filter(option => option.toLowerCase().includes(filterValue));
     }
+    changeDescritpion(){
+      this.descriptionHasChange = true;
+    }
+    adProposition(){
+      this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+    }
     onFetchFormations()
       {
        this.formationService.onFetchFormationsString().subscribe(
@@ -144,11 +151,12 @@ export class PropositionFormationComponent implements OnInit {
       this.heure = new Heure('','');
     }
     getProposition(proposition){
-      this.propositionFormation = new PropositionFormation(proposition.id,proposition.description,sessionStorage.getItem(this.signInService.USERNAME));
+      this.descriptionHasChange = false;
+      this.propositionFormation = new PropositionFormation(proposition.id,proposition.description,proposition.telephone,this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
      
     }
     addDisponibilite(id){
-      this.proposition= new PropositionFormation(id,'',sessionStorage.getItem(this.signInService.USERNAME));
+      this.proposition= new PropositionFormation(id,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
       this.rechercherDisponibilite(id);
      
      }
@@ -174,12 +182,13 @@ this.propositionFormationService.rechercherDisponibilites(id)
     enregistrerProposition(){
         if(this.propositionFormation.id !=0)
         {
-          this.propositionFormationService.modifierProposition(this.propositionFormation)
+          this.proposition= new PropositionFormation(this.propositionFormation.id,this.propositionFormation.description,this.propositionFormation.telephone,this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+          this.propositionFormationService.modifierProposition(this.proposition)
           .subscribe(
             (response)=>{
               alert("modification effectuée avec succès.");
               document.getElementById('ajouterDescription').click();
-              this.propositionFormation = new PropositionFormation(0,'',sessionStorage.getItem(this.signInService.USERNAME));
+              this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
               this.rechercherProposition();
             },
             (error)=>{
@@ -192,8 +201,8 @@ this.propositionFormationService.rechercherDisponibilites(id)
       .subscribe(
         (response)=>{
           
-          this.propositionFormation = new PropositionFormation(0,'',sessionStorage.getItem(this.signInService.USERNAME));
-          document.getElementById('ajouterDescription').click();
+          this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+          document.getElementById('addDesc').click();
           this.rechercherProposition();
         },
         (error)=>{

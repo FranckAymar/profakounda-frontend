@@ -43,14 +43,14 @@
                                 </div>
                                 <!--POPULAR COURSES: CONTENT-->
                                 <div class="col-md-10 home-top-cour-desc">
-                                    <a href="course-details.html">
+                                    <div>
                                         <h3>{{propositionFormation.prenomParticulier}}</h3>
-                                    </a>
+                                    </div>
                                     <h4 style="display: inline;" 
                                     *ngFor="let moduleFomation of propositionFormation.moduleFormations; let i = index" [attr.data-index]="i">
                                     {{moduleFomation.libelle}} <span *ngIf="propositionFormation.moduleFormations.length !== i+1">/</span>
                                     </h4>
-                                    <p class="add-three-dot">{{propositionFormation.description}}</p>
+                                    <p class="add-three-dot">{{propositionFormation.description}}</p><span *ngIf="propositionFormation.ville" class="home-top-cour-rat">{{propositionFormation.ville}}</span>
                                     <div class="hom-list-share">
                                         <ul>
                                             <li><a [routerLink]="['/formations/details-formation', propositionFormation.id]"
@@ -92,7 +92,7 @@
                         [latitude]="pf.rayonIntervention?.latitude" 
                         [longitude]="pf.rayonIntervention?.longitude" 
                         [circleDraggable]="true" [editable]="false"
-                        [fillColor]="green" [strokeColor]="green" 
+                       
                         [radius]="pf.rayonIntervention?.rayon" [clickable]="false"
                       >
                     </agm-circle>

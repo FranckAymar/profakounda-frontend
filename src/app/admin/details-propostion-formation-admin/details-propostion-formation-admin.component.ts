@@ -22,7 +22,16 @@ export class DetailsPropostionFormationAdminComponent implements OnInit {
       urlServer = URL.getPhoto
 
 
-  detailsPropositionFormation = {} ;
+  detailsPropositionFormation = {
+
+    particulier : null,
+    rayonIntervention : null,
+    propositionFormation : null,
+    modulesFormations : null,
+    contrats : null,
+    disponibilites : null
+
+  } ;
   idPropositionFormation : number;
 
   constructor(private propostionFormService : PropostionFormationsAdminService,

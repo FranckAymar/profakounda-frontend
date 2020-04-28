@@ -302,15 +302,12 @@ export class DetailsAnnonceComponent implements OnInit {
 
         if(resp.code == 0){
           alert('Payement effectué');
-         this.closeModalPayment.nativeElement.click() ;
+          this.closeModalPayment.nativeElement.click() ;
+          this.contactCustomer();
         }else{
-          alert("Une erreur s'est produite pendant le paiement, vérifiez votre numéro de téléphone ou votre code d'activation");
-
+          alert("Une erreur s'est produite pendant le paiement.\nVérifiez votre numéro de téléphone ou votre code d'activation");
         }
-
-        
       },
-
 
       (error)=>{
         console.log(error);

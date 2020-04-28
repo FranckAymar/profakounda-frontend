@@ -43,9 +43,9 @@
                                 </div>
                                 <!--POPULAR COURSES: CONTENT-->
                                 <div class="col-md-10 home-top-cour-desc">
-                                    <a href="course-details.html">
+                                    <div>
                                         <h3>{{propositionFormation.prenomParticulier}}</h3>
-                                    </a>
+                                    </div>
                                     <h4 style="display: inline;" 
                                     *ngFor="let moduleFomation of propositionFormation.moduleFormations; let i = index" [attr.data-index]="i">
                                     {{moduleFomation.libelle}} <span *ngIf="propositionFormation.moduleFormations.length !== i+1">/</span>

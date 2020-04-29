@@ -85,7 +85,7 @@ export class SignInComponent implements OnInit {
             
           } else {
            
-           this.router.navigateByUrl('/customers');
+           this.router.navigateByUrl('/customers/editprofil');
           }
 
       },

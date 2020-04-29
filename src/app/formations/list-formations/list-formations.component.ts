@@ -87,7 +87,7 @@ export class ListFormationsComponent implements OnInit {
   }
   
   OnFiltreFormation(){  
-
+  
       this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
     
       (reponse)=>{

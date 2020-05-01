@@ -10,16 +10,15 @@
           </div>
           <div  class="ed-mm-right">
               <div class="ed-mm-menu">
-                  <a  
-                    class="ed-micon"><i class="fa fa-bars"></i></a>
+                  <a type="button"  class="ed-micon"><i class="fa fa-bars"></i></a>
+                  
                   <div class="ed-mm-inn deroulant">
-                      <a class="ed-mi-close"><i class="fa fa-times"  style="color: white;"></i></a>
-                      <button style="height: 5em;" class="btn btn-secondary dropdown-toggle" type="button" 
-                      id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a   id="ed-mi-close" class="ed-mi-close"><i class="fa fa-times" style="color: white;"></i></a>
+                      <button style="height: 5em;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img style="width: 3em;height: 3em;border-radius: 50%;" src="{{url}}" alt="" />
                       </button>
                       <ul >
-                          <li><a routerLink ="editprofil" >Editer informations</a>
+                          <li><a (click)="close()" routerLink ="editprofil" >Editer informations</a>
                           </li>
                           <li><a  (click) ="logout()"><button style="background-color:red; width:2em; height:2em;border-radius:0.2em;color: white;"><i class="fa fa-power-off"></i></button></a>
                           </li> 
@@ -27,8 +26,8 @@
                       
                       <h4>Tableau de bord</h4>
                       <ul>
-                        <li><a  routerLink="formations">Proposition de formation</a></li>
-                        <li><a  routerLink="paiements">Mes paiements</a></li>
+                        <li><a (click)="close()" routerLink="formations">Proposition de formation</a></li>
+                        <li><a (click)="close()" routerLink="paiements">Mes paiements</a></li>
                       </ul>
                   </div>
               </div>

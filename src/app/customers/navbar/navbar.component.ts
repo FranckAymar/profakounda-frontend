@@ -56,17 +56,7 @@ close(){
     this.router.navigateByUrl('/home/sign-in') ;
   }
 
-  viewSideb(){
-    //MOBILE MENU OPEN
-   //MOBILE MENU OPEN
-   $(".ed-micon").on('click', function() {
-    $(".ed-mm-inn").addClass("ed-mm-act");
-    console.log("OKOK");
-    
-});
 
-    
-  }
 
   public loadJavaScript() {
     let node = document.createElement("script");

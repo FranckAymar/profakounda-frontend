@@ -19,7 +19,9 @@ export class NavbarComponent implements OnInit {
     this.rechercherPaticulierConnecter();
   }
 
-
+close(){
+  document.getElementById('ed-mi-close').click();
+}
   rechercherPaticulierConnecter(){
     this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
     .subscribe(

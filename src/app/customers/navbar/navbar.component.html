@@ -1,22 +1,56 @@
 <!--== MAIN CONTRAINER ==-->
-
-<div class="container-fluid sb1">
+<section  class="menu1">
+  <div  class="ed-mob-menu">
+      <div class="ed-mob-menu-con">
+          <div class="ed-mm-left">
+              <div class="wed-logo">
+                  <a href="index-2.html"><img src="../../assets/images/logo.png" alt="" />
+                  </a>
+              </div>
+          </div>
+          <div  class="ed-mm-right">
+              <div class="ed-mm-menu">
+                  <a  class="ed-micon"><i class="fa fa-bars"></i></a>
+                  
+                  <div class="ed-mm-inn deroulant">
+                      <a style="background-color: white;" class="ed-mi-close"><i class="fa fa-times"></i></a>
+                      <h4>Compte</h4>
+                      <ul >
+                          <li><a routerLink ="editprofil" >Editer informations</a>
+                          </li>
+                          <li><a (click) ="logout()"><button style="background-color:red; width:2em; height:2em;border-radius:0.2em;color: white;"><i class="fa fa-power-off"></i></button></a>
+                          </li>
+                      </ul>
+                      
+                      <h4>Tableau de bord</h4>
+                      <ul>
+                        <li><a  routerLink="formations">Proposition de formation</a></li>
+                        <li><a  routerLink="paiements">Mes paiements</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<div class="container-fluid sb1 principale">
+    
     <div class="row">
-        <!--== LOGO ==-->
+        
         <div class="col-md-2 col-sm-3 col-xs-6 sb1-1">
             <a href="#" class="btn-close-menu"><i class="fa fa-times" aria-hidden="true"></i></a>
             <a href="#" class="atab-menu"><i class="fa fa-bars tab-menu" aria-hidden="true"></i></a>
             <a routerLink="/home" class="logo"><img src="../../assets/images/logo1.png" alt="" />
             </a>
         </div>
-        <!--== SEARCH ==-->
+       
         <div class="col-md-6 col-sm-6 mob-hide">
             <form class="app-search">
                 <input type="text" placeholder="Search..." class="form-control">
                 <a href="#"><i class="fa fa-search"></i></a>
             </form>
         </div>
-        <!--== NOTIFICATION ==-->
+        
         <div class="col-md-2 tab-hide">
             <div class="top-not-cen">
                 <a class='waves-effect btn-noti' href="admin-all-enquiry.html" title="all enquiry messages"><i class="fa fa-commenting-o" aria-hidden="true"></i><span>5</span></a>
@@ -24,14 +58,14 @@
                 <a class='waves-effect btn-noti' href="admin-admission-enquiry.html" title="admission enquiry"><i class="fa fa-tag" aria-hidden="true"></i><span>5</span></a>
             </div>
         </div>
-        <!--== MY ACCCOUNT ==-->
-        <div class="col-md-2 col-sm-3 col-xs-6 dropdown">
-            <!-- Dropdown Trigger -->
+        
+        <div style="float: right;" class="col-md-2 col-sm-3 col-xs-6 dropdown">
+           
             <a class='waves-effect dropdown-toggle top-user-pro'  type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="{{url}}" alt="" />Mon compte <i class="fa fa-angle-down" aria-hidden="true"></i>
             </a>
 
-            <!-- Dropdown Structure -->
+            
             <ul id='top-menu' class='top-menu-sty dropdown-menu dropdown-menu-right' aria-labelledby="dropdownMenu2">
                 <li><a routerLink="editprofil" class="waves-effect"><i class="fa fa-cogs" aria-hidden="true"></i>Editer informations</a>
                 </li>
@@ -42,4 +76,5 @@
         </div>
     </div>
 </div>
+
 

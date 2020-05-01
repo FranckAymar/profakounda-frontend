@@ -1,6 +1,16 @@
-@media screen and (min-width: 480px) and (max-width: 990px){
+@media screen  and (max-width: 990px){
     
     .sidebar {
       display: none !important;
     }
+    
+    .sb2-2 {
+     
+      width: 100%  ;
+      padding: 40px ;
+      margin-left: 0px ;
+      background: #e3e8ea;
+  }
+
+  
 }

@@ -9,6 +9,8 @@ import { ListFormationsService } from 'src/app/formations/services/list-formatio
 })
 export class HeaderHomeComponent implements OnInit {
 
+ 
+
   expression="";
   propositionFormations = [] ;
   authenticated : boolean;
@@ -20,5 +22,16 @@ export class HeaderHomeComponent implements OnInit {
   ngOnInit() {
     //Vérifie si l'utilisateur est connecté
     this.authenticated = this.signInService.isLogged() ;
+    this.loadJavaScript();
   }
+
+  public loadJavaScript() {
+    let node = document.createElement("script");
+    node.src = "assets/js/custom.js";
+    node.type = "text/javascript";
+    node.async = true;
+    node.charset = "utf-8";
+    document.getElementsByTagName("head")[0].appendChild(node);
+}
+
 }

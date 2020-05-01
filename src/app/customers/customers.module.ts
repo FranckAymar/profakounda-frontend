@@ -1,3 +1,4 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { PropositionFormationService } from './services/propositionFormation.service';
@@ -17,7 +18,6 @@ import { PropositionFormationComponent } from './proposition-formation/propositi
 import { PaiementsComponent } from './paiements/paiements.component';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-
 
 const customersRouter: Routes = [
 
@@ -73,8 +73,8 @@ const customersRouter: Routes = [
     RouterModule.forChild(customersRouter),
     FormsModule,
     ReactiveFormsModule,
- 
     BrowserModule,
+    NgbModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,

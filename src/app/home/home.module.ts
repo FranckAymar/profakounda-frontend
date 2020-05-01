@@ -17,8 +17,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { SliderHomeComponent } from './slider-home/slider-home.component';
 import { HeaderHomeComponent } from './header-home/header-home.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { ListFormationsComponent } from '../formations/list-formations/list-formations.component';
-
 const homeRouter = [
 
 
@@ -72,7 +70,7 @@ const homeRouter = [
     SliderHomeComponent, 
     HeaderHomeComponent, 
     ResetPasswordComponent,
-    SignUpvalidationComponent
+    SignUpvalidationComponent,
    
    ],
   imports: [

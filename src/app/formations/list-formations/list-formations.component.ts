@@ -45,9 +45,12 @@ export class ListFormationsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getvalue();
-   this.onGetListFormation(this.page);
-   this.OnFiltreFormation();
+      this.getvalue();
+      if(this.criterRecherche){
+        this.OnFiltreFormation();
+      }else{
+        this.onGetListFormation(this.page);
+      }
    
 
   }

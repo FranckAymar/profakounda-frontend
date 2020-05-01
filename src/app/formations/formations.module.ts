@@ -44,7 +44,9 @@ const formationsRouter = [
     FormationsMainComponent, 
     DetailsAnnonceComponent,
      HeaderFormationsComponent,
-     FilterArrayPipe],
+     FilterArrayPipe,
+     
+    ],
   providers : [
     PaiementService
 
@@ -59,6 +61,7 @@ const formationsRouter = [
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCdrVoDFD_XTsAxUo2-VH0HTLX5IrdfC_E'
     }) ,
+    
    
 
     

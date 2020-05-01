@@ -41,6 +41,7 @@ const appRouter : Routes = [
     AppComponent,
     LoadingComponent,
     FilterPipe,
+    
   ],
   imports: [
     BrowserModule, 
@@ -55,6 +56,9 @@ const appRouter : Routes = [
         
   
   ],
+
+  exports : [],
+  
   providers: [ 
    { 
     provide: HTTP_INTERCEPTORS, 

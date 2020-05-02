@@ -90,6 +90,8 @@ export const URL = {
     listPropositionFormationsEnligne : consts.host+ consts.nameProject +'details/listpropositionsenligne',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
     FilterPropositionFormation : consts.host+ consts.nameProject +'details/fiterDeFormation',
+    FiterDeFormationParVille : consts.host+ consts.nameProject +'details/fiterDeFormationParVille',
+    
     getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier', 
 
     //JOUR

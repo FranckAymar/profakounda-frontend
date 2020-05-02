@@ -3,6 +3,8 @@ import { ListFormationsService } from './../services/list-formations.service';
 import { Component, OnInit } from '@angular/core';
 import { FilterArrayPipe } from './filter.pipe';
 import { ActivatedRoute } from '@angular/router';
+import { VilleService } from 'src/app/admin/services/ville.service';
+import { Ville } from 'src/app/admin/model/ville.model';
 
 @Component({
   selector: 'app-list-formations',
@@ -23,6 +25,10 @@ export class ListFormationsComponent implements OnInit {
 
 
   criterRecherche="";
+  designationVille="";
+  villes : any =[];
+  ville: Ville = {};
+ 
   ladate = new Date();
 
   propositionFormations = [];
@@ -41,16 +47,14 @@ export class ListFormationsComponent implements OnInit {
   totalPageArray: Array<any>;
 
 
-  constructor(private listFormationsService: ListFormationsService,private route: ActivatedRoute) { }
+  constructor(private listFormationsService: ListFormationsService,private route: ActivatedRoute,private villeService:VilleService) { }
 
 
   ngOnInit() {
-      this.getvalue();
-      if(this.criterRecherche){
-        this.OnFiltreFormation();
-      }else{
-        this.onGetListFormation(this.page);
-      }
+    this.getvalue();
+    this.onFetchVilles();
+   this.onGetListFormation(this.page);
+   this.OnFiltreFormation();
    
 
   }
@@ -90,7 +94,7 @@ export class ListFormationsComponent implements OnInit {
   }
   
   OnFiltreFormation(){  
-
+  
       this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
     
       (reponse)=>{
@@ -119,6 +123,22 @@ export class ListFormationsComponent implements OnInit {
       console.log("Une erreur s'est produite: " + erreur);
     }
   )
+}
+
+OnFiterDeFormationParVille(designationVille:String){  
+    
+ this.listFormationsService.getFiterDeFormationParVille(this.designationVille).subscribe(
+
+  (reponse)=>{
+    console.log(reponse);
+    
+    this.propositionFormations=reponse;
+  },
+
+  (erreur) => {
+    console.log("Une erreur s'est produite: " + erreur);
+  }
+)
 }
 
 
@@ -166,6 +186,19 @@ export class ListFormationsComponent implements OnInit {
       }
     ) ;
 
+  }
+
+  onFetchVilles()
+  {
+    this.villeService.onFetchVilles()
+    .subscribe(
+      (response)=>{
+        this.villes = response;
+      },
+      (error)=>{
+        console.log("Une erreur s'est produite: "+error);
+      }
+    )
   }
 
 }

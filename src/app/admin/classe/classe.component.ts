@@ -29,7 +29,6 @@ export class ClasseComponent implements OnInit {
     this.initForm();
   }
 
-
   initForm() {
 
     this.classForm = this.formBuilder.group({
@@ -64,6 +63,7 @@ export class ClasseComponent implements OnInit {
 
   onSaveClasse() {
 
+    alert("on a ici "+this.classe.cycleId);
     this.classeService.saveClasse(this.classForm.value).subscribe(
 
       (response) => {
@@ -116,7 +116,6 @@ export class ClasseComponent implements OnInit {
 
     this.classe.libelle = classeLoad.libelle;
     this.classe.cycleId = classeLoad.cycle.id;
-
 
   }
 

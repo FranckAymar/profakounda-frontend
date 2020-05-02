@@ -1,0 +1,25 @@
+
+  @media screen and (max-width: 990px){
+    .principale{
+        display: none !important;
+    }
+    .menu1 {
+      display: block !important;
+      
+    }
+    .deroulant{
+      background-color: #022C5D;;
+    }
+   .deroulant h4{
+     color: #E66030;
+   }
+   .deroulant ul li a{
+     color: white;
+   }
+   .deroulant ul li a:hover{
+     background-color: #002147;
+   }
+   .deroulant ul li a:active{
+    color: red;
+  }
+}

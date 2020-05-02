@@ -1185,6 +1185,12 @@
     font-weight: 700;
     cursor: pointer;
 }
+
+.hom-list-share ul li:nth-child(2) a{
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
  .hom-list-share ul li a {
      
      border: 1px solid #ececec;

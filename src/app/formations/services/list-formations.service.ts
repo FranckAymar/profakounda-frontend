@@ -1,3 +1,4 @@
+import { SignInService } from './../../home/services/sign-in.service';
 import { URL } from 'src/app/API_url/config';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -9,12 +10,13 @@ import { Injectable } from '@angular/core';
 export class ListFormationsService {
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient, private signInService : SignInService
   ) { }
 
   getListPropositionFormations(page?, numberDataOfPage?): Observable<any> {
 
-    let params = new HttpParams().set("page", page).set("total", numberDataOfPage);
+    let params = new HttpParams().set("page", page).set("total", numberDataOfPage)
+                .set("username" , sessionStorage.getItem(this.signInService.USERNAME));
     if (page && numberDataOfPage) {
       return this.httpClient.get(URL.listPropositionFormationsEnligne, { params: params });
     }

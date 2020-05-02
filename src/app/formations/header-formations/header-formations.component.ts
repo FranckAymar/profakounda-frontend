@@ -18,7 +18,17 @@ export class HeaderFormationsComponent implements OnInit {
   ngOnInit() {
     //Vérifie si l'utilisateur est connecté
     this.authenticated = this.signInService.isLogged() ;
+    this.loadJavaScript();
   }
+
+  public loadJavaScript() {
+    let node = document.createElement("script");
+    node.src = "assets/js/custom.js";
+    node.type = "text/javascript";
+    node.async = true;
+    node.charset = "utf-8";
+    document.getElementsByTagName("head")[0].appendChild(node);
+}
 
 
 }

@@ -42,6 +42,7 @@ export class DetailsAnnonceComponent implements OnInit {
   idPropositionFormation : number ;
 
   propositionFormation = {
+    code : null,
     idParticulier : null ,
     rayonIntervention : null,
     prenomParticulier : null,

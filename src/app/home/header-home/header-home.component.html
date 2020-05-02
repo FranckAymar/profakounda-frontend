@@ -4,29 +4,29 @@
         <div class="ed-mob-menu-con">
             <div class="ed-mm-left">
                 <div class="wed-logo">
-                    <a href="index-2.html"><img src="../../assets/images/logo.png" alt="" />
+                    <a routerLink="/home" routerLinkActive="router-link-active"  ><img src="../../assets/images/logo.png" alt="" />
                     </a>
                 </div>
             </div>
             <div class="ed-mm-right">
                 <div class="ed-mm-menu">
-                    <a class="ed-micon"><i class="fa fa-bars"></i></a>
-                    <div class="ed-mm-inn">
+                    <a  class="ed-micon"><i class="fa fa-bars"></i></a>
+                    <div  class="ed-mm-inn">
                         <a  class="ed-mi-close"><i class="fa fa-times"></i></a>
                         <h4>User Account</h4>
                         <ul  *ngIf="!authenticated" >
-                            <li><a href="#" routerLink ="/home/sign-in" >connexion</a>
+                            <li><a   routerLink ="/home/sign-in" >connexion</a>
                             </li>
-                            <li><a href="#" routerLink ="/home/sign-up" >inscription</a>
+                            <li><a  routerLink ="/home/sign-up" >inscription</a>
                             </li>
                         </ul>
                         <ul>
-                            <li><a href="#" routerLink ="/customers" >Mon Tableau de bord</a>
+                            <li><a   routerLink ="/customers" >Mon Tableau de bord</a>
                             </li>
                         </ul>
                         <h4>Formations</h4>
                         <ul *ngIf="authenticated">
-                            <li><a routerLink ="/formations">Nos répétiteurs</a></li>
+                            <li><a  routerLink ="/formations">Nos répétiteurs</a></li>
                             
                         </ul>
                         <h4>User Profile</h4>
@@ -320,7 +320,7 @@
                 <div class="col-md-12">
                     <div class="search-form">
                        
-                            <div class="sf-type">
+                            <div class="sf-type"> 
                                 <div class="sf-input">
                                     <input type="text" id="sf-box" [(ngModel)]="expression" placeholder="Vous cherchez une formation ?">
                                 </div>

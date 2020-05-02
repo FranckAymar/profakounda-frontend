@@ -1,3 +1,4 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { PropositionFormationService } from './services/propositionFormation.service';
@@ -9,7 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardCustomersComponent } from './dashboard-customers/dashboard-customers.component';
 import { ContentCustomersComponent } from './content-customers/content-customers.component';
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule, MatToolbarModule, MatIconModule, MatMenuModule, MatSidenavModule, MatExpansionModule, MatListModule } from '@angular/material';
 import { CustomerMainComponent } from './customer-main/customer-main.component';
 import { CustomersGuard } from '../guard/customers.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
@@ -17,7 +18,6 @@ import { PropositionFormationComponent } from './proposition-formation/propositi
 import { PaiementsComponent } from './paiements/paiements.component';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-
 
 const customersRouter: Routes = [
 
@@ -73,14 +73,22 @@ const customersRouter: Routes = [
     RouterModule.forChild(customersRouter),
     FormsModule,
     ReactiveFormsModule,
- 
     BrowserModule,
+    NgbModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatExpansionModule,
+    MatListModule,
 
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCdrVoDFD_XTsAxUo2-VH0HTLX5IrdfC_E'

@@ -18,6 +18,7 @@ import { FilterPipe } from './filter.pipe';
 import { FormsModule } from '@angular/forms';
 
 
+
 const appRouter : Routes = [
   { path: '',  redirectTo : '/home',
     pathMatch : 'full'
@@ -41,6 +42,7 @@ const appRouter : Routes = [
     AppComponent,
     LoadingComponent,
     FilterPipe,
+    
   ],
   imports: [
     BrowserModule, 
@@ -55,6 +57,9 @@ const appRouter : Routes = [
         
   
   ],
+
+  exports : [],
+  
   providers: [ 
    { 
     provide: HTTP_INTERCEPTORS, 

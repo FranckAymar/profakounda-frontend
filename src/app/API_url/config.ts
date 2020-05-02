@@ -95,7 +95,7 @@ export const URL = {
     getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier', 
 
     //JOUR
-    enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour',
+    enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour', 
     modifierJour : consts.host+ consts.nameProject +'modifierJour',
     supprimerJour : consts.host+ consts.nameProject +'supprimerJour',
     rechercherJour : consts.host+ consts.nameProject +'getJour',

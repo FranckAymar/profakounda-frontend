@@ -16,9 +16,9 @@
                     <div class="sf-submit">
                         <input type="submit" (click)="OnFiltreFormationSearch(criterRecherche)" value="Rechercher">
                     </div>
-                </div>
-            </div> 
-            <div class="col-md-2">
+               </div>
+             
+              <div class="col-md-2">
                     
                 <div class="form-group">
                     <label for="statusFilter" style="color:chocolate;" class="control-label"> Trier par Ville :</label>
@@ -26,20 +26,14 @@
                         
                         <option *ngFor="let ville of villes"  (ngvalue)="ville.designation">{{ville.designation}}</option>
 
-                    </select>
-                </div>
+                    </select> 
+                 </div>
             </div>
-         </div>
+          </div>
         </div>
     </div>
 </div>
 
-<!-- <select class="form-control" id="ville" [(ngModel)]="designationVille" formControlName="villeId" 
-                                 (change)="OnFiterDeFormationParVille($event.target.value)">
-                                    <option *ngFor="let ville of villes"  value="ville.designation">{{ville.designation}}</option>
-                                </select>-->
-
-<!-- POPULAR COURSES -->
 <section class="pop-cour">
     <div class="container com-sp pad-bot-70">
         <div class="row">

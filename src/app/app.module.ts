@@ -14,7 +14,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingInterceptor } from './LoadingInterceptor';
-import { FilterPipe } from './filter.pipe';
 import { FormsModule } from '@angular/forms';
 
 
@@ -41,7 +40,6 @@ const appRouter : Routes = [
   declarations: [
     AppComponent,
     LoadingComponent,
-    FilterPipe,
     
   ],
   imports: [

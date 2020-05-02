@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
 
   @Input() id:number;
   @Input() url:string ;
+  prenoms:string;
+  nom:string;
 
   constructor(private signInService : SignInService , 
               private router : Router,private particulierService:ParticulierService) {
@@ -42,6 +44,8 @@ close(){
       (reponse)=>{
        this.id = reponse['id'];
        this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
+       this.nom = reponse["nom"];
+       this.prenoms = reponse["prenoms"];
       },
       (error)=>{
         console.log("Une erreur s'est produite: "+error);

@@ -89,11 +89,13 @@ export const URL = {
     //Détails formations
     listPropositionFormationsEnligne : consts.host+ consts.nameProject +'details/listpropositionsenligne',
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
-    FilterPropositionFormation : consts.host+ consts.nameProject +'details/filterDeFormation',
+    FilterPropositionFormation : consts.host+ consts.nameProject +'details/fiterDeFormation',
+    FiterDeFormationParVille : consts.host+ consts.nameProject +'details/fiterDeFormationParVille',
+    
     getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier', 
 
     //JOUR
-    enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour',
+    enregistrerJour : consts.host+ consts.nameProject +'enregistrerJour', 
     modifierJour : consts.host+ consts.nameProject +'modifierJour',
     supprimerJour : consts.host+ consts.nameProject +'supprimerJour',
     rechercherJour : consts.host+ consts.nameProject +'getJour',

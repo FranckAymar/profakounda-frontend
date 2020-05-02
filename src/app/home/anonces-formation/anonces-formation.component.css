@@ -111,3 +111,9 @@ section .section-title {
     height: 120px;
     border-radius: 50%;
 }
+/* @media screen and (max-width: 990px){
+    img{
+        width: 8em;
+        height: 5em;
+    }
+} */

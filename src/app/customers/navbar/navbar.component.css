@@ -16,9 +16,12 @@
    .deroulant ul li a{
      color: white;
    }
-   .deroulant ul li a:hover{
+   .compte  li a:hover{
      background-color: #002147;
    }
+   .deroulant ul li a::before{
+    content:"";
+  }
    .deroulant ul li a:active{
     color: red;
   }

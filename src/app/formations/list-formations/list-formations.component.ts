@@ -42,13 +42,14 @@ export class ListFormationsComponent implements OnInit ,OnChanges{
 
 
   ngOnInit() {
+    
    
     if(this.getvalue() === ''){
-   
       this.onGetListFormation(this.page);
+    }else{
+      this.onFiltreFormationSearch(this.getvalue());
     }
   
-
   }
 
 
@@ -97,13 +98,13 @@ export class ListFormationsComponent implements OnInit ,OnChanges{
         
         this.propositionFormations=propositionFormation;
   }
-/*
+
   onFiltreFormationSearch(criterRecherche:String){  
     
-    this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
+    this.listFormationsService.getFilterFormation(criterRecherche).subscribe(
   
     (reponse)=>{
-      console.log(reponse);
+      console.log( "search reult :"+reponse);
       
       this.propositionFormations=reponse;
     },
@@ -113,7 +114,7 @@ export class ListFormationsComponent implements OnInit ,OnChanges{
     }
   )
 }
-*/
+
 
 OnFiterDeFormationParVille(propositionFormation){  
     
@@ -153,18 +154,19 @@ OnFiterDeFormationParVille(propositionFormation){
 
   //Recuperer criterRecherche dans l'URL
   getvalue() : string {
-
-                            
+                   
+    let params = '' ;
     this.route.params.subscribe(
-
+     
       ( variable ) =>{
-        return variable['value'] ;
+        console.log(variable['value']);
+        
+        params = variable['value'] ;
    
       }
-    ) ;
-
-    return '' ;
-
+    ) ;    
+      
+    return params ;
   }
 
 

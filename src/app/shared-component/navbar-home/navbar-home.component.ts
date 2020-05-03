@@ -2,22 +2,26 @@ import { SignInService } from './../../home/services/sign-in.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-header-formations',
-  templateUrl: './header-formations.component.html',
-  styleUrls: ['./header-formations.component.css']
+  selector: 'app-navbar-home',
+  templateUrl: './navbar-home.component.html',
+  styleUrls: ['./navbar-home.component.css']
 })
-export class HeaderFormationsComponent implements OnInit {
+export class NavbarHomeComponent implements OnInit {
 
- 
+  
   authenticated : boolean;
-
+  profile : string ;
 
   constructor(private signInService : SignInService) { }
+
 
 
   ngOnInit() {
     //Vérifie si l'utilisateur est connecté
     this.authenticated = this.signInService.isLogged() ;
+    this.profile = sessionStorage.getItem(this.signInService.AUHORITY);
+    
+    
     this.loadJavaScript();
   }
 

@@ -1,39 +1,7 @@
-<div class="search-top">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-              <div class="col-md-10">
-                <div class="search-form"> 
-                        <div class="sf-type">
-                            <div class="sf-input">
-                                <input type="text" 
-                                [(ngModel)]="criterRecherche" id="sf-box" placeholder="Search">
-                            </div>
-                        
-                        </div>
-
-                    </div>
-                    <div class="sf-submit">
-                        <input type="submit" (click)="OnFiltreFormationSearch(criterRecherche)" value="Rechercher">
-                    </div>
-               </div>
-             
-              <div class="col-md-2">
-                    
-                <div class="form-group">
-                    <label for="statusFilter" style="color:chocolate;" class="control-label"> Trier par Ville :</label>
-                    <select class="form-control" [(ngModel)]="designationVille" name="statusFilter" (change)="OnFiterDeFormationParVille($event.target.value)">
-                        
-                        <option *ngFor="let ville of villes"  (ngvalue)="ville.designation">{{ville.designation}}</option>
-
-                    </select> 
-                 </div>
-            </div>
-          </div>
-        </div>
-    </div>
-</div>
-
+<app-search-bar
+    (getFormationsFiltrees)= "OnFiltreFormation($event)"
+    (getFormationsFiltreParVille)= "OnFiterDeFormationParVille($event)"
+></app-search-bar>
 <section class="pop-cour">
     <div class="container com-sp pad-bot-70">
         <div class="row">
@@ -47,42 +15,19 @@
             <div class="row" *ngFor="let propositionFormation of propositionFormations">
 
                 <div class="col-md-12">
-                    <div class="home-top-cour">
-                        <!--POPULAR COURSES IMAGE-->
-                        <div class="col-md-2">
-                            <p>
-                                <img src="{{urlServer}}/{{propositionFormation.idParticulier}}" alt="">
-                            </p>
-                        </div>
-                        <!--POPULAR COURSES: CONTENT-->
-                        <div class="col-md-10 home-top-cour-desc">
-                            <div>
-                                <h3>{{propositionFormation.code}}</h3>
-                            </div>
-                            <h4 style="display: inline;"
-                                *ngFor="let moduleFomation of propositionFormation.moduleFormations; let i = index"
-                                [attr.data-index]="i">
-                                {{moduleFomation.libelle}} <span
-                                    *ngIf="propositionFormation.moduleFormations.length !== i+1">/</span>
-                            </h4>
-                            <p class="add-three-dot">{{propositionFormation.description}}</p><span
-                                *ngIf="propositionFormation.ville"
-                                class="home-top-cour-rat">{{propositionFormation.ville}}</span>
-                            <div class="hom-list-share">
-                                <ul>
-                                    <li><a [routerLink]="['/formations/details-formation', propositionFormation.id]"><i
-                                                class="fa fa-bar-chart" aria-hidden="true"></i> Details</a> </li>
-                                    <li><a (click)="viewCustomerInMap(propositionFormation.rayonIntervention)"><i
-                                                class="fa fa-map-marker" aria-hidden="true"></i>Sur la carte</a> </li>
-                                    <li><a><i class="fa fa-heart fa-lg"
-                                                [ngStyle]="{color: propositionFormation.isFavoris ? '#EC4067': '#DDDDD' }"
-                                                aria-hidden="true"></i>Favoris</a> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                   <app-card-formation
+                   [idParticulier]= "propositionFormation.idParticulier"
+                    [code] = "propositionFormation.code"
+                    [moduleFormations] = "propositionFormation.moduleFormations"
+                    [description] = "propositionFormation.description"
+                    [ville] = "propositionFormation.ville"
+                    [id] = "propositionFormation.id"
+                    [rayonIntervention] = "propositionFormation.rayonIntervention"
+                    [isFavoris] = "propositionFormation.isFavoris"     
+                    (coordMapEvent) = "viewCustomerInMap($event)"
+                    ></app-card-formation>
 
-                </div>
+                </div> 
 
 
 

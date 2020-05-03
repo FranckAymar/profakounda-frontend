@@ -1,7 +1,7 @@
+import { PropositionFormation } from './../../customers/models/PropositionFormation.model';
 import { URL } from 'src/app/API_url/config';
 import { ListFormationsService } from './../services/list-formations.service';
-import { Component, OnInit } from '@angular/core';
-import { FilterArrayPipe } from './filter.pipe';
+import { Component, OnInit, OnChanges, ɵɵNgOnChangesFeature, SimpleChange, Input, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { Ville } from 'src/app/admin/model/ville.model';
@@ -10,10 +10,9 @@ import { Ville } from 'src/app/admin/model/ville.model';
   selector: 'app-list-formations',
   templateUrl: './list-formations.component.html',
   styleUrls: ['./list-formations.component.css'],
-  providers: [FilterArrayPipe],
 })
 
-export class ListFormationsComponent implements OnInit {
+export class ListFormationsComponent implements OnInit ,OnChanges{
 
 
   //Map
@@ -22,19 +21,9 @@ export class ListFormationsComponent implements OnInit {
   lng: number = -4.049957191526247;
   radius: number = 1000;
   zoom: number = 11;
-
-
-  criterRecherche="";
-  designationVille="";
-  villes : any =[];
-  ville: Ville = {};
  
-  ladate = new Date();
 
   propositionFormations = [];
-  modulesFormation = [];
-  FormationFiltres = [];
-  urlServer = URL.getPhoto;
 
   //Nombre de données à chargées à chaque page
   numberDataOfPage: number = 15;
@@ -47,16 +36,27 @@ export class ListFormationsComponent implements OnInit {
   totalPageArray: Array<any>;
 
 
-  constructor(private listFormationsService: ListFormationsService,private route: ActivatedRoute,private villeService:VilleService) { }
+  constructor(private listFormationsService: ListFormationsService,
+              private route: ActivatedRoute,
+              private villeService:VilleService) { }
 
 
   ngOnInit() {
-    this.getvalue();
-    this.onFetchVilles();
-   this.onGetListFormation(this.page);
-   this.OnFiltreFormation();
    
+    if(this.getvalue() === ''){
+   
+      this.onGetListFormation(this.page);
+    }
+  
 
+  }
+
+
+  ngOnChanges(change : SimpleChanges){
+     
+    console.log(change);
+    
+      
   }
   onGetListFormation(pageActive) {
 
@@ -93,23 +93,13 @@ export class ListFormationsComponent implements OnInit {
  
   }
   
-  OnFiltreFormation(){  
-  
-      this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
-    
-      (reponse)=>{
-        console.log(reponse);
+  OnFiltreFormation(propositionFormation){  
         
-        this.propositionFormations=reponse;
-      },
-
-      (erreur) => {
-        console.log("Une erreur s'est produite: " + erreur);
-      }
-    )
+        this.propositionFormations=propositionFormation;
+  
   }
-
-  OnFiltreFormationSearch(criterRecherche:String){  
+/*
+  onFiltreFormationSearch(criterRecherche:String){  
     
     this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
   
@@ -124,21 +114,12 @@ export class ListFormationsComponent implements OnInit {
     }
   )
 }
+*/
 
-OnFiterDeFormationParVille(designationVille:String){  
+OnFiterDeFormationParVille(propositionFormation){  
     
- this.listFormationsService.getFiterDeFormationParVille(this.designationVille).subscribe(
+    this.propositionFormations=propositionFormation;
 
-  (reponse)=>{
-    console.log(reponse);
-    
-    this.propositionFormations=reponse;
-  },
-
-  (erreur) => {
-    console.log("Une erreur s'est produite: " + erreur);
-  }
-)
 }
 
 
@@ -156,10 +137,7 @@ OnFiterDeFormationParVille(designationVille:String){
     
   }
 
-  zoomChange(event){
-    console.log(event);
-    
-  }
+
 
   viewCustomerInMap(coord){
     this.zoom = 9 ;
@@ -175,30 +153,30 @@ OnFiterDeFormationParVille(designationVille:String){
   }
 
   //Recuperer criterRecherche dans l'URL
-  getvalue() {
+  getvalue() : string {
 
                             
     this.route.params.subscribe(
 
       ( variable ) =>{
-         this.criterRecherche= variable['value'] ;
+        return variable['value'] ;
    
       }
     ) ;
 
+    return '' ;
+
   }
 
-  onFetchVilles()
-  {
-    this.villeService.onFetchVilles()
-    .subscribe(
-      (response)=>{
-        this.villes = response;
-      },
-      (error)=>{
-        console.log("Une erreur s'est produite: "+error);
-      }
-    )
+
+
+
+
+
+  switchStateFavoris(propositionFormation){
+    propositionFormation.isFavoris = !propositionFormation.isFavoris ;
+    console.log(propositionFormation.isFavoris);
+    
   }
 
 }

@@ -1,4 +1,3 @@
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { PropositionFormationService } from './services/propositionFormation.service';
@@ -74,7 +73,6 @@ const customersRouter: Routes = [
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
-    NgbModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,

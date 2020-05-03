@@ -42,7 +42,7 @@ getFilterFormation(filtre) : Observable<any> {
   }
 
   getFiterDeFormationParVille(designationVille) : Observable<any> {
-
+  
       return this.httpClient.get(URL.FiterDeFormationParVille+"/"+designationVille);
 
     }

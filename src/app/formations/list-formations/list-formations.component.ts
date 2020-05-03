@@ -1,7 +1,6 @@
 import { URL } from 'src/app/API_url/config';
 import { ListFormationsService } from './../services/list-formations.service';
 import { Component, OnInit } from '@angular/core';
-import { FilterArrayPipe } from './filter.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { Ville } from 'src/app/admin/model/ville.model';
@@ -10,7 +9,6 @@ import { Ville } from 'src/app/admin/model/ville.model';
   selector: 'app-list-formations',
   templateUrl: './list-formations.component.html',
   styleUrls: ['./list-formations.component.css'],
-  providers: [FilterArrayPipe],
 })
 
 export class ListFormationsComponent implements OnInit {
@@ -51,12 +49,11 @@ export class ListFormationsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getvalue();
-    this.onFetchVilles();
+   this.getvalue();
+   this.onFetchVilles();
    this.onGetListFormation(this.page);
    this.OnFiltreFormation();
    
-
   }
   onGetListFormation(pageActive) {
 
@@ -93,7 +90,7 @@ export class ListFormationsComponent implements OnInit {
  
   }
   
-  OnFiltreFormation(){  
+  OnFiltreFormation(){ 
   
       this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
     

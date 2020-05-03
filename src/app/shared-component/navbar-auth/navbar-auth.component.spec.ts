@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FooterHomeComponent } from './footer-home.component';
+import { NavbarAuthComponent } from './navbar-auth.component';
 
-describe('FooterHomeComponent', () => {
-  let component: FooterHomeComponent;
-  let fixture: ComponentFixture<FooterHomeComponent>;
+describe('NavbarAuthComponent', () => {
+  let component: NavbarAuthComponent;
+  let fixture: ComponentFixture<NavbarAuthComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FooterHomeComponent ]
+      declarations: [ NavbarAuthComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FooterHomeComponent);
+    fixture = TestBed.createComponent(NavbarAuthComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

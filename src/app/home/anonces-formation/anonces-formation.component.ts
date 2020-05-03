@@ -11,8 +11,6 @@ export class AnoncesFormationComponent implements OnInit {
 
 
   propositionFormations = [] ;
-  urlServer = URL.getPhoto;
-
   //Nombre de données à chargées à chaque page
   numberDataOfPage: number = 15;
   //Page courante

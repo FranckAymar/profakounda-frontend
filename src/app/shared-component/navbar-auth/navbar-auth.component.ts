@@ -1,16 +1,15 @@
-import { SignInService } from '../../home/services/sign-in.service';
-import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ParticulierService } from 'src/app/customers/services/particulier.service';
+import { ParticulierService } from './../../customers/services/particulier.service';
+import { SignInService } from './../../home/services/sign-in.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { consts } from '../../API_url/const'
-import * as $ from 'jquery';
-@Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
-})
-export class NavbarComponent implements OnInit {
 
+@Component({
+  selector: 'app-navbar-auth',
+  templateUrl: './navbar-auth.component.html',
+  styleUrls: ['./navbar-auth.component.css']
+})
+export class NavbarAuthComponent implements OnInit {
   isView ;
   isCollapsed= true ;
 
@@ -21,6 +20,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private signInService : SignInService , 
               private router : Router,private particulierService:ParticulierService) {
+
 
   
   this.isView = false ;

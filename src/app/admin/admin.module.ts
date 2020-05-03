@@ -1,8 +1,7 @@
-import { AgmCoreModule } from '@agm/core';
+import { SharedModule } from './../shared.module';
 import { PropostionFormationsAdminService } from './services/propostion-formations-admin.service';
 import { CauserefusService } from './services/causerefus.service';
 import { AdminGuard } from '../guard/admin.guard';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { ForfaitService } from './services/forfait.service';
 import { FiliereService } from './services/filiere.service';
@@ -11,23 +10,16 @@ import { CycleService } from './services/cycle.service';
 import { Routes, RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NiveauComponent } from './niveau/niveau.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
 import { FiliereComponent } from './filiere/filiere.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { ContentAdminComponent } from './content-admin/content-admin.component';
 import { ClasseComponent } from './classe/classe.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CycleComponent } from './cycle/cycle.component';
 import { ForfaitComponent } from './forfait/forfait.component';
-import { HttpClientModule } from '@angular/common/http';
 import { AdminMainComponent } from './admin-main/admin-main.component';
 import { JourComponent } from './jour/jour.component';
 import { JourService } from '../customers/services/Jour.service';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule } from '@angular/material';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormationService } from './services/formation.service';
 import { FormationComponent } from './formation/formation.component';
 import { PaiementsComponent } from './paiements/paiements.component';
@@ -143,9 +135,7 @@ const adminRouter : Routes = [
                 CycleComponent,
                 DashboardHomeComponent,
                 FiliereComponent,
-                FooterComponent,
                 ForfaitComponent,
-                NavbarComponent,
                 NiveauComponent,
                 VilleComponent,
                 SidebarComponent,
@@ -156,28 +146,12 @@ const adminRouter : Routes = [
                 AllCustomersComponent,
                 AllConsultationsCustomersComponent,
                 VilleComponent,
-                CauserefusComponent,
-                
+                CauserefusComponent, 
                 PropostionFormationsAdminComponent,
                 DetailsPropostionFormationAdminComponent ],
   imports: [
-    CommonModule, 
     RouterModule.forChild(adminRouter),
-    HttpClientModule,
-    FormsModule, 
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCdrVoDFD_XTsAxUo2-VH0HTLX5IrdfC_E'
-    }) ,
-
-
+    SharedModule
   ], 
   providers : [
     ClasseService,

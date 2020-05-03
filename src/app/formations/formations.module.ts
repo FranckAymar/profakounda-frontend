@@ -1,16 +1,10 @@
-import { FilterArrayPipe } from './list-formations/filter.pipe';
+import { SharedModule } from './../shared.module';
 import { PaiementService } from './services/paiement.service';
-import { AgmCoreModule } from '@agm/core';
 import { DetailsAnnonceComponent } from './details-annonce/details-annonce.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ListFormationsComponent } from './list-formations/list-formations.component';
 import { FormationsMainComponent } from './formations-main/formations-main.component';
-import { HttpClientModule } from '@angular/common/http';
-import { HeaderFormationsComponent } from './header-formations/header-formations.component';
-import { EditProfileComponent } from '../customers/edit-profile/edit-profile.component';
 
 const formationsRouter = [
 
@@ -41,10 +35,9 @@ const formationsRouter = [
 
 @NgModule({
   declarations: [ListFormationsComponent, 
-    FormationsMainComponent, 
-    DetailsAnnonceComponent,
-     HeaderFormationsComponent,
-     FilterArrayPipe,
+                  FormationsMainComponent, 
+                  DetailsAnnonceComponent,
+     
      
     ],
   providers : [
@@ -53,18 +46,9 @@ const formationsRouter = [
   ],
   imports: [
    
-    CommonModule,
     RouterModule.forChild(formationsRouter),
-    HttpClientModule,
-    FormsModule, 
-    ReactiveFormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCdrVoDFD_XTsAxUo2-VH0HTLX5IrdfC_E'
-    }) ,
-    
-   
+    SharedModule
 
-    
   ]
 })
 export class FormationsModule { }

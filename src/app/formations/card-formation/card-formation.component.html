@@ -1,0 +1,35 @@
+<div class="home-top-cour">
+    <!--POPULAR COURSES IMAGE-->
+    <div class="col-md-2">
+        <p>
+            <img src="{{urlServer}}/{{idParticulier}}" alt="">
+        </p>
+    </div>
+    <!--POPULAR COURSES: CONTENT-->
+    <div class="col-md-10 home-top-cour-desc">
+        <div>
+            <h3>{{code}}</h3>
+        </div>
+        <h4 style="display: inline;"
+            *ngFor="let moduleFomation of moduleFormations; let i = index"
+            [attr.data-index]="i">
+            {{moduleFomation.libelle}} <span
+                *ngIf="moduleFormations.length !== i+1">/</span>
+        </h4>
+        <p class="add-three-dot">{{description}}</p>
+        <span
+            
+            class="home-top-cour-rat">{{ville}}</span>
+        <div class="hom-list-share">
+            <ul> 
+                <li><a [routerLink]="['/formations/details-formation', id]"><i
+                            class="fa fa-bar-chart" aria-hidden="true"></i> Details</a> </li>
+                <li><a *ngIf="rayonIntervention" (click)="onSendCoordMap(rayonIntervention)"><i
+                            class="fa fa-map-marker" aria-hidden="true"></i>Sur la carte</a> </li>
+                <li><a><i (click)= "switchStateFavoris(isFavoris)" class="fa fa-heart fa-lg"
+                            [ngStyle]="{color: getStyle()}"
+                            aria-hidden="true"></i>Favoris</a> </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -7,39 +7,15 @@
             </div>
         </div>
         <div class="row" *ngFor="let propositionFormation of propositionFormations">
-            <a [routerLink]="['/formations/details-formation', propositionFormation.id]">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <div class="home-top-cour">
-                        <!--POPULAR COURSES IMAGE-->
-                        <div class="col-md-2"> 
-                             <p>
-                                 <img  src="{{urlServer}}/{{propositionFormation.idParticulier}}" alt="">
-                            </p>
-                        </div>
-                        <!--POPULAR COURSES: CONTENT-->
-                        <div class="col-md-10 home-top-cour-desc">
-                            <a href="course-details.html">
-                                <h3>{{propositionFormation.code}}</h3>
-                            </a>
-                            <h4 style="display: inline;" 
-                            *ngFor="let moduleFomation of propositionFormation.moduleFormations; let i = index" [attr.data-index]="i">
-                            {{moduleFomation.libelle}} <span *ngIf="propositionFormation.moduleFormations.length !== i+1">/</span>
-                            </h4>
-                            <p class="add-three-dot">{{propositionFormation.description}}</p><span *ngIf="propositionFormation.ville" class="home-top-cour-rat">{{propositionFormation.ville}}</span>
-                            <div class="hom-list-share">
-                                <ul>
-                                    <li><a [routerLink]="['/formations/details-formation', propositionFormation.id]"
-                                        ><i class="fa fa-bar-chart" aria-hidden="true"></i> Details</a> </li>
-                                        
-                                </ul>
-                            </div>
-                        </div>
-                    </div>                      
-               
-                </div>
-                <div class="col-md-1"></div>
-            </a>
+            <app-card-formation
+            [idParticulier]= "propositionFormation.idParticulier"
+            [code] = "propositionFormation.code"
+            [moduleFormations] = "propositionFormation.moduleFormations"
+            [description] = "propositionFormation.description"
+            [ville] = "propositionFormation.ville"
+            [id] = "propositionFormation.id"
+            [isFavoris] = "propositionFormation.isFavoris"     
+            ></app-card-formation>
         </div>
         <div class="con-title">
             <a [routerLink]="['/formations']">

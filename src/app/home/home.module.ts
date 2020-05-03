@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared.module';
 import { signUpvalidationService } from './services/signUp-validation.service';
 import { SignUpvalidationComponent } from './sign-upvalidation/sign-upvalidation.component';
 import { ResetPasswordService } from './services/reset-password.service';
@@ -12,7 +13,6 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AnoncesFormationComponent } from './anonces-formation/anonces-formation.component';
-import { FooterHomeComponent } from './footer-home/footer-home.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SliderHomeComponent } from './slider-home/slider-home.component';
 import { HeaderHomeComponent } from './header-home/header-home.component';
@@ -65,21 +65,16 @@ const homeRouter = [
     SignUpComponent, 
     HomeComponent, 
     AnoncesFormationComponent, 
-    FooterHomeComponent, 
     ForgotPasswordComponent, 
     SliderHomeComponent, 
-    HeaderHomeComponent, 
     ResetPasswordComponent,
     SignUpvalidationComponent,
    
    ],
   imports: [
-    CommonModule,
     RouterModule.forChild(homeRouter),
-    HttpClientModule,
-    FormsModule, 
-    ReactiveFormsModule,
-     ],
+    SharedModule
+  ],
   providers : [
     SignInService, ResetPasswordService, signUpvalidationService
   ]

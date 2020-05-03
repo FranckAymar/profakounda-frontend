@@ -96,7 +96,6 @@ export class ListFormationsComponent implements OnInit ,OnChanges{
   OnFiltreFormation(propositionFormation){  
         
         this.propositionFormations=propositionFormation;
-  
   }
 /*
   onFiltreFormationSearch(criterRecherche:String){  

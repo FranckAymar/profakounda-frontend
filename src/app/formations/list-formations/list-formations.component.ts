@@ -51,10 +51,12 @@ export class ListFormationsComponent implements OnInit {
   ngOnInit() {
     
    
-    if(this.getvalue() === ''){
-      this.onGetListFormation(this.page);
-    }else{
+    if(this.getvalue()){
       this.onFiltreFormationSearch(this.getvalue());
+
+    }else{
+      this.onGetListFormation(this.page);
+
     }
   
   }

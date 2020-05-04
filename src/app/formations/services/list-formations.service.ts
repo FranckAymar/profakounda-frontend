@@ -15,8 +15,7 @@ export class ListFormationsService {
 
   getListPropositionFormations(page?, numberDataOfPage?): Observable<any> {
 
-    let params = new HttpParams().set("page", page).set("total", numberDataOfPage)
-                .set("username" , sessionStorage.getItem(this.signInService.USERNAME));
+    let params = new HttpParams().set("page", page).set("total", numberDataOfPage);
     if (page && numberDataOfPage) {
       return this.httpClient.get(URL.listPropositionFormationsEnligne, { params: params });
     }

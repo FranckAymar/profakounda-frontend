@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SignInService } from '../services/sign-in.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -10,6 +10,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class SignInComponent implements OnInit {
 
+
+  returnUrl : string ;
 
   //Clé des variables de session
   TOKEN = 'TOKEN';
@@ -24,7 +26,8 @@ export class SignInComponent implements OnInit {
 
   constructor(private signInService: SignInService,
     private router: Router,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private route : ActivatedRoute) {
 
     this.isFailed = false;
     this.errorInternet = false ;
@@ -35,6 +38,10 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/customers/editprofil';
+    console.log(this.returnUrl);
+    
   }
 
 
@@ -59,8 +66,7 @@ export class SignInComponent implements OnInit {
     console.log(sessionStorage.getItem(this.signInService.TOKEN));
     
     
-    try {
-      // synchronous operation
+   
 
     this.signInService.login(token).subscribe(
 
@@ -84,8 +90,8 @@ export class SignInComponent implements OnInit {
             this.router.navigateByUrl('/admin');
             
           } else {
-           
-           this.router.navigateByUrl('/customers/editprofil');
+            this.router.navigateByUrl(this.returnUrl);
+            
           }
 
       },
@@ -107,11 +113,7 @@ export class SignInComponent implements OnInit {
 
    );
      
-   }
-   catch(error) {
-      console.log('error', error);
-      
-   }
+  
 
   }
 

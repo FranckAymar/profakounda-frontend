@@ -32,11 +32,15 @@ export class AnoncesFormationComponent implements OnInit {
 
   onGetListFormation() {
 
+
     this.listFormationsService.getListPropositionFormations().subscribe(
 
       
       (resp) =>{
 
+
+        console.log(resp);
+    
         this.propositionFormations = resp ;
         
 

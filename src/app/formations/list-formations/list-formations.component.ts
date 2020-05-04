@@ -1,6 +1,6 @@
 import { URL } from 'src/app/API_url/config';
 import { ListFormationsService } from './../services/list-formations.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { Ville } from 'src/app/admin/model/ville.model';
@@ -49,11 +49,22 @@ export class ListFormationsComponent implements OnInit {
 
 
   ngOnInit() {
-   this.getvalue();
-   this.onFetchVilles();
-   this.onGetListFormation(this.page);
-   this.OnFiltreFormation();
+    
    
+    if(this.getvalue() === ''){
+      this.onGetListFormation(this.page);
+    }else{
+      this.onFiltreFormationSearch(this.getvalue());
+    }
+  
+  }
+
+
+  ngOnChanges(change : SimpleChanges){
+     
+    console.log(change);
+    
+      
   }
   onGetListFormation(pageActive) {
 
@@ -90,28 +101,17 @@ export class ListFormationsComponent implements OnInit {
  
   }
   
-  OnFiltreFormation(){ 
-  
-      this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
-    
-      (reponse)=>{
-        console.log(reponse);
+  OnFiltreFormation(propositionFormation){  
         
-        this.propositionFormations=reponse;
-      },
-
-      (erreur) => {
-        console.log("Une erreur s'est produite: " + erreur);
-      }
-    )
+        this.propositionFormations=propositionFormation;
   }
 
-  OnFiltreFormationSearch(criterRecherche:String){  
+  onFiltreFormationSearch(criterRecherche:String){  
     
-    this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
+    this.listFormationsService.getFilterFormation(criterRecherche).subscribe(
   
     (reponse)=>{
-      console.log(reponse);
+      console.log( "search reult :"+reponse);
       
       this.propositionFormations=reponse;
     },
@@ -172,17 +172,20 @@ OnFiterDeFormationParVille(designationVille:String){
   }
 
   //Recuperer criterRecherche dans l'URL
-  getvalue() {
-
-                            
+  getvalue() : string {
+                   
+    let params = '' ;
     this.route.params.subscribe(
-
+     
       ( variable ) =>{
-         this.criterRecherche= variable['value'] ;
+        console.log(variable['value']);
+        
+        params = variable['value'] ;
    
       }
-    ) ;
-
+    ) ;    
+      
+    return params ;
   }
 
   onFetchVilles()

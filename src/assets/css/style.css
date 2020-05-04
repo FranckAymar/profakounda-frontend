@@ -3608,14 +3608,14 @@ left: 0;
 }
  .home-requ {
 }
- .home-requ input, select, textarea {
+ .home-requ input, textarea {
      padding: 15px;
      height: auto;
      border: 1px solid #afafaf;
      border-radius: 2px;
      resize: none;
 }
- .home-requ select {
+ .home-requ  {
      padding: 12px 10px;
 }
  .home-requ textarea {
@@ -3699,7 +3699,7 @@ left: 0;
 }
  .n-form-com{
 }
- .n-form-com form input, select, textarea{
+ .n-form-com form input, textarea{
      border: 1px solid #cecece;
      height: 45px;
      background: #fff;

@@ -1,6 +1,8 @@
-import { URL } from './../../API_url/config';
-import { Ville } from './../../admin/model/ville.model';
+import { Router, RouterStateSnapshot, RouterState } from '@angular/router';
+import { SignInService } from './../../home/services/sign-in.service';
+import { URL } from '../../API_url/config';
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { FavorisService } from '../services/favoris.service';
 
 @Component({
   selector: 'app-card-formation',
@@ -11,6 +13,13 @@ export class CardFormationComponent implements OnInit, OnChanges {
 
   urlServer = URL.getPhoto ;
 
+  //Model
+  favorisModel = {
+
+    idProposition : null,
+    idParticulier : null ,
+
+  }
 
   @Input() code : string ;
   @Input() idParticulier : number ;
@@ -21,8 +30,21 @@ export class CardFormationComponent implements OnInit, OnChanges {
   @Input() rayonIntervention : {} ;
   @Input() isFavoris ;
 
+
+  //Sauvegarder l'URL courante 
+   snapshot : RouterStateSnapshot ;
+   state: RouterState 
+
   @Output() coordMapEvent = new EventEmitter<any>();
-  constructor() { }
+  constructor(private favorisService : FavorisService,
+               private signInService : SignInService,
+               private router : Router, 
+               ) {
+
+                this.state = router.routerState;
+                this.snapshot = this.state.snapshot;
+
+                }
   
   
   ngOnChanges(changes: SimpleChanges): void {
@@ -37,7 +59,25 @@ export class CardFormationComponent implements OnInit, OnChanges {
     
   }
 
-  switchStateFavoris(isFavoris){
+  switchStateFavoris(isFavoris ,idParticulier, id, state: RouterStateSnapshot){
+
+    
+
+    if(!this.signInService.isLogged()){
+      this.router.navigate(['/home/sign-in'], { queryParams: { returnUrl: this.snapshot.url }});
+      return ;
+    }
+
+    this.favorisModel.idParticulier = idParticulier ;;
+    this.favorisModel.idProposition = id ;
+
+    
+    if(!isFavoris){
+      this.onAddFavoris(this.favorisModel)
+    }else{
+      this.onDeleteFavoris(this.favorisModel)
+    }
+
     this.isFavoris = !isFavoris ;
     this.getStyle();
     
@@ -47,7 +87,44 @@ export class CardFormationComponent implements OnInit, OnChanges {
     if(this.isFavoris == true){
       return '#EC4067' ;
     }
-    return '#FFFFFF' ;
+    return '#C0C0C0' ;
 }
+
+  onAddFavoris(favorisModel) {
+
+
+    this.favorisService.addFavoris(favorisModel).subscribe(
+
+      (resp)=>{
+          console.log("Ajouter avec succès");
+          
+      },
+
+      (error) => {
+          console.log(error);
+          
+      }
+
+    )
+
+  }
+
+  onDeleteFavoris(favorisModel){
+    
+    this.favorisService.supprimerFavoris(favorisModel).subscribe(
+
+      (resp)=>{
+          console.log("supprimer avec succès");
+          
+      },
+
+      (error) => {
+          console.log(error);
+          
+      }
+
+    )
+
+  }
 
 }

@@ -129,6 +129,11 @@ export const URL = {
     supprimerMiseEnligne : consts.host+ consts.nameProject +'admin/supprimerMiseEnligne',
 
     //Dashboard
-    recupererDashBoard : consts.host+ consts.nameProject + 'admin/dashboard'
+    recupererDashBoard : consts.host+ consts.nameProject + 'admin/dashboard',
+
+    //Favoris
+    ajouterFavoris :  consts.host+ consts.nameProject + 'particulier/enregistrerfavoris',
+    supprimerFavoris :  consts.host+ consts.nameProject + 'particulier/supprimerfavorisparticulier',
+    recupererFavoris : consts.host+ consts.nameProject + 'particulier/favorisparticulier'
 
 }

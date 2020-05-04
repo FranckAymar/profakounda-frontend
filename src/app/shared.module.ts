@@ -27,7 +27,7 @@ import { NavbarHomeComponent } from './shared-component/navbar-home/navbar-home.
     FormsModule, 
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCdrVoDFD_XTsAxUo2-VH0HTLX5IrdfC_E'
+      apiKey: 'AIzaSyCud6-IOzGf04McqnGvz3z-pCdDEhci9Jw'
     }) ,
     MaterialDesignModule,
   ],

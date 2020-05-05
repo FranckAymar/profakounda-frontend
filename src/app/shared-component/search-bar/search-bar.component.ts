@@ -30,8 +30,8 @@ export class SearchBarComponent implements OnInit {
   onFiltreFormationSearch(criterRecherche:String){  
     
     this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
-  
-    (reponse)=>{      
+        
+    (reponse)=>{   
       this.getFormationsFiltrees.emit(reponse);
     },
 
@@ -47,7 +47,7 @@ OnFiterDeFormationParVille(designationVille:String){
  
    (reponse)=>{
      
-     this.getFormationsFiltreParVille.emit(reponse);
+    this.getFormationsFiltrees.emit(reponse);
    },
  
    (erreur) => {

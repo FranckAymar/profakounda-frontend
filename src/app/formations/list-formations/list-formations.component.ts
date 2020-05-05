@@ -27,8 +27,6 @@ export class ListFormationsComponent implements OnInit {
   villes : any =[];
   ville: Ville = {};
  
-  ladate = new Date();
-
   propositionFormations = [];
   modulesFormation = [];
   FormationFiltres = [];
@@ -124,21 +122,12 @@ export class ListFormationsComponent implements OnInit {
   )
 }
 
-OnFiterDeFormationParVille(designationVille:String){  
+OnFiterDeFormationParVille(propositionFormation){  
     
- this.listFormationsService.getFiterDeFormationParVille(this.designationVille).subscribe(
+  this.propositionFormations=propositionFormation;
 
-  (reponse)=>{
-    console.log(reponse);
-    
-    this.propositionFormations=reponse;
-  },
-
-  (erreur) => {
-    console.log("Une erreur s'est produite: " + erreur);
-  }
-)
 }
+
 
 
   inititalizeCoordMap(lat: number, long: number, radius: number, zoom: number) {
@@ -180,7 +169,6 @@ OnFiterDeFormationParVille(designationVille:String){
     this.route.params.subscribe(
      
       ( variable ) =>{
-        console.log(variable['value']);
         
         params = variable['value'] ;
    

@@ -26,3 +26,15 @@
     color: red;
   }
 }
+
+
+.btn-logout{
+
+  background-color:rgb(218, 52, 52); 
+  width:2em; 
+  height:2em;
+  border-radius:0.2em;
+  color: white;
+
+}
+

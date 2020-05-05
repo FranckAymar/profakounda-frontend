@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { VilleService } from './../../admin/services/ville.service';
 import { ListFormationsService } from './../../formations/services/list-formations.service';
 import { Ville } from './../../admin/model/ville.model';
@@ -10,6 +11,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class SearchBarComponent implements OnInit {
 
+  villeKey : string ;
+  searchKey : string ;
+
   criterRecherche="";
   designationVille="";
   villes : any =[];
@@ -20,19 +24,30 @@ export class SearchBarComponent implements OnInit {
 
   constructor(private villeService:VilleService,
               private listFormationsService: ListFormationsService,
+              private router : Router,
+              private route : ActivatedRoute
     ) { }
 
   ngOnInit() {
     this.onFetchVilles();
+
+    this.getvalue() ;
+    if(this.searchKey){
+      this.onFiltreFormationSearch(this.searchKey) ;
+    }else if (this.villeKey){
+      this.OnFiterDeFormationParVille(this.villeKey) ;
+    }
     
   }
 
-  onFiltreFormationSearch(criterRecherche:String){  
+  onFiltreFormationSearch(criterRecherche:String){ 
     
-    this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
+   
+    this.listFormationsService.getFilterFormation(criterRecherche).subscribe(
   
     (reponse)=>{      
       this.getFormationsFiltrees.emit(reponse);
+
     },
 
     (erreur) => {
@@ -41,19 +56,25 @@ export class SearchBarComponent implements OnInit {
   )
 }
 
-OnFiterDeFormationParVille(designationVille:String){  
+
+OnFiterDeFormationParVille(designationVille){  
+
+ 
+  this.router.navigate(['/formations'], { queryParams: { villeKey: designationVille }}) ;
     
-  this.listFormationsService.getFiterDeFormationParVille(this.designationVille).subscribe(
+  this.listFormationsService.getFiterDeFormationParVille(designationVille).subscribe(
  
    (reponse)=>{
      
+    console.log(reponse);
+    
      this.getFormationsFiltreParVille.emit(reponse);
    },
  
    (erreur) => {
      console.log("Une erreur s'est produite: " + erreur);
    }
- )
+ ) 
  }
 
  onFetchVilles()
@@ -69,4 +90,19 @@ OnFiterDeFormationParVille(designationVille:String){
    )
  }
 
+ goToFormations(villeKey) {
+   this.router.navigate(['/formations'], { queryParams:{ villeKey : villeKey}}) ;
+ }
+
+  //Recuperer criterRecherche dans l'URL
+  getvalue() {
+    
+    this.route.queryParams.subscribe(params => {
+       this.villeKey = params['villeKey'];
+       this.searchKey = params['searchKey']
+
+  });
+
+ 
+  }
 }

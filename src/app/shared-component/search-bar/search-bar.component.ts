@@ -29,7 +29,7 @@ export class SearchBarComponent implements OnInit {
 
   onFiltreFormationSearch(criterRecherche:String){  
     
-    this.listFormationsService.getFilterFormation(this.criterRecherche).subscribe(
+    this.listFormationsService.getFilterFormation(criterRecherche).subscribe(
   
     (reponse)=>{      
       this.getFormationsFiltrees.emit(reponse);
@@ -43,7 +43,7 @@ export class SearchBarComponent implements OnInit {
 
 OnFiterDeFormationParVille(designationVille:String){  
     
-  this.listFormationsService.getFiterDeFormationParVille(this.designationVille).subscribe(
+  this.listFormationsService.getFiterDeFormationParVille(designationVille).subscribe(
  
    (reponse)=>{
      

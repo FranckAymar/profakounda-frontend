@@ -1,4 +1,4 @@
-àè !<!--SECTION START-->
+<!--SECTION START-->
 <section>
     <div *ngIf="propositionFormation.rayonIntervention" class="pro-cover">
 
@@ -122,10 +122,71 @@
                             </ul>
                         </div>
                     </div>
+
+
+                    <div class="udb-sec udb-time">
+                        <h4>Notes et Commentaires</h4>
+
+                        <div class="tour_head1 udb-time-line days">
+                            <div style="width: 10em;margin: auto;">
+                                <a class="btn btn-primary" *ngIf="isConnected && !isProprio"   data-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
+                                  Mon avis
+                                </a>
+                                <a *ngIf="!isConnected" (click)="showAlert()" class="btn btn-primary">
+                                    Mon avis
+                                  </a>
+                            </div>
+                              <div class="collapse" id="collapseExample">
+                                <form (ngSubmit)="enregistrerCommentaire()" #k="ngForm">
+                                    <div *ngIf="error && !success" class="alert alert-danger">{{error}}</div>
+                                    <div class="form-group">
+                                        <label for="note">Note:</label>
+                                        <input (ngModelChange)="verifierValeur()" class="form-control" [(ngModel)]="avis.note" required name="note" type="number" id="note"
+                                             />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="commentaire">Commentaire:</label>
+                                        <textarea [(ngModel)]="avis.commentaire"  class="form-control"  required id="commentaire" name="commentaire" cols="20" rows="5">
+                                        </textarea>
+                                    </div>
+                                    <button type="submit" [disabled]="k.invalid" class="btn btn-danger">Enregistrer</button>
+                                </form>
+                              </div>
+                              <div  style="height: 18em;overflow: auto;">
+                                <div style="margin-top: 1em;" *ngFor="let av of tabAvis ">
+                                    <div style="border-radius: 0.5em 0.5em 0 0;" class="sb2-12 ">
+                                        <ul>
+                                            <li><img  src="{{urlServer}}/{{av.idParticulier}}" alt="">
+                                            </li>
+                                            <li>
+                                                <h5>{{av.nomParticulier}} {{av.prenomParticulier}}</h5>
+                                            </li>
+                                            
+                                        </ul>
+                                        <div  class="row">
+                                            <div style="background-color: yellow;border-radius: 0.3em;" class="col-md-2"><span *ngIf="!av.isGood" style="color: red;">{{av.note}}</span><span *ngIf="av.isGood" style="color: green;">{{av.note}}</span>/<span style="color: white;">10</span> <i *ngIf="!av.isGood" style="margin-left: 1em; color: red;" class="fa fa-thumbs-down"></i> <i *ngIf="av.isGood" style="margin-left: 1em; color: green;" class="fa fa-thumbs-up"></i></div>
+                                            
+                                        </div>
+                                                   
+                                        
+                                        <span 
+                class="home-top-cour-rat">{{av.date}}</span>
+                                    </div>
+                                    <div style="background-color: #286090; color: white;border-radius:0 0  0.5em 0.5em;padding: 0.3em;">{{av.commentaire}}</div>
+                                    
+                                  </div>
+                              </div>
+                              
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    
 
     <!--SECTION END-->
 

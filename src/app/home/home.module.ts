@@ -17,6 +17,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { SliderHomeComponent } from './slider-home/slider-home.component';
 import { HeaderHomeComponent } from './header-home/header-home.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AvisService } from './services/avis.service';
 const homeRouter = [
 
 
@@ -76,7 +77,8 @@ const homeRouter = [
     SharedModule
   ],
   providers : [
-    SignInService, ResetPasswordService, signUpvalidationService
+    SignInService, ResetPasswordService, signUpvalidationService,AvisService
+
   ]
 })
 export class HomeModule { }

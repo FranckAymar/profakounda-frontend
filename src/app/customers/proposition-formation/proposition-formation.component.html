@@ -5,7 +5,10 @@
 <div *ngFor="let p of propositions" style="margin-top: 1em;"class="col-md-12">
     <div class="box-inn-sp">
         <div class="inn-title">
+            <a *ngIf="p.proposition.enLigne && p.nombreAvis" style="float: right;" [routerLink]="['/formations/details-formation', p.proposition.id]" class='waves-effect btn-noti' href="admin-course-enquiry.html" title="course booking messages"><i class="fa fa-envelope-o" aria-hidden="true"></i><span>{{p.nombreAvis}}</span></a>
             <h5 *ngIf="p.proposition.enLigne" style="color: green;">En ligne</h5>
+           
+            <!-- <a  *ngIf="p.proposition.enLigne" style="float: right; color: white; background-color: darkorange;border-radius: 0.5em;" [routerLink]="['/formations/details-formation', p.proposition.id]" ><i class="fa fa-envelope-o" aria-hidden="true"></i><span>5</span></a> -->
             <h5 *ngIf="!p.proposition.attenteMiseEnLigne && 
                         !p.proposition.enLigne && 
                         !p.proposition.refusMiseEnLigne &&
@@ -24,15 +27,15 @@
                 </p>
                 <div  class="row">
                     <div style="margin-top: 0.5em !important;" class="col-md-3">
-                        <button (click)="addNiveau(p.proposition.id)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
-                                class="btn btn-primary btn-block">
-                                Niveau enseigné
+                        <button   (click)="addModule(p.modules,p.proposition.id)" type="button" data-toggle="modal" data-target="#modules"
+                                class="btn btn-info btn-block">
+                                Modules enseignés
                         </button>
                     </div>
                     <div style="margin-top: 0.5em !important;" class="col-md-3">
-                        <button  style="margin-left: 1em;" (click)="addModule(p.modules,p.proposition.id)" type="button" data-toggle="modal" data-target="#modules"
-                                class="btn btn-info btn-block">
-                                Modules enseignés
+                        <button style="margin-left: 1em;" (click)="addNiveau(p.proposition.id)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
+                                class="btn btn-primary btn-block">
+                                Niveau enseigné
                         </button>
                     </div>
                     <div style="margin-top: 0.5em !important;" class="col-md-3">

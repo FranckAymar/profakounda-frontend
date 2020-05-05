@@ -54,6 +54,8 @@ export const URL = {
 
     //sign up
     singUpValidation:consts.host+ consts.nameProject+'sinUp-validation',
+    //Avis
+    enregistrerAvis:consts.host+ consts.nameProject+'particulier/enregistrerAvis',
     //Change password
     changePassword:consts.host+ consts.nameProject+'particulier/changePassword',
 

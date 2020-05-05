@@ -1,29 +1,8 @@
 $(document).ready(function() {
 	"use strict";
     $('.chips').material_chip();
-    $('select').material_select();
 
-    //FILTER SELECT OPTIONS
-    $(".wed-fil-1").on('click', function() {
-        $(".fil-1").addClass("filt-eff");
-        $(".fil-2").addClass('filt-eff-1');
-    });
-    //FILTER SELECT OPTIONS
-    $(".wed-fil-2").on('click', function() {
-        $(".fil-2").removeClass("filt-eff-1");
-        $(".fil-3").addClass("filt-eff-1");
-    });
-    //FILTER SELECT OPTIONS
-    $(".wed-fil-3").on('click', function() {
-        $(".fil-3").removeClass("filt-eff-1");
-        $(".fil-4").addClass("filt-eff-1");
-    });
-    //FILTER SELECT OPTIONS
-    $(".wed-fil-4").on('click', function() {
-        $(".fil-4").removeClass("filt-eff-1");
-        $(".fil-5").addClass("filt-eff-1");
-    });
-
+   
     //MEGA MENU	
     $(".about-menu").hover(function() {
         $(".about-mm").fadeIn();
@@ -116,11 +95,7 @@ $(document).ready(function() {
         $(".ed-mm-inn").removeClass("ed-mm-act");
     });
 	
-    //MATERIAL SELECT BOX
-    $('select').material_select();
 
-    //MATERIAL COLLAPSIBLE
-    $('.collapsible').collapsible();
 
     //MATERIAL CHIP COMMON
     $('.chips').material_chip();

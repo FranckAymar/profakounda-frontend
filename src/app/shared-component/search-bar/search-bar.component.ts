@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { VilleService } from './../../admin/services/ville.service';
 import { ListFormationsService } from './../../formations/services/list-formations.service';
 import { Ville } from './../../admin/model/ville.model';
@@ -20,6 +21,7 @@ export class SearchBarComponent implements OnInit {
 
   constructor(private villeService:VilleService,
               private listFormationsService: ListFormationsService,
+              private router : Router
     ) { }
 
   ngOnInit() {
@@ -41,7 +43,18 @@ export class SearchBarComponent implements OnInit {
   )
 }
 
+test(){
+  console.log("OKOKO");
+  
+}
+
 OnFiterDeFormationParVille(designationVille:String){  
+
+
+  console.log(designationVille);
+  
+
+   this.router.navigateByUrl('/formations') ;
     
   this.listFormationsService.getFiterDeFormationParVille(designationVille).subscribe(
  
@@ -53,7 +66,7 @@ OnFiterDeFormationParVille(designationVille:String){
    (erreur) => {
      console.log("Une erreur s'est produite: " + erreur);
    }
- )
+ ) 
  }
 
  onFetchVilles()

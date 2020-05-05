@@ -1555,11 +1555,11 @@
      font-weight: 500;
      text-transform: capitalize;
      padding: 8px;
-     border: 1px solid #ffffff;
+     border: 0px solid #ffffff;
      padding: 8px 45px;
      margin: 0px;
-     border-top-left-radius: 2px;
-     border-bottom-left-radius: 2px;
+     border-top-left-radius: 0px;
+     border-bottom-left-radius: 0px;
      font-size: 14px;
 }
  .sf-list{

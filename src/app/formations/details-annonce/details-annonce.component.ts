@@ -11,6 +11,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as $ from 'jquery';
 import { MatAutocompleteTrigger } from '@angular/material';
 import { PasswordMatch } from 'src/app/custom-validator/password-match';
+import { Avis } from 'src/app/home/models/Avis.model';
+import { AvisService } from 'src/app/home/services/avis.service';
 
 declare var $: any;
 
@@ -30,17 +32,21 @@ export class DetailsAnnonceComponent implements OnInit {
   
   //Variable for condition
   isFailed: boolean;
+  isConnected:boolean=false;
+  isProprio:boolean=false;
   errorInternet : boolean ;
   message  : string
+  error:string;
+  success:string;
   disableForfaitNextButton : boolean = false ;
   authenticated : boolean;
-
+  noteIsInvalid:boolean = true;
 
   //Model
 
 
   idPropositionFormation : number ;
-
+avis:Avis;
   propositionFormation = {
     code : null,
     idParticulier : null ,
@@ -57,7 +63,7 @@ export class DetailsAnnonceComponent implements OnInit {
   } ;
 
   forfaits = [] ;
- 
+  tabAvis = [];
   paiementDetails = {
 
     forfait: null,
@@ -98,7 +104,8 @@ export class DetailsAnnonceComponent implements OnInit {
               private formBuilder : FormBuilder,
               private signUpService : ParticulierService,
               private forfaitService : ForfaitService,
-              private paiementService : PaiementService) { 
+              private paiementService : PaiementService,
+              private avisService:AvisService) { 
 
                 this.step = 'step1';
     
@@ -108,7 +115,7 @@ export class DetailsAnnonceComponent implements OnInit {
 
 
   ngOnInit() {
-
+    
     this.getIdFormation();
     this.onGetDetailPropositionFormation() ; 
     this.initSignInForm() ;
@@ -139,7 +146,35 @@ export class DetailsAnnonceComponent implements OnInit {
 
   );
   }
-
+  verifierValeur(){
+    
+    if(this.avis.note>=0 && this.avis.note<=10)
+    {
+      this.noteIsInvalid = false;
+    }
+    else{
+      this.noteIsInvalid = true;
+    }
+  }
+  enregistrerCommentaire(){
+   this.avisService.enregistrerAvis(this.avis).subscribe(
+     (response)=>{
+       if(response["error"])
+       {
+         this.error = response["error"];
+       }
+       if(response["success"])
+       {
+         this.success = response["success"];
+        this.avis = new Avis(0,this.idPropositionFormation,0,"",sessionStorage.getItem(this.signInService.USERNAME));
+        this.onGetDetailPropositionFormation();
+       }
+     },
+     (error)=>{
+       console.log(error)
+     }
+   )
+  }
   onSignIn(){
 
     let username = this.sigInForm.value['username'];
@@ -328,19 +363,29 @@ export class DetailsAnnonceComponent implements OnInit {
 
       ( p ) =>{
          this.idPropositionFormation = p['id'] ;
-   
+         this.avis = new Avis(0,this.idPropositionFormation,0,"",sessionStorage.getItem(this.signInService.USERNAME));
       }
     ) ;
 
   }
-
+  showAlert(){
+    alert('Veillez vous connecté svp');
+  }
 
   onGetDetailPropositionFormation() {
 
     this.detaisFormationsService.getDetailFormation(this.idPropositionFormation).subscribe(
 
       (resp)=> {
-       
+        if(sessionStorage.getItem(this.signInService.USERNAME))
+        {
+          if(resp["username"]===sessionStorage.getItem(this.signInService.USERNAME))
+          {
+            this.isProprio = true;
+          }
+          this.isConnected = true;
+        }
+       this.tabAvis = resp["avis"];
         
         if(resp.rayonIntervention){
           this.inititalizeCoordMap(resp.rayonIntervention.latitude,

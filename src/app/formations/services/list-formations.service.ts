@@ -23,7 +23,7 @@ export class ListFormationsService {
   }
 
   
-getFilterFormation(filtre) : Observable<any> {
+getFilterFormation(filtre,designationVille) : Observable<any> {
 
   if(filtre==undefined){
     return this.httpClient.get(URL.listPropositionFormationsEnligne);
@@ -36,16 +36,15 @@ getFilterFormation(filtre) : Observable<any> {
       return this.httpClient.get(URL.listPropositionFormationsEnligne);
     }
     else{
-      return this.httpClient.get(URL.FilterPropositionFormation+ "/"+ filtre) ;
+      return this.httpClient.get(URL.FilterPropositionFormation+ "/"+ filtre+"/"+designationVille) ;
     }
   }
 
-  getFiterDeFormationParVille(designationVille) : Observable<any> {
+  getFiterDeFormationParVille(designationVille,filtre) : Observable<any> {
   
-      return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille);
+      return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille+"/"+ filtre);
 
     }
-
 }
 
 

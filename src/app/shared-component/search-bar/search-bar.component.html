@@ -5,9 +5,9 @@
                 <div class="col-md-3" id="ville">
                     <select     (ngModelChange)="OnFiterDeFormationParVille($event)" 
                                 class="form-control" id="cycle" 
-                                [(ngModel)]="designationVille"   
+                                [(ngModel)]="villeKey"   
                                 required>
-                        <option value="" selected="" >Toutes les villes</option>
+                        <option value="" selected="selected" >Toutes les villes</option>
                         <option  *ngFor="let ville of villes" 
                                  [ngValue]="ville.designation">{{ville.designation}}</option>
                     </select>
@@ -16,14 +16,15 @@
                         <div class="sf-type">
                             <div class="sf-input">
                                 <input type="text" 
-                                [(ngModel)]="criterRecherche" id="sf-box" placeholder="Search">
+                                [(ngModel)]="searchKey" id="sf-box" placeholder="Search">
                             </div>
                         
                         </div>
                 </div>
                 <div class="sf-submit">
-                    <input [routerLink]="['/formations',criterRecherche]"  
-                         type="submit" (click)="onFiltreFormationSearch(criterRecherche)" value="Rechercher">
+                    <input   [routerLink]="['/formations']" [queryParams]="{searchKey: searchKey}"
+                            (click)="onFiltreFormationSearch(searchKey)"
+                           type="submit" value="Rechercher">
                 </div>           
           </div>
         </div>

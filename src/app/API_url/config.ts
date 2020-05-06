@@ -54,6 +54,8 @@ export const URL = {
 
     //sign up
     singUpValidation:consts.host+ consts.nameProject+'sinUp-validation',
+    //Avis
+    enregistrerAvis:consts.host+ consts.nameProject+'particulier/enregistrerAvis',
     //Change password
     changePassword:consts.host+ consts.nameProject+'particulier/changePassword',
 
@@ -91,6 +93,7 @@ export const URL = {
     detailsPropositionFormation : consts.host+ consts.nameProject +'details/propositionformation',
     FilterPropositionFormation : consts.host+ consts.nameProject +'details/filterDeFormation',
     filterDeFormationParVille : consts.host+ consts.nameProject +'details/filterDeFormationParVille',
+    filterDeFormationParEssai : consts.host+ consts.nameProject +'details/filterDeFormationParEssai',
 
     getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier', 
 

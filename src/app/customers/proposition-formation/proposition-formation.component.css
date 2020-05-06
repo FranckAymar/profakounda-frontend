@@ -16,7 +16,9 @@ i{
 .ng-invalid{
     border-color: red;
 }
-
+.btn-noti span {
+    top: 0 !important;
+}
 agm-map {
     height: 400px;
   }

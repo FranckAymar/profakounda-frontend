@@ -8,12 +8,14 @@ agm-map {
 
   .ng-invalid{
     border-bottom-color: red !important;
+    
 }
 
 small{
   color: red;
 
 }
+
 
   .stepper{
     z-index: 1050;

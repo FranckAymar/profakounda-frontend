@@ -14,6 +14,10 @@ import { Ville } from 'src/app/admin/model/ville.model';
 export class ListFormationsComponent implements OnInit {
 
 
+  //QuerryUrl Params
+  villeKey : string ;
+  searchKey : string ;
+
   //Map
 
   lat: number = 5.304001315606169;
@@ -43,29 +47,23 @@ export class ListFormationsComponent implements OnInit {
   totalPageArray: Array<any>;
 
 
-  constructor(private listFormationsService: ListFormationsService,private route: ActivatedRoute,private villeService:VilleService) { }
+  constructor(private listFormationsService: ListFormationsService,
+              private route: ActivatedRoute,
+              private villeService:VilleService) { }
 
 
   ngOnInit() {
     
+    this.getvalue() ;
    
-    if(this.getvalue()){
-      this.onFiltreFormationSearch(this.getvalue());
-
-    }else{
+    if(this.villeKey == undefined &&  this.searchKey == undefined){
+      
       this.onGetListFormation(this.page);
 
-    }
-  
+    } 
   }
 
 
-  ngOnChanges(change : SimpleChanges){
-     
-    console.log(change);
-    
-      
-  }
   onGetListFormation(pageActive) {
 
     this.page = pageActive;
@@ -102,13 +100,14 @@ export class ListFormationsComponent implements OnInit {
   }
   
   OnFiltreFormation(propositionFormation){  
+        console.log('test');
         
         this.propositionFormations=propositionFormation;
   }
 
   onFiltreFormationSearch(criterRecherche:String){  
     
-    this.listFormationsService.getFilterFormation(criterRecherche).subscribe(
+    this.listFormationsService.getFilterFormation(criterRecherche,this.villeKey).subscribe(
   
     (reponse)=>{
       console.log( "search reult :"+reponse);
@@ -122,8 +121,10 @@ export class ListFormationsComponent implements OnInit {
   )
 }
 
-OnFiterDeFormationParVille(propositionFormation){  
-    
+OnFiterDeFormationParVille(propositionFormation){ 
+
+  console.log("emis :" + propositionFormation);
+      
   this.propositionFormations=propositionFormation;
 
 }
@@ -163,19 +164,15 @@ OnFiterDeFormationParVille(propositionFormation){
   }
 
   //Recuperer criterRecherche dans l'URL
-  getvalue() : string {
-                   
-    let params = '' ;
-    this.route.params.subscribe(
-     
-      ( variable ) =>{
-        
-        params = variable['value'] ;
+  getvalue() {
+    
+    this.route.queryParams.subscribe(params => {
+       this.villeKey = params['villeKey'];
+       this.searchKey = params['searchKey']
+
+  });
+    
    
-      }
-    ) ;    
-      
-    return params ;
   }
 
   onFetchVilles()

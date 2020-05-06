@@ -200,7 +200,7 @@ avis:Avis;
     
           //Vérifier si l'utulilisateur a un forfait actif
           this.detaisFormationsService
-          .getDetailParticulierParFormation(this.idPropositionFormation, username).subscribe(
+          .getDetailParticulierParFormation(this.idPropositionFormation).subscribe(
 
 
             (resp)=> {
@@ -507,7 +507,7 @@ avis:Avis;
     
     let username = sessionStorage.getItem(this.signInService.USERNAME);
 
-    this.detaisFormationsService.getDetailParticulierParFormation(this.idPropositionFormation, username).subscribe(
+    this.detaisFormationsService.getDetailParticulierParFormation(this.idPropositionFormation).subscribe(
 
 
       (resp)=>{

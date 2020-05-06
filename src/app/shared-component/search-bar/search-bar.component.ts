@@ -35,15 +35,14 @@ export class SearchBarComponent implements OnInit {
     if(this.searchKey){
       this.onFiltreFormationSearch(this.searchKey) ;
     }else if (this.villeKey){
-      this.OnFiterDeFormationParVille(this.villeKey) ;
-    }
-    
+      this.OnFiterDeFormationParVille(this.villeKey);
+    } 
+
   }
 
   onFiltreFormationSearch(criterRecherche:String){ 
     
-   
-    this.listFormationsService.getFilterFormation(criterRecherche).subscribe(
+    this.listFormationsService.getFilterFormation(criterRecherche,this.villeKey).subscribe(
   
     (reponse)=>{      
       this.getFormationsFiltrees.emit(reponse);
@@ -59,10 +58,9 @@ export class SearchBarComponent implements OnInit {
 
 OnFiterDeFormationParVille(designationVille){  
 
- 
+
   this.router.navigate(['/formations'], { queryParams: { villeKey: designationVille }}) ;
-    
-  this.listFormationsService.getFiterDeFormationParVille(designationVille).subscribe(
+  this.listFormationsService.getFiterDeFormationParVille(designationVille,this.searchKey).subscribe(
  
    (reponse)=>{
      
@@ -74,7 +72,8 @@ OnFiterDeFormationParVille(designationVille){
    (erreur) => {
      console.log("Une erreur s'est produite: " + erreur);
    }
- ) 
+ )
+
  }
 
  onFetchVilles()
@@ -100,9 +99,7 @@ OnFiterDeFormationParVille(designationVille){
     this.route.queryParams.subscribe(params => {
        this.villeKey = params['villeKey'];
        this.searchKey = params['searchKey']
-
-  });
-
+      });
  
   }
 }

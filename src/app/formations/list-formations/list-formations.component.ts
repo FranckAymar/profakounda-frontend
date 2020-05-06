@@ -107,7 +107,7 @@ export class ListFormationsComponent implements OnInit {
 
   onFiltreFormationSearch(criterRecherche:String){  
     
-    this.listFormationsService.getFilterFormation(criterRecherche).subscribe(
+    this.listFormationsService.getFilterFormation(criterRecherche,this.villeKey).subscribe(
   
     (reponse)=>{
       console.log( "search reult :"+reponse);

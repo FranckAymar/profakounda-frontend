@@ -64,7 +64,7 @@ OnFiterDeFormationParVille(designationVille){
  
    (reponse)=>{
      
-    console.log(reponse);
+    console.log("emis filter ville" +reponse);
     
      this.getFormationsFiltreParVille.emit(reponse);
    },

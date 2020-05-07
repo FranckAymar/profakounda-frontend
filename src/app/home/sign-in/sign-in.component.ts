@@ -40,7 +40,6 @@ export class SignInComponent implements OnInit {
     this.initForm();
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/customers/editprofil';
-    console.log(this.returnUrl);
     
   }
 
@@ -63,7 +62,6 @@ export class SignInComponent implements OnInit {
     let password = this.loginForm.value['password'];
     
     let token = btoa(username + ':' + password);
-    console.log(sessionStorage.getItem(this.signInService.TOKEN));
     
     
    

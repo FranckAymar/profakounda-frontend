@@ -59,12 +59,12 @@ export class SearchBarComponent implements OnInit {
 OnFiterDeFormationParVille(designationVille){  
 
 
-  this.router.navigate(['/formations'], { queryParams: { villeKey: designationVille }}) ;
+  this.router.navigate(['/formations'], { queryParams: { villeKey: designationVille, searchKey : this.searchKey }}) ;
   this.listFormationsService.getFiterDeFormationParVille(designationVille,this.searchKey).subscribe(
  
    (reponse)=>{
      
-    console.log(reponse);
+    console.log("emis filter ville" +reponse);
     
      this.getFormationsFiltreParVille.emit(reponse);
    },

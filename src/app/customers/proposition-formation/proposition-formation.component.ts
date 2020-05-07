@@ -486,7 +486,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
 
       (resp) => {
           console.log(resp);
-          
+          this.rechercherProposition();
       },
 
       (error) => {

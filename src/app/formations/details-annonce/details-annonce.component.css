@@ -14,6 +14,12 @@ agm-map {
   margin-left: 0.7em;
   font-size: 1.5em;
 }
+.udb-time-line ul li i {
+  width: 0;
+  height: 0;
+  background-color: white;
+  position: relative;
+}
 small{
   color: red;
 

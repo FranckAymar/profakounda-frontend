@@ -1,18 +1,24 @@
-<div class="row" >
+<div class="container">
+    <div class="row" >
 
-    <div *ngFor="let propositionFormation of propositionFormations" class="col-md-6">
-       <app-card-formation
-        [idParticulier]= "propositionFormation.idParticulier"
-        [code] = "propositionFormation.code"
-        [moduleFormations] = "propositionFormation.moduleFormations"
-        [description] = "propositionFormation.description"
-        [ville] = "propositionFormation.ville"
-        [id] = "propositionFormation.id"
-        [isFavoris] = "propositionFormation.isFavoris"     
-        ></app-card-formation>
+        <div *ngIf="propositionFormations.length === 0" class="alert alert-primary center" >
+            Vous n'avez pas encore de favoris
+          </div>
 
-    </div> 
-
-
-
+        <div *ngFor="let propositionFormation of propositionFormations" class="col-md-6">
+           <app-card-formation
+            [idParticulier]= "propositionFormation.idParticulier"
+            [code] = "propositionFormation.code"
+            [moduleFormations] = "propositionFormation.moduleFormations"
+            [description] = "propositionFormation.description"
+            [ville] = "propositionFormation.ville"
+            [id] = "propositionFormation.id"
+            [isFavoris] = "propositionFormation.isFavoris"     
+            ></app-card-formation>
+    
+        </div> 
+    
+    
+    
+    </div>
 </div>

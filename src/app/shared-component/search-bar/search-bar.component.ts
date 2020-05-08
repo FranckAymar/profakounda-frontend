@@ -98,7 +98,7 @@ OnFiterDeFormationParVille(designationVille){
     this.route.queryParams.subscribe(params => {
        this.villeKey = params['villeKey'];
        this.searchKey = params['searchKey']
-         });   
+         });    
  
   }
 }

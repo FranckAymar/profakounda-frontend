@@ -10,10 +10,16 @@ agm-map {
     border-bottom-color: red !important;
     
 }
-
+.etoileNote,.etoile{
+  margin-left: 0.7em;
+  font-size: 1.5em;
+}
 small{
   color: red;
 
+}
+.etoileNote:hover{
+  cursor: pointer;
 }
 
 

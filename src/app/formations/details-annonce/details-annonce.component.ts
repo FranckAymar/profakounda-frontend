@@ -13,6 +13,8 @@ import { MatAutocompleteTrigger } from '@angular/material';
 import { PasswordMatch } from 'src/app/custom-validator/password-match';
 import { Avis } from 'src/app/home/models/Avis.model';
 import { AvisService } from 'src/app/home/services/avis.service';
+import { notEqual } from 'assert';
+import { not } from '@angular/compiler/src/output/output_ast';
 
 declare var $: any;
 
@@ -68,6 +70,7 @@ avis:Avis;
   } ;
 
   forfaits = [] ;
+  tabEtoiles = [];
   tabAvis = [];
   paiementDetails = {
 
@@ -125,7 +128,6 @@ avis:Avis;
     this.onGetDetailPropositionFormation() ; 
     this.initSignInForm() ;
     this.initSignUpForm() ;
-    this.getColor1();
   }
 
 getColor1(){
@@ -275,8 +277,16 @@ changeEtoile5(){
   }
   
   enregistrerCommentaire(){
-    
-    this.avis = new Avis(0,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,sessionStorage.getItem(this.signInService.USERNAME));
+    this.addEtoiles();
+    var note = 0;
+    this.tabEtoiles.forEach(function (value) {
+      if(value)
+      {
+        note++;
+      }
+     
+    });
+    this.avis = new Avis(0,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,sessionStorage.getItem(this.signInService.USERNAME));
      this.avisService.enregistrerAvis(this.avis).subscribe(
      (response)=>{
        if(response["error"])
@@ -291,7 +301,7 @@ changeEtoile5(){
          this.etoile4 = false;
          this.etoile5 = false;
          this.success = response["success"];
-        this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",sessionStorage.getItem(this.signInService.USERNAME));
+        this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,sessionStorage.getItem(this.signInService.USERNAME));
         this.onGetDetailPropositionFormation();
        }
      },
@@ -299,6 +309,14 @@ changeEtoile5(){
        console.log(error)
      }
    )
+  }
+  addEtoiles(){
+    this.tabEtoiles = [];
+    this.tabEtoiles.push(this.etoile1);
+    this.tabEtoiles.push(this.etoile2);
+    this.tabEtoiles.push(this.etoile3);
+    this.tabEtoiles.push(this.etoile4);
+    this.tabEtoiles.push(this.etoile5);
   }
   onSignIn(){
 
@@ -488,7 +506,7 @@ changeEtoile5(){
 
       ( p ) =>{
          this.idPropositionFormation = p['id'] ;
-         this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",sessionStorage.getItem(this.signInService.USERNAME));
+         this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,sessionStorage.getItem(this.signInService.USERNAME));
       }
     ) ;
 

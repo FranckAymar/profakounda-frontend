@@ -15,3 +15,21 @@
   
 }
 
+@media screen  and (min-width: 990px) and  (max-width: 1525px){
+    
+
+  .sb2-2 {
+   
+    float: left;
+    width: 100%;
+    padding: 40px;
+    margin-left: 20%;
+    background: #e3e8ea;
+}
+
+
+}
+
+
+   
+

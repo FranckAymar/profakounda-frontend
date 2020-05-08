@@ -137,12 +137,13 @@
                             </div>
                               <div class="collapse" id="collapseExample">
                                 <form (ngSubmit)="enregistrerCommentaire()" #k="ngForm">
-                                    <div *ngIf="error && !success" class="alert alert-danger">{{error}}</div>
-                                    <div class="form-group">
+                                    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                                    <div style="margin-top: 0.5em;" class="form-group">
                                         <label for="note">Note:</label>
-                                        <input (ngModelChange)="verifierValeur()" class="form-control" [(ngModel)]="avis.note" required name="note" type="number" id="note"
-                                             />
+                                       
+                                             <i (click)="changeEtoile1()" [ngStyle]="{color:getColor1()}" class="fa fa-star etoileNote"></i> <i (click)="changeEtoile2()" [ngStyle]="{color:getColor2()}" class="fa fa-star etoileNote"></i><i (click)="changeEtoile3()" [ngStyle]="{color:getColor3()}" class="fa fa-star etoileNote"></i> <i (click)="changeEtoile4()" [ngStyle]="{color:getColor4()}" class="fa fa-star etoileNote"></i> <i (click)="changeEtoile5()" [ngStyle]="{color:getColor5()}" class="fa fa-star etoileNote"></i>  
                                     </div>
+                                    
                                     <div class="form-group">
                                         <label for="commentaire">Commentaire:</label>
                                         <textarea [(ngModel)]="avis.commentaire"  class="form-control"  required id="commentaire" name="commentaire" cols="20" rows="5">
@@ -162,9 +163,12 @@
                                             </li>
                                             
                                         </ul>
+                                        
                                         <div  class="row">
-                                            <div style="background-color: yellow;border-radius: 0.3em;" class="col-md-2"><span *ngIf="!av.isGood" style="color: red;">{{av.note}}</span><span *ngIf="av.isGood" style="color: green;">{{av.note}}</span>/<span style="color: white;">10</span> <i *ngIf="!av.isGood" style="margin-left: 1em; color: red;" class="fa fa-thumbs-down"></i> <i *ngIf="av.isGood" style="margin-left: 1em; color: green;" class="fa fa-thumbs-up"></i></div>
-                                            
+            
+                                           <div class="col-md-6">
+                                            <i  [ngStyle]="{color:getColor(av.etoile1)}" class="fa fa-star etoile"></i><i [ngStyle]="{color:getColor(av.etoile2)}" class="fa fa-star etoile"></i> <i [ngStyle]="{color:getColor(av.etoile3)}" class="fa fa-star etoile"></i> <i [ngStyle]="{color:getColor(av.etoile4)}"  class="fa fa-star etoile"></i><i [ngStyle]="{color:getColor(av.etoile5)}"  class="fa fa-star etoile"></i>
+                                           </div> 
                                         </div>
                                                    
                                         

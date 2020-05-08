@@ -34,6 +34,11 @@ export class DetailsAnnonceComponent implements OnInit {
   isFailed: boolean;
   isConnected:boolean=false;
   isProprio:boolean=false;
+  etoile1:boolean = false;
+  etoile2:boolean = false;
+  etoile3:boolean = false;
+  etoile4:boolean = false;
+  etoile5:boolean = false;
   errorInternet : boolean ;
   message  : string
   error:string;
@@ -120,11 +125,92 @@ avis:Avis;
     this.onGetDetailPropositionFormation() ; 
     this.initSignInForm() ;
     this.initSignUpForm() ;
- 
+    this.getColor1();
   }
 
-
-
+getColor1(){
+ if(this.etoile1)
+ {
+   return 'wheat';
+ }
+ else{
+   return 'black';
+ }
+}
+getColor2(){
+  if(this.etoile2)
+  {
+    return 'wheat';
+  }
+  else{
+    return 'black';
+  }
+ }
+ getColor3(){
+  if(this.etoile3)
+  {
+    return 'wheat';
+  }
+  else{
+    return 'black';
+  }
+ }
+ getColor4(){
+  if(this.etoile4)
+  {
+    return 'wheat';
+  }
+  else{
+    return 'black';
+  }
+ }
+ getColor5(){
+  if(this.etoile5)
+  {
+    return 'wheat';
+  }
+  else{
+    return 'black';
+  }
+ }
+ getColor(etoile){
+  if(etoile)
+  {
+    return 'wheat';
+  }
+  else{
+    return 'black';
+  }
+ }
+changeEtoile1(){
+  this.etoile1 = !this.etoile1;
+}
+changeEtoile2(){
+  this.etoile2 = !this.etoile2;
+  // if(!this.etoile2)
+  // {
+  //   if(this.etoile1)
+  //   {
+  //     this.etoile2 = !this.etoile2;
+  //   }
+  //   else{
+  //     this.etoile1 = true;
+  //   }
+  // }
+  // else{
+    
+  // }
+  
+}
+changeEtoile3(){
+  this.etoile3 = !this.etoile3;
+}
+changeEtoile4(){
+  this.etoile4 = !this.etoile4;
+}
+changeEtoile5(){
+  this.etoile5 = !this.etoile5;
+}
   initSignInForm(){
 
     this.sigInForm = this.formBuilder.group({
@@ -146,18 +232,11 @@ avis:Avis;
 
   );
   }
-  verifierValeur(){
-    
-    if(this.avis.note>=0 && this.avis.note<=10)
-    {
-      this.noteIsInvalid = false;
-    }
-    else{
-      this.noteIsInvalid = true;
-    }
-  }
+  
   enregistrerCommentaire(){
-   this.avisService.enregistrerAvis(this.avis).subscribe(
+    
+    this.avis = new Avis(0,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,sessionStorage.getItem(this.signInService.USERNAME));
+     this.avisService.enregistrerAvis(this.avis).subscribe(
      (response)=>{
        if(response["error"])
        {
@@ -165,8 +244,13 @@ avis:Avis;
        }
        if(response["success"])
        {
+         this.etoile1 = false;
+         this.etoile2 = false;
+         this.etoile3 = false;
+         this.etoile4 = false;
+         this.etoile5 = false;
          this.success = response["success"];
-        this.avis = new Avis(0,this.idPropositionFormation,0,"",sessionStorage.getItem(this.signInService.USERNAME));
+        this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",sessionStorage.getItem(this.signInService.USERNAME));
         this.onGetDetailPropositionFormation();
        }
      },
@@ -363,7 +447,7 @@ avis:Avis;
 
       ( p ) =>{
          this.idPropositionFormation = p['id'] ;
-         this.avis = new Avis(0,this.idPropositionFormation,0,"",sessionStorage.getItem(this.signInService.USERNAME));
+         this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",sessionStorage.getItem(this.signInService.USERNAME));
       }
     ) ;
 

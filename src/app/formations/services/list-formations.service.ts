@@ -31,6 +31,9 @@ getFilterFormation(filtre,designationVille) : Observable<any> {
     if(filtre===""){
       return this.httpClient.get(URL.listPropositionFormationsEnligne);
     }
+    else if (designationVille){
+      alert("designation okk");
+    }
     else if(filtre===" "){
       
       return this.httpClient.get(URL.listPropositionFormationsEnligne);

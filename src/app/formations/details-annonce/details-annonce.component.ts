@@ -133,7 +133,7 @@ avis:Avis;
 getColor1(){
  if(this.etoile1)
  {
-   return 'wheat';
+   return '#FFD700';
  }
  else{
    return 'black';
@@ -142,7 +142,7 @@ getColor1(){
 getColor2(){
   if(this.etoile2)
   {
-    return 'wheat';
+    return '#FFD700';
   }
   else{
     return 'black';
@@ -151,7 +151,7 @@ getColor2(){
  getColor3(){
   if(this.etoile3)
   {
-    return 'wheat';
+    return '#FFD700';
   }
   else{
     return 'black';
@@ -160,7 +160,7 @@ getColor2(){
  getColor4(){
   if(this.etoile4)
   {
-    return 'wheat';
+    return '#FFD700';
   }
   else{
     return 'black';
@@ -169,7 +169,7 @@ getColor2(){
  getColor5(){
   if(this.etoile5)
   {
-    return 'wheat';
+    return '#FFD700';
   }
   else{
     return 'black';
@@ -178,7 +178,7 @@ getColor2(){
  getColor(etoile){
   if(etoile)
   {
-    return 'wheat';
+    return '#FFD700';
   }
   else{
     return 'black';

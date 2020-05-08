@@ -154,28 +154,27 @@
                               </div>
                               <div  style="height: 18em;overflow: auto;">
                                 <div style="margin-top: 1em;" *ngFor="let av of tabAvis ">
-                                    <div style="border-radius: 0.5em 0.5em 0 0;" class="sb2-12 ">
+                                    <div style="border-radius: 0.5em 0.5em 0 0; background-color: white !important;" class="sb2-12 ">
                                         <ul>
                                             <li><img  src="{{urlServer}}/{{av.idParticulier}}" alt="">
                                             </li>
                                             <li>
-                                                <h5>{{av.nomParticulier}} {{av.prenomParticulier}}</h5>
+                                                <h5 style="color: #007BFF;">{{av.nomParticulier}} {{av.prenomParticulier}} </h5>
+                                                <div>
+                                                    <i  [ngStyle]="{color:getColor(av.etoile1)}" class="fa fa-star etoile"></i><i [ngStyle]="{color:getColor(av.etoile2)}" class="fa fa-star etoile"></i> <i [ngStyle]="{color:getColor(av.etoile3)}" class="fa fa-star etoile"></i> <i [ngStyle]="{color:getColor(av.etoile4)}"  class="fa fa-star etoile"></i><i [ngStyle]="{color:getColor(av.etoile5)}"  class="fa fa-star etoile"></i>
+                                                   </div>
+                                                <div>{{av.commentaire}}</div>
                                             </li>
                                             
                                         </ul>
+                                       
                                         
-                                        <div  class="row">
-            
-                                           <div class="col-md-6">
-                                            <i  [ngStyle]="{color:getColor(av.etoile1)}" class="fa fa-star etoile"></i><i [ngStyle]="{color:getColor(av.etoile2)}" class="fa fa-star etoile"></i> <i [ngStyle]="{color:getColor(av.etoile3)}" class="fa fa-star etoile"></i> <i [ngStyle]="{color:getColor(av.etoile4)}"  class="fa fa-star etoile"></i><i [ngStyle]="{color:getColor(av.etoile5)}"  class="fa fa-star etoile"></i>
-                                           </div> 
-                                        </div>
                                                    
                                         
                                         <span 
                 class="home-top-cour-rat">{{av.date}}</span>
                                     </div>
-                                    <div style="background-color: #286090; color: white;border-radius:0 0  0.5em 0.5em;padding: 0.3em;">{{av.commentaire}}</div>
+                                    <!-- <div style="background-color: #17A2B8; color: white;border-radius:0 0  0.5em 0.5em;padding: 0.3em;">{{av.commentaire}}</div> -->
                                     
                                   </div>
                               </div>

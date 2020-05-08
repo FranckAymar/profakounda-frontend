@@ -17,10 +17,9 @@ export class FavorisService {
 
   }
 
-  recupererFavoris(idParticulier) :  Observable<any>{
+  recupererFavoris() :  Observable<any>{
     
-    let params = new HttpParams().set("idParticulier", idParticulier) ;
-    return this.http.get(URL.recupererFavoris,{params : params}) ;
+    return this.http.get(URL.recupererFavoris) ;
 
   }
 

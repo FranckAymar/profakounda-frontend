@@ -9,7 +9,7 @@ import { FavorisService } from '../services/favoris.service';
   templateUrl: './card-formation.component.html',
   styleUrls: ['./card-formation.component.css']
 })
-export class CardFormationComponent implements OnInit, OnChanges {
+export class CardFormationComponent implements OnInit {
 
   urlServer = URL.getPhoto ;
 
@@ -46,10 +46,7 @@ export class CardFormationComponent implements OnInit, OnChanges {
 
                 }
   
-  
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log( "onChangePreviuous : " +JSON.stringify(changes.isFavoris.previousValue));
-  }
+
  
   ngOnInit() {
   }

@@ -185,58 +185,59 @@ getColor2(){
   }
  }
 changeEtoile1(){
-  if(this.etoile1)
+  if(this.etoile2)
   {
-      this.etoile4 = false;
-      this.etoile3 = false;
-      this.etoile5 = false;
-      this.etoile2 = false;
+    this.etoile4 = false;
+    this.etoile3 = false;
+    this.etoile5 = false;
+    this.etoile2 = false;
+    this.etoile1 = true;
   }
-  this.etoile1 = !this.etoile1;
+  else{
+    this.etoile1 = !this.etoile1;
+  }
 }
 changeEtoile2(){
-  
-  if(!this.etoile2)
+  if(this.etoile3)
   {
+    this.etoile4 = false;
+    this.etoile3 = false;
+    this.etoile5 = false;
+    this.etoile2 = true;
+  }
+  else{
     this.etoile1 = true;
     this.etoile2 = !this.etoile2;
   }
-  else
-    {
-      this.etoile2 = !this.etoile2;
-      this.etoile4 = false;
-      this.etoile3 = false;
-      this.etoile5 = false;
-    }
   
 }
 changeEtoile3(){
-  if(!this.etoile3)
+  if(this.etoile4)
   {
-    this.etoile1 = true;
+    this.etoile5 = false;
+    this.etoile4 = false;
+    this.etoile3 = true;
+  }
+  else{
     this.etoile2 = true;
+    this.etoile1 = true;
     this.etoile3 = !this.etoile3;
   }
-  else
-    {
-      this.etoile3 = !this.etoile3;
-      this.etoile5 = false;
-      this.etoile4 = false;
-    }
+  
 }
 changeEtoile4(){
-  if(!this.etoile4)
+  if(this.etoile5)
   {
-    this.etoile1 = true;
+    this.etoile5 = false;
+    this.etoile4 = true;
+  }
+  else{
     this.etoile2 = true;
+    this.etoile1 = true;
     this.etoile3 = true;
     this.etoile4 = !this.etoile4;
   }
-  else
-    {
-      this.etoile4 = !this.etoile4;
-      this.etoile5 = false;
-    }
+ 
   
 }
 changeEtoile5(){
@@ -246,7 +247,7 @@ changeEtoile5(){
     this.etoile2 = true;
     this.etoile3 = true;
     this.etoile4 = true;
-    this.etoile5 = !this.etoile5;
+    this.etoile5 = true;
   }
   else
     {
@@ -254,6 +255,7 @@ changeEtoile5(){
     }
   
 }
+
   initSignInForm(){
 
     this.sigInForm = this.formBuilder.group({

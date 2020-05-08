@@ -187,20 +187,6 @@ changeEtoile1(){
 }
 changeEtoile2(){
   this.etoile2 = !this.etoile2;
-  // if(!this.etoile2)
-  // {
-  //   if(this.etoile1)
-  //   {
-  //     this.etoile2 = !this.etoile2;
-  //   }
-  //   else{
-  //     this.etoile1 = true;
-  //   }
-  // }
-  // else{
-    
-  // }
-  
 }
 changeEtoile3(){
   this.etoile3 = !this.etoile3;

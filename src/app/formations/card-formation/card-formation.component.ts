@@ -56,7 +56,7 @@ export class CardFormationComponent implements OnInit {
     
   }
 
-  switchStateFavoris(isFavoris ,idParticulier, id, state: RouterStateSnapshot){
+  switchStateFavoris(isFavoris, id, state: RouterStateSnapshot){
 
     
 
@@ -65,7 +65,6 @@ export class CardFormationComponent implements OnInit {
       return ;
     }
 
-    this.favorisModel.idParticulier = idParticulier ;;
     this.favorisModel.idProposition = id ;
 
     

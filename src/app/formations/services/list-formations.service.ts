@@ -41,9 +41,18 @@ getFilterFormation(filtre,designationVille) : Observable<any> {
   }
 
   getFiterDeFormationParVille(designationVille,filtre) : Observable<any> {
-  
-      return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille+"/"+ filtre);
 
+    if(designationVille==="Toutes"&&filtre==undefined){
+      
+      return this.httpClient.get(URL.listPropositionFormationsEnligne); 
+    }
+    else if (filtre===""){
+       filtre="undefined";
+       return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille+"/"+ filtre);
+    }
+    else{
+      return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille+"/"+ filtre);
+    }
     }
 }
 

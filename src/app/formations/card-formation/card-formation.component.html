@@ -26,7 +26,8 @@
                             class="fa fa-bar-chart" aria-hidden="true"></i> Details</a> </li>
                 <li *ngIf="rayonIntervention" ><a (click)="onSendCoordMap(rayonIntervention)"><i
                             class="fa fa-map-marker" aria-hidden="true"></i>Sur la carte</a> </li>
-                <li *ngIf="rayonIntervention"><a><i  (click)= "switchStateFavoris(isFavoris, idParticulier, id)" class="fa fa-heart fa-lg"
+                <li class="fav"  *ngIf="isFavoris == true || isFavoris ==false"><a><i  (click)= "switchStateFavoris(isFavoris, idParticulier, id)" 
+                        class="fa fa-heart fa-lg "
                             [ngStyle]="{color: getStyle()}"
                             aria-hidden="true"></i></a> </li>
             </ul>

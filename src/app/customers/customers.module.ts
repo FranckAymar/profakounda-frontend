@@ -11,6 +11,7 @@ import { CustomersGuard } from '../guard/customers.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PropositionFormationComponent } from './proposition-formation/proposition-formation.component';
 import { PaiementsComponent } from './paiements/paiements.component';
+import { FavorisPropositionComponent } from './favoris-proposition/favoris-proposition.component';
 const customersRouter: Routes = [
 
   {
@@ -37,6 +38,12 @@ const customersRouter: Routes = [
         path: 'paiements',
         component: PaiementsComponent
 
+      },
+      
+      {
+        path: 'favoris',
+        component: FavorisPropositionComponent
+
       }
 
     ]
@@ -53,7 +60,7 @@ const customersRouter: Routes = [
     
     CustomerMainComponent, 
     PropositionFormationComponent, 
-    PaiementsComponent],
+    PaiementsComponent, FavorisPropositionComponent],
 
   providers: [
 

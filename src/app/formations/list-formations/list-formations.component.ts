@@ -97,7 +97,7 @@ export class ListFormationsComponent implements OnInit {
       }
     )
  
-  }
+  } 
   
   OnFiltreFormation(propositionFormation){  
         console.log('test');

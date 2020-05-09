@@ -313,6 +313,9 @@
             </div>
             <div class="modal-body">
                 <form action="" (ngSubmit)="enregistrerProposition()" #k="ngForm">
+                    <div *ngIf="errorProposition" class="alert alert-danger">
+                        {{errorProposition}}
+                    </div>
                     <textarea placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" maxChars="1000" class="form-control" (ngModelChange)="changeDescritpion()" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
                         {{proposition.description}}
                     </textarea>
@@ -343,6 +346,9 @@
             </div>
             <div class="modal-body">
                 <form action="" (ngSubmit)="enregistrerProposition()" #l="ngForm">
+                    <div *ngIf="errorProposition" class="alert alert-danger">
+                        {{errorProposition}}
+                    </div>
                     <textarea class="form-control" placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
 
                     </textarea>

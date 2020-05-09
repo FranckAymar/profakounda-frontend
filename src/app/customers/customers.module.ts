@@ -12,6 +12,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PropositionFormationComponent } from './proposition-formation/proposition-formation.component';
 import { PaiementsComponent } from './paiements/paiements.component';
 import { FavorisPropositionComponent } from './favoris-proposition/favoris-proposition.component';
+import { CompressorService } from './services/CompressorService';
 const customersRouter: Routes = [
 
   {
@@ -66,6 +67,7 @@ const customersRouter: Routes = [
 
   ParticulierService,
   PropositionFormationService,
+  CompressorService
 
   ],
 

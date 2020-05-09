@@ -4,17 +4,14 @@ import { ForfaitService } from './../../admin/services/forfait.service';
 import { ParticulierService } from './../../customers/services/particulier.service';
 import { SignInService } from './../../home/services/sign-in.service';
 import { URL } from 'src/app/API_url/config';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, RouterStateSnapshot, Router } from '@angular/router';
 import { DetaisFormationsService } from './../services/detais-formations.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as $ from 'jquery';
-import { MatAutocompleteTrigger } from '@angular/material';
 import { PasswordMatch } from 'src/app/custom-validator/password-match';
 import { Avis } from 'src/app/home/models/Avis.model';
 import { AvisService } from 'src/app/home/services/avis.service';
-import { notEqual } from 'assert';
-import { not } from '@angular/compiler/src/output/output_ast';
 
 declare var $: any;
 
@@ -48,11 +45,10 @@ export class DetailsAnnonceComponent implements OnInit {
   disableForfaitNextButton : boolean = false ;
   authenticated : boolean;
   noteIsInvalid:boolean = true;
-
+  snapshot : RouterStateSnapshot ;
   //Model
     idPropositionFormation : number ;
     avis:Avis;
-    snapshot ;
    
     propositionFormation = {
     code : null,
@@ -116,8 +112,8 @@ export class DetailsAnnonceComponent implements OnInit {
               private forfaitService : ForfaitService,
               private paiementService : PaiementService,
               private avisService:AvisService,
-              private router : Router
-              ) { 
+
+              private router : Router, ) { 
 
                 this.step = 'step1';
                 this.snapshot = router.routerState.snapshot;

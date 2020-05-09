@@ -56,6 +56,7 @@ export class PropositionFormationComponent implements OnInit {
   zoom : number = 15 ; 
   errorNiveaux:string;
   errorModule:string;
+  errorProposition:string;
   errorJour:string;
   myControl = new FormControl();
   myControl2 = new FormControl();
@@ -116,6 +117,7 @@ export class PropositionFormationComponent implements OnInit {
       this.descriptionHasChange = true;
     }
     adProposition(){
+      this.errorProposition = "";
       this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
     }
     onFetchFormations()
@@ -152,6 +154,7 @@ export class PropositionFormationComponent implements OnInit {
     }
     getProposition(proposition){
       this.descriptionHasChange = false;
+      this.errorProposition = "";
       this.propositionFormation = new PropositionFormation(proposition.id,proposition.description,proposition.telephone,this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
      
     }
@@ -186,10 +189,15 @@ this.propositionFormationService.rechercherDisponibilites(id)
           this.propositionFormationService.modifierProposition(this.proposition)
           .subscribe(
             (response)=>{
-              alert("modification effectuée avec succès.");
-              document.getElementById('ajouterDescription').click();
-              this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
-              this.rechercherProposition();
+              this.errorProposition = response["error"];
+              if(!this.errorProposition)
+              {
+                alert("modification effectuée avec succès.");
+                document.getElementById('ajouterDescription').click();
+                this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+                this.rechercherProposition();
+              }
+              
             },
             (error)=>{
               console.log("Erreur : "+error);
@@ -200,10 +208,14 @@ this.propositionFormationService.rechercherDisponibilites(id)
           this.propositionFormationService.enregistrerProposition(this.propositionFormation)
       .subscribe(
         (response)=>{
+          this.errorProposition = response["error"];
+          if(!this.errorProposition)
+          {
+            this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+           document.getElementById('addDesc').click();
+            this.rechercherProposition();
+          }
           
-          this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
-          document.getElementById('addDesc').click();
-          this.rechercherProposition();
         },
         (error)=>{
           console.log("Erreur : "+error);

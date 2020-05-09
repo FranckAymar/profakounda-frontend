@@ -93,12 +93,11 @@ OnFiterDeFormationParVille(designationVille){
  }
 
   //Recuperer criterRecherche dans l'URL
-  getvalue() {
+  getvalue() { 
     
     this.route.queryParams.subscribe(params => {
        this.villeKey = params['villeKey'];
-       this.searchKey = params['searchKey']
-         });    
- 
+       this.searchKey = params['searchKey'];
+         });  
   }
 }

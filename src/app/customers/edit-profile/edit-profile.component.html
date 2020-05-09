@@ -13,6 +13,9 @@
                 <div class="tab-inn">
                         <div style="width: 100%;overflow: auto;">
                         <form [formGroup]="userForm" (ngSubmit)="onUpdateParticulier()">
+                            <div *ngIf="error" class="alert alert-danger">
+                                {{error}}
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                    
@@ -95,7 +98,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="file" (change)="onFileChange($event)" #fileInput class="validate">
+                                    <input type="file" (change)="onFileChange($event)" accept="image/*" #fileInput class="validate">
                                 </div>
                                 <div class="col-md-6">
                                     <button style="margin-top: 0.5em;" type="submit" [disabled]="userForm.invalid"

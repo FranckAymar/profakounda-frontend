@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 
+import { EMPTY } from 'rxjs';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { Router } from '@angular/router';
@@ -9,8 +10,9 @@ import { FiliereService } from 'src/app/admin/services/filiere.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { PasswordModel } from '../models/PasswordModel';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map,expand } from 'rxjs/operators';
 import { VilleService } from 'src/app/admin/services/ville.service';
+import { CompressorService } from '../services/CompressorService';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -30,11 +32,14 @@ export class EditProfileComponent implements OnInit {
    @Input() niveau:string;
    @Input() ville:string;
    message:string;
+   error:string;
    mes:string;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
   niveaux = [];
   villes : any = [];
+  data: FileList;
+  compressedImages = [];
   passwordModel:PasswordModel;
   userForm : FormGroup;
   passwordForm : FormGroup;
@@ -50,7 +55,8 @@ export class EditProfileComponent implements OnInit {
               private villeService:VilleService,
               private router:Router,
               private formBuilder:FormBuilder,
-              private signInService:SignInService) { }
+              private signInService:SignInService,
+              private compressor: CompressorService) { }
 
   ngOnInit() {
     this.init();
@@ -91,7 +97,25 @@ export class EditProfileComponent implements OnInit {
     return this.villes.filter(option => option.toLowerCase().includes(filterValue));
   }
 
- 
+///Compress File
+
+recursiveCompress = (image: File, index, array) => {
+  return this.compressor.compress(image).pipe (
+    map(response => {
+
+    //Code block after completing each compression
+      console.log('compressed ' + index + image.name);
+      this.compressedImages.push(response);
+      return {
+        data: response,
+        index: index + 1,
+        array: array,
+      };
+    }),
+  );
+}
+
+//En compresseFile
 init(){
   this.userForm = this.formBuilder.group({
     nom:['',Validators.required],
@@ -175,9 +199,25 @@ getColor(){
 
   onFileChange(event) {
     if(event.target.files.length > 0) {
-      let file = event.target.files[0];
-      this.userForm.get('photo').setValue(file);
-    }
+      this.data = event.target.files;
+        console.log('input: '  + this.data);
+        const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
+          expand(res => {
+            return res.index > res.array.length - 1
+              ? EMPTY
+              : this.recursiveCompress( this.data[res.index], res.index, this.data );
+          }),
+        );
+        compress.subscribe(res => {
+          if (res.index > res.array.length - 1) {
+          //Code block after completing all compression
+            console.log('Compression successful ' + this.compressedImages);
+            let file = this.compressedImages[0];
+            this.userForm.get('photo').setValue(file);
+           
+          }
+        });
+            }
   }
 
   private prepareSave(): any {
@@ -252,7 +292,10 @@ getColor(){
     this.particulierService.modifierParticulier(formModel)
     .subscribe(
       (response)=>{
-        alert("Modification effectuée avec succès."); 
+        this.error = response["error"]
+        if(!this.error)
+        {
+          alert("Modification effectuée avec succès."); 
         this.rechercherPaticulierConnecter();
       
         //Rechargementt du component courant
@@ -261,6 +304,8 @@ getColor(){
       }); 
         // window.location.reload(false);
         this.clearFile();
+        }
+        
        
       },
       (error)=>{

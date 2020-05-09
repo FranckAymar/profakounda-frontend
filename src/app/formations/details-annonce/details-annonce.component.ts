@@ -4,7 +4,7 @@ import { ForfaitService } from './../../admin/services/forfait.service';
 import { ParticulierService } from './../../customers/services/particulier.service';
 import { SignInService } from './../../home/services/sign-in.service';
 import { URL } from 'src/app/API_url/config';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterStateSnapshot, Router } from '@angular/router';
 import { DetaisFormationsService } from './../services/detais-formations.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -48,7 +48,7 @@ export class DetailsAnnonceComponent implements OnInit {
   disableForfaitNextButton : boolean = false ;
   authenticated : boolean;
   noteIsInvalid:boolean = true;
-
+  snapshot : RouterStateSnapshot ;
   //Model
 
 
@@ -113,7 +113,8 @@ avis:Avis;
               private signUpService : ParticulierService,
               private forfaitService : ForfaitService,
               private paiementService : PaiementService,
-              private avisService:AvisService) { 
+              private avisService:AvisService,
+              private router : Router, ) { 
 
                 this.step = 'step1';
     

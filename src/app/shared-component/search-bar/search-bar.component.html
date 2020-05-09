@@ -7,7 +7,7 @@
                                 class="form-control" id="cycle" 
                                 [(ngModel)]="villeKey"   
                                 required>
-                        <option value="" selected="selected" >Toutes les villes</option>
+                        <option value="" selected="selected" value="Toutes">Toutes les villes</option>
                         <option  *ngFor="let ville of villes" 
                                  [ngValue]="ville.designation">{{ville.designation}}</option>
                     </select>
@@ -15,7 +15,7 @@
                 <div class="search-form"> 
                         <div class="sf-type">
                             <div class="sf-input">
-                                <input type="text" 
+                                <input type="text"
                                 [(ngModel)]="searchKey" id="sf-box" placeholder="Search">
                             </div>
                         

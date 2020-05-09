@@ -25,11 +25,15 @@ export class ListFormationsService {
   
 getFilterFormation(filtre,designationVille) : Observable<any> {
 
-  if(filtre==undefined){
-    return this.httpClient.get(URL.listPropositionFormationsEnligne);
-  }
-    if(filtre===""){
+    if(filtre==undefined){
       return this.httpClient.get(URL.listPropositionFormationsEnligne);
+    }
+    else if(filtre===""){
+      filtre="undefined";
+        if(designationVille==="Toutes"){
+          return this.httpClient.get(URL.listPropositionFormationsEnligne);
+        }
+        else return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille+"/"+ filtre);
     }
     else if(filtre===" "){
       
@@ -39,11 +43,19 @@ getFilterFormation(filtre,designationVille) : Observable<any> {
       return this.httpClient.get(URL.FilterPropositionFormation+ "/"+ filtre+"/"+designationVille) ;
     }
   }
-
   getFiterDeFormationParVille(designationVille,filtre) : Observable<any> {
-  
-      return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille+"/"+ filtre);
 
+    if(designationVille==="Toutes"&&(filtre==undefined||filtre==="")){
+      
+      return this.httpClient.get(URL.listPropositionFormationsEnligne); 
+    }
+    else if (filtre===""){
+       filtre="undefined";
+       return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille+"/"+ filtre);
+    }
+    else{
+      return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille+"/"+ filtre);
+    }
     }
 }
 

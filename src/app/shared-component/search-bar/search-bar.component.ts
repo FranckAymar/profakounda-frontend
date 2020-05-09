@@ -11,7 +11,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class SearchBarComponent implements OnInit {
 
-  villeKey : string ;
+  villeKey: string ;
   searchKey : string ;
 
   criterRecherche="";
@@ -58,7 +58,6 @@ export class SearchBarComponent implements OnInit {
 
 OnFiterDeFormationParVille(designationVille){  
 
-
   this.router.navigate(['/formations'], { queryParams: { villeKey: designationVille, searchKey : this.searchKey }}) ;
   this.listFormationsService.getFiterDeFormationParVille(designationVille,this.searchKey).subscribe(
  
@@ -94,12 +93,11 @@ OnFiterDeFormationParVille(designationVille){
  }
 
   //Recuperer criterRecherche dans l'URL
-  getvalue() {
+  getvalue() { 
     
     this.route.queryParams.subscribe(params => {
        this.villeKey = params['villeKey'];
-       this.searchKey = params['searchKey']
-      });
- 
+       this.searchKey = params['searchKey'];
+         });  
   }
 }

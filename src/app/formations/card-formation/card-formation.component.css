@@ -5,3 +5,15 @@
     font-weight: 700 !important;
     cursor: pointer !important;
 }
+
+
+
+@media screen  and (max-width: 990px){
+    
+    .img-card-mob{
+    
+        width: 200px !important;
+        height: 200px !important;
+    }
+
+}

@@ -4,7 +4,7 @@ import { ForfaitService } from './../../admin/services/forfait.service';
 import { ParticulierService } from './../../customers/services/particulier.service';
 import { SignInService } from './../../home/services/sign-in.service';
 import { URL } from 'src/app/API_url/config';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DetaisFormationsService } from './../services/detais-formations.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -50,11 +50,11 @@ export class DetailsAnnonceComponent implements OnInit {
   noteIsInvalid:boolean = true;
 
   //Model
-
-
-  idPropositionFormation : number ;
-avis:Avis;
-  propositionFormation = {
+    idPropositionFormation : number ;
+    avis:Avis;
+    snapshot ;
+   
+    propositionFormation = {
     code : null,
     idParticulier : null ,
     rayonIntervention : null,
@@ -65,13 +65,8 @@ avis:Avis;
     contrats : null,
     disponibilites : null,
     
-    
-
   } ;
 
-  forfaits = [] ;
-  tabEtoiles = [];
-  tabAvis = [];
   paiementDetails = {
 
     forfait: null,
@@ -82,6 +77,13 @@ avis:Avis;
     token : null
 
   }
+
+  //Tableaux
+
+  forfaits = [] ;
+  tabEtoiles = [];
+  tabAvis = [];
+  
 
   particulierDetail : Particulier = {} ;
 
@@ -113,9 +115,12 @@ avis:Avis;
               private signUpService : ParticulierService,
               private forfaitService : ForfaitService,
               private paiementService : PaiementService,
-              private avisService:AvisService) { 
+              private avisService:AvisService,
+              private router : Router
+              ) { 
 
                 this.step = 'step1';
+                this.snapshot = router.routerState.snapshot;
     
               }
 
@@ -513,8 +518,10 @@ changeEtoile5(){
     ) ;
 
   }
+
   showAlert(){
-    alert('Veillez vous connecté svp');
+  
+      this.router.navigate(['/home/sign-in'], { queryParams: { returnUrl: this.snapshot.url }});
   }
 
   onGetDetailPropositionFormation() {
@@ -667,10 +674,8 @@ changeEtoile5(){
           
         }
 
-
         //L'utilisateur procède au paiement
         else {
-          
 
           if(resp.code === 2){
             alert("Désolé vous avez épuisés vos demandes de contacts ! Souscrivez à nouveau !")

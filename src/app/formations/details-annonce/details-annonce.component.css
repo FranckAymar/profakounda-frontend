@@ -2,6 +2,14 @@ agm-map {
     height: 300px;
   }
 
+
+  .img-resize{
+    width: 150px;
+    height: 150px;
+    background-size: 100px 100px;
+    display: inline-block;
+  }
+
   input{
     text-align: center !important;
   }

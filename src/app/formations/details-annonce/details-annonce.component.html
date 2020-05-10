@@ -16,7 +16,7 @@
         <div class="container pg-inn">
             <div class="col-md-3">
                 <div class="pro-user">
-                    <img *ngIf="propositionFormation.idParticulier"
+                    <img *ngIf="propositionFormation.idParticulier" 
                         src="{{ urlServer}}/{{propositionFormation.idParticulier}}" alt="user">
                 </div>
                 <div class="pro-user-bio">
@@ -141,7 +141,25 @@
                                     <div style="margin-top: 0.5em;" class="form-group">
                                         <label for="note">Note:</label>
                                        
-                                             <i (click)="changeEtoile1()" [ngStyle]="{color:getColor1()}" class="fa fa-star etoileNote"></i> <i (click)="changeEtoile2()" [ngStyle]="{color:getColor2()}" class="fa fa-star etoileNote"></i><i (click)="changeEtoile3()" [ngStyle]="{color:getColor3()}" class="fa fa-star etoileNote"></i> <i (click)="changeEtoile4()" [ngStyle]="{color:getColor4()}" class="fa fa-star etoileNote"></i> <i (click)="changeEtoile5()" [ngStyle]="{color:getColor5()}" class="fa fa-star etoileNote"></i>  
+                                             <i (click)="changeEtoile1()" 
+                                                [ngStyle]="{color:getColor1()}" 
+                                                class="fa fa-star etoileNote"></i>
+
+                                            <i (click)="changeEtoile2()" 
+                                                [ngStyle]="{color:getColor2()}" 
+                                                class="fa fa-star etoileNote"></i>
+
+                                            <i (click)="changeEtoile3()" 
+                                                [ngStyle]="{color:getColor3()}" 
+                                                class="fa fa-star etoileNote"></i> 
+                                            
+                                            <i (click)="changeEtoile4()" 
+                                                [ngStyle]="{color:getColor4()}" 
+                                                class="fa fa-star etoileNote"></i> 
+                                                
+                                            <i (click)="changeEtoile5()" 
+                                                [ngStyle]="{color:getColor5()}" 
+                                                class="fa fa-star etoileNote"></i>  
                                     </div>
                                     
                                     <div class="form-group">

@@ -22,7 +22,7 @@ export class ListFormationsService {
     return this.httpClient.get(URL.listPropositionFormationsEnligne);
   }
 
-  
+   
 getFilterFormation(filtre,designationVille) : Observable<any> {
 
     if(filtre==undefined){

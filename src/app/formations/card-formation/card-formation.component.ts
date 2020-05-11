@@ -56,7 +56,7 @@ export class CardFormationComponent implements OnInit {
     
   }
 
-  switchStateFavoris(isFavoris, id, state: RouterStateSnapshot){
+  switchStateFavoris(isFavoris, id){
 
     
 

@@ -48,8 +48,8 @@
                                                     placeholder="Ville de résidence" formControlName="ville" [(ngModel)]="ville" aria-label="Number" matInput
                                                     [formControl]="myControl2" [matAutocomplete]="auto2">
                                                 <mat-autocomplete #auto2="matAutocomplete">
-                                                    <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
-                                                        {{option}}
+                                                    <mat-option *ngFor="let option of filteredOptions2 | async"  [value]="option.designation">
+                                                        {{option.designation}}
                                                     </mat-option>
                                                 </mat-autocomplete>
                                             </mat-form-field>

@@ -38,6 +38,7 @@ export class EditProfileComponent implements OnInit {
   filieres=[] ;
   niveaux = [];
   villes : any = [];
+  villesObject:any = [];
   data: FileList;
   compressedImages = [];
   passwordModel:PasswordModel;
@@ -65,6 +66,7 @@ export class EditProfileComponent implements OnInit {
     this.onFetchFiliere();
     this.onFetchVilles();
     this.initPassword();
+    this.onFetchVillesObject();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -94,9 +96,12 @@ export class EditProfileComponent implements OnInit {
   private _filter2(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.villes.filter(option => option.toLowerCase().includes(filterValue));
+    return this.villesObject.filter(option => option.designation.toLowerCase().includes(filterValue));
   }
 
+  villeChange(object){
+    console.log(object);
+  }
 ///Compress File
 
 recursiveCompress = (image: File, index, array) => {
@@ -253,6 +258,19 @@ getColor(){
     this.villeService.onFetchVillesString().subscribe(
       (response)=> {
         this.villes = response;
+      },
+      (error)=> {
+        console.log("Une erreur est survenue");
+      }
+
+    )
+
+  }
+  onFetchVillesObject() {
+    this.villeService.onFetchVilles().subscribe(
+      (response)=> {
+        this.villesObject = response;
+        console.log(response);
       },
       (error)=> {
         console.log("Une erreur est survenue");

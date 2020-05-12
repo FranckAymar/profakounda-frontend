@@ -653,7 +653,14 @@ changeEtoile5(){
   contactCustomer() {
 
     
-    let username = sessionStorage.getItem(this.signInService.USERNAME);
+  
+
+    if(!this.signInService.isLogged()){
+
+       //Ouverture de la modal
+       this.openModalPayment.nativeElement.click() ;
+      return ;
+    }
 
     this.detaisFormationsService.getDetailParticulierParFormation(this.idPropositionFormation).subscribe(
 

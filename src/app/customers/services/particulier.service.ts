@@ -15,8 +15,11 @@ export class ParticulierService {
         return this.httpClient.post(URL.changePassword, data);
     }
 
-    modifierParticulier(formData: FormData) {
+    modifierParticulier(formData) {
         return this.httpClient.post(URL.modifierParticulier, formData);
+    }
+    modifierPhoto(formData: FormData) {
+        return this.httpClient.post(URL.modifierPhoto, formData);
     }
     rechercherParticulier(username: String) {
         return this.httpClient.post(URL.rechercherParticulier, username);

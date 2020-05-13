@@ -46,6 +46,7 @@ export const URL = {
     //Particulier
     enregistrerParticulier : consts.host+ consts.nameProject +'enregistrerParticulier',
     modifierParticulier : consts.host+ consts.nameProject +'particulier/modifierParticulier',
+    modifierPhoto: consts.host+ consts.nameProject +'particulier/uploadPhoto',
     rechercherParticulier : consts.host+ consts.nameProject +'rechercherParticulierParUsername',
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',

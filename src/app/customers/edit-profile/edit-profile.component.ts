@@ -38,6 +38,7 @@ export class EditProfileComponent implements OnInit {
   filieres=[] ;
   niveaux = [];
   villes : any = [];
+  villesObject:any = [];
   data: FileList;
   compressedImages = [];
   passwordModel:PasswordModel;
@@ -65,6 +66,7 @@ export class EditProfileComponent implements OnInit {
     this.onFetchFiliere();
     this.onFetchVilles();
     this.initPassword();
+    this.onFetchVillesObject();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -94,9 +96,12 @@ export class EditProfileComponent implements OnInit {
   private _filter2(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.villes.filter(option => option.toLowerCase().includes(filterValue));
+    return this.villesObject.filter(option => option.designation.toLowerCase().includes(filterValue));
   }
 
+  villeChange(object){
+    console.log(object);
+  }
 ///Compress File
 
 recursiveCompress = (image: File, index, array) => {
@@ -125,7 +130,7 @@ init(){
     filiere:'',
     niveau:'',
     ville:['',Validators.required],
-    photo:null
+    username:sessionStorage.getItem(this.signInService.USERNAME)
   })
 }
 initPassword(){
@@ -213,26 +218,29 @@ getColor(){
           //Code block after completing all compression
             console.log('Compression successful ' + this.compressedImages);
             let file = this.compressedImages[0];
-            this.userForm.get('photo').setValue(file);
+            let input = new FormData();
+            input.append('photo',file);
+            input.append('username',sessionStorage.getItem(this.signInService.USERNAME));
+            this.uploadFile(input);
            
           }
         });
             }
   }
 
-  private prepareSave(): any {
-    let input = new FormData();
-    input.append('nom', this.userForm.get('nom').value);
-    input.append('prenoms', this.userForm.get('prenoms').value);
-    input.append('telephone', this.userForm.get('telephone').value);
-    input.append('lieuHabitation', this.userForm.get('lieuHabitation').value);
-    input.append('filiere', this.filiere);
-    input.append('niveau', this.niveau);
-    input.append('ville', this.ville);
-    input.append('username', sessionStorage.getItem(this.signInService.USERNAME));
-    input.append('photo', this.userForm.get('photo').value);
-    return input;
+  uploadFile(data:FormData){
+    this.particulierService.modifierPhoto(data).
+    subscribe(
+      (response)=>{
+
+        
+      },
+      (error)=>{
+        console.log("Erreur de modification de la photo.");
+      }
+    )
   }
+  
   clearFile() {
     this.userForm.get('photo').setValue(null);
     this.fileInput.nativeElement.value = '';
@@ -253,6 +261,19 @@ getColor(){
     this.villeService.onFetchVillesString().subscribe(
       (response)=> {
         this.villes = response;
+      },
+      (error)=> {
+        console.log("Une erreur est survenue");
+      }
+
+    )
+
+  }
+  onFetchVillesObject() {
+    this.villeService.onFetchVilles().subscribe(
+      (response)=> {
+        this.villesObject = response;
+        console.log(response);
       },
       (error)=> {
         console.log("Une erreur est survenue");
@@ -288,8 +309,8 @@ getColor(){
     }
   }
   onUpdateParticulier(){
-    const formModel = this.prepareSave();
-    this.particulierService.modifierParticulier(formModel)
+   
+    this.particulierService.modifierParticulier(this.userForm.value)
     .subscribe(
       (response)=>{
         this.error = response["error"]

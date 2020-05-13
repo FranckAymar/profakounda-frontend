@@ -6,7 +6,9 @@
     cursor: pointer !important;
 }
 
-
+#team {
+   display: none;
+}
 
 @media screen  and (max-width: 990px){
     
@@ -16,4 +18,92 @@
         height: 200px !important;
     }
 
+
+    .home-top-cour{
+        display: none;
+    }
+
+  
+    #team {
+        display: inline;
+     } 
+
+
+}
+
+.card-text{
+
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1em;
+
+}
+
+
+
+
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+#team .card {
+    border: none;
+    background: #ffffff;
+}
+
+
+
+.frontside .card,
+.backside .card {
+    min-height: 312px;
+}
+
+.backside .card a {
+    font-size: 18px;
+}
+
+
+.frontside .card .card-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.btn-details {
+    margin-right: 0.5em;
+    color: #fff;
+    border: 1px solid #149acc;
+    background: #1aa5d8;
+    background: linear-gradient(to bottom, #1aa5d8, #1386b1);
+    font-weight: 700;
+}
+
+.btn-carte {
+    margin-right: 0.5em;
+    color: #fff;
+    border: 1px solid #f36b3b;
+    background: #f36b3b;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-fav {
+    margin-right: 0.5em;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.list-form{
+    display: inline;
+    font-size: 1em;
 }

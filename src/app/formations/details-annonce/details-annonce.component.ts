@@ -698,22 +698,19 @@ changeEtoile5(){
 
   contactCustomer() {
 
-    
   
 
     if(!this.signInService.isLogged()){
-
        //Ouverture de la modal
        this.openModalPayment.nativeElement.click() ;
       return ;
     }
 
     this.detaisFormationsService.getDetailParticulierParFormation(this.idPropositionFormation).subscribe(
-
+     
 
       (resp)=>{
-
-
+        
         if(resp.code === 0){
 
           
@@ -747,7 +744,7 @@ changeEtoile5(){
 
 
       (error)=>{
-        
+
         console.log(error);
         
       }

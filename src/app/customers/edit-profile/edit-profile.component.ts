@@ -176,6 +176,7 @@ getColor(){
   }
 }
 
+
   rechercherPaticulierConnecter(){
     this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
     .subscribe(
@@ -205,7 +206,7 @@ getColor(){
   onFileChange(event) {
     if(event.target.files.length > 0) {
       this.data = event.target.files;
-        console.log('input: '  + this.data);
+        console.log('input: '  + this.data[0].size);
         const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
           expand(res => {
             return res.index > res.array.length - 1
@@ -218,8 +219,16 @@ getColor(){
           //Code block after completing all compression
             console.log('Compression successful ' + this.compressedImages);
             let file = this.compressedImages[0];
+
             let input = new FormData();
-            input.append('photo',file);
+            if(this.data[0].size>512000)
+            {
+              input.append('photo',file);
+            }
+            else
+            {
+              input.append('photo',this.data[0]);
+            }
             input.append('username',sessionStorage.getItem(this.signInService.USERNAME));
             this.uploadFile(input);
            
@@ -232,7 +241,7 @@ getColor(){
     this.particulierService.modifierPhoto(data).
     subscribe(
       (response)=>{
-
+       
         
       },
       (error)=>{

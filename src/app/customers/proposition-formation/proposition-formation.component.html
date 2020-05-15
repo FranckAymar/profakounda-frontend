@@ -2,6 +2,8 @@
  <button data-toggle="modal" (click)="adProposition()" data-target="#addDesc" class="btn btn-info"><i class="fa fa-plus"></i> Nouvelle proposition</button>
 </div>
 
+
+
 <div *ngFor="let p of propositions" style="margin-top: 1em;"class="col-md-12">
     <div class="box-inn-sp">
         <div class="inn-title">
@@ -374,6 +376,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
+
                 <h5 class="modal-title" id="exampleModalLabel">Veuillez manier le cercle pour préciser votre zone
                     d'intervention</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -381,6 +384,8 @@
                 </button>
             </div>
             <div class="modal-body">
+
+                <app-google-place (setAddress)="getAddress($event)" adressType="geocode"></app-google-place>
 
                 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"
                     (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)"

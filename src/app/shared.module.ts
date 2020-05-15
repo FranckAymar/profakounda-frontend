@@ -10,6 +10,7 @@ import { FooterComponent } from './shared-component/footer/footer.component';
 import { SearchBarComponent } from './shared-component/search-bar/search-bar.component';
 import { NavbarAuthComponent } from './shared-component/navbar-auth/navbar-auth.component';
 import { NavbarHomeComponent } from './shared-component/navbar-home/navbar-home.component';
+import { GooglePlaceComponent } from './shared-component/google-place/google-place.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NavbarHomeComponent } from './shared-component/navbar-home/navbar-home.
     NavbarHomeComponent,
     FooterComponent,
     NavbarAuthComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    GooglePlaceComponent
 
   ],
   imports: [
@@ -34,6 +36,7 @@ import { NavbarHomeComponent } from './shared-component/navbar-home/navbar-home.
   exports : [
     CardFormationComponent,
     FooterComponent,
+    GooglePlaceComponent,
     CommonModule,
     RouterModule,
     HttpClientModule,

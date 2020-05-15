@@ -1,0 +1,247 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 stepper">
+            <ul class="progressbar">
+                <li id="step1" class="active"></li>
+                <li id="step2"></li>
+                <li id="step3"></li>
+                <li id="step4"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!--Information générale-->
+            <div id="content1">
+
+                <form [formGroup]="coursCommunForm" (ngSubmit)="next()">
+
+                    <div class="input-field s12">
+                        <input [(ngModel)]="coursCommun.titre" formControlName="titre" type="text" class="validate">
+                        <label>Titre</label>
+                    </div>
+
+                    <div class="input-field s12">
+                        <input formControlName="organisation" [(ngModel)]="coursCommun.organisation" type="text"
+                            class="validate">
+                        <label>Organisation</label>
+                    </div>
+
+                    <div class="input-field s12">
+                        <input formControlName="description" [(ngModel)]="coursCommun.description" type="text"
+                            class="validate">
+                        <label>Description</label>
+                    </div>
+
+                    <div class="input-field s12">
+                        <input formControlName="numeroTelephone" [(ngModel)]="coursCommun.numeroTelephone" type="text"
+                            class="validate">
+                        <label>Numéro de téléphone</label>
+                    </div>
+
+                    <div class="">
+                        <small>Date de début du cours</small>
+                        <input formControlName="dateDebut" [(ngModel)]="coursCommun.dataDebut" type="date"
+                            class="validate">
+                    </div>
+
+                    <div class="">
+                        <small>Date de fin du cours</small>
+                        <input formControlName="dateFin" [(ngModel)]="coursCommun.dateFin" type="date" class="validate">
+                    </div>
+
+                    <div class="row">
+                        <div class="col"> <button id="" class="btn btn-bg-warning btn-block">Annuler</button>
+                        </div>
+                        <div class="col">
+                            <button id="" [disabled]="coursCommunForm.disabled" type="submit"
+                                class="btn btn-bg-color btn-block">Suivant</button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+            <!--Public visé-->
+            <div id="content2" class="hide">
+
+
+                <!--                     <mat-checkbox>Votre formation toucheront-ils un public précis ?</mat-checkbox>
+ -->
+                <div class="col-md-6">
+
+                    <form [formGroup]="publicCibleForm" (ngSubmit)="addPublicToTable()">
+
+
+
+                        <label for="">Niveau</label>
+                        <select  formControlName="niveau" class="form-control">
+                            <option *ngFor="let niveau of niveaux" [value]="niveau.id">
+                                {{niveau.libelle}}</option>
+                        </select>
+
+                        <label style="margin-top: 10px;" for="">Formations</label>
+                        <div class="multiselect">
+                            <div class="selectBox" (click)="showCheckboxes()">
+                                <select class="form-control">
+                                    <option>Select des formations</option>
+                                </select>
+                                <div class="overSelect"></div>
+                            </div>
+                            <div id="checkboxes">
+                                <div class="">
+                                    <label formArrayName="formations"
+                                    *ngFor="let formation of formationsTab; let i = index ">
+                                        <input type="checkbox" [formControlName]="i" />
+                                        {{formation.libelle}}
+                                    </label>
+                                   
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 10px;" class="input-field s12">
+                            <input formControlName="cout" type="number" class="validate">
+                            <label>Cout</label>
+                        </div>
+
+                        <button type="submit" [disabled]="publicCibleForm.disabled" mat-button>Ajouter</button>
+
+                    </form>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <ul class="list-group">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Morbi leo risus</li>
+                        <li class="list-group-item">Porta ac consectetur ac</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+
+                </div>
+
+                <div style="margin-top: 10px;" class="row">
+
+                    <div class="col"> <button id="" (click)="next()"
+                            class="btn btn-bg-warning btn-block">Annuler</button>
+                    </div>
+                    <div class="col">
+                        <button id="" (click)=next() class="btn btn-bg-color btn-block">Suivant</button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <!--Lieu intervention-->
+            <div id="content3" class="hide">
+
+
+                <p>Précisez votre lieu d'intervention</p>
+
+                <app-google-place adressType="geocode"></app-google-place>
+
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+
+                </agm-map>
+
+
+
+                <div class="row">
+                    <div class="col"> <button id="" (click)="next()"
+                            class="btn btn-bg-warning btn-block">Annuler</button>
+                    </div>
+                    <div class="col">
+                        <button id="" (click)=next() class="btn btn-bg-color btn-block">Soumettre</button>
+
+                    </div>
+
+                </div>
+            </div>
+            <!--Mode de paiement-->
+            <div id="content4" class=" hide">
+
+
+
+                <div class="row">
+                    <div class="col"> <button id="" (click)="next()"
+                            class="btn btn-bg-warning btn-block">Annuler</button>
+                    </div>
+                    <div class="col">
+                        <button id="" (click)=next() class="btn btn-bg-color btn-block">Soumettre</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- 
+<mat-horizontal-stepper  #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="">
+       
+
+        <div class="input-field s12">
+            <input  type="text" class="validate" 
+            >
+            <label>Titre</label>
+        </div>
+
+        <div class="input-field s12">
+            <input  type="text" class="validate" 
+            >
+            <label>Organisation</label>
+        </div>
+        
+        <div class="input-field s12">
+            <input  type="text" class="validate" 
+            >
+            <label>Description</label>
+        </div>
+
+        <div class="input-field s12">
+            <input  type="text" class="validate" 
+            >
+            <label>Numéro de téléphone</label>
+        </div>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel></ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper> -->

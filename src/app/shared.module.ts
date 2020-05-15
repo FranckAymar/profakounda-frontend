@@ -11,6 +11,7 @@ import { SearchBarComponent } from './shared-component/search-bar/search-bar.com
 import { NavbarAuthComponent } from './shared-component/navbar-auth/navbar-auth.component';
 import { NavbarHomeComponent } from './shared-component/navbar-home/navbar-home.component';
 import { GooglePlaceComponent } from './shared-component/google-place/google-place.component';
+import { OganiserCoursSheetComponent } from './shared-component/oganiser-cours-sheet/oganiser-cours-sheet.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { GooglePlaceComponent } from './shared-component/google-place/google-pla
     FooterComponent,
     NavbarAuthComponent,
     SearchBarComponent,
-    GooglePlaceComponent
+    GooglePlaceComponent,
+    OganiserCoursSheetComponent
 
   ],
   imports: [
@@ -50,5 +52,6 @@ import { GooglePlaceComponent } from './shared-component/google-place/google-pla
      
   
   ],
+  entryComponents : [OganiserCoursSheetComponent]
 })
 export class SharedModule { }

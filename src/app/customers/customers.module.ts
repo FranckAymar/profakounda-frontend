@@ -13,6 +13,7 @@ import { PropositionFormationComponent } from './proposition-formation/propositi
 import { PaiementsComponent } from './paiements/paiements.component';
 import { FavorisPropositionComponent } from './favoris-proposition/favoris-proposition.component';
 import { CompressorService } from './services/CompressorService';
+import { CoursCommunComponent } from './cours-commun/cours-commun.component';
 const customersRouter: Routes = [
 
   {
@@ -45,6 +46,12 @@ const customersRouter: Routes = [
         path: 'favoris',
         component: FavorisPropositionComponent
 
+      },
+       
+      {
+        path: 'courscommun',
+        component: CoursCommunComponent
+
       }
 
     ]
@@ -61,7 +68,7 @@ const customersRouter: Routes = [
     
     CustomerMainComponent, 
     PropositionFormationComponent, 
-    PaiementsComponent, FavorisPropositionComponent],
+    PaiementsComponent, FavorisPropositionComponent, CoursCommunComponent],
 
   providers: [
 

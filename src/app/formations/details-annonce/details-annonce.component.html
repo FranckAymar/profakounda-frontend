@@ -81,8 +81,8 @@
                                 <tbody>
                                     <tr *ngFor="let contrat of propositionFormation.contrats">
                                         <td>{{contrat.niveau.libelle}}</td>
-                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.minMontant}}
-                                                FCFA</span></td>
+                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.minMontant | currency:'XOF'}}
+                                                </span></td>
                                         <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}}
                                                 FCFA</span></td>
 

@@ -7,7 +7,15 @@
 <div *ngFor="let p of propositions" style="margin-top: 1em;"class="col-md-12">
     <div class="box-inn-sp">
         <div class="inn-title">
-            <a *ngIf="p.proposition.enLigne && p.nombreAvis" style="float: right;" [routerLink]="['/formations/details-formation', p.proposition.id]" class='waves-effect btn-noti' href="admin-course-enquiry.html" title="Les commentaires"><i class="fa fa-envelope-o" aria-hidden="true"></i><span>{{p.nombreAvis}}</span></a>
+            <a *ngIf="p.proposition.enLigne && p.nombreAvis" style="float: right;" 
+            [routerLink]="['/formations/details-formation', p.proposition.id]" 
+            class='waves-effect btn-noti' 
+            title="Les commentaires">
+            <i class="fa fa-envelope-o" aria-hidden="true">
+                
+            </i><span>{{p.nombreAvis}}</span></a>
+
+
             <h5 *ngIf="p.proposition.enLigne" style="color: green;">En ligne</h5>
            
            
@@ -376,7 +384,6 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-
                 <h5 class="modal-title" id="exampleModalLabel">Veuillez manier le cercle pour préciser votre zone
                     d'intervention</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

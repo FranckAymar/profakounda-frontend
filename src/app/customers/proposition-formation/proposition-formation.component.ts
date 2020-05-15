@@ -520,4 +520,18 @@ this.propositionFormationService.rechercherDisponibilites(id)
     this.propostionLoad = id ;
   }
 
+
+  getAddress(place: object) { 
+
+
+    let lat = place['geometry'].location.lat() ;
+    let long = place['geometry'].location.lng() ;
+
+    
+
+    this.lat = lat;
+    this.lng = long;
+
+  }
+
 }

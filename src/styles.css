@@ -10,3 +10,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
+.pac-container {
+    z-index: 2001 !important;
+}

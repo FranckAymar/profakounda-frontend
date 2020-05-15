@@ -20,7 +20,6 @@ export class DetaisFormationsService {
   }
   getDetailParticulierParFormation(idPropositionFormation) : Observable<any> {
 
-    alert("okkk connecter"+idPropositionFormation);
 
     return this.httpClient.get(URL.getContactParticulier + "/"+ idPropositionFormation ) ;
 

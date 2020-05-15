@@ -24,6 +24,9 @@ export class ParticulierService {
     rechercherParticulier(username: String) {
         return this.httpClient.post(URL.rechercherParticulier, username);
     }
+    getCodeParticilier(username: String) {
+        return this.httpClient.post(URL.getCode, username);
+    }
     getPhoto(id: number) {
         return this.httpClient.post(URL.getPhoto, id);
     }

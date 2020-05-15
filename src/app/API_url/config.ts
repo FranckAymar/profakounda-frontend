@@ -48,6 +48,7 @@ export const URL = {
     modifierParticulier : consts.host+ consts.nameProject +'particulier/modifierParticulier',
     modifierPhoto: consts.host+ consts.nameProject +'particulier/uploadPhoto',
     rechercherParticulier : consts.host+ consts.nameProject +'rechercherParticulierParUsername',
+    getCode : consts.host+ consts.nameProject +'rechercherCodeParticulier',
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
     //SIGN IN
@@ -57,6 +58,7 @@ export const URL = {
     singUpValidation:consts.host+ consts.nameProject+'sinUp-validation',
     //Avis
     enregistrerAvis:consts.host+ consts.nameProject+'particulier/enregistrerAvis',
+    modifierAvis:consts.host+ consts.nameProject+'particulier/modifierAvis',
     //Change password
     changePassword:consts.host+ consts.nameProject+'particulier/changePassword',
 

@@ -39,7 +39,6 @@ export class AnoncesFormationComponent implements OnInit {
       (resp) =>{
     
         this.propositionFormations = resp ;
-        
 
       },
 

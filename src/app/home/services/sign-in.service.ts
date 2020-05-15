@@ -21,8 +21,7 @@ export class SignInService {
         return this.http.get(URL.login,{headers}) ;
 
     }
-
-
+ 
 
     logout() {
 

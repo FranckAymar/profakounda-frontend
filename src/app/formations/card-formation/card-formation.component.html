@@ -10,6 +10,9 @@
         <div>
             <h3>{{code}}</h3>
         </div>
+        <div>
+            <i *ngFor="let e of etoilesBrillants"  class="fa fa-star etoileNote"></i><i *ngFor="let eb of etoilesEteints"  class="fa fa-star etoile"></i> 
+        </div>
         <h4 style="display: inline;" *ngFor="let moduleFomation of moduleFormations; let i = index"
             [attr.data-index]="i">
             {{moduleFomation.libelle}} <span *ngIf="moduleFormations.length !== i+1">/</span>

@@ -40,6 +40,7 @@ export class DetailsAnnonceComponent implements OnInit {
   etoile5:boolean = false;
   errorInternet : boolean ;
   message  : string
+  id:number;
   error:string;
   success:string;
   disableForfaitNextButton : boolean = false ;
@@ -111,6 +112,7 @@ export class DetailsAnnonceComponent implements OnInit {
               private signUpService : ParticulierService,
               private forfaitService : ForfaitService,
               private paiementService : PaiementService,
+              private particulierService:ParticulierService,
               private avisService:AvisService,
 
               private router : Router, ) { 
@@ -124,7 +126,7 @@ export class DetailsAnnonceComponent implements OnInit {
 
 
   ngOnInit() {
-    
+    this.getCodeParticulier();
     this.getIdFormation();
     this.onGetDetailPropositionFormation() ; 
     this.initSignInForm() ;
@@ -278,7 +280,29 @@ changeEtoile5(){
 
   );
   }
-  
+  getCodeParticulier(){
+    if(sessionStorage.getItem(this.signInService.USERNAME))
+    {
+      this.particulierService.getCodeParticilier(sessionStorage.getItem(this.signInService.USERNAME)).subscribe(
+        (response)=>{
+          this.id = response["id"];
+        },
+        (error)=>{
+          console.log(error);
+        }
+      )
+    }
+    
+  }
+  getAvis(av){
+    this.avis.commentaire = av.commentaire;
+    this.etoile1 = av.etoile1;
+    this.etoile2 = av.etoile2;
+    this.etoile3 = av.etoile3;
+    this.etoile4 = av.etoile4;
+    this.etoile5 = av.etoile5; 
+    this.avis.id = av.id;
+  }
   enregistrerCommentaire(){
     this.addEtoiles();
     var note = 0;
@@ -289,7 +313,28 @@ changeEtoile5(){
       }
      
     });
-    this.avis = new Avis(0,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,sessionStorage.getItem(this.signInService.USERNAME));
+    if(this.avis.id != 0)
+    {
+      this.avis = new Avis(this.avis.id,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,sessionStorage.getItem(this.signInService.USERNAME));
+     this.avisService.modifierAvis(this.avis).subscribe(
+     (response)=>{
+      this.etoile1 = false;
+      this.etoile2 = false;
+      this.etoile3 = false;
+      this.etoile4 = false;
+      this.etoile5 = false;
+      this.success = response["success"];
+     this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,sessionStorage.getItem(this.signInService.USERNAME));
+     this.onGetDetailPropositionFormation();
+     },
+     (error)=>{
+       console.log(error)
+     }
+   )
+    }
+    else
+    {
+      this.avis = new Avis(0,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,sessionStorage.getItem(this.signInService.USERNAME));
      this.avisService.enregistrerAvis(this.avis).subscribe(
      (response)=>{
        if(response["error"])
@@ -312,6 +357,7 @@ changeEtoile5(){
        console.log(error)
      }
    )
+    }
   }
   addEtoiles(){
     this.tabEtoiles = [];

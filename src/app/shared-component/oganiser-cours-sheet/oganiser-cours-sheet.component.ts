@@ -1,10 +1,11 @@
+import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { NiveauService } from './../../admin/services/niveau.service';
 import { Niveau } from './../../admin/model/niveau.model';
 import { FormationService } from './../../admin/services/formation.service';
 import { publicCibleModel } from './../../home/models/publiccible';
 import { LieuInterventionModel } from './../../home/models/lieuintervention';
 import { CoursCommunModel } from './../../home/models/courscommun';
-import { FormBuilder, FormGroup, Validators, Form, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, Form, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import * as $ from 'jquery';
@@ -19,11 +20,18 @@ declare var $: any;
 export class OganiserCoursSheetComponent implements OnInit {
 
 
+  //Boolean
+  isCheckPublicCible = false ;
+
+  //COnst
+  idCoursCommun : number ;
+
   //FormGroup
   coursCommunForm : FormGroup;
   publicCibleForm : FormGroup;
   lieuInterventionForm : FormGroup ;
-
+  formationsListControl = new FormControl();
+  coutGeneralForm : FormGroup ;
 
   //Variable for map
 
@@ -67,14 +75,11 @@ export class OganiserCoursSheetComponent implements OnInit {
     private dialogRef: MatDialogRef<OganiserCoursSheetComponent>,
     private formBuilder: FormBuilder,
     private formationService : FormationService,
-    private niveauService : NiveauService
+    private niveauService : NiveauService,
+    private coursCommunService : CoursCommunService
 
   ) {
-
-    dialogRef.disableClose = true ;
-    dialogRef.backdropClick().subscribe( () => {
-      dialogRef.close();
-    })
+   
 
     this.step = 'step1';
 
@@ -87,7 +92,9 @@ export class OganiserCoursSheetComponent implements OnInit {
    
     this.initFormCoursCommun();
     this.initLieuInterventionForm();
+    this.initCoutGeneral();
     this.initPublicVise();
+
 
   }
 
@@ -100,11 +107,23 @@ export class OganiserCoursSheetComponent implements OnInit {
        id : [''],
        titre : ['', Validators.required],
        organisation : ['', Validators.required],
-       numeroTelephone : ['', Validators.required],
+       telephone : ['', Validators.required],
        dateDebut :  ['', Validators.required],
        dateFin  : ['', Validators.required],
        description  : ['', Validators.required],
+       
+     }
 
+    )
+  }
+
+  initCoutGeneral(){
+
+    this.coutGeneralForm = this.formBuilder.group(
+
+     {
+       id : [''],
+       cout : ['', Validators.required],   
      }
 
     )
@@ -115,10 +134,9 @@ export class OganiserCoursSheetComponent implements OnInit {
 
       {
           id : [''],
-          idCoursCommun : [''],
-          niveau : ['', Validators.required],
+          idNiveau : ['', Validators.required],
           cout : ['', Validators.required],
-          formations : new FormArray([]),
+          formations : new FormControl('', Validators.required),
       }
     )
   }
@@ -137,20 +155,22 @@ export class OganiserCoursSheetComponent implements OnInit {
     )
   }
 
- 
 
- showCheckboxes() {
-  var checkboxes = document.getElementById("checkboxes");
-  if (!this.expanded) {
-    checkboxes.style.display = "block";
-    this.expanded = true;
-  } else {
-    checkboxes.style.display = "none";
-    this.expanded = false;
+  checkBoxPublicChange(){
+
+    this.isCheckPublicCible = !this.isCheckPublicCible ;
+
+
+    this.initCoutGeneral();
+
+    if(this.isCheckPublicCible == true){
+      this.coutGeneralForm.get('cout').setValue('null')  ;
+    }
+
+    this.initPublicVise();
+    this.publicCibleMdels = [];
   }
-}
-  
-
+ 
   next() {
 
     if (this.step === 'step1') {
@@ -217,8 +237,11 @@ export class OganiserCoursSheetComponent implements OnInit {
 
 
   addPublicToTable(){
-
-    this.publicCibleMdels.push(this.publicCibleMdel);
+    
+    this.publicCibleMdels.push(this.publicCibleForm.value);
+    console.log(this.publicCibleMdels);
+    
+    this.initPublicVise();
 
   }
 
@@ -262,6 +285,139 @@ export class OganiserCoursSheetComponent implements OnInit {
         
       },
 
+    )
+
+  }
+
+
+  deletePublic(index){
+
+    this.publicCibleMdels.splice(index, 1);
+
+  }
+
+  savePublicCible(){
+
+    if(this.coutGeneralForm.get('cout').value !== 'null'){
+
+      this.coutGeneralForm.get('id').setValue(this.idCoursCommun);
+      //Si le cout général est précisé on le sauvegarde
+      this.saveCoutGeneral();
+
+      return ;
+    }
+
+    console.log(this.publicCibleMdels);
+
+    this.publicCibleMdelsToSend.idCoursCommun = this.idCoursCommun,
+    this.publicCibleMdelsToSend.publicCible = this.publicCibleMdels ;
+    console.log(this.publicCibleMdelsToSend);
+    
+
+    this.coursCommunService.savePublicVise(this.publicCibleMdelsToSend).subscribe(
+
+
+      (resp)=>{
+        console.log("OK enregistrépublic cible");
+        console.log(resp);
+        this.next();
+        
+      },
+      (error)=>{
+        console.log(error);
+        
+      }
+    )
+
+  }
+
+
+  saveLieuIntervention(){
+
+    this.lieuInterventionForm.get('idCoursCommun').setValue(this.idCoursCommun);
+    this.lieuInterventionForm.get('latitude').setValue(this.lat);
+    this.lieuInterventionForm.get('longitude').setValue(this.lng);
+   
+    console.log(this.lieuInterventionForm.value);
+
+    this.coursCommunService.saveLieuIntervention(this.lieuInterventionForm.value).subscribe(
+
+
+      (resp)=>{
+        console.log("OK enregistré Lileu intervention");
+        console.log(resp);
+        
+      },
+      (error)=>{
+        console.log(error);
+        
+      }
+    )
+
+
+    this.dialogRef.close();
+    
+  
+  }
+
+  saveCoursCommun(){
+    console.log(this.coursCommunForm.value);
+    
+    this.coursCommunService.saveCoursCommun(this.coursCommunForm.value).subscribe(
+
+
+      (resp)=>{
+
+        if(resp['error']){
+          console.log(resp);
+          
+        }else{
+
+          console.log(resp);
+          console.log(resp.id);
+          this.idCoursCommun = resp.id ;
+          this.next();
+        }
+       
+        
+      },
+      (error)=>{
+        console.log(error);
+        
+      }
+    ) ;
+    
+  }
+
+
+  setAddress(adress){
+    this.lieuInterventionForm.get('libelle').setValue(adress.formatted_address);
+    
+    let lat = adress['geometry'].location.lat() ;
+    let long = adress['geometry'].location.lng() ;
+
+    this.lat = lat;
+    this.lng = long;
+
+  }
+
+
+  saveCoutGeneral(){
+
+    this.coursCommunService.modifierCoutGeneral(this.coutGeneralForm.value).subscribe(
+
+
+      (resp)=>{
+
+        console.log(resp);
+        this.next();
+        
+      },
+
+      (error)=>{
+        console.log(error);
+        
+      }
     )
 
   }

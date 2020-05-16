@@ -1,3 +1,4 @@
+import { CoursCommunService } from './../services/cours-commun-service.service';
 import { OganiserCoursSheetComponent } from './../../shared-component/oganiser-cours-sheet/oganiser-cours-sheet.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
@@ -9,9 +10,14 @@ import { MatDialog } from '@angular/material';
 })
 export class CoursCommunComponent implements OnInit {
 
-  constructor(private dialog : MatDialog) { }
+
+  coursCommuns = [] ;
+
+  constructor(private dialog : MatDialog,
+              private coursCommunService : CoursCommunService) { }
 
   ngOnInit() {
+    this.onFectCoursCommun();
   }
 
 
@@ -21,8 +27,7 @@ export class CoursCommunComponent implements OnInit {
     this.dialog.closeAll();
   
     const dialogRef = this.dialog.open(OganiserCoursSheetComponent, {
-      hasBackdrop : true,
-      backdropClass: 'cdk-overlay-transparent-backdrop',
+      disableClose : true ,
       width: '800px',
       data: {},
       
@@ -35,8 +40,27 @@ export class CoursCommunComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
   
   
+      this.onFectCoursCommun();
     });
   
   };
+
+
+  onFectCoursCommun(){
+
+    this.coursCommunService.fetchCoursCommun().subscribe(
+
+      (resp)=>{
+        console.log(resp);
+        this.coursCommuns = resp ;
+        
+      },
+      (error)=>{
+        console.log(error);
+        
+      }
+    )
+
+  }
 
 }

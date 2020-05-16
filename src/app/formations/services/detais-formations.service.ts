@@ -19,7 +19,7 @@ export class DetaisFormationsService {
 
   }
   getDetailParticulierParFormation(idPropositionFormation) : Observable<any> {
-
+    
     return this.httpClient.get(URL.getContactParticulier + "/"+ idPropositionFormation ) ;
 
 

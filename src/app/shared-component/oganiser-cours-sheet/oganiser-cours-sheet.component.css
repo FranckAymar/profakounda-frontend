@@ -11,7 +11,7 @@
   }
   .progressbar li {
     list-style-type: none;
-    width: 25%;
+    width: 30%;
     float: left;
     font-size: 12px;
     position: relative;
@@ -58,47 +58,15 @@
     background-color: #FF5722;
   }
 
-
-  .multiselect {
-    width: 100%;
-  }
-  
-  .selectBox {
-    position: relative;
-  }
-  
-  .selectBox select {
-    width: 100%;
-    font-weight: bold;
-  }
-  
-  .overSelect {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-  }
-  
-  #checkboxes {
-    display: none;
-    border: 1px #dadada solid;
-  }
-
-  .formation{
-    margin: 10px;
-    display: inline;
-
-  }
-  
-  #checkboxes label {
-    display: block;
-  }
-  
-  #checkboxes label:hover {
-    background-color: #1e90ff;
-  }
-
   agm-map {
     height: 400px;
-  } 
+  }
+
+  .trash{
+    float: right;
+    cursor: pointer;
+  }
+
+  .mat-form-field {
+    width: 100% !important;
+  }

@@ -99,6 +99,9 @@ export class OganiserCoursSheetComponent implements OnInit {
   }
 
 
+
+
+
   initFormCoursCommun(){
 
     this.coursCommunForm = this.formBuilder.group(

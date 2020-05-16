@@ -123,8 +123,8 @@
                     </div>
 
 
-                    <div class="udb-sec udb-time">
-                        <h4>Notes et Commentaires</h4>
+                    <div id="UpdateComments" class="udb-sec udb-time">
+                        <h4 >Notes et Commentaires</h4>
 
                         <div class="tour_head1 udb-time-line days">
                             <div style="width: 10em;margin: auto;">
@@ -183,14 +183,14 @@
                                                    </div>
                                                 <div>{{av.commentaire}}</div>
                                             </li>
-                                            
+                                            <div *ngIf="id===av.idParticulier" style="margin-top: 0.5em;"><a href="#UpdateComments" (click)="getAvis(av)" data-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample" style="color: blue;">Modifier</a></div>
                                         </ul>
                                              
                                         
                                         <span 
                 class="home-top-cour-rat">{{av.date}}</span>
                                     </div>
-                                    <!-- <div style="background-color: #17A2B8; color: white;border-radius:0 0  0.5em 0.5em;padding: 0.3em;">{{av.commentaire}}</div> -->
+                                    
                                     
                                   </div>
                               </div>

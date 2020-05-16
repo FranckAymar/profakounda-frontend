@@ -10,5 +10,8 @@ export class AvisService{
     enregistrerAvis(data){
         return this.http.post(URL.enregistrerAvis,data) ;
     }
+    modifierAvis(data){
+        return this.http.post(URL.modifierAvis,data) ;
+    }
 
 }

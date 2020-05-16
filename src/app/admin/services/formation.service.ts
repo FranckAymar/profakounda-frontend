@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { URL } from 'src/app/API_url/config';
 import { Injectable } from '@angular/core';
@@ -14,7 +15,7 @@ export class FormationService{
      supprimerFormation(id:number){
       return this.httpClient.post(URL.supprimerFormation,id);
    }
-     onFetchFormations(){
+     onFetchFormations() : Observable <any>{
         return this.httpClient.get(URL.onFetchFormations);
      }
      onFetchFormationsString(){

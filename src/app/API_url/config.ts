@@ -140,6 +140,16 @@ export const URL = {
     //Favoris
     ajouterFavoris :  consts.host+ consts.nameProject + 'particulier/enregistrerfavoris',
     supprimerFavoris :  consts.host+ consts.nameProject + 'particulier/supprimerfavorisparticulier',
-    recupererFavoris : consts.host+ consts.nameProject + 'particulier/favorisparticulier'
+    recupererFavoris : consts.host+ consts.nameProject + 'particulier/favorisparticulier',
+
+
+    //COurs commun
+    enregistrerCoursCommun : consts.host+ consts.nameProject + 'particulier/enregistrercourscommun',
+    modifierCoursCommun : consts.host+ consts.nameProject + 'particulier/modifiercourscommun',
+    enregistrerPublicCible : consts.host+ consts.nameProject + 'particulier/enregistrerpublicvise',
+    enregisterLieuIntervention : consts.host+ consts.nameProject + 'particulier/enregistrerlieuintervention',
+    recupererCoursCommun : consts.host+ consts.nameProject + '/organisation/coursCommuns',
+    modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral'
+
 
 }

@@ -1,0 +1,42 @@
+<section>
+        <div class="head-2">
+                <div class="container">
+                        <div class="head-2-inn head-2-inn-padd-top">
+                                <h1>Mes cours organisés</h1>
+                                <div class="event-head-sub">
+                                        <ul>
+                                                <li>Total cours: {{coursCommuns.length}}</li>
+                                                <li>Total inscrits: 0</li>
+                                        </ul>
+                                </div>
+                        </div>
+
+                </div>
+        </div>
+</section>
+
+<div style="text-align: center; margin-top: 1em;">
+        <button  (click)="goToOrganiserCours()" data-target="#addDesc" class="btn btn-info">
+                <i class="fa fa-plus">
+        
+                </i> Organiser un cours</button>
+</div>
+
+
+<div style="margin-top: 5em;" class="container">
+        <div class="row">
+                <div *ngFor="let cours of coursCommuns" class="col-md-6">
+                        <div class="ed-rese-grid ed-rese-grid-mar-bot-30">
+                                <div class="ed-rsear-img ed-faci-full-top">
+                                        <img src="../../../assets/images/logo.png" alt="">
+                                </div>
+                                <div class="ed-rsear-dec ed-faci-full-bot">
+                                        <h4><a>{{cours.organisation}} - {{cours.titre}}</a></h4>
+                                        <p>{{cours.description}}</p>
+                                        <a class="read-line-btn">Read more</a>
+                                </div>
+                        </div>
+                </div>
+
+        </div>
+</div>

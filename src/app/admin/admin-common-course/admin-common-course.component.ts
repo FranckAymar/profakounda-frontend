@@ -1,3 +1,4 @@
+import { CoursCommunAdminService } from './../services/cours-commun-admin.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminCommonCourseComponent implements OnInit {
 
-  constructor() { }
+  constructor(private coursCommunAdminService : CoursCommunAdminService) { }
+
+  courCommuns= [];
 
   ngOnInit() {
+
+    this.onFetchCoursCommuns();
   }
 
+  onFetchCoursCommuns(){
+
+    
+    this.coursCommunAdminService.fetchCoursCommun().subscribe(
+
+
+      (resp) => {
+        this.courCommuns = resp ;
+        alert("okk on a "+this.courCommuns);
+      },
+
+      (error) => {
+        console.log(error);
+        
+
+      }
+
+    )
+  }
 }

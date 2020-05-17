@@ -147,9 +147,11 @@ export const URL = {
     enregistrerCoursCommun : consts.host+ consts.nameProject + 'particulier/enregistrercourscommun',
     modifierCoursCommun : consts.host+ consts.nameProject + 'particulier/modifiercourscommun',
     enregistrerPublicCible : consts.host+ consts.nameProject + 'particulier/enregistrerpublicvise',
+    modifierPublicCible : consts.host+ consts.nameProject + 'particulier/modifierpublicvise',
     enregisterLieuIntervention : consts.host+ consts.nameProject + 'particulier/enregistrerlieuintervention',
-    recupererCoursCommun : consts.host+ consts.nameProject + '/organisation/coursCommuns',
-    modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral'
+    modifierLieuIntervention : consts.host+ consts.nameProject + 'particulier/modifierlieuintervention',
+    recupererCoursCommun : consts.host+ consts.nameProject + 'organisation/coursCommuns',
+    modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
 
 
 }

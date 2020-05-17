@@ -63,8 +63,17 @@
   }
 
   .trash{
+    margin-right: 1em;
     float: right;
     cursor: pointer;
+  }
+
+
+  .info{
+
+    margin-right: 1em;
+    float: right;
+
   }
 
   .mat-form-field {

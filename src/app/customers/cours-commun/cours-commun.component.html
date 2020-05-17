@@ -16,9 +16,9 @@
 </section>
 
 <div style="text-align: center; margin-top: 1em;">
-        <button  (click)="goToOrganiserCours()" data-target="#addDesc" class="btn btn-info">
+        <button (click)="goToOrganiserCours()" data-target="#addDesc" class="btn btn-info">
                 <i class="fa fa-plus">
-        
+
                 </i> Organiser un cours</button>
 </div>
 
@@ -31,9 +31,11 @@
                                         <img src="../../../assets/images/logo.png" alt="">
                                 </div>
                                 <div class="ed-rsear-dec ed-faci-full-bot">
-                                        <h4><a>{{cours.organisation}} - {{cours.titre}}</a></h4>
-                                        <p>{{cours.description}}</p>
-                                        <a class="read-line-btn">Read more</a>
+                                        <h4><a>{{cours.coursCommun.organisation}} - {{cours.coursCommun.titre}}</a></h4>
+                                        <p>{{cours.coursCommun.description}}</p>
+                                        <a class="read-line-btn">Détails</a>
+                                        <a  style="margin-left: 1em;" (click)="loadCoursCommun(cours)" class="details-line-btn">Modifier</a>
+
                                 </div>
                         </div>
                 </div>

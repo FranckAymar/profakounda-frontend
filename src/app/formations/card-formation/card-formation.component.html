@@ -45,6 +45,9 @@
                                 <div class="card-body text-center">
                                     <p><img class=" img-fluid" src="{{urlServer}}/{{idParticulier}}?width=200&height=200" alt="card image"></p>
                                     <h4 class="card-title">{{code}}</h4>
+                                    <div>
+                                        <i *ngFor="let e of etoilesBrillants"  class="fa fa-star etoileNoteMobile"></i><i *ngFor="let eb of etoilesEteints"  class="fa fa-star etoileMobile"></i> 
+                                    </div>
                                     <h4 class="list-form" *ngFor="let moduleFomation of moduleFormations; let i = index"
                                         [attr.data-index]="i">
                                         {{moduleFomation.libelle}} <span *ngIf="moduleFormations.length !== i+1">/</span>

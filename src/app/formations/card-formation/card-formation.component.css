@@ -13,7 +13,11 @@
     margin-left: 0.7em;
     font-size: 1.5em;
   }
-.etoileNote{
+  .etoileNoteMobile,.etoileMobile{
+    margin-left: 0.5em;
+    font-size: 1em;
+  }
+.etoileNote,.etoileNoteMobile{
     color: #FFD700;
 }
 

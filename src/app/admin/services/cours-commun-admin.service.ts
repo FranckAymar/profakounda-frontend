@@ -13,7 +13,7 @@ export class CoursCommunAdminService {
 
   fetchCoursCommun(): Observable<any> {
 
-    return this.httpClient.get(URL.recupererCoursCommun);
+    return this.httpClient.get(URL.listeCoursCommuns);
 
   }
 

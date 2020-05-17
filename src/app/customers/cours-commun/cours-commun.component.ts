@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from './../services/cours-commun-service.service';
 import { OganiserCoursSheetComponent } from './../../shared-component/oganiser-cours-sheet/oganiser-cours-sheet.component';
 import { Component, OnInit } from '@angular/core';
@@ -14,34 +15,47 @@ export class CoursCommunComponent implements OnInit {
   coursCommuns = [] ;
 
   constructor(private dialog : MatDialog,
-              private coursCommunService : CoursCommunService) { }
+              private coursCommunService : CoursCommunService,
+              private route : ActivatedRoute,
+              private router : Router,
+          ) { }
 
   ngOnInit() {
     this.onFectCoursCommun();
   }
 
+  ngOnDestroy() {
+   this.dialog.closeAll();
+  }
+
+
+  openDialog(data){
+
+      //Fermetture par défaut de toutes les dialogues
+      this.dialog.closeAll();
+  
+      const dialogRef = this.dialog.open(OganiserCoursSheetComponent, {
+        disableClose : true ,
+        width: '800px',
+        data: data,
+        
+        });
+    
+    
+      /*
+        Après fermetture de la dialogue
+      */   
+      dialogRef.afterClosed().subscribe(result => {
+    
+    
+        this.onFectCoursCommun();
+      });
+
+  }
 
   goToOrganiserCours(): void {
 
-    //Fermetture par défaut de toutes les dialogues
-    this.dialog.closeAll();
-  
-    const dialogRef = this.dialog.open(OganiserCoursSheetComponent, {
-      disableClose : true ,
-      width: '800px',
-      data: {},
-      
-      });
-  
-  
-    /*
-      Après fermetture de la dialogue
-    */   
-    dialogRef.afterClosed().subscribe(result => {
-  
-  
-      this.onFectCoursCommun();
-    });
+    this.openDialog({});
   
   };
 
@@ -62,5 +76,38 @@ export class CoursCommunComponent implements OnInit {
     )
 
   }
+
+  loadCoursCommun(data){
+
+    this.navigateToModifyCours(data.id);
+    this.openDialog(data) ;
+    
+
+  }
+
+  navigateToModifyCours(idCoursCommun){
+    this.router.navigate([], {
+     relativeTo: this.route,
+     queryParams: {
+      courscommunedit: idCoursCommun 
+     },
+     queryParamsHandling: 'merge',
+   });
+  }
+
+  getMdemandemMiseEnLigne(id){
+    this.coursCommunService.demandeMiseEnLigne(id)
+    .subscribe(
+      (response)=>{
+        this.onFectCoursCommun();
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+
+  }
+
+
 
 }

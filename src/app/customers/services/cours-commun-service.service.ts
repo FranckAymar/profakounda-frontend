@@ -1,3 +1,4 @@
+import { publicCibleModel } from './../../home/models/publiccible';
 import { URL } from 'src/app/API_url/config';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -21,9 +22,16 @@ export class CoursCommunService {
 
   saveCoursCommun(coursCommum) :Observable<any>{
 
+    if(coursCommum.id){
+
+      return this.http.post(URL.modifierCoursCommun, coursCommum) ;
+      
+    }
+
     return this.http.post(URL.enregistrerCoursCommun, coursCommum) ;
 
   }
+
 
   modifierCoutGeneral(coutModel) :Observable<any>{
 
@@ -31,15 +39,30 @@ export class CoursCommunService {
 
   }
 
-  savePublicVise(publicCible) :Observable<any>{
+  savePublicVise(publicCibles) :Observable<any>{
 
-    return this.http.post(URL.enregistrerPublicCible, publicCible) ;
+    if(publicCibles.publicCible[0].id){
+      return this.http.post(URL.modifierPublicCible, publicCibles) ;
+
+    }
+
+    return this.http.post(URL.enregistrerPublicCible, publicCibles) ;
 
   }
 
   saveLieuIntervention(lieuIntervention) :Observable<any>{
 
+    if(lieuIntervention.id){
+
+      return this.http.post(URL.modifierLieuIntervention, lieuIntervention) ;
+
+    }
+
     return this.http.post(URL.enregisterLieuIntervention, lieuIntervention) ;
 
   }
+
+  demandeMiseEnLigne(idPrposition) : Observable<any> {
+    return this.http.post(URL.demandeMiseEnligneCourCommun,idPrposition);
+}
 }

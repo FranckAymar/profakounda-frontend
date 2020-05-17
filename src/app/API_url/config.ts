@@ -147,10 +147,18 @@ export const URL = {
     enregistrerCoursCommun : consts.host+ consts.nameProject + 'particulier/enregistrercourscommun',
     modifierCoursCommun : consts.host+ consts.nameProject + 'particulier/modifiercourscommun',
     enregistrerPublicCible : consts.host+ consts.nameProject + 'particulier/enregistrerpublicvise',
+    modifierPublicCible : consts.host+ consts.nameProject + 'particulier/modifierpublicvise',
     enregisterLieuIntervention : consts.host+ consts.nameProject + 'particulier/enregistrerlieuintervention',
     recupererCoursCommun : consts.host+ consts.nameProject + '/organisation/coursCommuns',
     modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
-    listeCoursCommuns : consts.host+ consts.nameProject + '/admin/coursCommuns'
-
+    modifierLieuIntervention : consts.host+ consts.nameProject + 'particulier/modifierlieuintervention',
+    demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
+  
+    //cours Commun admin
+    listeCoursCommuns : consts.host+ consts.nameProject + '/admin/coursCommuns',
+    accepterMiseEnligneCourCommun : consts.host+ consts.nameProject + '/admin/accepterMiseEnligneCourCommun',
+    refuserMiseEnLigneCourCommun : consts.host+ consts.nameProject + '/admin/refuserMiseEnLigneCourCommun',
+    supprimerMiseEnligneCourCommun : consts.host+ consts.nameProject + '/admin/supprimerMiseEnligneCourCommun',
+   
 
 }

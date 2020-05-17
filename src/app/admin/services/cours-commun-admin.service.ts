@@ -17,4 +17,18 @@ export class CoursCommunAdminService {
 
   }
 
+  supprimerMiseEnLigne(id:number){ 
+
+    return this.httpClient.post(URL.supprimerMiseEnligneCourCommun,id);
+ }
+  mettreEnLigne(idProposition): Observable<any> {
+    return this.httpClient.post(URL.accepterMiseEnligneCourCommun, idProposition);
+  }
+
+  refuserMiseEnLigne(idProposition, idCause): Observable<any> {
+    let params = new HttpParams().set("idProposition", idProposition).set("idCause", idCause);
+    return this.httpClient.post(URL.refuserMiseEnLigneCourCommun, null,{ params: params });
+  }
+
+
   }

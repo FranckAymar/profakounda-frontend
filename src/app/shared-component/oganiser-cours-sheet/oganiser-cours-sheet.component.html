@@ -17,47 +17,44 @@
                 <form [formGroup]="coursCommunForm" (ngSubmit)="saveCoursCommun()">
 
                     <div class="input-field s12">
-                        <input [(ngModel)]="coursCommun.titre" formControlName="titre" type="text" class="validate">
+                        <input formControlName="titre" type="text" class="validate">
                         <label>Titre</label>
                     </div>
 
                     <div class="input-field s12">
-                        <input formControlName="organisation" type="text"
-                            class="validate">
+                        <input formControlName="organisation" type="text" class="validate">
                         <label>Organisation</label>
                     </div>
 
                     <div class="input-field s12">
-                        
-                        <textarea formControlName="description"
-                                  maxChars="1000" class="form-control"  name="description" id="" cols="30" rows="10">
-                           
+
+                        <textarea formControlName="description" maxChars="1000" class="form-control" name="description"
+                            id="" cols="30" rows="10">
+
                         </textarea>
                         <label>Description</label>
-                       
-                      
+
+
                     </div>
 
                     <div class="input-field s12">
-                        <input formControlName="telephone"  type="text"
-                            class="validate">
+                        <input formControlName="telephone" type="text" class="validate">
                         <label>Numéro de téléphone</label>
                     </div>
 
                     <div class="">
                         <small>Date de début du cours</small>
-                        <input formControlName="dateDebut"  type="date"
-                            class="validate">
+                        <input formControlName="dateDebut" type="date" class="validate">
                     </div>
 
                     <div class="">
                         <small>Date de fin du cours</small>
-                        <input formControlName="dateFin"  type="date" class="validate">
+                        <input formControlName="dateFin" type="date" class="validate">
                     </div>
 
                     <div class="row">
 
-                        <button id="" [disabled]="coursCommunForm.invalid"  type="submit"
+                        <button id="" [disabled]="coursCommunForm.invalid" type="submit"
                             class="btn btn-bg-color btn-block">Suivant</button>
 
                     </div>
@@ -67,81 +64,86 @@
             </div>
             <!--Public visé-->
             <div id="content2" class="hide">
-
-
-                    <div class="row" style="text-align: center; margin-top: 2em;">
-                        <mat-checkbox (change)="checkBoxPublicChange()" >
-                            Votre formation touchera-elle un public précis (Niveau d'étude) ?</mat-checkbox>
-
-                            <div *ngIf="!isCheckPublicCible" style="margin-top: 10px;" class="input-field s12">
-                                <form [formGroup]="coutGeneralForm" >
-                                    <input formControlName="cout" type="number" class="validate">
-                                    <label>Cout Général</label>
-                            </form>
-                            </div>        
-                            
-                        
+                <div class="row" style="text-align: center; margin-top: 2em;">
+                    <mat-checkbox *ngIf="!isModify" (change)="checkBoxPublicChange()">
+                        Votre formation touchera-elle un public précis (Niveau d'étude) ?</mat-checkbox>
+                    <div *ngIf="!isCheckPublicCible" style="margin-top: 10px;" class="input-field s12">
+                        <form [formGroup]="coutGeneralForm">
+                            <input formControlName="cout" type="number" class="validate">
+                            <label>Cout Général</label>
+                        </form>
                     </div>
-                    <div *ngIf="isCheckPublicCible" class="row mt-5">
-                        <div class="col-md-6">
-    
-                            <form [formGroup]="publicCibleForm" (ngSubmit)="addPublicToTable()">
-    
-                                <mat-form-field>
-                                    <mat-label>Niveau</mat-label>
-                                    <mat-select formControlName="idNiveau">
-                                        <mat-option *ngFor="let niveau of niveaux"
-                                            [value]="niveau.id">
-                                            {{niveau.libelle}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                             
-    
-                                <mat-form-field>
-                                    <mat-label>Formations</mat-label>
-                                    <mat-select formControlName="formations" multiple>
-                                        <mat-option *ngFor="let formation of formationsTab; let i=index"
-                                            [value]="formation">
-                                            {{formation.libelle}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-    
-                                <div style="margin-top: 10px;" class="input-field s12">
-                                    <input formControlName="cout" type="number" class="validate">
-                                    <label>Cout</label>
-                                </div>
-    
-                                
-                                <button type="submit" class="btn btn-info"
-                                        [disabled]="publicCibleForm.invalid">Ajouter</button>
-    
-    
-                            </form>
-    
-                        </div>
-    
-                        <div class="col-md-6">
-    
-                            <ul *ngIf="publicCibleMdels.length > 0" class="list-group">
-                                <li *ngFor="let public of publicCibleMdels; 
-                                let i=index" class="list-group-item">Public {{i+1}}, Cout : {{public.cout}} FCFA 
-                                <span (click)="deletePublic(i)" class="trash" ><i class="fa fa-trash"></i></span></li>
-                            </ul>
-    
-                        </div>
-    
-                    </div>
-    
-                    <div class="row" style="margin-top: 40px;">
-    
-                        <button id="" [disabled]="publicCibleMdels.length  == 0 && isCheckPublicCible || coutGeneralForm.invalid" 
-                                                    (click)="savePublicCible()" class="btn btn-bg-color btn-block">Suivant</button>
-    
-    
-                    </div>
-    
 
 
+                </div>
+                <div *ngIf="isCheckPublicCible" class="row mt-5">
+                    <div class="col-md-6">
+
+                        <form [formGroup]="publicCibleForm" (ngSubmit)="addPublicToTable()">
+
+                            <mat-form-field>
+                                <mat-label>Niveau</mat-label>
+                                <mat-select  formControlName="niveau">
+                                    <mat-option *ngFor="let niveau of niveaux" [value]="niveau">
+                                        {{niveau.libelle}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+                            <mat-form-field>
+                                <mat-label>Formations</mat-label>
+                                <mat-select formControlName="formations" multiple>
+                                    <mat-option *ngFor="let formation of formationsTab; let i=index"
+                                        [value]="formation">
+                                        {{formation.libelle}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <div style="margin-top: 10px;" class="input-field s12">
+                                <input formControlName="cout" type="number" class="validate">
+                                <label>Cout</label>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-info"
+                                [disabled]="publicCibleForm.invalid">Ajouter</button>
+
+
+                        </form>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <ul *ngIf="publicCibleMdels.length > 0" class="list-group">
+                            <li *ngFor="let public of publicCibleMdels; 
+                                let i=index" class="list-group-item">
+                                {{public.niveau.libelle}} - Cout : {{public.cout}} FCFA
+                                <span (click)="deletePublic(i)" class="trash">
+                                    <i class="fa fa-trash"></i></span>
+                                <span data-toggle="tooltip" 
+                                      data-placement="right" 
+                                      title="{{getFormationsForPublic(public)}}" 
+                                      class="info">
+                                    <i class="fa fa-lg fa-info"></i></span>
+<!--                                 
+                                    <span (click)="loadPublicCible(public)"
+                                    class="trash">
+                                  <i class="fa fa-lg fa-edit"></i></span> -->
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="row" style="margin-top: 40px;">
+
+                    <button id=""
+                        [disabled]="publicCibleMdels.length  == 0 && isCheckPublicCible || coutGeneralForm.invalid"
+                        (click)="savePublicCible()" class="btn btn-bg-color btn-block">Suivant</button>
+
+                </div>
 
             </div>
 
@@ -150,30 +152,30 @@
 
                 <div class="row" style="text-align: center;">
 
-                <p>Précisez votre lieu d'intervention</p>
+                    <p>Précisez votre lieu</p>
 
-                <form [formGroup]="lieuInterventionForm" (submit)="saveLieuIntervention()">
+                    <form [formGroup]="lieuInterventionForm" (submit)="saveLieuIntervention()">
 
-                    <app-google-place (setAddress)="setAddress($event)" adressType="geocode"></app-google-place>
+                        <app-google-place [autocompleteInput]="libelleLieu" (setAddress)="setAddress($event)" adressType="geocode"></app-google-place>
 
-                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+                        <agm-map [latitude]="lat" 
+                                 [longitude]="lng" 
+                                 [zoom]="zoom"
+                                 (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)">
 
-                        <agm-marker [latitude]="lat" [longitude]="lng">
+                            <agm-marker [latitude]="lat" 
+                                        [longitude]="lng" >
+
+                            </agm-marker>
+                        </agm-map>
+
+                        <button type="submit" class="btn btn-bg-color btn-block">Soumettre</button>
 
 
-                        </agm-marker>
-                    </agm-map>
-
-
-                   
-                            <button id="" 
-                                    type="submit" class="btn btn-bg-color btn-block">Soumettre</button>
-
-
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-        
+
 
         </div>
 

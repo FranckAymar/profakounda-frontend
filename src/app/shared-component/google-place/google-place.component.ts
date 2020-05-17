@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 declare var google; 
 
@@ -9,19 +10,20 @@ declare var google;
 })
 export class GooglePlaceComponent implements OnInit, AfterViewInit {
 
-  
 
   @Input() adressType: string;
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
   @ViewChild('addresstext', {static: false}) addresstext: any;
 
-  autocompleteInput: string;
+  @Input() autocompleteInput: string;
   queryWait: boolean;
 
   constructor() {
+
   }
 
   ngOnInit() {
+   
   }
 
   ngAfterViewInit() {

@@ -90,12 +90,12 @@ OnFiterDeFormationParVille(designationVille){
    this.router.navigate(['/formations'], { queryParams:{ villeKey : villeKey}}) ;
  }
 
-  //Recuperer criterRecherche dans l'URL
-  getvalue() { 
-    
-    this.route.queryParams.subscribe(params => {
-       this.villeKey = params['villeKey'];
-       this.searchKey = params['searchKey'];
-         });  
-  }
+    //Recuperer criterRecherche dans l'URL
+    getvalue() { 
+      
+      this.route.queryParams.subscribe(params => {
+        this.villeKey = params['villeKey'];
+        this.searchKey = params['searchKey'];
+          });  
+    }
 }

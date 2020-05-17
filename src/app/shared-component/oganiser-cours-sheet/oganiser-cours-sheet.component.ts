@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { NiveauService } from './../../admin/services/niveau.service';
 import { Niveau } from './../../admin/model/niveau.model';
@@ -6,8 +7,8 @@ import { publicCibleModel } from './../../home/models/publiccible';
 import { LieuInterventionModel } from './../../home/models/lieuintervention';
 import { CoursCommunModel } from './../../home/models/courscommun';
 import { FormBuilder, FormGroup, Validators, Form, FormArray, FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import * as $ from 'jquery';
 
 declare var $: any;
@@ -22,9 +23,11 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   //Boolean
   isCheckPublicCible = false ;
+  isModify = false ;
 
   //COnst
   idCoursCommun : number ;
+  libelleLieu : string ;
 
   //FormGroup
   coursCommunForm : FormGroup;
@@ -76,7 +79,11 @@ export class OganiserCoursSheetComponent implements OnInit {
     private formBuilder: FormBuilder,
     private formationService : FormationService,
     private niveauService : NiveauService,
-    private coursCommunService : CoursCommunService
+    private coursCommunService : CoursCommunService,
+    @Inject(MAT_DIALOG_DATA) public dataReceived: any,
+    private route : ActivatedRoute,
+    private router : Router,
+    private snackBar: MatSnackBar
 
   ) {
    
@@ -87,6 +94,8 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getParameterUrl();
+
     this.onFetchFormations();
     this.onFetchNiveau();
    
@@ -94,10 +103,93 @@ export class OganiserCoursSheetComponent implements OnInit {
     this.initLieuInterventionForm();
     this.initCoutGeneral();
     this.initPublicVise();
+        
+
+    if(this.dataReceived){
+
+      this.idCoursCommun = this.dataReceived.coursCommun.id ;
+
+      //Mode modification activé
+      this.isModify = true ;
+
+      //Si le cout commun est précisé
+      if(this.dataReceived.coursCommun.cout !== null){
+
+        this.isCheckPublicCible = false;
+      }else{
+        this.isCheckPublicCible = true;
+
+      }
+
+      this.initializeInput(this.dataReceived);
+
+
+    }
 
 
   }
 
+
+  initializeInput(data){
+
+    
+    this.coursCommunForm.patchValue(
+
+      {
+        id : data.coursCommun.id,
+        titre : data.coursCommun.titre,
+        organisation :data.coursCommun.organisation,
+        telephone : data.coursCommun.telephone,
+        dateDebut :  data.coursCommun.dateDebut,
+        dateFin  : data.coursCommun.dateFin,
+        description  : data.coursCommun.description
+        
+      }
+    )
+
+    //Si le cours commun est précisé
+    
+    if(data.coursCommun.cout !== null){
+
+      
+      this.coutGeneralForm.patchValue(
+        {
+          id : this.idCoursCommun,
+          cout : data.coursCommun.cout 
+        }
+      )
+    }else{
+
+      this.coutGeneralForm.patchValue(
+
+
+        {
+          cout : 'null',
+        }
+      )
+
+      this.publicCibleMdels = data.publicCible ;
+
+
+    }
+
+    
+    this.lieuInterventionForm.patchValue(
+
+      {
+        id : data.lieuIntervention.id,
+        longitude : data.lieuIntervention.longitude,
+        latitude :  data.lieuIntervention.latitude,
+        libelle :  data.lieuIntervention.libelle,
+
+      }
+
+    )
+
+    this.lat =  data.lieuIntervention.latitude ;
+    this.lng =  data.lieuIntervention.longitude;
+    this.libelleLieu = data.lieuIntervention.libelle;
+  }
 
 
 
@@ -114,7 +206,6 @@ export class OganiserCoursSheetComponent implements OnInit {
        dateDebut :  ['', Validators.required],
        dateFin  : ['', Validators.required],
        description  : ['', Validators.required],
-       
      }
 
     )
@@ -137,7 +228,7 @@ export class OganiserCoursSheetComponent implements OnInit {
 
       {
           id : [''],
-          idNiveau : ['', Validators.required],
+          niveau : ['', Validators.required],
           cout : ['', Validators.required],
           formations : new FormControl('', Validators.required),
       }
@@ -163,10 +254,10 @@ export class OganiserCoursSheetComponent implements OnInit {
 
     this.isCheckPublicCible = !this.isCheckPublicCible ;
 
-
     this.initCoutGeneral();
 
     if(this.isCheckPublicCible == true){
+      
       this.coutGeneralForm.get('cout').setValue('null')  ;
     }
 
@@ -177,7 +268,6 @@ export class OganiserCoursSheetComponent implements OnInit {
   next() {
 
     if (this.step === 'step1') {
-        console.log(this.coursCommun);
         
         this.goToStep2();
 
@@ -185,8 +275,6 @@ export class OganiserCoursSheetComponent implements OnInit {
     
     else if (this.step === 'step2') {
     
-      console.log(this.publicCibleMdels);
-
       this.goToStep3() ;
 
   
@@ -194,7 +282,6 @@ export class OganiserCoursSheetComponent implements OnInit {
     
     else if (this.step === 'step3') {
      
-      console.log(this.lieuInterventionModel);
 
 
       this.goToStep4() ;
@@ -242,7 +329,6 @@ export class OganiserCoursSheetComponent implements OnInit {
   addPublicToTable(){
     
     this.publicCibleMdels.push(this.publicCibleForm.value);
-    console.log(this.publicCibleMdels);
     
     this.initPublicVise();
 
@@ -301,6 +387,8 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   savePublicCible(){
 
+
+    //Si le cout général est précisé 
     if(this.coutGeneralForm.get('cout').value !== 'null'){
 
       this.coutGeneralForm.get('id').setValue(this.idCoursCommun);
@@ -310,19 +398,15 @@ export class OganiserCoursSheetComponent implements OnInit {
       return ;
     }
 
-    console.log(this.publicCibleMdels);
-
     this.publicCibleMdelsToSend.idCoursCommun = this.idCoursCommun,
     this.publicCibleMdelsToSend.publicCible = this.publicCibleMdels ;
-    console.log(this.publicCibleMdelsToSend);
     
 
+    //Sinon on sauvegarde le public cible
     this.coursCommunService.savePublicVise(this.publicCibleMdelsToSend).subscribe(
 
 
       (resp)=>{
-        console.log("OK enregistrépublic cible");
-        console.log(resp);
         this.next();
         
       },
@@ -335,21 +419,26 @@ export class OganiserCoursSheetComponent implements OnInit {
   }
 
 
+   /*
+  * Sauvegarde du lieu d'intervention
+  */
+
+
   saveLieuIntervention(){
+
 
     this.lieuInterventionForm.get('idCoursCommun').setValue(this.idCoursCommun);
     this.lieuInterventionForm.get('latitude').setValue(this.lat);
     this.lieuInterventionForm.get('longitude').setValue(this.lng);
    
-    console.log(this.lieuInterventionForm.value);
-
     this.coursCommunService.saveLieuIntervention(this.lieuInterventionForm.value).subscribe(
 
 
       (resp)=>{
-        console.log("OK enregistré Lileu intervention");
-        console.log(resp);
-        
+        this.dialogRef.close();
+        this.openSnackBar("Soumis avec succès !")
+
+
       },
       (error)=>{
         console.log(error);
@@ -358,14 +447,12 @@ export class OganiserCoursSheetComponent implements OnInit {
     )
 
 
-    this.dialogRef.close();
     
   
   }
 
   saveCoursCommun(){
-    console.log(this.coursCommunForm.value);
-    
+
     this.coursCommunService.saveCoursCommun(this.coursCommunForm.value).subscribe(
 
 
@@ -376,8 +463,6 @@ export class OganiserCoursSheetComponent implements OnInit {
           
         }else{
 
-          console.log(resp);
-          console.log(resp.id);
           this.idCoursCommun = resp.id ;
           this.next();
         }
@@ -393,22 +478,13 @@ export class OganiserCoursSheetComponent implements OnInit {
   }
 
 
-  setAddress(adress){
-    this.lieuInterventionForm.get('libelle').setValue(adress.formatted_address);
-    
-    let lat = adress['geometry'].location.lat() ;
-    let long = adress['geometry'].location.lng() ;
-
-    this.lat = lat;
-    this.lng = long;
-
-  }
-
+  /*
+  * Modification du cout général
+  */
 
   saveCoutGeneral(){
 
     this.coursCommunService.modifierCoutGeneral(this.coutGeneralForm.value).subscribe(
-
 
       (resp)=>{
 
@@ -424,5 +500,87 @@ export class OganiserCoursSheetComponent implements OnInit {
     )
 
   }
+
+
+  ajoutMarqueur(lat : number, lng : number) {
+     
+    this.lat = lat ;
+    this.lng = lng ;
+    
+  }
+
+
+  //Recuperer criterRecherche dans l'URL
+  getParameterUrl() { 
+      
+     this.route.queryParams.subscribe(params => {
+        
+      this.idCoursCommun = params['courscommunedit'];
+            });  
+      }
+
+  /*
+  * Assignation du lieu d'intervention
+  */
+
+  setAddress(adress){
+    
+    this.lieuInterventionForm.get('libelle').setValue(adress.formatted_address);
+  
+    this.lat = adress['geometry'].location.lat() ;
+    this.lng = adress['geometry'].location.lng() ;
+
+    console.log(this.lat + "/" +this.lng);
+    
+
+  }
+
+
+  getFormationsForPublic(publicCible) : string{
+    
+
+    let formation = "";
+
+    publicCible.formations.forEach(element => {
+      
+      let libelle = element.libelle ;
+
+      if(formation ==""){
+        formation = libelle;
+      }else{
+        formation = (formation + "/").concat(libelle)
+
+      }
+
+    });
+
+    return formation ;
+    
+
+  }
+
+  loadPublicCible(publicCible){
+
+
+    this.publicCibleForm.patchValue({
+
+      id : publicCible.id,
+      niveau : publicCible.niveau,
+      cout : publicCible.cout,
+      formations : publicCible.formations
+
+
+    })
+
+
+  }
+
+
+  openSnackBar(message: string, action?: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
+ 
 
 }

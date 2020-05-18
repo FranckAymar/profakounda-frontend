@@ -30,7 +30,7 @@ export class CoursCommunAdminService {
   }
 
 
-  supprimerMiseEnLigne(id:number){ 
+  supprimerMiseEnLigne(id:number){
 
     return this.httpClient.post(URL.supprimerMiseEnligneCourCommun,id);
  }

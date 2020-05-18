@@ -22,10 +22,15 @@
                     </div>
 
                     <div class="input-field s12">
-                        <input formControlName="organisation" type="text" class="validate">
+                        <input formControlName="organisation" [matAutocomplete]="auto" type="text" class="validate">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let organisation of filteredOrganisations | async" [value]="organisation.libelle">
+                            {{organisation.libelle}}
+                            </mat-option>
+                        </mat-autocomplete>
                         <label>Organisation</label>
                     </div>
-
+                    
                     <div class="input-field s12">
 
                         <textarea formControlName="description" maxChars="1000" class="form-control" name="description"
@@ -158,13 +163,16 @@
 
                         <app-google-place [autocompleteInput]="libelleLieu" (setAddress)="setAddress($event)" adressType="geocode"></app-google-place>
 
-                        <agm-map [latitude]="lat" 
+                        <agm-map *ngIf="lat" [latitude]="lat" 
                                  [longitude]="lng" 
                                  [zoom]="zoom"
+                                
                                  (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)">
 
                             <agm-marker [latitude]="lat" 
-                                        [longitude]="lng" >
+                                        [longitude]="lng"
+                                        [markerClickable]="true"
+                                        [markerDraggable]="true" >
 
                             </agm-marker>
                         </agm-map>

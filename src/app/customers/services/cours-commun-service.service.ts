@@ -14,9 +14,13 @@ export class CoursCommunService {
   }
 
 
-  fetchCoursCommun() :Observable<any> {
+  fetchCoursCommun(id?) :Observable<any> {
 
-   return  this.http.get(URL.recupererCoursCommun);
+    if(id){
+      return  this.http.get(URL.recupererCoursCommunParId + "/" + id);
+
+    }
+      return  this.http.get(URL.recupererCoursCommun);
 
   }
 

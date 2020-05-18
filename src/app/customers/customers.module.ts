@@ -14,6 +14,7 @@ import { PaiementsComponent } from './paiements/paiements.component';
 import { FavorisPropositionComponent } from './favoris-proposition/favoris-proposition.component';
 import { CompressorService } from './services/CompressorService';
 import { CoursCommunComponent } from './cours-commun/cours-commun.component';
+import { DetailsCoursCommunComponent } from './cours-commun/details-cours-commun/details-cours-commun.component';
 const customersRouter: Routes = [
 
   {
@@ -52,6 +53,11 @@ const customersRouter: Routes = [
         path: 'courscommun',
         component: CoursCommunComponent
 
+      },
+
+      {
+        path : 'courscommun/:id',
+        component : DetailsCoursCommunComponent
       }
 
     ]
@@ -68,7 +74,7 @@ const customersRouter: Routes = [
     
     CustomerMainComponent, 
     PropositionFormationComponent, 
-    PaiementsComponent, FavorisPropositionComponent, CoursCommunComponent],
+    PaiementsComponent, FavorisPropositionComponent, CoursCommunComponent, DetailsCoursCommunComponent],
 
   providers: [
 
@@ -77,7 +83,10 @@ const customersRouter: Routes = [
   CompressorService
 
   ],
-
+  exports : [
+    DetailsCoursCommunComponent
+  ]
+,
   imports: [
     RouterModule.forChild(customersRouter),
     SharedModule

@@ -22,6 +22,8 @@ export class CoursCommunComponent implements OnInit {
 
   ngOnInit() {
     this.onFectCoursCommun();
+    console.log(this.coursCommuns);
+    
   }
 
   ngOnDestroy() {

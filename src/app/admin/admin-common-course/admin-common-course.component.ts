@@ -16,11 +16,11 @@ export class AdminCommonCourseComponent implements OnInit {
   idPropositionCourante : number ;
   causeRefusId : number;
   causeRefusTab = [];
-
+  critereFiltre : number ;
 
   ngOnInit() {
 
-    this.onFetchCoursCommuns();
+    this.onFetchAllcoursCommunAdmin();
     this.onFetchCauseRefus();
   }
 
@@ -30,8 +30,7 @@ export class AdminCommonCourseComponent implements OnInit {
     this.coursCommunAdminService.fetchCoursCommun().subscribe(
 
       (resp) => {
-        this.courCommuns = resp ;
-        alert("okk on a "+this.courCommuns);
+       
       },
 
       (error) => {
@@ -44,7 +43,7 @@ export class AdminCommonCourseComponent implements OnInit {
   }
 
 
-  onFetchPropositionFormation(critereFiltre? : number){
+  onFetchAllcoursCommunAdmin(critereFiltre? : number){
 
     
     this.coursCommunAdminService.fetchAllcoursCommunAdmin(critereFiltre).subscribe(
@@ -52,7 +51,7 @@ export class AdminCommonCourseComponent implements OnInit {
 
       (resp) => {
         this.courCommuns = resp ;
-        
+        alert("okk on a ici "+this.courCommuns);
       },
 
 
@@ -73,8 +72,8 @@ export class AdminCommonCourseComponent implements OnInit {
       (resp)=>{
         
         alert("mise en ligne accordé") ;
-        //this.onFetchPropositionFormation(this.critereFiltre)
-        this.onFetchCoursCommuns();
+
+        this.onFetchAllcoursCommunAdmin();
 
       },
       (error)=>{
@@ -87,19 +86,19 @@ export class AdminCommonCourseComponent implements OnInit {
   }
 
   prepareToRefusEnLigne(idProposition){
+    alert("Refus ") ;
     this.idPropositionCourante = idProposition ;
   }
 
   onRefuserMiseEnLigne(){
-
+   
     this.coursCommunAdminService.refuserMiseEnLigne(this.idPropositionCourante, this.causeRefusId).subscribe(
 
 
       (resp)=>{
         alert("Refus validé") ;
         document.getElementById('closeModalChoixRefus').click() ;
-        //this.onFetchPropositionFormation(this.critereFiltre) ;
-        this.onFetchCoursCommuns();
+         this.onFetchAllcoursCommunAdmin();
       },
       (error)=>{
 
@@ -136,8 +135,7 @@ export class AdminCommonCourseComponent implements OnInit {
     this.coursCommunAdminService.supprimerMiseEnLigne(id).subscribe(
     
       (response)=>{ 
-        //this.onFetchPropositionFormation(this.critereFiltre) ;
-        this.onFetchCoursCommuns();
+        this.onFetchAllcoursCommunAdmin();
       },
       (error)=>{
         console.log("Error de suppression: "+error);

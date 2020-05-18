@@ -1,0 +1,79 @@
+<section>
+    <div *ngIf="cours.lieuIntervention" class="pro-cover">
+
+        <agm-map [latitude]="cours.lieuIntervention.latitude" 
+                [longitude]="cours.lieuIntervention.longitude" [zoom]="zoom">
+
+            <agm-marker [latitude]="cours.lieuIntervention.latitude" 
+            [longitude]="cours.lieuIntervention.longitude"></agm-marker>
+
+           
+        </agm-map>
+    </div>
+
+    <div class="stu-db">
+        <div class="container pg-inn">
+            <div class="col-md-3">
+                <div class="pro-user">
+                    <img 
+                        src="../../../assets/images/logo.png" alt="user">
+                </div>
+                <div class="pro-user-bio">
+                    <ul>
+                        <li>
+                            <h4>{{cours.coursCommun?.organisation.libelle}}</h4>
+                        </li>
+                        <li>{{cours.coursCommun?.titre}}</li>
+                       
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-md-9">
+                <div class="udb">
+
+                    <div class="udb-sec">
+                        <input  type="button" value="S'inscrire"
+                            class="btn btn-lg btn-block my-2 light-btn">
+                    </div>
+
+
+
+                    <div class="udb-sec udb-prof">
+                        <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
+                        <p>{{cours.coursCommun?.description}}</p>
+                    </div>
+
+                    <div class="udb-sec udb-cour-stat">
+                        <h4><img src="../../assets/images/icon/db3.png" alt="" />Public cibles</h4>
+                        <div class="pro-con-table">
+                            <table class="bordered responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th>Niveaux</th>
+                                        <th class="align-text-right">Formations </th>
+                                        <th class="align-text-right">cout</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr *ngFor="let public of cours.publicCible">
+                                        <td>{{public.niveau.libelle}}</td>
+                                        <td class="align-text-right"><span class="pro-user-act">
+                                                </span></td>
+                                        <td class="align-text-right"><span class="pro-user-act">{{public.cout}}
+                                                FCFA</span></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

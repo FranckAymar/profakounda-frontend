@@ -1,3 +1,6 @@
+import { startWith, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { OrganisationService } from './../../admin/services/organisation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { NiveauService } from './../../admin/services/niveau.service';
@@ -20,6 +23,9 @@ declare var $: any;
 })
 export class OganiserCoursSheetComponent implements OnInit {
 
+  // initial center position for the map
+  initialLat: number = 5.338390;
+  initialLng: number = 7.815982;
 
   //Boolean
   isCheckPublicCible = false ;
@@ -38,9 +44,8 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   //Variable for map
 
-  lat: number = 5.338390;
-  lng: number = -4.097748;
-  radius : number = 1000
+  lat: number =   5.3176661 ;
+  lng: number = -4.0899911 ;
   zoom : number = 15 ; 
 
   step : string ;
@@ -52,6 +57,7 @@ export class OganiserCoursSheetComponent implements OnInit {
   //Tab
   niveaux = [];
   formationsTab = [];
+  organisations = [];
 
   expanded = false;
 
@@ -79,6 +85,7 @@ export class OganiserCoursSheetComponent implements OnInit {
     private formBuilder: FormBuilder,
     private formationService : FormationService,
     private niveauService : NiveauService,
+    private organisationService : OrganisationService,
     private coursCommunService : CoursCommunService,
     @Inject(MAT_DIALOG_DATA) public dataReceived: any,
     private route : ActivatedRoute,
@@ -92,20 +99,35 @@ export class OganiserCoursSheetComponent implements OnInit {
 
    }
 
+  filteredOrganisations: Observable<any[]>;
+
+
+
   ngOnInit() {
 
-    this.getParameterUrl();
-
-    this.onFetchFormations();
-    this.onFetchNiveau();
-   
+    //Initialisation des params
     this.initFormCoursCommun();
     this.initLieuInterventionForm();
     this.initCoutGeneral();
     this.initPublicVise();
         
+    //Recuperation du param
+    this.getParameterUrl();
 
-    if(this.dataReceived){
+
+    //
+    this.onFetchFormations();
+    this.onFetchNiveau();
+    this.onFetchOrganisation(); 
+    
+    this.filteredOrganisations = this.coursCommunForm.get('organisation').valueChanges.pipe( 
+      startWith(''),
+      map(value => this._filter(value))
+    );
+    
+       
+
+    if(this.dataReceived.coursCommun){
 
       this.idCoursCommun = this.dataReceived.coursCommun.id ;
 
@@ -138,7 +160,8 @@ export class OganiserCoursSheetComponent implements OnInit {
       {
         id : data.coursCommun.id,
         titre : data.coursCommun.titre,
-        organisation :data.coursCommun.organisation,
+        idOrganisation : data.coursCommun.organisation.id,
+        organisation :data.coursCommun.organisation.libelle,
         telephone : data.coursCommun.telephone,
         dateDebut :  data.coursCommun.dateDebut,
         dateFin  : data.coursCommun.dateFin,
@@ -186,6 +209,9 @@ export class OganiserCoursSheetComponent implements OnInit {
 
     )
 
+   
+    
+
     this.lat =  data.lieuIntervention.latitude ;
     this.lng =  data.lieuIntervention.longitude;
     this.libelleLieu = data.lieuIntervention.libelle;
@@ -200,6 +226,7 @@ export class OganiserCoursSheetComponent implements OnInit {
 
      {
        id : [''],
+       idOrganisation : [''],
        titre : ['', Validators.required],
        organisation : ['', Validators.required],
        telephone : ['', Validators.required],
@@ -378,6 +405,32 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   }
 
+  onFetchOrganisation(){
+
+    this.organisationService.fetchOrganisations().subscribe(
+
+      (resp)=>{
+        
+        console.log(resp);
+        
+        this.organisations = resp ;
+
+      },
+
+
+      (error)=>{
+
+        console.log(error);
+        
+      }
+
+    )
+
+  
+
+    
+
+  }
 
   deletePublic(index){
 
@@ -504,6 +557,8 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   ajoutMarqueur(lat : number, lng : number) {
      
+    console.log(lat);
+    
     this.lat = lat ;
     this.lng = lng ;
     
@@ -581,6 +636,18 @@ export class OganiserCoursSheetComponent implements OnInit {
       duration: 3000,
     });
   }
+
+    //Pour l'autocomplétin
+    private _filter(value: string): string[] {
+    
+      const filterValue = this._normalizeValue(value);
+      return this.organisations.filter(organisation => this._normalizeValue(organisation.libelle).includes(filterValue));
+    }
+  
+    private _normalizeValue(value: string): string {
+  
+      return value.toLowerCase().replace(/\s/g, '');
+    }
  
 
 }

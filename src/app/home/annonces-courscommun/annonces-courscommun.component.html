@@ -1,0 +1,40 @@
+
+
+<!-- POPULAR COURSES -->
+<section class="pop-cour">
+    <div class="container com-sp pad-bot-70">
+        <div class="row">
+            <div class="con-title">
+                <h2>Nos <span>cours Organisés</span></h2>
+            </div>
+        </div>
+        
+  <div class="container">
+
+    <div class="row">
+        <div *ngFor="let cours of coursCommuns" class="col-md-4">
+                <div class="ed-rese-grid ed-rese-grid-mar-bot-30">
+                        <div class="ed-rsear-img ed-faci-full-top">
+                                <img src="../../../assets/images/logo.png" alt="">
+                        </div>
+                        <div class="ed-rsear-dec ed-faci-full-bot">
+                                <h4><a>{{cours.coursCommun.organisation.libelle}} - {{cours.coursCommun.titre}}</a></h4>
+                                <p>{{cours.coursCommun.description}}</p>
+                                <a [routerLink]="[cours.coursCommun.id]"  class="read-line-btn">Détails</a>
+                               
+                        </div>
+                </div>
+        </div>
+
+</div>
+  </div>
+       
+        <div class="con-title">
+            <a>
+                <p>Voir plus ...</p>
+            </a>
+        </div>
+       
+    </div> 
+</section>
+

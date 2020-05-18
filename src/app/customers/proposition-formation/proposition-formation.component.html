@@ -7,7 +7,12 @@
 <div *ngFor="let p of propositions" style="margin-top: 1em;"class="col-md-12">
     <div class="box-inn-sp">
         <div class="inn-title">
-            <a *ngIf="p.proposition.enLigne && p.nombreAvis" style="float: right;" [routerLink]="['/formations/details-formation', p.proposition.id]" class='waves-effect btn-noti' href="admin-course-enquiry.html" title="Les commentaires"><i class="fa fa-comment" aria-hidden="true"></i><span>{{p.nombreAvis}}</span></a>
+            <a *ngIf="p.proposition.enLigne && 
+                p.nombreAvis" style="float: right;" 
+                [routerLink]="['/formations/details-formation', p.proposition.id]" 
+                class='waves-effect btn-noti' href="admin-course-enquiry.html" 
+                title="Les commentaires"><i class="fa fa-comment" 
+                aria-hidden="true"></i><span>{{p.nombreAvis}}</span></a>
             <h5 *ngIf="p.proposition.enLigne" style="color: green;">En ligne</h5>
            
            
@@ -19,7 +24,7 @@
             <h5 *ngIf="p.proposition.attenteMiseEnLigne" style="color: red;">En attende de validation</h5>
             <h5 *ngIf="p.proposition.refusMiseEnLigne" style="color:darkorange;" 
                 data-toggle="tooltip" data-placement="right" title="{{p.proposition.causeRefus?.details}}">Refusée</h5>
-                <h5 *ngIf="p.proposition.suppressionMiseEnLigne" style="color: red;">Hors-ligne</h5>
+            <h5 *ngIf="p.proposition.suppressionMiseEnLigne" style="color: red;">Hors-ligne</h5>
 
         </div>
         <div class="tab-inn">

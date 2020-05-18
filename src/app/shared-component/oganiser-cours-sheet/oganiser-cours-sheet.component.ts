@@ -254,7 +254,7 @@ export class OganiserCoursSheetComponent implements OnInit {
     this.publicCibleForm = this.formBuilder.group(
 
       {
-          id : [''],
+          id : new FormControl(),
           niveau : ['', Validators.required],
           cout : ['', Validators.required],
           formations : new FormControl('', Validators.required),

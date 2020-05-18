@@ -159,6 +159,6 @@ export const URL = {
     accepterMiseEnligneCourCommun : consts.host+ consts.nameProject + '/admin/accepterMiseEnligneCourCommun',
     refuserMiseEnLigneCourCommun : consts.host+ consts.nameProject + '/admin/refuserMiseEnLigneCourCommun',
     supprimerMiseEnligneCourCommun : consts.host+ consts.nameProject + '/admin/supprimerMiseEnligneCourCommun',
-   
+    allCoursCommunAdmin : consts.host+ consts.nameProject + '/admin/AllCoursCommun',
 
 }

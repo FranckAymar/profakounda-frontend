@@ -17,6 +17,19 @@ export class CoursCommunAdminService {
 
   }
 
+  fetchAllcoursCommunAdmin(critereFiltre?): Observable<any> {
+
+    if (critereFiltre) {
+      let params = new HttpParams().set("critereFiltre", critereFiltre);
+      return this.httpClient.get(URL.allCoursCommunAdmin, { params: params });
+
+    }
+
+    return this.httpClient.get(URL.allCoursCommunAdmin);
+
+  }
+
+
   supprimerMiseEnLigne(id:number){ 
 
     return this.httpClient.post(URL.supprimerMiseEnligneCourCommun,id);

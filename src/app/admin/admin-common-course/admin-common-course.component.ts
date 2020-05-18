@@ -21,6 +21,7 @@ export class AdminCommonCourseComponent implements OnInit {
   ngOnInit() {
 
     this.onFetchCoursCommuns();
+    this.onFetchCauseRefus();
   }
 
   onFetchCoursCommuns(){
@@ -41,6 +42,29 @@ export class AdminCommonCourseComponent implements OnInit {
 
     )
   }
+
+
+  onFetchPropositionFormation(critereFiltre? : number){
+
+    
+    this.coursCommunAdminService.fetchAllcoursCommunAdmin(critereFiltre).subscribe(
+
+
+      (resp) => {
+        this.courCommuns = resp ;
+        
+      },
+
+
+      (error) => {
+        console.log(error);
+        
+
+      }
+
+    )
+  }
+
 
   onAccorderMiseEnLigne(idProposition){
     this.coursCommunAdminService.mettreEnLigne(idProposition).subscribe(

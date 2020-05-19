@@ -1,0 +1,89 @@
+<section>
+    <div *ngIf="detailsCoursCommun.lieuIntervention" class="pro-cover">
+
+        <agm-map [latitude]="detailsCoursCommun.lieuIntervention.latitude" 
+                [longitude]="detailsCoursCommun.lieuIntervention.longitude" [zoom]="zoom">
+
+            <agm-marker [latitude]="detailsCoursCommun.lieuIntervention.latitude" 
+            [longitude]="detailsCoursCommun.lieuIntervention.longitude"></agm-marker>
+
+           
+        </agm-map>
+    </div>
+
+    <div class="stu-db">
+        <div class="container pg-inn">
+            <div class="col-md-3">
+                <div class="pro-user">
+                    <img 
+                        src="../../../assets/images/logo.png" alt="user">
+                </div>
+                <div class="pro-user-bio">
+                    <ul>
+                        <li>
+                            <h4>{{detailsCoursCommun.coursCommun?.organisation.libelle}}</h4>
+                        </li>
+                        <li>{{detailsCoursCommun.coursCommun?.titre}}</li>
+                        <li>
+                           <h5 style="text-align: center;" *ngIf="detailsCoursCommun.coursCommun?.cout" class="pro-user-act">{{detailsCoursCommun.coursCommun?.cout}} FCFA</h5>
+                        </li>
+                        <li>
+                            Début : <span>{{detailsCoursCommun.coursCommun?.dateDebut  |date:"dd MMMM yyyy "}}</span>
+
+                        </li>
+                        <li>
+                             fin : <span>{{detailsCoursCommun.coursCommun?.dateFin}}</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-md-9">
+
+              
+                <div  *ngIf="detailsCoursCommun.coursCommun?.cout" class="udb-sec">
+                    <a style="width: 100%;"  class="details-line-btn">S'inscrire</a>
+
+                </div>
+
+                <div class="udb-sec">
+
+                    <div class="udb-sec udb-prof">
+                        <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
+                        <p>{{detailsCoursCommun.coursCommun?.description}}</p>
+                    </div>
+
+                    <div  *ngIf="!detailsCoursCommun.coursCommun?.cout"  class="udb-sec udb-time">
+                        <h4><img src="images/icon/db4.png" alt="" /> Public cible</h4>
+                        <div class="tour_head1 udb-time-line days">
+                            <ul>
+                                <li *ngFor="let public of detailsCoursCommun.publicCible" class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    <div class="sdb-cl-tim">
+                                        <div class="sdb-cl-day">
+                                            <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA</h5>
+                                            <span> Niveau : {{public.niveau.libelle}}</span>
+                                            
+                                        </div>
+                                        <div class="sdb-cl-class">
+                                            <ul>
+                                                <li *ngFor="let formation of public.formations">
+                                                    <div class="sdb-cl-class-name tooltipped" data-position="top" data-delay="50" data-tooltip="Class Details">
+                                                        <h5>{{formation.libelle}}</h5>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div style="float: right;">
+                                        <a  class="details-line-btn">S'inscrire</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

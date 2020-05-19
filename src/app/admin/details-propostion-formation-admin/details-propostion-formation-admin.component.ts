@@ -62,6 +62,7 @@ export class DetailsPropostionFormationAdminComponent implements OnInit {
 
 
   onDetailsPropostionFormation(idProposition){
+
       
     this.propostionFormService.fetchPropositionParId(idProposition).subscribe(
 

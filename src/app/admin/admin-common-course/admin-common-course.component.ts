@@ -51,7 +51,6 @@ export class AdminCommonCourseComponent implements OnInit {
 
       (resp) => {
         this.courCommuns = resp ;
-        alert("okk on a ici "+this.courCommuns);
       },
 
 

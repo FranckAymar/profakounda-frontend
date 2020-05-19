@@ -76,4 +76,12 @@ export class CoursCommunService {
   demandeMiseEnLigne(idPrposition) : Observable<any> {
     return this.http.post(URL.demandeMiseEnligneCourCommun,idPrposition);
 }
+
+
+  rechercherParCode() : Observable<any>{
+
+    return null;
+
+  }
+
 }

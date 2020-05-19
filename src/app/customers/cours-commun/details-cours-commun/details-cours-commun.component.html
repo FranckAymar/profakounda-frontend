@@ -4,8 +4,11 @@
         <agm-map [latitude]="cours.lieuIntervention.latitude" 
                 [longitude]="cours.lieuIntervention.longitude" [zoom]="zoom">
 
-            <agm-marker [latitude]="cours.lieuIntervention.latitude" 
-            [longitude]="cours.lieuIntervention.longitude"></agm-marker>
+            <agm-marker
+            
+             [latitude]="cours.lieuIntervention.latitude" 
+            [longitude]="cours.lieuIntervention.longitude"
+            [label] = "cours.lieuIntervention.libelle"></agm-marker>
 
            
         </agm-map>

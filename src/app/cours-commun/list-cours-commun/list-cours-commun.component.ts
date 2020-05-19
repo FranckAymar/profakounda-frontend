@@ -33,4 +33,9 @@ export class ListCoursCommunComponent implements OnInit {
 
   }
 
+  filterCoursCommunParCode(coursCommun){
+
+    this.coursCommuns = coursCommun ;
+  }
+
 }

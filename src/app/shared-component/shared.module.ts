@@ -15,6 +15,7 @@ import { NavbarHomeComponent } from './navbar-home/navbar-home.component';
 import { GooglePlaceComponent } from './google-place/google-place.component';
 import { OganiserCoursSheetComponent } from './oganiser-cours-sheet/oganiser-cours-sheet.component';
 import { DetailsInscritsComponent } from './details-inscrits/details-inscrits.component';
+import { SearchBarCoursCommunComponent } from './search-bar-cours-commun/search-bar-cours-commun.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DetailsInscritsComponent } from './details-inscrits/details-inscrits.co
     OganiserCoursSheetComponent,
     CardCoursCommunComponent,
     PaymentCoursCommunComponent,
-    DetailsInscritsComponent
+    DetailsInscritsComponent,
+    SearchBarCoursCommunComponent
 
   ],
   imports: [
@@ -55,7 +57,8 @@ import { DetailsInscritsComponent } from './details-inscrits/details-inscrits.co
      NavbarAuthComponent,
      NavbarHomeComponent,
      SearchBarComponent,
-     CardCoursCommunComponent
+     CardCoursCommunComponent,
+     SearchBarCoursCommunComponent
      
   
   ],

@@ -41,7 +41,7 @@
             <div class="col-md-9">
 
               
-                <div  *ngIf="cours.coursCommun?.cout" class="udb-sec">
+                <div (click)="onFetchInscrits()"  *ngIf="cours.coursCommun?.cout" class="udb-sec">
                     <a style="width: 100%;"  class="details-line-btn">Details</a>
 
                 </div>
@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
                                     <div style="float: right;">
-                                        <a  class="details-line-btn">Details</a>
+                                        <a (click)="onFetchInscrits(public.id)"  class="details-line-btn">Details</a>
                                     </div>
                                 </li>
                             </ul>

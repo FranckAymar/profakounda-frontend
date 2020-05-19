@@ -14,6 +14,7 @@ import { NavbarAuthComponent } from './navbar-auth/navbar-auth.component';
 import { NavbarHomeComponent } from './navbar-home/navbar-home.component';
 import { GooglePlaceComponent } from './google-place/google-place.component';
 import { OganiserCoursSheetComponent } from './oganiser-cours-sheet/oganiser-cours-sheet.component';
+import { DetailsInscritsComponent } from './details-inscrits/details-inscrits.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { OganiserCoursSheetComponent } from './oganiser-cours-sheet/oganiser-cou
     GooglePlaceComponent,
     OganiserCoursSheetComponent,
     CardCoursCommunComponent,
-    PaymentCoursCommunComponent
+    PaymentCoursCommunComponent,
+    DetailsInscritsComponent
 
   ],
   imports: [
@@ -57,6 +59,6 @@ import { OganiserCoursSheetComponent } from './oganiser-cours-sheet/oganiser-cou
      
   
   ],
-  entryComponents : [OganiserCoursSheetComponent, PaymentCoursCommunComponent]
+  entryComponents : [OganiserCoursSheetComponent, PaymentCoursCommunComponent, DetailsInscritsComponent]
 })
 export class SharedModule { }

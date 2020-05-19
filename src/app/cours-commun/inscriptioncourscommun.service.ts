@@ -21,5 +21,18 @@ export class InscriptioncourscommunService {
 
     return this.http.post(URL.inscriptionpubliccible, data);
   
+  
+  }
+
+  recupererInscrit(data : {idPublicCible : number, idCoursCommun : number}) : Observable<any> {
+
+    if(data.idPublicCible){
+
+      return this.http.get(URL.recupererInscrit + "/" + data.idCoursCommun + "/" + data.idPublicCible);
+
+    }
+
+    return this.http.get(URL.recupererInscrit + "/" + data.idCoursCommun);
+
   }
 }

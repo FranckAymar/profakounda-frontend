@@ -169,5 +169,6 @@ export const URL = {
     //InscriptionCOursCommun
     inscriptioncourscommun : consts.host+ consts.nameProject + 'particulier/inscriptioncourscommun',
     inscriptionpubliccible : consts.host+ consts.nameProject + 'particulier/inscriptionpubliccible',
+    recupererInscrit :  consts.host+ consts.nameProject + 'recupererinscrits'
 
 }

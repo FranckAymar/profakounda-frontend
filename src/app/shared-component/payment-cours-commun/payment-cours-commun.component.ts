@@ -14,6 +14,8 @@ declare var $: any;
 })
 export class PaymentCoursCommunComponent implements OnInit {
 
+
+  //Model
   paiementDetails = {
 
     username : null,
@@ -22,8 +24,13 @@ export class PaymentCoursCommunComponent implements OnInit {
     token : null
 
   }
+
   step;
 
+  //Boolean
+  isNotCheck = true ; 
+
+  //Form group
   identificationForm : FormGroup ;
   operatorForm : FormGroup ;
 
@@ -206,11 +213,19 @@ export class PaymentCoursCommunComponent implements OnInit {
 
   checkBoxChange(){
 
+    this.initIdentificationForm();
+    this.isNotCheck = !this.isNotCheck ;
 
-    this.identificationForm.get('nomInscrit').clearValidators();
-    this.identificationForm.get('nomInscrit').updateValueAndValidity();
-    this.identificationForm.get('prenomInscrit').clearValidators();
-    this.identificationForm.get('prenomInscrit').updateValueAndValidity();
+
+    if(this.isNotCheck ===false ){
+      this.identificationForm.get('nomInscrit').clearValidators();
+      this.identificationForm.get('nomInscrit').updateValueAndValidity();
+      this.identificationForm.get('prenomInscrit').clearValidators();
+      this.identificationForm.get('prenomInscrit').updateValueAndValidity();
+  
+    }
+
+  
 
   }
 

@@ -22,20 +22,20 @@
 
                 <form [formGroup]="identificationForm" (submit)="next()">
                     <div class="input-field s12">
-                        <input type="text" class="validate" formControlName="nomInscrit">
+                        <input [attr.disabled]=" isNotCheck ? null : ''" type="text" class="validate" formControlName="nomInscrit">
                         <label>Votre nom</label>
                     </div>
                     <small style="color: red;" *ngIf="identificationForm.controls.nomInscrit.errors?.required" class="invalid-feedback">
                         Champ requis
                     </small>
                     <div class="input-field s12">
-                        <input type="text" class="validate" formControlName="prenomInscrit">
+                        <input [attr.disabled]=" isNotCheck ? null : ''"  type="text" class="validate" formControlName="prenomInscrit">
                         <label>Votre prenom</label>
                     </div>
                     <small style="color: red;" *ngIf="identificationForm.controls.prenomInscrit.errors?.required" class="invalid-feedback">
                         Champ requis
                     </small>
-                    <button [disabled]="identificationForm.invalid" type="submit" class="btn btn-bg-color btn-block">Suivants</button>
+                    <button [disabled]="identificationForm.invalid" type="submit" class="btn btn-bg-color btn-block">Suivant</button>
 
                 </form>
 

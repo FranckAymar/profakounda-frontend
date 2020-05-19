@@ -1,4 +1,4 @@
-import { SharedModule } from './../shared.module';
+import { SharedModule } from './../shared-component/shared.module';
 import { PaiementService } from './services/paiement.service';
 import { DetailsAnnonceComponent } from './details-annonce/details-annonce.component';
 import { RouterModule } from '@angular/router';

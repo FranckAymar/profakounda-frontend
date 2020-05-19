@@ -14,6 +14,13 @@ export class CoursCommunService {
   }
 
 
+  fetchCoursCommunForHome():Observable<any>{
+
+    return this.http.get(URL.recupererCoursCommunHome);
+
+  }
+
+
   fetchCoursCommun(id?) :Observable<any> {
 
     if(id){
@@ -69,4 +76,12 @@ export class CoursCommunService {
   demandeMiseEnLigne(idPrposition) : Observable<any> {
     return this.http.post(URL.demandeMiseEnligneCourCommun,idPrposition);
 }
+
+
+  rechercherParCode() : Observable<any>{
+
+    return null;
+
+  }
+
 }

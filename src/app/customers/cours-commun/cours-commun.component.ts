@@ -51,6 +51,7 @@ export class CoursCommunComponent implements OnInit {
     
     
         this.onFectCoursCommun();
+        
       });
 
   }
@@ -97,7 +98,7 @@ export class CoursCommunComponent implements OnInit {
    });
   }
 
-  getMdemandemMiseEnLigne(id){
+  demanderMiseEnLigne(id){
     this.coursCommunService.demandeMiseEnLigne(id)
     .subscribe(
       (response)=>{
@@ -113,3 +114,4 @@ export class CoursCommunComponent implements OnInit {
 
 
 }
+ 

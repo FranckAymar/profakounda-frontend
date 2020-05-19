@@ -1,0 +1,32 @@
+<div class="col-md-12">
+    <section>
+            <div  class="row">
+                <p *ngIf="dataReceived.length === 0">Vous n'avez pas encore d'inscrits</p>
+                <div *ngIf="dataReceived.length > 0" class="cor about-sp">
+                    <p style="text-align: center;">{{dataReceived.length}} inscrit(s)</p>
+                    <div class="s18-age-event l-info-pack-days">
+                        <ul>
+                            <li *ngFor="let inscrit of dataReceived">
+                                <div class="age-eve-com age-eve-1">
+                                    <img src="../../../assets/images/icon/awa/Stylo_Noir_SF.png" alt="">
+                                </div>
+                                <div class="s17-eve-time">
+                                    <div class="s17-eve-time-msg">
+                                        <h4>Code d'inscription : {{inscrit.code}}</h4>
+                                        <p>Nom : {{inscrit.nom}}</p>
+                                        <p>Prénoms : {{inscrit.prenoms}}</p>
+                                        <p>Date inscription  : {{inscrit.dateInscription |date:"dd MMMM yyyy "}}</p>
+
+                                    </div>
+                                </div>
+                            </li>
+                            
+    
+                        </ul>
+                    </div>
+                </div>
+                <a matDialogClose class="details-line-btn">Sortir</a>
+            </div>
+    </section>
+    
+</div>

@@ -1,4 +1,4 @@
-import { SharedModule } from './../shared.module';
+import { SharedModule } from './../shared-component/shared.module';
 import { signUpvalidationService } from './services/signUp-validation.service';
 import { SignUpvalidationComponent } from './sign-upvalidation/sign-upvalidation.component';
 import { ResetPasswordService } from './services/reset-password.service';
@@ -14,6 +14,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { SliderHomeComponent } from './slider-home/slider-home.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AvisService } from './services/avis.service';
+import { AnnoncesCourscommunComponent } from './annonces-courscommun/annonces-courscommun.component';
 const homeRouter = [
 
 
@@ -66,6 +67,7 @@ const homeRouter = [
     SliderHomeComponent, 
     ResetPasswordComponent,
     SignUpvalidationComponent,
+    AnnoncesCourscommunComponent,
    
    ],
   imports: [

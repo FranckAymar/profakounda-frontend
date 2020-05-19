@@ -1,4 +1,4 @@
-import { SharedModule } from './../shared.module';
+import { SharedModule } from './../shared-component/shared.module';
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { PropositionFormationService } from './services/propositionFormation.service';
 import { Routes, RouterModule } from '@angular/router';

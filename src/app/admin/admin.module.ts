@@ -1,4 +1,4 @@
-import { SharedModule } from './../shared.module';
+import { SharedModule } from './../shared-component/shared.module';
 import { PropostionFormationsAdminService } from './services/propostion-formations-admin.service';
 import { CauserefusService } from './services/causerefus.service';
 import { AdminGuard } from '../guard/admin.guard';
@@ -32,7 +32,6 @@ import { FormationMangementeService } from './services/formationMangemente.servi
 import { PropostionFormationsAdminComponent } from './propostion-formations-admin/propostion-formations-admin.component';
 import { DetailsPropostionFormationAdminComponent } from './details-propostion-formation-admin/details-propostion-formation-admin.component';
 import { AdminCommonCourseComponent } from './admin-common-course/admin-common-course.component';
-import { CoursCommunAdminComponent } from './cours-commun-admin/cours-commun-admin.component';
 
 
 
@@ -124,11 +123,6 @@ const adminRouter : Routes = [
         component : DetailsPropostionFormationAdminComponent
         
       },
-      {
-        path : 'coursCommun/:id',
-        component : CoursCommunAdminComponent
-        
-      },
 
       {
         path : 'coursCommun',
@@ -162,8 +156,7 @@ const adminRouter : Routes = [
                 CauserefusComponent, 
                 PropostionFormationsAdminComponent,
                 DetailsPropostionFormationAdminComponent,
-                AdminCommonCourseComponent,
-                CoursCommunAdminComponent],
+                AdminCommonCourseComponent],
   imports: [
     RouterModule.forChild(adminRouter),
     SharedModule

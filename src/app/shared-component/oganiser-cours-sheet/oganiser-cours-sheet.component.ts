@@ -488,9 +488,7 @@ export class OganiserCoursSheetComponent implements OnInit {
 
 
       (resp)=>{
-        this.dialogRef.close();
-        this.openSnackBar("Soumis avec succès !")
-
+        this.demanderMiseEnLigne(this.idCoursCommun);
 
       },
       (error)=>{
@@ -649,5 +647,22 @@ export class OganiserCoursSheetComponent implements OnInit {
       return value.toLowerCase().replace(/\s/g, '');
     }
  
+
+    demanderMiseEnLigne(id){
+      this.coursCommunService.demandeMiseEnLigne(id)
+      .subscribe(
+        (response)=>{
+
+          this.openSnackBar("Soumis avec succès !")
+          this.dialogRef.close();
+        },
+        (error)=>{
+          console.log("Erreur : "+error);
+        }
+      )
+  
+    }
+  
+  
 
 }

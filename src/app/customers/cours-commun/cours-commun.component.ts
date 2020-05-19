@@ -51,6 +51,7 @@ export class CoursCommunComponent implements OnInit {
     
     
         this.onFectCoursCommun();
+        
       });
 
   }
@@ -113,3 +114,4 @@ export class CoursCommunComponent implements OnInit {
 
 
 }
+ 

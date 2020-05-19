@@ -97,5 +97,19 @@ export class CoursCommunComponent implements OnInit {
    });
   }
 
+  demanderMiseEnLigne(id){
+    this.coursCommunService.demandeMiseEnLigne(id)
+    .subscribe(
+      (response)=>{
+        this.onFectCoursCommun();
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+
+  }
+
+
 
 }

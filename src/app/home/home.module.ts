@@ -1,4 +1,4 @@
-import { SharedModule } from './../shared.module';
+import { SharedModule } from './../shared-component/shared.module';
 import { signUpvalidationService } from './services/signUp-validation.service';
 import { SignUpvalidationComponent } from './sign-upvalidation/sign-upvalidation.component';
 import { ResetPasswordService } from './services/reset-password.service';

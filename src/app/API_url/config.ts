@@ -143,7 +143,7 @@ export const URL = {
     recupererFavoris : consts.host+ consts.nameProject + 'particulier/favorisparticulier',
 
 
-    //COurs commun
+    //COurs commun 
     enregistrerCoursCommun : consts.host+ consts.nameProject + 'particulier/enregistrercourscommun',
     modifierCoursCommun : consts.host+ consts.nameProject + 'particulier/modifiercourscommun',
     enregistrerPublicCible : consts.host+ consts.nameProject + 'particulier/enregistrerpublicvise',
@@ -153,10 +153,21 @@ export const URL = {
     recupererCoursCommun : consts.host+ consts.nameProject + 'organisation/coursCommuns',
     recupererCoursCommunHome : consts.host+ consts.nameProject + 'home/coursCommuns',
     modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
+    demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
+  
+    //cours Commun admin
+    listeCoursCommuns : consts.host+ consts.nameProject + '/admin/coursCommuns',
+    accepterMiseEnligneCourCommun : consts.host+ consts.nameProject + '/admin/accepterMiseEnligneCourCommun',
+    refuserMiseEnLigneCourCommun : consts.host+ consts.nameProject + '/admin/refuserMiseEnLigneCourCommun',
+    supprimerMiseEnligneCourCommun : consts.host+ consts.nameProject + '/admin/supprimerMiseEnligneCourCommun',
+    allCoursCommunAdmin : consts.host+ consts.nameProject + '/admin/AllCoursCommun',
     recupererCoursCommunParId : consts.host+ consts.nameProject + 'particulier/detailCoursCommun',
 
     //Organisation
-    recupererOrganisation : consts.host+ consts.nameProject + 'organisations',
-    
+    recupererOrganisation : consts.host+ consts.nameProject + 'organisations',  
+
+    //InscriptionCOursCommun
+    inscriptioncourscommun : consts.host+ consts.nameProject + 'particulier/inscriptioncourscommun',
+    inscriptionpubliccible : consts.host+ consts.nameProject + 'particulier/inscriptionpubliccible',
 
 }

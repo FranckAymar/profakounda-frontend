@@ -1,3 +1,4 @@
+import { CoursCommunModule } from './cours-commun/cours-commun.module';
 import { FormationsModule } from './formations/formations.module';
 import { CustomersModule } from './customers/customers.module';
 import { ErrorPageModule } from './error-page/error-page.module';
@@ -29,9 +30,14 @@ const appRouter : Routes = [
   } ,
   {
     path :'formations', redirectTo :'/formations'
+  }
+  ,
+  {
+    path :'courscommun', redirectTo :'/courscommun'
   },{
     path: "**", redirectTo :'/error404'
-  }
+  },
+  
  
 ] ;
 
@@ -48,6 +54,7 @@ const appRouter : Routes = [
     HomeModule,
     CustomersModule,
     FormationsModule,
+    CoursCommunModule,
     ErrorPageModule,
     FormsModule,
     RouterModule.forRoot(appRouter, {scrollPositionRestoration: 'enabled'}),

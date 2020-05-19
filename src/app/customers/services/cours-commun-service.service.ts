@@ -72,4 +72,8 @@ export class CoursCommunService {
     return this.http.post(URL.enregisterLieuIntervention, lieuIntervention) ;
 
   }
+
+  demandeMiseEnLigne(idPrposition) : Observable<any> {
+    return this.http.post(URL.demandeMiseEnligneCourCommun,idPrposition);
+}
 }

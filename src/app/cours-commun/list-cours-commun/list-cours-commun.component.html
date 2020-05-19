@@ -1,0 +1,36 @@
+
+<section class="pop-cour">
+    <div class="container com-sp pad-bot-70">
+        <div class="row">
+            <div class="con-title">
+                <h2>Nos <span>Cours organisés</span></h2>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="row" *ngFor="let cours of coursCommuns" class="col-md-5">
+
+                <div >
+                    <app-card-cours-commun [cours]="cours"></app-card-cours-commun>
+
+                </div>
+
+
+
+            </div>
+           <!--  <div class="pg-pagina">
+                <ul class="pagination">
+                    <li [ngClass]="{'active': (i+1) === page }" (click)="onGetListFormation(i+1)"
+                        *ngFor="let p of totalPageArray ; let i=index"><a>{{i+1}}</a></li>
+                </ul>
+            </div> -->
+
+        </div>
+
+    </div>
+
+
+
+
+</section>

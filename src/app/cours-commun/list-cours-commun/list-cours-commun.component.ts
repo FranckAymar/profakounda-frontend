@@ -2,11 +2,11 @@ import { CoursCommunService } from './../../customers/services/cours-commun-serv
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-annonces-courscommun',
-  templateUrl: './annonces-courscommun.component.html',
-  styleUrls: ['./annonces-courscommun.component.css']
+  selector: 'app-list-cours-commun',
+  templateUrl: './list-cours-commun.component.html',
+  styleUrls: ['./list-cours-commun.component.css']
 })
-export class AnnoncesCourscommunComponent implements OnInit {
+export class ListCoursCommunComponent implements OnInit {
 
   coursCommuns = [] ;
 
@@ -14,12 +14,11 @@ export class AnnoncesCourscommunComponent implements OnInit {
 
   ngOnInit() {
     this.onFectCoursCommunHome();
-  }
-
+    }
 
   onFectCoursCommunHome(){
 
-    this.coursCommunService.fetchCoursCommunForHome().subscribe(
+    this.coursCommunService.fetchCoursCommun().subscribe(
 
       (resp)=>{
         console.log(resp);
@@ -33,6 +32,5 @@ export class AnnoncesCourscommunComponent implements OnInit {
     )
 
   }
-
 
 }

@@ -29,7 +29,6 @@ export class PropostionFormationsAdminService {
 
   }
 
-
   supprimerMiseEnLigne(id:number){ 
 
     return this.httpClient.post(URL.supprimerMiseEnligne,id);

@@ -1,0 +1,102 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 stepper">
+            <ul class="progressbar">
+                <li id="step1" class="active">Détails</li>
+                <li id="step2">Payement</li>
+                <li id="step3">Confirmtation</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!--Information générale-->
+            <div id="content1">
+
+                <div  style="text-align: center;" >
+                    <mat-checkbox  (change)="checkBoxChange()">
+                        Vous êtes vous-mếme le souscripteur ?</mat-checkbox>
+                </div>
+                
+
+                <form [formGroup]="identificationForm" (submit)="next()">
+                    <div class="input-field s12">
+                        <input type="text" class="validate" formControlName="nomInscrit">
+                        <label>Votre nom</label>
+                    </div>
+                    <small style="color: red;" *ngIf="identificationForm.controls.nomInscrit.errors?.required" class="invalid-feedback">
+                        Champ requis
+                    </small>
+                    <div class="input-field s12">
+                        <input type="text" class="validate" formControlName="prenomInscrit">
+                        <label>Votre prenom</label>
+                    </div>
+                    <small style="color: red;" *ngIf="identificationForm.controls.prenomInscrit.errors?.required" class="invalid-feedback">
+                        Champ requis
+                    </small>
+                    <button [disabled]="identificationForm.invalid" type="submit" class="btn btn-bg-color btn-block">Suivants</button>
+
+                </form>
+
+
+            </div>
+            <!--Payement-->
+            <div id="content2" class="hide">
+
+              <form [formGroup]="operatorForm" (submit)="next()">
+
+                <div class="form-check-inline text-center">
+
+                    <p>Choisissez un opérateur :</p>
+
+                    <input type="radio" value="MOMO_SKAN" name="operator"
+                       formControlName="operator" class="filled-in" id="mtn"  />
+                    <label for="mtn">MTN CI</label>
+
+                    <input value="MOOV_SKAN" type="radio" name="operator"
+                       formControlName="operator" class="filled-in" id="moov"  />
+                    <label for="moov">MOOV CI</label>
+
+                    <input value="OM_SKAN" type="radio" name="operator"
+                       formControlName="operator" class="filled-in" id="orange" />
+                    <label for="orange">ORANGE CI</label>
+
+                </div>
+
+                <div class="input-field s12">
+                    <input minlength="8" maxlength="8" formControlName="numero"
+                        type="number"  class="validate">
+                    <label>Entrez votre numéro</label>
+                </div>
+
+                <button id="nextBtnPaiement" [disabled]="operatorForm.invalid" 
+                        (click)=next() class="btn btn-bg-color btn-block">Suivant</button>
+
+
+              </form>
+            </div>
+
+            <!--Lieu intervention-->
+            <div id="content3" class="hide">
+                <div class="columns">
+                    <ul class="price">
+<!--                         <li>{{dataReceived.coursCommun?.titre}}</li>
+                        <li class="grey">{{dataReceived.coursCommun?.organisation.libelle}}</li>
+ -->                        <li> Numéro de téléphone : {{operatorForm.get('numero').value}}
+                            <br> Opérateur : {{operatorForm.get('operator').value}}
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <button (click)=onSaveInscrit() class="btn btn-bg-color btn-block">Confirmer</button>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>

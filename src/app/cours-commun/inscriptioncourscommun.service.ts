@@ -35,4 +35,11 @@ export class InscriptioncourscommunService {
     return this.http.get(URL.recupererInscrit + "/" + data.idCoursCommun);
 
   }
+
+  verifiedLastInscription(idCoursCommun){
+
+    return this.http.get(URL.verifiedLastInscription +"/"+ idCoursCommun);
+
+  }
+
 }

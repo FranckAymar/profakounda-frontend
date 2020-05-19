@@ -1,3 +1,4 @@
+import { InscriptioncourscommunService } from './../inscriptioncourscommun.service';
 import { SignInService } from './../../home/services/sign-in.service';
 import { PaymentCoursCommunComponent } from './../../shared-component/payment-cours-commun/payment-cours-commun.component';
 import { MatDialog } from '@angular/material';
@@ -26,11 +27,17 @@ export class DetailsCoursCommunComponent implements OnInit {
   snapshot: RouterStateSnapshot;
   state: RouterState;
 
+  //FOr map
+  lat : number;
+  long : number;
+  libelle : string;
+
   constructor(private dialog: MatDialog,
     private coursCommunService: CoursCommunService,
     private route: ActivatedRoute,
     private router: Router,
-    private signService: SignInService) {
+    private signService: SignInService,
+    private inscritService : InscriptioncourscommunService) {
 
     this.state = router.routerState;
     this.snapshot = this.state.snapshot;
@@ -50,6 +57,9 @@ export class DetailsCoursCommunComponent implements OnInit {
          this.openDialog({ idCoursCommun: this.idCoursCommun, idPublicCible: this.idPublicCible, data : this.cours });
 
     }
+
+    //console.log(this.isCheckLastInscription());
+    
   }
 
   ngOnDestroy() {
@@ -107,7 +117,12 @@ export class DetailsCoursCommunComponent implements OnInit {
     this.coursCommunService.fetchCoursCommun(this.idCoursCommun).subscribe(
 
       (resp) => {
+      
+        
+        
         this.cours = resp;
+        this.initializeMap(this.cours.lieuIntervention);
+        
 
       },
       (error) => {
@@ -172,4 +187,44 @@ export class DetailsCoursCommunComponent implements OnInit {
     }
 
   }
+
+  isCheckLastInscription() : string{
+
+    let response ;
+    let libelleButton = "S'inscrire" ;
+
+    if(!this.signService.isLogged()){
+      return libelleButton ;
+    }
+
+    this.inscritService.verifiedLastInscription(this.idCoursCommun).subscribe(
+
+      (resp) => {
+        
+        console.log(resp);
+        
+        response = resp ;
+
+      },
+      (error) => {
+        console.log(error);
+
+      }
+    )
+
+    if(response){
+      return "S'inscrire à nouveau"
+    }
+
+    
+  }
+
+  initializeMap(lieuIntervetion){
+
+    this.lat = lieuIntervetion.latitude;
+    this.long = lieuIntervetion.longitude ;
+    this.libelle = lieuIntervetion.libelle ;
+
+  }
+
 }

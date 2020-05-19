@@ -13,7 +13,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DetailsCoursCommunComponent implements OnInit {
 
 
-  zoom = 14 ;
+  zoom = 17 ;
 
   @Input() cours = {
 

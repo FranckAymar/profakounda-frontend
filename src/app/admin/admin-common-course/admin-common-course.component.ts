@@ -50,7 +50,6 @@ export class AdminCommonCourseComponent implements OnInit {
 
       (resp) => {
         this.courCommuns = resp ;
-        
       },
 
 

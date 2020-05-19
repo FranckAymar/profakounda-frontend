@@ -149,9 +149,10 @@ export const URL = {
     enregistrerPublicCible : consts.host+ consts.nameProject + 'particulier/enregistrerpublicvise',
     modifierPublicCible : consts.host+ consts.nameProject + 'particulier/modifierpublicvise',
     enregisterLieuIntervention : consts.host+ consts.nameProject + 'particulier/enregistrerlieuintervention',
-    recupererCoursCommun : consts.host+ consts.nameProject + '/organisation/coursCommuns',
-    modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
     modifierLieuIntervention : consts.host+ consts.nameProject + 'particulier/modifierlieuintervention',
+    recupererCoursCommun : consts.host+ consts.nameProject + 'organisation/coursCommuns',
+    recupererCoursCommunHome : consts.host+ consts.nameProject + 'home/coursCommuns',
+    modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
     demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
   
     //cours Commun admin
@@ -166,4 +167,9 @@ export const URL = {
     //Organisation
     recupererOrganisation : consts.host+ consts.nameProject + 'organisations',  
 
+    //InscriptionCOursCommun
+    inscriptioncourscommun : consts.host+ consts.nameProject + 'particulier/inscriptioncourscommun',
+    inscriptionpubliccible : consts.host+ consts.nameProject + 'particulier/inscriptionpubliccible',
+    recupererInscrit :  consts.host+ consts.nameProject + 'recupererinscrits',
+    verifiedLastInscription :  consts.host+ consts.nameProject + 'particulier/verifiedLastInscription'
 }

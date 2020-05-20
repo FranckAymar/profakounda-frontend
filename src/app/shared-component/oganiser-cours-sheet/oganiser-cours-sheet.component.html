@@ -59,7 +59,7 @@
 
                     <div class="row">
 
-                        <button id="" [disabled]="coursCommunForm.invalid" type="submit"
+                        <button id=""  type="submit" [disabled]="coursCommunForm.invalid" 
                             class="btn btn-bg-color btn-block">Suivant</button>
 
                     </div>
@@ -67,18 +67,44 @@
                 </form>
 
             </div>
-            <!--Public visé-->
-            <div id="content2" class="hide">
+            <!--Public visé--> 
+            <div id="content2" class="hide ">
                 <div class="row" style="text-align: center; margin-top: 2em;">
                     <mat-checkbox *ngIf="!isModify" (change)="checkBoxPublicChange()">
                         Votre formation touchera-elle un public précis (Niveau d'étude) ?</mat-checkbox>
                     <div *ngIf="!isCheckPublicCible" style="margin-top: 10px;" class="input-field s12">
-                        <form [formGroup]="coutGeneralForm">
-                            <input formControlName="cout" type="number" class="validate">
-                            <label>Cout Général</label>
+                        <form [formGroup]="coutGeneralForm" >
+                            <div class="row d-flex " style="text-align: center;">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="input-field s12">
+                                        <input formControlName="cout" type="number" class="validate">
+                                        <label>Cout Général</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-3">
+                                    <div class="input-field s12">
+                                        <input [attr.disabled]="isNotCheckIllimite ? null : ''"   
+                                            formControlName="nbreMaxInscrits" type="number" class="validate">
+                                        <label>Nombre maximun d'inscrits</label>
+                                    </div>
+    
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-field s12">
+                                        <mat-checkbox checked="true" (change)="checkBoxIllimiteChange()">
+                                            Illimité ?</mat-checkbox>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
                         </form>
                     </div>
-
 
                 </div>
                 <div *ngIf="isCheckPublicCible" class="row mt-5">
@@ -107,6 +133,20 @@
                             <div style="margin-top: 10px;" class="input-field s12">
                                 <input formControlName="cout" type="number" class="validate">
                                 <label>Cout</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-field s12">
+                                        <input [attr.disabled]="isNotCheckIllimitePublicCible ? null : ''"  
+                                         formControlName="nbreMaxInscrits" type="number" class="validate">
+                                        <label>Nombre maximun d'inscrits</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <mat-checkbox checked="true" (change)="checkBoxIllimiteChangePublicCible()">
+                                        Illimité ?</mat-checkbox>
+                                </div>
                             </div>
 
 

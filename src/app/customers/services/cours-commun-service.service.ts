@@ -78,10 +78,24 @@ export class CoursCommunService {
 }
 
 
-  rechercherParCode() : Observable<any>{
+  rechercherParCode(code) : Observable<any>{
+  
+    if(code==undefined){ 
+      
+      return this.http.get(URL.recupererCoursCommunHome);
 
-    return null;
+    }
 
+      return  this.http.get(URL.coursCommunsParCode + "/" +code);
+    
+    
   }
 
+  fectchCoursCommunSelect(): Observable<any> {
+    return this.http.get(URL.recupererCoursCommunsInscritsParticulier);
+   }
+
+
+
 }
+

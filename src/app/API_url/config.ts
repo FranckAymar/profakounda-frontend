@@ -154,16 +154,17 @@ export const URL = {
     recupererCoursCommunHome : consts.host+ consts.nameProject + 'home/coursCommuns',
     modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
     demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
-  
-    //cours Commun admin
-    listeCoursCommuns : consts.host+ consts.nameProject + '/admin/coursCommuns',
-    accepterMiseEnligneCourCommun : consts.host+ consts.nameProject + '/admin/accepterMiseEnligneCourCommun',
-    refuserMiseEnLigneCourCommun : consts.host+ consts.nameProject + '/admin/refuserMiseEnLigneCourCommun',
-    supprimerMiseEnligneCourCommun : consts.host+ consts.nameProject + '/admin/supprimerMiseEnligneCourCommun',
-    allCoursCommunAdmin : consts.host+ consts.nameProject + '/admin/AllCoursCommun',
-    recupererCoursCommunParId : consts.host+ consts.nameProject + 'particulier/detailCoursCommun',
-    detailsCoursCommunAdmin : consts.host+ consts.nameProject + '/admin/detailsCoursCommun',
+    recupererCoursCommunsInscritsParticulier : consts.host+ consts.nameProject + 'particulier/coursCommunsSelects',
+    coursCommunsParCode : consts.host+ consts.nameProject + '/home/coursCommunsParCode',
    
+    //cours Commun admin
+    listeCoursCommuns : consts.host+ consts.nameProject + 'admin/coursCommuns',
+    accepterMiseEnligneCourCommun : consts.host+ consts.nameProject + 'admin/accepterMiseEnligneCourCommun',
+    refuserMiseEnLigneCourCommun : consts.host+ consts.nameProject + 'admin/refuserMiseEnLigneCourCommun',
+    supprimerMiseEnligneCourCommun : consts.host+ consts.nameProject + 'admin/supprimerMiseEnligneCourCommun',
+    allCoursCommunAdmin : consts.host+ consts.nameProject + 'admin/AllCoursCommun',
+    recupererCoursCommunParId : consts.host+ consts.nameProject + 'particulier/detailCoursCommun',
+    detailsCoursCommunAdmin : consts.host+ consts.nameProject + 'admin/detailsCoursCommun',
     //Organisation
     recupererOrganisation : consts.host+ consts.nameProject + 'organisations',  
 

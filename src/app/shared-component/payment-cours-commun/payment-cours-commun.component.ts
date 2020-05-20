@@ -1,3 +1,4 @@
+import { SnackbarService } from './../services/snackbar.service';
 import { InscriptioncourscommunService } from './../../cours-commun/inscriptioncourscommun.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
@@ -38,7 +39,7 @@ export class PaymentCoursCommunComponent implements OnInit {
              @Inject(MAT_DIALOG_DATA) public dataReceived: any,
              private formBuilder : FormBuilder,
              private inscriptionService : InscriptioncourscommunService,
-             private snackBar: MatSnackBar
+             private snackBar: SnackbarService
 
 
   ) {
@@ -169,7 +170,7 @@ export class PaymentCoursCommunComponent implements OnInit {
 
         console.log(resp);
         this.dialogRef.close() ;
-        this.openSnackBar('Inscription réussie !');
+        this.snackBar.openSnackBar('Inscription réussie !');
 
         
       },
@@ -196,7 +197,7 @@ export class PaymentCoursCommunComponent implements OnInit {
 
         console.log(resp);
         this.dialogRef.close() ;
-        this.openSnackBar('Inscription réussie !');
+        this.snackBar.openSnackBar('Inscription réussie !');
 
         
       },
@@ -229,10 +230,6 @@ export class PaymentCoursCommunComponent implements OnInit {
 
   }
 
-  openSnackBar(message: string, action?: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-    });
-  }
+
 
 }

@@ -1,3 +1,4 @@
+import { CoursCommunService } from './../services/cours-commun-service.service';
 import { SignInService } from 'src/app/home/services/sign-in.service';
 import { PaiementService } from './../../formations/services/paiement.service';
 import { Component, OnInit } from '@angular/core';
@@ -24,10 +25,12 @@ export class PaiementsComponent implements OnInit {
   totalPageArray : Array<any> ;
 
   constructor(private paiementService : PaiementService,
-            private signInService : SignInService) { }
+            private signInService : SignInService,
+            private coursCommunService : CoursCommunService) { }
 
   ngOnInit() {
     this.onFetchPayment(this.page) ;
+    this.onFetchCoursCommun();
   }
 
   onFetchPayment(pageActive) {
@@ -63,6 +66,25 @@ export class PaiementsComponent implements OnInit {
     )
     
 
+  }
+
+
+  onFetchCoursCommun(){
+
+    this.coursCommunService.fectchCoursCommunSelect().subscribe(
+
+      (resp)=>{
+
+        console.log(resp);
+        
+      },
+
+      (error)=>{
+
+        console.log(error);
+        
+      }
+    )
   }
 
 }

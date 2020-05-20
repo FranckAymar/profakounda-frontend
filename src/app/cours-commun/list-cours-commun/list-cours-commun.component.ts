@@ -23,7 +23,6 @@ export class ListCoursCommunComponent implements OnInit {
       (resp)=>{
         console.log(resp);
         this.coursCommuns = resp ;
-        alert("voila "+this.coursCommuns)
         
       },
       (error)=>{

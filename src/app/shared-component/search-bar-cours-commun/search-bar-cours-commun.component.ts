@@ -30,7 +30,8 @@ export class SearchBarCoursCommunComponent implements OnInit {
   onFilterCoursCommun(){
 
     this.addParameterInURl();
-    this.coursCommunService.rechercherParCode().subscribe(
+    
+    this.coursCommunService.rechercherParCode(this.code).subscribe(
 
       (resp)=>{
 

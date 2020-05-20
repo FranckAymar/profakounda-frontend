@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators, Form, FormArray, FormControl } from
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import * as $ from 'jquery';
+import { validateHorizontalPosition } from '@angular/cdk/overlay';
 
 declare var $: any;
 
@@ -29,6 +30,8 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   //Boolean
   isCheckPublicCible = false ;
+  isNotCheckIllimite = false ;
+  isNotCheckIllimitePublicCible = false ;
   isModify = false ;
 
   //COnst
@@ -145,9 +148,7 @@ export class OganiserCoursSheetComponent implements OnInit {
 
       this.initializeInput(this.dataReceived);
 
-
     }
-
 
   }
 
@@ -245,6 +246,7 @@ export class OganiserCoursSheetComponent implements OnInit {
      {
        id : [''],
        cout : ['', Validators.required],   
+       nbreMaxInscrits : [''],  
      }
 
     )
@@ -258,6 +260,7 @@ export class OganiserCoursSheetComponent implements OnInit {
           niveau : ['', Validators.required],
           cout : ['', Validators.required],
           formations : new FormControl('', Validators.required),
+          nbreMaxInscrits : ['']
       }
     )
   }
@@ -290,6 +293,8 @@ export class OganiserCoursSheetComponent implements OnInit {
 
     this.initPublicVise();
     this.publicCibleMdels = [];
+
+    
   }
  
   next() {
@@ -663,6 +668,32 @@ export class OganiserCoursSheetComponent implements OnInit {
   
     }
   
+
+    checkBoxIllimiteChange(){
+
+
+      this.isNotCheckIllimite = !this.isNotCheckIllimite;
+      
+      if(this.isNotCheckIllimite == false){
+        this.coutGeneralForm.get('nbreMaxInscrits').patchValue("");
+        this.publicCibleForm.updateValueAndValidity();
+
+      }
+
+    }
+
+
+    checkBoxIllimiteChangePublicCible(){
+
+      this.isNotCheckIllimitePublicCible = !this.isNotCheckIllimitePublicCible;
+      
+      if(this.isNotCheckIllimitePublicCible === false){
+        this.publicCibleForm.get('nbreMaxInscrits').patchValue("");
+        this.publicCibleForm.updateValueAndValidity();
+
+      }
+
+    }
   
 
 }

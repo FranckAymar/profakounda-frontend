@@ -1,7 +1,7 @@
 import { InscriptioncourscommunService } from './../inscriptioncourscommun.service';
 import { SignInService } from './../../home/services/sign-in.service';
 import { PaymentCoursCommunComponent } from './../../shared-component/payment-cours-commun/payment-cours-commun.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router, RouterStateSnapshot, RouterState } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { Component, OnInit } from '@angular/core';
@@ -37,7 +37,8 @@ export class DetailsCoursCommunComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private signService: SignInService,
-    private inscritService : InscriptioncourscommunService) {
+    private inscritService : InscriptioncourscommunService,
+    private snack : MatSnackBar) {
 
     this.state = router.routerState;
     this.snapshot = this.state.snapshot;
@@ -58,7 +59,7 @@ export class DetailsCoursCommunComponent implements OnInit {
 
     }
 
-    //console.log(this.isCheckLastInscription());
+    this.isCheckLastInscription();
     
   }
 
@@ -201,9 +202,10 @@ export class DetailsCoursCommunComponent implements OnInit {
 
       (resp) => {
         
-        console.log(resp);
+        if(resp){
+          this.openSnackBar("Rappel : Vous vous êtes déjà inscrit(e)s à ce cours !")
+        }
         
-        response = resp ;
 
       },
       (error) => {
@@ -226,5 +228,17 @@ export class DetailsCoursCommunComponent implements OnInit {
     this.libelle = lieuIntervetion.libelle ;
 
   }
+
+
+  openSnackBar(message: string, action?: string) {
+    this.snack.open(message, action, {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition : 'right',
+      panelClass: ['snackbar'],
+    });
+  }
+
+
 
 }

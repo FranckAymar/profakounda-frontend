@@ -45,6 +45,7 @@ export class DetailsCoursCommunComponent implements OnInit {
 
       (resp)=>{
         this.cours = resp ;
+        console.log(resp);
         
       },
       (error)=>{

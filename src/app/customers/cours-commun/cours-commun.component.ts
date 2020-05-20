@@ -117,9 +117,7 @@ export class CoursCommunComponent implements OnInit {
   calculTotalInscrit(coursCommuns){
 
     coursCommuns.forEach(element => {
-      
-      console.log(element.coursCommun.nombreInscrit);
-      
+            
       this.totalInscrits += element.coursCommun.nombreInscrit;
 
     });

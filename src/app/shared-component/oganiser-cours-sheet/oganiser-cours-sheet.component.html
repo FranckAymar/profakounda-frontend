@@ -39,7 +39,6 @@
                         </textarea>
                         <label>Description</label>
 
-
                     </div>
 
                     <div class="input-field s12">
@@ -114,8 +113,8 @@
 
                             <mat-form-field>
                                 <mat-label>Niveau</mat-label>
-                                <mat-select  formControlName="niveau">
-                                    <mat-option *ngFor="let niveau of niveaux" [value]="niveau">
+                                <mat-select [(value)]="niveauModel"   formControlName="niveau">
+                                    <mat-option *ngFor="let niveau of niveaux" [(value)]="niveau">
                                         {{niveau.libelle}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -123,7 +122,7 @@
 
                             <mat-form-field>
                                 <mat-label>Formations</mat-label>
-                                <mat-select formControlName="formations" multiple>
+                                <mat-select [(value)]="formationsModel" formControlName="formations" multiple>
                                     <mat-option *ngFor="let formation of formationsTab; let i=index"
                                         [value]="formation">
                                         {{formation.libelle}}</mat-option>
@@ -170,11 +169,10 @@
                                       data-placement="right" 
                                       title="{{getFormationsForPublic(public)}}" 
                                       class="info">
-                                    <i class="fa fa-lg fa-info"></i></span>
-<!--                                 
+                                    <i class="fa fa-lg fa-info"></i></span>                                
                                     <span (click)="loadPublicCible(public)"
                                     class="trash">
-                                  <i class="fa fa-lg fa-edit"></i></span> -->
+                                  <i class="fa fa-lg fa-edit"></i></span> 
                             </li>
                         </ul>
 

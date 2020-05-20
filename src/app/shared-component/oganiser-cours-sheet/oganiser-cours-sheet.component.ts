@@ -70,6 +70,8 @@ export class OganiserCoursSheetComponent implements OnInit {
   publicCibleMdel : publicCibleModel = {} ;
   publicCibleMdels : publicCibleModel[] = [] ;
 
+  formationsModel = [];
+  niveauModel = {};
 
 
 
@@ -269,9 +271,9 @@ export class OganiserCoursSheetComponent implements OnInit {
 
       {
           id : new FormControl(),
-          niveau : ['', Validators.required],
+          niveau : [null, Validators.required],
           cout : ['', Validators.required],
-          formations : new FormControl('', Validators.required),
+          formations : new FormControl(null, Validators.required),
           nbreMaxInscrits : ['']
       }
     )
@@ -386,7 +388,8 @@ export class OganiserCoursSheetComponent implements OnInit {
 
         
         this.niveaux = resp ;
-
+        console.log(this.niveaux);
+        
       },
 
 
@@ -632,16 +635,23 @@ export class OganiserCoursSheetComponent implements OnInit {
   loadPublicCible(publicCible){
 
 
+    console.log(publicCible);
+    
+
     this.publicCibleForm.patchValue({
 
       id : publicCible.id,
-      niveau : publicCible.niveau,
       cout : publicCible.cout,
-      formations : publicCible.formations
-
+      
 
     })
-
+    
+    this.niveauModel = publicCible.niveau ;
+    this.formationsModel = publicCible.formations ;
+    
+    this.publicCibleForm.get('niveau').setValue(publicCible.niveau);
+    this.publicCibleForm.get('formations').setValue(publicCible.formations);
+    this.publicCibleForm.updateValueAndValidity();
 
   }
     //Pour l'autocomplétin

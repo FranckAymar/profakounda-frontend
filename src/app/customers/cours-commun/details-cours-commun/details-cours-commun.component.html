@@ -37,6 +37,15 @@
                         <li>
                              fin : <span>{{cours.coursCommun?.dateFin}}</span>
                         </li>
+                        <li>
+                            Etat : <span *ngIf="cours.coursCommun?.inscriptionFermer === true">Fermé</span>
+                                    <span *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>
+                       </li>
+                       <li *ngIf="cours.coursCommun?.nbreMaxInscrits">
+                             <span>{{cours.coursCommun.nbreMaxInscrits - cours.coursCommun.nombreInscrit}}</span> places disponibles
+                      </li>
+
+                       
                     </ul>
                 </div>
 
@@ -65,6 +74,10 @@
                                         <div class="sdb-cl-day">
                                             <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA</h5>
                                             <span> Niveau : {{public.niveau.libelle}}</span>
+                                            <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>
+                                            <p *ngIf="public.inscriptionFermer === false"> Etat : Ouvert</p>
+                                            <small> {{public.nbreMaxInscrits - public.nombreInscrit}} places disponibles</small>
+
                                         </div>
                                         <div class="sdb-cl-class">
                                             <ul>
@@ -76,8 +89,11 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div style="float: right;">
-                                        <a (click)="onFetchInscrits(public.id)"  class="details-line-btn">Details  ({{public.nombreInscrit}} inscrits)</a>
+                                    <div style="float: right ;">
+                                        <a (click)="onFetchInscrits(public.id)"  
+                                        class="details-line-btn">Details  ({{public.nombreInscrit}} inscrits)</a>
+                                        <a style="margin-left: 0.5em;" class="read-line-btn">Fermer</a>
+
                                     </div>
                                 </li>
                             </ul>

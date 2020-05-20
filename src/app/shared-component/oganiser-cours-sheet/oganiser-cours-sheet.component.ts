@@ -5,7 +5,6 @@ import { OrganisationService } from './../../admin/services/organisation.service
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { NiveauService } from './../../admin/services/niveau.service';
-import { Niveau } from './../../admin/model/niveau.model';
 import { FormationService } from './../../admin/services/formation.service';
 import { publicCibleModel } from './../../home/models/publiccible';
 import { LieuInterventionModel } from './../../home/models/lieuintervention';
@@ -14,7 +13,6 @@ import { FormBuilder, FormGroup, Validators, Form, FormArray, FormControl } from
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import * as $ from 'jquery';
-import { validateHorizontalPosition } from '@angular/cdk/overlay';
 
 declare var $: any;
 
@@ -151,6 +149,9 @@ export class OganiserCoursSheetComponent implements OnInit {
 
     }
 
+    console.log(this.dataReceived);
+    
+
   }
 
 
@@ -167,10 +168,12 @@ export class OganiserCoursSheetComponent implements OnInit {
         telephone : data.coursCommun.telephone,
         dateDebut :  data.coursCommun.dateDebut,
         dateFin  : data.coursCommun.dateFin,
-        description  : data.coursCommun.description
+        description  : data.coursCommun.description,
         
       }
     )
+
+  
 
     //Si le cours commun est précisé
     
@@ -180,9 +183,17 @@ export class OganiserCoursSheetComponent implements OnInit {
       this.coutGeneralForm.patchValue(
         {
           id : this.idCoursCommun,
-          cout : data.coursCommun.cout 
+          cout : data.coursCommun.cout,
+          nbreMaxInscrits : data.coursCommun.nbreMaxInscrits
+        
         }
       )
+
+      if(data.coursCommun.nbreMaxInscrits !=0){
+        this.isNotCheckIllimite = !this.isNotCheckIllimite;
+      }
+
+
     }else{
 
       this.coutGeneralForm.patchValue(

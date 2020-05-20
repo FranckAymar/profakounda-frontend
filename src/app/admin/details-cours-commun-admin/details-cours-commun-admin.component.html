@@ -21,7 +21,7 @@
                 <div class="pro-user-bio">
                     <ul>
                         <li>
-                            <h4>{{detailsCoursCommun.coursCommun?.organisation.libelle}}</h4>
+                            <h4>{{detailsCoursCommun.coursCommun?.organisation?.libelle}}</h4>
                         </li>
                         <li>{{detailsCoursCommun.coursCommun?.titre}}</li>
                         <li>
@@ -32,7 +32,7 @@
 
                         </li>
                         <li>
-                             fin : <span>{{detailsCoursCommun.coursCommun?.dateFin}}</span>
+                             fin : <span>{{detailsCoursCommun.coursCommun?.dateFin |date:"dd MMMM yyyy "}}</span>
                         </li>
                     </ul>
                 </div>
@@ -73,9 +73,6 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
-                                    <div style="float: right;">
-                                        <a  class="details-line-btn">S'inscrire</a>
                                     </div>
                                 </li>
                             </ul>

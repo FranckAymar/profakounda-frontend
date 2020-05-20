@@ -90,7 +90,7 @@
                                              class="ho-dr-con-last waves-effect">Refuser Mise en ligne</a>
                                         </li>
                                         <li class="divider"></li>
-                                        <li><a [ngClass]="{isDisabled:p.enLigne}" 
+                                        <li><a [ngClass]="{isDisabled: !p.enLigne}" 
                                             (click)="supprimerMiseEnLigne(p.id)" 
                                             class="ho-dr-con-last waves-effect">Mettre Hors ligne</a>
                                         </li>

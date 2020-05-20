@@ -1,17 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CoursCommunAdminService } from '../services/cours-commun-admin.service';
 import { ActivatedRoute } from '@angular/router';
-import { PropostionFormationsAdminService } from '../services/propostion-formations-admin.service';
 
 @Component({
-  selector: 'app-cours-commun-admin',
-  templateUrl: './cours-commun-admin.component.html',
-  styleUrls: ['./cours-commun-admin.component.css']
+  selector: 'app-details-cours-commun-admin',
+  templateUrl: './details-cours-commun-admin.component.html',
+  styleUrls: ['./details-cours-commun-admin.component.css']
 })
-export class CoursCommunAdminComponent implements OnInit {
+export class DetailsCoursCommunAdminComponent implements OnInit {
 
-
-  zoom = 14 ;
 
   @Input() detailsCoursCommun = {
 
@@ -54,8 +51,6 @@ idCours : number;
 
       (resp)=>{
         this.detailsCoursCommun = resp ;
-        alert("ok"+this.detailsCoursCommun);
-   
       },
 
 
@@ -67,5 +62,6 @@ idCours : number;
 
     )
 }
+
 
 }

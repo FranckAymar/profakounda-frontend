@@ -13,6 +13,7 @@ export class CoursCommunComponent implements OnInit {
 
 
   coursCommuns = [] ;
+  totalInscrits : number = 0 ;
 
   constructor(private dialog : MatDialog,
               private coursCommunService : CoursCommunService,
@@ -70,6 +71,7 @@ export class CoursCommunComponent implements OnInit {
       (resp)=>{
         console.log(resp);
         this.coursCommuns = resp ;
+        this.calculTotalInscrit(this.coursCommuns);
         
       },
       (error)=>{
@@ -108,6 +110,19 @@ export class CoursCommunComponent implements OnInit {
         console.log("Erreur : "+error);
       }
     )
+
+  }
+
+
+  calculTotalInscrit(coursCommuns){
+
+    coursCommuns.forEach(element => {
+      
+      console.log(element.coursCommun.nombreInscrit);
+      
+      this.totalInscrits += element.coursCommun.nombreInscrit;
+
+    });
 
   }
 

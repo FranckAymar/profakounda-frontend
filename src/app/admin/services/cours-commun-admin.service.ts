@@ -43,5 +43,10 @@ export class CoursCommunAdminService {
     return this.httpClient.post(URL.refuserMiseEnLigneCourCommun, null,{ params: params });
   }
 
+  fetchCoursCommunParId(idCours): Observable<any> {
+    
+    return this.httpClient.get(URL.detailsCoursCommunAdmin+ "/"+ idCours );
+
+  }
 
   }

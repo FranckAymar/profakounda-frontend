@@ -32,6 +32,7 @@ import { FormationMangementeService } from './services/formationMangemente.servi
 import { PropostionFormationsAdminComponent } from './propostion-formations-admin/propostion-formations-admin.component';
 import { DetailsPropostionFormationAdminComponent } from './details-propostion-formation-admin/details-propostion-formation-admin.component';
 import { AdminCommonCourseComponent } from './admin-common-course/admin-common-course.component';
+import { DetailsCoursCommunAdminComponent } from './details-cours-commun-admin/details-cours-commun-admin.component';
 
 
 
@@ -119,6 +120,12 @@ const adminRouter : Routes = [
       },
 
       {
+        path : 'coursCommun/:id',
+        component : DetailsCoursCommunAdminComponent
+        
+      },
+
+      {
         path : 'propositonsformations/:id',
         component : DetailsPropostionFormationAdminComponent
         
@@ -156,7 +163,8 @@ const adminRouter : Routes = [
                 CauserefusComponent, 
                 PropostionFormationsAdminComponent,
                 DetailsPropostionFormationAdminComponent,
-                AdminCommonCourseComponent],
+                AdminCommonCourseComponent,
+                DetailsCoursCommunAdminComponent],
   imports: [
     RouterModule.forChild(adminRouter),
     SharedModule

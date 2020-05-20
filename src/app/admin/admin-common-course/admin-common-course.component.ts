@@ -44,7 +44,6 @@ export class AdminCommonCourseComponent implements OnInit {
 
 
   onFetchAllcoursCommunAdmin(critereFiltre? : number){
-
     
     this.coursCommunAdminService.fetchAllcoursCommunAdmin(critereFiltre).subscribe(
 
@@ -85,7 +84,7 @@ export class AdminCommonCourseComponent implements OnInit {
   }
 
   prepareToRefusEnLigne(idProposition){
-    alert("Refus ") ;
+  
     this.idPropositionCourante = idProposition ;
   }
 

@@ -18,11 +18,12 @@ export class ListCoursCommunComponent implements OnInit {
 
   onFectCoursCommunHome(){
 
-    this.coursCommunService.fetchCoursCommun().subscribe(
+    this.coursCommunService.fetchCoursCommunForHome().subscribe(
 
       (resp)=>{
         console.log(resp);
         this.coursCommuns = resp ;
+        alert("voila "+this.coursCommuns)
         
       },
       (error)=>{

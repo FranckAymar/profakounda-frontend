@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { InscriptioncourscommunService } from './../inscriptioncourscommun.service';
 import { SignInService } from './../../home/services/sign-in.service';
 import { PaymentCoursCommunComponent } from './../../shared-component/payment-cours-commun/payment-cours-commun.component';
@@ -38,7 +39,8 @@ export class DetailsCoursCommunComponent implements OnInit {
     private router: Router,
     private signService: SignInService,
     private inscritService : InscriptioncourscommunService,
-    private snack : MatSnackBar) {
+    private snack : SnackbarService,
+    ) {
 
     this.state = router.routerState;
     this.snapshot = this.state.snapshot;
@@ -203,7 +205,7 @@ export class DetailsCoursCommunComponent implements OnInit {
       (resp) => {
         
         if(resp){
-          this.openSnackBar("Rappel : Vous vous êtes déjà inscrit(e)s à ce cours !")
+          this.snack.openSnackBar("Rappel : Vous vous êtes déjà inscrit(e)s à ce cours !")
         }
         
 
@@ -230,14 +232,7 @@ export class DetailsCoursCommunComponent implements OnInit {
   }
 
 
-  openSnackBar(message: string, action?: string) {
-    this.snack.open(message, action, {
-      duration: 3000,
-      verticalPosition: 'top',
-      horizontalPosition : 'right',
-      panelClass: ['snackbar'],
-    });
-  }
+ 
 
 
 

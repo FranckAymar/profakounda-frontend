@@ -17,5 +17,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .snackbar{
-    color: white;
+    background-color: white;
+    border-color: black;
 }

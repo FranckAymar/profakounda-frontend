@@ -1,3 +1,4 @@
+import { SnackbarService } from './../services/snackbar.service';
 import { startWith, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { OrganisationService } from './../../admin/services/organisation.service';
@@ -93,7 +94,7 @@ export class OganiserCoursSheetComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dataReceived: any,
     private route : ActivatedRoute,
     private router : Router,
-    private snackBar: MatSnackBar
+    private snackBar: SnackbarService
 
   ) {
    
@@ -632,14 +633,6 @@ export class OganiserCoursSheetComponent implements OnInit {
 
 
   }
-
-
-  openSnackBar(message: string, action?: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-    });
-  }
-
     //Pour l'autocomplétin
     private _filter(value: string): string[] {
     
@@ -658,7 +651,7 @@ export class OganiserCoursSheetComponent implements OnInit {
       .subscribe(
         (response)=>{
 
-          this.openSnackBar("Soumis avec succès !")
+          this.snackBar.openSnackBar("Soumis avec succès !")
           this.dialogRef.close();
         },
         (error)=>{

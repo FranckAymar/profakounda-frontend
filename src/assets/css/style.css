@@ -2938,7 +2938,8 @@
 }
  .sdb-cl-day span{
      font-size: 12px;
-     color: #9ba3ab;
+     color:black;
+     white-space: pre;
 }
  .sdb-cl-class{
      float: left;

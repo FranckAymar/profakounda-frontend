@@ -5067,7 +5067,8 @@ left: 0;
     display: none;
 }
 .logo {} .logo img {
-    width: 100%;
+    width: 75%;
+    margin-top: 0.5em;
 }
 .atab-menu {
     display: inline-block;

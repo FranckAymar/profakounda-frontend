@@ -218,7 +218,7 @@
 
                         <app-google-place [autocompleteInput]="libelleLieu" (setAddress)="setAddress($event)" adressType="geocode"></app-google-place>
 
-                        <agm-map *ngIf="lat" [latitude]="lat" 
+                        <agm-map [latitude]="lat" 
                                  [longitude]="lng" 
                                  [zoom]="zoom"
                                 

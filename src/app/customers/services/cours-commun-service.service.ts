@@ -97,8 +97,14 @@ export class CoursCommunService {
 
 
 
-   fermerInscriptionCoursCommun(id){
-    return this.http.post(URL.fermerInscriptionCoursCommun, id);
+   fermerInscriptionCoursCommun(id : number){
+
+    let data = {
+      idCoursCommun : id
+    }
+    console.log(data);
+    
+    return this.http.post(URL.fermerInscriptionCoursCommun+ '/'+ id , null);
 
    }
 

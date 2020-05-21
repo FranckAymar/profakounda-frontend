@@ -66,7 +66,9 @@
                     <div class="col-md-6">
                         
                         <div (click)="onFermerInscriptionCoursCommun()"  *ngIf="cours.coursCommun?.cout" class="udb-sec">
-                            <a style="width: 100%;"  class="read-line-btn">Fermer</a>
+                            <a style="width: 100%;"  class="read-line-btn">
+                                {{cours.coursCommun.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
+                            </a>
         
                         </div>
                     </div>
@@ -111,7 +113,9 @@
                                     <div style="float: right ;">
                                         <a (click)="onFetchInscrits(public.id)"  
                                         class="details-line-btn">Details  ({{public.nombreInscrit}} inscrits)</a>
-                                        <a (click)="onFermerInscriptionPublicCble(public.id)" style="margin-left: 0.5em;" class="read-line-btn">Fermer</a>
+                                        <a (click)="onFermerInscriptionPublicCble(public.id)" style="margin-left: 0.5em;" class="read-line-btn">
+                                            {{public.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
+                                            </a>
 
                                     </div>
                                 </li>

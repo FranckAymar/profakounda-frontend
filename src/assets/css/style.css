@@ -4343,8 +4343,7 @@ left: 0;
 }
 .sb2-13 ul li a:after {
     font-family: FontAwesome;
-    content: "\f105";
-    font-size: 16px;
+      font-size: 16px;
     display: block;
     position: absolute;
     margin-top: -15px;

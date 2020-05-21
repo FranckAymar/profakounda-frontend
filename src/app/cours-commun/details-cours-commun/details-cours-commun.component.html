@@ -53,7 +53,12 @@
 
               
                 <div  *ngIf="cours.coursCommun?.cout" class="udb-sec">
-                    <a [ngClass]="{isDisabled: cours.coursCommun?.inscriptionFermer === true }" 
+                    <a *ngIf="cours.coursCommun?.inscriptionFermer === true " 
+                        [ngClass]="{isDisabled: cours.coursCommun?.inscriptionFermer === true }" 
+                        
+                        style="width: 100%;"  class="details-line-btn">S'inscrire</a>
+
+                    <a *ngIf="cours.coursCommun?.inscriptionFermer === false " 
                         (click)=" onSubscribeToCoursCommun(cours)" 
                         style="width: 100%;"  class="details-line-btn">S'inscrire</a>
 
@@ -93,8 +98,11 @@
                                         </div>
                                     </div>
                                     <div style="float: right;">
-                                        <a [ngClass]="{isDisabled: public.inscriptionFermer === true }" 
-                                            (click)="onSubscribeToCoursCommun(public)" class="details-line-btn">S'inscrire</a>
+                                        <a *ngIf="public.inscriptionFermer === true" [ngClass]="{isDisabled: public.inscriptionFermer === true }" 
+                                             class="details-line-btn">S'inscrire</a>
+                                      <a  *ngIf="public.inscriptionFermer === false" 
+                                        (click)="onSubscribeToCoursCommun(public)" class="details-line-btn">S'inscrire</a>
+
                                     </div>
                                 </li>
                             </ul>

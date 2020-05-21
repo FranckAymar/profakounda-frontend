@@ -131,10 +131,14 @@ export class DetailsCoursCommunComponent implements OnInit {
     this.coursCommunService.fermerInscriptionPublicCible(idPublicCible).subscribe(
 
       (resp)=>{
-
-        console.log(resp);
         
-        this.snackService.openSnackBar("Inscription fermée avec suucès");
+        if(resp['inscriptionFermer']){
+          this.snackService.openSnackBar("Inscription fermée avec succès");
+        
+        }else{
+          this.snackService.openSnackBar("Inscription ouverte avec succès");
+
+        }
         this.onFectCoursCommun();
       },
 
@@ -155,9 +159,13 @@ export class DetailsCoursCommunComponent implements OnInit {
 
       (resp)=>{
 
-        console.log(resp);
+        if(resp['inscriptionFermer']){
+          this.snackService.openSnackBar("Inscription fermée avec succès");
         
-        this.snackService.openSnackBar("Inscription fermée avec suucès");
+        }else{
+          this.snackService.openSnackBar("Inscription ouverte avec succès");
+
+        }
         this.onFectCoursCommun();
       },
 

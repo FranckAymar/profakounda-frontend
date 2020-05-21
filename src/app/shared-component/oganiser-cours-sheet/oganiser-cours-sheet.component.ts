@@ -155,7 +155,10 @@ export class OganiserCoursSheetComponent implements OnInit {
 
      //Si on est en attente d'une mise en ligne alors c'est pour une modification
      //Sinon c'est pour on est toujours en mode édition
-      if(this.dataReceived.coursCommun.attenteMiseEnLigne){
+      if(this.dataReceived.coursCommun.attenteMiseEnLigne
+        || this.dataReceived.coursCommun.enLigne 
+        || this.dataReceived.coursCommun.refusMiseEnLigne ||
+        this.dataReceived.coursCommun.suppressionMiseEnLigne){
 
         this.isModify = true ;
 

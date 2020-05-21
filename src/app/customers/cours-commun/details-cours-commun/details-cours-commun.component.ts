@@ -180,8 +180,4 @@ export class DetailsCoursCommunComponent implements OnInit {
 
   }
 
-    
-  
-
-
 }

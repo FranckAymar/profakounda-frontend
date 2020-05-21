@@ -92,15 +92,19 @@ export class CoursCommunService {
   }
 
   rechercherParOrganisation(organisationName): Observable<any> {
+ 
+    if(organisationName===""){ 
+      return this.http.get(URL.recupererCoursCommunHome);
 
-    return  this.http.get(URL.coursCommunsParOrganisation + "/" +organisationName);
-    
+    }
+    else{
+        return  this.http.get(URL.coursCommunsParOrganisation + "/" +organisationName);
+    }
   }
 
   fectchCoursCommunSelect(): Observable<any> {
     return this.http.get(URL.recupererCoursCommunsInscritsParticulier);
    }
-
 
    fermerInscriptionCoursCommun(id){
     

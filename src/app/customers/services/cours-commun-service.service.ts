@@ -91,9 +91,32 @@ export class CoursCommunService {
     
   }
 
+  rechercherParOrganisation(organisationName): Observable<any> {
+
+    return  this.http.get(URL.coursCommunsParOrganisation + "/" +organisationName);
+    
+  }
+
   fectchCoursCommunSelect(): Observable<any> {
     return this.http.get(URL.recupererCoursCommunsInscritsParticulier);
    }
+
+
+   fermerInscriptionCoursCommun(id){
+    
+    return this.http.post(URL.fermerInscriptionCoursCommun, id);
+
+   }
+
+   fermerInscriptionPublicCible(id){
+
+    return this.http.post(URL.fermerInscriptionPublicCible, id);
+
+
+   }
+
+
+
 
 }
 

@@ -74,13 +74,13 @@
                                     <div class="sdb-cl-tim">
                                         <div class="sdb-cl-day">
                                             <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA</h5>
-                                            <span> Niveau : {{public.niveau.libelle}}</span>
-                                            <span *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</span>
-                                            <span *ngIf="public.inscriptionFermer === true"> Etat : Fermé</span>
-                                            <span *ngIf="public.inscriptionFermer === false"> Etat : Ouvert</span>
+                                            <p> Niveau : {{public.niveau.libelle}}</p>
+                                            <p *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</p>
+
+                                            <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>
+                                            <p *ngIf="public.inscriptionFermer === false"> Etat : Ouvert</p>
                                             <p style="font-size: 85%;" *ngIf="public.nbreMaxInscrits"> {{public.nbreMaxInscrits - public.nombreInscrit}} places disponibles</p>
                                             <p style="font-size: 85%;" *ngIf="!public.nbreMaxInscrits">Places disponibles : <strong>illimitées</strong> </p>
-
                                         </div>
                                         <div class="sdb-cl-class">
                                             <ul>

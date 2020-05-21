@@ -97,5 +97,18 @@ export class CoursCommunService {
 
 
 
+   fermerInscriptionCoursCommun(id){
+    return this.http.post(URL.fermerInscriptionCoursCommun, id);
+
+   }
+
+   fermerInscriptionPublicCible(id){
+
+    return this.http.post(URL.fermerInscriptionPublicCible, id);
+
+
+   }
+
+
 }
 

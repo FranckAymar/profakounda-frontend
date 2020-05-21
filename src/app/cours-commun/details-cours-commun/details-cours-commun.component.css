@@ -9,3 +9,7 @@ agm-map {
     opacity: 0.5;
     text-decoration: none;
   }
+
+  p{
+    font-size: 80%;
+  }

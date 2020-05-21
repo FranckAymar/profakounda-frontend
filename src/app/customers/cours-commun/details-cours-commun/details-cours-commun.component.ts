@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../../shared-component/services/snackbar.service';
 import { DetailsInscritsComponent } from './../../../shared-component/details-inscrits/details-inscrits.component';
 import { MatDialog } from '@angular/material';
 import { InscriptioncourscommunService } from './../../../cours-commun/inscriptioncourscommun.service';
@@ -31,7 +32,8 @@ export class DetailsCoursCommunComponent implements OnInit {
               private route : ActivatedRoute,
               private router : Router,
               private inscriptionService : InscriptioncourscommunService,
-              private dialog : MatDialog) { }
+              private dialog : MatDialog,
+              private snackService : SnackbarService) { }
 
   ngOnInit() {
     this.getIdCoursCommun() ;
@@ -120,5 +122,57 @@ export class DetailsCoursCommunComponent implements OnInit {
     });
 
   }
+
+
+
+  onFermerInscriptionPublicCble(idPublicCible){
+
+    this.coursCommunService.fermerInscriptionPublicCible(idPublicCible).subscribe(
+
+      (resp)=>{
+
+        console.log(resp);
+        
+        this.snackService.openSnackBar("Inscription fermée avec suucès");
+        this.onFectCoursCommun();
+      },
+
+
+      (error)=>{
+        
+        console.log(error);
+        this.snackService.openSnackBar("Une erreur s'est produite veuillez réessayer");
+
+      }
+    )
+
+  }
+
+  onFermerInscriptionCoursCommun(){
+
+    this.coursCommunService.fermerInscriptionCoursCommun(this.idCoursCommun).subscribe(
+
+      (resp)=>{
+
+        console.log(resp);
+        
+        this.snackService.openSnackBar("Inscription fermée avec suucès");
+        this.onFectCoursCommun();
+      },
+
+
+      (error)=>{
+        
+        console.log(error);
+        this.snackService.openSnackBar("Une erreur s'est produite veuillez réessayer");
+
+      }
+    )
+
+  }
+
+    
+  
+
 
 }

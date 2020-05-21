@@ -149,20 +149,27 @@ export class OganiserCoursSheetComponent implements OnInit {
       this.idCoursCommun = this.dataReceived.coursCommun.id ;
 
       //Mode modification activé
-      this.isModify = true ;
 
       console.log(this.dataReceived);
       
 
-      //Si le cout commun est précisé
-      if(this.dataReceived.coursCommun.cout !== null){
+     //Si on est en attente d'une mise en ligne alors c'est pour une modification
+     //Sinon c'est pour on est toujours en mode édition
+      if(this.dataReceived.coursCommun.attenteMiseEnLigne){
 
-        this.isCheckPublicCible = false;
-      }else{
-        this.isCheckPublicCible = true;
+        this.isModify = true ;
+
+          //Si le cout commun est précisé
+          if(this.dataReceived.coursCommun.cout !== null){
+
+            this.isCheckPublicCible = false;
+          }else{
+            this.isCheckPublicCible = true;
+
+          }
 
       }
-
+    
       this.initializeInput(this.dataReceived);
 
     }
@@ -206,6 +213,7 @@ export class OganiserCoursSheetComponent implements OnInit {
         }
       )
 
+      //On active le check box illimité pour le cout général
       if(data.coursCommun.nbreMaxInscrits !=0){
         this.isCheckIllimite = !this.isCheckIllimite;
       }

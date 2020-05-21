@@ -690,7 +690,7 @@ export class OganiserCoursSheetComponent implements OnInit {
       nbreMaxInscrits : publicCible.nbreMaxInscrits,
       niveau : publicCible.niveau,
       formations : publicCible.formations,
-      filiere : publicCible.filiere.libelle
+      filiere : publicCible.filiere
     })
 
     if(publicCible.nbreMaxInscrits){

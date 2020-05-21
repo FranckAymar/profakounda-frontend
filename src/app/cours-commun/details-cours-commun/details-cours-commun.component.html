@@ -40,7 +40,7 @@
                                     <span *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>
                        </li>
                        <li *ngIf="cours.coursCommun?.nbreMaxInscrits">
-                        <span>{{cours.coursCommun.nbreMaxInscrits - cours.coursCommun.nombreInscrit}}</span> places disponibles
+                            {{cours.coursCommun.nbreMaxInscrits - cours.coursCommun.nombreInscrit}} <span> places disponibles</span>
                      </li>
                      <li *ngIf="!cours.coursCommun?.nbreMaxInscrits && cours.coursCommun?.cout">
                         <span>Places disponibles <strong>illimitées</strong> </span>

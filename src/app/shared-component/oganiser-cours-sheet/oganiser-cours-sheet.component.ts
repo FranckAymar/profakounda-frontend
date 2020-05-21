@@ -1,3 +1,4 @@
+import { FiliereService } from './../../admin/services/filiere.service';
 import { SnackbarService } from './../services/snackbar.service';
 import { startWith, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -29,13 +30,14 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   //Boolean
   isCheckPublicCible = false ;
-  isNotCheckIllimite = false ;
-  isNotCheckIllimitePublicCible = false ;
+  isCheckIllimite = true ;
+  isCheckIllimitePublicCible = true ;
   isModify = false ;
 
   //COnst
   idCoursCommun : number ;
   libelleLieu : string ;
+  currentIndex : number = undefined ;
 
   //FormGroup
   coursCommunForm : FormGroup;
@@ -60,6 +62,7 @@ export class OganiserCoursSheetComponent implements OnInit {
   niveaux = [];
   formationsTab = [];
   organisations = [];
+  filieres = [];
 
   expanded = false;
 
@@ -70,6 +73,8 @@ export class OganiserCoursSheetComponent implements OnInit {
   publicCibleMdel : publicCibleModel = {} ;
   publicCibleMdels : publicCibleModel[] = [] ;
 
+  formationsModel = [];
+  niveauModel = {};
 
 
 
@@ -92,7 +97,8 @@ export class OganiserCoursSheetComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dataReceived: any,
     private route : ActivatedRoute,
     private router : Router,
-    private snackBar: SnackbarService
+    private snackBar: SnackbarService,
+    private filiereService : FiliereService
 
   ) {
    
@@ -101,7 +107,9 @@ export class OganiserCoursSheetComponent implements OnInit {
 
    }
 
+   //For autocomplete
   filteredOrganisations: Observable<any[]>;
+  filteredFilieres: Observable<any[]>;
 
 
 
@@ -121,11 +129,18 @@ export class OganiserCoursSheetComponent implements OnInit {
     this.onFetchFormations();
     this.onFetchNiveau();
     this.onFetchOrganisation(); 
+    this.onFetchFileres();
     
     this.filteredOrganisations = this.coursCommunForm.get('organisation').valueChanges.pipe( 
       startWith(''),
-      map(value => this._filter(value))
+      map(value => this._filterOrganisations(value))
     );
+
+    this.filteredFilieres = this.publicCibleForm.get('filiere').valueChanges.pipe( 
+      startWith(''),
+      map(value => this._filterFiliere(value))
+    );
+    
     
        
 
@@ -135,6 +150,9 @@ export class OganiserCoursSheetComponent implements OnInit {
 
       //Mode modification activé
       this.isModify = true ;
+
+      console.log(this.dataReceived);
+      
 
       //Si le cout commun est précisé
       if(this.dataReceived.coursCommun.cout !== null){
@@ -179,7 +197,6 @@ export class OganiserCoursSheetComponent implements OnInit {
     
     if(data.coursCommun.cout !== null){
 
-      
       this.coutGeneralForm.patchValue(
         {
           id : this.idCoursCommun,
@@ -190,7 +207,7 @@ export class OganiserCoursSheetComponent implements OnInit {
       )
 
       if(data.coursCommun.nbreMaxInscrits !=0){
-        this.isNotCheckIllimite = !this.isNotCheckIllimite;
+        this.isCheckIllimite = !this.isCheckIllimite;
       }
 
 
@@ -221,9 +238,6 @@ export class OganiserCoursSheetComponent implements OnInit {
       }
 
     )
-
-   
-    
 
     this.lat =  data.lieuIntervention.latitude ;
     this.lng =  data.lieuIntervention.longitude;
@@ -269,10 +283,11 @@ export class OganiserCoursSheetComponent implements OnInit {
 
       {
           id : new FormControl(),
-          niveau : ['', Validators.required],
+          niveau : [null, Validators.required],
           cout : ['', Validators.required],
-          formations : new FormControl('', Validators.required),
-          nbreMaxInscrits : ['']
+          formations : new FormControl(null, Validators.required),
+          nbreMaxInscrits : [''],
+          filiere : [null]
       }
     )
   }
@@ -372,8 +387,21 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   addPublicToTable(){
     
-    this.publicCibleMdels.push(this.publicCibleForm.value);
+    console.log(this.currentIndex);
     
+
+    if(this.currentIndex !== undefined){
+
+      console.log("splice");
+      
+      this.publicCibleMdels.splice(this.currentIndex,1,this.publicCibleForm.value);
+
+    }else{
+      this.publicCibleMdels.push(this.publicCibleForm.value);
+
+    }
+
+    this.currentIndex = undefined ;
     this.initPublicVise();
 
   }
@@ -386,7 +414,8 @@ export class OganiserCoursSheetComponent implements OnInit {
 
         
         this.niveaux = resp ;
-
+        console.log(this.niveaux);
+        
       },
 
 
@@ -400,6 +429,27 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   }
 
+  onFetchFileres(){
+
+    this.filiereService.fetchFilieres().subscribe(
+
+      (resp)=>{
+
+        
+        this.filieres = resp.response ;
+        
+      },
+
+
+      (error)=>{
+
+        console.log(error);
+        
+      },
+
+    )
+
+  }
 
   onFetchFormations(){
 
@@ -550,7 +600,7 @@ export class OganiserCoursSheetComponent implements OnInit {
   * Modification du cout général
   */
 
-  saveCoutGeneral(){
+  saveCoutGeneral(){    
 
     this.coursCommunService.modifierCoutGeneral(this.coutGeneralForm.value).subscribe(
 
@@ -629,32 +679,47 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   }
 
-  loadPublicCible(publicCible){
+  loadPublicCible(publicCible, index){
 
+    this.currentIndex = index ;    
 
     this.publicCibleForm.patchValue({
 
       id : publicCible.id,
-      niveau : publicCible.niveau,
       cout : publicCible.cout,
-      formations : publicCible.formations
-
-
+      nbreMaxInscrits : publicCible.nbreMaxInscrits,
+      niveau : publicCible.niveau,
+      formations : publicCible.formations,
+      filiere : publicCible.filiere
     })
 
-
+    if(publicCible.nbreMaxInscrits){
+      this.isCheckIllimitePublicCible = false; 
+    }
+    
   }
-    //Pour l'autocomplétin
-    private _filter(value: string): string[] {
+
+
+    //Pour l'autocomplétin Organisation
+    private _filterOrganisations(value: string): string[] {
     
       const filterValue = this._normalizeValue(value);
       return this.organisations.filter(organisation => this._normalizeValue(organisation.libelle).includes(filterValue));
     }
   
-    private _normalizeValue(value: string): string {
-  
-      return value.toLowerCase().replace(/\s/g, '');
-    }
+
+        //Pour l'autocomplétin Filiere
+     private _filterFiliere(value: string): string[] {
+    
+          const filterValue = this._normalizeValue(value);
+          return this.filieres.filter(filiere => this._normalizeValue(filiere.libelle).includes(filterValue));
+        }
+      
+        private _normalizeValue(value: string): string {
+      
+          return value.toLowerCase().replace(/\s/g, '');
+        }
+     
  
 
     demanderMiseEnLigne(id){
@@ -676,9 +741,9 @@ export class OganiserCoursSheetComponent implements OnInit {
     checkBoxIllimiteChange(){
 
 
-      this.isNotCheckIllimite = !this.isNotCheckIllimite;
+      this.isCheckIllimite = !this.isCheckIllimite;
       
-      if(this.isNotCheckIllimite == false){
+      if(this.isCheckIllimite == true){
         this.coutGeneralForm.get('nbreMaxInscrits').patchValue("");
         this.publicCibleForm.updateValueAndValidity();
 
@@ -689,15 +754,20 @@ export class OganiserCoursSheetComponent implements OnInit {
 
     checkBoxIllimiteChangePublicCible(){
 
-      this.isNotCheckIllimitePublicCible = !this.isNotCheckIllimitePublicCible;
+      this.isCheckIllimitePublicCible = !this.isCheckIllimitePublicCible;
       
-      if(this.isNotCheckIllimitePublicCible === false){
+      if(this.isCheckIllimitePublicCible === true){
         this.publicCibleForm.get('nbreMaxInscrits').patchValue("");
         this.publicCibleForm.updateValueAndValidity();
 
       }
 
     }
+
+    comparer(o1: any, o2: any): boolean {
+      // if possible compare by object's name property - and not by reference.
+      return o1 && o2 ? o1.libelle === o2.libelle : o1 === o2;
+    }
   
 
-}
+} 

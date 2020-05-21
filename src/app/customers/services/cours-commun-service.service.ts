@@ -94,7 +94,7 @@ export class CoursCommunService {
   fectchCoursCommunSelect(): Observable<any> {
     return this.http.get(URL.recupererCoursCommunsInscritsParticulier);
    }
-   rechercherParOrganisation(organisationName): Observable<any>{
+    rechercherParOrganisation(organisationName): Observable<any>{
 
   return  this.http.get(URL.coursCommunsParOrganisation + "/" +organisationName);
     

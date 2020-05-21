@@ -75,6 +75,7 @@ export class PaiementsComponent implements OnInit {
 
       (resp)=>{
 
+        console.log("COURS COMMUN SELECT....");
         console.log(resp);
         
       },

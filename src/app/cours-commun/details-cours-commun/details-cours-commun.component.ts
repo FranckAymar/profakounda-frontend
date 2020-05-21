@@ -64,6 +64,8 @@ export class DetailsCoursCommunComponent implements OnInit {
     }
 
     this.isCheckLastInscription();
+
+    
     
   }
 
@@ -128,7 +130,8 @@ export class DetailsCoursCommunComponent implements OnInit {
         
         this.cours = resp;
         this.initializeMap(this.cours.lieuIntervention);
-        
+        console.log(this.cours);
+
 
       },
       (error) => {

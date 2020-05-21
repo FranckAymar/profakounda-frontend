@@ -168,9 +168,9 @@ export const URL = {
     recupererCoursCommunParId : consts.host+ consts.nameProject + 'particulier/detailCoursCommun',
     detailsCoursCommunAdmin : consts.host+ consts.nameProject + 'admin/detailsCoursCommun',
     //Organisation
-    recupererOrganisation : consts.host+ consts.nameProject + 'organisations',  
+    recupererOrganisation : consts.host+ consts.nameProject + 'organisations',
 
-    //InscriptionCOursCommun
+    //InscriptionCoursCommun
     inscriptioncourscommun : consts.host+ consts.nameProject + 'particulier/inscriptioncourscommun',
     inscriptionpubliccible : consts.host+ consts.nameProject + 'particulier/inscriptionpubliccible',
     recupererInscrit :  consts.host+ consts.nameProject + 'recupererinscrits',

@@ -6,5 +6,7 @@ export class publicCibleModel {
                 public niveau? : any,
                 public cout? : number,
                 public formation? : Array<{}>,
+                public filiere? : any,
+                public nbreMaxInscrits? : number
                 ) {} 
 }

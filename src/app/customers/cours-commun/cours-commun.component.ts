@@ -39,7 +39,7 @@ export class CoursCommunComponent implements OnInit {
   
       const dialogRef = this.dialog.open(OganiserCoursSheetComponent, {
         disableClose : true ,
-        width: '800px',
+        width: '1000px',
         data: data,
         
         });
@@ -117,9 +117,7 @@ export class CoursCommunComponent implements OnInit {
   calculTotalInscrit(coursCommuns){
 
     coursCommuns.forEach(element => {
-      
-      console.log(element.coursCommun.nombreInscrit);
-      
+            
       this.totalInscrits += element.coursCommun.nombreInscrit;
 
     });

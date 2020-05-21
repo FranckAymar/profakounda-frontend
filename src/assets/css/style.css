@@ -2938,7 +2938,8 @@
 }
  .sdb-cl-day span{
      font-size: 12px;
-     color: #9ba3ab;
+     color:black;
+     white-space: pre;
 }
  .sdb-cl-class{
      float: left;
@@ -4342,8 +4343,7 @@ left: 0;
 }
 .sb2-13 ul li a:after {
     font-family: FontAwesome;
-    content: "\f105";
-    font-size: 16px;
+      font-size: 16px;
     display: block;
     position: absolute;
     margin-top: -15px;
@@ -5066,7 +5066,8 @@ left: 0;
     display: none;
 }
 .logo {} .logo img {
-    width: 100%;
+    width: 75%;
+    margin-top: 0.5em;
 }
 .atab-menu {
     display: inline-block;
@@ -5649,6 +5650,23 @@ input:not(:focus):valid ~ .floating-label{
 }
 
 .details-line-btn{
+    padding: 6px 25px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    height: 35px;
+    text-align: center;
+    /* margin: 0px 10px; */
+    /* background: linear-gradient(to top, #ef612f, #f36b3b); */
+    color: #f4364f !important;
+    border: 1px solid #f4364f ;
+    margin-top: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.red-line-btn{
     padding: 6px 25px;
     border-radius: 3px;
     text-transform: uppercase;

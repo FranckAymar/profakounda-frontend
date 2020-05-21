@@ -9,8 +9,6 @@
                         [latitude] = "lat" 
                         [longitude]="long"
                         draggable="true"></agm-marker>
-
-           
         </agm-map>
     </div>
 
@@ -37,6 +35,16 @@
                         <li>
                              fin : <span>{{cours.coursCommun?.dateFin}}</span>
                         </li>
+                        <li>
+                            Etat : <span *ngIf="cours.coursCommun?.inscriptionFermer === true">Fermé</span>
+                                    <span *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>
+                       </li>
+                       <li *ngIf="cours.coursCommun?.nbreMaxInscrits">
+                            {{cours.coursCommun.nbreMaxInscrits - cours.coursCommun.nombreInscrit}} <span> places disponibles</span>
+                     </li>
+                     <li *ngIf="!cours.coursCommun?.nbreMaxInscrits && cours.coursCommun?.cout">
+                        <span>Places disponibles <strong>illimitées</strong> </span>
+                     </li>
                     </ul>
                 </div>
 
@@ -45,7 +53,8 @@
 
               
                 <div  *ngIf="cours.coursCommun?.cout" class="udb-sec">
-                    <a (click)=" onSubscribeToCoursCommun(cours)" 
+                    <a [ngClass]="{isDisabled: cours.coursCommun?.inscriptionFermer === true }" 
+                        (click)=" onSubscribeToCoursCommun(cours)" 
                         style="width: 100%;"  class="details-line-btn">S'inscrire</a>
 
                 </div>
@@ -65,8 +74,13 @@
                                     <div class="sdb-cl-tim">
                                         <div class="sdb-cl-day">
                                             <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA</h5>
-                                            <span> Niveau : {{public.niveau.libelle}}</span>
-                                            
+                                            <p> Niveau : {{public.niveau.libelle}}</p>
+                                            <p *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</p>
+
+                                            <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>
+                                            <p *ngIf="public.inscriptionFermer === false"> Etat : Ouvert</p>
+                                            <p style="font-size: 85%;" *ngIf="public.nbreMaxInscrits"> {{public.nbreMaxInscrits - public.nombreInscrit}} places disponibles</p>
+                                            <p style="font-size: 85%;" *ngIf="!public.nbreMaxInscrits">Places disponibles : <strong>illimitées</strong> </p>
                                         </div>
                                         <div class="sdb-cl-class">
                                             <ul>
@@ -79,7 +93,8 @@
                                         </div>
                                     </div>
                                     <div style="float: right;">
-                                        <a (click)="onSubscribeToCoursCommun(public)" class="details-line-btn">S'inscrire</a>
+                                        <a [ngClass]="{isDisabled: public.inscriptionFermer === true }" 
+                                            (click)="onSubscribeToCoursCommun(public)" class="details-line-btn">S'inscrire</a>
                                     </div>
                                 </li>
                             </ul>

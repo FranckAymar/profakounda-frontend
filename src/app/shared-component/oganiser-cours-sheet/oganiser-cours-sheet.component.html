@@ -39,7 +39,6 @@
                         </textarea>
                         <label>Description</label>
 
-
                     </div>
 
                     <div class="input-field s12">
@@ -88,7 +87,7 @@
                                 <div class="col-md-3"></div>
                                 <div class="col-md-3">
                                     <div class="input-field s12">
-                                        <input [attr.disabled]="isNotCheckIllimite ? null : ''"   
+                                        <input [attr.disabled]="isCheckIllimite ? '' : null"   
                                             formControlName="nbreMaxInscrits" type="number" class="validate">
                                         <label>Nombre maximun d'inscrits</label>
                                     </div>
@@ -96,7 +95,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-field s12">
-                                        <mat-checkbox checked="true" (change)="checkBoxIllimiteChange()">
+                                        <mat-checkbox [checked]="isCheckIllimite" (change)="checkBoxIllimiteChange()">
                                             Illimité ?</mat-checkbox>
                                     </div>
         
@@ -108,77 +107,93 @@
 
                 </div>
                 <div *ngIf="isCheckPublicCible" class="row mt-5">
-                    <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
 
-                        <form [formGroup]="publicCibleForm" (ngSubmit)="addPublicToTable()">
-
-                            <mat-form-field>
-                                <mat-label>Niveau</mat-label>
-                                <mat-select  formControlName="niveau">
-                                    <mat-option *ngFor="let niveau of niveaux" [value]="niveau">
-                                        {{niveau.libelle}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-
-                            <mat-form-field>
-                                <mat-label>Formations</mat-label>
-                                <mat-select formControlName="formations" multiple>
-                                    <mat-option *ngFor="let formation of formationsTab; let i=index"
-                                        [value]="formation">
-                                        {{formation.libelle}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <div style="margin-top: 10px;" class="input-field s12">
-                                <input formControlName="cout" type="number" class="validate">
-                                <label>Cout</label>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-field s12">
-                                        <input [attr.disabled]="isNotCheckIllimitePublicCible ? null : ''"  
-                                         formControlName="nbreMaxInscrits" type="number" class="validate">
-                                        <label>Nombre maximun d'inscrits</label>
+                            <form [formGroup]="publicCibleForm" (ngSubmit)="addPublicToTable()">
+    
+                                <mat-form-field>
+                                    <mat-label>Niveau</mat-label>
+                                    <mat-select  [compareWith]="comparer" formControlName="niveau">
+                                        <mat-option *ngFor="let niveau of niveaux" [(value)]="niveau">
+                                             {{niveau.libelle}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+    
+    
+    
+                                <div class="input-field s12">
+                                    <input matInput formControlName="filiere" [matAutocomplete]="auto" type="text" class="validate">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let filiere of filteredFilieres | async" [value]="filiere.libelle">
+                                        {{filiere.libelle}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <label>Filière (optionnel)</label>
+                                </div>
+    
+    
+                                <mat-form-field>
+                                    <mat-label>Formations</mat-label>
+                                    <mat-select [compareWith]="comparer" formControlName="formations" multiple>
+                                        <mat-option *ngFor="let formation of formationsTab; let i=index"
+                                            [value]="formation">
+                                            {{formation.libelle}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+    
+                                <div style="margin-top: 10px;" class="input-field s12">
+                                    <input formControlName="cout" type="number" class="validate">
+                                    <label>Cout</label>
+                                </div>
+    
+                                 <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="input-field s12">
+                                            <input [attr.disabled]="isCheckIllimitePublicCible ? '' : null"  
+                                             formControlName="nbreMaxInscrits" type="number" class="validate">
+                                            <label>Nombre maximun d'inscrits</label>
+                                        </div>
                                     </div>
+                                    <div class="col-md-4" style="margin-top: 1.5em">
+                                        <mat-checkbox [checked]="isCheckIllimitePublicCible" (change)="checkBoxIllimiteChangePublicCible()">
+                                            Illimité ?</mat-checkbox>
                                 </div>
-                                <div class="col">
-                                    <mat-checkbox checked="true" (change)="checkBoxIllimiteChangePublicCible()">
-                                        Illimité ?</mat-checkbox>
-                                </div>
-                            </div>
-
-
-                            <button type="submit" class="btn btn-info"
-                                [disabled]="publicCibleForm.invalid">Ajouter</button>
-
-
-                        </form>
-
+                                 </div>
+    
+    
+                                <button type="submit" class="btn btn-info"
+                                    [disabled]="publicCibleForm.invalid">Ajouter</button>
+    
+    
+                            </form>
+    
+                        </div>
+    
+                        <div class="col-md-8">
+    
+                            <ul *ngIf="publicCibleMdels.length > 0" class="list-group">
+                                <li *ngFor="let public of publicCibleMdels;let i =index; 
+                                    let i=index" class="list-group-item">
+                                    {{public.niveau.libelle}} - Coût : {{public.cout}} FCFA-{{public.filiere ? 'Filière : ' + public.filiere : 'Filière : Non précisée !'}}
+                                  
+                                  
+                                    <span (click)="deletePublic(i)" class="trash">
+                                        <i class="fa fa-trash"></i></span>
+                                    <span data-toggle="tooltip" 
+                                          data-placement="right" 
+                                          title="Nombre de places : {{public.nbreMaxInscrits}} ; {{getFormationsForPublic(public)}}" 
+                                          class="info">
+                                        <i class="fa fa-lg fa-info"></i></span>                                
+                                        <span (click)="loadPublicCible(public, i)"
+                                        class="trash">
+                                      <i class="fa fa-lg fa-edit"></i></span> 
+                                </li>
+                            </ul>
+    
+                        </div>
                     </div>
-
-                    <div class="col-md-6">
-
-                        <ul *ngIf="publicCibleMdels.length > 0" class="list-group">
-                            <li *ngFor="let public of publicCibleMdels; 
-                                let i=index" class="list-group-item">
-                                {{public.niveau.libelle}} - Cout : {{public.cout}} FCFA
-                                <span (click)="deletePublic(i)" class="trash">
-                                    <i class="fa fa-trash"></i></span>
-                                <span data-toggle="tooltip" 
-                                      data-placement="right" 
-                                      title="{{getFormationsForPublic(public)}}" 
-                                      class="info">
-                                    <i class="fa fa-lg fa-info"></i></span>
-<!--                                 
-                                    <span (click)="loadPublicCible(public)"
-                                    class="trash">
-                                  <i class="fa fa-lg fa-edit"></i></span> -->
-                            </li>
-                        </ul>
-
-                    </div>
+                
 
                 </div>
 

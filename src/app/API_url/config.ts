@@ -155,9 +155,11 @@ export const URL = {
     modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
     demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
     recupererCoursCommunsInscritsParticulier : consts.host+ consts.nameProject + 'particulier/coursCommunsSelects',
-    coursCommunsParCode : consts.host+ consts.nameProject + 'home/coursCommunsParCode',
+    coursCommunsParCode : consts.host+ consts.nameProject + '/home/coursCommunsParCode',
     fermerInscriptionCoursCommun : consts.host+ consts.nameProject + 'particulier/fermerinscriptioncourscommun',
     fermerInscriptionPublicCible : consts.host+ consts.nameProject + 'particulier/fermerinscriptionpubliccible',
+    coursCommunsParOrganisation : consts.host+ consts.nameProject + '/home/coursCommunsParOrganisation',
+    
    
     //cours Commun admin
     listeCoursCommuns : consts.host+ consts.nameProject + 'admin/coursCommuns',
@@ -168,9 +170,9 @@ export const URL = {
     recupererCoursCommunParId : consts.host+ consts.nameProject + 'particulier/detailCoursCommun',
     detailsCoursCommunAdmin : consts.host+ consts.nameProject + 'admin/detailsCoursCommun',
     //Organisation
-    recupererOrganisation : consts.host+ consts.nameProject + 'organisations',  
+    recupererOrganisation : consts.host+ consts.nameProject + 'organisations',
 
-    //InscriptionCOursCommun
+    //InscriptionCoursCommun
     inscriptioncourscommun : consts.host+ consts.nameProject + 'particulier/inscriptioncourscommun',
     inscriptionpubliccible : consts.host+ consts.nameProject + 'particulier/inscriptionpubliccible',
     recupererInscrit :  consts.host+ consts.nameProject + 'recupererinscrits',

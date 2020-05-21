@@ -21,7 +21,7 @@ export class CoursCommunService {
   }
 
 
-    fetchCoursCommun(id?) :Observable<any> {
+  fetchCoursCommun(id?) :Observable<any> {
 
     if(id){
       return  this.http.get(URL.recupererCoursCommunParId + "/" + id);
@@ -91,6 +91,17 @@ export class CoursCommunService {
     
   }
 
+  rechercherParOrganisation(organisationName): Observable<any> {
+ 
+    if(organisationName===""){ 
+      return this.http.get(URL.recupererCoursCommunHome);
+
+    }
+    else{
+        return  this.http.get(URL.coursCommunsParOrganisation + "/" +organisationName);
+    }
+  }
+
   fectchCoursCommunSelect(): Observable<any> {
     return this.http.get(URL.recupererCoursCommunsInscritsParticulier);
    }
@@ -107,6 +118,8 @@ export class CoursCommunService {
 
 
    }
+
+
 
 
 }

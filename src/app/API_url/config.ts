@@ -156,6 +156,8 @@ export const URL = {
     demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
     recupererCoursCommunsInscritsParticulier : consts.host+ consts.nameProject + 'particulier/coursCommunsSelects',
     coursCommunsParCode : consts.host+ consts.nameProject + '/home/coursCommunsParCode',
+    coursCommunsParOrganisation : consts.host+ consts.nameProject + '/home/coursCommunsParOrganisation',
+   
    
     //cours Commun admin
     listeCoursCommuns : consts.host+ consts.nameProject + 'admin/coursCommuns',

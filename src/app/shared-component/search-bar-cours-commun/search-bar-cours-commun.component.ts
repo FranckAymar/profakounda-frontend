@@ -11,7 +11,8 @@ export class SearchBarCoursCommunComponent implements OnInit {
 
 
   code ;
-
+  organisationName:String;
+  
   @Output() getCoursCommunFiltrees = new EventEmitter<[]>() ;
 
   constructor(private coursCommunService : CoursCommunService,
@@ -21,7 +22,7 @@ export class SearchBarCoursCommunComponent implements OnInit {
   ngOnInit() {
 
     this.getParameterUrl();
-
+    this.getNameUrl();
     if(this.code){
       this.onFilterCoursCommun();
     }
@@ -30,15 +31,25 @@ export class SearchBarCoursCommunComponent implements OnInit {
   onFilterCoursCommun(){
 
     this.addParameterInURl();
-    
     this.coursCommunService.rechercherParCode(this.code).subscribe(
-
       (resp)=>{
 
         this.getCoursCommunFiltrees.emit(resp);
       }
     )
   }
+
+  onFilterCoursCommunByOrganisationName(){
+
+    this. addNameInURl();
+    this.coursCommunService.rechercherParOrganisation(this.organisationName).subscribe(
+      (resp)=>{
+
+        this.getCoursCommunFiltrees.emit(resp);
+      }
+    )
+  }
+
 
   addParameterInURl() {
    
@@ -63,5 +74,27 @@ export class SearchBarCoursCommunComponent implements OnInit {
     });
   }
 
+  //ajouter le non a l'url
+  addNameInURl() {
+   
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        organisationName: this.organisationName ,
+
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+     //Recuperer criterRecherche dans l'URL
+     getNameUrl() {
+
+      this.route.queryParams.subscribe(params => {
+  
+        this.organisationName = params['organisationName'];
+  
+      });
+    }
 
 }

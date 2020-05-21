@@ -47,6 +47,7 @@ export class DetailsCoursCommunComponent implements OnInit {
 
       (resp)=>{
         this.cours = resp ;
+        this.idCoursCommun = resp["coursCommun"].id;
         console.log(resp);
         
       },

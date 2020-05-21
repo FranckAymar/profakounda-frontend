@@ -98,6 +98,7 @@ export class CoursCommunService {
 
 
    fermerInscriptionCoursCommun(id){
+    
     return this.http.post(URL.fermerInscriptionCoursCommun, id);
 
    }

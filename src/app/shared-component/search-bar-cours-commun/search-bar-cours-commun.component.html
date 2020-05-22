@@ -2,24 +2,36 @@
     <div class="container">  
         <div class="row">
 
-            <div class="col-md-4">
-                <div class="search-form"> 
-                    <div class="sf-type">
-                        <div class="sf-input">
-                            <input style="text-align: center;" type="text" [(ngModel)]="organisationName"
-                                    id="sf-box" placeholder="par organisation ">
-                        </div>
-                    
-                    </div>
+            <div class="col-md-6" >
+
+                <div class="sf-type">
+                    <div class="sf-input">
+                        <mat-form-field >
+                      
+                            <div [formGroup]="myGroup">
+                              <input type="text"   style="text-align: center;" id="sf-box"
+                                  placeholder="Ville de résidence" formControlName="ville" [(ngModel)]="ville" aria-label="Number" matInput
+                                  [formControl]="myControl2" [matAutocomplete]="auto2"  id="sf-box">
+                            </div>     
+                              <mat-autocomplete #auto2="matAutocomplete">
+                                  <mat-option *ngFor="let option of filteredOptions2 | async"  [value]="option.designation">
+                                      {{option.designation}}
+                                  </mat-option>
+                              </mat-autocomplete>
+                          </mat-form-field>
+                     </div>
+                
                 </div>
+
                 <div class="sf-submit">
                     <input   
-                            (click)="onFilterCoursCommunByOrganisationName()"
-                           type="submit" value="search">
-                </div> 
-    
-            </div>
-            <div class="col-md-8">   
+                            (click)="onFilterCoursCommun()"
+                           type="submit" value="Rechercher">
+                </div>  
+                
+            </div>      
+           
+            <div class="col-md-6">   
                 <div class="search-form"> 
                         <div class="sf-type">
                             <div class="sf-input">
@@ -38,4 +50,5 @@
           
         </div>
     </div>
+   
 </div>

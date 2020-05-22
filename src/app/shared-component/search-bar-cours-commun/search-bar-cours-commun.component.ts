@@ -1,6 +1,10 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { VilleService } from 'src/app/admin/services/ville.service';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-bar-cours-commun',
@@ -8,8 +12,11 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./search-bar-cours-commun.component.css']
 })
 export class SearchBarCoursCommunComponent implements OnInit {
-
-
+  myGroup;
+  villes : any = [];
+  villesObject:any = [];
+  filteredOptions2: Observable<string[]>
+  myControl2 = new FormControl();
   code ;
   organisationName:String;
   
@@ -17,17 +24,33 @@ export class SearchBarCoursCommunComponent implements OnInit {
 
   constructor(private coursCommunService : CoursCommunService,
               private router : Router,
-              private route : ActivatedRoute) { }
+              private route : ActivatedRoute,private villeService : VilleService) { }
 
   ngOnInit() {
+
+
+    this.onFetchVilles();
+    this.onFetchVillesObject();
+
+    this.filteredOptions2 = this.myControl2.valueChanges
+    .pipe(
+      startWith(''),
+      map(v => this._filter2(v))
+    );
+
 
     this.getParameterUrl();
     this.getNameUrl();
     if(this.code){
       this.onFilterCoursCommun();
     }
+    this.myGroup = new FormGroup({
+      ville: new FormControl()
+    });
+
   }
 
+  
   onFilterCoursCommun(){
 
     this.addParameterInURl();
@@ -96,5 +119,36 @@ export class SearchBarCoursCommunComponent implements OnInit {
   
       });
     }
+
+     onFetchVilles() {
+    this.villeService.onFetchVillesString().subscribe(
+      (response)=> {
+        this.villes = response;
+      },
+      (error)=> {
+        console.log("Une erreur est survenue");
+      }
+
+    )
+
+  }
+  onFetchVillesObject() {
+    this.villeService.onFetchVilles().subscribe(
+      (response)=> {
+        this.villesObject = response;
+        console.log(response);
+      },
+      (error)=> {
+        console.log("Une erreur est survenue");
+      }
+
+    )
+
+  }
+  private _filter2(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.villesObject.filter(option => option.designation.toLowerCase().includes(filterValue));
+  }
 
 }

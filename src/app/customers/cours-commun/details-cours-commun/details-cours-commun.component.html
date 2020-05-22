@@ -65,9 +65,13 @@
                     </div>
                     <div class="col-md-6">
                         
-                        <div (click)="onFermerInscriptionCoursCommun()"  *ngIf="cours.coursCommun?.cout" class="udb-sec">
-                            <a style="width: 100%;"  class="read-line-btn">
+                        <div  *ngIf="cours.coursCommun?.cout" class="udb-sec">
+                            <a (click)="onFermerInscriptionCoursCommun()" *ngIf="cours.coursCommun.nbreMaxInscrits !== cours.coursCommun.nombreInscrit"  style="width: 100%;"  class="read-line-btn">
                                 {{cours.coursCommun.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
+                            </a>
+
+                            <a (click)="openAlert('coursGeneral')" *ngIf="cours.coursCommun.nbreMaxInscrits === cours.coursCommun.nombreInscrit" style="width: 100%;"  class="read-line-btn">
+                                Ouvrir
                             </a>
         
                         </div>
@@ -96,6 +100,7 @@
 
                                             <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>
                                             <p *ngIf="public.inscriptionFermer === false"> Etat : Ouvert</p>
+                                            <p>Nombre inscrits : {{public.nombreInscrit}} </p>
                                             <p style="font-size: 85%;" *ngIf="public.nbreMaxInscrits"> {{public.nbreMaxInscrits - public.nombreInscrit}} places disponibles</p>
                                             <p style="font-size: 85%;" *ngIf="!public.nbreMaxInscrits">Places disponibles : <strong>illimitées</strong> </p>
 
@@ -111,11 +116,31 @@
                                         </div>
                                     </div>
                                     <div style="float: right ;">
-                                        <a (click)="onFetchInscrits(public.id)"  
-                                        class="details-line-btn">Details  ({{public.nombreInscrit}} inscrits)</a>
-                                        <a (click)="onFermerInscriptionPublicCble(public.id)" style="margin-left: 0.5em;" class="read-line-btn">
-                                            {{public.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
-                                            </a>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <a (click)="onFetchInscrits(public.id)"  
+                                                class="details-line-btn">Details</a>
+        
+                                            </div>
+                                            <div class="col-md-6">
+                                                
+                                                <a *ngIf="public.nbreMaxInscrits !== public.nombreInscrit" 
+                                                (click)="onFermerInscriptionPublicCble(public.id)" 
+                                                style="margin-left: 0.5em;" class="read-line-btn">
+                                                {{public.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
+                                                </a>
+    
+                                             <a (click)="openAlert('publicCible', public.id)" 
+                                                *ngIf="public.nbreMaxInscrits === public.nombreInscrit" 
+                                                style="width: 100%;"  class="read-line-btn">
+                                                    Ouvrir
+                                                </a>
+                            
+    
+                                            </div>
+
+                                        </div>
+                                        
 
                                     </div>
                                 </li>

@@ -16,6 +16,7 @@ import { GooglePlaceComponent } from './google-place/google-place.component';
 import { OganiserCoursSheetComponent } from './oganiser-cours-sheet/oganiser-cours-sheet.component';
 import { DetailsInscritsComponent } from './details-inscrits/details-inscrits.component';
 import { SearchBarCoursCommunComponent } from './search-bar-cours-commun/search-bar-cours-commun.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SearchBarCoursCommunComponent } from './search-bar-cours-commun/search-
     CardCoursCommunComponent,
     PaymentCoursCommunComponent,
     DetailsInscritsComponent,
-    SearchBarCoursCommunComponent
+    SearchBarCoursCommunComponent,
+    AlertComponent
 
   ],
   imports: [
@@ -62,6 +64,6 @@ import { SearchBarCoursCommunComponent } from './search-bar-cours-commun/search-
      
   
   ],
-  entryComponents : [OganiserCoursSheetComponent, PaymentCoursCommunComponent, DetailsInscritsComponent]
+  entryComponents : [OganiserCoursSheetComponent, PaymentCoursCommunComponent, DetailsInscritsComponent, AlertComponent]
 })
 export class SharedModule { }

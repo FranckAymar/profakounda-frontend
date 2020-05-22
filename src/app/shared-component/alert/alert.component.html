@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Confirmation</h1>
+<div mat-dialog-content>
+  <p>Etes vous sur de vouloir effectuer cette action ?</p>
+  <p *ngIf="dataReceived.message">{{dataReceived.message}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick('')">Non</button>
+  <button mat-button (click)="onNoClick('oui')" cdkFocusInitial>Oui</button>
+</div>

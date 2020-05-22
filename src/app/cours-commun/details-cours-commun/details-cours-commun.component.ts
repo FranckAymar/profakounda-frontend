@@ -114,7 +114,14 @@ export class DetailsCoursCommunComponent implements OnInit {
       Après fermetture de la dialogue
     */
     dialogRef.afterClosed().subscribe(result => {
+      
 
+      if(result.etat === 'reussie'){
+        this.onFectCoursCommun();
+        return ;
+      }
+
+      this.snack.openSnackBar("Une erreur s'est produite pendant le paiement")
 
     });
 

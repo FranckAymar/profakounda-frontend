@@ -169,7 +169,7 @@ export class PaymentCoursCommunComponent implements OnInit {
       (resp)=>{
 
         console.log(resp);
-        this.dialogRef.close() ;
+        this.dialogRef.close({etat : 'reussie'}) ;
         this.snackBar.openSnackBar('Inscription réussie !');
 
         
@@ -196,7 +196,7 @@ export class PaymentCoursCommunComponent implements OnInit {
       (resp)=>{
 
         console.log(resp);
-        this.dialogRef.close() ;
+        this.dialogRef.close({etat : 'reussie'}) ;
         this.snackBar.openSnackBar('Inscription réussie !');
 
         

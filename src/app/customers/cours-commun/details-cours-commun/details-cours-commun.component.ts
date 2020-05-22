@@ -1,3 +1,4 @@
+import { AlertComponent } from './../../../shared-component/alert/alert.component';
 import { SnackbarService } from './../../../shared-component/services/snackbar.service';
 import { DetailsInscritsComponent } from './../../../shared-component/details-inscrits/details-inscrits.component';
 import { MatDialog } from '@angular/material';
@@ -23,6 +24,8 @@ export class DetailsCoursCommunComponent implements OnInit {
     lieuIntervention : null
 
   };
+
+  messageAlert = 'Cette action fera passée le nombre de places disponibles à illimité' ;
 
   idCoursCommun : number;
 
@@ -120,6 +123,36 @@ export class DetailsCoursCommunComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
 
+    });
+
+  }
+
+  openAlert(type, idPublicCible?) {
+
+    //Fermetture par défaut de toutes les dialogues
+    this.dialog.closeAll();
+
+    const dialogRef = this.dialog.open(AlertComponent, {
+      width: '400px',
+      data : {type : type , message : this.messageAlert}
+
+    });
+
+
+    /*
+      Après fermetture de la dialogue
+    */
+    dialogRef.afterClosed().subscribe(result => {
+
+     if(result){
+        
+      if(result.type === 'publicCible' && result.response ==='oui'){
+        this.onFermerInscriptionPublicCble(idPublicCible);
+      }else if(result.type === 'coursGeneral' && result.response ==='oui'){
+        this.onFermerInscriptionCoursCommun();
+      }
+
+     }
     });
 
   }

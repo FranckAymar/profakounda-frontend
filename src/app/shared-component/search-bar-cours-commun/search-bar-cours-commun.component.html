@@ -9,12 +9,12 @@
                         <div class="sf-input">
                             <mat-form-field > 
                                 <div [formGroup]="myGroup" >
-                                  <input type="text"   id="sf-box" placeholder="nom de l'organissation"  (ngModelChange)="onFilterCoursCommunByOrganisationName()"
+                                  <input type="text"   id="sf-box" placeholder="nom de l'organissation"  
                                      formControlName="organisation" [(ngModel)]="organisationName" matInput
                                       [formControl]="myControl" [matAutocomplete]="auto"  id="sf-box">
                                 </div>   
                                   <mat-autocomplete #auto="matAutocomplete">
-                                      <mat-option *ngFor="let organisation of listeOrganisation | async"  [value]="organisation.libelle" >
+                                      <mat-option  *ngFor="let organisation of listeOrganisation | async" (click)="onFilterCoursCommunByOrganisationName()" [value]="organisation.libelle" >
                                           {{organisation.libelle}}
                                       </mat-option>
                                   </mat-autocomplete>

@@ -1,6 +1,10 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { VilleService } from 'src/app/admin/services/ville.service';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-bar-cours-commun',
@@ -8,8 +12,10 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./search-bar-cours-commun.component.css']
 })
 export class SearchBarCoursCommunComponent implements OnInit {
-
-
+  myGroup;
+  organisationObject:any = [];
+  listeOrganisation: Observable<string[]>
+  myControl = new FormControl();
   code ;
   organisationName:String;
   
@@ -21,13 +27,26 @@ export class SearchBarCoursCommunComponent implements OnInit {
 
   ngOnInit() {
 
+    this.onFetchOrganisationObject();
+
+    this.listeOrganisation = this.myControl.valueChanges
+    .pipe(
+      startWith(''),
+      map(valeur => this.filterOrganisation(valeur))
+    );
+
     this.getParameterUrl();
     this.getNameUrl();
     if(this.code){
       this.onFilterCoursCommun();
     }
+    this.myGroup = new FormGroup({
+      organisation: new FormControl()
+    });
+
   }
 
+  
   onFilterCoursCommun(){
 
     this.addParameterInURl();
@@ -96,5 +115,24 @@ export class SearchBarCoursCommunComponent implements OnInit {
   
       });
     }
+
+  onFetchOrganisationObject() {
+    this.coursCommunService.fetchOrganisationList().subscribe(
+      (response)=> {
+        this.organisationObject = response;
+        console.log(response);
+      },
+      (error)=> {
+        console.log("Une erreur est survenue");
+      }
+
+    )
+
+  }
+  private filterOrganisation(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.organisationObject.filter(option => option.libelle.toLowerCase().includes(filterValue));
+  }
 
 }

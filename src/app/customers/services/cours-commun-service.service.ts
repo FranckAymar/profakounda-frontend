@@ -119,6 +119,10 @@ export class CoursCommunService {
 
    }
 
+  fetchOrganisationList(): Observable<any> {
+    return this.http.get(URL.recupererOrganisation);
+   }
+
 
 
 

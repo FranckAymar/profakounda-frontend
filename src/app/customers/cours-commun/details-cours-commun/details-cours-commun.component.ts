@@ -77,20 +77,42 @@ export class DetailsCoursCommunComponent implements OnInit {
   }
 
 
-  onFetchInscrits(idPublicCible?){
+  onFetchInscrits(dataPublic?){
 
-    let data = {
+    let data ;
+    if(dataPublic){
+      data= {
 
-      idCoursCommun : this.idCoursCommun,
-      idPublicCible : idPublicCible
+        idCoursCommun : this.idCoursCommun,
+        idPublicCible : dataPublic.id
+      }
+    }else{
+
+      data= {
+
+        idCoursCommun : this.idCoursCommun,
+        idPublicCible : ''
+
     }
+  }
     
     this.inscriptionService.recupererInscrit(data).subscribe(
 
       (resp)=>{
 
         console.log(resp);
-        this.openDialog(resp);
+
+        if(dataPublic){
+          
+          this.openDialog(
+            {inscrit : resp,
+             details : dataPublic});
+
+             return ;
+        }
+        this.openDialog(
+            {inscrit : resp,
+             details : this.cours});
         
       },
 

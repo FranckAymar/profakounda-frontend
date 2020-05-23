@@ -66,11 +66,15 @@
                     <div class="col-md-6">
                         
                         <div  *ngIf="cours.coursCommun?.cout" class="udb-sec">
-                            <a (click)="onFermerInscriptionCoursCommun()" *ngIf="cours.coursCommun.nbreMaxInscrits !== cours.coursCommun.nombreInscrit"  style="width: 100%;"  class="read-line-btn">
+                            <a (click)="onFermerInscriptionCoursCommun()" 
+                                *ngIf="cours.coursCommun.nbreMaxInscrits !== cours.coursCommun.nombreInscrit"  
+                                style="width: 100%;"  class="read-line-btn">
                                 {{cours.coursCommun.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
                             </a>
 
-                            <a (click)="openAlert('coursGeneral')" *ngIf="cours.coursCommun.nbreMaxInscrits === cours.coursCommun.nombreInscrit" style="width: 100%;"  class="read-line-btn">
+                            <a (click)="openAlert('coursGeneral')" 
+                                *ngIf="cours.coursCommun.nbreMaxInscrits === cours.coursCommun.nombreInscrit" 
+                                style="width: 100%;"  class="read-line-btn">
                                 Ouvrir
                             </a>
         
@@ -118,7 +122,7 @@
                                     <div style="float: right ;">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <a (click)="onFetchInscrits(public.id)"  
+                                                <a (click)="onFetchInscrits(public)"  
                                                 class="details-line-btn">Details</a>
         
                                             </div>

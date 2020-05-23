@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { NavbarAuthComponent } from './navbar-auth/navbar-auth.component';
@@ -64,6 +64,8 @@ import { AlertComponent } from './alert/alert.component';
      
   
   ],
+
+  providers : [DatePipe],
   entryComponents : [OganiserCoursSheetComponent, PaymentCoursCommunComponent, DetailsInscritsComponent, AlertComponent]
 })
 export class SharedModule { }

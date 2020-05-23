@@ -1,12 +1,15 @@
 <div class="col-md-12">
     <section>
+        <div class="row">
+            <a (click)="generatePDFListInscrit()" class="read-line-btn">Imprimer</a> 
+        </div>
             <div  class="row">
-                <p *ngIf="dataReceived.length === 0">Vous n'avez pas encore d'inscrits</p>
-                <div *ngIf="dataReceived.length > 0" class="cor about-sp">
-                    <p style="text-align: center;">{{dataReceived.length}} inscrit(s)</p>
+                <p *ngIf="dataReceived.inscrit.length === 0">Vous n'avez pas encore d'inscrits</p>
+                <div *ngIf="dataReceived.inscrit.length > 0" class="cor about-sp">
+                    <p style="text-align: center;">{{dataReceived.inscrit.length}} inscrit(s)</p>
                     <div class="s18-age-event l-info-pack-days">
                         <ul>
-                            <li *ngFor="let inscrit of dataReceived">
+                            <li *ngFor="let inscrit of dataReceived.inscrit">
                                 <div class="age-eve-com age-eve-1">
                                     <img src="../../../assets/images/icon/awa/Stylo_Noir_SF.png" alt="">
                                 </div>

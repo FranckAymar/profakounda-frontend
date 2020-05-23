@@ -24,7 +24,7 @@ export class DetailsInscritsComponent implements OnInit {
     private datePipe: DatePipe
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
 
     this.body.push(this.headersTable);
     console.log(this.dataReceived);

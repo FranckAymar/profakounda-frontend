@@ -6,30 +6,14 @@
                 <div class="search-form">
                     <div class="sf-type" id="organisation">
                         <div class="sf-input">
-                            <mat-form-field > 
-                                <div [formGroup]="myGroup" > 
-                                  <input type="text"   id="sf-box" placeholder="nom de l'organissation"  
-                                     formControlName="organisation" [(ngModel)]="organisationName" matInput
-                                      [formControl]="myControl" [matAutocomplete]="auto"  id="sf-box">
-                                </div>   
-                                  <mat-autocomplete #auto="matAutocomplete">
-                                      <mat-option  *ngFor="let organisation of listeOrganisation | async" (click)="onFilterCoursCommunByOrganisationName()" [value]="organisation.libelle" >
-                                          {{organisation.libelle}}
-                                      </mat-option>
-                                  </mat-autocomplete>
-                              </mat-form-field>
-                         </div>            
-                    </div>
-                    
-                </div> 
-                <div class="search-form"> 
-                        <div class="sf-type">
-                            <div class="sf-input">
-                                <input style="text-align: center;" type="number" [(ngModel)]="code"
-                                        id="sf-box" placeholder="Rechercher un cours par son code d'identification">
+                            <div [formGroup]="myGroup">
+                                <input type="text" id="sf-box" placeholder="Nom de l'organissation"
+                                   formControlName="organisation" [(ngModel)]="organisationName"
+                                    [formControl]="myControl" [matAutocomplete]="auto" id="sf-box">
                             </div>
                             <mat-autocomplete #auto="matAutocomplete">
                                 <mat-option *ngFor="let organisation of listeOrganisation | async"
+                                    (click)="onFilterCoursCommunByOrganisationName()"
                                     [value]="organisation.libelle">
                                     {{organisation.libelle}}
                                 </mat-option>
@@ -57,8 +41,6 @@
             </form>
             </div>
             <div class="col-md-3"></div>
-
-
 
         </div>
     </div>

@@ -13,10 +13,9 @@ import { startWith, map } from 'rxjs/operators';
 })
 export class SearchBarCoursCommunComponent implements OnInit {
   myGroup;
-  villes : any = [];
-  villesObject:any = [];
-  filteredOptions2: Observable<string[]>
-  myControl2 = new FormControl();
+  organisationObject:any = [];
+  listeOrganisation: Observable<string[]>
+  myControl = new FormControl();
   code ;
   organisationName:String;
   
@@ -24,20 +23,17 @@ export class SearchBarCoursCommunComponent implements OnInit {
 
   constructor(private coursCommunService : CoursCommunService,
               private router : Router,
-              private route : ActivatedRoute,private villeService : VilleService) { }
+              private route : ActivatedRoute) { }
 
   ngOnInit() {
 
+    this.onFetchOrganisationObject();
 
-    this.onFetchVilles();
-    this.onFetchVillesObject();
-
-    this.filteredOptions2 = this.myControl2.valueChanges
+    this.listeOrganisation = this.myControl.valueChanges
     .pipe(
       startWith(''),
-      map(v => this._filter2(v))
+      map(valeur => this.filterOrganisation(valeur))
     );
-
 
     this.getParameterUrl();
     this.getNameUrl();
@@ -45,7 +41,7 @@ export class SearchBarCoursCommunComponent implements OnInit {
       this.onFilterCoursCommun();
     }
     this.myGroup = new FormGroup({
-      ville: new FormControl()
+      organisation: new FormControl()
     });
 
   }
@@ -120,22 +116,10 @@ export class SearchBarCoursCommunComponent implements OnInit {
       });
     }
 
-     onFetchVilles() {
-    this.villeService.onFetchVillesString().subscribe(
+  onFetchOrganisationObject() {
+    this.coursCommunService.fetchOrganisationList().subscribe(
       (response)=> {
-        this.villes = response;
-      },
-      (error)=> {
-        console.log("Une erreur est survenue");
-      }
-
-    )
-
-  }
-  onFetchVillesObject() {
-    this.villeService.onFetchVilles().subscribe(
-      (response)=> {
-        this.villesObject = response;
+        this.organisationObject = response;
         console.log(response);
       },
       (error)=> {
@@ -145,10 +129,10 @@ export class SearchBarCoursCommunComponent implements OnInit {
     )
 
   }
-  private _filter2(value: string): string[] {
+  private filterOrganisation(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.villesObject.filter(option => option.designation.toLowerCase().includes(filterValue));
+    return this.organisationObject.filter(option => option.libelle.toLowerCase().includes(filterValue));
   }
 
 }

@@ -37,7 +37,7 @@ export class DetailsInscritsComponent implements OnInit {
     let line;
     dataReceived.forEach(element => {
 
-      line = [element.nom, element.prenoms, this.datePipe.transform(element.dateInscription,'dd-MMMM-yyyy')];
+      line = [element.nom, element.prenoms, this.datePipe.transform(element.dateInscription,'dd-MM-yyyy')];
       this.body.push(line);
     });
 
@@ -50,7 +50,11 @@ export class DetailsInscritsComponent implements OnInit {
     PdfMakeWrapper.setFonts(pdfFonts);
 
     const pdf = new PdfMakeWrapper();
-
+    pdf.info({
+      title: 'Liste des inscrits',
+      author: 'ProfAkounda'
+  });
+  
     this.createBodyOfTable(this.dataReceived.inscrit);
 
     if(!this.dataReceived.details.coursCommun){

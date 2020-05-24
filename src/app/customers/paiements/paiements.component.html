@@ -59,8 +59,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let  of ">
-                          
+                            <tr  *ngFor="let cours  of myCoursCommuns">
+                                <td>{{ cours.coursCommun ?  cours.coursCommun?.organisation.libelle :
+                                    cours.publicCible.coursCommun.organisation.libelle 
+                                     }}</td>
+                                <td>{{cours.nom}}</td>
+                                <td>{{cours.prenoms}}</td>
+                                <td>{{cours.dateInscription | date : 'dd-MMMM-yyyy'}}</td>
+                                <td><a (click)="onGenerateRecuPaiement(cours)" class="details-line-btn"><i class="fa fa-download"></i>Recu de paiement</a>
+                                </td>
+
+
+                            </tr>
                     </table>
                 </div>
                 

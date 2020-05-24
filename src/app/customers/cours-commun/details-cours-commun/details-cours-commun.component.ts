@@ -77,14 +77,14 @@ export class DetailsCoursCommunComponent implements OnInit {
   }
 
 
-  onFetchInscrits(dataPublic?){
+  onFetchInscrits(dataToSend, type){
 
     let data ;
-    if(dataPublic){
+    if(type ==='publicCible'){
       data= {
 
         idCoursCommun : this.idCoursCommun,
-        idPublicCible : dataPublic.id
+        idPublicCible : dataToSend.id
       }
     }else{
 
@@ -102,17 +102,25 @@ export class DetailsCoursCommunComponent implements OnInit {
 
         console.log(resp);
 
-        if(dataPublic){
+        if(type ==='publicCible'){
           
           this.openDialog(
-            {inscrit : resp,
-             details : dataPublic});
+            {
+              inscrit : resp,
+              details : {
+                publicCible : dataToSend,
+                cours : this.cours.coursCommun
+              },
 
-             return ;
+            });
+
+          return ;
         }
         this.openDialog(
-            {inscrit : resp,
-             details : this.cours});
+            {
+              inscrit : resp,
+              details : dataToSend
+            });
         
       },
 

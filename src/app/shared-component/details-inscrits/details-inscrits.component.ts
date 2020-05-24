@@ -13,8 +13,12 @@ import localeFr from '@angular/common/locales/fr';
 export class DetailsInscritsComponent implements OnInit {
 
 
-  headersTable = ['Nom', 'Prénoms', 'Date Inscription'];
-  body = [];
+  headersTable = [  
+                  new Txt('Nom').bold().end, 
+                  new Txt('Prénoms').bold().end, 
+                  new Txt("Date d'inscription").bold().end
+                ];
+  bodyOfTable = [];
 
 
 
@@ -26,7 +30,7 @@ export class DetailsInscritsComponent implements OnInit {
 
   ngOnInit() { 
 
-    this.body.push(this.headersTable);
+    this.bodyOfTable.push(this.headersTable);
     console.log(this.dataReceived);
 
   }
@@ -37,8 +41,12 @@ export class DetailsInscritsComponent implements OnInit {
     let line;
     dataReceived.forEach(element => {
 
-      line = [element.nom, element.prenoms, this.datePipe.transform(element.dateInscription, 'dd-MMMM-yyyy')];
-      this.body.push(line);
+      line = [  
+              element.nom, 
+              element.prenoms, 
+              this.datePipe.transform(element.dateInscription, 'dd-MMMM-yyyy')];
+
+      this.bodyOfTable.push(line);
     });
 
   }
@@ -48,37 +56,35 @@ export class DetailsInscritsComponent implements OnInit {
 
     PdfMakeWrapper.setFonts(pdfFonts);
    
-  
     const pdf = new PdfMakeWrapper();
 
-  
-
-  //  pdf.add(new Img('../../../assets/images/icon/awa/Stylo_Noir_SF.png').build());
-
-   
-
-
-    new Img('../../../assets/images/logo.png').width(150).margin(40).build().then( img => {
+    new Img('../../../assets/images/logo.png').width(150).margin([0,40,0,40]).build().then( img => {
     pdf.add( img);
     
 
     this.createBodyOfTable(this.dataReceived.inscrit);
 
-    if (!this.dataReceived.details.coursCommun) {
-      pdf.add(new Txt('Noveau : ' + this.dataReceived.details.niveau.libelle).end);
-      pdf.add(new Txt('Filière : ' + this.dataReceived.details.filiere).end);
-     // pdf.add(new Txt('Formations : ' + this.dataReceived.details.filiere).end);
 
-    }else{
+    //Cas d'un cours avec public cible
+    if (this.dataReceived.details.publicCible) {
+      pdf.add(new Txt('Organisation : ' + this.dataReceived.details.cours.organisation.libelle).bold().end);
+      pdf.add(new Txt('Titre : ' + this.dataReceived.details.cours.titre).end);
+      pdf.add(new Txt('Niveau : ' + this.dataReceived.details.publicCible.niveau.libelle).end);
+      pdf.add(new Txt('Filière : ' + this.dataReceived.details.publicCible.filiere).end);
+      pdf.add(new Txt('Formations : ' + this.dataReceived.details.filiere).end);
+
+     //Cas d'un cours général
+
+    } else{
       pdf.add(new Txt('Organisation : ' + this.dataReceived.details.organisation.libelle).bold().end);
       pdf.add(new Txt('Titre : ' + this.dataReceived.details.titre).end);
   
-    }
+    } 
 
     pdf.add(new Txt('Liste des inscrits').alignment('center').decoration('underline').margin(20).bold().end);
-    pdf.add(new Table(this.body).alignment('center').widths([150, 150, 150]).end);  
+    pdf.add(new Table(this.bodyOfTable).alignment('center').widths([100, 250, 150]).end);  
 
-    pdf.footer('Imprimé le : ' + new Date())
+    pdf.footer('Imprimé le : ' + new Date().toDateString())
 
     pdf.create().open();
 

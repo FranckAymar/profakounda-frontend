@@ -68,10 +68,10 @@ export class DetailsInscritsComponent implements OnInit {
     //Cas d'un cours avec public cible
     if (this.dataReceived.details.publicCible) {
       pdf.add(new Txt('Organisation : ' + this.dataReceived.details.cours.organisation.libelle).bold().end);
-      pdf.add(new Txt('Titre : ' + this.dataReceived.details.cours.titre).end);
-      pdf.add(new Txt('Niveau : ' + this.dataReceived.details.publicCible.niveau.libelle).end);
-      pdf.add(new Txt('Filière : ' + this.dataReceived.details.publicCible.filiere).end);
-      pdf.add(new Txt('Formations : ' + this.dataReceived.details.filiere).end);
+      pdf.add(new Txt('Titre : ' + this.dataReceived.details.cours.titre).margin([0,5,0,0]).end);
+      pdf.add(new Txt('Niveau : ' + this.dataReceived.details.publicCible.niveau.libelle).margin([0,5,0,0]).end);
+      pdf.add(new Txt('Filière : ' + this.dataReceived.details.publicCible.filiere).margin([0,5,0,0]).end);
+      pdf.add(new Txt('Formations : ' + this.getFormationsForPublic(this.dataReceived.details.publicCible)).margin([0,5,0,0]).end);
 
      //Cas d'un cours général
 
@@ -93,6 +93,30 @@ export class DetailsInscritsComponent implements OnInit {
    
   }
 
+
+
+  getFormationsForPublic(publicCible) : string{
+    
+
+    let formation = "";
+
+    publicCible.formations.forEach(element => {
+      
+      let libelle = element.libelle ;
+
+      if(formation ==""){
+        formation = libelle;
+      }else{
+        formation = (formation + "/").concat(libelle)
+
+      }
+
+    });
+
+    return formation ;
+    
+
+  }
 
 
 

@@ -58,7 +58,7 @@
                 <div class="row">
                     <div class="col-md-6">
 
-                        <div (click)="onFetchInscrits()"  *ngIf="cours.coursCommun?.cout" class="udb-sec">
+                        <div (click)="onFetchInscrits(cours.coursCommun)"  *ngIf="cours.coursCommun?.cout" class="udb-sec">
                             <a style="width: 100%;"  class="details-line-btn">Details  ({{cours.coursCommun.nombreInscrit}} inscrits)</a>
         
                         </div>
@@ -122,7 +122,7 @@
                                     <div style="float: right ;">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <a (click)="onFetchInscrits(public)"  
+                                                <a (click)="onFetchInscrits(public, 'publicCible')"  
                                                 class="details-line-btn">Details</a>
         
                                             </div>

@@ -39,8 +39,8 @@
                         </li>
         
                         <li>
-                            Etat : <span *ngIf="cours.coursCommun?.inscriptionFermer === true">Fermé</span>
-                                    <span *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>
+                            Etat : <span  *ngIf="cours.coursCommun?.inscriptionFermer === true" > Fermé  </span>
+                                    <span  *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>
                        </li>
                        <li *ngIf="cours.coursCommun?.nbreMaxInscrits">
                              <span>{{cours.coursCommun.nbreMaxInscrits - cours.coursCommun.nombreInscrit}}</span> places disponibles
@@ -58,13 +58,13 @@
                         <li>
                             Nombre inscrits : <span>{{cours.coursCommun.compteRendu.nombreInscrits}}</span>
                         </li>
-                        <li style="background-color: #DA7F5C; color: white;">
+                        <li style="background-color: #DA7F5C; color: white;border-radius: 0.2em;padding-left: 0.1em;">
                             Point Transactions : <span style="color: white;">{{cours.coursCommun.compteRendu.pointGlobale}} Frcfa</span>
                         </li>
                         <li>
                             Pourcentage operateur : <span>{{cours.coursCommun.compteRendu.pourcentageOperateur}}%</span>
                         </li>
-                        <li style="background-color: #002147;">
+                        <li style="background-color: #002147; border-radius: 0.2em;padding-left: 0.1em;">
                            <span style="color: white;"> Révénu cours :</span> <span style="color:#DA7F5C">{{cours.coursCommun.compteRendu.revenuClient}} Frcfa</span>
                         </li>
         
@@ -137,7 +137,7 @@
                                                 </li>
                                             </ul>
                                             <ul style="float: right;">
-                                                <li style="background-color: #DA7F5C; color: white; padding: 0.2em;">
+                                                <li style="background-color: #DA7F5C; color: white; padding: 0.2em; border-radius: 0.2em;">
                                                     Point Transactions : <span style="color: white;">{{public.point}} Frcfa</span>
                                                 </li>
                                             </ul>

@@ -41,17 +41,12 @@ export class DetailsInscritsComponent implements OnInit {
     let line;
     dataReceived.forEach(element => {
 
-<<<<<<< HEAD
-      line = [element.nom, element.prenoms, this.datePipe.transform(element.dateInscription,'dd-MM-yyyy')];
-      this.body.push(line);
-=======
       line = [  
               element.nom, 
               element.prenoms, 
               this.datePipe.transform(element.dateInscription, 'dd-MMMM-yyyy')];
 
       this.bodyOfTable.push(line);
->>>>>>> afba531a348ad18db1d6df5a09a09a9df075040c
     });
 
   }
@@ -62,19 +57,16 @@ export class DetailsInscritsComponent implements OnInit {
     PdfMakeWrapper.setFonts(pdfFonts);
    
     const pdf = new PdfMakeWrapper();
-<<<<<<< HEAD
-    pdf.info({
-      title: 'Liste des inscrits',
-      author: 'ProfAkounda'
-  });
+  //   pdf.info({
+  //     title: 'Liste des inscrits',
+  //     author: 'ProfAkounda'
+  // });
   
-=======
 
     new Img('../../../assets/images/logo.png').width(150).margin([0,40,0,40]).build().then( img => {
     pdf.add( img);
     
 
->>>>>>> afba531a348ad18db1d6df5a09a09a9df075040c
     this.createBodyOfTable(this.dataReceived.inscrit);
 
 

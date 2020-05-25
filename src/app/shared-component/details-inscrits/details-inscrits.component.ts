@@ -57,6 +57,11 @@ export class DetailsInscritsComponent implements OnInit {
     PdfMakeWrapper.setFonts(pdfFonts);
    
     const pdf = new PdfMakeWrapper();
+  //   pdf.info({
+  //     title: 'Liste des inscrits',
+  //     author: 'ProfAkounda'
+  // });
+  
 
     new Img('../../../assets/images/logo.png').width(150).margin([0,40,0,40]).build().then( img => {
     pdf.add( img);

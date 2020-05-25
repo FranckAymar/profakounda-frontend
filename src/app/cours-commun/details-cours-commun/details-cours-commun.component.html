@@ -35,6 +35,7 @@
                         <li>
                              fin : <span>{{cours.coursCommun?.dateFin}}</span>
                         </li>
+                        
                         <li *ngIf="cours.coursCommun?.cout">
                             Etat : <span *ngIf="cours.coursCommun?.inscriptionFermer === true">Fermé</span>
                                     <span *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>

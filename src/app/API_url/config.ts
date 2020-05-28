@@ -170,6 +170,8 @@ export const URL = {
     supprimerMiseEnligneCourCommun : consts.host+ consts.nameProject + 'admin/supprimerMiseEnligneCourCommun',
     allCoursCommunAdmin : consts.host+ consts.nameProject + 'admin/AllCoursCommun',
     recupererCoursCommunParId : consts.host+ consts.nameProject + 'particulier/detailCoursCommun',
+    recupererCoursCommunForHomeParId : consts.host+ consts.nameProject + 'detailCoursCommun',
+
     detailsCoursCommunAdmin : consts.host+ consts.nameProject + 'admin/detailsCoursCommun',
     //Organisation
     recupererOrganisation : consts.host+ consts.nameProject + 'organisations',

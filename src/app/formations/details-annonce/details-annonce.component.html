@@ -67,8 +67,8 @@
 
                     <div class="udb-sec udb-cour-stat">
                         <h4><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
-                        <div class="pro-con-table">
-                            <table class="bordered responsive-table">
+                        <div class="pro-con-table table-responsive">
+                            <table class="bordered table">
                                 <thead>
                                     <tr>
                                         <th>Niveaux</th>
@@ -96,7 +96,7 @@
 
                         <div class="tour_head1 udb-time-line days">
                             <ul>
-                                <li *ngFor="let disponibilite of propositionFormation.disponibilites "
+                                <li *ngFor="let disponibilite of propositionFormation.disponibilites"
                                     class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     <div class="sdb-cl-tim">
                                         <div class="sdb-cl-day">
@@ -126,7 +126,7 @@
                     <div id="UpdateComments" class="udb-sec udb-time">
                         <h4 ><i class="fa fa-comment" aria-hidden="true"></i>  Notes et Commentaires </h4>
 
-                        <div class="tour_head1 udb-time-line days">
+                        <div class="tour_head1 udb-time-line2 days">
                             <div style="width: 10em;margin: auto;">
                                 <a class="btn btn-primary" *ngIf="isConnected && !isProprio"   data-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
                                   Mon avis

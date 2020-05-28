@@ -163,6 +163,8 @@ export const URL = {
    
     //cours Commun admin
     listeCoursCommuns : consts.host+ consts.nameProject + 'admin/coursCommuns',
+    comptabiliteCoursCommun : consts.host+ consts.nameProject + 'admin/comptabilite',
+    comptabiliteParOrganisation : consts.host+ consts.nameProject + 'admin/comptabiliteParOrganistion',
     accepterMiseEnligneCourCommun : consts.host+ consts.nameProject + 'admin/accepterMiseEnligneCourCommun',
     refuserMiseEnLigneCourCommun : consts.host+ consts.nameProject + 'admin/refuserMiseEnLigneCourCommun',
     supprimerMiseEnligneCourCommun : consts.host+ consts.nameProject + 'admin/supprimerMiseEnligneCourCommun',

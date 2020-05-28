@@ -19,7 +19,7 @@ export class AdminCommonCourseComponent implements OnInit {
   critereFiltre : number ;
 
   ngOnInit() {
-
+    
     this.onFetchAllcoursCommunAdmin();
     this.onFetchCauseRefus();
   }
@@ -30,7 +30,7 @@ export class AdminCommonCourseComponent implements OnInit {
     this.coursCommunAdminService.fetchCoursCommun().subscribe(
 
       (resp) => {
-       
+       console.log(resp)
       },
 
       (error) => {
@@ -50,6 +50,7 @@ export class AdminCommonCourseComponent implements OnInit {
 
       (resp) => {
         this.courCommuns = resp ;
+        console.log(resp);
       },
 
 

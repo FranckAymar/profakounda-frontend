@@ -35,8 +35,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Identifiant</th>
-                            <th>Par :</th>
+                            <th>Organisation</th>
+                            <th>Téléphone </th>
+                            <th>Titre </th>
                             <th>Date  De debut</th>
                             <th>Date de fin</th>
                             <th>cout</th>
@@ -46,7 +47,8 @@
                     <tbody>
                         <p *ngIf="courCommuns.length == 0">Aucun élément</p>
                         <tr *ngFor="let p of courCommuns">
-                            <td>{{p.id}}</td>
+                            <td>{{p.organisation.libelle}}</td>
+                            <td>{{p.telephone}}</td>
                             <td>{{p.titre}}</td>
                             <td>{{p.dateDebut |date:"yyyy-MM-dd"}}</td>
                             <td>{{p.dateFin |date:"yyyy-MM-dd "}}</td>

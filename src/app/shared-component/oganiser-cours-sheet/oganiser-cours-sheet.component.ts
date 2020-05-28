@@ -72,7 +72,7 @@ export class OganiserCoursSheetComponent implements OnInit {
   lieuInterventionModel : LieuInterventionModel = {} ;
   publicCibleMdel : publicCibleModel = {} ;
   publicCibleMdels : publicCibleModel[] = [] ;
-
+error:String;
   formationsModel = [];
   niveauModel = {};
 
@@ -618,7 +618,12 @@ export class OganiserCoursSheetComponent implements OnInit {
       (resp)=>{
 
         console.log(resp);
-        this.next();
+        this.error = resp['error'];
+        if(!this.error)
+        {
+          this.next();
+        }
+       
         
       },
 

@@ -137,6 +137,7 @@ export class DetailsCoursCommunComponent implements OnInit {
         
         this.cours = resp;
         this.initializeMap(this.cours.lieuIntervention);
+        console.log("cours...");
         console.log(this.cours);
 
 

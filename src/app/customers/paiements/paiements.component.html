@@ -62,8 +62,7 @@
                         <tbody>
                             <tr  *ngFor="let cours  of myCoursCommuns">
                                 <td>{{ cours.coursCommun ?  cours.coursCommun?.organisation.libelle :
-                                    cours.publicCible.coursCommun.organisation.libelle 
-                                     }}</td>
+                                    cours.publicCible.coursCommun.organisation.libelle}}</td>
                                 <td>{{cours.nom}}</td>
                                 <td>{{cours.prenoms}}</td>
                                 <td>{{cours.dateInscription | date : 'dd-MMMM-yyyy'}}</td>

@@ -18,7 +18,7 @@ export const URL = {
     modifierFiliere:  consts.host+ consts.nameProject +'admin/modifierFiliere' ,
     supprimerFiliere:  consts.host+ consts.nameProject +'admin/supprimerFiliere' ,
     //URL Villes
-    recupererVilles :  consts.host+consts.nameProject+'admin/villes' ,
+    recupererVilles :  consts.host+consts.nameProject+'villes' ,
     onFetchVillesString :  consts.host+consts.nameProject+'villesString' ,
     enregistrerVille : consts.host+ consts.nameProject +'admin/enregistrerVille',
     modifierVille:  consts.host+ consts.nameProject +'admin/modifierVille' ,

@@ -65,17 +65,17 @@ getColor(){
     this.particulierService.saveParticulier(particulier)
     .subscribe(
       (response)=>{
+        sessionStorage.setItem("mail",particulier.email);
         this.formInitialisation();
-        this.error =response["error"];
-       
+        this.error =response["error"];      
         if(response["success"])
         {
           alert('Inscription effectuée avec succès; verifier votre mail et cliquer sur le lien de validation');
           this.router.navigate(["/home/sign-up"]);
           this.formInitialisation();
-          
+          alert("voici session :"+sessionStorage.getItem("mail"))
         }
-       
+  
       },
       (error)=>{
         console.log(particulier);

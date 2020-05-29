@@ -51,6 +51,7 @@ export const URL = {
     getCode : consts.host+ consts.nameProject +'rechercherCodeParticulier',
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
+    renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
 

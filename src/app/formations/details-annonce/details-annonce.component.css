@@ -22,7 +22,7 @@ agm-map {
   margin-left: 0.5em;
   font-size: 1.1em;
 }
-.udb-time-line ul li i {
+.udb-time-line2 ul li i {
   width: 0;
   height: 0;
   background-color: white;
@@ -154,7 +154,7 @@ small{
   .columns {
     width: 100%;
   }
-  .udb-time-line ul li{
+  .udb-time-line2 ul li{
     padding-left: 0px;
   }
 }

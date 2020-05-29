@@ -129,7 +129,7 @@ export class DetailsCoursCommunComponent implements OnInit {
 
   onFectCoursCommun() {
 
-    this.coursCommunService.fetchCoursCommun(this.idCoursCommun).subscribe(
+    this.coursCommunService.fetchDetailsCoursCommunForHome(this.idCoursCommun).subscribe(
 
       (resp) => {
       
@@ -137,7 +137,6 @@ export class DetailsCoursCommunComponent implements OnInit {
         
         this.cours = resp;
         this.initializeMap(this.cours.lieuIntervention);
-        console.log("cours...");
         console.log(this.cours);
 
 

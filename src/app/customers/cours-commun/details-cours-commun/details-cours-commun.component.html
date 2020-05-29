@@ -1,25 +1,21 @@
 <section>
     <div *ngIf="cours.lieuIntervention" class="pro-cover">
 
-        <agm-map [latitude]="cours.lieuIntervention.latitude" 
-                [longitude]="cours.lieuIntervention.longitude" [zoom]="zoom">
+        <agm-map [latitude]="cours.lieuIntervention.latitude" [longitude]="cours.lieuIntervention.longitude"
+            [zoom]="zoom">
 
-            <agm-marker
-            
-             [latitude]="cours.lieuIntervention.latitude" 
-            [longitude]="cours.lieuIntervention.longitude"
-            [label] = "cours.lieuIntervention.libelle"></agm-marker>
+            <agm-marker [latitude]="cours.lieuIntervention.latitude" [longitude]="cours.lieuIntervention.longitude"
+                [label]="cours.lieuIntervention.libelle"></agm-marker>
 
-           
+
         </agm-map>
     </div>
-
     <div class="stu-db">
+
         <div class="container pg-inn">
             <div class="col-md-3">
                 <div class="pro-user">
-                    <img 
-                        src="../../../assets/images/logo.png" alt="user">
+                    <img src="../../../assets/images/logo.png" alt="user">
                 </div>
                 <div class="pro-user-bio">
                     <ul>
@@ -28,28 +24,30 @@
                         </li>
                         <li>{{cours.coursCommun?.titre}}</li>
                         <li>
-                           <h5 style="text-align: center;" *ngIf="cours.coursCommun?.cout" class="pro-user-act">{{cours.coursCommun?.cout}} FCFA</h5>
+                            <h5 style="text-align: center;" *ngIf="cours.coursCommun?.cout" class="pro-user-act">
+                                {{cours.coursCommun?.cout}} FCFA</h5>
                         </li>
                         <li>
                             Début : <span>{{cours.coursCommun?.dateDebut  |date:"dd MMMM yyyy "}}</span>
 
                         </li>
                         <li>
-                             fin : <span>{{cours.coursCommun?.dateFin}}</span>
+                            fin : <span>{{cours.coursCommun?.dateFin}}</span>
                         </li>
-        
-                        <li>
-                            Etat : <span  *ngIf="cours.coursCommun?.inscriptionFermer === true" > Fermé  </span>
-                                    <span  *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>
-                       </li>
-                       <li *ngIf="cours.coursCommun?.nbreMaxInscrits">
-                             <span>{{cours.coursCommun.nbreMaxInscrits - cours.coursCommun.nombreInscrit}}</span> places disponibles
-                      </li>
-                      <li *ngIf="!cours.coursCommun?.nbreMaxInscrits && cours.coursCommun?.cout">
-                        <span>Places disponibles <strong>illimitées</strong> </span>
-                     </li>
 
-                       
+                        <li>
+                            Etat : <span *ngIf="cours.coursCommun?.inscriptionFermer === true"> Fermé </span>
+                            <span *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>
+                        </li>
+                        <li *ngIf="cours.coursCommun?.nbreMaxInscrits">
+                            <span>{{cours.coursCommun.nbreMaxInscrits - cours.coursCommun.nombreInscrit}}</span> places
+                            disponibles
+                        </li>
+                        <li *ngIf="!cours.coursCommun?.nbreMaxInscrits && cours.coursCommun?.cout">
+                            <span>Places disponibles <strong>illimitées</strong> </span>
+                        </li>
+
+
                     </ul>
                 </div>
                 <div style="margin-top: 1em;margin-bottom: 0.3em;" class="pro-user-bio">
@@ -59,128 +57,143 @@
                             Nombre inscrits : <span>{{cours.coursCommun.compteRendu.nombreInscrits}}</span>
                         </li>
                         <li style="background-color: #DA7F5C; color: white;border-radius: 0.2em;padding-left: 0.1em;">
-                            Point Transactions : <span style="color: white;">{{cours.coursCommun.compteRendu.pointGlobale}} Frcfa</span>
+                            Point Transactions : <span
+                                style="color: white;">{{cours.coursCommun.compteRendu.pointGlobale}} Frcfa</span>
                         </li>
                         <li>
                             Pourcentage operateur : <span>{{cours.coursCommun.compteRendu.pourcentageOperateur}}%</span>
                         </li>
                         <li style="background-color: #002147; border-radius: 0.2em;padding-left: 0.1em;">
-                           <span style="color: white;"> Révénu cours :</span> <span style="color:#DA7F5C">{{cours.coursCommun.compteRendu.revenuClient}} Frcfa</span>
+                            <span style="color: white;"> Révénu cours :</span> <span
+                                style="color:#DA7F5C">{{cours.coursCommun.compteRendu.revenuClient}} Frcfa</span>
                         </li>
-        
+
                     </ul>
                 </div>
 
             </div>
             <div class="col-md-9">
+                <div class="udb">
 
-                <div class="row">
-                    <div class="col-md-6">
 
-                        <div (click)="onFetchInscrits(cours.coursCommun)"  *ngIf="cours.coursCommun?.cout" class="udb-sec">
-                            <a style="width: 100%;"  class="details-line-btn">Details  ({{cours.coursCommun.nombreInscrit}} inscrits)</a>
-        
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div (click)="onFetchInscrits(cours.coursCommun)" *ngIf="cours.coursCommun?.cout"
+                                class="udb-sec">
+                                <a style="width: 100%;" class="details-line-btn">Details
+                                    ({{cours.coursCommun.nombreInscrit}} inscrits)</a>
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        
-                        <div  *ngIf="cours.coursCommun?.cout" class="udb-sec">
-                            <a (click)="onFermerInscriptionCoursCommun()" 
-                                *ngIf="cours.coursCommun.nbreMaxInscrits !== cours.coursCommun.nombreInscrit"  
-                                style="width: 100%;"  class="read-line-btn">
-                                {{cours.coursCommun.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
-                            </a>
+                        <div class="col-md-6">
 
-                            <a (click)="openAlert('coursGeneral')" 
-                                *ngIf="cours.coursCommun.nbreMaxInscrits === cours.coursCommun.nombreInscrit" 
-                                style="width: 100%;"  class="read-line-btn">
-                                Ouvrir
-                            </a>
-        
+                            <div *ngIf="cours.coursCommun?.cout" class="udb-sec">
+                                <a (click)="onFermerInscriptionCoursCommun()"
+                                    *ngIf="cours.coursCommun.nbreMaxInscrits !== cours.coursCommun.nombreInscrit"
+                                    style="width: 100%;" class="read-line-btn">
+                                    {{cours.coursCommun.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
+                                </a>
+
+                                <a (click)="openAlert('coursGeneral')"
+                                    *ngIf="cours.coursCommun.nbreMaxInscrits === cours.coursCommun.nombreInscrit"
+                                    style="width: 100%;" class="read-line-btn">
+                                    Ouvrir
+                                </a>
+
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
-               
 
-                <div class="udb-sec">
 
-                    <div class="udb-sec udb-prof">
-                        <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
-                        <p>{{cours.coursCommun?.description}}</p>
-                    </div>
 
-                    <div  *ngIf="!cours.coursCommun?.cout"  class="udb-sec udb-time">
-                        <h4><img src="images/icon/db4.png" alt="" /> Public cible</h4>
-                        <div class="tour_head1 udb-time-line days">
-                            <ul>
-                                <li *ngFor="let public of cours.publicCible" class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    <div class="sdb-cl-tim">
-                                        <div class="sdb-cl-day">
-                                            <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA</h5>
-                                            <p> Niveau : {{public.niveau.libelle}}</p>
-                                            <p *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</p>
+                <div class="udb-sec udb-prof">
+                    <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
+                    <p>{{cours.coursCommun?.description}}</p>
+                </div>
 
-                                            <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>
-                                            <p *ngIf="public.inscriptionFermer === false"> Etat : Ouvert</p>
-                                            <p>Nombre inscrits : {{public.nombreInscrit}} </p>
-                                            <p style="font-size: 85%;" *ngIf="public.nbreMaxInscrits"> {{public.nbreMaxInscrits - public.nombreInscrit}} places disponibles</p>
-                                            <p style="font-size: 85%;" *ngIf="!public.nbreMaxInscrits">Places disponibles : <strong>illimitées</strong> </p>
+                <div *ngIf="!cours.coursCommun?.cout" class="udb-sec udb-time">
+                    <h4><img src="images/icon/db4.png" alt="" /> Public cible</h4>
+                    <div class="tour_head1 udb-time-line days">
+                        <ul>
+                            <li *ngFor="let public of cours.publicCible" class="l-info-pack-plac"> <i
+                                    class="fa fa-clock-o" aria-hidden="true"></i>
+                                <div class="sdb-cl-tim">
+                                    <div class="sdb-cl-day">
+                                        <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA
+                                        </h5>
+                                        <p> Niveau : {{public.niveau.libelle}}</p>
+                                        <p *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</p>
 
-                                        </div>
-                                        <div class="sdb-cl-class">
-                                            <ul style="float: left;">
-                                                <li *ngFor="let formation of public.formations">
-                                                    <div class="sdb-cl-class-name tooltipped" data-position="top" data-delay="50" data-tooltip="Class Details">
-                                                        <h5>{{formation.libelle}}</h5>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <ul style="float: right;">
-                                                <li style="background-color: #DA7F5C; color: white; padding: 0.2em; border-radius: 0.2em;">
-                                                    Point Transactions : <span style="color: white;">{{public.point}} Frcfa</span>
-                                                </li>
-                                            </ul>
+                                        <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>
+                                        <p *ngIf="public.inscriptionFermer === false"> Etat : Ouvert</p>
+                                        <p>Nombre inscrits : {{public.nombreInscrit}} </p>
+                                        <p style="font-size: 85%;" *ngIf="public.nbreMaxInscrits">
+                                            {{public.nbreMaxInscrits - public.nombreInscrit}} places disponibles</p>
+                                        <p style="font-size: 85%;" *ngIf="!public.nbreMaxInscrits">Places
+                                            disponibles : <strong>illimitées</strong> </p>
 
-                                        </div>
-                                        
                                     </div>
-                                    
-                                    <div style="float: right ;">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <a (click)="onFetchInscrits(public, 'publicCible')"  
+                                    <div class="sdb-cl-class">
+                                        <ul style="float: left;">
+                                            <li *ngFor="let formation of public.formations">
+                                                <div class="sdb-cl-class-name tooltipped" data-position="top"
+                                                    data-delay="50" data-tooltip="Class Details">
+                                                    <h5>{{formation.libelle}}</h5>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul style="float: right;">
+                                            <li
+                                                style="background-color: #DA7F5C; color: white; padding: 0.2em; border-radius: 0.2em;">
+                                                Point Transactions : <span style="color: white;">{{public.point}}
+                                                    Frcfa</span>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+                                </div>
+
+                                <div style="float: right ;">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a (click)="onFetchInscrits(public, 'publicCible')"
                                                 class="details-line-btn">Details</a>
-        
-                                            </div>
-                                            <div class="col-md-6">
-                                                
-                                                <a *ngIf="public.nbreMaxInscrits !== public.nombreInscrit" 
-                                                (click)="onFermerInscriptionPublicCble(public.id)" 
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <a *ngIf="public.nbreMaxInscrits !== public.nombreInscrit"
+                                                (click)="onFermerInscriptionPublicCble(public.id)"
                                                 style="margin-left: 0.5em;" class="read-line-btn">
                                                 {{public.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
-                                                </a>
-    
-                                             <a (click)="openAlert('publicCible', public.id)" 
-                                                *ngIf="public.nbreMaxInscrits === public.nombreInscrit" 
-                                                style="width: 100%;"  class="read-line-btn">
-                                                    Ouvrir
-                                                </a>
-                            
-    
-                                            </div>
+                                            </a>
+
+                                            <a (click)="openAlert('publicCible', public.id)"
+                                                *ngIf="public.nbreMaxInscrits === public.nombreInscrit"
+                                                style="width: 100%;" class="read-line-btn">
+                                                Ouvrir
+                                            </a>
+
 
                                         </div>
-                                        
 
                                     </div>
-                                </li>
-                            </ul>
-                        </div>
+
+
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
+
         </div>
+
     </div>
 
 </section>

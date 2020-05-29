@@ -1,14 +1,9 @@
 <section>
     <div class="pro-cover">
 
-        <agm-map [latitude]="lat" 
-                [longitude]="long" [zoom]="17">
+        <agm-map [latitude]="lat" [longitude]="long" [zoom]="17">
 
-            <agm-marker 
-                        [label] = "libelle"
-                        [latitude] = "lat" 
-                        [longitude]="long"
-                        draggable="true"></agm-marker>
+            <agm-marker [label]="libelle" [latitude]="lat" [longitude]="long" draggable="true"></agm-marker>
         </agm-map>
     </div>
 
@@ -16,8 +11,7 @@
         <div class="container pg-inn">
             <div class="col-md-3">
                 <div class="pro-user">
-                    <img 
-                        src="../../../assets/images/logo.png" alt="user">
+                    <img src="../../../assets/images/logo.png" alt="user">
                 </div>
                 <div class="pro-user-bio">
                     <ul>
@@ -26,88 +20,94 @@
                         </li>
                         <li>{{cours.coursCommun?.titre}}</li>
                         <li>
-                           <h5 style="text-align: center;" *ngIf="cours.coursCommun?.cout" class="pro-user-act">{{cours.coursCommun?.cout}} FCFA</h5>
+                            <h5 style="text-align: center;" *ngIf="cours.coursCommun?.cout" class="pro-user-act">
+                                {{cours.coursCommun?.cout}} FCFA</h5>
                         </li>
                         <li>
                             Début : <span>{{cours.coursCommun?.dateDebut  |date:"dd MMMM yyyy "}}</span>
 
                         </li>
                         <li>
-                             fin : <span>{{cours.coursCommun?.dateFin}}</span>
+                            fin : <span>{{cours.coursCommun?.dateFin}}</span>
                         </li>
-                        
+
                         <li *ngIf="cours.coursCommun?.cout">
                             Etat : <span *ngIf="cours.coursCommun?.inscriptionFermer === true">Fermé</span>
-                                    <span *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>
-                       </li>
-                       <li *ngIf="cours.coursCommun?.nbreMaxInscrits">
-                            {{cours.coursCommun.nbreMaxInscrits - cours.coursCommun.nombreInscrit}} <span> places disponibles</span>
-                     </li>
-                     <li *ngIf="!cours.coursCommun?.nbreMaxInscrits && cours.coursCommun?.cout">
-                        <span>Places disponibles <strong>illimitées</strong> </span>
-                     </li>
+                            <span *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>
+                        </li>
+                        <li *ngIf="cours.coursCommun?.nbreMaxInscrits">
+                            {{cours.coursCommun.nbreMaxInscrits - cours.coursCommun.nombreInscrit}} <span> places
+                                disponibles</span>
+                        </li>
+                        <li *ngIf="!cours.coursCommun?.nbreMaxInscrits && cours.coursCommun?.cout">
+                            <span>Places disponibles <strong>illimitées</strong> </span>
+                        </li>
                     </ul>
                 </div>
 
             </div>
             <div class="col-md-9">
 
-              
-                <div  *ngIf="cours.coursCommun?.cout" class="udb-sec">
-                    <a *ngIf="cours.coursCommun?.inscriptionFermer === true " 
-                        [ngClass]="{isDisabled: cours.coursCommun?.inscriptionFermer === true }" 
-                        
-                        style="width: 100%;"  class="details-line-btn">S'inscrire</a>
+                <div class="udb-sec">
 
-                    <a *ngIf="cours.coursCommun?.inscriptionFermer === false " 
-                        (click)=" onSubscribeToCoursCommun(cours)" 
-                        style="width: 100%;"  class="details-line-btn">S'inscrire</a>
+                    <div *ngIf="cours.coursCommun?.cout" class="udb-sec">
+                        <a *ngIf="cours.coursCommun?.inscriptionFermer === true "
+                            [ngClass]="{isDisabled: cours.coursCommun?.inscriptionFermer === true }"
+                            style="width: 100%;" class="details-line-btn">S'inscrire</a>
 
+                        <a *ngIf="cours.coursCommun?.inscriptionFermer === false "
+                            (click)=" onSubscribeToCoursCommun(cours)" style="width: 100%;"
+                            class="details-line-btn">S'inscrire</a>
+
+                    </div>
                 </div>
 
                 <div class="udb-sec">
+                    <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
+                    <p>{{cours.coursCommun?.description}}</p>
+                </div>
 
-                    <div class="udb-sec udb-prof">
-                        <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
-                        <p>{{cours.coursCommun?.description}}</p>
-                    </div>
+                <div *ngIf="!cours.coursCommun?.cout" class="udb-sec udb-time">
+                    <h4><img src="../../assets/images/icon/db4.png" alt="" /> Public cible</h4>
+                    <div class="tour_head1 udb-time-line days">
+                        <ul>
+                            <li *ngFor="let public of cours.publicCible" class="l-info-pack-plac"> <i
+                                    class="fa fa-clock-o" aria-hidden="true"></i>
+                                <div class="sdb-cl-tim">
+                                    <div class="sdb-cl-day">
+                                        <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA</h5>
+                                        <p> Niveau : {{public.niveau.libelle}}</p>
+                                        <p *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</p>
 
-                    <div  *ngIf="!cours.coursCommun?.cout"  class="udb-sec udb-time">
-                        <h4><img src="../../assets/images/icon/db4.png" alt="" /> Public cible</h4>
-                        <div class="tour_head1 udb-time-line days">
-                            <ul>
-                                <li *ngFor="let public of cours.publicCible" class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    <div class="sdb-cl-tim">
-                                        <div class="sdb-cl-day">
-                                            <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA</h5>
-                                            <p> Niveau : {{public.niveau.libelle}}</p>
-                                            <p *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</p>
-
-                                            <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>
-                                            <p *ngIf="public.inscriptionFermer === false"> Etat : Ouvert</p>
-                                            <p style="font-size: 85%;" *ngIf="public.nbreMaxInscrits"> {{public.nbreMaxInscrits - public.nombreInscrit}} places disponibles</p>
-                                            <p style="font-size: 85%;" *ngIf="!public.nbreMaxInscrits">Places disponibles : <strong>illimitées</strong> </p>
-                                        </div>
-                                        <div class="sdb-cl-class">
-                                            <ul>
-                                                <li *ngFor="let formation of public.formations">
-                                                    <div class="sdb-cl-class-name tooltipped" data-position="top" data-delay="50" data-tooltip="Class Details">
-                                                        <h5>{{formation.libelle}}</h5>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>
+                                        <p *ngIf="public.inscriptionFermer === false"> Etat : Ouvert</p>
+                                        <p style="font-size: 85%;" *ngIf="public.nbreMaxInscrits">
+                                            {{public.nbreMaxInscrits - public.nombreInscrit}} places disponibles</p>
+                                        <p style="font-size: 85%;" *ngIf="!public.nbreMaxInscrits">Places disponibles :
+                                            <strong>illimitées</strong> </p>
                                     </div>
-                                    <div style="float: right;">
-                                        <a *ngIf="public.inscriptionFermer === true" [ngClass]="{isDisabled: public.inscriptionFermer === true }" 
-                                             class="details-line-btn">S'inscrire</a>
-                                      <a  *ngIf="public.inscriptionFermer === false" 
-                                        (click)="onSubscribeToCoursCommun(public)" class="details-line-btn">S'inscrire</a>
-
+                                    <div class="sdb-cl-class">
+                                        <ul>
+                                            <li *ngFor="let formation of public.formations">
+                                                <div class="sdb-cl-class-name tooltipped" data-position="top"
+                                                    data-delay="50" data-tooltip="Class Details">
+                                                    <h5>{{formation.libelle}}</h5>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </li>
-                            </ul>
-                        </div>
+                                </div>
+                                <div style="float: right;">
+                                    <a *ngIf="public.inscriptionFermer === true"
+                                        [ngClass]="{isDisabled: public.inscriptionFermer === true }"
+                                        class="details-line-btn">S'inscrire</a>
+                                    <a *ngIf="public.inscriptionFermer === false"
+                                        (click)="onSubscribeToCoursCommun(public)"
+                                        class="details-line-btn">S'inscrire</a>
+
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

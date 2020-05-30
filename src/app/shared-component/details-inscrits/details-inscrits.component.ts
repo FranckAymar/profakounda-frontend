@@ -91,6 +91,7 @@ export class DetailsInscritsComponent implements OnInit {
 
     pdf.footer('Imprimé le : ' + new Date().toDateString())
 
+    pdf.create().download('Liste_profAkounda_'+ this.dataReceived.details.cours.organisation.libelle + "_"+ new Date().getDate().toString()  );
     pdf.create().open();
 
       });

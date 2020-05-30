@@ -21,7 +21,7 @@
                         <li>{{cours.coursCommun?.titre}}</li>
                         <li>
                             <h5 style="text-align: center;" *ngIf="cours.coursCommun?.cout" class="pro-user-act">
-                                {{cours.coursCommun?.cout}} FCFA</h5>
+                                {{cours.coursCommun?.cout | currency:'XOF'}} </h5>
                         </li>
                         <li>
                             Début : <span>{{cours.coursCommun?.dateDebut  |date:"dd MMMM yyyy "}}</span>
@@ -75,7 +75,7 @@
                                     class="fa fa-clock-o" aria-hidden="true"></i>
                                 <div class="sdb-cl-tim">
                                     <div class="sdb-cl-day">
-                                        <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA</h5>
+                                        <h5 style="text-align: center;" class="pro-user-act"> {{public.cout | currency:'XOF'}}</h5>
                                         <p> Niveau : {{public.niveau.libelle}}</p>
                                         <p *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</p>
 

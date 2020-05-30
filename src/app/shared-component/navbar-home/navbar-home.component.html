@@ -13,26 +13,27 @@
                 <div class="ed-mm-menu">
                     <a class="ed-micon"><i class="fa fa-bars"></i></a>
                     <div class="ed-mm-inn">
-                        <a  class="ed-mi-close"><i class="fa fa-times"></i></a>
+                        <a id="ed-mi-close"  class="ed-mi-close"><i class="fa fa-times"></i></a>
                         <h4>User Account</h4>
                         <ul  *ngIf="!authenticated" >
-                            <li><a href="#" routerLink ="/home/sign-in" >connexion</a>
+                            <li><a (click)="close()" href="#" routerLink ="/home/sign-in" >connexion</a>
                             </li>
-                            <li><a href="#" routerLink ="/home/sign-up" >inscription</a>
+                            <li><a (click)="close()" href="#" routerLink ="/home/sign-up" >inscription</a>
                             </li>
                         </ul>
                         <ul>
-                            <li><a href="#" routerLink ="/customers" >Mon Tableau de bord</a>
+                            <li><a *ngIf="authenticated" (click)="close()" href="#" routerLink ="/customers" >Mon Tableau de bord</a>
                             </li>
                         </ul>
                         <h4>Formations</h4>
                         <ul *ngIf="authenticated">
-                            <li><a routerLink ="/formations">Nos répétiteurs</a></li>
-                            
+                            <li><a (click)="close()" routerLink ="/formations">Nos répétiteurs</a></li>
+                            <li><a (click)="close()" routerLink ="/courscommun">Nos cours organisés</a></li>
+
                         </ul>
                         <h4>User Profile</h4>
                         <ul>
-                            <li><a href="dashboard.html">User profile</a></li>
+                            <li><a  href="dashboard.html">User profile</a></li>
                             <li><a href="db-courses.html">Courses</a></li>
                             <li><a href="db-exams.html">Exams</a></li>
                             <li><a href="db-profile.html">Prfile</a></li>

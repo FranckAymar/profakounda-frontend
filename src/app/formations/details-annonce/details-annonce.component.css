@@ -157,4 +157,9 @@ small{
   .udb-time-line2 ul li{
     padding-left: 0px;
   }
+
+  .headersStepper{
+
+    display: none;
+  }
 }

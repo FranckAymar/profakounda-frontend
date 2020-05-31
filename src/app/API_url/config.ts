@@ -49,6 +49,7 @@ export const URL = {
     modifierPhoto: consts.host+ consts.nameProject +'particulier/uploadPhoto',
     rechercherParticulier : consts.host+ consts.nameProject +'rechercherParticulierParUsername',
     getCode : consts.host+ consts.nameProject +'rechercherCodeParticulier',
+    reSendEmail : consts.host+ consts.nameProject +'renvoyerMail',
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
     renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',

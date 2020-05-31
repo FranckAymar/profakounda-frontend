@@ -20,12 +20,12 @@
             <div class="log-in-pop-right">
                 <h4>Login</h4>
                 <p>Don't have an account? Create your account. It's take less then a minutes</p>
-                <div *ngIf="errorInternet" class="modal-header center">
-                    <span class="alert alert-danger">Vérifier votre connexion à internet</span>
+                 <div *ngIf="errorInternet" class="modal-header center">
+                    <p class="alert alert-danger">Vérifier votre connexion à internet</p>
                 </div>
                 <div *ngIf="isFailed" class="modal-header center">
-                    <span class="alert alert-danger">Vérifier vos informations de connexion </span>
-                </div>
+                    <p class="alert alert-danger">Vérifier vos informations de connexion </p>
+                </div> 
                 <form  [formGroup]="loginForm" class="s12" (submit)="onLogin()">
                     <div>
                         <div class="input-field s12">

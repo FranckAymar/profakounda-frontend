@@ -7,7 +7,7 @@
     .sb2-2 {
      
       width: 100%  ;
-      padding: 40px ;
+      padding: 0px ;
       margin-left: 0px ;
       background: #e3e8ea;
   }
@@ -22,7 +22,7 @@
    
     float: left;
     width: 100%;
-    padding: 40px;
+    padding: 0px !important;
     margin-left: 20%;
     background: #e3e8ea;
 }

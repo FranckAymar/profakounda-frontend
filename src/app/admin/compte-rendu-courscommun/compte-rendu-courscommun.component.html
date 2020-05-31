@@ -10,13 +10,13 @@
                         <h4>COMPTE RENDU</h4>
                         <ul>
                             <li style="background-color: #DA7F5C; color: white;border-radius: 0.2em;padding-left: 0.1em;">
-                                Point Transactions : <span style="color: white;">{{revenuGlobale.pointGlobale}} Frcfa</span>
+                                Point Transactions : <span style="color: white;">{{revenuGlobale.pointGlobale | currency:'XOF'}}</span>
                             </li>
                             <li>
-                                Révénu profAkounda : <span>{{revenuGlobale.revenuProfAkounda}} Frcfa</span>
+                                Révénu profAkounda : <span>{{revenuGlobale.revenuProfAkounda | currency:'XOF'}}</span>
                             </li>
                             <li style="background-color: #002147; border-radius: 0.2em;padding-left: 0.1em;">
-                               <span style="color: white;"> Révénu Exterieur :</span> <span style="color:#DA7F5C">{{revenuGlobale.revenuExterieur}} Frcfa</span>
+                               <span style="color: white;"> Révénu Exterieur :</span> <span style="color:#DA7F5C">{{revenuGlobale.revenuExterieur | currency:'XOF'}} </span>
                             </li>
             
                         </ul>
@@ -64,9 +64,9 @@
                             <td>{{p.coursCommun.titre}}</td>
                             
                             <td>{{p.coursCommun.compteRendu.nombreInscrits}}</td>
-                            <td>{{p.coursCommun.compteRendu.pointGlobale}} Frcfa</td>
-                            <td>{{p.coursCommun.compteRendu.revenuClient}} Frcfa</td>
-                            <td>{{p.coursCommun.compteRendu.revenuOperateur}} Frcfa</td>
+                            <td>{{p.coursCommun.compteRendu.pointGlobale | currency:'XOF'}}</td>
+                            <td>{{p.coursCommun.compteRendu.revenuClient | currency:'XOF'}} </td>
+                            <td>{{p.coursCommun.compteRendu.revenuOperateur | currency:'XOF'}} </td>
                             <td><button class="btn btn-success">virement</button></td>
                         </tr>
                     </tbody>

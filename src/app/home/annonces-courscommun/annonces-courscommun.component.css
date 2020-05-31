@@ -1,0 +1,13 @@
+@media screen  and (min-width: 990px) and  (max-width: 1525px){
+    
+
+    .col-mobile{
+    position: relative; 
+    min-height: 0px !important; 
+    padding-right: 0px !important; 
+    padding-left: 0px !important;
+    }
+  
+  }
+  
+  

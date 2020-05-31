@@ -31,7 +31,7 @@ export class ParticulierService {
         return this.httpClient.post(URL.getPhoto, id);
     }
     revoyerEmail(mail: String) {
-        return this.httpClient.post(URL.renvoieMail,mail);
+        return this.httpClient.post(URL.reSendEmail,mail);
     }
 
     getAllCustomers(page, numberDataOfPage): Observable<any> {

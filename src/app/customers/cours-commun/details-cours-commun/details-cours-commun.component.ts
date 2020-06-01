@@ -1,3 +1,5 @@
+import { AlertComponent } from './../../../shared-component/alert/alert.component';
+import { SnackbarService } from './../../../shared-component/services/snackbar.service';
 import { DetailsInscritsComponent } from './../../../shared-component/details-inscrits/details-inscrits.component';
 import { MatDialog } from '@angular/material';
 import { InscriptioncourscommunService } from './../../../cours-commun/inscriptioncourscommun.service';
@@ -23,6 +25,8 @@ export class DetailsCoursCommunComponent implements OnInit {
 
   };
 
+  messageAlert = 'Cette action fera passée le nombre de places disponibles à illimité' ;
+
   idCoursCommun : number;
 
   inscrits = [];
@@ -31,7 +35,8 @@ export class DetailsCoursCommunComponent implements OnInit {
               private route : ActivatedRoute,
               private router : Router,
               private inscriptionService : InscriptioncourscommunService,
-              private dialog : MatDialog) { }
+              private dialog : MatDialog,
+              private snackService : SnackbarService) { }
 
   ngOnInit() {
     this.getIdCoursCommun() ;
@@ -45,6 +50,7 @@ export class DetailsCoursCommunComponent implements OnInit {
 
       (resp)=>{
         this.cours = resp ;
+        this.idCoursCommun = resp["coursCommun"].id;
         console.log(resp);
         
       },
@@ -71,20 +77,50 @@ export class DetailsCoursCommunComponent implements OnInit {
   }
 
 
-  onFetchInscrits(idPublicCible?){
+  onFetchInscrits(dataToSend, type){
 
-    let data = {
+    let data ;
+    if(type ==='publicCible'){
+      data= {
 
-      idCoursCommun : this.idCoursCommun,
-      idPublicCible : idPublicCible
+        idCoursCommun : this.idCoursCommun,
+        idPublicCible : dataToSend.id
+      }
+    }else{
+
+      data= {
+
+        idCoursCommun : this.idCoursCommun,
+        idPublicCible : ''
+
     }
+  }
     
     this.inscriptionService.recupererInscrit(data).subscribe(
 
       (resp)=>{
 
         console.log(resp);
-        this.openDialog(resp);
+
+        if(type ==='publicCible'){
+          
+          this.openDialog(
+            {
+              inscrit : resp,
+              details : {
+                publicCible : dataToSend,
+                cours : this.cours.coursCommun
+              },
+
+            });
+
+          return ;
+        }
+        this.openDialog(
+            {
+              inscrit : resp,
+              details : dataToSend
+            });
         
       },
 
@@ -105,7 +141,7 @@ export class DetailsCoursCommunComponent implements OnInit {
     this.dialog.closeAll();
 
     const dialogRef = this.dialog.open(DetailsInscritsComponent, {
-      width: '800px',
+      width: '1000px',
       data: data,
 
     });
@@ -118,6 +154,92 @@ export class DetailsCoursCommunComponent implements OnInit {
 
 
     });
+
+  }
+
+  openAlert(type, idPublicCible?) {
+
+    //Fermetture par défaut de toutes les dialogues
+    this.dialog.closeAll();
+
+    const dialogRef = this.dialog.open(AlertComponent, {
+      width: '400px',
+      data : {type : type , message : this.messageAlert}
+
+    });
+
+
+    /*
+      Après fermetture de la dialogue
+    */
+    dialogRef.afterClosed().subscribe(result => {
+
+     if(result){
+        
+      if(result.type === 'publicCible' && result.response ==='oui'){
+        this.onFermerInscriptionPublicCble(idPublicCible);
+      }else if(result.type === 'coursGeneral' && result.response ==='oui'){
+        this.onFermerInscriptionCoursCommun();
+      }
+
+     }
+    });
+
+  }
+
+
+
+  onFermerInscriptionPublicCble(idPublicCible){
+
+    this.coursCommunService.fermerInscriptionPublicCible(idPublicCible).subscribe(
+
+      (resp)=>{
+        
+        if(resp['inscriptionFermer']){
+          this.snackService.openSnackBar("Inscription fermée avec succès");
+        
+        }else{
+          this.snackService.openSnackBar("Inscription ouverte avec succès");
+
+        }
+        this.onFectCoursCommun();
+      },
+
+
+      (error)=>{
+        
+        console.log(error);
+        this.snackService.openSnackBar("Une erreur s'est produite veuillez réessayer");
+
+      }
+    )
+
+  }
+
+  onFermerInscriptionCoursCommun(){
+
+    this.coursCommunService.fermerInscriptionCoursCommun(this.idCoursCommun).subscribe(
+
+      (resp)=>{
+
+        if(resp['inscriptionFermer']){
+          this.snackService.openSnackBar("Inscription fermée avec succès");
+        
+        }else{
+          this.snackService.openSnackBar("Inscription ouverte avec succès");
+
+        }
+        this.onFectCoursCommun();
+      },
+
+
+      (error)=>{
+        
+        console.log(error);
+        this.snackService.openSnackBar("Une erreur s'est produite veuillez réessayer");
+
+      }
+    )
 
   }
 

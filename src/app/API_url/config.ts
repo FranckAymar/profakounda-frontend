@@ -18,7 +18,7 @@ export const URL = {
     modifierFiliere:  consts.host+ consts.nameProject +'admin/modifierFiliere' ,
     supprimerFiliere:  consts.host+ consts.nameProject +'admin/supprimerFiliere' ,
     //URL Villes
-    recupererVilles :  consts.host+consts.nameProject+'admin/villes' ,
+    recupererVilles :  consts.host+consts.nameProject+'villes' ,
     onFetchVillesString :  consts.host+consts.nameProject+'villesString' ,
     enregistrerVille : consts.host+ consts.nameProject +'admin/enregistrerVille',
     modifierVille:  consts.host+ consts.nameProject +'admin/modifierVille' ,
@@ -48,9 +48,12 @@ export const URL = {
     modifierParticulier : consts.host+ consts.nameProject +'particulier/modifierParticulier',
     modifierPhoto: consts.host+ consts.nameProject +'particulier/uploadPhoto',
     rechercherParticulier : consts.host+ consts.nameProject +'rechercherParticulierParUsername',
+    verifierVilleParticulier : consts.host+ consts.nameProject +'particulier/rechercherVilleParParticulier',
     getCode : consts.host+ consts.nameProject +'rechercherCodeParticulier',
+    reSendEmail : consts.host+ consts.nameProject +'renvoyerMail',
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
+    renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
 
@@ -88,6 +91,7 @@ export const URL = {
     deleteDisponibiliteByDay: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByDayId',
     deleteDisponibiliteByHour: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByHourId',
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
+    demandeMiseEnLigneObject: consts.host+ consts.nameProject +'particulier/demandemiseenligneObject',
     
     
    
@@ -155,19 +159,28 @@ export const URL = {
     modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
     demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
     recupererCoursCommunsInscritsParticulier : consts.host+ consts.nameProject + 'particulier/coursCommunsSelects',
-
+    coursCommunsParCode : consts.host+ consts.nameProject + '/home/coursCommunsParCode',
+    fermerInscriptionCoursCommun : consts.host+ consts.nameProject + 'particulier/fermerinscriptioncourscommun',
+    fermerInscriptionPublicCible : consts.host+ consts.nameProject + 'particulier/fermerinscriptionpubliccible',
+    coursCommunsParOrganisation : consts.host+ consts.nameProject + '/home/coursCommunsParOrganisation',
+    
+   
     //cours Commun admin
     listeCoursCommuns : consts.host+ consts.nameProject + 'admin/coursCommuns',
+    comptabiliteCoursCommun : consts.host+ consts.nameProject + 'admin/comptabilite',
+    comptabiliteParOrganisation : consts.host+ consts.nameProject + 'admin/comptabiliteParOrganistion',
     accepterMiseEnligneCourCommun : consts.host+ consts.nameProject + 'admin/accepterMiseEnligneCourCommun',
     refuserMiseEnLigneCourCommun : consts.host+ consts.nameProject + 'admin/refuserMiseEnLigneCourCommun',
     supprimerMiseEnligneCourCommun : consts.host+ consts.nameProject + 'admin/supprimerMiseEnligneCourCommun',
     allCoursCommunAdmin : consts.host+ consts.nameProject + 'admin/AllCoursCommun',
     recupererCoursCommunParId : consts.host+ consts.nameProject + 'particulier/detailCoursCommun',
+    recupererCoursCommunForHomeParId : consts.host+ consts.nameProject + 'detailCoursCommun',
+
     detailsCoursCommunAdmin : consts.host+ consts.nameProject + 'admin/detailsCoursCommun',
     //Organisation
-    recupererOrganisation : consts.host+ consts.nameProject + 'organisations',  
+    recupererOrganisation : consts.host+ consts.nameProject + 'organisations',
 
-    //InscriptionCOursCommun
+    //InscriptionCoursCommun
     inscriptioncourscommun : consts.host+ consts.nameProject + 'particulier/inscriptioncourscommun',
     inscriptionpubliccible : consts.host+ consts.nameProject + 'particulier/inscriptionpubliccible',
     recupererInscrit :  consts.host+ consts.nameProject + 'recupererinscrits',

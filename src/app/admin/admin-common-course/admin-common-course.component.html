@@ -35,8 +35,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Identifiant</th>
-                            <th>Par :</th>
+                            <th>Organisation</th>
+                            <th>Téléphone </th>
+                            <th>Titre </th>
                             <th>Date  De debut</th>
                             <th>Date de fin</th>
                             <th>cout</th>
@@ -46,7 +47,8 @@
                     <tbody>
                         <p *ngIf="courCommuns.length == 0">Aucun élément</p>
                         <tr *ngFor="let p of courCommuns">
-                            <td>{{p.id}}</td>
+                            <td>{{p.organisation.libelle}}</td>
+                            <td>{{p.telephone}}</td>
                             <td>{{p.titre}}</td>
                             <td>{{p.dateDebut |date:"yyyy-MM-dd"}}</td>
                             <td>{{p.dateFin |date:"yyyy-MM-dd "}}</td>
@@ -68,33 +70,45 @@
                                         Action
                                     </button>
                                     <ul id='top-menu' class='top-menu-sty dropdown-menu dropdown-menu-right'>
-                                        <li><a
-                                            [ngClass]="{isDisabled: !p.attenteMiseEnLigne &&
-                                                                    !p.enLigne &&
-                                                                     !p.refusMiseEnLigne &&
-                                                                    !p.suppressionMiseEnLigne
-                                                                    }"
-                                            [routerLink]="[p.id]"
+                                        <li><a *ngIf=" !p.attenteMiseEnLigne &&
+                                                        !p.enLigne &&
+                                                        !p.refusMiseEnLigne &&
+                                                        !p.suppressionMiseEnLigne"
+                                                 class="isDisabled"                        
                                                  class="waves-effect">Détails</a>
+                                        <a *ngIf="p.attenteMiseEnLigne ||
+                                                 p.enLigne ||
+                                                 p.refusMiseEnLigne ||
+                                                 p.suppressionMiseEnLigne"
+                                         [routerLink]="[p.id]"
+                                          class="waves-effect">Détails</a>
                                         </li>
-                                        <li class="divider"></li>
+                                        <li class="divider"></li> 
 
-                                        <li><a (click)="onAccorderMiseEnLigne(p.id)"
-                                                [ngClass]="{isDisabled: !p.attenteMiseEnLigne}"
+                                        <li><a *ngIf="!p.attenteMiseEnLigne"
+                                                class="waves-effect isDisabled">Mettre en ligne</a>
+                                            
+                                                <a *ngIf="p.attenteMiseEnLigne" (click)="onAccorderMiseEnLigne(p.id)"
                                                 class="waves-effect">Mettre en ligne</a>
                                         </li>
                                         <li class="divider"></li>
-                                        <li><a data-toggle="modal" data-target="#ajouterRefus"
+                                        <li><a *ngIf="!p.attenteMiseEnLigne" data-toggle="modal" 
+                                             class="ho-dr-con-last waves-effect isDisabled">Refuser Mise en ligne</a>
+
+                                             <a *ngIf="p.attenteMiseEnLigne" data-toggle="modal" data-target="#ajouterRefus"
                                              (click)="prepareToRefusEnLigne(p.id)"
-                                             [ngClass]="{isDisabled: !p.attenteMiseEnLigne }" 
                                              class="ho-dr-con-last waves-effect">Refuser Mise en ligne</a>
                                         </li>
                                         <li class="divider"></li>
-                                        <li><a [ngClass]="{isDisabled: !p.enLigne}" 
-                                            (click)="supprimerMiseEnLigne(p.id)" 
-                                            class="ho-dr-con-last waves-effect">Mettre Hors ligne</a>
+                                        <li><a *ngIf="!p.enLigne"  
+                                                class="ho-dr-con-last waves-effect isDisabled">Mettre Hors ligne</a>
+
+                                             <a *ngIf="p.enLigne"
+                                                (click)="supprimerMiseEnLigne(p.id)" 
+                                                class="ho-dr-con-last waves-effect">Mettre Hors ligne</a>
                                         </li>
                                     </ul>
+
                                 </div>
 
                             </td>

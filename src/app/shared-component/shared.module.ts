@@ -6,8 +6,8 @@ import { AgmCoreModule } from '@agm/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { NavbarAuthComponent } from './navbar-auth/navbar-auth.component';
@@ -16,6 +16,10 @@ import { GooglePlaceComponent } from './google-place/google-place.component';
 import { OganiserCoursSheetComponent } from './oganiser-cours-sheet/oganiser-cours-sheet.component';
 import { DetailsInscritsComponent } from './details-inscrits/details-inscrits.component';
 import { SearchBarCoursCommunComponent } from './search-bar-cours-commun/search-bar-cours-commun.component';
+import { AlertComponent } from './alert/alert.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -29,7 +33,8 @@ import { SearchBarCoursCommunComponent } from './search-bar-cours-commun/search-
     CardCoursCommunComponent,
     PaymentCoursCommunComponent,
     DetailsInscritsComponent,
-    SearchBarCoursCommunComponent
+    SearchBarCoursCommunComponent,
+    AlertComponent
 
   ],
   imports: [
@@ -62,6 +67,15 @@ import { SearchBarCoursCommunComponent } from './search-bar-cours-commun/search-
      
   
   ],
-  entryComponents : [OganiserCoursSheetComponent, PaymentCoursCommunComponent, DetailsInscritsComponent]
+
+  providers : [DatePipe,
+               { 
+                 provide: LOCALE_ID, 
+                 useValue: 'fr-FR'
+               }],
+  entryComponents : [OganiserCoursSheetComponent, 
+                    PaymentCoursCommunComponent, 
+                    DetailsInscritsComponent, 
+                    AlertComponent]
 })
 export class SharedModule { }

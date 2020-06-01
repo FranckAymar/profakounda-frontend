@@ -16,6 +16,16 @@ export class CoursCommunAdminService {
     return this.httpClient.get(URL.listeCoursCommuns);
 
   }
+  fetchCoursComptabilite(): Observable<any> {
+
+    return this.httpClient.get(URL.comptabiliteCoursCommun);
+
+  }
+  fetchCoursComptabiliteByOrganisation(idOrganisation:Number): Observable<any> {
+
+    return this.httpClient.post(URL.comptabiliteParOrganisation,idOrganisation);
+
+  }
 
   fetchAllcoursCommunAdmin(critereFiltre?): Observable<any> {
 

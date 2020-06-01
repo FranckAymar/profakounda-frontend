@@ -21,6 +21,13 @@ export class CoursCommunService {
   }
 
 
+  fetchDetailsCoursCommunForHome(id?) :Observable<any> {
+
+      return  this.http.get(URL.recupererCoursCommunForHomeParId + "/" + id);
+
+
+  }
+
   fetchCoursCommun(id?) :Observable<any> {
 
     if(id){
@@ -78,16 +85,53 @@ export class CoursCommunService {
 }
 
 
-  rechercherParCode() : Observable<any>{
+  rechercherParCode(code) : Observable<any>{
+  
+    if(code==undefined){ 
+      
+      return this.http.get(URL.recupererCoursCommunHome);
 
-    return null;
+    }
 
+      return  this.http.get(URL.coursCommunsParCode + "/" +code);
+    
+    
+  }
+
+  rechercherParOrganisation(organisationName): Observable<any> {
+ 
+    if(organisationName===""){ 
+      return this.http.get(URL.recupererCoursCommunHome);
+
+    }
+    else{
+        return  this.http.get(URL.coursCommunsParOrganisation + "/" +organisationName);
+    }
   }
 
   fectchCoursCommunSelect(): Observable<any> {
     return this.http.get(URL.recupererCoursCommunsInscritsParticulier);
    }
 
+   fermerInscriptionCoursCommun(id){
+    
+    return this.http.post(URL.fermerInscriptionCoursCommun, id);
+
+   }
+
+   fermerInscriptionPublicCible(id){
+
+    return this.http.post(URL.fermerInscriptionPublicCible, id);
+
+
+   }
+
+  fetchOrganisationList(): Observable<any> {
+    return this.http.get(URL.recupererOrganisation);
+   }
+
+
 
 
 }
+

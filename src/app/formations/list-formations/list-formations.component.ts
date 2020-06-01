@@ -83,7 +83,6 @@ export class ListFormationsComponent implements OnInit {
  
         this.totalPageArray = new Array(this.totalPage);
 
-        console.log(resp.data);
         
         this.propositionFormations = resp.data;
       },
@@ -100,7 +99,6 @@ export class ListFormationsComponent implements OnInit {
   } 
   
   OnFiltreFormation(propositionFormation){  
-        console.log('test');
         
         this.propositionFormations=propositionFormation;
   }
@@ -110,7 +108,6 @@ export class ListFormationsComponent implements OnInit {
     this.listFormationsService.getFilterFormation(criterRecherche,this.villeKey).subscribe(
   
     (reponse)=>{
-      console.log( "search reult :"+reponse);
       
       this.propositionFormations=reponse;
     },
@@ -122,8 +119,6 @@ export class ListFormationsComponent implements OnInit {
 }
 
 OnFiterDeFormationParVille(propositionFormation){ 
-
-  console.log("emis :" + propositionFormation);
       
   this.propositionFormations=propositionFormation;
 

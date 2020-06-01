@@ -34,12 +34,12 @@ export class DetailsCoursCommunComponent implements OnInit {
   libelle : string;
 
   constructor(private dialog: MatDialog,
-    private coursCommunService: CoursCommunService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private signService: SignInService,
-    private inscritService : InscriptioncourscommunService,
-    private snack : SnackbarService,
+              private coursCommunService: CoursCommunService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private signService: SignInService,
+              private inscritService : InscriptioncourscommunService,
+              private snack : SnackbarService,
     ) {
 
     this.state = router.routerState;
@@ -57,11 +57,15 @@ export class DetailsCoursCommunComponent implements OnInit {
     if (this.action === 'subscribe') {
       
       if(this.signService.isLogged())
-         this.openDialog({ idCoursCommun: this.idCoursCommun, idPublicCible: this.idPublicCible, data : this.cours });
+         this.openDialog({ idCoursCommun: this.idCoursCommun, 
+                           idPublicCible: this.idPublicCible,
+                            data : this.cours });
 
     }
 
     this.isCheckLastInscription();
+
+    
     
   }
 
@@ -72,7 +76,7 @@ export class DetailsCoursCommunComponent implements OnInit {
 
   onSubscribeToCoursCommun(data) {
  
-    this.navigateToSubScribe(data);
+    //this.navigateToSubScribe(data);
 
     if(!data.coursCommun){
       this.idPublicCible = data.id;
@@ -83,11 +87,12 @@ export class DetailsCoursCommunComponent implements OnInit {
       return;
     }
  
+    console.log(this.snapshot);
+    
 
-    setTimeout(() => {
-      this.router.navigate(['/home/sign-in'], { queryParams: { returnUrl: this.snapshot.url } });
-    }, 500);
-
+    this.router.navigate(['/home/sign-in'],     
+                                         { queryParams: { 
+                                          returnUrl: this.snapshot.url + "?action=subscribe&publicible="+(data.id ? data.id : "") } });
 
   }
 
@@ -109,7 +114,14 @@ export class DetailsCoursCommunComponent implements OnInit {
       Après fermetture de la dialogue
     */
     dialogRef.afterClosed().subscribe(result => {
+      
 
+      if(result.etat === 'reussie'){
+        this.onFectCoursCommun();
+        return ;
+      }
+
+      this.snack.openSnackBar("Une erreur s'est produite pendant le paiement")
 
     });
 
@@ -117,7 +129,7 @@ export class DetailsCoursCommunComponent implements OnInit {
 
   onFectCoursCommun() {
 
-    this.coursCommunService.fetchCoursCommun(this.idCoursCommun).subscribe(
+    this.coursCommunService.fetchDetailsCoursCommunForHome(this.idCoursCommun).subscribe(
 
       (resp) => {
       
@@ -125,7 +137,8 @@ export class DetailsCoursCommunComponent implements OnInit {
         
         this.cours = resp;
         this.initializeMap(this.cours.lieuIntervention);
-        
+        console.log(this.cours);
+
 
       },
       (error) => {
@@ -157,7 +170,7 @@ export class DetailsCoursCommunComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
 
       this.action = params['action'];
-      this.idPublicCible = params['idpublicible'];
+      this.idPublicCible = params['publicible'];
 
     });
   }

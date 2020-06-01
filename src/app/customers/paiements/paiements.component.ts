@@ -128,7 +128,8 @@ export class PaiementsComponent implements OnInit {
 
     pdf.footer('Imprimé le : ' + new Date().toDateString())
 
-
+    
+    pdf.create().download('Recu_profAkounda_'+data.nom );
     pdf.create().open();
 
       });

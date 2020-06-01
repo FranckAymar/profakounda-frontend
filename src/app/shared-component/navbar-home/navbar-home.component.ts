@@ -35,4 +35,8 @@ export class NavbarHomeComponent implements OnInit {
 }
 
 
+close(){
+  document.getElementById('ed-mi-close').click();
+}
+
 }

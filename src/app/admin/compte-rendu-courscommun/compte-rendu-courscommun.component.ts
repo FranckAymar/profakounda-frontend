@@ -12,7 +12,11 @@ export class CompteRenduCourscommunComponent implements OnInit {
   constructor(private coursCommunAdminService : CoursCommunAdminService,private organisationService:OrganisationService) { }
   resultats= [];
   organisations = [];
-  revenuGlobale = [];
+  revenuGlobale  : {
+    pointGlobale : null,
+    revenuProfAkounda : null,
+    revenuExterieur : null
+  };
   @Input() idOrganisation:Number;
   ngOnInit() {
     this.onFetchCoursCommuns();
@@ -54,7 +58,6 @@ export class CompteRenduCourscommunComponent implements OnInit {
     this.coursCommunAdminService.fetchCoursCommun().subscribe(
 
       (resp) => {
-  console.log("execution..");
        this.resultats = resp['resultats'];
        this.revenuGlobale = resp['compteRenduGlobale'];
        

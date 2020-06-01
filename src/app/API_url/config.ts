@@ -50,8 +50,10 @@ export const URL = {
     rechercherParticulier : consts.host+ consts.nameProject +'rechercherParticulierParUsername',
     verifierVilleParticulier : consts.host+ consts.nameProject +'particulier/rechercherVilleParParticulier',
     getCode : consts.host+ consts.nameProject +'rechercherCodeParticulier',
+    reSendEmail : consts.host+ consts.nameProject +'renvoyerMail',
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
+    renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
 
@@ -172,6 +174,8 @@ export const URL = {
     supprimerMiseEnligneCourCommun : consts.host+ consts.nameProject + 'admin/supprimerMiseEnligneCourCommun',
     allCoursCommunAdmin : consts.host+ consts.nameProject + 'admin/AllCoursCommun',
     recupererCoursCommunParId : consts.host+ consts.nameProject + 'particulier/detailCoursCommun',
+    recupererCoursCommunForHomeParId : consts.host+ consts.nameProject + 'detailCoursCommun',
+
     detailsCoursCommunAdmin : consts.host+ consts.nameProject + 'admin/detailsCoursCommun',
     //Organisation
     recupererOrganisation : consts.host+ consts.nameProject + 'organisations',

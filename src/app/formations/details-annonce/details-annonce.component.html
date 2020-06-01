@@ -16,7 +16,7 @@
         <div class="container pg-inn">
             <div class="col-md-3">
                 <div class="pro-user">
-                    <img *ngIf="propositionFormation.idParticulier" 
+                    <img *ngIf="propositionFormation.idParticulier"
                         src="{{ urlServer}}/{{propositionFormation.idParticulier}}" alt="user">
                 </div>
                 <div class="pro-user-bio">
@@ -25,7 +25,7 @@
                             <h4>{{propositionFormation.code}}</h4>
                         </li>
                         <li>{{propositionFormation.niveau?.libelle}}</li>
-                       
+
                     </ul>
                 </div>
 
@@ -67,8 +67,8 @@
 
                     <div class="udb-sec udb-cour-stat">
                         <h4><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
-                        <div class="pro-con-table">
-                            <table class="bordered responsive-table">
+                        <div class="pro-con-table table-responsive">
+                            <table class="bordered table">
                                 <thead>
                                     <tr>
                                         <th>Niveaux</th>
@@ -81,10 +81,11 @@
                                 <tbody>
                                     <tr *ngFor="let contrat of propositionFormation.contrats">
                                         <td>{{contrat.niveau.libelle}}</td>
-                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.minMontant | currency:'XOF'}}
+                                        <td class="align-text-right"><span
+                                                class="pro-user-act">{{contrat.minMontant | currency:'XOF'}}
+                                            </span></td>
+                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant | currency:'XOF'}}
                                                 </span></td>
-                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}}
-                                                FCFA</span></td>
 
                                     </tr>
                                 </tbody>
@@ -96,7 +97,7 @@
 
                         <div class="tour_head1 udb-time-line days">
                             <ul>
-                                <li *ngFor="let disponibilite of propositionFormation.disponibilites "
+                                <li *ngFor="let disponibilite of propositionFormation.disponibilites"
                                     class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     <div class="sdb-cl-tim">
                                         <div class="sdb-cl-day">
@@ -124,78 +125,90 @@
 
 
                     <div id="UpdateComments" class="udb-sec udb-time">
-                        <h4 ><i class="fa fa-comment" aria-hidden="true"></i>  Notes et Commentaires </h4>
+                        <h4><i class="fa fa-comment" aria-hidden="true"></i> Notes et Commentaires </h4>
 
-                        <div class="tour_head1 udb-time-line days">
+                        <div class="tour_head1 udb-time-line2 days">
                             <div style="width: 10em;margin: auto;">
-                                <a class="btn btn-primary" *ngIf="isConnected && !isProprio"   data-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
-                                  Mon avis
+                                <a class="btn btn-primary" *ngIf="isConnected && !isProprio" data-toggle="collapse"
+                                    href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Mon avis
                                 </a>
                                 <a *ngIf="!isConnected" (click)="showAlert()" class="btn btn-primary">
                                     Mon avis
-                                  </a>
+                                </a>
                             </div>
-                              <div class="collapse" id="collapseExample">
+                            <div class="collapse" id="collapseExample">
                                 <form (ngSubmit)="enregistrerCommentaire()" #k="ngForm">
                                     <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                                     <div style="margin-top: 0.5em;" class="form-group">
                                         <label for="note">Note:</label>
-                                       
-                                             <i (click)="changeEtoile1()" 
-                                                [ngStyle]="{color:getColor1()}" 
-                                                class="fa fa-star etoileNote"></i>
 
-                                            <i (click)="changeEtoile2()" 
-                                                [ngStyle]="{color:getColor2()}" 
-                                                class="fa fa-star etoileNote"></i>
+                                        <i (click)="changeEtoile1()" [ngStyle]="{color:getColor1()}"
+                                            class="fa fa-star etoileNote"></i>
 
-                                            <i (click)="changeEtoile3()" 
-                                                [ngStyle]="{color:getColor3()}" 
-                                                class="fa fa-star etoileNote"></i> 
-                                            
-                                            <i (click)="changeEtoile4()" 
-                                                [ngStyle]="{color:getColor4()}" 
-                                                class="fa fa-star etoileNote"></i> 
-                                                
-                                            <i (click)="changeEtoile5()" 
-                                                [ngStyle]="{color:getColor5()}" 
-                                                class="fa fa-star etoileNote"></i>  
+                                        <i (click)="changeEtoile2()" [ngStyle]="{color:getColor2()}"
+                                            class="fa fa-star etoileNote"></i>
+
+                                        <i (click)="changeEtoile3()" [ngStyle]="{color:getColor3()}"
+                                            class="fa fa-star etoileNote"></i>
+
+                                        <i (click)="changeEtoile4()" [ngStyle]="{color:getColor4()}"
+                                            class="fa fa-star etoileNote"></i>
+
+                                        <i (click)="changeEtoile5()" [ngStyle]="{color:getColor5()}"
+                                            class="fa fa-star etoileNote"></i>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label for="commentaire">Commentaire:</label>
-                                        <textarea [(ngModel)]="avis.commentaire"  class="form-control"  required id="commentaire" name="commentaire" cols="20" rows="5">
+                                        <textarea [(ngModel)]="avis.commentaire" class="form-control" required
+                                            id="commentaire" name="commentaire" cols="20" rows="5">
                                         </textarea>
                                     </div>
-                                    <button type="submit" [disabled]="k.invalid" class="btn btn-danger">Enregistrer</button>
+                                    <button type="submit" [disabled]="k.invalid"
+                                        class="btn btn-danger">Enregistrer</button>
                                 </form>
-                              </div>
-                              <div  style="height: 18em;overflow: auto;">
+                            </div>
+                            <div style="height: 18em;overflow: auto;">
                                 <div style="margin-top: 1em;" *ngFor="let av of tabAvis ">
-                                    <div style="border-radius: 0.5em 0.5em 0 0; background-color: white !important;" class="sb2-12 ">
+                                    <div style="border-radius: 0.5em 0.5em 0 0; background-color: white !important;"
+                                        class="sb2-12 ">
                                         <ul>
-                                            <li><img  src="{{urlServer}}/{{av.idParticulier}}" alt="">
+                                            <li><img src="{{urlServer}}/{{av.idParticulier}}" alt="">
                                             </li>
                                             <li>
-                                                <h5 style="color: #007BFF;">{{av.nomParticulier}} {{av.prenomParticulier}} </h5>
+                                                <h5 style="color: #007BFF;">{{av.nomParticulier}}
+                                                    {{av.prenomParticulier}} </h5>
                                                 <div>
-                                                    <i  [ngStyle]="{color:getColor(av.etoile1)}" class="fa fa-star etoile"></i><i [ngStyle]="{color:getColor(av.etoile2)}" class="fa fa-star etoile"></i> <i [ngStyle]="{color:getColor(av.etoile3)}" class="fa fa-star etoile"></i> <i [ngStyle]="{color:getColor(av.etoile4)}"  class="fa fa-star etoile"></i><i [ngStyle]="{color:getColor(av.etoile5)}"  class="fa fa-star etoile"></i>
-                                                   </div>
+                                                    <i [ngStyle]="{color:getColor(av.etoile1)}"
+                                                        class="fa fa-star etoile"></i><i
+                                                        [ngStyle]="{color:getColor(av.etoile2)}"
+                                                        class="fa fa-star etoile"></i> <i
+                                                        [ngStyle]="{color:getColor(av.etoile3)}"
+                                                        class="fa fa-star etoile"></i> <i
+                                                        [ngStyle]="{color:getColor(av.etoile4)}"
+                                                        class="fa fa-star etoile"></i><i
+                                                        [ngStyle]="{color:getColor(av.etoile5)}"
+                                                        class="fa fa-star etoile"></i>
+                                                </div>
                                                 <div>{{av.commentaire}}</div>
                                             </li>
-                                            <div *ngIf="id===av.idParticulier" style="margin-top: 0.5em;"><a href="#UpdateComments" (click)="getAvis(av)" data-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample" style="color: blue;">Modifier</a></div>
+                                            <div *ngIf="id===av.idParticulier" style="margin-top: 0.5em;"><a
+                                                    href="#UpdateComments" (click)="getAvis(av)" data-toggle="collapse"
+                                                    href="#collapseExample" aria-expanded="false"
+                                                    aria-controls="collapseExample" style="color: blue;">Modifier</a>
+                                            </div>
                                         </ul>
-                                             
-                                        
-                                        <span 
-                class="home-top-cour-rat">{{av.date}}</span>
+
+
+                                        <span class="home-top-cour-rat">{{av.date}}</span>
                                     </div>
-                                    
-                                    
-                                  </div>
-                              </div>
-                              
-                            
+
+
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -204,160 +217,161 @@
     </div>
 
 </section>
-    <!--SECTION END-->
-    <section>
-        <!--Modal for Payment-->
-        <div id="modalPayment" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12 stepper">
-                                    <ul class="progressbar">
-                                        <li id="step1" class="active">Connexion</li>
-                                        <li id="step2">Forfaits</li>
-                                        <li id="step3">Mode de paiement</li>
-                                        <li id="step4">Récapitulatif</li>
-                                        <li id="step5">Confirmation</li>
-                                    </ul>
-                                </div>
+<!--SECTION END-->
+<section>
+    <!--Modal for Payment-->
+    <div id="modalPayment" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 stepper">
+                                <ul class="progressbar">
+                                    <li id="step1" class="active"><span class="headersStepper">Connexion</span></li>
+                                    <li id="step2"><span class="headersStepper">Forfaits</span></li>
+                                    <li id="step3"><span class="headersStepper">Mode de paiement</span></li>
+                                    <li id="step4"><span class="headersStepper">Récapitulatif</span></li>
+                                    <li id="step5"><span class="headersStepper">Confirmation</span></li>
+                                </ul>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <!--Login-->
-                                    <div id="content1-signin">
-                                        <div *ngIf="errorInternet" class="modal-header center">
-                                            <span class="alert alert-danger">Vérifier votre connexion à internet</span>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!--Login-->
+                                <div id="content1-signin">
+                                    <div *ngIf="errorInternet" class="modal-header center">
+                                        <p class="alert alert-danger">Vérifier votre connexion à internet</p>
+                                    </div>
+                                    <div *ngIf="isFailed" class="modal-header center">
+                                        <p class="alert alert-danger">Vérifier vos informations de connexion
+                                        </p>
+                                    </div>
+                                    <form [formGroup]="sigInForm" (submit)="onSignIn()">
+                                        <div class="input-field s12">
+                                            <input type="text" data-ng-model="name" class="validate"
+                                                formControlName="username">
+                                            <label>Adresse e-mail</label>
                                         </div>
-                                        <div *ngIf="isFailed" class="modal-header center">
-                                            <span class="alert alert-danger">Vérifier vos informations de connexion
-                                            </span>
+                                        <small *ngIf="sigInForm.controls.username.errors?.email"
+                                            class="invalid-feedback">
+                                            Adresse e-mail non valide
+                                        </small>
+                                        <div class="input-field s12">
+                                            <input type="password" data-ng-model="name" class="validate"
+                                                formControlName="password">
+                                            <label>Mot de passe</label>
                                         </div>
-                                        <form [formGroup]="sigInForm" (submit)="onSignIn()">
+                                        <div *ngIf="" class="invalid-feedback">
+                                            Adresse e-mail non valide
+                                        </div>
+                                        <div class="form-group">
+                                            <button [disabled]="sigInForm.invalid" type="submit"
+                                                class="btn btn-bg-color btn-block">Se
+                                                connecter</button>
+                                        </div>
+
+                                    </form>
+                                    <p (click)="goToSignUp()" class="text-center"><button class="btn-link">Create an
+                                            Account</button></p>
+                                </div>
+                                <!--Inscription-->
+                                <div id="content1-signup" class="hide">
+                                    <div *ngIf="message" class="modal-header center">
+                                        <p class="alert alert-danger">{{message}}</p>
+                                    </div>
+                                    <form [formGroup]="singUpForm" (submit)="onSignUp()">
+                                        <div>
                                             <div class="input-field s12">
                                                 <input type="text" data-ng-model="name" class="validate"
-                                                    formControlName="username">
+                                                    formControlName="email">
                                                 <label>Adresse e-mail</label>
                                             </div>
-                                            <small *ngIf="sigInForm.controls.username.errors?.email"
+                                            <small *ngIf="singUpForm.controls.email.errors?.email"
                                                 class="invalid-feedback">
                                                 Adresse e-mail non valide
                                             </small>
+                                        </div>
+
+                                        <div>
                                             <div class="input-field s12">
                                                 <input type="password" data-ng-model="name" class="validate"
                                                     formControlName="password">
                                                 <label>Mot de passe</label>
                                             </div>
-                                            <div *ngIf="" class="invalid-feedback">
-                                                Adresse e-mail non valide
-                                            </div>
-                                            <div class="form-group">
-                                                <button [disabled]="sigInForm.invalid" type="submit"
-                                                    class="btn btn-bg-color btn-block">Se
-                                                    connecter</button>
-                                            </div>
 
-                                        </form>
-                                        <p (click)="goToSignUp()" class="text-center"><button class="btn-link">Create an
-                                                Account</button></p>
-                                    </div>
-                                    <!--Inscription-->
-                                    <div id="content1-signup" class="hide">
-                                        <div *ngIf="message" class="modal-header center">
-                                            <span class="alert alert-danger">{{message}}</span>
                                         </div>
-                                        <form [formGroup]="singUpForm" (submit)="onSignUp()">
-                                            <div>
-                                                <div class="input-field s12">
-                                                    <input type="text" data-ng-model="name" class="validate"
-                                                        formControlName="email">
-                                                    <label>Adresse e-mail</label>
-                                                </div>
-                                                <small *ngIf="singUpForm.controls.email.errors?.email"
-                                                    class="invalid-feedback">
-                                                    Adresse e-mail non valide
-                                                </small>
+                                        <div>
+                                            <div class="input-field s12">
+                                                <input type="password" data-ng-model="name" class="validate"
+                                                    formControlName="passwordConfirm">
+                                                <label>Confirmer votre mot de passe</label>
                                             </div>
-
-                                            <div>
-                                                <div class="input-field s12">
-                                                    <input type="password" data-ng-model="name" class="validate"
-                                                        formControlName="password">
-                                                    <label>Mot de passe</label>
-                                                </div>
-
-                                            </div>
-                                            <div>
-                                                <div class="input-field s12">
-                                                    <input type="password" data-ng-model="name" class="validate"
-                                                        formControlName="passwordConfirm">
-                                                    <label>Confirmer votre mot de passe</label>
-                                                </div>
-                                                <small class="invalid-feedback"
-                                                    *ngIf="singUpForm.controls.passwordConfirm.errors?.passwordMatch">
-                                                    Les mots de passes doivent correspondre
-                                                </small>
-                                            </div>
-                                            <div class="form-group">
-                                                <button [disabled]="singUpForm.invalid" type="submit"
-                                                    class="btn btn-bg-color btn-block">S'inscrire</button>
-                                            </div>
-
-                                        </form>
-                                        <p #goToSignin (click)="goToSignIn()" class="text-center"><button
-                                                class="btn-link">Se
-                                                connecter</button></p>
-                                    </div>
-                                    <!--Forfaits-->
-                                    <div id="content2" class="hide">
-
-                                        <div class="tab-inn">
-                                            <div style="width: 100%;overflow: auto;" class="table-responsive table-desi">
-                                                <table class="table table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Forfait</th>
-                                                            <th>Requêtes</th>
-                                                            <th>Valide pour :</th>
-                                                            <th>Montant</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                        <tr *ngFor="let forfait of forfaits; let i=index">
-                                                            <td>
-                                                                <input (change)="forfaitChange()" [value]="forfait"
-                                                                    type="radio" name="forfait"
-                                                                    [(ngModel)]="paiementDetails.forfait"
-                                                                    class="filled-in" id="filled-in-box-{{i}}" />
-                                                                <label for="filled-in-box-{{i}}"></label>
-                                                            </td>
-                                                            <td>{{forfait.name}}</td>
-                                                            <td>{{forfait.nbreRequete}}</td>
-                                                            <td>{{forfait.nbreJour}} jour(s)</td>
-                                                            <td class="align-text-right"><span
-                                                                    class="pro-user-act">{{forfait.montant}}
-                                                                    FCFA</span></td>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                            <small class="invalid-feedback"
+                                                *ngIf="singUpForm.controls.passwordConfirm.errors?.passwordMatch">
+                                                Les mots de passes doivent correspondre
+                                            </small>
+                                        </div>
+                                        <div class="form-group">
+                                            <button [disabled]="singUpForm.invalid" type="submit"
+                                                class="btn btn-bg-color btn-block">S'inscrire</button>
                                         </div>
 
-                                        <button id="nextBtnForfait" disabled (click)=next()
-                                            class="btn btn-bg-color btn-block">Suivant</button>
+                                    </form>
+                                    <p #goToSignin (click)="goToSignIn()" class="text-center"><button
+                                            class="btn-link">Se
+                                            connecter</button></p>
+                                </div>
+                                <!--Forfaits-->
+                                <div id="content2" class="hide">
 
+                                    <div class="tab-inn">
+                                        <div style="width: 100%;overflow: auto;" class="table-responsive table-desi">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Forfait</th>
+                                                        <th>Requêtes</th>
+                                                        <th>Valide pour :</th>
+                                                        <th>Montant</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr *ngFor="let forfait of forfaits; let i=index">
+                                                        <td>
+                                                            <input (change)="forfaitChange()" [value]="forfait"
+                                                                type="radio" name="forfait"
+                                                                [(ngModel)]="paiementDetails.forfait" class="filled-in"
+                                                                id="filled-in-box-{{i}}" />
+                                                            <label for="filled-in-box-{{i}}"></label>
+                                                        </td>
+                                                        <td>{{forfait.name}}</td>
+                                                        <td>{{forfait.nbreRequete}}</td>
+                                                        <td>{{forfait.nbreJour}} jour(s)</td>
+                                                        <td class="align-text-right"><span
+                                                                class="pro-user-act">{{forfait.montant | currency : 'XOF'}}
+                                                                </span></td>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <!--Mode de paiement-->
-                                    <div id="content3" class=" hide">
 
-                                        <div class="form-check-inline text-center">
+                                    <button id="nextBtnForfait" disabled (click)=next()
+                                        class="btn btn-bg-color btn-block">Suivant</button>
 
-                                            <p>Choississez un opérateur :</p>
+                                </div>
+                                <!--Mode de paiement-->
+                                <div id="content3" class=" hide">
 
+                                    <div class="form-check-inline text-center">
+
+                                        <p>Choississez un opérateur :</p>
+
+                                        <div class="row">
                                             <input (change)="modePaiemenentValidation()" type="radio" value="MOMO_SKAN"
                                                 name="operateur" [(ngModel)]="paiementDetails.modePaiement"
                                                 class="filled-in" id="mtn" />
@@ -374,120 +388,122 @@
                                             <label for="orange">ORANGE CI</label>
 
                                         </div>
-
-                                        <div class="input-field s12">
-                                            <input (ngModelChange)="modePaiemenentValidation()"
-                                                [(ngModel)]="paiementDetails.numeroPaiement" type="number"
-                                                data-ng-model="name" class="validate">
-                                            <label>Entrez votre numéro</label>
-                                        </div>
-
-                                        <button id="nextBtnPaiement" disabled (click)=next()
-                                            class="btn btn-bg-color btn-block">Suivant</button>
-
                                     </div>
+
+                                    <div class="input-field s12">
+                                        <input (ngModelChange)="modePaiemenentValidation()"
+                                            [(ngModel)]="paiementDetails.numeroPaiement" type="number"
+                                            data-ng-model="name" class="validate">
+                                        <label>Entrez votre numéro</label>
+                                    </div>
+
+                                    <button id="nextBtnPaiement" disabled (click)=next()
+                                        class="btn btn-bg-color btn-block">Suivant</button>
+
+                                </div>
+                            </div>
+
+
+                            <!--Resume-->
+                            <div id="content4" class="hide">
+
+                                <div class="columns">
+                                    <ul class="price">
+                                        <li>{{paiementDetails.forfait?.name}}</li>
+                                        <li class="grey">{{paiementDetails.forfait?.montant | currency : 'XOF'}} </li>
+                                        <li> Numéro de téléphone : {{paiementDetails?.numeroPaiement}}
+                                            <br> Opérateur : {{paiementDetails?.modePaiement | uppercase}}
+                                        </li>
+                                        <li>Nombre de requêtes : {{paiementDetails.forfait?.nbreRequete}}</li>
+                                        <li>Valide pour : {{paiementDetails.forfait?.nbreJour}} Jours </li>
+
+                                    </ul>
                                 </div>
 
 
-                                <!--Resume-->
-                                <div id="content4" class="hide">
-
-                                    <div class="columns">
-                                        <ul class="price">
-                                            <li>{{paiementDetails.forfait?.name}}</li>
-                                            <li class="grey">{{paiementDetails.forfait?.montant}} FCFA</li>
-                                            <li> Numéro de téléphone : {{paiementDetails?.numeroPaiement}}
-                                                <br> Opérateur : {{paiementDetails?.modePaiement | uppercase}}
-                                            </li>
-                                            <li>Nombre de requêtes : {{paiementDetails.forfait?.nbreRequete}}</li>
-                                            <li>Valide pour : {{paiementDetails.forfait?.nbreJour}} Jours </li>
-
-                                        </ul>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <button (click)=next() class="btn btn-bg-color btn-block">Confirmer</button>
-                                    </div>
-
-                                </div>
-
-                                <!--confirmation ORANGE-->
-                                <div id="content5" class=" hide">
-
-                                    <div class="row center">
-                                        <div *ngIf="paiementDetails.modePaiement === 'OM_SKAN'">
-                                            <img src="../../../assets/img/logo_OM.jpg" width="100" height="100" alt="">
-                                            <p>Veuillez générer un <strong>code de confirmation</strong> en tapant le
-                                                code USSD suivant :
-                                                <br><strong>#144*8#</strong></p>
-
-                                            <div class="input-field s12">
-                                                <input (ngModelChange)="modePaiemenentValidation()"
-                                                    [(ngModel)]="paiementDetails.token" type="number" class="validate">
-                                                <label>Entrez le code</label>
-                                            </div>
-                                        </div>
-
-                                        <div *ngIf="paiementDetails.modePaiement === 'MOOV_SKAN'">
-                                            <img src="../../../assets/img/logo_MOOV_MONEY.png" width="100" height="100" alt="">
-
-                                            <p>Veuillez confirmer la transaction en tapant le code USSD suivant :
-                                                <br><strong>*133#</strong></p>
-
-                                        </div>
-
-                                        <div *ngIf="paiementDetails.modePaiement === 'MOMO_SKAN'">
-                                            <img src="../../../assets/img/logo_MOMO.jpg" width="100" height="100" alt="">
-                                            <p>Veuillez confirmer la transaction en tapant le code USSD suivant :
-                                                <br><strong>*133#</strong></p>
-                                        </div>
-                                    </div>
-
-
-                                    <button (click)=onProcessToPayment() class="btn btn-bg-color btn-block">Proceder au
-                                        paiement</button>
-
+                                <div class="form-group">
+                                    <button (click)=next() class="btn btn-bg-color btn-block">Confirmer</button>
                                 </div>
 
                             </div>
 
+                            <!--confirmation ORANGE-->
+                            <div id="content5" class=" hide">
+
+                                <div class="row center">
+                                    <div *ngIf="paiementDetails.modePaiement === 'OM_SKAN'">
+                                        <img src="../../../assets/img/logo_OM.jpg" width="100" height="100" alt="">
+                                        <p>Veuillez générer un <strong>code de confirmation</strong> en tapant le
+                                            code USSD suivant :
+                                            <br><strong>#144*8#</strong></p>
+
+                                        <div class="input-field s12">
+                                            <input (ngModelChange)="modePaiemenentValidation()"
+                                                [(ngModel)]="paiementDetails.token" type="number" class="validate">
+                                            <label>Entrez le code</label>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="paiementDetails.modePaiement === 'MOOV_SKAN'">
+                                        <img src="../../../assets/img/logo_MOOV_MONEY.png" width="100" height="100"
+                                            alt="">
+
+                                        <p>Veuillez confirmer la transaction en tapant le code USSD suivant :
+                                            <br><strong>*133#</strong></p>
+
+                                    </div>
+
+                                    <div *ngIf="paiementDetails.modePaiement === 'MOMO_SKAN'">
+                                        <img src="../../../assets/img/logo_MOMO.jpg" width="100" height="100" alt="">
+                                        <p>Veuillez confirmer la transaction en tapant le code USSD suivant :
+                                            <br><strong>*133#</strong></p>
+                                    </div>
+                                </div>
+
+
+                                <button (click)=onProcessToPayment() class="btn btn-bg-color btn-block">Proceder au
+                                    paiement</button>
+
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
-
-            <button #closeModalPayment [hidden]="true" data-dismiss="modal"></button>
-
         </div>
 
+        <button #closeModalPayment [hidden]="true" data-dismiss="modal"></button>
 
-        <!--Modal for show contact-->
-        <div id="particulierDetails" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
+    </div>
 
-                        <div class="columns">
-                            <ul class="price">
-                                <li>Nom : <strong>{{particulierDetail.nom}}</strong></li>
-                                <li>Prénoms : <strong>{{particulierDetail.prenoms}}</strong></li>
-                                <li> Numéro de téléphone : <strong>{{particulierDetail.telephone}}</strong>
-                                </li>
-                                <li>Adress e-mail : <strong>{{particulierDetail.email}}</strong></li>
-                            </ul>
-                        </div>
 
+    <!--Modal for show contact-->
+    <div id="particulierDetails" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <div class="columns">
+                        <ul class="price">
+                            <li>Nom : <strong>{{particulierDetail.nom}}</strong></li>
+                            <li>Prénoms : <strong>{{particulierDetail.prenoms}}</strong></li>
+                            <li> Numéro de téléphone : <strong>{{particulierDetail.telephone}}</strong>
+                            </li>
+                            <li>Adress e-mail : <strong>{{particulierDetail.email}}</strong></li>
+                        </ul>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-failed" data-dismiss="modal">Fermer</button>
-                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-failed" data-dismiss="modal">Fermer</button>
                 </div>
             </div>
-
         </div>
 
+    </div>
 
 
-        <button #openModalPayment [hidden]="true" data-toggle="modal" data-target="#modalPayment"></button>
-        <button #openParticulierDetails [hidden]="true" data-toggle="modal" data-target="#particulierDetails"></button>
+
+    <button #openModalPayment [hidden]="true" data-toggle="modal" data-target="#modalPayment"></button>
+    <button #openParticulierDetails [hidden]="true" data-toggle="modal" data-target="#particulierDetails"></button>

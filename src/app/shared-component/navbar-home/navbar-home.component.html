@@ -13,31 +13,34 @@
                 <div class="ed-mm-menu">
                     <a class="ed-micon"><i class="fa fa-bars"></i></a>
                     <div class="ed-mm-inn">
-                        <a  class="ed-mi-close"><i class="fa fa-times"></i></a>
+                        <a id="ed-mi-close"  class="ed-mi-close"><i class="fa fa-times"></i></a>
                         <h4>User Account</h4>
                         <ul  *ngIf="!authenticated" >
-                            <li><a href="#" routerLink ="/home/sign-in" >connexion</a>
+                            <li><a (click)="close()" href="#" routerLink ="/home/sign-in" >connexion</a>
                             </li>
-                            <li><a href="#" routerLink ="/home/sign-up" >inscription</a>
+                            <li><a (click)="close()" href="#" routerLink ="/home/sign-up" >inscription</a>
                             </li>
                         </ul>
                         <ul>
-                            <li><a href="#" routerLink ="/customers" >Mon Tableau de bord</a>
+                            <li><a *ngIf="authenticated" (click)="close()" href="#" routerLink ="/customers" >Mon Tableau de bord</a>
                             </li>
                         </ul>
                         <h4>Formations</h4>
                         <ul *ngIf="authenticated">
-                            <li><a routerLink ="/formations">Nos répétiteurs</a></li>
-                            
+                            <li><a (click)="close()" routerLink ="/formations">Nos répétiteurs</a></li>
+                            <li><a (click)="close()" routerLink ="/courscommun">Nos cours organisés</a></li>
+                            <li><a (click)="close()" routerLink ="">Contactez-nous</a></li>
+
+
                         </ul>
-                        <h4>User Profile</h4>
+                        <!-- <h4>User Profile</h4>
                         <ul>
-                            <li><a href="dashboard.html">User profile</a></li>
+                            <li><a  href="dashboard.html">User profile</a></li>
                             <li><a href="db-courses.html">Courses</a></li>
                             <li><a href="db-exams.html">Exams</a></li>
                             <li><a href="db-profile.html">Prfile</a></li>
                             <li><a href="db-time-line.html">Time line</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>
@@ -53,9 +56,13 @@
                 <div class="col-md-12">
                     <div class="ed-com-t1-left">
                         <ul>
+<<<<<<< HEAD
                             <li><a href="#">Email: <span style="color: white;">support@profakounda.com</span></a>
                             </li>
                             <li><a href="#">Téléphones: <span style="color: white;">+225 41-28-22-60/47-32-94-05/54-42-02-10</span></a>
+=======
+                            <li><a href="#">Besoin d'aide ? : support@profakounda.com</a>
+>>>>>>> 617a3d21f6ab41a3c4b552e2d69817715c2b43a8
                             </li>
                         </ul>
                     </div>
@@ -99,104 +106,20 @@
                     </div>
                     <div class="main-menu">
                         <ul>
-                            <li><a href="index-2.html">Home</a>
+                            <li><a routerLink ="/home">Accueil</a>
                             </li>
                             <li class="about-menu">
-                                <a href="about.html" class="mm-arr">About us</a>
+                                <a routerLink ="/courscommun" class="mm-arr">Nos cours organisés</a>
                                 <!-- MEGA MENU 1 -->
-                                <div class="mm-pos">
-                                    <div class="about-mm m-menu">
-                                        <div class="m-menu-inn">
-                                            <div class="mm1-com mm1-s1">
-                                                <div class="ed-course-in">
-                                                    <a class="course-overlay menu-about" href="admission.html">
-                                                        <img src="../../assets/images/h-about.jpg" alt="">
-                                                        <span>Academics</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="mm1-com mm1-s2">
-                                                <p>Want to change the world? At Berkeley we’re doing just that. When you join the Golden Bear community, you’re part of an institution that shifts the global conversation every single day.</p>
-                                                <a href="about.html" class="mm-r-m-btn">Read more</a>
-                                            </div>
-                                            <div class="mm1-com mm1-s3">
-                                                <ul>
-                                                    <li><a href="all-courses.html">All Courses</a></li>
-                                                    <li><a href="course-details.html">Course details</a></li>
-                                                    <li><a href="about.html">About</a></li>
-                                                    <li><a href="admission.html">Admission</a></li>
-                                                    <li><a href="awards.html">Awards</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="mm1-com mm1-s4">
-                                                <ul>
-                                                    <li><a href="dashboard.html">Student profile</a></li>
-                                                    <li><a href="db-courses.html">Dashboard courses</a></li>
-                                                    <li><a href="db-exams.html">Dashboard exams</a></li>
-                                                    <li><a href="db-profile.html">Dashboard profile</a></li>
-                                                    <li><a href="db-time-line.html">Dashboard timeline</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </li>
                             <li class="admi-menu">
-                                <a href="#" class="mm-arr">Admission</a>
+                                <a routerLink ="/formations" class="mm-arr">Nos formateurs</a>
                                 <!-- MEGA MENU 1 -->
-                                <div class="mm-pos">
-                                    <div class="admi-mm m-menu">
-                                        <div class="m-menu-inn">
-                                            <div class="mm2-com mm1-com mm1-s1">
-                                                <div class="ed-course-in">
-                                                    <a class="course-overlay" href="about.html">
-                                                        <img src="../../assets/images/h-about1.jpg" alt="">
-                                                        <span>Academics</span>
-                                                    </a>
-                                                </div>
-                                                <p>Donec lacus libero, rutrum ac sollicitudin sed, mattis non eros. Vestibulum congue nec eros quis lacinia. Mauris non tincidunt lectus. Nulla mollis, orci vitae accumsan rhoncus.</p>
-                                                <a href="about.html" class="mm-r-m-btn">Read more</a>
-                                            </div>
-                                            <div class="mm2-com mm1-com mm1-s1">
-                                                <div class="ed-course-in">
-                                                    <a class="course-overlay" href="admission.html">
-                                                        <img src="../../assets/images/h-adm1.jpg" alt="">
-                                                        <span>Admission</span>
-                                                    </a>
-                                                </div>
-                                                <p>Donec lacus libero, rutrum ac sollicitudin sed, mattis non eros. Vestibulum congue nec eros quis lacinia. Mauris non tincidunt lectus. Nulla mollis, orci vitae accumsan rhoncus.</p>
-                                                <a href="admission.html" class="mm-r-m-btn">Read more</a>
-                                            </div>
-                                            <div class="mm2-com mm1-com mm1-s1">
-                                                <div class="ed-course-in">
-                                                    <a class="course-overlay" href="awards.html">
-                                                        <img src="../../assets/images/h-cam1.jpg" alt="">
-                                                        <span>History & awards</span>
-                                                    </a>
-                                                </div>
-                                                <p>Donec lacus libero, rutrum ac sollicitudin sed, mattis non eros. Vestibulum congue nec eros quis lacinia. Mauris non tincidunt lectus. Nulla mollis, orci vitae accumsan rhoncus.</p>
-                                                <a href="awards.html" class="mm-r-m-btn">Read more</a>
-                                            </div>
-                                            <div class="mm2-com mm1-com mm1-s4">
-                                                <div class="ed-course-in">
-                                                    <a class="course-overlay" href="seminar.html">
-                                                        <img src="../../assets/images/h-res1.jpg" alt="">
-                                                        <span>Seminar 2018</span>
-                                                    </a>
-                                                </div>
-                                                <p>Donec lacus libero, rutrum ac sollicitudin sed, mattis non eros. Vestibulum congue nec eros quis lacinia. Mauris non tincidunt lectus. Nulla mollis, orci vitae accumsan rhoncus.</p>
-                                                <a href="seminar.html" class="mm-r-m-btn">Read more</a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
                             </li>
-                            <li><a href="all-courses.html">All Courses</a></li>
-                            <!--<li><a class='dropdown-button ed-sub-menu' href='#' data-activates='dropdown1'>Courses</a></li>-->
-                            <li class="cour-menu">
-                                <a href="#" class="mm-arr">All Pages</a>
+                            <li class="admi-menu">
+                                <a routerLink ="/" class="mm-arr">Contactez-nous</a>
                                 <!-- MEGA MENU 1 -->
+<<<<<<< HEAD
                                 <div class="mm-pos">
                                     <div class="cour-mm m-menu">
                                         <div class="m-menu-inn">
@@ -303,6 +226,8 @@
                             <li><a href="dashboard.html">Student</a>
                             </li>
                             <li><a href="Contacts">Contact us</a>
+=======
+>>>>>>> 617a3d21f6ab41a3c4b552e2d69817715c2b43a8
                             </li>
                         </ul>
                     </div>

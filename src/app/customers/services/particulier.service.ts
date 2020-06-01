@@ -33,6 +33,9 @@ export class ParticulierService {
     getPhoto(id: number) {
         return this.httpClient.post(URL.getPhoto, id);
     }
+    revoyerEmail(mail: String) {
+        return this.httpClient.post(URL.reSendEmail,mail);
+    }
 
     getAllCustomers(page, numberDataOfPage): Observable<any> {
         let params = new HttpParams().set("page", page).set("total", numberDataOfPage) ;

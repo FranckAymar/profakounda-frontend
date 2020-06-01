@@ -141,7 +141,7 @@ export class DetailsCoursCommunComponent implements OnInit {
     this.dialog.closeAll();
 
     const dialogRef = this.dialog.open(DetailsInscritsComponent, {
-      width: '800px',
+      width: '1000px',
       data: data,
 
     });

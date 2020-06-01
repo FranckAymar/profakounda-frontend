@@ -3286,7 +3286,7 @@ left: 0;
 /*= 24.ABOUT US 
 /*-------------------------------------------------*/
  .about-sp{
-     padding: 0px 30px;
+     padding: 0px 2px;
 }
  .ed-about-sec1{
 }
@@ -3386,7 +3386,7 @@ left: 0;
      padding-left: 70px;
 }
  .age-eve-com{
-     width: 55px;
+     width: 30px;
      height: 55px;
      border-radius: 50%;
     /* padding: 9px 10px;
@@ -4145,9 +4145,9 @@ left: 0;
 }
  .ed-mm-inn{
      position: fixed;
-     width: 70%;
+     width: 80%;
      background: #fff;
-     padding: 50px;
+     padding: 9px;
      box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.32);
      overflow-y: auto;
      right: -80%;
@@ -4165,9 +4165,7 @@ left: 0;
      transition:all 0.5s ease;
 }
  .ed-mi-close{
-     position: absolute;
-     z-index: 99;
-     margin:-50px 8px 8px -30px;
+     margin-bottom: 1em !important;
 }
  .ed-mi-close i{
      width: 32px;

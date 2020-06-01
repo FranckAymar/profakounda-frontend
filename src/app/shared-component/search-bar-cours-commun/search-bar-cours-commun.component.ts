@@ -14,7 +14,7 @@ import { startWith, map } from 'rxjs/operators';
 export class SearchBarCoursCommunComponent implements OnInit {
   myGroup;
   organisationObject:any = [];
-  listeOrganisation: Observable<string[]>
+  listeOrganisation: Observable<any[]>
   myControl = new FormControl();
   code ;
   organisationName:String;

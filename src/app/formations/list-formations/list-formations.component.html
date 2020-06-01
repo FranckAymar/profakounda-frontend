@@ -46,8 +46,11 @@
 
         <div class="col-md-4">
             <agm-map *ngIf="propositionFormations" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-                <agm-marker *ngFor="let pf of propositionFormations" [latitude]="pf.rayonIntervention?.latitude"
-                    [longitude]="pf.rayonIntervention?.longitude">
+                <agm-marker 
+                *ngFor="let pf of propositionFormations" 
+                [latitude]="pf.rayonIntervention?.latitude"
+                [longitude]="pf.rayonIntervention?.longitude"
+                [label]="pf.code">
                 </agm-marker>
 
                 <agm-circle *ngFor="let pf of propositionFormations" [latitude]="pf.rayonIntervention?.latitude"

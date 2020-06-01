@@ -6,7 +6,6 @@
             <div class="log-in-pop-left">
 
                 <h1>Hello...</h1>
-                <p>Don't have an account? Create your account. It's take less then a minutes</p>
                 <h4>Login with social media</h4>
                 <ul>
                     <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a>
@@ -18,13 +17,12 @@
                 </ul>
             </div>
             <div class="log-in-pop-right">
-                <h4>Login</h4>
-                <p>Don't have an account? Create your account. It's take less then a minutes</p>
+                <h4>Connexion</h4>
                  <div *ngIf="errorInternet" class="modal-header center">
-                    <p class="alert alert-danger">Vérifier votre connexion à internet</p>
+                    <p class="alert alert-danger">Vérifiez votre connexion à internet</p>
                 </div>
                 <div *ngIf="isFailed" class="modal-header center">
-                    <p class="alert alert-danger">Vérifier vos informations de connexion </p>
+                    <p class="alert alert-danger">Vérifiez vos informations de connexion </p>
                 </div> 
                 <form  [formGroup]="loginForm" class="s12" (submit)="onLogin()">
                     <div>
@@ -40,28 +38,29 @@
                     <div>
                         <div class="input-field s12">
                             <input formControlName="password" type="password" class="validate">
-                            <label>Password</label>
+                            <label>Mot de passe</label>
                         </div>
 
                     </div>
                     <div>
-                        <div class="s12 log-ch-bx">
+<!--                         <div class="s12 log-ch-bx">
                             <p>
                                 <input type="checkbox" id="test5" />
                                 <label for="test5">Remember me</label>
                             </p>
                         </div>
-                    </div>
+ -->                    </div>
                     <div>
                         <div class="input-field s4">
-                            <input [disabled]="loginForm.invalid" type="submit" value="Login"
+                            <input [disabled]="loginForm.invalid" type="submit" value="Se connecter"
                                 class="waves-effect waves-light log-in-btn">
                         </div>
 
                     </div>
                     <div>
-                        <div class="input-field s12"> <a href="#" routerLink="/home/forgot-password">Forgot password</a>
-                            <a href="#" routerLink="/home/sign-in">Create a new account</a> </div>
+                        <div class="input-field s12"> 
+                            <a routerLink="/home/forgot-password">Mot de passe oublié ?</a>
+                            <a style="margin-left: 1em;" routerLink="/home/sign-in">Créer un compte</a> </div>
                     </div>
 
                 </form>

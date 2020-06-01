@@ -125,8 +125,8 @@ init(){
   this.userForm = this.formBuilder.group({
     nom:['',Validators.required],
     prenoms:['',Validators.required],
-    telephone:['',Validators.required],
-    lieuHabitation:['',Validators.required],
+    telephone:'',
+    lieuHabitation:'',
     filiere:'',
     niveau:'',
     ville:['',Validators.required],
@@ -242,7 +242,8 @@ getColor(){
     subscribe(
       (response)=>{
        
-        
+        alert("Photo modifiée avec succès.");
+         
       },
       (error)=>{
         console.log("Erreur de modification de la photo.");

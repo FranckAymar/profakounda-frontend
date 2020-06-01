@@ -1,0 +1,9 @@
+@media only screen and (max-width: 600px) {
+    .gauche{
+        display: none;
+    }
+    section{
+        margin-top: 4.6em;
+    }
+  }
+  

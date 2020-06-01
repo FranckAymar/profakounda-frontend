@@ -15,6 +15,7 @@ export class SignUpComponent implements OnInit {
   @Input() invalidation:boolean = true;
   error :string;
   message:string;
+  mailSaisi:String
   constructor(private particulierService:ParticulierService,private router:Router,private formBuilder:FormBuilder) { }
   ngOnInit() {
     this.formInitialisation();
@@ -65,20 +66,32 @@ getColor(){
     this.particulierService.saveParticulier(particulier)
     .subscribe(
       (response)=>{
+        sessionStorage.setItem("mail",particulier.email);
+        this.mailSaisi = sessionStorage.getItem("mail");
         this.formInitialisation();
-        this.error =response["error"];
-       
+        this.error =response["error"];      
         if(response["success"])
-        {
+        { 
           alert('Inscription effectuée avec succès; verifier votre mail et cliquer sur le lien de validation');
           this.router.navigate(["/home/sign-up"]);
           this.formInitialisation();
-          
-        }
        
+        }
+   
       },
       (error)=>{
         console.log(particulier);
+        console.log("Une erreur s'est produite: "+error);
+      }
+    )
+  }
+
+  onRevoyerEmail(){
+    this.particulierService.revoyerEmail(this.mailSaisi).subscribe(
+      (Response)=>{
+        alert("Mail de confirmation renvoyé avec succès");
+      },
+      (error)=>{
         console.log("Une erreur s'est produite: "+error);
       }
     )

@@ -86,11 +86,46 @@
                 </div>
                 
             </div>
-            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention" data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="showVilleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">SAISIE DE LA VILLE DE RESIDENCE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Libelle-->
+
+                <form (ngSubmit)="saveDemandeMiseEnLigne()" #z="ngForm">
+                                <mat-form-field style="width: 16em;">
+                                     <input type="text" required  
+                                                    placeholder="Renseignez votre ville de résidence svp"  [(ngModel)]="ville" aria-label="Number" matInput
+                                                    [formControl]="myControl4" [matAutocomplete]="auto4">
+                                                <mat-autocomplete #auto4="matAutocomplete">
+                                                    <mat-option *ngFor="let option of filteredOptions4 | async"  [value]="option.designation">
+                                                        {{option.designation}}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+                                        </mat-form-field>
+                                        <button style="margin-top: 0.5em;" type="submit" [disabled]="myControl4.invalid"
+                                        class="btn btn-outline-info btn-block ">Enregistrer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="niveauEnseigne" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">

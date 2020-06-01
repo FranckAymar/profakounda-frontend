@@ -95,8 +95,6 @@ export class DetailsInscritsComponent implements OnInit {
     pdf.create().open();
 
       });
-
-   
   }
 
 

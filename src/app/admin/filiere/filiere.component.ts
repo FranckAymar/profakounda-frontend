@@ -2,7 +2,6 @@ import { Filiere } from '../model/filiere';
 import { FiliereService } from '../services/filiere.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-filiere',
@@ -10,6 +9,18 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./filiere.component.css']
 })
 export class FiliereComponent implements OnInit {
+
+  //For pagination
+
+  //Nombre de données à chargées à chaque page
+  numberDataOfPage : number = 20 ;
+  //Page courante
+  page : number = 1;
+  //Taille totale des données en base de données
+  sizeData : number ;
+  //Nombre de page totals
+  totalPage : number 
+  totalPageArray : Array<any> ;
 
   filieres=[] ;
   filiere: Filiere ={}; 
@@ -22,7 +33,7 @@ export class FiliereComponent implements OnInit {
 
   ngOnInit() {
 
-    this.onFetchFiliere() ;
+    this.onFetchFiliere(this.page) ;
     this.initForm();
   }
  
@@ -57,13 +68,26 @@ export class FiliereComponent implements OnInit {
 
   }
   //recuperer les filieres
-  onFetchFiliere() {
+  onFetchFiliere(pageActive) {
 
-    this.filiereService.fetchFilieres().subscribe(
+    this.page = pageActive ;
+    
+    this.filiereService.fetchFilieres(this.page, this.numberDataOfPage).subscribe(
 
-      (response)=> {
-        this.filieres = response.response ;
-        console.log(response.response)
+      (resp)=> {
+
+        this.sizeData = resp.totalData ;
+        
+        this.totalPage = (this.sizeData/this.numberDataOfPage) ; 
+        
+        if(this.sizeData % this.numberDataOfPage != 0){
+          this.totalPage =  Math.ceil(this.totalPage) ;
+        } 
+        
+
+        this.totalPageArray = new Array(this.totalPage);
+
+        this.filieres = resp.data ;
       },
 
       (error)=> {
@@ -82,7 +106,7 @@ export class FiliereComponent implements OnInit {
 
       (response) => {
 
-        this.onFetchFiliere();
+        this.onFetchFiliere(this.page);
         this.message = "Enregistrement effectué avec succès"
         this.initialisation();
       },
@@ -104,7 +128,7 @@ export class FiliereComponent implements OnInit {
      (response) => {
 
 
-        this.onFetchFiliere();
+        this.onFetchFiliere(this.page);
         alert("suppression  effectué avec succès");
       },
       (error) => {

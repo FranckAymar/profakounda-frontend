@@ -1,6 +1,5 @@
-import { UserModel } from './../models/UserModel';
-import { Router } from '@angular/router';
-import { SignInService } from './../services/sign-in.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SignInService } from '../services/sign-in.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -12,30 +11,26 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class SignInComponent implements OnInit {
 
 
+  returnUrl : string ;
+
   //Clé des variables de session
   TOKEN = 'TOKEN';
   USERNAME = 'USERNAME';
   AUHORITY = 'AUTHORITY';
 
 
-  credentials = {
-    username: '',
-    password: ''
-  };
-
-  user: UserModel = {};
-
-
   loginForm: FormGroup;
 
   isFailed: boolean;
-
+  errorInternet : boolean ;
 
   constructor(private signInService: SignInService,
     private router: Router,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private route : ActivatedRoute) {
 
     this.isFailed = false;
+    this.errorInternet = false ;
 
   }
 
@@ -43,6 +38,9 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/customers/editprofil';
+    
   }
 
 
@@ -50,7 +48,7 @@ export class SignInComponent implements OnInit {
 
     this.loginForm = this.formBuilder.group({
 
-      username: [null, Validators.required],
+      username: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]
 
     })
@@ -60,62 +58,61 @@ export class SignInComponent implements OnInit {
 
   onLogin() {
 
-    this.user.username = this.loginForm.value['username'];
-    this.user.password = this.loginForm.value['password'];
+    let username = this.loginForm.value['username'];
+    let password = this.loginForm.value['password'];
+    
+    let token = btoa(username + ':' + password);
+    
+    
+   
 
-    this.signInService.login(this.user).subscribe(
+    this.signInService.login(token).subscribe(
 
  
       (response) => {
 
 
-        if (response.code == 0) {
+          let authorities = response.authorities ;    
+          let authority = authorities[0].authority;
 
-
-
-          let authorities = 'ROLE_' + response.response[0].libelle;
-          let token = btoa(this.user.username + ':' + this.user.password);
-          let username = this.user.username;
-
-          sessionStorage.setItem(this.AUHORITY, authorities);
+          //Sauvegarde du token
           sessionStorage.setItem(this.TOKEN, token);
+            //Sauvegarde de l'authorité
+          sessionStorage.setItem(this.AUHORITY, authority);
+            //Sauvegarde du username
           sessionStorage.setItem(this.USERNAME, username);
-
-
+     
           //Si l'utilisateur est un admin
-          if (authorities === 'ROLE_ADMIN') {
+          if (authority === 'ROLE_ADMIN') {
 
             this.router.navigateByUrl('/admin');
-
-            //Si c'est un particulier
+            
           } else {
-
-            alert('Réussi : Particulier pas encore disponible');
-            this.signInService.logout();
-
-            //Pas encore fonctionnel
-            //this.router.navigateByUrl('/customers');
-
+            this.router.navigateByUrl(this.returnUrl);
+            
           }
-
-
-          this.isFailed = false;
-
-        } else {
-          //Authentification échouée
-          this.isFailed = true;
-          console.log(response.response);
-        }
 
       },
 
       (error) => {
-        console.log(error);
+        
+        if(error.status === 401) {
+
+          this.errorInternet = false ;
+          this.isFailed = true ;
+
+        }else{
+          this.errorInternet = true ;
+          this.isFailed = false ;
+        }
+
 
       }
 
+   );
+     
+  
 
-    )
   }
 
 }

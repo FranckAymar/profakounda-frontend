@@ -1,6 +1,9 @@
+import { CoursCommunModule } from './cours-commun/cours-commun.module';
+import { FormationsModule } from './formations/formations.module';
+import { CustomersModule } from './customers/customers.module';
 import { ErrorPageModule } from './error-page/error-page.module';
-import { SignInGuard } from './sign-in.guard';
-import { RoleGuard } from './role.guard';
+import { SignInGuard } from './guard/sign-in.guard';
+import { AdminGuard } from './guard/admin.guard';
 import { XhrInterceptor } from './XhrInterceptor';
 import { HomeModule } from './home/home.module';
 import { AdminModule } from './admin/admin.module';
@@ -8,8 +11,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injectable } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router'
-import { ParticulierService } from './home/services/particulier.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoadingComponent } from './loading/loading.component';
+import { LoadingInterceptor } from './LoadingInterceptor';
+import { FormsModule } from '@angular/forms';
+
 
 
 const appRouter : Routes = [
@@ -17,9 +24,20 @@ const appRouter : Routes = [
     pathMatch : 'full'
   },{
     path :'admin', redirectTo :'/admin'
+  },
+  {
+    path :'customers', redirectTo :'/customers'
+  } ,
+  {
+    path :'formations', redirectTo :'/formations'
+  }
+  ,
+  {
+    path :'courscommun', redirectTo :'/courscommun'
   },{
     path: "**", redirectTo :'/error404'
-  }
+  },
+  
  
 ] ;
 
@@ -27,22 +45,40 @@ const appRouter : Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-   
+    LoadingComponent,
     
   ],
   imports: [
     BrowserModule, 
     AdminModule,
     HomeModule,
+    CustomersModule,
+    FormationsModule,
+    CoursCommunModule,
     ErrorPageModule,
-    RouterModule.forRoot(appRouter)
-    
+    FormsModule,
+    RouterModule.forRoot(appRouter, {scrollPositionRestoration: 'enabled'}),
+  
+        
+  
   ],
-  providers: [
-   ParticulierService, 
-   { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
-   RoleGuard,
-   SignInGuard
+
+  exports : [],
+  
+  providers: [ 
+   { 
+    provide: HTTP_INTERCEPTORS, 
+    useClass: XhrInterceptor, 
+    multi: true 
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoadingInterceptor,
+    multi: true
+  },
+   AdminGuard,
+   SignInGuard,
+   
   ],
   bootstrap: [AppComponent]
 })

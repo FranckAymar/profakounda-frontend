@@ -1,0 +1,40 @@
+
+  @media screen and (max-width: 990px){
+    .principale{
+        display: none !important;
+    }
+    .menu1 {
+      display: block !important;
+      
+    }
+    .deroulant{
+      background-color: #022C5D;;
+    }
+   .deroulant h4{
+     color: #E66030;
+   }
+   .deroulant ul li a{
+     color: white;
+   }
+   .compte  li a:hover{
+     background-color: #002147;
+   }
+   .deroulant ul li a::before{
+    content:"";
+  }
+   .deroulant ul li a:active{
+    color: red;
+  }
+}
+
+
+.btn-logout{
+
+  background-color:rgb(218, 52, 52); 
+  width:2em; 
+  height:2em;
+  border-radius:0.2em;
+  color: white;
+
+}
+

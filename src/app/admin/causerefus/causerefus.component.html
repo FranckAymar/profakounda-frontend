@@ -1,0 +1,70 @@
+<!--== User Details ==-->
+<div class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <h4>Cause refus Demandes</h4>
+        </div>
+        <div class="tab-inn">
+            <div class="table-responsive">
+                <button type="button" data-toggle="modal" data-target="#ajouterRefus"
+                    class="btn btn-primary">
+                    Ajouter
+                </button>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>titre</th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        <span *ngIf="causeRefus.length == 0">Aucun élément</span>
+                        <tr *ngFor="let cause of causeRefus">
+                            <td>{{cause.titre}}</td>
+                            <td><button (click)="onLoadCauseRefus(cause)" data-toggle="modal" data-target="#ajouterRefus"
+                                    type="button" class="btn btn-primary"> Modifier</button></td>
+                           
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="ajouterRefus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Libelle-->
+                <form [formGroup]="causeRefusForm" (ngSubmit)="onSaveRefus()">
+                    <div class="form-group">
+                        <label for="libelle">Titre:</label>
+                        <input  formControlName="titre" type="text" 
+                            name="libelle" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="details">Détails:</label>
+                        <textarea formControlName="details" name="details" id="details" cols="30" rows="50"></textarea>
+                        <input   type="text"
+                            name="details" required>
+                    </div>
+                    <!-- Cycle-->
+                    <!-- Btn submit-->
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>

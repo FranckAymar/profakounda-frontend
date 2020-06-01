@@ -1,0 +1,414 @@
+<div style="margin:auto;width:15em;margin-top: 1em;">
+ <button data-toggle="modal" (click)="adProposition()" data-target="#addDesc" class="btn btn-info"><i class="fa fa-plus"></i> Nouvelle proposition</button>
+</div>
+
+
+
+<div *ngFor="let p of propositions" style="margin-top: 1em;"class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <a *ngIf="p.proposition.enLigne && 
+                p.nombreAvis" style="float: right;" 
+                [routerLink]="['/formations/details-formation', p.proposition.id]" 
+                class='waves-effect btn-noti' href="admin-course-enquiry.html" 
+                title="Les commentaires"><i class="fa fa-comment" 
+                aria-hidden="true"></i><span>{{p.nombreAvis}}</span></a>
+            <h5 *ngIf="p.proposition.enLigne" style="color: green;">En ligne</h5>
+           
+           
+            <h5 *ngIf="!p.proposition.attenteMiseEnLigne && 
+                        !p.proposition.enLigne && 
+                        !p.proposition.refusMiseEnLigne &&
+                        !p.proposition.suppressionMiseEnLigne"
+                        style="color: yellow;">En édition</h5>
+            <h5 *ngIf="p.proposition.attenteMiseEnLigne" style="color: red;">En attende de validation</h5>
+            <h5 *ngIf="p.proposition.refusMiseEnLigne" style="color:darkorange;" 
+                data-toggle="tooltip" data-placement="right" title="{{p.proposition.causeRefus?.details}}">Refusée</h5>
+            <h5 *ngIf="p.proposition.suppressionMiseEnLigne" style="color: red;">Hors-ligne</h5>
+
+        </div>
+        <div class="tab-inn">
+            <div class="table-responsive table-desi">
+                <p>
+                    <button data-toggle="modal" data-target="#ajouterDescription" (click)="getProposition(p.proposition)" class="btn btn-danger btn btn-block">Description</button>
+                </p>
+                <div  class="row">
+                    <div style="margin-top: 0.5em !important;" class="col-md-3">
+                        <button   (click)="addModule(p.modules,p.proposition.id)" type="button" data-toggle="modal" data-target="#modules"
+                                class="btn btn-info btn-block">
+                                Modules enseignés
+                        </button>
+                    </div>
+                    <div style="margin-top: 0.5em !important;" class="col-md-3">
+                        <button style="margin-left: 1em;" (click)="addNiveau(p.proposition.id)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
+                                class="btn btn-primary btn-block">
+                                Niveau enseigné
+                        </button>
+                    </div>
+                    <div style="margin-top: 0.5em !important;" class="col-md-3">
+                        <button style="margin-left: 1em;" (click)="addDisponibilite(p.proposition.id)" type="button" data-toggle="modal" data-target="#disponibilite"
+                        class="btn btn-outline-success btn-block">
+                        Disponibilités
+                        </button>
+                    </div>
+                    <div  style="margin-top: 0.5em !important;" class="col-md-3">
+                        <button  (click)="loadPropostion(p.proposition.id)" style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
+                        class="btn btn-outline-dark btn-block">
+                        Zone Intervention
+                        </button>   
+                    </div>
+                </div>
+                <div style="width: 100%; overflow: auto;">
+                    <table  class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Niveau enseigné</th>
+                                <th>Coût minimum</th>
+                                <th>Coût Maximum</th>
+    
+                            </tr>
+                        </thead>
+                        <tbody>
+    
+                            <tr *ngFor="let n of p.contrats">
+                                <td>{{n.niveau.libelle}}</td>
+                                <td>{{n.minMontant}} Eco</td>
+                                <td>{{n.maxMontant}} Eco</td>
+                                <td><button data-toggle="modal" data-target="#niveauEnseigne" (click)="getContrat(n.id)"
+                                        class="updateButton"><i class="fa fa-edit"></i></button></td>
+                                <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i
+                                            class="fa fa-times"></i></button></td>
+    
+                            </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="niveauEnseigne" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">AJOUTER UN NIVEAU</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Libelle-->
+
+                <form (ngSubmit)="onSaveLevelTeach(niveauForme)" #f="ngForm">
+                    <div *ngIf="errorNiveaux" class="altert alert-danger">
+                        {{errorNiveaux}}
+                    </div>
+                    <mat-form-field>
+                        <input type="text"
+                        placeholder="Niveau"
+                            [(ngModel)]="niveauForme.designationNiveau"
+                               aria-label="Number"
+                               matInput
+                               [formControl]="myControl3"
+                               [matAutocomplete]="auto3" required>
+                        <mat-autocomplete #auto3="matAutocomplete">
+                          <mat-option *ngFor="let option of filteredOptions3 | async" [value]="option">
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="prixMin">Prix min:</label>
+                            <input name="prixMin" required [(ngModel)]="niveauForme.prixMin" type="number"
+                                id="prixMin" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="prixMax">Prix max:</label>
+                            <input name="prixMax" type="number" [(ngModel)]="niveauForme.prixMax" id="prixMax"
+                                required />
+                        </div>
+                    </div>
+                    <button style="margin-top:0.5em;" *ngIf="!edit" [disabled]="f.invalid || myControl3.invalid" type="submit"
+                        class="btn btn-primary">Enregistrer</button>
+                    <button style="margin-top:0.5em;" *ngIf="edit" [disabled]="f.invalid || myControl3.invalid" type="submit"
+                        class="btn btn-success">Enregistrer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modules" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">MODULES</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form (ngSubmit)="onSaveModule(module)" #f2="ngForm">
+                            <div *ngIf="errorModule" class="alert alert-danger">
+                                {{errorModule}}
+                            </div>
+                            <mat-form-field>
+                                <input type="text"
+                                placeholder="Designation du module"
+                                    [(ngModel)]="module.designation"
+                                       aria-label="Number"
+                                       matInput
+                                       [formControl]="myControl2"
+                                       [matAutocomplete]="auto2" required>
+                                <mat-autocomplete #auto2="matAutocomplete">
+                                  <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
+                                    {{option}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            
+                            <button *ngIf="!editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button *ngIf="editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
+                            <button *ngIf="editModule" style="margin-left: 1em;"  type="submit" class="btn btn-danger">Annuler</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6" style="height: 17em; overflow: auto;">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="font-weight: bold;">Désignation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let m of modules">
+                                    <td>{{m.module.libelle}}</td>
+                                    <td><button (click)="getModule(m.id)" class="updateButton"><i class="fa fa-edit"></i></button></td>
+                                    <td><button (click)="deleteModule(m.id)" class="deleteButton"><i class="fa fa-times"></i></button></td>
+                                </tr>
+                         
+                                <tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="disponibilite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">MES DISPONIBILITES</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form #f3="ngForm" (ngSubmit)="onSaveDisponibilite(disponibilite)">
+                            <div *ngIf="errorJour" class="alert alert-danger">
+                                {{errorJour}}
+                            </div>
+                            <mat-form-field>
+                                <input type="text"
+                                
+                                placeholder="Jour"
+                                    [(ngModel)]="disponibilite.jour"
+                                       aria-label="Number"
+                                       matInput
+                                       [formControl]="myControl"
+                                       [matAutocomplete]="auto" required>
+                                <mat-autocomplete #auto="matAutocomplete">
+                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                              <div  class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heureDebut">De:</label>
+                                        <input name="heureDebut" type="time" id="heureDebut"
+                                            [(ngModel)]="heure.heureDebut" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heureFin">A:</label>
+                                        <input [(ngModel)]="heure.heureFin" type="time" id="heureFin"
+                                            name="heureFin" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <button (click)="addHour()"  [disabled]="heure.heureFin=='' || heure.heureDebut=='' || disponibilite.jour==''" style="margin-top: 1.5em;" class="btn btn-success">Ajouter heure</button>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <span *ngFor="let h of hours">{{h.heureDebut}}-{{h.heureFin}} ; &nbsp;</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button style="margin: 0.3em;" type="submit" [disabled]="myControl.invalid || f3.invalid || heure.heureFin!='' || heure.heureDebut!=''" class="btn btn-primary">Enregistrer</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="col-md-6" style="height: 17em; overflow: auto;">
+                        <table  class="table table-hover">
+                            <thead style="background:rgb(104, 172, 104);">
+                                <tr>
+                                    <th style="font-weight: bold; color: white;">Jours</th>
+                                    <th style="font-weight: bold; color: white;">Heures</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let d of disponibilites">
+                                    <td>{{d.jour.designation}}</td>
+                                    <td><span  *ngFor="let i of d.intervals">{{i.heureDebut}}<span *ngIf="i.heureDebut !=''">-</span>{{i.heureFin}} <a class="deleteIcon"><i *ngIf="i.heureDebut !=''"  (click)="deleteHour(i.id)" class="fa fa-times"></i></a><span *ngIf="i.heureDebut !=''">;</span>&nbsp;</span></td>
+                                    <td><button (click)="deleteDay(d.jour.id)" class="deleteButton"><i class="fa fa-times"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal"  class="btn btn-danger">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="ajouterDescription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">DESCRITPION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" (ngSubmit)="enregistrerProposition()" #k="ngForm">
+                    <div *ngIf="errorProposition" class="alert alert-danger">
+                        {{errorProposition}}
+                    </div>
+                    <textarea placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" maxChars="1000" class="form-control" (ngModelChange)="changeDescritpion()" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+                        {{proposition.description}}
+                    </textarea>
+                    <div class="form-group">
+                        <label for="tel">Téléphone:</label>
+                        <input  required name="telephone" type="text" id="tel"
+                            [(ngModel)]="propositionFormation.telephone" />
+                    </div>
+                    <button [disabled]="k.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div> 
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addDesc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">DESCRITPION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" (ngSubmit)="enregistrerProposition()" #l="ngForm">
+                    <div *ngIf="errorProposition" class="alert alert-danger">
+                        {{errorProposition}}
+                    </div>
+                    <textarea class="form-control" placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+
+                    </textarea>
+                    <div class="form-group">
+                        <label for="tel">Téléphone:</label>
+                        <input  required name="telephone" type="text" id="tel"
+                            [(ngModel)]="propositionFormation.telephone" />
+                    </div>
+                    <button  [disabled]="l.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="zoneIntervention" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Veuillez manier le cercle pour préciser votre zone
+                    d'intervention</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <app-google-place (setAddress)="getAddress($event)" adressType="geocode"></app-google-place>
+
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+                    (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)"
+                    (zoomChange)="setZoom($event)">
+
+                    <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="true"
+                        [radius]="radius" (radiusChange)="changeRaduis($event)">
+                    </agm-circle>
+                </agm-map>
+
+
+            </div>
+            <div class="modal-footer">
+                <button (click)="onSaveCoordMap()" type="button" class="btn btn-success"
+                    data-dismiss="modal">Enregitrer</button>
+                <button type="button" class=" btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

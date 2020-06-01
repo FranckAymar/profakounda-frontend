@@ -1,0 +1,63 @@
+<app-search-bar
+    (getFormationsFiltrees)= "OnFiltreFormation($event)"
+    (getFormationsFiltreParVille)= "OnFiterDeFormationParVille($event)"
+></app-search-bar>
+<section class="pop-cour">
+    <div class="container com-sp pad-bot-70">
+        <div class="row">
+            <div class="con-title">
+                <h2>Nos <span>Répétiteurs</span></h2>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+
+            <div class="row" *ngFor="let propositionFormation of propositionFormations">
+
+                <div class="col-md-12">
+                   <app-card-formation
+                   [idParticulier]= "propositionFormation.idParticulier"
+                    [code] = "propositionFormation.code"
+                    [moduleFormations] = "propositionFormation.moduleFormations"
+                    [etoilesEteints] = "propositionFormation.etoilesEteints"
+                    [etoilesBrillants] = "propositionFormation.etoilesBrillants"
+                    [description] = "propositionFormation.description"
+                    [ville] = "propositionFormation.ville"
+                    [id] = "propositionFormation.id"
+                    [rayonIntervention] = "propositionFormation.rayonIntervention"
+                    [isFavoris] = "propositionFormation.isFavoris"     
+                    (coordMapEvent) = "viewCustomerInMap($event)"
+                    ></app-card-formation>
+
+                </div> 
+
+
+
+            </div>
+            <div class="pg-pagina">
+                <ul class="pagination">
+                    <li [ngClass]="{'active': (i+1) === page }" (click)="onGetListFormation(i+1)"
+                        *ngFor="let p of totalPageArray ; let i=index"><a>{{i+1}}</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+            <agm-map *ngIf="propositionFormations" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+                <agm-marker *ngFor="let pf of propositionFormations" [latitude]="pf.rayonIntervention?.latitude"
+                    [longitude]="pf.rayonIntervention?.longitude">
+                </agm-marker>
+
+                <agm-circle *ngFor="let pf of propositionFormations" [latitude]="pf.rayonIntervention?.latitude"
+                    [longitude]="pf.rayonIntervention?.longitude" [circleDraggable]="true" [editable]="false"
+                    [radius]="pf.rayonIntervention?.rayon" [clickable]="false">
+                </agm-circle>
+            </agm-map>
+        </div>
+
+    </div>
+
+
+</section>

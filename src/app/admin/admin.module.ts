@@ -1,5 +1,7 @@
-import { RoleGuard } from './../role.guard';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './../shared-component/shared.module';
+import { PropostionFormationsAdminService } from './services/propostion-formations-admin.service';
+import { CauserefusService } from './services/causerefus.service';
+import { AdminGuard } from '../guard/admin.guard';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { ForfaitService } from './services/forfait.service';
 import { FiliereService } from './services/filiere.service';
@@ -8,27 +10,37 @@ import { CycleService } from './services/cycle.service';
 import { Routes, RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NiveauComponent } from './niveau/niveau.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
 import { FiliereComponent } from './filiere/filiere.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { ContentAdminComponent } from './content-admin/content-admin.component';
 import { ClasseComponent } from './classe/classe.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CycleComponent } from './cycle/cycle.component';
 import { ForfaitComponent } from './forfait/forfait.component';
-import { HttpClientModule } from '@angular/common/http';
 import { AdminMainComponent } from './admin-main/admin-main.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { JourComponent } from './jour/jour.component';
+import { JourService } from '../customers/services/Jour.service';
+import { FormationService } from './services/formation.service';
+import { FormationComponent } from './formation/formation.component';
+import { PaiementsComponent } from './paiements/paiements.component';
+import { AllCustomersComponent } from './all-customers/all-customers.component';
+import { AllConsultationsCustomersComponent } from './all-consultations-customers/all-consultations-customers.component';
+import { VilleService } from './services/ville.service';
+import { VilleComponent } from './ville/ville.component';
+import { CauserefusComponent } from './causerefus/causerefus.component';
+import { FormationMangementeService } from './services/formationMangemente.service';
+import { PropostionFormationsAdminComponent } from './propostion-formations-admin/propostion-formations-admin.component';
+import { DetailsPropostionFormationAdminComponent } from './details-propostion-formation-admin/details-propostion-formation-admin.component';
+import { AdminCommonCourseComponent } from './admin-common-course/admin-common-course.component';
+import { DetailsCoursCommunAdminComponent } from './details-cours-commun-admin/details-cours-commun-admin.component';
 
 
 
 const adminRouter : Routes = [
-  {path: 'admin', component  : AdminMainComponent , canActivate : [RoleGuard], data : { role : 'ROLE_ADMIN'},
+  {path: 'admin', component  : AdminMainComponent , canActivate : [AdminGuard], data : { role : 'ROLE_ADMIN'},
     children : [
       {
-        path : 'dashboard',
+        path : '',
         component : DashboardHomeComponent
         
       },
@@ -63,13 +75,70 @@ const adminRouter : Routes = [
         
       },
       {
-        path : 'editprofil',
-        component : EditProfileComponent
+        path : 'jour',
+        component : JourComponent
+        
+      },
+      {
+        path : 'ville',
+        component : VilleComponent
+        
+      },
+      {
+        path : 'formation',
+        component : FormationComponent
+        
+      },
+      {
+        path : 'paiements',
+        component : PaiementsComponent
+        
+      }
+      ,
+      {
+        path : 'particulierpropositions',
+        component : AllConsultationsCustomersComponent
+        
+      }
+      ,
+      {
+        path : 'customers',
+        component : AllCustomersComponent
+        
+      }, 
+      
+      {
+        path : 'causerefus',
+        component : CauserefusComponent
         
       },
 
+      {
+        path : 'propositonsformations',
+        component : PropostionFormationsAdminComponent
+        
+      },
 
-    ]},
+      {
+        path : 'coursCommun/:id',
+        component : DetailsCoursCommunAdminComponent
+        
+      },
+
+      {
+        path : 'propositonsformations/:id',
+        component : DetailsPropostionFormationAdminComponent
+        
+      },
+
+      {
+        path : 'coursCommun',
+        component : AdminCommonCourseComponent
+        
+      }
+
+    ]}
+
 ] ;
 
 
@@ -80,28 +149,38 @@ const adminRouter : Routes = [
                 CycleComponent,
                 DashboardHomeComponent,
                 FiliereComponent,
-                FooterComponent,
                 ForfaitComponent,
-                NavbarComponent,
                 NiveauComponent,
+                VilleComponent,
                 SidebarComponent,
                 AdminMainComponent,
-                EditProfileComponent  ],
+                JourComponent,
+                FormationComponent,
+                PaiementsComponent,
+                AllCustomersComponent,
+                AllConsultationsCustomersComponent,
+                VilleComponent,
+                CauserefusComponent, 
+                PropostionFormationsAdminComponent,
+                DetailsPropostionFormationAdminComponent,
+                AdminCommonCourseComponent,
+                DetailsCoursCommunAdminComponent],
   imports: [
-    CommonModule, 
     RouterModule.forChild(adminRouter),
-    HttpClientModule,
-    FormsModule, 
-    ReactiveFormsModule
-
-
+    SharedModule
   ], 
   providers : [
     ClasseService,
     CycleService,
     FiliereService,
     ForfaitService,
-    NiveauService
+    NiveauService,
+    JourService,
+    VilleService,
+    FormationService, 
+    CauserefusService,
+    FormationMangementeService,
+    PropostionFormationsAdminService
   ]
 })
 export class AdminModule { }

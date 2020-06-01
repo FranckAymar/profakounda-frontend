@@ -3,7 +3,7 @@ import { ClasseService } from '../services/classe.service';
 import { Classe } from '../model/classe';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { timer } from 'rxjs';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-classe',
@@ -28,7 +28,6 @@ export class ClasseComponent implements OnInit {
     this.onFetchCycles();
     this.initForm();
   }
-
 
   initForm() {
 
@@ -64,6 +63,7 @@ export class ClasseComponent implements OnInit {
 
   onSaveClasse() {
 
+    alert("on a ici "+this.classe.cycleId);
     this.classeService.saveClasse(this.classForm.value).subscribe(
 
       (response) => {
@@ -117,7 +117,6 @@ export class ClasseComponent implements OnInit {
     this.classe.libelle = classeLoad.libelle;
     this.classe.cycleId = classeLoad.cycle.id;
 
-
   }
 
   onFetchCycles() {
@@ -143,6 +142,11 @@ export class ClasseComponent implements OnInit {
 
     this.classe = {} ;
     this.message = "" ;
+    this.classForm.patchValue(
+      {
+        id : null
+      }
+    )
 
   }
 

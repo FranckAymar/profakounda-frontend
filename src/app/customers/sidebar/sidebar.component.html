@@ -1,0 +1,25 @@
+<div class="sb2-1">
+    <!--== USER INFO ==-->
+    <div class="sb2-12">
+        <ul *ngIf="particulier">
+            <li class="list-img"><img  src="{{urlServer}}/{{particulier.id}}" alt="">
+            </li>
+            <li>
+                <h5>{{particulier.nom}} {{particulier.prenoms}} </h5>
+            </li>
+            <li></li>
+        </ul>
+    </div>
+    <!--== LEFT MENU ==-->
+    <div class="sb2-13">
+        <ul class="collapsible" data-collapsible="accordion">
+            <li><a href="#" routerLink="dashboard"  class="menu-active"><i class="fa fa-bar-chart" aria-hidden="true"></i> Dashboard</a>
+            </li>
+            <li><a href="#" routerLink="formations">Proposer une formation</a></li>
+            <li><a href="#" routerLink="courscommun">Organiser un cours</a></li>
+            <li><a href="#" routerLink="paiements">Mes paiements</a></li>
+            <li><a href="#" routerLink="favoris">Mes favoris</a></li>
+
+        </ul>
+    </div>
+</div> 

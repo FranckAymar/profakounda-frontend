@@ -10,46 +10,24 @@
             </div>
             <div class="ed-mm-right">
                 <div class="ed-mm-menu">
-                    <a href="#!" class="ed-micon"><i class="fa fa-bars"></i></a>
+                    <a class="ed-micon"><i class="fa fa-bars"></i></a>
                     <div class="ed-mm-inn">
-                        <a href="#!" class="ed-mi-close"><i class="fa fa-times"></i></a>
-                        <h4>All Courses</h4>
-                        <ul>
-                            <li><a href="course-details.html">Accounting/Finance</a></li>
-                            <li><a href="course-details.html">civil engineering</a></li>
-                            <li><a href="course-details.html">Art/Design</a></li>
-                            <li><a href="course-details.html">Marine Engineering</a></li>
-                            <li><a href="course-details.html">Business Management</a></li>
-                            <li><a href="course-details.html">Journalism/Writing</a></li>
-                            <li><a href="course-details.html">Physical Education</a></li>
-                            <li><a href="course-details.html">Political Science</a></li>
-                            <li><a href="course-details.html">Sciences</a></li>
-                            <li><a href="course-details.html">Statistics</a></li>
-                            <li><a href="course-details.html">Web Design/Development</a></li>
-                            <li><a href="course-details.html">SEO</a></li>
-                            <li><a href="course-details.html">Google Business</a></li>
-                            <li><a href="course-details.html">Graphics Design</a></li>
-                            <li><a href="course-details.html">Networking Courses</a></li>
-                            <li><a href="course-details.html">Information technology</a></li>
-                        </ul>
+                        <a  class="ed-mi-close"><i class="fa fa-times"></i></a>
                         <h4>User Account</h4>
-                        <ul>
-                            <li><a href="#" routerLink ="sign-in">Sign In</a></li>
-                            <li><a href="#" routerLink ="sign-up">Register</a></li>
+                        <ul  *ngIf="!authenticated" >
+                            <li><a href="#" routerLink ="/home/sign-in" >connexion</a>
+                            </li>
+                            <li><a href="#" routerLink ="/home/sign-up" >inscription</a>
+                            </li>
                         </ul>
-                        <h4>All Pages</h4>
                         <ul>
-                            <li><a href="index-2.html">Home</a></li>
-                            <li><a href="about.html">About us</a></li>
-                            <li><a href="admission.html">Admission</a></li>
-                            <li><a href="all-courses.html">All courses</a></li>
-                            <li><a href="course-details.html">Course details</a></li>
-                            <li><a href="awards.html">Awards</a></li>
-                            <li><a href="seminar.html">Seminar</a></li>
-                            <li><a href="events.html">Events</a></li>
-                            <li><a href="event-details.html">Event details</a></li>
-                            <li><a href="event-register.html">Event register</a></li>
-                            <li><a href="contact-us.html">Contact us</a></li>
+                            <li><a href="#" routerLink ="/customers" >Mon Tableau de bord</a>
+                            </li>
+                        </ul>
+                        <h4>Formations</h4>
+                        <ul *ngIf="authenticated">
+                            <li><a routerLink ="/formations">Nos répétiteurs</a></li>
+                            
                         </ul>
                         <h4>User Profile</h4>
                         <ul>
@@ -83,9 +61,15 @@
                     </div>
                     <div *ngIf="!authenticated" class="ed-com-t1-right">
                         <ul>
-                            <li><a href="#" routerLink ="sign-in" >connexion</a>
+                            <li><a href="#" routerLink ="/home/sign-in" >connexion</a>
                             </li>
-                            <li><a href="#" routerLink ="sign-up" >inscription</a>
+                            <li><a href="#" routerLink ="/home/sign-up" >inscription</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="authenticated" class="ed-com-t1-right">
+                        <ul>
+                            <li><a href="#" routerLink ="/customers" >Mon Tableau de bord</a>
                             </li>
                         </ul>
                     </div>
@@ -335,40 +319,24 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="search-form">
-                        <form>
+                       
                             <div class="sf-type">
                                 <div class="sf-input">
-                                    <input type="text" id="sf-box" placeholder="Search course and discount courses">
-                                </div>
-                                <div class="sf-list">
-                                    <ul>
-                                        <li><a href="course-details.html">Accounting/Finance</a></li>
-                                        <li><a href="course-details.html">civil engineering</a></li>
-                                        <li><a href="course-details.html">Art/Design</a></li>
-                                        <li><a href="course-details.html">Marine Engineering</a></li>
-                                        <li><a href="course-details.html">Business Management</a></li>
-                                        <li><a href="course-details.html">Journalism/Writing</a></li>
-                                        <li><a href="course-details.html">Physical Education</a></li>
-                                        <li><a href="course-details.html">Political Science</a></li>
-                                        <li><a href="course-details.html">Sciences</a></li>
-                                        <li><a href="course-details.html">Statistics</a></li>
-                                        <li><a href="course-details.html">Web Design/Development</a></li>
-                                        <li><a href="course-details.html">SEO</a></li>
-                                        <li><a href="course-details.html">Google Business</a></li>
-                                        <li><a href="course-details.html">Graphics Design</a></li>
-                                        <li><a href="course-details.html">Networking Courses</a></li>
-                                        <li><a href="course-details.html">Information technology</a></li>
-                                    </ul>
+                                    <input type="text" id="sf-box" [(ngModel)]="expression" placeholder="Vous cherchez une formation ?">
                                 </div>
                             </div>
                             <div class="sf-submit">
-                                <input type="submit" value="Rechercher">
+                                <a [routerLink]="['/formations',expression]" >
+                                    <input type="submit"  value="Search Course"> 0
+                                </a> 
+                               
                             </div>
-                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </section>
 <!--END HEADER SECTION-->

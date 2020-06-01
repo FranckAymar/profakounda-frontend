@@ -11,16 +11,13 @@
                  class="btn btn-primary">
           Ajouter
         </button>
-        <div style="margin-top: 2em;" 
-             *ngIf="erreur"
-             class="alert alert-danger">
-          {{erreur}}
-        </div>
         <table class="table table-hover">
           <thead>
             <tr>
+              <th>Nom</th>
               <th>Nombre de requêtes</th>
               <th>Période de validité</th>
+              <th>Montant</th> 
               <th>date de creation</th> 
               <th>date de modification</th>
 
@@ -29,11 +26,15 @@
           <tbody>
             <span *ngIf="forfaits.length == 0">Aucun élément</span>
             <tr *ngFor="let forfait of forfaits">
+              
 
+              <td>{{forfait.name}}</td>
               <td>{{forfait.nbreRequete}}</td>
               <td>{{forfait.nbreJour}}</td> 
+              <td>{{forfait.montant}}</td>
               <td>{{forfait.dateCreation|date:"yyyy-MM-dd HH:mm:ss"}}</td>
               <td>{{forfait.dateModification|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+              
                             
               <td><button (click) = "onLoadForfait(forfait)" type="button" class="btn btn-primary" 
                           data-toggle="modal" 
@@ -72,6 +73,12 @@
         <!-- Nbre jour-->
         <form [formGroup]="forfaitForm" (ngSubmit)="onSaveForfait()">
           <div class="form-group">
+            <label for="nbreRequete">Nom : </label>
+            <input [(ngModel)]="forfait.name" formControlName="name" 
+                    type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
             <label for="nbreRequete">Nombre de requêtes : </label>
             <input [(ngModel)]="forfait.nbreRequete" formControlName="nbreRequete" 
                     type="number" id="nbreRequete" name="nbreRequete" required>
@@ -82,6 +89,13 @@
             <label for="nbreJour">Nombre de jour de validité : </label>
             <input [(ngModel)]="forfait.nbreJour" formControlName="nbreJour"
              type="number" id="nbreJour" name="nbreJour" required>
+          </div>
+
+           <!-- Nombre Requete-->
+           <div class="form-group">
+            <label for="montant">Montant : </label>
+            <input [(ngModel)]="forfait.montant" formControlName="montant"
+             type="number" id="montant" name="montant" required>
           </div>
 
 

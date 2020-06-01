@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ParticulierService } from '../services/particulier.service';
+import { ParticulierService } from '../../customers/services/particulier.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { Particulier } from '../models/Particulier.model';
@@ -23,15 +23,14 @@ formInitialisation(){
   this.userForm = this.formBuilder.group({
     nom:['',Validators.required],
     prenoms:['',Validators.required],
-    telephone:['',Validators.required],
+    telephone:[''],
     email:['',[Validators.required,Validators.email]],
-    lieuHabitation:['',Validators.required],
+    lieuHabitation:'',
     password:['',Validators.required],
     passwordConfirm:['',Validators.required]
   })
 }
 changement(){
-  console.log(this.userForm.value['password']);
   if(this.userForm.value['password']===this.userForm.value['passwordConfirm'])
   {
     this.invalidation = false;
@@ -54,10 +53,11 @@ getColor(){
   onSaveParticulier(){
     const formData = this.userForm.value;
     const particulier = new Particulier(
+      0,
       formData['nom'],
       formData['prenoms'],
       formData['email'],
-      formData['telephone'],
+      '',
       formData['lieuHabitation'],
       formData['password'],
       formData['passwordConfirm']
@@ -70,11 +70,15 @@ getColor(){
        
         if(response["success"])
         {
-          this.router.navigate(["/home/sign-in"]);
+          alert('Inscription effectuée avec succès; verifier votre mail et cliquer sur le lien de validation');
+          this.router.navigate(["/home/sign-up"]);
+          this.formInitialisation();
+          
         }
        
       },
       (error)=>{
+        console.log(particulier);
         console.log("Une erreur s'est produite: "+error);
       }
     )

@@ -1,8 +1,7 @@
-import { UserModel } from './../models/UserModel';
 import { Observable } from 'rxjs';
 import { URL } from 'src/app/API_url/config';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import {  HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -16,26 +15,13 @@ export class SignInService {
     constructor(private http: HttpClient ) { }
 
 
-    authorities = [
-        {
-            authority: ''
-        }
-    ]
+    login(token) : Observable<any>{
 
-
-    authority: string;
-
-    message: string = '';
-
-
-    login(user : UserModel) : Observable<any>{
-
-        return this.http.post(URL.login, user) ;
+        const headers = new HttpHeaders({'Authorization': `Basic ${token}`})
+        return this.http.get(URL.login,{headers}) ;
 
     }
-
-    
-
+ 
 
     logout() {
 

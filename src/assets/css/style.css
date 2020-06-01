@@ -45,6 +45,8 @@
 /*-------------------------------------------------*/
 /* =  1.All Pages Common CSS Styles
 /*-------------------------------------------------*/
+
+
  body{
      font-family: 'Open Sans', sans-serif;
      padding-right: 0px !important;
@@ -1157,7 +1159,6 @@
  .hom-list-share {
      position: relative;
      overflow: hidden;
-     width: 100%;
      padding-top: 12px;
 }
  .hom-list-share ul {
@@ -1168,18 +1169,31 @@
      float: left;
      list-style-type: none;
      display: inline-block;
-     width: 33.333%;
 }
  .hom-list-share ul li:nth-child(1) a{
      color: #fff;
      border: 1px solid #149acc;
      background: #1aa5d8;
      background: linear-gradient(to bottom, #1aa5d8, #1386b1);
-     text-transform: uppercase;
      font-weight: 700;
 }
+
+.hom-list-share ul li:nth-child(2) a{
+    color: #fff;
+    border: 1px solid #f36b3b;
+    background: #f36b3b;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.hom-list-share ul li:nth-child(3) a{
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
  .hom-list-share ul li a {
-     display: block;
+     
      border: 1px solid #ececec;
      margin: 2px;
      padding: 4px 5px;
@@ -1542,11 +1556,11 @@
      font-weight: 500;
      text-transform: capitalize;
      padding: 8px;
-     border: 1px solid #ffffff;
+     border: 0px solid #ffffff;
      padding: 8px 45px;
      margin: 0px;
-     border-top-left-radius: 2px;
-     border-bottom-left-radius: 2px;
+     border-top-left-radius: 0px;
+     border-bottom-left-radius: 0px;
      font-size: 14px;
 }
  .sf-list{
@@ -2215,9 +2229,8 @@
 /* =  14.USER DASHBOARD 
 /*-------------------------------------------------*/
  .pro-cover{
-     background: url('../images/pro-bg.jpg') no-repeat center center;
      width:100%;
-     height:250px;
+     height:300px;
      display: block;
      background-size: cover;
 }
@@ -3392,6 +3405,7 @@ left: 0;
      margin-left: 11px;
      margin-top: 12px;
 }
+
  .s18-age-event ul li h4{
      margin-top: 0px;
      font-weight: 700;
@@ -3596,14 +3610,14 @@ left: 0;
 }
  .home-requ {
 }
- .home-requ input, select, textarea {
+ .home-requ input, textarea {
      padding: 15px;
      height: auto;
      border: 1px solid #afafaf;
      border-radius: 2px;
      resize: none;
 }
- .home-requ select {
+ .home-requ  {
      padding: 12px 10px;
 }
  .home-requ textarea {
@@ -3687,7 +3701,7 @@ left: 0;
 }
  .n-form-com{
 }
- .n-form-com form input, select, textarea{
+ .n-form-com form input, textarea{
      border: 1px solid #cecece;
      height: 45px;
      background: #fff;
@@ -4085,7 +4099,7 @@ left: 0;
      position:fixed;
      top:0px;
      width:100%;
-     height:55px;
+     height:62px;
      background:#fff;
      box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.32);
      z-index: 999;
@@ -4195,7 +4209,7 @@ left: 0;
      position: fixed;
      top: 0px;
      width: 100%;
-     height: 55px;
+     height: 69px;
      background: #fff;
      box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.32);
      z-index: 999;
@@ -5617,7 +5631,7 @@ input:not(:focus):valid ~ .floating-label{
 	font-size:12px;
 }
 .read-line-btn{
-padding: 6px 25px;
+    padding: 6px 25px;
     border-radius: 3px;
     text-transform: uppercase;
     font-weight: 600;
@@ -5630,7 +5644,27 @@ padding: 6px 25px;
     border: 1px solid #02294e;
     margin-top: 10px;
     display: inline-block;
+    cursor: pointer;
+
 }
+
+.details-line-btn{
+    padding: 6px 25px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    height: 35px;
+    text-align: center;
+    /* margin: 0px 10px; */
+    /* background: linear-gradient(to top, #ef612f, #f36b3b); */
+    color: #f4364f !important;
+    border: 1px solid #f4364f ;
+    margin-top: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
 .ed-rese-grid-mar-bot-30{
 	margin-bottom:30px;
 }
@@ -5700,3 +5734,12 @@ padding: 6px 25px;
 .ad-log-in-con p{}
 .ad-log-in-con form{}
 .ad-log-in-con form input{}
+
+
+.align-text-right{
+    text-align: right;
+}
+
+.btn-bg-color{
+  background-color: #FF5722;  
+}

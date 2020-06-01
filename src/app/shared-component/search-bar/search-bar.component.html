@@ -1,0 +1,32 @@
+<div class="search-top">
+    <div class="container">  
+        <div class="row">
+            <div class="col-md-12">   
+                <div class="col-md-3" id="ville">
+                    <select     (ngModelChange)="OnFiterDeFormationParVille($event)" 
+                                class="form-control" id="cycle" 
+                                [(ngModel)]="villeKey"   
+                                required>
+                        <option value="" selected="selected" value="Toutes">Toutes les villes</option>
+                        <option  *ngFor="let ville of villes" 
+                                 [ngValue]="ville.designation">{{ville.designation}}</option>
+                    </select>
+                </div>         
+                <div class="search-form"> 
+                        <div class="sf-type">
+                            <div class="sf-input">
+                                <input type="text"
+                                [(ngModel)]="searchKey" id="sf-box" placeholder="Search">
+                            </div>
+                        
+                        </div>
+                </div>
+                <div class="sf-submit">
+                    <input   [routerLink]="['/formations']" [queryParams]="{searchKey: searchKey, villeKey: villeKey}"
+                            (click)="onFiltreFormationSearch(searchKey)"
+                           type="submit" value="Rechercher">
+                </div>           
+          </div>
+        </div>
+    </div>
+</div>

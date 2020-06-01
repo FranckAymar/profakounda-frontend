@@ -17,6 +17,9 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { FormationService } from 'src/app/admin/services/formation.service';
+import { ParticulierService } from '../services/particulier.service';
+import { VilleService } from 'src/app/admin/services/ville.service';
+import { DemandeMiseEnLigne } from '../models/DemandeMiseEnLigne';
 
 @Component({
   selector: 'app-proposition-formation',
@@ -29,6 +32,7 @@ export class PropositionFormationComponent implements OnInit {
   public model: Niveau;
   @Input() edit:boolean = false;
   @Input() editModule:boolean = false;
+  @Input() isVilleExist:boolean;
   joursString:any = [];
   niveaux=[];
   descriptionHasChange:boolean = false;
@@ -37,12 +41,15 @@ export class PropositionFormationComponent implements OnInit {
   modules: any = [];
   hours: any = [];
   jours: any = [];
+  villes:any = [];
+  @Input() ville:string;
   propositions: any = [];
   formations: any = [];
   heure:Heure = new Heure('','');
   lambda:Lambda;
   @Input() propositionFormation:PropositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME)); ;
   @Input() numberOfTable:number;
+  demandeMiseEnLigne:DemandeMiseEnLigne;
   disponibilite:Disponibilite = new Disponibilite('',[],null,sessionStorage.getItem(this.signInService.USERNAME));
   proposition:PropositionFormation= new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
   niveauForme:NiveauForme = new NiveauForme(0,'',null,null,null,sessionStorage.getItem(this.signInService.USERNAME)); ;
@@ -58,9 +65,11 @@ export class PropositionFormationComponent implements OnInit {
   errorModule:string;
   errorProposition:string;
   errorJour:string;
+  filteredOptions4: Observable<string[]>
   myControl = new FormControl();
   myControl2 = new FormControl();
   myControl3 = new FormControl();
+  myControl4 = new FormControl();
   coordMapModel : CoordMapModel ;
   filteredOptions: Observable<string[]>;
   filteredOptions2: Observable<string[]>;
@@ -69,6 +78,8 @@ export class PropositionFormationComponent implements OnInit {
   constructor(private signInService:SignInService,
     private niveauService:NiveauService,
     private jourService:JourService,
+    private particulierService:ParticulierService,
+    private villeService:VilleService,
     private propositionFormationService:PropositionFormationService,
     private formationService:FormationService
     ) { 
@@ -81,7 +92,8 @@ export class PropositionFormationComponent implements OnInit {
     this.rechercherProposition();
     this.onFetchFormations();
     this.onFetchJoursString();
-    
+    this.onFetchVillesObject();
+    this.verifierVilleParticulier();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -97,7 +109,18 @@ export class PropositionFormationComponent implements OnInit {
       startWith(''),
       map(va => this._filter3(va))
     );
+    this.filteredOptions4 = this.myControl4.valueChanges
+    .pipe(
+      startWith(''),
+      map(v => this._filter4(v))
+    );
     }
+    private _filter4(value: string): string[] {
+      const filterValue = value.toLowerCase();
+  
+      return this.villes.filter(option => option.designation.toLowerCase().includes(filterValue));
+    }
+    
     private _filter(value: string): string[] {
       const filterValue = value.toLowerCase();
   
@@ -119,6 +142,23 @@ export class PropositionFormationComponent implements OnInit {
     adProposition(){
       this.errorProposition = "";
       this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+    }
+    getMdemandemMiseEnLigneA(id:number){
+      this.demandeMiseEnLigne = new DemandeMiseEnLigne(id,'');
+    }
+    saveDemandeMiseEnLigne(){
+      this.demandeMiseEnLigne.ville = this.ville;
+      this.propositionFormationService.demandeMiseEnLigneObject(this.demandeMiseEnLigne).subscribe(
+        (response)=>{
+          document.getElementById('showVilleModal').click();
+          this.rechercherProposition();
+          this.verifierVilleParticulier();
+        },
+        (error)=>{
+          console.log(error);
+        }
+      )
+   
     }
     onFetchFormations()
       {
@@ -158,6 +198,18 @@ export class PropositionFormationComponent implements OnInit {
       this.propositionFormation = new PropositionFormation(proposition.id,proposition.description,proposition.telephone,this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
      
     }
+    verifierVilleParticulier(){
+      this.particulierService.verifierVilleParticulier().subscribe(
+        (response)=>{
+          
+          this.isVilleExist = response['isVilleExist'];
+        
+        },
+        (error)=>{
+          console.log(error);
+        }
+      )
+    }
     addDisponibilite(id){
       this.proposition= new PropositionFormation(id,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
       this.rechercherDisponibilite(id);
@@ -182,6 +234,19 @@ this.propositionFormationService.rechercherDisponibilites(id)
       console.log(this.module);
     }
     
+    onFetchVillesObject() {
+      this.villeService.onFetchVilles().subscribe(
+        (response)=> {
+          this.villes = response;
+          console.log(response);
+        },
+        (error)=> {
+          console.log("Une erreur est survenue");
+        }
+  
+      )
+  
+    }
     enregistrerProposition(){
         if(this.propositionFormation.id !=0)
         {

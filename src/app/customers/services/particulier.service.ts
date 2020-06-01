@@ -27,6 +27,9 @@ export class ParticulierService {
     getCodeParticilier(username: String) {
         return this.httpClient.post(URL.getCode, username);
     }
+    verifierVilleParticulier() {
+        return this.httpClient.get(URL.verifierVilleParticulier);
+    }
     getPhoto(id: number) {
         return this.httpClient.post(URL.getPhoto, id);
     }

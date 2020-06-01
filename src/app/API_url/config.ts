@@ -48,6 +48,7 @@ export const URL = {
     modifierParticulier : consts.host+ consts.nameProject +'particulier/modifierParticulier',
     modifierPhoto: consts.host+ consts.nameProject +'particulier/uploadPhoto',
     rechercherParticulier : consts.host+ consts.nameProject +'rechercherParticulierParUsername',
+    verifierVilleParticulier : consts.host+ consts.nameProject +'particulier/rechercherVilleParParticulier',
     getCode : consts.host+ consts.nameProject +'rechercherCodeParticulier',
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
@@ -88,6 +89,7 @@ export const URL = {
     deleteDisponibiliteByDay: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByDayId',
     deleteDisponibiliteByHour: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByHourId',
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
+    demandeMiseEnLigneObject: consts.host+ consts.nameProject +'particulier/demandemiseenligneObject',
     
     
    

@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from './../services/cours-commun-service.service';
 import { OganiserCoursSheetComponent } from './../../shared-component/oganiser-cours-sheet/oganiser-cours-sheet.component';
@@ -19,6 +20,7 @@ export class CoursCommunComponent implements OnInit {
               private coursCommunService : CoursCommunService,
               private route : ActivatedRoute,
               private router : Router,
+              private snack : SnackbarService
           ) { }
 
   ngOnInit() {
@@ -116,6 +118,7 @@ export class CoursCommunComponent implements OnInit {
 
   calculTotalInscrit(coursCommuns){
 
+    this.totalInscrits = 0 ;
     coursCommuns.forEach(element => {
             
       this.totalInscrits += element.coursCommun.nombreInscrit;

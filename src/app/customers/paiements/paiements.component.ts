@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { PdfMakeWrapper, Img, Txt, QR, Columns } from 'pdfmake-wrapper';
 import { CoursCommunService } from './../services/cours-commun-service.service';
 import { SignInService } from 'src/app/home/services/sign-in.service';
@@ -16,6 +17,9 @@ export class PaiementsComponent implements OnInit {
   paiements = [] ;
   myCoursCommuns = [];
 
+  idCoursCommunSelect : number ;
+  action : string ;
+
     //For pagination
 
   //Nombre de données à chargées à chaque page
@@ -31,9 +35,14 @@ export class PaiementsComponent implements OnInit {
   constructor(private paiementService : PaiementService,
             private signInService : SignInService,
             private coursCommunService : CoursCommunService,
-            private datePipe: DatePipe) { }
+            private datePipe: DatePipe, 
+            private router : Router,
+            private route : ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.getParamsURL() ;
+
     this.onFetchPayment(this.page) ;
     this.onFetchCoursCommun();
   }
@@ -42,7 +51,7 @@ export class PaiementsComponent implements OnInit {
 
     this.page = pageActive ;
 
-    let username = sessionStorage.getItem(this.signInService.USERNAME);
+    let username = localStorage.getItem(this.signInService.USERNAME);
 
     this.paiementService.getPaymentParticulier(username, this.page, this.numberDataOfPage).subscribe(
 
@@ -71,6 +80,29 @@ export class PaiementsComponent implements OnInit {
     )
     
 
+  }
+
+
+  processToPrintRecuFromMail(idCoursCommun){
+
+    this.coursCommunService.fectchCoursCommunSelect(idCoursCommun).subscribe(
+
+      (resp)=>{
+
+        if(resp.code === 0){
+          this.onGenerateRecuPaiement(resp.response);
+        }else{
+          this.router.navigateByUrl('/error404') ;
+        }
+
+      },
+
+      (error)=>{
+
+        console.log(error);
+        
+      }
+    )
   }
 
 
@@ -130,7 +162,6 @@ export class PaiementsComponent implements OnInit {
 
     
     pdf.create().download('Recu_profAkounda_'+data.nom );
-    pdf.create().open();
 
       });
 
@@ -139,4 +170,21 @@ export class PaiementsComponent implements OnInit {
 
   }
 
+
+
+  getParamsURL() {
+    
+    this.route.queryParams.subscribe(params => {
+       this.action = params['action'];
+       this.idCoursCommunSelect = params['id'] ;
+
+       if(this.action  === 'print'){
+
+        this.processToPrintRecuFromMail(this.idCoursCommunSelect) ;
+       }
+
+  });
+    
+}
+   
 }

@@ -17,14 +17,18 @@
             </div>
             <div  class="log-in-pop-right">
                 <h4>Créer un compte</h4>
-                  <div  class="modal-header center" >
-                     <a *ngIf="mailSaisi" style="cursor: pointer;" (click)="onRevoyerEmail()">Renvoyer le mail de confirmation</a>
-
-                </div>
-                    <p>Vous n'avez pas de compte? Créez-en un. <br> Cela ne vous prendra que quelques secondes.</p>
+                
+                    <p *ngIf="!inscriptionSucess">Vous n'avez pas de compte? Créez-en un. <br> Cela ne vous prendra que quelques secondes.</p>
                    
                 <div *ngIf="error" class="alert alert-danger">
                     {{error}}
+                </div>
+                <div *ngIf="inscriptionSucess" class="modal-header center alert alert-success">
+                  <div style="padding: 0.5em;"   class="row">
+                    <p><strong>Inscription effectuée !</strong></p>
+                    <p>Un mail de confirmation vous a été envoyé sur votre adresse email. Si le mail ne vous est pas parvenu, vérifiez vos <strong>spams</strong> ou 
+                        <a style="cursor: pointer;" (click)="onRevoyerEmail()">renvoyez le mail de confirmation.</a> </p>
+                  </div>
                 </div>
                
                 <form [formGroup] = "userForm" (ngSubmit)="onSaveParticulier()" class="s12">

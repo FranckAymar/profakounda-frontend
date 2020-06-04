@@ -130,7 +130,7 @@ init(){
     filiere:'',
     niveau:'',
     ville:['',Validators.required],
-    username:sessionStorage.getItem(this.signInService.USERNAME)
+    username:localStorage.getItem(this.signInService.USERNAME)
   })
 }
 initPassword(){
@@ -138,7 +138,7 @@ initPassword(){
     lastPassword:['',Validators.required],
     password:['',Validators.required],
     passwordConfirm:['',Validators.required],
-    username:sessionStorage.getItem(this.signInService.USERNAME)
+    username:localStorage.getItem(this.signInService.USERNAME)
   })
 }
 
@@ -178,7 +178,7 @@ getColor(){
 
 
   rechercherPaticulierConnecter(){
-    this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
+    this.particulierService.rechercherParticulier(localStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (reponse)=>{
         this.niveau = reponse['niveau'];
@@ -229,7 +229,7 @@ getColor(){
             {
               input.append('photo',this.data[0]);
             }
-            input.append('username',sessionStorage.getItem(this.signInService.USERNAME));
+            input.append('username',localStorage.getItem(this.signInService.USERNAME));
             this.uploadFile(input);
            
           }
@@ -293,18 +293,18 @@ getColor(){
 
   }
   changePassword(){
-    let token = btoa( sessionStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['lastPassword']);
-    let sesToken = sessionStorage.getItem(this.signInService.TOKEN);
+    let token = btoa( localStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['lastPassword']);
+    let sesToken = localStorage.getItem(this.signInService.TOKEN);
     if(token === sesToken)
     {
-      let newToken = btoa( sessionStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['password']);
-      this.passwordModel = new PasswordModel(this.passwordForm.value['lastPassword'],this.passwordForm.value['password'],this.passwordForm.value['passwordConfirm'],sessionStorage.getItem(this.signInService.USERNAME));
+      let newToken = btoa( localStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['password']);
+      this.passwordModel = new PasswordModel(this.passwordForm.value['lastPassword'],this.passwordForm.value['password'],this.passwordForm.value['passwordConfirm'],localStorage.getItem(this.signInService.USERNAME));
       this.particulierService.onChangePassword(this.passwordModel)
     .subscribe(
       (response)=>{
         alert("Modification effectuée avec succès.");
         this.initPassword();
-        sessionStorage.setItem(this.signInService.TOKEN,newToken);
+        localStorage.setItem(this.signInService.TOKEN,newToken);
         this.mes = '';
       },
       (error)=>{

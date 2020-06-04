@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
   }
 
   rechercherPaticulierConnecter() {
-    this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
+    this.particulierService.rechercherParticulier(localStorage.getItem(this.signInService.USERNAME))
       .subscribe(
         (reponse) => {
           

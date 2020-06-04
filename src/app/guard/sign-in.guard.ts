@@ -19,7 +19,7 @@ export class SignInGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     
-      let token = sessionStorage.getItem(this.signInService.TOKEN)
+      let token = localStorage.getItem(this.signInService.TOKEN)
 
       if (token) {
   

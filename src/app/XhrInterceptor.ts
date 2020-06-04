@@ -9,7 +9,7 @@ export class XhrInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    let token = sessionStorage.getItem(this.signInService.TOKEN) ;
+    let token = localStorage.getItem(this.signInService.TOKEN) ;
 
 
     if(token) {

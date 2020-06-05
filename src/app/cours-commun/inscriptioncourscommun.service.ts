@@ -23,6 +23,12 @@ export class InscriptioncourscommunService {
   
   
   }
+  getDashBoardInscrits() : Observable<any>{
+
+    return this.http.get(URL.getDashBoardInscritsCoursCommuns);
+  
+  
+  }
 
   recupererInscrit(data : {idPublicCible : number, idCoursCommun : number}) : Observable<any> {
 

@@ -65,7 +65,18 @@
                                             <td>{{p.proposition.description}}</td>
                                             <td>{{p.proposition.telephone}}</td>
                                             <td>{{p.proposition.dateCreation | date: 'dd-MM-yyyy'}}</td>
-                                           
+                                            <td>
+                                                <span *ngIf="!p.proposition.attenteMiseEnLigne && 
+                                                !p.proposition.enLigne && 
+                                                !p.proposition.refusMiseEnLigne &&
+                                                !p.proposition.suppressionMiseEnLigne"
+                                                style="color: yellow;">En édition</span>
+                                                <span *ngIf="p.proposition.attenteMiseEnLigne" style="color: red;">En attende de validation</span>
+                                                <span *ngIf="p.proposition.refusMiseEnLigne" style="color:darkorange;" 
+                data-toggle="tooltip" data-placement="right" title="{{p.proposition.causeRefus?.details}}">Refusée</span>
+                <span *ngIf="p.proposition.suppressionMiseEnLigne" style="color: red;">Hors-ligne</span>
+                <span *ngIf="p.proposition.enLigne" style="color: green;">En ligne</span>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

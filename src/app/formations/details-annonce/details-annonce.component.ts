@@ -51,6 +51,7 @@ export class DetailsAnnonceComponent implements OnInit {
   //Model
     idPropositionFormation : number ;
     avis:Avis;
+  
    
     propositionFormation = {
     code : null,
@@ -572,7 +573,7 @@ changeEtoile5(){
           this.isConnected = true;
         }
        this.tabAvis = resp["avis"];
-        
+       
         if(resp.rayonIntervention){
           this.inititalizeCoordMap(resp.rayonIntervention.latitude,
             resp.rayonIntervention.longitude,

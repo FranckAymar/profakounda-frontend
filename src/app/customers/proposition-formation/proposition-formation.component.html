@@ -32,8 +32,8 @@
                 <p>
                     <button data-toggle="modal" data-target="#ajouterDescription" (click)="getProposition(p.proposition)" class="btn btn-danger btn btn-block">Description</button>
                 </p>
-                <div  class="row">
-                    <div style="margin-top: 0.5em !important;" class="col-md-3">
+                <div *ngIf="!p.proposition.cyclePrimaire"  class="row">
+                    <div  style="margin-top: 0.5em !important;" class="col-md-3">
                         <button   (click)="addModule(p.modules,p.proposition.id)" type="button" data-toggle="modal" data-target="#modules"
                                 class="btn btn-info btn-block">
                                 Modules enseignés
@@ -58,6 +58,27 @@
                         </button>   
                     </div>
                 </div>
+                <div *ngIf="p.proposition.cyclePrimaire"  class="row">
+                    
+                    <div style="margin-top: 0.5em !important;" class="col-md-4">
+                        <button style="margin-left: 1em;" (click)="addNiveau(p.proposition.id)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
+                                class="btn btn-primary btn-block">
+                                Niveau enseigné
+                        </button>
+                    </div>
+                    <div style="margin-top: 0.5em !important;" class="col-md-4">
+                        <button style="margin-left: 1em;" (click)="addDisponibilite(p.proposition.id)" type="button" data-toggle="modal" data-target="#disponibilite"
+                        class="btn btn-outline-success btn-block">
+                        Disponibilités
+                        </button>
+                    </div>
+                    <div  style="margin-top: 0.5em !important;" class="col-md-4">
+                        <button  (click)="loadPropostion(p.proposition.id)" style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
+                        class="btn btn-outline-dark btn-block">
+                        Zone Intervention
+                        </button>   
+                    </div>
+                </div>
                 <div style="width: 100%; overflow: auto;">
                     <table  class="table table-hover">
                         <thead>
@@ -72,8 +93,8 @@
     
                             <tr *ngFor="let n of p.contrats">
                                 <td>{{n.niveau.libelle}}</td>
-                                <td>{{n.minMontant}} Eco</td>
-                                <td>{{n.maxMontant}} Eco</td>
+                                <td>{{n.minMontant}} Frcfa</td>
+                                <td>{{n.maxMontant}} Fcfa</td>
                                 <td><button data-toggle="modal" data-target="#niveauEnseigne" (click)="getContrat(n.id)"
                                         class="updateButton"><i class="fa fa-edit"></i></button></td>
                                 <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i
@@ -86,8 +107,11 @@
                 </div>
                 
             </div>
-            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention" data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
-            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && !p.proposition.cyclePrimaire" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && !p.proposition.cyclePrimaire" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <!--CYCLE PRIMAIRE-->
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && p.proposition.cyclePrimaire" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && p.proposition.cyclePrimaire" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
         </div>
     </div>
 </div>
@@ -348,7 +372,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">DESCRITPION</h5>
+                <h5 class="modal-title" id="exampleModalLabel">MODIFIER LA PROPOSITION DE FORMATION</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -358,9 +382,15 @@
                     <div *ngIf="errorProposition" class="alert alert-danger">
                         {{errorProposition}}
                     </div>
-                    <textarea placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" maxChars="1000" class="form-control" (ngModelChange)="changeDescritpion()" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
-                        {{proposition.description}}
-                    </textarea>
+                    <mat-checkbox [checked]="isCheckCiclePrimaire" style="width: 70%;"  (change)="checkBoxCylePrimaire()">
+                        Cycle primaire ?</mat-checkbox>
+                    <div class="form-group">
+                        <label for="tel">Description:</label>
+                        <textarea placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" maxChars="1000" class="form-control" (ngModelChange)="changeDescritpion()" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+                            {{proposition.description}}
+                        </textarea>
+                    </div>
+                   
                     <div class="form-group">
                         <label for="tel">Téléphone:</label>
                         <input  required name="telephone" type="text" id="tel"
@@ -381,7 +411,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">DESCRITPION</h5>
+                <h5 class="modal-title" id="exampleModalLabel">NOUVELLE PROPOSITION DE FORMATION</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -391,9 +421,15 @@
                     <div *ngIf="errorProposition" class="alert alert-danger">
                         {{errorProposition}}
                     </div>
-                    <textarea class="form-control" placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
-
-                    </textarea>
+                    <mat-checkbox style="width: 70%;"  (change)="checkBoxCylePrimaire()">
+                        Cycle primaire ?</mat-checkbox>
+                        <div class="form-group">
+                            <label for="tel">Description:</label>
+                            <textarea class="form-control" placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+        
+                            </textarea>
+                        </div>
+                   
                     <div class="form-group">
                         <label for="tel">Téléphone:</label>
                         <input  required name="telephone" type="text" id="tel"

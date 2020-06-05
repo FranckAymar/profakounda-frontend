@@ -58,7 +58,7 @@ export class PropositionFormationService{
         return this.httpClient.post(URL.rechercherPropositions,username);
     }
     enregistrerProposition(data){
-        return this.httpClient.post(URL.enregsitrerProposition,data);
+         return this.httpClient.post(URL.enregsitrerProposition,data);
      }
      modifierProposition(data){
         return this.httpClient.post(URL.modifierProposition,data);

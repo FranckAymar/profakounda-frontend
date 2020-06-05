@@ -77,6 +77,7 @@ export const URL = {
     rechercherNiveauEnseignes: consts.host+ consts.nameProject +'particulier/contrats' ,
     getContrat: consts.host+ consts.nameProject +'particulier/getContrat',
     getProposition: consts.host+ consts.nameProject +'particulier/getProposition',
+    
     getModule: consts.host+ consts.nameProject +'particulier/getModule',
     deleteContrat: consts.host+ consts.nameProject +'particulier/deleteContrat',
     deleteModule: consts.host+ consts.nameProject +'particulier/deleteModule',
@@ -92,7 +93,10 @@ export const URL = {
     deleteDisponibiliteByHour: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByHourId',
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
     demandeMiseEnLigneObject: consts.host+ consts.nameProject +'particulier/demandemiseenligneObject',
-    
+    //DASHBOARD PARTICULIER
+    getDashBoardProposition: consts.host+ consts.nameProject +'particulier/dashboard/propositions',
+    getDashBoardCoursCommun: consts.host+ consts.nameProject +'particulier/dashboard/coursCommuns',
+    getDashBoardInscritsCoursCommuns:consts.host+ consts.nameProject +'particulier/dashboard/inscrits',
     
    
     //Détails formations
@@ -121,6 +125,7 @@ export const URL = {
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
     getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier',
+    getPaymentActifDashboard : consts.host+ consts.nameProject + 'particulier/dashboard/paiementsparticulier',
     getPayments : consts.host+ consts.nameProject + 'admin/paiements',
 
     //ParticulierProposition

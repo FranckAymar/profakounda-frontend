@@ -97,6 +97,10 @@ export class CoursCommunService {
     
     
   }
+  getDashBoardCoursCommuns(){
+    return this.http.get(URL.getDashBoardCoursCommun);
+  }
+
 
   rechercherParOrganisation(organisationName): Observable<any> {
  

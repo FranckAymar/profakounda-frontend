@@ -47,11 +47,13 @@ export class PropositionFormationComponent implements OnInit {
   formations: any = [];
   heure:Heure = new Heure('','');
   lambda:Lambda;
-  @Input() propositionFormation:PropositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME)); ;
+  isCheckCiclePrimaire= false ;
+  @Input() propositionFormation:PropositionFormation = new PropositionFormation(0,this.isCheckCiclePrimaire,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME)); ;
   @Input() numberOfTable:number;
   demandeMiseEnLigne:DemandeMiseEnLigne;
+  
   disponibilite:Disponibilite = new Disponibilite('',[],null,localStorage.getItem(this.signInService.USERNAME));
-  proposition:PropositionFormation= new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
+  proposition:PropositionFormation= new PropositionFormation(0,this.isCheckCiclePrimaire,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
   niveauForme:NiveauForme = new NiveauForme(0,'',null,null,null,localStorage.getItem(this.signInService.USERNAME)); ;
   module:Module = new Module(0,'',null,localStorage.getItem(this.signInService.USERNAME));;
   propostionLoad = {} ;
@@ -139,9 +141,13 @@ export class PropositionFormationComponent implements OnInit {
     changeDescritpion(){
       this.descriptionHasChange = true;
     }
+    checkBoxCylePrimaire(){
+      this.isCheckCiclePrimaire = !this.isCheckCiclePrimaire ;
+      console.log(this.isCheckCiclePrimaire);
+    }
     adProposition(){
       this.errorProposition = "";
-      this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
+      this.propositionFormation = new PropositionFormation(0,this.isCheckCiclePrimaire,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
     }
     getMdemandemMiseEnLigneA(id:number){
       this.demandeMiseEnLigne = new DemandeMiseEnLigne(id,'');
@@ -194,8 +200,9 @@ export class PropositionFormationComponent implements OnInit {
     }
     getProposition(proposition){
       this.descriptionHasChange = false;
+      this.isCheckCiclePrimaire =proposition.cyclePrimaire;
       this.errorProposition = "";
-      this.propositionFormation = new PropositionFormation(proposition.id,proposition.description,proposition.telephone,this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
+      this.propositionFormation = new PropositionFormation(proposition.id,proposition.isCheckCiclePrimaire,proposition.description,proposition.telephone,this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
      
     }
     verifierVilleParticulier(){
@@ -211,7 +218,7 @@ export class PropositionFormationComponent implements OnInit {
       )
     }
     addDisponibilite(id){
-      this.proposition= new PropositionFormation(id,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
+      this.proposition= new PropositionFormation(id,this.isCheckCiclePrimaire,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
       this.rechercherDisponibilite(id);
      
      }
@@ -250,7 +257,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
     enregistrerProposition(){
         if(this.propositionFormation.id !=0)
         {
-          this.proposition= new PropositionFormation(this.propositionFormation.id,this.propositionFormation.description,this.propositionFormation.telephone,this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
+          this.proposition= new PropositionFormation(this.propositionFormation.id,this.isCheckCiclePrimaire,this.propositionFormation.description,this.propositionFormation.telephone,this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
           this.propositionFormationService.modifierProposition(this.proposition)
           .subscribe(
             (response)=>{
@@ -259,7 +266,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
               {
                 alert("modification effectuée avec succès.");
                 document.getElementById('ajouterDescription').click();
-                this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
+                this.propositionFormation = new PropositionFormation(0,this.isCheckCiclePrimaire,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
                 this.rechercherProposition();
               }
               
@@ -270,13 +277,14 @@ this.propositionFormationService.rechercherDisponibilites(id)
           )
         }
         else{
+          this.propositionFormation.cyclePrimaire = this.isCheckCiclePrimaire;
           this.propositionFormationService.enregistrerProposition(this.propositionFormation)
       .subscribe(
         (response)=>{
           this.errorProposition = response["error"];
           if(!this.errorProposition)
           {
-            this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
+            this.propositionFormation = new PropositionFormation(0,this.isCheckCiclePrimaire,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
            document.getElementById('addDesc').click();
             this.rechercherProposition();
           }

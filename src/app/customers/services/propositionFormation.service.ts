@@ -50,13 +50,15 @@ export class PropositionFormationService{
      onUpdateModule(data){
         return this.httpClient.post(URL.modifierModule,data);
      }
-
+     getDashBoardPropositions(){
+        return this.httpClient.get(URL.getDashBoardProposition);
+     }
      //PROPOSITION
      rechercherProposition(username:String){
         return this.httpClient.post(URL.rechercherPropositions,username);
     }
     enregistrerProposition(data){
-        return this.httpClient.post(URL.enregsitrerProposition,data);
+         return this.httpClient.post(URL.enregsitrerProposition,data);
      }
      modifierProposition(data){
         return this.httpClient.post(URL.modifierProposition,data);

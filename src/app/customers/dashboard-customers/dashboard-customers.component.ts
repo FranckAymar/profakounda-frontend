@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InscriptioncourscommunService } from 'src/app/cours-commun/inscriptioncourscommun.service';
 import { CoursCommunService } from '../services/cours-commun-service.service';
 import { PropositionFormationService } from '../services/propositionFormation.service';
+import { PaiementService } from 'src/app/formations/services/paiement.service';
 
 @Component({
   selector: 'app-dashboard-customers',
@@ -10,14 +11,27 @@ import { PropositionFormationService } from '../services/propositionFormation.se
 })
 export class DashboardCustomersComponent implements OnInit {
 
-  constructor(private inscriptionService:InscriptioncourscommunService,private coursCommunService:CoursCommunService,private propositionService:PropositionFormationService) { }
+  constructor(private paiementService:PaiementService,private inscriptionService:InscriptioncourscommunService,private coursCommunService:CoursCommunService,private propositionService:PropositionFormationService) { }
 inscrits:any = [];
 propositions:any =[];
 coursCommuns:any =  [];
+paiements:any =  [];
   ngOnInit() {
     this.onFetchDernieresInscriptions();
     this.onFetchDernieresPropositions();
     this.onFetchDerniersCoursCommuns();
+  }
+  onFetchPaiements(){
+    this.paiementService.getPaiementsActifDashboard().subscribe(
+      (response)=>{
+        console.log("Paiements Actif....");
+        console.log(response);
+        this.paiements = response;
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
   }
   onFetchDernieresInscriptions(){
     this.inscriptionService.getDashBoardInscrits().subscribe(

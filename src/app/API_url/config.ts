@@ -125,6 +125,7 @@ export const URL = {
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
     getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier',
+    getPaymentActifDashboard : consts.host+ consts.nameProject + 'particulier/dashboard/paiementsparticulier',
     getPayments : consts.host+ consts.nameProject + 'admin/paiements',
 
     //ParticulierProposition

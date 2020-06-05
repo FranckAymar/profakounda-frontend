@@ -16,6 +16,10 @@ export class PaiementService {
 
   }
 
+  getPaiementsActifDashboard(){
+    return this.httpClient.get(URL.getPaymentActifDashboard) ;
+  }
+
   getPaymentParticulier(username, page?, numberDataOfPage?) : Observable<any>  {
 
     if(page && numberDataOfPage){

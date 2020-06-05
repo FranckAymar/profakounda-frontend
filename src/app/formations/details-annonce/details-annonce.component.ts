@@ -1,3 +1,4 @@
+import { PaiementDetails } from './../model/niveau.model';
 import { Particulier } from './../../home/models/Particulier.model';
 import { PaiementService } from './../services/paiement.service';
 import { ForfaitService } from './../../admin/services/forfait.service';
@@ -64,16 +65,7 @@ export class DetailsAnnonceComponent implements OnInit {
     
   } ;
 
-  paiementDetails = {
-
-    forfait: null,
-    forfaitId : null,
-    username : null,
-    numeroPaiement : null,
-    modePaiement : null,
-    token : null
-
-  }
+  paiementDetails : PaiementDetails = {} ;
 
   //Tableaux
 
@@ -281,9 +273,9 @@ changeEtoile5(){
   );
   }
   getCodeParticulier(){
-    if(sessionStorage.getItem(this.signInService.USERNAME))
+    if(localStorage.getItem(this.signInService.USERNAME))
     {
-      this.particulierService.getCodeParticilier(sessionStorage.getItem(this.signInService.USERNAME)).subscribe(
+      this.particulierService.getCodeParticilier(localStorage.getItem(this.signInService.USERNAME)).subscribe(
         (response)=>{
           this.id = response["id"];
         },
@@ -315,7 +307,7 @@ changeEtoile5(){
     });
     if(this.avis.id != 0)
     {
-      this.avis = new Avis(this.avis.id,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,sessionStorage.getItem(this.signInService.USERNAME));
+      this.avis = new Avis(this.avis.id,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,localStorage.getItem(this.signInService.USERNAME));
      this.avisService.modifierAvis(this.avis).subscribe(
      (response)=>{
       this.etoile1 = false;
@@ -324,7 +316,7 @@ changeEtoile5(){
       this.etoile4 = false;
       this.etoile5 = false;
       this.success = response["success"];
-     this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,sessionStorage.getItem(this.signInService.USERNAME));
+     this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,localStorage.getItem(this.signInService.USERNAME));
      this.onGetDetailPropositionFormation();
      },
      (error)=>{
@@ -334,7 +326,7 @@ changeEtoile5(){
     }
     else
     {
-      this.avis = new Avis(0,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,sessionStorage.getItem(this.signInService.USERNAME));
+      this.avis = new Avis(0,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,localStorage.getItem(this.signInService.USERNAME));
      this.avisService.enregistrerAvis(this.avis).subscribe(
      (response)=>{
        if(response["error"])
@@ -349,7 +341,7 @@ changeEtoile5(){
          this.etoile4 = false;
          this.etoile5 = false;
          this.success = response["success"];
-        this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,sessionStorage.getItem(this.signInService.USERNAME));
+        this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,localStorage.getItem(this.signInService.USERNAME));
         this.onGetDetailPropositionFormation();
        }
      },
@@ -384,11 +376,11 @@ changeEtoile5(){
           let authority = authorities[0].authority;
 
           //Sauvegarde du token
-          sessionStorage.setItem(this.signInService.TOKEN, token);
+          localStorage.setItem(this.signInService.TOKEN, token);
             //Sauvegarde de l'authorité
-          sessionStorage.setItem(this.signInService.AUHORITY, authority);
+          localStorage.setItem(this.signInService.AUHORITY, authority);
             //Sauvegarde du username
-          sessionStorage.setItem(this.signInService.USERNAME, username);
+          localStorage.setItem(this.signInService.USERNAME, username);
     
           //Vérifier si l'utulilisateur a un forfait actif
           this.detaisFormationsService
@@ -520,7 +512,7 @@ changeEtoile5(){
       return ;
     }
 
-    this.paiementDetails.username = sessionStorage.getItem(this.signInService.USERNAME) ;
+    this.paiementDetails.username = localStorage.getItem(this.signInService.USERNAME) ;
     this.paiementDetails.forfaitId = this.paiementDetails.forfait.id ;
 
     this.paiementService.processToPayment(this.paiementDetails).subscribe(
@@ -555,7 +547,7 @@ changeEtoile5(){
 
       ( p ) =>{
          this.idPropositionFormation = p['id'] ;
-         this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,sessionStorage.getItem(this.signInService.USERNAME));
+         this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,localStorage.getItem(this.signInService.USERNAME));
       }
     ) ;
 
@@ -571,9 +563,9 @@ changeEtoile5(){
     this.detaisFormationsService.getDetailFormation(this.idPropositionFormation).subscribe(
 
       (resp)=> {
-        if(sessionStorage.getItem(this.signInService.USERNAME))
+        if(localStorage.getItem(this.signInService.USERNAME))
         {
-          if(resp["username"]===sessionStorage.getItem(this.signInService.USERNAME))
+          if(resp["username"]===localStorage.getItem(this.signInService.USERNAME))
           {
             this.isProprio = true;
           }
@@ -603,10 +595,32 @@ changeEtoile5(){
   }
 
 
+  initializeModalPayment(){
+
+    this.paiementDetails = {} 
+    this.step = 'step1';
+
+    //Initialisation HTML
+    $("#content2").addClass('hide');
+    $("#content3").addClass('hide');
+    $("#content4").addClass('hide');
+    $("#content5").addClass('hide');
+
+
+    $("#step2").removeClass("active");
+    $("#step3").removeClass("active");
+    $("#step4").removeClass("active");
+    $("#step5").removeClass("active");
+
+
+
+  }
+
+
   //Method for stepper 
 
   goToStep2(){
-    $("#content1-signin").addClass('hide');
+      $("#content1-signin").addClass('hide');
       $("#content1-signup").addClass('hide');
       $("#content2").removeClass('hide');
       this.step = 'step2';
@@ -810,5 +824,6 @@ changeEtoile5(){
 
   }
   
+
 
 }

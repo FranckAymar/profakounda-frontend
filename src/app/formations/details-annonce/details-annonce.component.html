@@ -227,6 +227,10 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12 stepper">
+                                <div style="text-align: right; margin-bottom: 1em;" class="row">   
+                                    <a (click)="initializeModalPayment()" data-dismiss="modal"  id="ed-mi-close" class="ed-mi-close"><i class="fa fa-times" style="color: gainsboro;"></i></a>
+                            
+                                </div>
                                 <ul class="progressbar">
                                     <li id="step1" class="active"><span class="headersStepper">Connexion</span></li>
                                     <li id="step2"><span class="headersStepper">Forfaits</span></li>
@@ -505,5 +509,5 @@
 
 
 
-    <button #openModalPayment [hidden]="true" data-toggle="modal" data-target="#modalPayment"></button>
+    <button data-backdrop="static" data-keyboard="false" #openModalPayment [hidden]="true" data-toggle="modal" data-target="#modalPayment"></button>
     <button #openParticulierDetails [hidden]="true" data-toggle="modal" data-target="#particulierDetails"></button>

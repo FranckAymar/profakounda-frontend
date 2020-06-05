@@ -142,16 +142,15 @@ error:String;
     );
     
     
+    console.log(this.dataReceived);
+    
        
 
     if(this.dataReceived.coursCommun){
 
       this.idCoursCommun = this.dataReceived.coursCommun.id ;
 
-      //Mode modification activé
-
-      console.log(this.dataReceived);
-      
+      //Mode modification activé      
 
      //Si on est en attente d'une mise en ligne alors c'est pour une modification
      //Sinon c'est pour on est toujours en mode édition
@@ -177,7 +176,6 @@ error:String;
 
     }
 
-    console.log(this.dataReceived);
     
 
   }
@@ -397,13 +395,9 @@ error:String;
 
 
   addPublicToTable(){
-    
-    console.log(this.currentIndex);
-    
+        
 
     if(this.currentIndex !== undefined){
-
-      console.log("splice");
       
       this.publicCibleMdels.splice(this.currentIndex,1,this.publicCibleForm.value);
 
@@ -425,7 +419,6 @@ error:String;
 
         
         this.niveaux = resp ;
-        console.log(this.niveaux);
         
       },
 
@@ -489,7 +482,6 @@ error:String;
 
       (resp)=>{
         
-        console.log(resp);
         
         this.organisations = resp ;
 
@@ -588,7 +580,6 @@ error:String;
       (resp)=>{
 
         if(resp['error']){
-          console.log(resp);
           
         }else{
 
@@ -617,7 +608,6 @@ error:String;
 
       (resp)=>{
 
-        console.log(resp);
         this.error = resp['error'];
         if(!this.error)
         {
@@ -638,7 +628,6 @@ error:String;
 
   ajoutMarqueur(lat : number, lng : number) {
      
-    console.log(lat);
     
     this.lat = lat ;
     this.lng = lng ;
@@ -666,7 +655,6 @@ error:String;
     this.lat = adress['geometry'].location.lat() ;
     this.lng = adress['geometry'].location.lng() ;
 
-    console.log(this.lat + "/" +this.lng);
     
 
   }

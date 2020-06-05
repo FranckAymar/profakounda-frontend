@@ -39,7 +39,7 @@ close(){
   document.getElementById('ed-mi-close').click();
 }
   rechercherPaticulierConnecter(){
-    this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
+    this.particulierService.rechercherParticulier(localStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (reponse)=>{
        this.id = reponse['id'];

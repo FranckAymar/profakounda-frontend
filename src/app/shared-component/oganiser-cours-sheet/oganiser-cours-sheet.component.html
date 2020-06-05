@@ -85,7 +85,9 @@
                                 <div class="row d-flex " style="text-align: center;">
                                     <div class="col-md-6">
                                         <div class="input-field s12">
-                                            <input formControlName="cout" type="number" class="validate">
+                                            <input [attr.disabled]="dataReceived?.coursCommun?.nombreInscrit > 0 ? '' : null "
+                                                     
+                                                    formControlName="cout" type="number" class="validate">
                                             <label>Cout Général</label>
                                         </div>
                                     </div>
@@ -152,7 +154,8 @@
                                 </mat-form-field>
 
                                 <div style="margin-top: 10px;" class="input-field s12">
-                                    <input formControlName="cout" type="number" class="validate">
+                                    <input [attr.disabled]="dataReceived?.coursCommun?.nombreInscrit > 0 ? '' : null"  
+                                             formControlName="cout" type="number" class="validate">
                                     <label>Cout</label>
                                 </div>
 

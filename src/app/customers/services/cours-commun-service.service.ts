@@ -113,7 +113,11 @@ export class CoursCommunService {
     }
   }
 
-  fectchCoursCommunSelect(): Observable<any> {
+  fectchCoursCommunSelect(id?): Observable<any> {
+    if(id){
+      return this.http.get(URL.recupererCoursCommunsInscritsParticulier + "/" + id);
+
+    }
     return this.http.get(URL.recupererCoursCommunsInscritsParticulier);
    }
 

@@ -20,6 +20,18 @@ paiements:any =  [];
     this.onFetchDernieresInscriptions();
     this.onFetchDernieresPropositions();
     this.onFetchDerniersCoursCommuns();
+    this.onFetchStatistiquesInscrits();
+  }
+  onFetchStatistiquesInscrits(){
+    this.inscriptionService.statistiquesInscritsParJour().subscribe(
+      (resp)=>{
+        console.log("Statistiques des inscrits......");
+        console.log(resp);
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
   }
   onFetchPaiements(){
     this.paiementService.getPaiementsActifDashboard().subscribe(

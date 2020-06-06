@@ -2,7 +2,9 @@
     <!--== USER INFO ==-->
     <div class="sb2-12">
         <ul *ngIf="particulier">
-            <li class="list-img"><img  src="{{urlServer}}/{{particulier.id}}" alt="">
+            <li class="list-img">
+                <img *ngIf="!isExtension"  src="../../assets/images/Stylo.png"   alt="" />
+                <img *ngIf="!isExtension" src="{{urlServer}}/{{particulier.id}}" alt="">
             </li>
             <li>
                 <h5>{{particulier.nom}} {{particulier.prenoms}} </h5>

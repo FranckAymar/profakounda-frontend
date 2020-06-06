@@ -25,7 +25,7 @@
                                 <div class="sb2-12">
 
                                     <ul >
-                                        <li class="list-img"><img *ngIf="!isExtension" src="{{url}}" alt="">
+                                        <li class="list-img"><img *ngIf="isExtension" src="{{url}}" alt="">
                                             <img *ngIf="!isExtension" src="../../assets/images/Stylo.png"   alt="" />
                                         </li>
                                         <li>
@@ -98,8 +98,9 @@
               <a class='waves-effect dropdown-toggle top-user-pro list-img' 
                 type="button" id="dropdownMenu2" data-toggle="dropdown"
                  aria-haspopup="true" aria-expanded="false">
-                 <!-- <img *ngIf="!isExtension" src="../../assets/images/Stylo.png" alt="" />Mon compte <i class="fa fa-angle-down" aria-hidden="true"></i> -->
-                <img *ngIf="isExtension" src="{{url}}" alt="" />Mon compte <i class="fa fa-angle-down" aria-hidden="true"></i>
+                 
+                <img  src="{{url}}" alt="" />Mon compte <i class="fa fa-angle-down" aria-hidden="true"></i>
+                <!-- <img *ngIf="!isExtension" src="../../assets/images/Stylo.png" alt="" />Mon compte <i class="fa fa-angle-down" aria-hidden="true"></i> -->
               </a>
   
               

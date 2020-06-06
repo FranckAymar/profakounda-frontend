@@ -43,6 +43,7 @@ close(){
     .subscribe(
       (reponse)=>{
         this.isExtension = reponse['extensionPresente'];
+        console.log(this.isExtension);
        this.id = reponse['id'];
        this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
        this.nom = reponse["nom"];

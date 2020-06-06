@@ -5,7 +5,8 @@
         <div class="col-md-12">
             <div class="box-inn-sp ">
                 <div class="inn-title">
-                    <img style="width: 10em;height: 10em; border-radius: 0.3em;" src="{{url}}" alt="">
+                    <img *ngIf="!isExtension" style="width: 10em;height: 10em; border-radius: 0.3em;" src="../../assets/images/Stylo.png"   alt="" />
+                    <img *ngIf="!isExtension" style="width: 10em;height: 10em; border-radius: 0.3em;" src="{{url}}" alt="">
                     <div style="float: right;">
                         <h4 style="background-color: red;">Editer profil</h4>
                     </div>

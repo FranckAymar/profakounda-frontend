@@ -109,9 +109,7 @@
             </div>
             <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && !p.proposition.cyclePrimaire" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
             <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && !p.proposition.cyclePrimaire" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
-            <!--CYCLE PRIMAIRE-->
-            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && p.proposition.cyclePrimaire" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
-            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && p.proposition.cyclePrimaire" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+           
         </div>
     </div>
 </div>
@@ -382,8 +380,7 @@
                     <div *ngIf="errorProposition" class="alert alert-danger">
                         {{errorProposition}}
                     </div>
-                    <mat-checkbox [checked]="isCheckCiclePrimaire" style="width: 70%;"  (change)="checkBoxCylePrimaire()">
-                        Cycle primaire ?</mat-checkbox>
+                    
                     <div class="form-group">
                         <label for="tel">Description:</label>
                         <textarea placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" maxChars="1000" class="form-control" (ngModelChange)="changeDescritpion()" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
@@ -421,8 +418,7 @@
                     <div *ngIf="errorProposition" class="alert alert-danger">
                         {{errorProposition}}
                     </div>
-                    <mat-checkbox style="width: 70%;"  (change)="checkBoxCylePrimaire()">
-                        Cycle primaire ?</mat-checkbox>
+                   
                         <div class="form-group">
                             <label for="tel">Description:</label>
                             <textarea class="form-control" placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">

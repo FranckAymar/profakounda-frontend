@@ -29,6 +29,12 @@ export class InscriptioncourscommunService {
   
   
   }
+  statistiquesInscritsParJour() : Observable<any>{
+
+    return this.http.get(URL.getStatistiquesInscrits);
+  
+  
+  }
 
   recupererInscrit(data : {idPublicCible : number, idCoursCommun : number}) : Observable<any> {
 

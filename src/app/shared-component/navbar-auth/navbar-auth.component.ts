@@ -17,7 +17,7 @@ export class NavbarAuthComponent implements OnInit {
   @Input() url:string ;
   prenoms:string;
   nom:string;
-
+isExtension:boolean = false;
   constructor(private signInService : SignInService , 
               private router : Router,private particulierService:ParticulierService) {
 
@@ -42,6 +42,8 @@ close(){
     this.particulierService.rechercherParticulier(localStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (reponse)=>{
+        this.isExtension = reponse['extensionPresente'];
+        console.log(this.isExtension);
        this.id = reponse['id'];
        this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
        this.nom = reponse["nom"];

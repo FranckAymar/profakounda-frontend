@@ -97,6 +97,7 @@ export const URL = {
     getDashBoardProposition: consts.host+ consts.nameProject +'particulier/dashboard/propositions',
     getDashBoardCoursCommun: consts.host+ consts.nameProject +'particulier/dashboard/coursCommuns',
     getDashBoardInscritsCoursCommuns:consts.host+ consts.nameProject +'particulier/dashboard/inscrits',
+    getStatistiquesInscrits:consts.host+ consts.nameProject +'particulier/dashboard/statistiques',
     
    
     //Détails formations

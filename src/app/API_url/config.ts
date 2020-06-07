@@ -169,8 +169,8 @@ export const URL = {
     fermerInscriptionCoursCommun : consts.host+ consts.nameProject + 'particulier/fermerinscriptioncourscommun',
     fermerInscriptionPublicCible : consts.host+ consts.nameProject + 'particulier/fermerinscriptionpubliccible',
     coursCommunsParOrganisation : consts.host+ consts.nameProject + '/home/coursCommunsParOrganisation',
-    
-   
+    modifierLogoCoursCommun : consts.host+ consts.nameProject + 'particulier/uploadLogo',
+    getLogoCoursCommun : consts.host+ consts.nameProject + 'logoCoursCommun',
     //cours Commun admin
     listeCoursCommuns : consts.host+ consts.nameProject + 'admin/coursCommuns',
     comptabiliteCoursCommun : consts.host+ consts.nameProject + 'admin/comptabilite',

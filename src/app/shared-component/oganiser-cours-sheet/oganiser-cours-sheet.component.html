@@ -7,8 +7,9 @@
         <div class="col-md-12 stepper">
             <ul class="progressbar">
                 <li id="step1" class="active">Détails</li>
-                <li id="step2">Modalités</li>
-                <li id="step3">Lieu</li>
+                <li id="step2" class="active">Photos</li>
+                <li id="step3">Modalités</li>
+                <li id="step4">Lieu</li>
             </ul>
         </div>
 
@@ -74,8 +75,33 @@
                 </form>
 
             </div>
+             <!--Upload Photo Organisation-->
+             <div id="content2" class="hide">
+                <div class="row" style="text-align: center;" >
+                                  
+                    <p>Touchez plus de cibles en ajoutant un logo à votre cours organisé</p>
+                    <small>(Optionnel)</small>
+                        <!-- Upload  -->
+                        <form id="file-upload-form" class="uploader">
+                            <input (change)="onSelectFile($event)" id="file-upload" type="file" name="fileUpload" accept="image/*" />
+                        
+                            <label for="file-upload" id="file-drag">
+                            <img  height="250" id="file-image" src="{{ urlFile ? urlFile : '../../../assets/images/Stylo.png'}}" alt="Apercu">
+                            <div id="start">
+                                <div>Selectionner une photo</div>
+                                <span id="file-upload-btn" class="btn btn-primary">Choisir</span>
+                            </div>
+                           
+                            </label>
+                        </form>
+
+                        <button style="margin-top: 0.5em;" type="submit" (click)="next()"
+                            class="btn btn-bg-color btn-block">Suivant</button>
+
+                </div>
+            </div>
             <!--Public visé-->
-            <div id="content2" class="hide">
+            <div id="content3" class="hide">
                 <div class="row d-flex justify-content-center" style="text-align: center; margin-top: 2em;">
                     <mat-checkbox style="width: 70%;" *ngIf="!isModify" (change)="checkBoxPublicChange()">
                         Votre formation touchera-elle un public précis (Niveau d'étude) ?</mat-checkbox>
@@ -219,7 +245,7 @@
             </div>
 
             <!--Lieu intervention-->
-            <div id="content3" class="hide">
+            <div id="content4" class="hide">
 
                 <div class="row" style="text-align: center;">
 

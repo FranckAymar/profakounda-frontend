@@ -139,6 +139,9 @@ export class CoursCommunService {
    }
 
 
+   saveLogoCoursCommun(formdata) : Observable<any>{
+    return this.http.post(URL.modifierLogoCoursCommun, formdata);
+   }
 
 
 }

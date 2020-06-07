@@ -1,3 +1,4 @@
+import { URL } from 'src/app/API_url/config';
 import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { InscriptioncourscommunService } from './../inscriptioncourscommun.service';
 import { SignInService } from './../../home/services/sign-in.service';
@@ -13,6 +14,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details-cours-commun.component.css']
 })
 export class DetailsCoursCommunComponent implements OnInit {
+
+
+  urlServer = URL.getLogoCoursCommun;
+
 
   idCoursCommun: number;
   idPublicCible: number;

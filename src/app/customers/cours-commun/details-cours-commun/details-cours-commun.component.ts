@@ -1,3 +1,4 @@
+import { URL } from 'src/app/API_url/config';
 import { AlertComponent } from './../../../shared-component/alert/alert.component';
 import { SnackbarService } from './../../../shared-component/services/snackbar.service';
 import { DetailsInscritsComponent } from './../../../shared-component/details-inscrits/details-inscrits.component';
@@ -14,6 +15,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DetailsCoursCommunComponent implements OnInit {
 
+  urlServer = URL.getLogoCoursCommun;
 
   zoom = 17 ;
 

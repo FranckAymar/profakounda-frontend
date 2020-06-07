@@ -1,3 +1,4 @@
+import { URL } from 'src/app/API_url/config';
 import { FiliereService } from './../../admin/services/filiere.service';
 import { SnackbarService } from './../services/snackbar.service';
 import { startWith, map } from 'rxjs/operators';
@@ -20,7 +21,7 @@ declare var $: any;
 @Component({
   selector: 'app-oganiser-cours-sheet',
   templateUrl: './oganiser-cours-sheet.component.html',
-  styleUrls: ['./oganiser-cours-sheet.component.css']
+  styleUrls: ['./oganiser-cours-sheet.component.scss']
 })
 export class OganiserCoursSheetComponent implements OnInit {
 
@@ -38,7 +39,8 @@ export class OganiserCoursSheetComponent implements OnInit {
   idCoursCommun : number ;
   libelleLieu : string ;
   currentIndex : number = undefined ;
-
+  urlFile;
+  urlServer = URL.getLogoCoursCommun;
   //FormGroup
   coursCommunForm : FormGroup;
   publicCibleForm : FormGroup;
@@ -115,6 +117,7 @@ error:String;
 
   ngOnInit() {
 
+
     //Initialisation des params
     this.initFormCoursCommun();
     this.initLieuInterventionForm();
@@ -148,7 +151,12 @@ error:String;
 
     if(this.dataReceived.coursCommun){
 
+
       this.idCoursCommun = this.dataReceived.coursCommun.id ;
+
+      //Recuperation de la photo
+      this.urlFile = this.urlServer +"/" + this.idCoursCommun ;
+
 
       //Mode modification activé      
 
@@ -574,7 +582,7 @@ error:String;
 
   saveCoursCommun(){
 
-    this.coursCommunService.saveCoursCommun(this.coursCommunForm.value).subscribe(
+     this.coursCommunService.saveCoursCommun(this.coursCommunForm.value).subscribe(
 
 
       (resp)=>{
@@ -593,7 +601,7 @@ error:String;
         console.log(error);
         
       }
-    ) ;
+    ) ; 
     
   }
 
@@ -642,6 +650,9 @@ error:String;
         
       this.idCoursCommun = params['courscommunedit'];
             });  
+
+      this.urlFile = this.urlServer +"/" + this.idCoursCommun ;
+
       }
 
   /*
@@ -769,9 +780,52 @@ error:String;
     }
 
     comparer(o1: any, o2: any): boolean {
-      // if possible compare by object's name property - and not by reference.
       return o1 && o2 ? o1.libelle === o2.libelle : o1 === o2;
     }
   
+
+    onSelectFile(event) {
+      if (event.target.files && event.target.files[0]) {
+        var reader = new FileReader();
+  
+        reader.readAsDataURL(event.target.files[0]); 
+  
+        //Apercu
+        reader.onload = (event) => {
+          this.urlFile = reader.result ;
+        }
+  
+        //Envoie au serveur
+         this.saveLogoCoursCommun(event.target.files[0]);
+      }
+
+      
+    }
+
+
+    saveLogoCoursCommun(pictureData){
+      
+
+      let formData = new FormData();
+
+      formData.append('idCoursCommun', this.idCoursCommun.toString());
+      formData.append('picture', pictureData);
+
+      this.coursCommunService.saveLogoCoursCommun(formData).subscribe(
+
+        (resp)=>{
+
+          console.log(resp);
+          
+        },
+
+        (error)=>{
+
+          console.log(error);
+          
+        }
+      )
+
+    }
 
 } 

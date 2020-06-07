@@ -1,3 +1,4 @@
+import { URL } from 'src/app/API_url/config';
 import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from './../services/cours-commun-service.service';
@@ -11,6 +12,9 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./cours-commun.component.css']
 })
 export class CoursCommunComponent implements OnInit {
+
+
+  urlServer = URL.getLogoCoursCommun;
 
 
   coursCommuns = [] ;

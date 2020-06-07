@@ -1,3 +1,4 @@
+import { URL } from 'src/app/API_url/config';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -6,6 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./card-cours-commun.component.css']
 })
 export class CardCoursCommunComponent implements OnInit {
+
+
+  urlServer = URL.getLogoCoursCommun;
+
 
   @Input() cours;
 

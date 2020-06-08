@@ -21,21 +21,21 @@
 
                 <div  style="text-align: center;" >
                     <mat-checkbox  (change)="checkBoxChange()">
-                        Vous êtes vous-mếme le souscripteur ?</mat-checkbox>
+                        Je suis le participant ?</mat-checkbox>
                 </div>
                 
 
                 <form [formGroup]="identificationForm" (submit)="next()">
                     <div class="input-field s12">
                         <input [attr.disabled]=" isNotCheck ? null : ''" type="text" class="validate" formControlName="nomInscrit">
-                        <label>Votre nom</label>
+                        <label>Nom du participant</label>
                     </div>
                     <small style="color: red;" *ngIf="identificationForm.controls.nomInscrit.errors?.required" class="invalid-feedback">
                         Champ requis
                     </small>
                     <div class="input-field s12">
                         <input [attr.disabled]=" isNotCheck ? null : ''"  type="text" class="validate" formControlName="prenomInscrit">
-                        <label>Votre prenom</label>
+                        <label>Prenoms du participant</label>
                     </div>
                     <small style="color: red;" *ngIf="identificationForm.controls.prenomInscrit.errors?.required" class="invalid-feedback">
                         Champ requis

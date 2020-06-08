@@ -44,11 +44,11 @@
                             disponibles
                         </li>
                         <li *ngIf="!cours.coursCommun?.nbreMaxInscrits && cours.coursCommun?.cout">
-                            <span>Places disponibles <strong>illimitées</strong> </span>
+                            <span>Places disponibles: <strong>illimitées</strong> </span>
                         </li>
-                        
-
-
+                        <li >
+                            <span><i class="fa fa-map-marker" aria-hidden="true"></i>: <strong>{{cours.lieuIntervention.libelle}}</strong> </span>
+                        </li>
                     </ul>
                 </div>
                 <div style="margin-top: 1em;margin-bottom: 0.3em;" class="pro-user-bio">

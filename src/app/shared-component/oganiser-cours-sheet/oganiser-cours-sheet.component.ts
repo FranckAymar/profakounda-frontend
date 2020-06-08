@@ -1,8 +1,8 @@
 import { URL } from 'src/app/API_url/config';
 import { FiliereService } from './../../admin/services/filiere.service';
 import { SnackbarService } from './../services/snackbar.service';
-import { startWith, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { startWith, map,expand } from 'rxjs/operators';
+import { Observable, EMPTY } from 'rxjs';
 import { OrganisationService } from './../../admin/services/organisation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
@@ -15,6 +15,7 @@ import { FormBuilder, FormGroup, Validators, Form, FormArray, FormControl } from
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import * as $ from 'jquery';
+import { CompressorService } from 'src/app/customers/services/CompressorService';
 
 declare var $: any;
 
@@ -77,7 +78,8 @@ export class OganiserCoursSheetComponent implements OnInit {
 error:String;
   formationsModel = [];
   niveauModel = {};
-
+  data: FileList;
+  compressedImages = [];
 
 
   publicCibleMdelsToSend = {
@@ -100,7 +102,8 @@ error:String;
     private route : ActivatedRoute,
     private router : Router,
     private snackBar: SnackbarService,
-    private filiereService : FiliereService
+    private filiereService : FiliereService,
+    private compressor: CompressorService
 
   ) {
    
@@ -782,10 +785,44 @@ error:String;
     comparer(o1: any, o2: any): boolean {
       return o1 && o2 ? o1.libelle === o2.libelle : o1 === o2;
     }
-  
+  ///Compress File
 
+recursiveCompress = (image: File, index, array) => {
+  return this.compressor.compress(image).pipe (
+    map(response => {
+
+    //Code block after completing each compression
+      console.log('compressed ' + index + image.name);
+      this.compressedImages.push(response);
+      return {
+        data: response,
+        index: index + 1,
+        array: array,
+      };
+    }),
+  );
+}
+
+    // onSelectFile(event) {
+    //   if (event.target.files && event.target.files[0]) {
+    //     var reader = new FileReader();
+  
+    //     reader.readAsDataURL(event.target.files[0]); 
+  
+    //     //Apercu
+    //     reader.onload = (event) => {
+    //       this.urlFile = reader.result ;
+    //     }
+  
+    //     //Envoie au serveur
+    //      this.saveLogoCoursCommun(event.target.files[0]);
+    //   }
+
+      
+    // }
     onSelectFile(event) {
-      if (event.target.files && event.target.files[0]) {
+      if(event.target.files.length > 0) {
+        this.data = event.target.files;
         var reader = new FileReader();
   
         reader.readAsDataURL(event.target.files[0]); 
@@ -794,24 +831,47 @@ error:String;
         reader.onload = (event) => {
           this.urlFile = reader.result ;
         }
+          console.log('input: '  + this.data[0].size);
+          const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
+            expand(res => {
+              return res.index > res.array.length - 1
+                ? EMPTY
+                : this.recursiveCompress( this.data[res.index], res.index, this.data );
+            }),
+          );
+          compress.subscribe(res => {
+            if (res.index > res.array.length - 1) {
+            //Code block after completing all compression
+              console.log('Compression successful ' + this.compressedImages);
+              let file = this.compressedImages[0];
   
-        //Envoie au serveur
-         this.saveLogoCoursCommun(event.target.files[0]);
-      }
-
-      
+              let input = new FormData();
+              if(this.data[0].size>512000)
+              {
+                input.append('logo',file);
+              }
+              else
+              {
+                input.append('logo',this.data[0]);
+              }
+              input.append('idCoursCommun', this.idCoursCommun.toString());
+              this.saveLogoCoursCommun(input);
+             
+            }
+          });
+              }
     }
 
 
-    saveLogoCoursCommun(pictureData){
+    saveLogoCoursCommun(data:FormData){
       
 
-      let formData = new FormData();
+      // let formData = new FormData();
 
-      formData.append('idCoursCommun', this.idCoursCommun.toString());
-      formData.append('picture', pictureData);
+      // formData.append('idCoursCommun', this.idCoursCommun.toString());
+      // formData.append('picture', pictureData);
 
-      this.coursCommunService.saveLogoCoursCommun(formData).subscribe(
+      this.coursCommunService.saveLogoCoursCommun(data).subscribe(
 
         (resp)=>{
 

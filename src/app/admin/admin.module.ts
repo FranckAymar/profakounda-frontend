@@ -34,6 +34,7 @@ import { DetailsPropostionFormationAdminComponent } from './details-propostion-f
 import { AdminCommonCourseComponent } from './admin-common-course/admin-common-course.component';
 import { DetailsCoursCommunAdminComponent } from './details-cours-commun-admin/details-cours-commun-admin.component';
 import { CompteRenduCourscommunComponent } from './compte-rendu-courscommun/compte-rendu-courscommun.component';
+import { DemandeVirementComponent } from './demande-virement/demande-virement.component';
 
 
 
@@ -141,6 +142,11 @@ const adminRouter : Routes = [
         path : 'comptabilite',
         component : CompteRenduCourscommunComponent
         
+      },
+      {
+        path : 'demandeVirements',
+        component : DemandeVirementComponent
+        
       }
 
     ]}
@@ -172,7 +178,8 @@ const adminRouter : Routes = [
                 DetailsPropostionFormationAdminComponent,
                 AdminCommonCourseComponent,
                 DetailsCoursCommunAdminComponent,
-                CompteRenduCourscommunComponent],
+                CompteRenduCourscommunComponent,
+                DemandeVirementComponent],
   imports: [
     RouterModule.forChild(adminRouter),
     SharedModule

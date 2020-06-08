@@ -46,6 +46,7 @@
                         <li *ngIf="!cours.coursCommun?.nbreMaxInscrits && cours.coursCommun?.cout">
                             <span>Places disponibles <strong>illimitées</strong> </span>
                         </li>
+                        
 
 
                     </ul>
@@ -67,7 +68,10 @@
                             <span style="color: white;"> Révénu cours :</span> <span
                                 style="color:#DA7F5C">{{cours.coursCommun.compteRendu?.revenuClient | currency:'XOF'}}</span>
                         </li>
-
+                        <li style="margin-top: 1em;">
+                            <span *ngIf="cours.coursCommun.demandeVirement" style="color: red;font-weight: bold;">Virement en cours de traitement....<i class="fa fa-spinner"></i></span>
+                            <button *ngIf="!cours.coursCommun.demandeVirement" data-target="#demandeVirementAlerte" data-toggle="modal" class="btn btn-info">Demande de virement</button>
+                        </li>
                     </ul>
                 </div>
 
@@ -196,4 +200,23 @@
 
     </div>
 
+    <div class="modal fade" id="demandeVirementAlerte" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ATTENTION!!!!</h5>
+                
+            </div>
+            <div class="modal-body alert alert-danger">
+                <div>Cette action est irreversible.Après versement aucune inscription ne sera possible.</div>
+            </div>
+            <div class="modal-footer">
+                <button style="margin-left: 1em;" type="button"  class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="demandeVersement()"  class="btn btn-primary" data-dismiss="modal">Confirmer demande</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
 </section>

@@ -64,7 +64,16 @@ export class DetailsCoursCommunComponent implements OnInit {
 
   }
 
-  
+  demandeVersement(){
+    this.coursCommunService.demandeVirement(this.idCoursCommun).subscribe(
+      (resp)=>{
+        this.onFectCoursCommun();
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
   //Recuperer l'id dans l'URL
   getIdCoursCommun() {
 

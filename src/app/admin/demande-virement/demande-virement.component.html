@@ -1,13 +1,13 @@
 <div class="col-md-12">
     <div class="box-inn-sp">
         <div class="inn-title">
-            <h4><i class="fa fa-money"></i> Comptabilité</h4>
+            <h4><i class="fa fa-money"></i> Les demandes de virement</h4>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div style="margin-top: 1em;margin-bottom: 0.3em;" class="pro-user-bio">
-                        <h4>COMPTE RENDU</h4>
+                        <h4>COMPTE RENDU DES DEMANDES</h4>
                         <ul>
                             <li style="background-color: #DA7F5C; color: white;border-radius: 0.2em;padding-left: 0.1em;">
                                 Point Transactions : <span style="color: white;">{{revenuGlobale.pointGlobale | currency:'XOF'}}</span>
@@ -25,14 +25,7 @@
     
                 <div class="col-md-4">
                     
-                    <div class="form-group">
-                        <label for="statusFilter" class="control-label">Organisation :</label>
-                        <select [(ngModel)]="idOrganisation" (change)="rechercherpointParOrganisation()"  class="form-control">
-                            <option [ngValue]="0"></option>
-                            <option *ngFor="let o of organisations" [ngValue]="o.id"  selected="selected">{{o.libelle}}</option>
-          
-                        </select>
-                    </div>
+                   
                 </div>
                 <div class="col-md-4"></div>
     
@@ -40,7 +33,6 @@
     
         </div>
        
-
         <div class="tab-inn">
             <div class="table-responsive">
                 <table class="table">
@@ -48,7 +40,6 @@
                         <tr>
                             <th>Organisation</th>
                             <th>Téléphone </th>
-                            <th>Titre </th>
                             <th>Nombre d'inscrits </th>
                             <th>Point globale </th>
                             <th>Révénu client </th>
@@ -62,8 +53,6 @@
                         <tr *ngFor="let p of resultats">
                             <td>{{p.coursCommun.organisation.libelle}}</td>
                             <td>{{p.coursCommun.telephone}}</td>
-                            <td>{{p.coursCommun.titre}}</td>
-                            
                             <td>{{p.coursCommun.compteRendu.nombreInscrits}}</td>
                             <td>{{p.coursCommun.compteRendu.pointGlobale | currency:'XOF'}}</td>
                             <td>{{p.coursCommun.compteRendu.revenuClient | currency:'XOF'}} </td>
@@ -79,5 +68,3 @@
         </div>
     </div>
 </div>
-
-

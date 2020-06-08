@@ -26,7 +26,12 @@ export class CoursCommunAdminService {
     return this.httpClient.post(URL.comptabiliteParOrganisation,idOrganisation);
 
   }
-
+  demandeVirementAdmin() : Observable<any> {
+    return this.httpClient.get(URL.demandeVersementAdmin);
+  }
+  nombreDemandeVirement() : Observable<any> {
+    return this.httpClient.get(URL.nombreDemandeVirement);
+  }
   fetchAllcoursCommunAdmin(critereFiltre?): Observable<any> {
 
     if (critereFiltre) {

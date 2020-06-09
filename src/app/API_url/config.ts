@@ -190,6 +190,7 @@ export const URL = {
     recupererOrganisation : consts.host+ consts.nameProject + 'organisations',
 
     //InscriptionCoursCommun
+    inscritptionCoursOrganise :  consts.host+ consts.nameProject +  'particulier/paiementinscription',
     inscriptioncourscommun : consts.host+ consts.nameProject + 'particulier/inscriptioncourscommun',
     inscriptionpubliccible : consts.host+ consts.nameProject + 'particulier/inscriptionpubliccible',
     recupererInscrit :  consts.host+ consts.nameProject + 'recupererinscrits',

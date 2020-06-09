@@ -11,6 +11,12 @@ export class InscriptioncourscommunService {
   constructor(private http : HttpClient) { }
 
 
+  inscriptionCoursOrganise(data) : Observable<any> {
+
+    return this.http.post(URL.inscritptionCoursOrganise, data);
+
+  }
+
   saveInscritsCoursCommun(data) : Observable<any>{
 
     return this.http.post(URL.inscriptioncourscommun, data);

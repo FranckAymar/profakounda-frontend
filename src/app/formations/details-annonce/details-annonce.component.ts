@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { PaiementDetails } from './../model/niveau.model';
 import { Particulier } from './../../home/models/Particulier.model';
 import { PaiementService } from './../services/paiement.service';
@@ -18,7 +19,7 @@ declare var $: any;
 
 @Component({
   selector: 'app-details-annonce',
-  templateUrl: './details-annonce.component.html',
+  templateUrl: './details-annonce.component.html', 
   styleUrls: ['./details-annonce.component.css']
 })
 export class DetailsAnnonceComponent implements OnInit {
@@ -32,6 +33,7 @@ export class DetailsAnnonceComponent implements OnInit {
   
   //Variable for condition
   isFailed: boolean;
+  paymentWaiting : boolean = false ;
   isConnected:boolean=false;
   isProprio:boolean=false;
   etoile1:boolean = false;
@@ -107,7 +109,7 @@ export class DetailsAnnonceComponent implements OnInit {
               private paiementService : PaiementService,
               private particulierService:ParticulierService,
               private avisService:AvisService,
-
+              private snackbarService : SnackbarService,
               private router : Router, ) { 
 
                 this.step = 'step1';
@@ -508,10 +510,7 @@ changeEtoile5(){
   //Proceder au payement
   onProcessToPayment() {
 
-    if(this.paiementDetails.modePaiement === "MOMO_SKAN" || this.paiementDetails.modePaiement === "MOOV_SKAN"){
-      alert('Pas encore disponible') ;
-      return ;
-    }
+   
 
     this.paiementDetails.username = localStorage.getItem(this.signInService.USERNAME) ;
     this.paiementDetails.forfaitId = this.paiementDetails.forfait.id ;
@@ -521,12 +520,25 @@ changeEtoile5(){
 
       (resp)=>{
 
+        console.log(resp);
+        
+
         if(resp.code == 0){
-          alert('Payement effectué');
-          this.closeModalPayment.nativeElement.click() ;
-          this.contactCustomer();
+
+          if(this.paiementDetails.modePaiement === "MOMO_SKAN" || this.paiementDetails.modePaiement === "MOOV_SKAN"){
+
+            this.snackbarService.openSnackBar('Un SMS de confirmation vous a été envoyé. \nVeuillez confirmer votre paiement.')
+            this.closeModalPayment.nativeElement.click() ;
+            this.paymentWaiting = true ;
+
+          }else {
+            this.snackbarService.openSnackBar('Payement effectué avec succès, profitez de votre forfait')
+            this.closeModalPayment.nativeElement.click() ;
+            this.contactCustomer();
+          }
+          
         }else{
-          alert("Une erreur s'est produite pendant le paiement.\nVérifiez votre numéro de téléphone ou votre code d'activation");
+          alert("Une erreur s'est produite pendant le paiement.\nVérifiez votre numéro de téléphone ou votre code d'activation puis réessayer");
         }
       },
 

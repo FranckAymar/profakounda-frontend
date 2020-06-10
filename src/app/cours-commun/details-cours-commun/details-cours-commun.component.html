@@ -43,13 +43,21 @@
                             <span>Places disponibles: <strong>illimitées</strong> </span>
                         </li>
                         <li >
-                            <span><i class="fa fa-map-marker" aria-hidden="true"></i>: <strong>{{cours.lieuIntervention.libelle}}</strong> </span>
+                            <span><i class="fa fa-map-marker" aria-hidden="true"></i> <strong> {{cours.lieuIntervention.libelle}}</strong> </span>
                         </li>
                     </ul>
                 </div>
 
             </div>
             <div class="col-md-9">
+
+                <div *ngIf="paymentWaiting" class="modal-header center alert alert-success">
+                    <div style="padding: 0.5em;"   class="row">
+                      <p><strong>Demande de paiement envoyé !</strong></p>
+                      <p>Un mail de confirmation vous sera envoyé une fois le paiement confirmé !</p> 
+                    </div>
+                  </div>
+  
 
                 <div class="udb-sec">
 

@@ -14,7 +14,6 @@ export class SidebarComponent implements OnInit {
   id: number;
   urlServer = URL.getPhoto;
   particulier : Particulier
-  isExtension:boolean=false;
   constructor(private particulierService: ParticulierService,
     private signInService: SignInService) { }
 
@@ -29,7 +28,6 @@ export class SidebarComponent implements OnInit {
     this.particulierService.rechercherParticulier(localStorage.getItem(this.signInService.USERNAME))
       .subscribe(
         (reponse) => {
-          this.isExtension = reponse['extensionPresente'];
           this.particulier = reponse;
         },
         (error) => {

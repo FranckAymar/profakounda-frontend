@@ -17,6 +17,7 @@ export class NavbarAuthComponent implements OnInit {
   @Input() url:string ;
   prenoms:string;
   nom:string;
+  authorisation:any;
 isExtension:boolean = false;
   constructor(private signInService : SignInService , 
               private router : Router,private particulierService:ParticulierService) {
@@ -32,9 +33,20 @@ isExtension:boolean = false;
     
     this.rechercherPaticulierConnecter();
     this.loadJavaScript() ;
- 
+    this.verifier();
   }
 
+  verifier(){
+    this.signInService.verifier().subscribe(
+      (response)=>{
+        this.authorisation = response;
+        
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
 close(){
   document.getElementById('ed-mi-close').click();
 }

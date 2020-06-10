@@ -7,9 +7,11 @@
     <div class="row">
         <div class="col-md-12 stepper">
             <ul class="progressbar">
-                <li id="step1" class="active">Détails</li>
-                <li id="step2">Payement</li>
-                <li id="step3">Confirmtation</li>
+                <li id="step1" class="active"><span class="hideLabelStepper">Détails</span> </li>
+                <li id="step2"><span class="hideLabelStepper">Payement</span></li>
+                <li id="step3"><span class="hideLabelStepper">Confirmation</span></li>
+                <li id="step4"><span class="hideLabelStepper">Validation</span></li>
+
             </ul>
         </div>
     </div>
@@ -71,7 +73,7 @@
 
                 <div class="input-field s12">
                     <input minlength="8" maxlength="8" formControlName="numero"
-                        type="number"  class="validate">
+                        type="tel" pattern="[0-9]*"   class="validate">
                     <label>Entrez votre numéro</label>
                 </div>
 
@@ -96,11 +98,48 @@
                 </div>
 
                 <div class="form-group">
-                    <button (click)=onSaveInscrit() class="btn btn-bg-color btn-block">Confirmer</button>
+                    <button (click)=next() class="btn btn-bg-color btn-block">Confirmer</button>
                 </div>
 
             </div>
 
+             <!--confirmation ORANGE-->
+             <div id="content4" class=" hide">
+
+                <div class="row center">
+                    <div *ngIf="operatorForm.get('operator').value === 'OM_SKAN'">
+                        <img src="../../../assets/img/logo_OM.jpg" width="100" height="100" alt="">
+                        <p>Veuillez générer un <strong>code de confirmation</strong> en tapant le
+                            code USSD suivant :
+                            <br><strong>#144*8#</strong></p>
+
+                        <div class="input-field s12">
+                            <input 
+                                [(ngModel)]="tokenPaymentOrange" type="number" class="validate">
+                            <label>Entrez le code</label>
+                        </div>
+                    </div>
+
+                    <div *ngIf="operatorForm.get('operator').value === 'MOOV_SKAN'">
+                        <img src="../../../assets/img/logo_MOOV_MONEY.png" width="100" height="100"
+                            alt="">
+
+                        <p>Veuillez confirmer la transaction en tapant le code USSD suivant :
+                            <br><strong>*133#</strong></p>
+
+                    </div>
+
+                    <div *ngIf="operatorForm.get('operator').value === 'MOMO_SKAN'">
+                        <img src="../../../assets/img/logo_MOMO.jpg" width="100" height="100" alt="">
+                        <p>Veuillez confirmer la transaction en tapant le code USSD suivant :
+                            <br><strong>*133#</strong></p>
+                    </div>
+                </div>
+
+
+                <button (click)=onSaveInscrit() class="btn btn-bg-color btn-block">Proceder au paiement</button>
+
+            </div>
 
         </div>
 

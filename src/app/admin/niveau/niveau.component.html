@@ -12,7 +12,8 @@
                 <div style="margin-top: 2em;" *ngIf="erreur" class="alert alert-danger">
                     {{erreur}}
                 </div>
-                <table class="table table-hover">
+                <div style="width: 100%; overflow: auto;">
+                  <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Libelle</th>
@@ -32,6 +33,7 @@
 
                     </tbody>
                 </table>
+                </div>
             </div>
             <div class="pg-pagina">
               <ul class="pagination">

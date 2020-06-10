@@ -28,6 +28,8 @@ export class DetailsCoursCommunComponent implements OnInit {
   };
   action: string;
 
+  paymentWaiting : boolean;
+
 
   //Sauvegarder l'URL courante 
   snapshot: RouterStateSnapshot;
@@ -124,6 +126,9 @@ export class DetailsCoursCommunComponent implements OnInit {
       if(result.etat === 'reussie'){
         this.onFectCoursCommun();
         return ;
+      }else if (result.etat === 'enAttente'){
+        this.paymentWaiting = true ;
+        return
       }
 
       this.snack.openSnackBar("Une erreur s'est produite pendant le paiement")

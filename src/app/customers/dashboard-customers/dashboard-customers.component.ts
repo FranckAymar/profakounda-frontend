@@ -21,6 +21,7 @@ paiements:any =  [];
     this.onFetchDernieresPropositions();
     this.onFetchDerniersCoursCommuns();
     this.onFetchStatistiquesInscrits();
+    this.onFetchPaiements();
   }
   onFetchStatistiquesInscrits(){
     this.inscriptionService.statistiquesInscritsParJour().subscribe(

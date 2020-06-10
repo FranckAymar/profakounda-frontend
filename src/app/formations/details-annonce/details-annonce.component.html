@@ -31,6 +31,15 @@
 
             </div>
             <div class="col-md-9">
+
+                <div *ngIf="paymentWaiting" class="modal-header center alert alert-success">
+                    <div style="padding: 0.5em;"   class="row">
+                      <p><strong>Demande de paiement envoyé !</strong></p>
+                      <p>Cliquez sur le bouton <strong>Me contacter</strong> une fois le paiement confirmé ! </p> 
+                    </div>
+                  </div>
+  
+
                 <div class="udb">
 
                     <div class="udb-sec">
@@ -396,7 +405,8 @@
 
                                     <div class="input-field s12">
                                         <input (ngModelChange)="modePaiemenentValidation()"
-                                            [(ngModel)]="paiementDetails.numeroPaiement" type="number"
+                                            [(ngModel)]="paiementDetails.numeroPaiement" 
+                                            type="tel" pattern="[0-9]*" 
                                             data-ng-model="name" class="validate">
                                         <label>Entrez votre numéro</label>
                                     </div>

@@ -16,15 +16,7 @@ declare var $: any;
 export class PaymentCoursCommunComponent implements OnInit {
 
 
-  //Model
-  paiementDetails = {
-
-    username : null,
-    numeroPaiement : null,
-    modePaiement : null,
-    token : null
-
-  }
+  tokenPaymentOrange : string;
 
   step;
 
@@ -87,16 +79,6 @@ export class PaymentCoursCommunComponent implements OnInit {
   }
 
 
-  modePaiemenentValidation(){
-    
-    if(this.paiementDetails.modePaiement !== null && this.paiementDetails.numeroPaiement){
-      $("#nextBtnPaiement").prop('disabled', false);
-    }else {
-      $('#nextBtnPaiement').prop('disabled', true);
-    }
-    
-  }
-
 
   next() {
 
@@ -109,6 +91,13 @@ export class PaymentCoursCommunComponent implements OnInit {
     else if (this.step === 'step2') {
     
       this.goToStep3() ;
+
+  
+    }
+
+    else if (this.step === 'step3') {
+    
+      this.goToStep4() ;
 
   
     }
@@ -139,6 +128,15 @@ export class PaymentCoursCommunComponent implements OnInit {
 
   }
 
+  goToStep4(){
+
+    $("#content3").addClass('hide');
+    $("#content4").removeClass('hide');
+    this.step = 'step4';
+
+    $("#step4").addClass("active");
+
+  }
 
   onSaveInscrit(){
 
@@ -148,69 +146,55 @@ export class PaymentCoursCommunComponent implements OnInit {
       idPublicCible : this.dataReceived.idPublicCible ,
       nomInscrit : this.identificationForm.get('nomInscrit').value,
       prenomInscrit : this.identificationForm.get('prenomInscrit').value ,
-
+      numeroPaiement : this.operatorForm.get('numero').value ,
+      modePaiement : this.operatorForm.get('operator').value ,
+      token : this.tokenPaymentOrange
     }
 
     console.log(data.idPublicCible);
     
 
-    if(data.idPublicCible){
-      this.saveInscritPublicCible(data);
-    }else {
-      this.saveInscritsCoursCommun(data);
-    }
-    
-  }
-
-
-  saveInscritsCoursCommun(data){
-    this.inscriptionService.saveInscritsCoursCommun(data).subscribe(
+    this.inscriptionService.inscriptionCoursOrganise(data).subscribe(
 
       (resp)=>{
 
         console.log(resp);
-        this.dialogRef.close({etat : 'reussie'}) ;
-        this.snackBar.openSnackBar('Inscription réussie !');
-
         
-      },
 
+        if(resp.code == 0){
+
+          if(data.modePaiement === "MOMO_SKAN" || data.modePaiement === "MOOV_SKAN"){
+
+            this.snackBar.openSnackBar('Un SMS de confirmation vous a été envoyé. \nVeuillez confirmer votre paiement.')
+            this.dialogRef.close({etat : 'enAttente'}) ;
+
+          }else {
+            this.snackBar.openSnackBar('Payement effectué avec succès !\n Un mail de confirmation vous a été envoyé')
+            this.dialogRef.close({etat : 'reussie'}) ;
+
+          }
+
+
+          
+        }else{
+          alert("Une erreur s'est produite pendant le paiement.\nVérifiez votre numéro de téléphone ou votre code d'activation puis réessayer");
+        }
+      },
       (error)=>{
 
         console.log(error);
         
       },
     )
-    
-    
-  }
-
-
-  saveInscritPublicCible(data){
-    
-    console.log("public cible");
-    
-
-    this.inscriptionService.saveInscritsPublicCible(data).subscribe(
-
-      (resp)=>{
-
-        console.log(resp);
-        this.dialogRef.close({etat : 'reussie'}) ;
-        this.snackBar.openSnackBar('Inscription réussie !');
-
-        
-      },
-
-      (error)=>{
-
-        console.log(error);
-        
-      },
-    )
-    
+  
     
   }
+
+
+
+
+
+  
 
   checkBoxChange(){
 

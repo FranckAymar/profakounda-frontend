@@ -56,6 +56,7 @@ export const URL = {
     renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
+    verifier : consts.host+ consts.nameProject +'verifier',
 
     //sign up
     singUpValidation:consts.host+ consts.nameProject+'sinUp-validation',
@@ -190,6 +191,7 @@ export const URL = {
     recupererOrganisation : consts.host+ consts.nameProject + 'organisations',
 
     //InscriptionCoursCommun
+    inscritptionCoursOrganise :  consts.host+ consts.nameProject +  'particulier/paiementinscription',
     inscriptioncourscommun : consts.host+ consts.nameProject + 'particulier/inscriptioncourscommun',
     inscriptionpubliccible : consts.host+ consts.nameProject + 'particulier/inscriptionpubliccible',
     recupererInscrit :  consts.host+ consts.nameProject + 'recupererinscrits',

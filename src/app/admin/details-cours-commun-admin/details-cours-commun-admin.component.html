@@ -23,6 +23,7 @@
                             <h4>{{detailsCoursCommun.coursCommun?.organisation.libelle}}</h4>
                         </li>
                         <li>{{detailsCoursCommun.coursCommun?.titre}}</li>
+                        <li> <h5>Auteur: {{detailsCoursCommun.coursCommun?.particulier.prenoms}} </h5>  </li>
                         <li>
                            <h5 style="text-align: center;" *ngIf="detailsCoursCommun.coursCommun?.cout" class="pro-user-act">{{detailsCoursCommun.coursCommun?.cout}} FCFA</h5>
                         </li>

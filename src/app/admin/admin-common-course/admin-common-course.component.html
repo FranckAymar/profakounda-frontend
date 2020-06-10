@@ -37,6 +37,7 @@
                         <thead>
                             <tr>
                                 <th>Organisation</th>
+                                <th>Auteur</th>
                                 <th>Téléphone </th>
                                 <th>Titre </th>
                                 <th>Date  De debut</th>
@@ -49,6 +50,7 @@
                             <p *ngIf="courCommuns.length == 0">Aucun élément</p>
                             <tr *ngFor="let p of courCommuns">
                                 <td>{{p.organisation.libelle}}</td>
+                                <td>{{p.particulier.prenoms}}</td>
                                 <td>{{p.telephone}}</td>
                                 <td>{{p.titre}}</td>
                                 <td>{{p.dateDebut |date:"yyyy-MM-dd"}}</td>

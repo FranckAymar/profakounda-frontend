@@ -22,6 +22,9 @@ export class SignInService {
 
     }
  
+    verifier(){
+        return this.http.get(URL.verifier) ;
+    }
 
     logout() {
 

@@ -56,6 +56,7 @@ export const URL = {
     renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
+    verifier : consts.host+ consts.nameProject +'verifier',
 
     //sign up
     singUpValidation:consts.host+ consts.nameProject+'sinUp-validation',

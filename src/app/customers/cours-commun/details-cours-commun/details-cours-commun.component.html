@@ -70,7 +70,7 @@
                         </li>
                         <li style="margin-top: 1em;">
                             <span *ngIf="cours.coursCommun.demandeVirement" style="color: red;font-weight: bold;">Virement en cours de traitement....<i class="fa fa-spinner"></i></span>
-                            <button *ngIf="!cours.coursCommun.demandeVirement" data-target="#demandeVirementAlerte" data-toggle="modal" class="btn btn-info">Demande de virement</button>
+                            <button *ngIf="!cours.coursCommun.demandeVirement && cours.coursCommun.compteRendu?.pointGlobale != 0" data-target="#demandeVirementAlerte" data-toggle="modal" class="btn btn-info">Demande de virement</button>
                         </li>
                     </ul>
                 </div>

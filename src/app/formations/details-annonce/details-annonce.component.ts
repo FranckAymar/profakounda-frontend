@@ -99,6 +99,8 @@ export class DetailsAnnonceComponent implements OnInit {
   //Form
   sigInForm : FormGroup ;
   singUpForm : FormGroup ;
+  operatorForm : FormGroup ;
+
 
   constructor(private detaisFormationsService : DetaisFormationsService,
               private route : ActivatedRoute,
@@ -126,6 +128,7 @@ export class DetailsAnnonceComponent implements OnInit {
     this.onGetDetailPropositionFormation() ; 
     this.initSignInForm() ;
     this.initSignUpForm() ;
+    this.initOperatorForm();
   }
 
 getColor1(){
@@ -261,6 +264,17 @@ changeEtoile5(){
       password : [null, Validators.required]
     })
 
+  }
+  initOperatorForm(){
+
+    this.operatorForm = this.formBuilder.group(
+
+      {
+        operator : ['', Validators.required],
+        numero : ['', [Validators.required, Validators.minLength(8)]]
+      }
+    )
+  
   }
 
   initSignUpForm(){

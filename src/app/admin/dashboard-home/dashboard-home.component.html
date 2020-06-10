@@ -46,35 +46,37 @@
                 </div>
                 <div class="tab-inn">
                     <div class="table-responsive table-desi">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Par :</th>
-                                    <th>Forfait</th>
-                                    <th>Requete(s) restante(s)</th>
-                                    <th>Date de paiement</th>
-                                    <th>Date d'expiration</th>
-                                    <th>Status</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let paiement of detailsDahboard.paiements">
-                                    <td><span class="list-img"><img src="{{urlServer}}/{{paiement.particulier.id}}"
-                                                alt=""></span>
-                                    <td>{{paiement.particulier.nom}} {{paiement.particulier.prenoms}} </td>
-                                    <td>{{paiement.forfait.name}}</td>
-                                    <td>{{paiement.nbreRequeteRestante}}</td>
-                                    <td>{{paiement.datePaiement |date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                                    <td>{{paiement.dateFin |date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                                    <td>
-                                        <span *ngIf="paiement.actif" class="label label-success">Actif</span>
-                                        <span *ngIf="!paiement.actif" class="label label-danger">Inactif</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div style="width: 100%;overflow: auto;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Par :</th>
+                                        <th>Forfait</th>
+                                        <th>Requete(s) restante(s)</th>
+                                        <th>Date de paiement</th>
+                                        <th>Date d'expiration</th>
+                                        <th>Status</th>
+    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let paiement of detailsDahboard.paiements">
+                                        <td><span class="list-img"><img src="{{urlServer}}/{{paiement.particulier.id}}"
+                                                    alt=""></span>
+                                        <td>{{paiement.particulier.nom}} {{paiement.particulier.prenoms}} </td>
+                                        <td>{{paiement.forfait.name}}</td>
+                                        <td>{{paiement.nbreRequeteRestante}}</td>
+                                        <td>{{paiement.datePaiement |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                        <td>{{paiement.dateFin |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                        <td>
+                                            <span *ngIf="paiement.actif" class="label label-success">Actif</span>
+                                            <span *ngIf="!paiement.actif" class="label label-danger">Inactif</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,27 +94,29 @@
                 </div>
                 <div class="tab-inn">
                     <div class="table-responsive table-desi">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Nom Prenoms</th>
-                                    <th>Date Inscription</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let p of detailsDahboard.particuliers">
-                                    <td><span class="list-img"><img src="{{urlServer}}/{{p.id}}" alt=""></span>
-                                    <td>{{p.nom}} {{p.prenoms}} </td>
-                                    <td>{{p.dateCreation |date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                                    <td>
-                                        <span *ngIf="p.compte.enabled" class="label label-success">Actif</span>
-                                        <span *ngIf="!p.compte.enabled" class="label label-danger">Inactif</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div style="width: 100%;overflow: auto;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nom Prenoms</th>
+                                        <th>Date Inscription</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let p of detailsDahboard.particuliers">
+                                        <td><span class="list-img"><img src="{{urlServer}}/{{p.id}}" alt=""></span>
+                                        <td>{{p.nom}} {{p.prenoms}} </td>
+                                        <td>{{p.dateCreation |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                        <td>
+                                            <span *ngIf="p.compte.enabled" class="label label-success">Actif</span>
+                                            <span *ngIf="!p.compte.enabled" class="label label-danger">Inactif</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,29 +134,31 @@
                 </div>
                 <div class="tab-inn">
                     <div class="table-responsive table-desi">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Identifiant</th>
-                                    <th>Par :</th>
-                                    <th>Date demande en Ligne</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <p *ngIf="detailsDahboard.prpositionsEnAttenteValidation?.length == 0">Aucun élément</p>
-                                <tr *ngFor="let p of detailsDahboard.prpositionsEnAttenteValidation">
-                                    <td>{{p.id}}</td>
-                                    <td>{{p.particulier?.nom}} {{p.particulier?.prenoms}}</td>
-                                    <td>{{p.dateDemandeMiseEnLigne |date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                                    <td>
-                                        <span *ngIf="p.attenteMiseEnLigne" class="label label-info">En attente</span>
-
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div style="width: 100%;overflow: auto;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Identifiant</th>
+                                        <th>Par :</th>
+                                        <th>Date demande en Ligne</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <p *ngIf="detailsDahboard.prpositionsEnAttenteValidation?.length == 0">Aucun élément</p>
+                                    <tr *ngFor="let p of detailsDahboard.prpositionsEnAttenteValidation">
+                                        <td>{{p.id}}</td>
+                                        <td>{{p.particulier?.nom}} {{p.particulier?.prenoms}}</td>
+                                        <td>{{p.dateDemandeMiseEnLigne |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                        <td>
+                                            <span *ngIf="p.attenteMiseEnLigne" class="label label-info">En attente</span>
+    
+                                        </td>
+    
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -166,27 +172,29 @@
                 </div>
                 <div class="tab-inn">
                     <div class="table-responsive table-desi">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th></th> 
-                                    <th>Souscripteur</th> 
-                                    <th></th> 
-                                    <th>Particullier consulté</th>
-                                    <th>Date</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let pp of detailsDahboard.profilsConsultes">
-                                    <td><span class="list-img"><img src="{{urlServer}}/{{pp.particulier.id}}" alt=""></span>
-                                    <td>{{pp.particulier.nom}} {{pp.particulier.prenoms}} </td>
-                                    <td><span class="list-img"><img src="{{urlServer}}/{{pp.propositionFormation.particulier.id}}" alt=""></span>
-                                    <td>{{pp.propositionFormation.particulier.nom}} {{pp.propositionFormation.particulier.prenoms}}</td>
-                                    <td>{{pp.dateConsultation |date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                                    
-                            </tbody>
-                                </table>
+                        <div style="width: 100%;overflow: auto;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th> 
+                                        <th>Souscripteur</th> 
+                                        <th></th> 
+                                        <th>Particullier consulté</th>
+                                        <th>Date</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let pp of detailsDahboard.profilsConsultes">
+                                        <td><span class="list-img"><img src="{{urlServer}}/{{pp.particulier.id}}" alt=""></span>
+                                        <td>{{pp.particulier.nom}} {{pp.particulier.prenoms}} </td>
+                                        <td><span class="list-img"><img src="{{urlServer}}/{{pp.propositionFormation.particulier.id}}" alt=""></span>
+                                        <td>{{pp.propositionFormation.particulier.nom}} {{pp.propositionFormation.particulier.prenoms}}</td>
+                                        <td>{{pp.dateConsultation |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                        
+                                </tbody>
+                                    </table>
+                        </div>
                     </div>
                 </div>
             </div>

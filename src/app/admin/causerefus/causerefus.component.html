@@ -10,23 +10,26 @@
                     class="btn btn-primary">
                     Ajouter
                 </button>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>titre</th>
-                        </tr>
-                    </thead> 
-                    <tbody>
-                        <span *ngIf="causeRefus.length == 0">Aucun élément</span>
-                        <tr *ngFor="let cause of causeRefus">
-                            <td>{{cause.titre}}</td>
-                            <td><button (click)="onLoadCauseRefus(cause)" data-toggle="modal" data-target="#ajouterRefus"
-                                    type="button" class="btn btn-primary"> Modifier</button></td>
-                           
-                        </tr>
-
-                    </tbody>
-                </table>
+                <div style="width: 100%;overflow: auto;">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>titre</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <span *ngIf="causeRefus.length == 0">Aucun élément</span>
+                            <tr *ngFor="let cause of causeRefus">
+                                <td>{{cause.titre}}</td>
+                                <td><button (click)="onLoadCauseRefus(cause)" data-toggle="modal" data-target="#ajouterRefus"
+                                        type="button" class="btn btn-primary"> Modifier</button></td>
+                               
+                            </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+                
             </div>
         </div>
     </div>

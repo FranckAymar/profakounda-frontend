@@ -34,7 +34,7 @@
 
                 <div *ngIf="paymentWaiting" class="modal-header center alert alert-success">
                     <div style="padding: 0.5em;"   class="row">
-                      <p><strong>Demande de paiement envoyé !</strong></p>
+                      <p><strong>Demande de paiement envoyée !</strong></p>
                       <p>Cliquez sur le bouton <strong>Me contacter</strong> une fois le paiement confirmé ! </p> 
                     </div>
                   </div>
@@ -379,24 +379,27 @@
                                 </div>
                                 <!--Mode de paiement-->
                                 <div id="content3" class=" hide">
+                                    <form [formGroup]="operatorForm" (submit)="next()">
 
                                     <div class="form-check-inline text-center">
 
                                         <p>Choississez un opérateur :</p>
-
                                         <div class="row">
-                                            <input (change)="modePaiemenentValidation()" type="radio" value="MOMO_SKAN"
-                                                name="operateur" [(ngModel)]="paiementDetails.modePaiement"
-                                                class="filled-in" id="mtn" />
+                                            <input  type="radio" value="MOMO_SKAN"
+                                            formControlName="operator" name="operator" 
+                                            [(ngModel)]="paiementDetails.modePaiement"
+                                            class="filled-in" id="mtn" />
                                             <label for="mtn">MTN CI</label>
 
-                                            <input (change)="modePaiemenentValidation()" value="MOOV_SKAN" type="radio"
-                                                name="operateur" [(ngModel)]="paiementDetails.modePaiement"
-                                                class="filled-in" id="moov" />
+                                            <input  value="MOOV_SKAN" type="radio"
+                                            formControlName="operator" name="operator" 
+                                            [(ngModel)]="paiementDetails.modePaiement"
+                                            class="filled-in" id="moov" />
                                             <label for="moov">MOOV CI</label>
 
-                                            <input (change)="modePaiemenentValidation()" value="OM_SKAN" type="radio"
-                                                name="operateur" [(ngModel)]="paiementDetails.modePaiement"
+                                            <input  value="OM_SKAN" type="radio"
+                                            formControlName="operator" name="operator" 
+                                            [(ngModel)]="paiementDetails.modePaiement"
                                                 class="filled-in" id="orange" />
                                             <label for="orange">ORANGE CI</label>
 
@@ -404,16 +407,17 @@
                                     </div>
 
                                     <div class="input-field s12">
-                                        <input (ngModelChange)="modePaiemenentValidation()"
+                                        <input 
+                                            formControlName="numero"
                                             [(ngModel)]="paiementDetails.numeroPaiement" 
                                             type="tel" pattern="[0-9]*" 
                                             data-ng-model="name" class="validate">
                                         <label>Entrez votre numéro</label>
                                     </div>
 
-                                    <button id="nextBtnPaiement" disabled (click)=next()
+                                    <button id="nextBtnPaiement" [disabled]="operatorForm.invalid" 
                                         class="btn btn-bg-color btn-block">Suivant</button>
-
+                                </form>
                                 </div>
                             </div>
 

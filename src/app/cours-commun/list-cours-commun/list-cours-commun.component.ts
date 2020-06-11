@@ -18,7 +18,7 @@ export class ListCoursCommunComponent implements OnInit {
 
   onFectCoursCommunHome(){
 
-    this.coursCommunService.fetchCoursCommunForHome().subscribe(
+    this.coursCommunService.fetchCoursCommunForHomeGlobale().subscribe(
 
       (resp)=>{
         console.log(resp);

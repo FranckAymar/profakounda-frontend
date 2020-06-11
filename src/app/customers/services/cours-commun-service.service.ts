@@ -19,6 +19,12 @@ export class CoursCommunService {
     return this.http.get(URL.recupererCoursCommunHome);
 
   }
+  fetchCoursCommunForHomeGlobale():Observable<any>{
+
+    return this.http.get(URL.recupererListCoursCommunHome);
+
+  }
+
 
 
   fetchDetailsCoursCommunForHome(id?) :Observable<any> {

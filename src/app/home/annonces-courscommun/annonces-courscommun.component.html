@@ -5,10 +5,10 @@
     <div class="container com-sp">
         <div class="row">
             <div class="con-title">
-                <h2>Nos <span>cours Organisés</span></h2>
+                <h2>Les <span>cours Organisés</span></h2>
             </div>
         </div>
-        
+        <span *ngIf="coursCommuns.length == 0">Aucun cours disponible</span> 
   <div class="container">
 
     <div class="row">
@@ -19,7 +19,7 @@
 </div>
   </div>
        
-        <div class="con-title">
+        <div *ngIf="isNombreMaxAtteint" class="con-title">
             <a [routerLink]="['/courscommun']">
                 <p>Voir plus ...</p>
             </a>

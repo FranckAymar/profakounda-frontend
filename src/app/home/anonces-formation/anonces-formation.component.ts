@@ -20,7 +20,7 @@ export class AnoncesFormationComponent implements OnInit {
   //Nombre de page totals
   totalPage: number
   totalPageArray: Array<any>;
-
+isNombreMaxAtteint:boolean = false;
   constructor(private listFormationsService : ListFormationsService) { }
 
   ngOnInit() {
@@ -38,8 +38,9 @@ export class AnoncesFormationComponent implements OnInit {
       
       (resp) =>{
     
-        this.propositionFormations = resp ;
-
+        this.propositionFormations = resp['formations'] ;
+        this.isNombreMaxAtteint = resp['nombreMaxAtteint'];
+      
       },
 
       

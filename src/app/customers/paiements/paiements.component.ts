@@ -6,14 +6,14 @@ import { PaiementService } from './../../formations/services/paiement.service';
 import { Component, OnInit } from '@angular/core';
 import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import { DatePipe } from '@angular/common';
-
+import { URL } from 'src/app/API_url/config';
 @Component({
   selector: 'app-paiements',
   templateUrl: './paiements.component.html',
   styleUrls: ['./paiements.component.css']
 })
 export class PaiementsComponent implements OnInit {
-
+urlServer  = URL.getLogoCoursCommun;
   paiements = [] ;
   myCoursCommuns = [];
 
@@ -132,17 +132,15 @@ export class PaiementsComponent implements OnInit {
     PdfMakeWrapper.setFonts(pdfFonts);
    
     const pdf = new PdfMakeWrapper();
-
-    
-    new Img('../../../assets/images/logo.png').width(150).margin([0,30,0,30]).build().then( img => {
+    pdf.add(new Txt('www.profakounda.com').alignment('center').margin([50,-10,0,0]).end)
+    new Img(this.urlServer+'/'+data.coursCommun.id).width(150).margin([0,-10,0,30]).build().then( img => {
     pdf.add(new Columns([img, new QR(data.codeInscription.toString()).fit(100).alignment('right').end]).end)
-
-    pdf.add(new Txt('Recu de paiement').bold().decoration('underline').margin([0,20,0,20]).end)
-    pdf.add(new Txt('Date : ' + this.datePipe.transform(data.dateInscription, 'dd-MMMM-yyyy')).margin([0,10,0,0]).end)
     
-    pdf.add(new Txt('PROVENANT DE :').margin([0,10,0,0]).bold().end)
-    pdf.add(new Txt('ProfAkounda').end)
-    pdf.add(new Columns([new Txt('CLIENT :').bold().end, new Txt('Organisateur :').bold().end]).margin([0,10,0,0]).end)
+    pdf.add(new Txt((data.coursCommun ? data.coursCommun.titre : data.publicCible.coursCommun.titre)+'-Recu de paiement').bold().alignment('center').decoration('underline').margin([0,20,0,20]).end)
+    pdf.add(new Txt('Date : ' + this.datePipe.transform(data.dateInscription, 'dd-MMMM-yyyy')).margin([0,10,0,0]).end)
+    pdf.add(new Txt('Code:').margin([0,10,0,0]).bold().end)
+    pdf.add(new Txt(data.codeInscription).color('red').end)
+    pdf.add(new Columns([new Txt('Participant:').bold().end, new Txt('Organisateur :').bold().end]).margin([0,10,0,0]).end)
     pdf.add(new Columns([new Txt(data.nom + " " + data.prenoms).end,
     new Txt(data.coursCommun ?  data.coursCommun.organisation.libelle : data.publicCible.coursCommun.organisation.libelle).end]).end)
 
@@ -155,10 +153,13 @@ export class PaiementsComponent implements OnInit {
     }
     
 
-    pdf.add(new Columns([new Txt('TOTAL :').bold().end,new Txt('EN PAIEMENT DE :').bold().end]).margin([0,10,0,0]).end)
-    pdf.add(new Columns([new Txt(data.coursCommun ? data.coursCommun.cout : data.publicCible.cout + ' '+ 'FCFA').end,new Txt('Cours organisé').end]).end);
-
-    pdf.footer('Imprimé le : ' + new Date().toDateString())
+    pdf.add(new Txt('Montant :').margin([0,10,0,0]).bold().end)
+    pdf.add(new Txt(data.coursCommun ? data.coursCommun.cout : data.publicCible.cout + 'FCFA').end);
+    pdf.add(new Txt('Operateur:').margin([0,10,0,0]).bold().end)
+    pdf.add(new Txt(data.modePaiement).end)
+    pdf.add(new Txt('Téléphone:').margin([0,10,0,0]).bold().end)
+    pdf.add(new Txt(data.numeroPaiement).end)
+    pdf.footer(new Txt('Toute tentative de falsification est passive de poursuites judiciaires.').alignment('center').end);
 
     
     pdf.create().download('Recu_profAkounda_'+data.nom );

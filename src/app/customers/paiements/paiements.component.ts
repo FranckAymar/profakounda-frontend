@@ -6,14 +6,15 @@ import { PaiementService } from './../../formations/services/paiement.service';
 import { Component, OnInit } from '@angular/core';
 import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import { DatePipe } from '@angular/common';
-
+import { URL } from 'src/app/API_url/config';
+import { async } from '@angular/core/testing';
 @Component({
   selector: 'app-paiements',
   templateUrl: './paiements.component.html',
   styleUrls: ['./paiements.component.css']
 })
 export class PaiementsComponent implements OnInit {
-
+urlServer  = URL.getLogoCoursCommun;
   paiements = [] ;
   myCoursCommuns = [];
 
@@ -31,7 +32,8 @@ export class PaiementsComponent implements OnInit {
   //Nombre de page totals
   totalPage : number 
   totalPageArray : Array<any> ;
-
+operateur:string;
+color:string;
   constructor(private paiementService : PaiementService,
             private signInService : SignInService,
             private coursCommunService : CoursCommunService,
@@ -124,7 +126,7 @@ export class PaiementsComponent implements OnInit {
       }
     )
   }
-
+  
   onGenerateRecuPaiement(data){
 
     console.log(data);
@@ -132,38 +134,59 @@ export class PaiementsComponent implements OnInit {
     PdfMakeWrapper.setFonts(pdfFonts);
    
     const pdf = new PdfMakeWrapper();
-
-    
-    new Img('../../../assets/images/logo.png').width(150).margin([0,30,0,30]).build().then( img => {
-    pdf.add(new Columns([img, new QR(data.codeInscription.toString()).fit(100).alignment('right').end]).end)
-
-    pdf.add(new Txt('Recu de paiement').bold().decoration('underline').margin([0,20,0,20]).end)
-    pdf.add(new Txt('Date : ' + this.datePipe.transform(data.dateInscription, 'dd-MMMM-yyyy')).margin([0,10,0,0]).end)
-    
-    pdf.add(new Txt('PROVENANT DE :').margin([0,10,0,0]).bold().end)
-    pdf.add(new Txt('ProfAkounda').end)
-    pdf.add(new Columns([new Txt('CLIENT :').bold().end, new Txt('Organisateur :').bold().end]).margin([0,10,0,0]).end)
-    pdf.add(new Columns([new Txt(data.nom + " " + data.prenoms).end,
-    new Txt(data.coursCommun ?  data.coursCommun.organisation.libelle : data.publicCible.coursCommun.organisation.libelle).end]).end)
-
-    if(!data.coursCommun){
-
-      pdf.add(new Columns([new Txt('NIVEAU :').bold().end, new Txt('FILIERE :').bold().end]).margin([0,10,0,0]).end)
-      pdf.add(new Columns([new Txt(data.publicCible.niveau.libelle).end,
-      new Txt(data.publicCible.filiere ?  data.publicCible.filiere.libelle : 'Non précisée').end]).end)
-    
+    pdf.header(new Txt('www.profakounda.com').alignment('center').end)
+   
+    if(data.modePaiement=="OM_SKAN")
+    {
+      this.operateur="Orange Money"
+      this.color = "orange"
+    }
+    else if(data.modePaiement=="MOMO_SKAN"){
+      this.operateur = "MTN Mobile Money"
+      this.color = "yellow"
+    }
+    else if(data.modePaiement="MOOV_SKAN"){
+      this.operateur = "Moov Money"
+      this.color = "green"
+    }
+    else{
+      this.operateur = "";
+      this.color = "black"
     }
     
-
-    pdf.add(new Columns([new Txt('TOTAL :').bold().end,new Txt('EN PAIEMENT DE :').bold().end]).margin([0,10,0,0]).end)
-    pdf.add(new Columns([new Txt(data.coursCommun ? data.coursCommun.cout : data.publicCible.cout + ' '+ 'FCFA').end,new Txt('Cours organisé').end]).end);
-
-    pdf.footer('Imprimé le : ' + new Date().toDateString())
-
+ 
     
-    pdf.create().download('Recu_profAkounda_'+data.nom );
-
-      });
+    new Img(data.coursCommun ? this.urlServer+'/'+data.coursCommun.id : this.urlServer+'/'+data.publicCible.coursCommun.id)
+          .width(100).margin([0,-10,0,30]).build().then( img => {
+      pdf.add(new Columns([img, new QR(data.codeInscription.toString()).fit(100).alignment('right').end]).end)
+      pdf.add(new Txt((data.coursCommun ? data.coursCommun.titre : data.publicCible.coursCommun.titre)+'-Reçu de paiement').bold().alignment('center').decoration('underline').margin([0,20,0,20]).end)
+      pdf.add(new Txt('Date : ' + this.datePipe.transform(data.dateInscription, 'dd-MMMM-yyyy')).margin([0,10,0,0]).end)
+      pdf.add(new Txt('Code:').margin([0,10,0,0]).bold().end)
+      pdf.add(data.codeInscription)
+      pdf.add(new Columns([new Txt('Participant:').bold().end, new Txt('Organisateur :').bold().end]).margin([0,10,0,0]).end)
+      pdf.add(new Columns([new Txt(data.nom + " " + data.prenoms).end,
+      new Txt(data.coursCommun ?  data.coursCommun.organisation.libelle : data.publicCible.coursCommun.organisation.libelle).end]).end)
+  
+      if(!data.coursCommun){
+  
+        pdf.add(new Columns([new Txt('Niveau :').bold().end, new Txt('Filière :').bold().end]).margin([0,10,0,0]).end)
+        pdf.add(new Columns([new Txt(data.publicCible.niveau.libelle).end,
+        new Txt(data.publicCible.filiere ?  data.publicCible.filiere.libelle : 'Non précisée').end]).end)
+      
+      }
+      
+      pdf.add(new Columns([new Txt('Montant :').margin([0,10,0,0]).bold().end, new Txt('Opérateur:').margin([0,10,0,0]).bold().end]).end);
+      pdf.add(new Columns([new Txt(data.coursCommun ? data.coursCommun.cout : data.publicCible.cout + 'FCFA').end, new Txt(this.operateur).color(this.color).end]).end);
+     
+      pdf.add(new Txt('Téléphone:').margin([0,10,0,0]).bold().end)
+      pdf.add(new Txt(data.numeroPaiement).end)
+      pdf.footer(new Txt('Toute tentative de falsification est passible de poursuites judiciaires.').alignment('center').end);
+  
+      
+      pdf.create().download('Recu_profAkounda_'+data.nom );
+  
+        });
+        
 
    
 

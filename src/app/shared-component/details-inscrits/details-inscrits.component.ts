@@ -5,6 +5,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import { DatePipe } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { URL } from 'src/app/API_url/config';
 @Component({
   selector: 'app-details-inscrits',
   templateUrl: './details-inscrits.component.html',
@@ -12,7 +13,7 @@ import localeFr from '@angular/common/locales/fr';
 })
 export class DetailsInscritsComponent implements OnInit {
 
-
+  urlServer = URL.getLogoCoursCommun;
   headersTable = [  
                   new Txt('Nom').bold().end, 
                   new Txt('Prénoms').bold().end, 
@@ -63,12 +64,11 @@ export class DetailsInscritsComponent implements OnInit {
   // });
   
 
-    new Img('../../../assets/images/logo.png').width(150).margin([0,40,0,40]).build().then( img => {
+    new Img(this.urlServer+"/"+this.dataReceived.details.id).width(150).margin([0,40,0,40]).build().then( img => {
     pdf.add( img);
     
 
     this.createBodyOfTable(this.dataReceived.inscrit);
-
 
     //Cas d'un cours avec public cible
     if (this.dataReceived.details.publicCible) {
@@ -86,12 +86,19 @@ export class DetailsInscritsComponent implements OnInit {
   
     } 
 
-    pdf.add(new Txt('Liste des inscrits').alignment('center').decoration('underline').margin(20).bold().end);
+   
+   
     pdf.add(new Table(this.bodyOfTable).alignment('center').widths([100, 250, 150]).end);  
 
-    pdf.footer('Imprimé le : ' + new Date().toDateString())
-
-    pdf.create().download('Liste_profAkounda_'+ this.dataReceived.details.cours.organisation.libelle + "_"+ new Date().getDate().toString()  );
+    pdf.footer('Imprimé le : ' +this.datePipe.transform(new Date(), 'dd-MMMM-yyyy') )
+    if (this.dataReceived.details.publicCible) {
+      pdf.create().download('Liste_profAkounda_'+ this.dataReceived.details.cours.organisation.libelle + "_"+ new Date().getDate().toString()  );
+    }
+    else{
+      pdf.create().download('Liste_profAkounda_'+ this.dataReceived.details.organisation.libelle + "_"+ new Date().getDate().toString()  );
+    }
+    
+    
     pdf.create().open();
 
       });

@@ -3,9 +3,10 @@
     <div class="container com-sp pad-bot-70">
         <div class="row">
             <div class="con-title">
-                <h2>Nos <span>Formateurs</span></h2>
+                <h2>Les <span>Formateurs</span></h2>
             </div>
         </div>
+        <span *ngIf="propositionFormations.length == 0">Aucun formateur disponible</span>
         <div class="row" *ngFor="let propositionFormation of propositionFormations">
             <app-card-formation
             [idParticulier]= "propositionFormation.idParticulier"
@@ -18,7 +19,7 @@
             [id] = "propositionFormation.id"
             ></app-card-formation>
         </div>
-        <div class="con-title">
+        <div *ngIf="isNombreMaxAtteint" class="con-title">
             <a [routerLink]="['/formations']">
                 <p>Voir plus ...</p>
             </a>

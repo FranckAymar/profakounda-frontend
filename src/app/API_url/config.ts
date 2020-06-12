@@ -163,6 +163,7 @@ export const URL = {
     modifierLieuIntervention : consts.host+ consts.nameProject + 'particulier/modifierlieuintervention',
     recupererCoursCommun : consts.host+ consts.nameProject + 'organisation/coursCommuns',
     recupererCoursCommunHome : consts.host+ consts.nameProject + 'home/coursCommuns',
+    recupererListCoursCommunHome : consts.host+ consts.nameProject + 'home/list/coursCommuns',
     modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
     demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
     demandeVersement : consts.host+ consts.nameProject + 'particulier/demandeVirement',

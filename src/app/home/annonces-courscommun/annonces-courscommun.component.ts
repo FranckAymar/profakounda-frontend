@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AnnoncesCourscommunComponent implements OnInit {
 
   coursCommuns = [] ;
-
+isNombreMaxAtteint:boolean = false;
   constructor(private coursCommunService : CoursCommunService) { }
 
   ngOnInit() {
@@ -23,8 +23,8 @@ export class AnnoncesCourscommunComponent implements OnInit {
 
       (resp)=>{
         console.log(resp);
-        this.coursCommuns = resp ;
-        
+        this.coursCommuns = resp['cours'] ;
+        this.isNombreMaxAtteint = resp['nombreMaxAtteint'];
       },
       (error)=>{
         console.log(error);

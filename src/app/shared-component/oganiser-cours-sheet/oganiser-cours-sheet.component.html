@@ -23,35 +23,58 @@
                 <form [formGroup]="coursCommunForm" (ngSubmit)="saveCoursCommun()">
 
                     <div class="input-field s12">
-                        <input formControlName="titre" type="text" class="validate">
-                        <label>Titre</label>
+                        <!-- <input formControlName="titre" type="text" class="validate">
+                        <label>Titre</label> -->
+                        <mat-form-field>
+                            <input matInput formControlName="titre" required type="text" placeholder="Titre">
+                        </mat-form-field>
                     </div>
 
                     <div class="input-field s12">
-                        <input formControlName="organisation" [matAutocomplete]="auto" type="text" class="validate">
+                        <mat-form-field>
+                            <input type="text" required  
+                                placeholder="Organisation" formControlName="organisation"  matInput
+                                [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let organisation of filteredOrganisations | async"
+                                [value]="organisation.libelle">
+                                {{organisation.libelle}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                        <!-- <input formControlName="organisation"  [matAutocomplete]="auto" type="text" class="validate">
                         <mat-autocomplete #auto="matAutocomplete">
                             <mat-option *ngFor="let organisation of filteredOrganisations | async"
                                 [value]="organisation.libelle">
                                 {{organisation.libelle}}
                             </mat-option>
                         </mat-autocomplete>
-                        <label>Organisation</label>
+                        <label>Organisation</label> -->
                     </div>
 
 
                     <div class="input-field s12">
-                        <input formControlName="telephone" type="text" class="validate">
-                        <label>Numéro de téléphone</label>
+                        <!-- <input formControlName="telephone" type="text" class="validate">
+                        <label>Numéro de téléphone</label> -->
+                        <mat-form-field>
+                            <input matInput formControlName="telephone" required type="text" placeholder="Téléphone">
+                        </mat-form-field>
                     </div>
 
 
                     <div class="input-field s12">
 
-                        <textarea formControlName="description" maxChars="1000" class="form-control" name="description"
+                        <!-- <textarea formControlName="description" maxChars="1000" class="form-control" name="description"
                             id="" cols="30" rows="5">
 
                         </textarea>
-                        <label>Description</label>
+                        <label>Description</label> -->
+                        <mat-form-field>
+                            <textarea matInput required placeholder="Description" formControlName="description" maxChars="1000" class="form-control" name="description"
+                            id="" cols="30" rows="5">
+
+                            </textarea>
+                        </mat-form-field>
 
                     </div>
 

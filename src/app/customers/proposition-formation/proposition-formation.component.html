@@ -99,7 +99,6 @@
                                         class="updateButton"><i class="fa fa-edit"></i></button></td>
                                 <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i
                                             class="fa fa-times"></i></button></td>
-    
                             </tr>
     
                         </tbody>
@@ -183,18 +182,18 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="prixMin">Prix min:</label>
-                            <input name="prixMin" required [(ngModel)]="niveauForme.prixMin" type="number"
+                            <input name="prixMin" (ngModelChange)="nombreMinChange($event)" required [(ngModel)]="niveauForme.prixMin" type="number"
                                 id="prixMin" />
                         </div>
                         <div class="col-md-6">
                             <label for="prixMax">Prix max:</label>
-                            <input name="prixMax" type="number" [(ngModel)]="niveauForme.prixMax" id="prixMax"
+                            <input name="prixMax" (ngModelChange)="nombreMaxChange($event)" type="number" [(ngModel)]="niveauForme.prixMax" id="prixMax"
                                 required />
                         </div>
                     </div>
-                    <button style="margin-top:0.5em;" *ngIf="!edit" [disabled]="f.invalid || myControl3.invalid" type="submit"
+                    <button style="margin-top:0.5em;" *ngIf="!edit" [disabled]="f.invalid || myControl3.invalid || !isNombreMaxValid || !isNombreMinValid || !isPresentDoubleNumber " type="submit"
                         class="btn btn-primary">Enregistrer</button>
-                    <button style="margin-top:0.5em;" *ngIf="edit" [disabled]="f.invalid || myControl3.invalid" type="submit"
+                    <button style="margin-top:0.5em;" *ngIf="edit" [disabled]="f.invalid || myControl3.invalid || !isNombreMaxValid || !isNombreMinValid || !isPresentDoubleNumber" type="submit"
                         class="btn btn-success">Enregistrer</button>
                 </form>
             </div>

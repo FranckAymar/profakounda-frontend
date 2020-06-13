@@ -35,6 +35,8 @@ export class PropositionFormationComponent implements OnInit {
   @Input() isVilleExist:boolean;
   joursString:any = [];
   id:number;
+  alMod:boolean = false;
+  alNiv:boolean = false;
   isNombreMinValid:boolean = false;
   isNombreMaxValid:boolean = false;
   isPresentDoubleNumber:boolean = false;
@@ -236,15 +238,24 @@ export class PropositionFormationComponent implements OnInit {
     )
   }
     addNiveau(id){
-      
-      
       this.edit = false;
-      this.niveauForme = new NiveauForme(0,'',null,null,id,localStorage.getItem(this.signInService.USERNAME));
-      this.booleenParDefaut();
       this.propositionFormationService.getAllAnivaux(id).subscribe(
         (resp)=>{
-          console.log(resp);
+          if(resp['contrat']){
+            this.isNombreMaxValid = true;
+            this.isNombreMinValid = true;
+            this.isPresentDoubleNumber = true;
+            this.nombreMax = resp['contrat'].maxMontant;
+            this.nombreMin = resp['contrat'].minMontant;
+            this.niveauForme = new NiveauForme(resp['contrat'].id,'',resp['contrat'].minMontant,resp['contrat'].maxMontant,id,localStorage.getItem(this.signInService.USERNAME));
+          }
+          else
+          {
+            this.booleenParDefaut();
+            this.niveauForme = new NiveauForme(0,'',null,null,id,localStorage.getItem(this.signInService.USERNAME));
+          }
           this.isAllNiveaux = resp['allNiveau'];
+          this.alMod = resp['allModule'];
         },
         (error)=>{
           console.log(error);
@@ -292,11 +303,13 @@ this.propositionFormationService.rechercherDisponibilites(id)
       }
     )
      }
-    addModule(m,id,va){
+    addModule(m,id,va,alNi){
       this.editModule = false;
       this.isAllModule = va;
       this.modules = m;
       this.id = id;
+      this.alNiv = alNi;
+      console.log(this.alNiv);
       this.module = new Module(0,'',id,localStorage.getItem(this.signInService.USERNAME));
     }
     

@@ -54,7 +54,7 @@
                         <p>{{propositionFormation.description}}</p>
                     </div>
 
-                    <div  class="udb-sec udb-cour">
+                    <div *ngIf="!propositionFormation.isAllModule" class="udb-sec udb-cour">
                         <h4><img src="../../assets/images/icon/db2.png" alt="" /> Mes Formations</h4>
                         <div class="sdb-cours">
                             <ul>
@@ -74,7 +74,7 @@
                     </div>
 
 
-                    <div class="udb-sec udb-cour-stat">
+                    <div  class="udb-sec udb-cour-stat">
                         <h4><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
                         <div class="pro-con-table table-responsive">
                             <table class="bordered table">

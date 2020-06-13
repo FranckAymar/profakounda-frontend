@@ -34,7 +34,7 @@
                 </p>
                 <div *ngIf="!p.proposition.cyclePrimaire"  class="row">
                     <div  style="margin-top: 0.5em !important;" class="col-md-3">
-                        <button    (click)="addModule(p.modules,p.proposition.id,p.proposition.allModule)" type="button" data-toggle="modal" data-target="#modules"
+                        <button    (click)="addModule(p.modules,p.proposition.id,p.proposition.allModule,p.proposition.allNiveau)" type="button" data-toggle="modal" data-target="#modules"
                                 class="btn btn-info btn-block">
                                 Modules enseignés
                         </button>
@@ -171,7 +171,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <mat-checkbox [checked]="isAllNiveaux" style="width: 70%;"   (change)="checkAllNiveauxChange()">
+                            <mat-checkbox *ngIf="!alMod"  [checked]="isAllNiveaux" style="width: 70%;"   (change)="checkAllNiveauxChange()">
                                 <span style="color: red;">Tous les niveaux</span></mat-checkbox>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <mat-checkbox [checked]="isAllModule" style="width: 70%;" [checked]="isAllModule"  (change)="checkAllModuleChange()">
+                                    <mat-checkbox *ngIf="!alNiv"  [checked]="isAllModule" style="width: 70%;" [checked]="isAllModule"  (change)="checkAllModuleChange()">
                                         <span style="color: red;">Tous les modules</span></mat-checkbox>
                                 </div>
                             </div>

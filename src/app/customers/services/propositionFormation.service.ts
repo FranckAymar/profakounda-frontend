@@ -20,6 +20,9 @@ export class PropositionFormationService{
      getContratById(id:Number){
         return this.httpClient.post(URL.getContrat,id);
     }
+    getAllAnivaux(id:Number){
+        return this.httpClient.post(URL.allNiveauVerification,id);
+    }
     getModuleById(id:Number){
         return this.httpClient.post(URL.getModule,id);
     }
@@ -56,6 +59,12 @@ export class PropositionFormationService{
      //PROPOSITION
      rechercherProposition(username:String){
         return this.httpClient.post(URL.rechercherPropositions,username);
+    }
+    addAllModule(id:Number){
+        return this.httpClient.post(URL.addAllModule,id);
+    }
+    addAllNiveaux(data){
+        return this.httpClient.post(URL.addAllNiveaux,data);
     }
     enregistrerProposition(data){
          return this.httpClient.post(URL.enregsitrerProposition,data);

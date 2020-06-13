@@ -34,7 +34,7 @@
                 </p>
                 <div *ngIf="!p.proposition.cyclePrimaire"  class="row">
                     <div  style="margin-top: 0.5em !important;" class="col-md-3">
-                        <button   (click)="addModule(p.modules,p.proposition.id)" type="button" data-toggle="modal" data-target="#modules"
+                        <button    (click)="addModule(p.modules,p.proposition.id,p.proposition.allModule,p.proposition.allNiveau)" type="button" data-toggle="modal" data-target="#modules"
                                 class="btn btn-info btn-block">
                                 Modules enseignés
                         </button>
@@ -61,7 +61,7 @@
                 <div *ngIf="p.proposition.cyclePrimaire"  class="row">
                     
                     <div style="margin-top: 0.5em !important;" class="col-md-4">
-                        <button style="margin-left: 1em;" (click)="addNiveau(p.proposition.id)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
+                        <button style="margin-left: 1em;" (click)="addNiveau(p.proposition.id,p.proposition.allNiveau)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
                                 class="btn btn-primary btn-block">
                                 Niveau enseigné
                         </button>
@@ -79,7 +79,7 @@
                         </button>   
                     </div>
                 </div>
-                <div style="width: 100%; overflow: auto;">
+                <div *ngIf="!p.proposition.allNiveau"  style="width: 100%; overflow: auto;">
                     <table  class="table table-hover">
                         <thead>
                             <tr>
@@ -99,7 +99,6 @@
                                         class="updateButton"><i class="fa fa-edit"></i></button></td>
                                 <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i
                                             class="fa fa-times"></i></button></td>
-    
                             </tr>
     
                         </tbody>
@@ -107,9 +106,13 @@
                 </div>
                 
             </div>
-            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && !p.proposition.cyclePrimaire" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
-            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && !p.proposition.cyclePrimaire" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
-           
+           <div style="margin-top: 1em;">
+            <button   *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && !p.proposition.allModule" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && !p.proposition.allModule" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <!--All module-->
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && p.proposition.allModule" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && p.proposition.allModule" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+           </div>
         </div>
     </div>
 </div>
@@ -166,7 +169,13 @@
                     <div *ngIf="errorNiveaux" class="altert alert-danger">
                         {{errorNiveaux}}
                     </div>
-                    <mat-form-field>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-checkbox *ngIf="!alMod"  [checked]="isAllNiveaux" style="width: 70%;"   (change)="checkAllNiveauxChange()">
+                                <span style="color: red;">Tous les niveaux</span></mat-checkbox>
+                        </div>
+                    </div>
+                    <mat-form-field *ngIf="!isAllNiveaux">
                         <input type="text"
                         placeholder="Niveau"
                             [(ngModel)]="niveauForme.designationNiveau"
@@ -183,19 +192,26 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="prixMin">Prix min:</label>
-                            <input name="prixMin" required [(ngModel)]="niveauForme.prixMin" type="number"
+                            <input name="prixMin" (ngModelChange)="nombreMinChange($event)" required [(ngModel)]="niveauForme.prixMin" type="number"
                                 id="prixMin" />
                         </div>
                         <div class="col-md-6">
                             <label for="prixMax">Prix max:</label>
-                            <input name="prixMax" type="number" [(ngModel)]="niveauForme.prixMax" id="prixMax"
+                            <input name="prixMax" (ngModelChange)="nombreMaxChange($event)" type="number" [(ngModel)]="niveauForme.prixMax" id="prixMax"
                                 required />
                         </div>
                     </div>
-                    <button style="margin-top:0.5em;" *ngIf="!edit" [disabled]="f.invalid || myControl3.invalid" type="submit"
+                    <div *ngIf="!isAllNiveaux">
+                        <button style="margin-top:0.5em;" *ngIf="!edit" [disabled]="f.invalid || myControl3.invalid || !isNombreMaxValid || !isNombreMinValid || !isPresentDoubleNumber " type="submit"
                         class="btn btn-primary">Enregistrer</button>
-                    <button style="margin-top:0.5em;" *ngIf="edit" [disabled]="f.invalid || myControl3.invalid" type="submit"
+                    <button style="margin-top:0.5em;" *ngIf="edit" [disabled]="f.invalid || myControl3.invalid || !isNombreMaxValid || !isNombreMinValid || !isPresentDoubleNumber" type="submit"
                         class="btn btn-success">Enregistrer</button>
+                    </div>
+                    <div *ngIf="isAllNiveaux">
+                        <button style="margin-top:0.5em;"  [disabled]="f.invalid  || !isNombreMaxValid || !isNombreMinValid || !isPresentDoubleNumber " type="submit"
+                        class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    
                 </form>
             </div>
             <div class="modal-footer">
@@ -222,9 +238,16 @@
                             <div *ngIf="errorModule" class="alert alert-danger">
                                 {{errorModule}}
                             </div>
-                            <mat-form-field>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-checkbox *ngIf="!alNiv"  [checked]="isAllModule" style="width: 70%;" [checked]="isAllModule"  (change)="checkAllModuleChange()">
+                                        <span style="color: red;">Tous les modules</span></mat-checkbox>
+                                </div>
+                            </div>
+                            <mat-form-field *ngIf="!isAllModule">
                                 <input type="text"
-                                placeholder="Designation du module"
+                                
+                                placeholder="Désignation du module"
                                     [(ngModel)]="module.designation"
                                        aria-label="Number"
                                        matInput
@@ -237,12 +260,12 @@
                                 </mat-autocomplete>
                               </mat-form-field>
                             
-                            <button *ngIf="!editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
-                            <button *ngIf="editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
+                            <button *ngIf="!editModule" [disabled]="f2.invalid || myControl2.invalid && !isAllModule" type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button *ngIf="editModule" [disabled]="f2.invalid || myControl2.invalid && !isAllModule" type="submit" class="btn btn-success">Enregistrer</button>
                             <button *ngIf="editModule" style="margin-left: 1em;"  type="submit" class="btn btn-danger">Annuler</button>
                         </form>
                     </div>
-                    <div class="col-md-6" style="height: 17em; overflow: auto;">
+                    <div *ngIf="!isAllModule" class="col-md-6" style="height: 17em; overflow: auto;">
                         <table class="table table-hover">
                             <thead>
                                 <tr>

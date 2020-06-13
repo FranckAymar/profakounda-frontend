@@ -34,6 +34,14 @@ export class PropositionFormationComponent implements OnInit {
   @Input() editModule:boolean = false;
   @Input() isVilleExist:boolean;
   joursString:any = [];
+  id:number;
+  alMod:boolean = false;
+  alNiv:boolean = false;
+  isNombreMinValid:boolean = false;
+  isNombreMaxValid:boolean = false;
+  isPresentDoubleNumber:boolean = false;
+  nombreMin:number;
+  nombreMax:number;
   niveaux=[];
   descriptionHasChange:boolean = false;
   niveauxEnseignes: any = [];
@@ -42,6 +50,8 @@ export class PropositionFormationComponent implements OnInit {
   hours: any = [];
   jours: any = [];
   villes:any = [];
+  @Input() isAllModule:boolean =false;
+  @Input() isAllNiveaux:boolean =false;
   @Input() ville:string;
   propositions: any = [];
   formations: any = [];
@@ -145,6 +155,43 @@ export class PropositionFormationComponent implements OnInit {
       this.isCheckCiclePrimaire = !this.isCheckCiclePrimaire ;
       console.log(this.isCheckCiclePrimaire);
     }
+    nombreMinChange(event){
+      if(event < 0){
+        this.isNombreMinValid = false;
+      }
+      else{
+        this.isNombreMinValid = true;
+        this.nombreMin = event;
+      }
+      this.validDoubleNumber();
+     
+    }
+    nombreMaxChange(event){
+      if(event < 0){
+        this.isNombreMaxValid = false;
+      }
+      else{
+        this.isNombreMaxValid = true;
+        this.nombreMax = event;
+      }
+      this.validDoubleNumber();
+     
+    }
+    checkAllModuleChange(){
+      this.isAllModule = !this.isAllModule;
+    }
+    checkAllNiveauxChange(){
+      this.isAllNiveaux = !this.isAllNiveaux;
+    }
+    validDoubleNumber(){
+      if((this.nombreMin && this.nombreMax) && (this.nombreMin<this.nombreMax)){
+        this.isPresentDoubleNumber = true;
+      }
+      else
+      {
+        this.isPresentDoubleNumber = false;
+      }
+    }
     adProposition(){
       this.errorProposition = "";
       this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
@@ -192,7 +239,29 @@ export class PropositionFormationComponent implements OnInit {
   }
     addNiveau(id){
       this.edit = false;
-      this.niveauForme = new NiveauForme(0,'',null,null,id,localStorage.getItem(this.signInService.USERNAME));
+      this.propositionFormationService.getAllAnivaux(id).subscribe(
+        (resp)=>{
+          if(resp['contrat']){
+            this.isNombreMaxValid = true;
+            this.isNombreMinValid = true;
+            this.isPresentDoubleNumber = true;
+            this.nombreMax = resp['contrat'].maxMontant;
+            this.nombreMin = resp['contrat'].minMontant;
+            this.niveauForme = new NiveauForme(resp['contrat'].id,'',resp['contrat'].minMontant,resp['contrat'].maxMontant,id,localStorage.getItem(this.signInService.USERNAME));
+          }
+          else
+          {
+            this.booleenParDefaut();
+            this.niveauForme = new NiveauForme(0,'',null,null,id,localStorage.getItem(this.signInService.USERNAME));
+          }
+          this.isAllNiveaux = resp['allNiveau'];
+          this.alMod = resp['allModule'];
+        },
+        (error)=>{
+          console.log(error);
+        }
+      )
+     
     }
     addHour(){
       this.hours.push(this.heure);
@@ -234,11 +303,14 @@ this.propositionFormationService.rechercherDisponibilites(id)
       }
     )
      }
-    addModule(m,id){
+    addModule(m,id,va,alNi){
       this.editModule = false;
+      this.isAllModule = va;
       this.modules = m;
+      this.id = id;
+      this.alNiv = alNi;
+      console.log(this.alNiv);
       this.module = new Module(0,'',id,localStorage.getItem(this.signInService.USERNAME));
-      console.log(this.module);
     }
     
     onFetchVillesObject() {
@@ -297,6 +369,11 @@ this.propositionFormationService.rechercherDisponibilites(id)
         }
       
     }
+    booleenParDefaut(){
+      this.isNombreMaxValid = false;
+      this.isNombreMinValid = false;
+      this.isPresentDoubleNumber = false;
+    }
 
     
 
@@ -315,15 +392,34 @@ this.propositionFormationService.rechercherDisponibilites(id)
 
   }
   onSaveLevelTeach(object){
+    if(this.isAllNiveaux){
+      console.log(object);
+      console.log("Enregistrer tout les niveaux");
+      this.propositionFormationService.addAllNiveaux(object).subscribe(
+        (resp)=>{
+          document.getElementById('niveauEnseigne').click();
+          this.rechercherProposition();
+        },
+        (error)=>{
+          console.log(error);
+        }
+      )
+    }
+    else{
+      this.saveNiveaux(object);
+    }
+  }
+  saveNiveaux(object){
     if(!this.edit)
     {
-  
+      this.booleenParDefaut();
       this.propositionFormationService.onSaveNiveauEnseigne(object)
     .subscribe(
       (response)=>{
         this.errorNiveaux = response['error'];
         if(!this.errorNiveaux)
         {
+         
           this.niveauForme = new NiveauForme(0,'',null,null,0,localStorage.getItem(this.signInService.USERNAME));
           document.getElementById('niveauEnseigne').click();
         }
@@ -343,6 +439,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
         this.errorNiveaux = response['error'];
         if(!this.errorNiveaux)
         {
+          this.booleenParDefaut();
           this.niveauForme = new NiveauForme(0,'',null,null,0,localStorage.getItem(this.signInService.USERNAME));
           document.getElementById('niveauEnseigne').click();
         }
@@ -354,9 +451,27 @@ this.propositionFormationService.rechercherDisponibilites(id)
       }
     )
     }
-    
   }
   onSaveModule(data){
+    if(this.isAllModule){
+      this.propositionFormationService.addAllModule(this.id).subscribe(
+        (resp)=>{
+          this.rechercherProposition();
+          
+          this.isAllModule = false;
+          document.getElementById('modules').click();
+        },
+        (error)=>{
+          console.log(error);
+        }
+      )
+    }
+    else{
+      this.enregistrerModule(data);
+    }
+    
+  }
+  enregistrerModule(data){
     if(!this.editModule)
     {
         this.propositionFormationService.onSaveModule(data)
@@ -405,6 +520,11 @@ this.propositionFormationService.rechercherDisponibilites(id)
       (response)=>{
         this.onFetchNiveaux();
         this.niveauForme = new NiveauForme(response['id'],response['niveau'],response['prixMin'],response['prixMax'],response['propositionId'],localStorage.getItem(this.signInService.USERNAME))
+        this.nombreMax = response['prixMax'];
+        this.nombreMin = response['prixMin'];
+        this.isNombreMaxValid = true;
+        this.isNombreMinValid = true;
+        this.isPresentDoubleNumber = true;
       },
       (error)=>{
         console.log("Erreur : "+error);
@@ -419,6 +539,9 @@ this.propositionFormationService.rechercherDisponibilites(id)
       (response)=>{
         this.onFetchFormations();
         this.module = new Module(response['id'],response['designation'],response['propositionId'],localStorage.getItem(this.signInService.USERNAME));
+        this.isAllModule = response['allModule'];
+        console.log(response)
+        console.log(this.isAllModule)
       },
       (error)=>{
         console.log("Erreur : "+error);
@@ -500,8 +623,8 @@ this.propositionFormationService.rechercherDisponibilites(id)
     this.propositionFormationService.rechercherProposition(localStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (response)=>{
-        
         this.propositions = response;
+        console.log(response);
       },
       (error)=>{
         console.log("Erreur : "+error);

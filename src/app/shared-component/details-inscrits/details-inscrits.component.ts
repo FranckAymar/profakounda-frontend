@@ -14,6 +14,7 @@ import { URL } from 'src/app/API_url/config';
 export class DetailsInscritsComponent implements OnInit {
 
   urlServer = URL.getLogoCoursCommun;
+  idCoursCommun:number;
   headersTable = [  
                   new Txt('Nom').bold().end, 
                   new Txt('Prénoms').bold().end, 
@@ -63,8 +64,14 @@ export class DetailsInscritsComponent implements OnInit {
   //     author: 'ProfAkounda'
   // });
   
-
-    new Img(this.urlServer+"/"+this.dataReceived.details.id).width(150).margin([0,40,0,40]).build().then( img => {
+    if(this.dataReceived.details.id)
+    {
+      this.idCoursCommun = this.dataReceived.details.id;
+    }
+    else{
+      this.idCoursCommun = this.dataReceived.details.cours.id
+    }
+    new Img(this.urlServer+"/"+this.idCoursCommun).width(150).margin([0,40,0,40]).build().then( img => {
     pdf.add( img);
     
 

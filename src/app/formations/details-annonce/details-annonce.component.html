@@ -75,12 +75,13 @@
 
 
                     <div  class="udb-sec udb-cour-stat">
-                        <h4><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
+                        <h4 *ngIf="!propositionFormation.isAllNiveau"><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
+                        <h4 *ngIf="propositionFormation.isAllNiveau"> <i class="fa fa-money"></i> COÛT</h4>
                         <div class="pro-con-table table-responsive">
                             <table class="bordered table">
                                 <thead>
                                     <tr>
-                                        <th>Niveaux</th>
+                                        <th *ngIf="!propositionFormation.isAllNiveau">Niveaux</th>
                                         <th class="align-text-right">Prix Minimun </th>
                                         <th class="align-text-right">Prix Maximum(Mensuel)</th>
 
@@ -89,7 +90,7 @@
 
                                 <tbody>
                                     <tr *ngFor="let contrat of propositionFormation.contrats">
-                                        <td>{{contrat.niveau.libelle}}</td>
+                                        <td *ngIf="!propositionFormation.isAllNiveau">{{contrat.niveau.libelle}}</td>
                                         <td class="align-text-right"><span
                                                 class="pro-user-act">{{contrat.minMontant | currency:'XOF'}}
                                             </span></td>

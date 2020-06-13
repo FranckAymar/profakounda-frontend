@@ -27,14 +27,14 @@
                   <div style="padding: 0.5em;"   class="row">
                     <p><strong>Inscription effectuée !</strong></p>
                     <p>Un mail de confirmation vous a été envoyé sur votre adresse email. Si le mail ne vous est pas parvenu, vérifiez vos <strong>spams</strong> ou 
-                        <a style="cursor: pointer;" (click)="onRevoyerEmail()">renvoyez le mail de confirmation.</a> </p>
+                        <a style="cursor: pointer;color:blue;" (click)="onRevoyerEmail()">renvoyez le mail de confirmation.</a> </p>
                   </div>
                 </div>
                
                 <form [formGroup] = "userForm" (ngSubmit)="onSaveParticulier()" class="s12">
                     
                     <div>
-                        <div class="input-field s12">
+                        <div class="input-field s12"> 
                             <input   type="text" formControlName="nom" class="validate">
                             <label>Nom</label>
                         </div>

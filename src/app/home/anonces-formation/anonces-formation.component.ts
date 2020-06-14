@@ -38,6 +38,7 @@ isNombreMaxAtteint:boolean = false;
       
       (resp) =>{
     
+        console.log(resp)
         this.propositionFormations = resp['formations'] ;
         this.isNombreMaxAtteint = resp['nombreMaxAtteint'];
       

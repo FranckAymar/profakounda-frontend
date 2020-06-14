@@ -8,10 +8,13 @@
                 <h2>Les <span>cours Organisés</span></h2>
             </div>
         </div>
-        <span *ngIf="coursCommuns.length == 0">Aucun cours disponible</span> 
-  <div class="container">
+        <div style="text-align: center;" *ngIf="coursCommuns.length == 0" >
+            <p>Aucun cours organisés pour le moment.</p>
+            <p>Vous désirez organiser un cours ? N'hésitez pas, mettez votre cours en  ligne <a style="color: #FF5722;" routerLink="/customers/courscommun">ici</a></p>
 
-    <div class="row">
+        </div>  <div class="container">
+
+    <div style="text-align: center;" class="row">
         <div *ngFor="let cours of coursCommuns" class="col-md-4 col-mobile">
               <app-card-cours-commun [cours]="cours"></app-card-cours-commun>
         </div>

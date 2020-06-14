@@ -6,7 +6,11 @@
                 <h2>Les <span>Formateurs</span></h2>
             </div>
         </div>
-        <span *ngIf="propositionFormations.length == 0">Aucun formateur disponible</span>
+        <div style="text-align: center;" *ngIf="propositionFormations.length == 0" >
+            <p>Aucun formateurs disponibles</p>
+            <p>Vous êtes un formateur ? Proposez vos cours <a style="color: #FF5722;" routerLink="/customers/formations">ici</a></p>
+
+        </div>
         <div class="row" *ngFor="let propositionFormation of propositionFormations">
             <app-card-formation
             [idParticulier]= "propositionFormation.idParticulier"

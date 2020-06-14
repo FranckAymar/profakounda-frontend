@@ -239,7 +239,7 @@
                                 <li *ngFor="let public of publicCibleMdels;let i =index; 
                                     let i=index" class="list-group-item">
                                     {{public.niveau ? public.niveau.libelle :  'Tout niveau confondu' }} - Coût : {{public.cout}}
-                                    FCFA-{{public.filiere ? 'Filière : ' + public.filiere : 'Filière : Non précisée !'}}
+                                    FCFA - {{public.filiere ? 'Filière : ' + public.filiere : 'Filière : Non précisée !'}}
 
                                     <span (click)="deletePublic(i)" class="trash">
                                         <i class="fa fa-trash"></i></span>

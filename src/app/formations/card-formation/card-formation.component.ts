@@ -24,6 +24,8 @@ export class CardFormationComponent implements OnInit {
   @Input() code : string ;
   @Input() idParticulier : number ;
   @Input() moduleFormations : [] ;
+  @Input() contrats : [] ;
+  @Input() isAllModule : boolean = false ;
   @Input() etoilesEteints : [] ;
   @Input() etoilesBrillants : [] ;
   @Input() description : string ;

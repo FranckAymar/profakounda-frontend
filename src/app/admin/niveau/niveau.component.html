@@ -6,7 +6,7 @@
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
-                <button type="button" data-toggle="modal" data-target="#ajouterNiveau" class="btn btn-primary">
+                <button type="button" data-toggle="modal" data-target="#ajouterClasse" class="btn btn-primary">
                     Ajouter
                 </button>
                 <div style="margin-top: 2em;" *ngIf="erreur" class="alert alert-danger">
@@ -17,6 +17,7 @@
                     <thead>
                         <tr>
                             <th>Libelle</th>
+                            <th>Cycle</th>
                             <th>date de creation</th> 
                             <th>date de modification</th>            
                         </tr>
@@ -25,6 +26,7 @@
                         <tr *ngFor="let niveau of niveaux">
                            
                             <td>{{niveau.libelle}}</td>
+                            <td>{{niveau.cycle.libelle}}</td>
                             <td>{{niveau.dateCreation|date:"yyyy-MM-dd HH:mm:ss"}}</td>
                             <td>{{niveau.dateModification|date:"yyyy-MM-dd HH:mm:ss"}}</td>
                             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateNiveau" (click)="getNiveau(niveau.id)"> Modifier</button></td>
@@ -96,3 +98,42 @@
       </div>
     </div>
   </div>
+
+
+  <div class="modal fade" id="ajouterClasse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div *ngIf="message" class="modal-header">
+                    <span class="alert alert-info">{{message}}</span>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Libelle-->
+                <form [formGroup]="classForm" (ngSubmit)="onSaveClasse()">
+                    <div class="form-group">
+                        <label for="libelle">Libelle:</label>
+                        <input [(ngModel)]="classe.libelle" formControlName="libelle" type="text" id="libelle"
+                            name="libelle" required>
+                    </div>
+                    <!-- Cycle-->
+                    <div class="form-group">
+                        <label for="cycle">Cycle :</label>
+                        <select class="form-control" id="cycle" [(ngModel)]="classe.cycleId" formControlName="cycleId" required>
+                            <option *ngFor="let cycle of cycles" [ngValue]="cycle.id">{{cycle.libelle}}</option>
+                        </select>
+                    </div>
+                    <!-- Btn submit-->
+                    <button [disabled]="classForm.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { Niveau } from 'src/app/admin/model/niveau.model';
+import { Classe } from '../model/classe';
+import { CycleService } from '../services/cycle.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-niveau',
@@ -10,6 +13,7 @@ import { Niveau } from 'src/app/admin/model/niveau.model';
 export class NiveauComponent implements OnInit {
 
   niveaux : [];
+  classe: Classe = {};
   erreur :string;
   niveau1:Niveau = new Niveau(0,"");
   niveau:Niveau = new Niveau(0,"");
@@ -25,11 +29,44 @@ export class NiveauComponent implements OnInit {
   //Nombre de page totals
   totalPage : number 
   totalPageArray : Array<any> ;
-
-  constructor(private niveauService:NiveauService) { }
+  classForm: FormGroup
+  cycles = [];
+  constructor(private niveauService:NiveauService,private cycleService: CycleService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.onFetchNiveaux(this.page);
+    this.onFetchCycles();
+    this.initForm();
+  }
+  initForm() {
+
+    this.classForm = this.formBuilder.group({
+
+      id: [null],
+      cycleId: [null, Validators.required],
+      libelle: [null, Validators.required],
+
+    });
+
+  }
+
+  onFetchCycles() {
+
+    this.cycleService.fetchCycles().subscribe(
+
+      (response) => {
+        this.cycles = response.response;
+      },
+
+      (error) => {
+
+        console.log("Une erreur est survenue");
+
+      }
+
+    )
+
   }
 
   onFetchNiveaux(pageActive) {
@@ -76,6 +113,28 @@ export class NiveauComponent implements OnInit {
         console.log('Une erreure à survenue: '+ error);
       }
     )
+  }
+
+  onSaveClasse() {
+
+    alert("on a ici "+this.classe.cycleId);
+    this.niveauService.onSaveNiveau(this.classForm.value).subscribe(
+
+      (response) => {
+
+        this.onFetchNiveaux(this.page);
+        
+
+      },
+      (error) => {
+
+        console.log("Une erreur est survenue");
+
+      }
+
+    );
+
+
   }
 
   onUpdateNiveau(formData){

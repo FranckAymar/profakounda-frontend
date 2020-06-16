@@ -15,10 +15,18 @@
         <div>
             <i *ngFor="let e of etoilesBrillants"  class="fa fa-star etoileNote"></i><i *ngFor="let eb of etoilesEteints"  class="fa fa-star etoile"></i> 
         </div>
-        <h4 style="display: inline;" *ngFor="let moduleFomation of moduleFormations; let i = index"
+        <h4   style="display: inline;" *ngFor="let moduleFomation of moduleFormations; let i = index"
             [attr.data-index]="i">
             {{moduleFomation.libelle}} <span *ngIf="moduleFormations.length !== i+1">/</span>
         </h4>
+        <div *ngIf="isAllModule">
+            <h4   style="display: inline;" *ngFor="let c of contrats; let i = index"
+            [attr.data-index]="i">
+            {{c.niveau?.libelle}} {{c.niveauTemporaire?.libelle}}  <span *ngIf="contrats.length !== i+1">/</span>
+            </h4>
+        </div>
+       
+        
         <p class="add-three-dot">{{description}}</p>
         <span class="home-top-cour-rat">{{ville}}</span>
         <div class="hom-list-share">
@@ -54,6 +62,12 @@
                                         [attr.data-index]="i">
                                         {{moduleFomation.libelle}} <span *ngIf="moduleFormations.length !== i+1">/</span>
                                     </h4>
+                                    <div *ngIf="isAllModule">
+                                        <h4   style="display: inline;" *ngFor="let c of contrats; let i = index"
+                                        [attr.data-index]="i">
+                                        {{c.niveau?.libelle}} {{c.niveauTemporaire?.libelle}}  <span *ngIf="contrats.length !== i+1">/</span>
+                                        </h4>
+                                    </div>
                                     <p class="card-text">{{description}}</p>
                                     
                                     <span class="home-top-cour-rat">{{ville}}</span>

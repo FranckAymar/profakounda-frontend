@@ -49,7 +49,7 @@
                         <tbody>
                             <p *ngIf="courCommuns.length == 0">Aucun élément</p>
                             <tr *ngFor="let p of courCommuns">
-                                <td>{{p.organisation.libelle}}</td>
+                                <td>{{p.organisation?.libelle}} {{p.organisationTemporaire?.libelle}}</td>
                                 <td>{{p.particulier.prenoms}}</td>
                                 <td>{{p.telephone}}</td>
                                 <td>{{p.titre}}</td>

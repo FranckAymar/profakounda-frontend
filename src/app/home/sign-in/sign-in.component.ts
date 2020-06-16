@@ -72,8 +72,7 @@ export class SignInComponent implements OnInit {
 
  
       (response) => {
-
-
+          
           let authorities = response.authorities ;    
           let authority = authorities[0].authority;
 

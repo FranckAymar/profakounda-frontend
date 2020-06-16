@@ -90,7 +90,6 @@ color:string;
     this.coursCommunService.fectchCoursCommunSelect(idCoursCommun).subscribe(
 
       (resp)=>{
-
         if(resp.code === 0){
           this.onGenerateRecuPaiement(resp.response);
         }else{
@@ -113,6 +112,9 @@ color:string;
     this.coursCommunService.fectchCoursCommunSelect().subscribe(
 
       (resp)=>{
+
+        console.log(resp);
+        
 
         this.myCoursCommuns = resp;
         console.log(this.myCoursCommuns);

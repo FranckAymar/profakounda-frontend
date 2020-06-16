@@ -88,7 +88,7 @@
                         <input formControlName="dateFin" type="date" class="validate">
                     </div>
 
-                    <div class="row">
+                    <div  style="margin-top: 1em;" class="row">
 
                         <button id="" type="submit" [disabled]="coursCommunForm.invalid"
                             class="btn btn-bg-color btn-block">Suivant</button>
@@ -99,7 +99,7 @@
 
             </div>
              <!--Upload Photo Organisation-->
-             <div id="content2" class="hide">
+             <div style="overflow:auto;" id="content2" class="hide">
                 <div class="row" style="text-align: center;" >
                                   
                     <p>Touchez plus de cibles en ajoutant un logo à votre cours organisé</p>
@@ -170,26 +170,28 @@
                             <form [formGroup]="publicCibleForm" (ngSubmit)="addPublicToTable()">
 
                                 <mat-form-field>
-                                    <mat-label>Niveau</mat-label>
+                                    <mat-label>Niveau (optionnel)</mat-label>
                                     <mat-select [compareWith]="comparer" formControlName="niveau">
+                                        <mat-option>
+                                            </mat-option>
                                         <mat-option *ngFor="let niveau of niveaux" [(value)]="niveau">
                                             {{niveau.libelle}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
 
-
-                                <div class="input-field s12">
-                                    <input matInput formControlName="filiere" [matAutocomplete]="auto" type="text"
-                                        class="validate">
+                                <mat-form-field>
+                                    <input type="text"  
+                                        placeholder="Filière (optionnel)" formControlName="filiere"  matInput
+                                        [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete">
                                         <mat-option *ngFor="let filiere of filteredFilieres | async"
-                                            [value]="filiere.libelle">
-                                            {{filiere.libelle}}
+                                        [value]="filiere.libelle">
+                                        {{filiere.libelle}}
                                         </mat-option>
                                     </mat-autocomplete>
-                                    <label>Filière (optionnel)</label>
-                                </div>
+                                </mat-form-field>
+                               
 
 
                                 <mat-form-field>
@@ -236,9 +238,8 @@
                             <ul *ngIf="publicCibleMdels.length > 0" class="list-group">
                                 <li *ngFor="let public of publicCibleMdels;let i =index; 
                                     let i=index" class="list-group-item">
-                                    {{public.niveau.libelle}} - Coût : {{public.cout}}
-                                    FCFA-{{public.filiere ? 'Filière : ' + public.filiere : 'Filière : Non précisée !'}}
-
+                                    {{public.niveau ? public.niveau.libelle :  'Tout niveau confondu' }} - Coût : {{public.cout}}
+                                    FCFA - {{public.filiere ? 'Filière : ' + public.filiere : 'Filière : Non précisée !'}}
 
                                     <span (click)="deletePublic(i)" class="trash">
                                         <i class="fa fa-trash"></i></span>

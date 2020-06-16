@@ -303,7 +303,7 @@ error:String;
 
       {
           id : new FormControl(),
-          niveau : [null, Validators.required],
+          niveau : [null],
           cout : ['', Validators.required],
           formations : new FormControl(null, Validators.required),
           nbreMaxInscrits : [''],

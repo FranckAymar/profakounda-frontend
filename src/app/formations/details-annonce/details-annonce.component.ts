@@ -66,7 +66,8 @@ export class DetailsAnnonceComponent implements OnInit {
     contrats : null,
     disponibilites : null,
     isAllNiveau : null,
-    isAllModule : null
+    isAllModule : null,
+    cyclePrimairePresent : null
     
   } ;
 

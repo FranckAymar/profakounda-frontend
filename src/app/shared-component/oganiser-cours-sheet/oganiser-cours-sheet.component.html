@@ -22,13 +22,13 @@
 
                 <form [formGroup]="coursCommunForm" (ngSubmit)="saveCoursCommun()">
 
-                    <div class="input-field s12">
-                        <!-- <input formControlName="titre" type="text" class="validate">
-                        <label>Titre</label> -->
+                      
                         <mat-form-field>
                             <input matInput formControlName="titre" required type="text" placeholder="Titre">
                         </mat-form-field>
-                    </div>
+                        <small style="color: red;" *ngIf="coursCommunForm.controls.titre.errors?.required" class="invalid-feedback">
+                            Un titre pour votre cours organisé est requis (Ex : Cours de renforcement du Lycée ProfAkounda)
+                        </small>
 
                     <div class="input-field s12">
                         <mat-form-field>
@@ -42,25 +42,21 @@
                                 </mat-option>
                             </mat-autocomplete>
                         </mat-form-field>
-                        <!-- <input formControlName="organisation"  [matAutocomplete]="auto" type="text" class="validate">
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let organisation of filteredOrganisations | async"
-                                [value]="organisation.libelle">
-                                {{organisation.libelle}}
-                            </mat-option>
-                        </mat-autocomplete>
-                        <label>Organisation</label> -->
+                        <small style="color: red;" *ngIf="coursCommunForm.controls.organisation.errors?.required" class="invalid-feedback">
+                            Précisez votre organisation (Ex : Assocication des Professeurs du Lycée ProfAkounda)
+                        </small>
+                       
                     </div>
 
 
-                    <div class="input-field s12">
                         <!-- <input formControlName="telephone" type="text" class="validate">
                         <label>Numéro de téléphone</label> -->
                         <mat-form-field>
                             <input matInput formControlName="telephone" required type="text" placeholder="Téléphone">
                         </mat-form-field>
-                    </div>
-
+                        <small style="color: red;" *ngIf="coursCommunForm.controls.telephone.errors?.required" class="invalid-feedback">
+                            Champ requis
+                        </small>
 
                     <div class="input-field s12">
 
@@ -81,11 +77,17 @@
                     <div class="">
                         <small>Date de début du cours</small>
                         <input formControlName="dateDebut" type="date" class="validate">
+                        <small style="color: red;" *ngIf="coursCommunForm.controls.dateDebut.errors?.required" class="invalid-feedback">
+                            Précisez la date du début de votre cours organisé
+                        </small>
                     </div>
 
                     <div class="">
                         <small>Date de fin du cours</small>
                         <input formControlName="dateFin" type="date" class="validate">
+                        <small style="color: red;" *ngIf="coursCommunForm.controls.dateFin.errors?.required" class="invalid-feedback">
+                            Précisez la date de fin de votre cours organisé
+                        </small>
                     </div>
 
                     <div  style="margin-top: 1em;" class="row">

@@ -22,7 +22,6 @@ isNombreMaxAtteint:boolean = false;
     this.coursCommunService.fetchCoursCommunForHome().subscribe(
 
       (resp)=>{
-        console.log(resp);
         this.coursCommuns = resp['cours'] ;
         this.isNombreMaxAtteint = resp['nombreMaxAtteint'];
       },

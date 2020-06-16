@@ -92,7 +92,7 @@
                         <tbody>
     
                             <tr *ngFor="let n of p.contrats">
-                                <td>{{n.niveau.libelle}}</td>
+                                <td>{{n.niveau?.libelle}} {{n.niveauTemporaire?.libelle}}</td>
                                 <td>{{n.minMontant}} Frcfa</td>
                                 <td>{{n.maxMontant}} Fcfa</td>
                                 <td><button data-toggle="modal" data-target="#niveauEnseigne" (click)="getContrat(n.id)"
@@ -274,7 +274,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let m of modules">
-                                    <td>{{m.module.libelle}}</td>
+                                    <td>{{m.module?.libelle}} {{m.moduleTemporaire?.libelle}}</td>
                                     <td><button (click)="getModule(m.id)" class="updateButton"><i class="fa fa-edit"></i></button></td>
                                     <td><button (click)="deleteModule(m.id)" class="deleteButton"><i class="fa fa-times"></i></button></td>
                                 </tr>

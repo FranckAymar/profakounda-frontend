@@ -33,6 +33,7 @@ export class ListFormationsComponent implements OnInit {
  
   propositionFormations = [];
   modulesFormation = [];
+  contrats = [];
   FormationFiltres = [];
   urlServer = URL.getPhoto;
 
@@ -72,8 +73,6 @@ export class ListFormationsComponent implements OnInit {
 
 
       (resp) => {
-
-        console.log(resp);
         
         this.sizeData = resp.totalData;
 
@@ -115,6 +114,7 @@ export class ListFormationsComponent implements OnInit {
     (reponse)=>{
       
       this.propositionFormations=reponse;
+      
     },
 
     (erreur) => {

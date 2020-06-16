@@ -96,7 +96,7 @@
 
                                 <tbody>
                                     <tr *ngFor="let contrat of propositionFormation.contrats">
-                                        <td *ngIf="!propositionFormation.isAllNiveau">{{contrat.niveau.libelle}}</td>
+                                        <td *ngIf="!propositionFormation.isAllNiveau">{{contrat.niveau?.libelle}} {{contrat.niveauTemporaire?.libelle}}</td>
                                         <td class="align-text-right"><span
                                                 class="pro-user-act">{{contrat.minMontant | currency:'XOF'}}
                                             </span></td>

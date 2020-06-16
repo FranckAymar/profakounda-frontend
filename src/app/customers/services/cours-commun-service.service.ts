@@ -1,7 +1,7 @@
 import { publicCibleModel } from './../../home/models/publiccible';
 import { URL } from 'src/app/API_url/config';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -19,8 +19,14 @@ export class CoursCommunService {
     return this.http.get(URL.recupererCoursCommunHome);
 
   }
-  fetchCoursCommunForHomeGlobale():Observable<any>{
+  fetchCoursCommunForHomeGlobale(page? : any , total? : any):Observable<any>{
 
+    if(page && total){
+      
+      let params = new HttpParams().set("page", page).set("total", total);
+      return this.http.get(URL.recupererListCoursCommunHome, {params : params});
+
+    }
     return this.http.get(URL.recupererListCoursCommunHome);
 
   }

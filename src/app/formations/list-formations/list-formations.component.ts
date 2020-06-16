@@ -38,7 +38,7 @@ export class ListFormationsComponent implements OnInit {
   urlServer = URL.getPhoto;
 
   //Nombre de données à chargées à chaque page
-  numberDataOfPage: number = 7;
+  numberDataOfPage: number = 6;
   //Page courante
   page: number = 1;
   //Taille totale des données en base de données

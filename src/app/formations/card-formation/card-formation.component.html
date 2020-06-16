@@ -22,7 +22,7 @@
         <div *ngIf="isAllModule">
             <h4   style="display: inline;" *ngFor="let c of contrats; let i = index"
             [attr.data-index]="i">
-            {{c.niveau.libelle}}  <span *ngIf="contrats.length !== i+1">/</span>
+            {{c.niveau?.libelle}} {{c.niveauTemporaire?.libelle}}  <span *ngIf="contrats.length !== i+1">/</span>
             </h4>
         </div>
        
@@ -65,7 +65,7 @@
                                     <div *ngIf="isAllModule">
                                         <h4   style="display: inline;" *ngFor="let c of contrats; let i = index"
                                         [attr.data-index]="i">
-                                        {{c.niveau.libelle}}  <span *ngIf="contrats.length !== i+1">/</span>
+                                        {{c.niveau?.libelle}} {{c.niveauTemporaire?.libelle}}  <span *ngIf="contrats.length !== i+1">/</span>
                                         </h4>
                                     </div>
                                     <p class="card-text">{{description}}</p>

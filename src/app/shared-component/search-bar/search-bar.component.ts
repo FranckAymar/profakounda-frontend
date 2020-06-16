@@ -21,7 +21,7 @@ export class SearchBarComponent implements OnInit {
 
   @Output() getFormationsFiltrees = new EventEmitter<[]>() ;
   @Output() getFormationsFiltreParVille = new EventEmitter<[]>() ;
-
+ 
   constructor(private villeService:VilleService,
               private listFormationsService: ListFormationsService,
               private router : Router,
@@ -41,10 +41,11 @@ export class SearchBarComponent implements OnInit {
   }
 
   onFiltreFormationSearch(criterRecherche:String){ 
-    
+   
     this.listFormationsService.getFilterFormation(criterRecherche,this.villeKey).subscribe(
   
-    (reponse)=>{      
+    (reponse)=>{     
+    
       this.getFormationsFiltrees.emit(reponse);
 
     },

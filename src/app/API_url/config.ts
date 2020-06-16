@@ -78,8 +78,10 @@ export const URL = {
     rechercherNiveauEnseignes: consts.host+ consts.nameProject +'particulier/contrats' ,
     getContrat: consts.host+ consts.nameProject +'particulier/getContrat',
     getProposition: consts.host+ consts.nameProject +'particulier/getProposition',
-    
+    addAllModule: consts.host+ consts.nameProject +'particulier/addAllModule',
+    addAllNiveaux: consts.host+ consts.nameProject +'particulier/enregistrerContratAllNiveaux',
     getModule: consts.host+ consts.nameProject +'particulier/getModule',
+    allNiveauVerification: consts.host+ consts.nameProject +'particulier/getAllNiveau',
     deleteContrat: consts.host+ consts.nameProject +'particulier/deleteContrat',
     deleteModule: consts.host+ consts.nameProject +'particulier/deleteModule',
     modifierModule: consts.host+ consts.nameProject +'particulier/modifierModule' ,

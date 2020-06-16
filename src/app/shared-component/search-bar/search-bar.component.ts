@@ -62,8 +62,8 @@ OnFiterDeFormationParVille(designationVille){
   this.listFormationsService.getFiterDeFormationParVille(designationVille,this.searchKey).subscribe(
  
    (reponse)=>{
-         
-     this.getFormationsFiltreParVille.emit(reponse);
+         console.log(reponse);
+    this.getFormationsFiltreParVille.emit(reponse);
    },
  
    (erreur) => {

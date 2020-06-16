@@ -145,7 +145,7 @@ color:string;
     }
     else if(data.modePaiement=="MOMO_SKAN"){
       this.operateur = "MTN Mobile Money"
-      this.color = "yellow"
+      this.color = "#ffbe00"
     }
     else if(data.modePaiement="MOOV_SKAN"){
       this.operateur = "Moov Money"
@@ -172,7 +172,7 @@ color:string;
       if(!data.coursCommun){
   
         pdf.add(new Columns([new Txt('Niveau :').bold().end, new Txt('Filière :').bold().end]).margin([0,10,0,0]).end)
-        pdf.add(new Columns([new Txt(data.publicCible.niveau.libelle).end,
+        pdf.add(new Columns([new Txt(data.publicCible.niveau ? data.publicCible.niveau.libelle : 'Tout niveau confondu').end,
         new Txt(data.publicCible.filiere ?  data.publicCible.filiere.libelle : 'Non précisée').end]).end)
       
       }

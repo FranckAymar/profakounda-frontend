@@ -37,7 +37,7 @@ export class ListFormationsComponent implements OnInit {
   urlServer = URL.getPhoto;
 
   //Nombre de données à chargées à chaque page
-  numberDataOfPage: number = 15;
+  numberDataOfPage: number = 7;
   //Page courante
   page: number = 1;
   //Taille totale des données en base de données
@@ -73,6 +73,8 @@ export class ListFormationsComponent implements OnInit {
 
       (resp) => {
 
+        console.log(resp);
+        
         this.sizeData = resp.totalData;
 
         this.totalPage = (this.sizeData / this.numberDataOfPage);
@@ -85,6 +87,9 @@ export class ListFormationsComponent implements OnInit {
 
         
         this.propositionFormations = resp.data;
+
+        console.log(this.sizeData);
+        
       },
 
 

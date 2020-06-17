@@ -33,7 +33,7 @@ isNombreMaxAtteint:boolean = false;
   onGetListFormation() {
 
 
-    this.listFormationsService.getListPropositionFormations().subscribe(
+    this.listFormationsService.getListPropositionFormationsForHome().subscribe(
 
       
       (resp) =>{

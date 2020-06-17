@@ -13,6 +13,13 @@ export class ListFormationsService {
     private httpClient: HttpClient, private signInService : SignInService
   ) { }
 
+    //Recuperer les prpositions de fromations pour la pafe d'accueil
+  getListPropositionFormationsForHome(): Observable<any> {
+
+   
+    return this.httpClient.get(URL.rechercherPropositionEnLigneHome);
+  }
+
   getListPropositionFormations(page?, numberDataOfPage?): Observable<any> {
 
     let params = new HttpParams().set("page", page).set("total", numberDataOfPage);

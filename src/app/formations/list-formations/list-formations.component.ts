@@ -85,7 +85,13 @@ export class ListFormationsComponent implements OnInit {
         this.totalPageArray = new Array(this.totalPage);
         this.propositionFormations = resp.data;
 
+        console.log(this.totalPage);
+        
+
         console.log(this.sizeData);
+
+        console.log(resp);
+        
         
       },
 

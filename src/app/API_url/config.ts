@@ -109,6 +109,7 @@ export const URL = {
     FilterPropositionFormation : consts.host+ consts.nameProject +'details/filterDeFormation',
     filterDeFormationParVille : consts.host+ consts.nameProject +'details/filterDeFormationParVille',
     filterDeFormationParEssai : consts.host+ consts.nameProject +'details/filterDeFormationParEssai',
+    rechercherPropositionEnLigneHome : consts.host+ consts.nameProject +'details/home/listpropositionsenligne',
 
     getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier', 
 

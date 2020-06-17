@@ -83,8 +83,6 @@ export class ListFormationsComponent implements OnInit {
         }
  
         this.totalPageArray = new Array(this.totalPage);
-
-        
         this.propositionFormations = resp.data;
 
         console.log(this.sizeData);
@@ -112,7 +110,6 @@ export class ListFormationsComponent implements OnInit {
     this.listFormationsService.getFilterFormation(criterRecherche,this.villeKey).subscribe(
   
     (reponse)=>{
-      
       this.propositionFormations=reponse;
       
     },

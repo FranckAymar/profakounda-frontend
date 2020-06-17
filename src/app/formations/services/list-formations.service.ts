@@ -37,13 +37,12 @@ getFilterFormation(filtre,designationVille) : Observable<any> {
     }
     else if(filtre===""){
       filtre="undefined";
-        if(designationVille==="Toutes"){
+        if(designationVille==="Toutes"||designationVille==undefined){
           return this.httpClient.get(URL.listPropositionFormationsEnligne);
         }
         else return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille+"/"+ filtre);
     }
     else if(filtre===" "){
-      
       return this.httpClient.get(URL.listPropositionFormationsEnligne);
     }
     else{

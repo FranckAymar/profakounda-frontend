@@ -326,6 +326,8 @@ this.propositionFormationService.rechercherDisponibilites(id)
       )
   
     }
+
+    
     enregistrerProposition(){
         if(this.propositionFormation.id !=0)
         {

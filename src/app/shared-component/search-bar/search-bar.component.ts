@@ -41,13 +41,17 @@ export class SearchBarComponent implements OnInit {
   }
 
   onFiltreFormationSearch(criterRecherche:String){ 
-   
     this.listFormationsService.getFilterFormation(criterRecherche,this.villeKey).subscribe(
   
-    (reponse)=>{     
-    
-      this.getFormationsFiltrees.emit(reponse);
-
+    (reponse)=>{   
+      if(reponse["formations"])
+      {
+        this.getFormationsFiltrees.emit(reponse["formations"]);
+      }
+      else
+      {
+        this.getFormationsFiltrees.emit(reponse);
+      }
     },
 
     (erreur) => {
@@ -63,8 +67,15 @@ OnFiterDeFormationParVille(designationVille){
   this.listFormationsService.getFiterDeFormationParVille(designationVille,this.searchKey).subscribe(
  
    (reponse)=>{
-         
-    this.getFormationsFiltreParVille.emit(reponse);
+     if(reponse["formations"])
+     {
+      this.getFormationsFiltreParVille.emit(reponse["formations"]);
+     }
+     else
+     {
+      this.getFormationsFiltreParVille.emit(reponse);
+     }
+     
    },
  
    (erreur) => {

@@ -89,6 +89,9 @@ export class PropositionFormationService{
     demandeMiseEnLigne(idPrposition) : Observable<any> {
         return this.httpClient.post(URL.demandeMiseEnLigne,idPrposition);
     }
+    demandeMiseEnHorsLigne(idPrposition) : Observable<any> {
+        return this.httpClient.post(URL.demandeMiseHorsLigne,idPrposition);
+    }
     demandeMiseEnLigneObject(data) : Observable<any> {
         return this.httpClient.post(URL.demandeMiseEnLigneObject,data);
     }

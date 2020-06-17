@@ -107,8 +107,9 @@
                 
             </div>
            <div style="margin-top: 1em;">
-            <button   *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && !p.proposition.allModule" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
-            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && !p.proposition.allModule" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button   *ngIf="p.proposition.enLigne"    (click)="mettreHorsLigne(p.proposition.id)" class="btn btn-outline-info btnEnLigne">Mettre en hors ligne</button>
+            <button   *ngIf="(!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && !p.proposition.allModule)" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button  *ngIf="(!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && !p.proposition.allModule)" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
             <!--All module-->
             <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && p.proposition.allModule" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
             <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && p.proposition.allModule" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
@@ -473,7 +474,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Veuillez manier le cercle pour préciser votre zone
                     d'intervention</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button   type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

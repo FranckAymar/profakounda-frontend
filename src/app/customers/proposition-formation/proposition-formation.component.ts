@@ -551,6 +551,17 @@ this.propositionFormationService.rechercherDisponibilites(id)
     )
 
   }
+  mettreHorsLigne(id){
+    this.propositionFormationService.demandeMiseEnHorsLigne(id)
+    .subscribe(
+      (response)=>{
+        this.rechercherProposition();
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
+  }
   getMdemandemMiseEnLigne(id){
     this.propositionFormationService.demandeMiseEnLigne(id)
     .subscribe(

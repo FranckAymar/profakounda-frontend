@@ -95,6 +95,7 @@ export const URL = {
     deleteDisponibiliteByDay: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByDayId',
     deleteDisponibiliteByHour: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByHourId',
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
+    demandeMiseHorsLigne: consts.host+ consts.nameProject +'particulier/mettrehorsligne',
     demandeMiseEnLigneObject: consts.host+ consts.nameProject +'particulier/demandemiseenligneObject',
     //DASHBOARD PARTICULIER
     getDashBoardProposition: consts.host+ consts.nameProject +'particulier/dashboard/propositions',

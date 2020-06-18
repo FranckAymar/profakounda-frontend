@@ -153,7 +153,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="niveauEnseigne" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="niveauEnseigne" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -223,7 +223,7 @@
 </div>
 
 
-<div class="modal fade" id="modules" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modules" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -296,7 +296,7 @@
 </div>
 
 
-<div class="modal fade" id="disponibilite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="disponibilite" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -389,7 +389,7 @@
 
 
 
-<div class="modal fade" id="ajouterDescription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="ajouterDescription" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -427,7 +427,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="addDesc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="addDesc" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -467,14 +467,14 @@
 </div>
 
 
-<div class="modal fade" id="zoneIntervention" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="zoneIntervention" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Veuillez manier le cercle pour préciser votre zone
                     d'intervention</h5>
-                <button   type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button (click)="rechercherProposition()"  type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -496,7 +496,7 @@
             <div class="modal-footer">
                 <button (click)="onSaveCoordMap()" type="button" class="btn btn-success"
                     data-dismiss="modal">Enregitrer</button>
-                <button type="button" class=" btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="button" class=" btn btn-danger" (click)="rechercherProposition()" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>

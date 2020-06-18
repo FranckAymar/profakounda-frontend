@@ -11,7 +11,7 @@
         <div class="container pg-inn">
             <div class="col-md-3">
                 <div class="pro-user">
-                    <img  height="250" src="{{urlServer}}/{{cours.coursCommun.id}}" alt="">
+                    <img  height="250" src="{{urlServer}}/{{cours.coursCommun?.id}}" alt="">
                 </div>
                 <div class="pro-user-bio">
                     <ul>
@@ -42,7 +42,7 @@
                         <li *ngIf="!cours.coursCommun?.nbreMaxInscrits && cours.coursCommun?.cout">
                             <span>Places disponibles: <strong>illimitées</strong> </span>
                         </li>
-                        <li >
+                        <li *ngIf="cours.lieuIntervention" >
                             <span><i class="fa fa-map-marker" aria-hidden="true"></i> <strong> {{cours.lieuIntervention.libelle}}</strong> </span>
                         </li>
                     </ul>
@@ -87,7 +87,7 @@
                                 <div class="sdb-cl-tim">
                                     <div class="sdb-cl-day">
                                         <h5 style="text-align: center;" class="pro-user-act"> {{public.cout | currency:'XOF'}}</h5>
-                                        <p> Niveau : {{public.niveau.libelle}}</p>
+                                        <p> Niveau : {{public.niveau?.libelle}}</p>
                                         <p *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</p>
 
                                         <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>
@@ -97,12 +97,12 @@
                                         <p style="font-size: 85%;" *ngIf="!public.nbreMaxInscrits">Places disponibles :
                                             <strong>illimitées</strong> </p>
                                     </div>
-                                    <div class="sdb-cl-class">
+                                    <div *ngIf="public.formations" class="sdb-cl-class">
                                         <ul>
                                             <li *ngFor="let formation of public.formations">
                                                 <div class="sdb-cl-class-name tooltipped" data-position="top"
                                                     data-delay="50" data-tooltip="Class Details">
-                                                    <h5>{{formation.libelle}}</h5>
+                                                    <h5>{{formation?.libelle}}</h5>
                                                 </div>
                                             </li>
                                         </ul>

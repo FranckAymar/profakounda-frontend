@@ -54,8 +54,11 @@
                         <mat-form-field>
                             <input matInput formControlName="telephone" required type="text" placeholder="Téléphone">
                         </mat-form-field>
-                        <small style="color: red;" *ngIf="coursCommunForm.controls.telephone.errors?.required" class="invalid-feedback">
-                            Champ requis
+                        <small style="color: red;" 
+                        *ngIf="coursCommunForm.controls.telephone.errors?.required ||
+                                 coursCommunForm.controls.telephone.errors?.maxlength ||
+                                 coursCommunForm.controls.telephone.errors?.minlength " class="invalid-feedback">
+                            Entrez un numéro de téléphone valide  (8 chiffres)
                         </small>
 
                     <div class="input-field s12">
@@ -74,21 +77,29 @@
 
                     </div>
 
-                    <div class="">
-                        <small>Date de début du cours</small>
-                        <input formControlName="dateDebut" type="date" class="validate">
-                        <small style="color: red;" *ngIf="coursCommunForm.controls.dateDebut.errors?.required" class="invalid-feedback">
-                            Précisez la date du début de votre cours organisé
-                        </small>
+
+                    <div class="col-md-6">
+                        <div class="">
+                            <small>Date de début du cours</small>
+                            <input formControlName="dateDebut" type="date" class="validate">
+                            <small style="color: red;" *ngIf="coursCommunForm.controls.dateDebut.errors?.required" class="invalid-feedback">
+                                Précisez la date du début de votre cours organisé
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="">
+                            <small>Date de fin du cours</small>
+                            <input formControlName="dateFin" type="date" class="validate">
+                            <small style="color: red;" *ngIf="coursCommunForm.controls.dateFin.errors?.required" class="invalid-feedback">
+                                Précisez la date de fin de votre cours organisé
+                            </small>
+                        </div>
                     </div>
 
-                    <div class="">
-                        <small>Date de fin du cours</small>
-                        <input formControlName="dateFin" type="date" class="validate">
-                        <small style="color: red;" *ngIf="coursCommunForm.controls.dateFin.errors?.required" class="invalid-feedback">
-                            Précisez la date de fin de votre cours organisé
-                        </small>
-                    </div>
+                   
+
 
                     <div  style="margin-top: 1em;" class="row">
 

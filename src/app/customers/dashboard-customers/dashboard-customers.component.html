@@ -73,12 +73,16 @@
                                                     !p.proposition.enLigne && 
                                                     !p.proposition.refusMiseEnLigne &&
                                                     !p.proposition.suppressionMiseEnLigne"
-                                                    style="color: yellow;">En édition</span>
-                                                    <span *ngIf="p.proposition.attenteMiseEnLigne" style="color: red;">En attende de validation</span>
-                                                    <span *ngIf="p.proposition.refusMiseEnLigne" style="color:darkorange;" 
+                                                    class="label label-info">En édition</span>
+                                                    <span *ngIf="p.proposition.attenteMiseEnLigne" class="label label-info"
+                                                        >En attende de validation</span>
+                                                    <span *ngIf="p.proposition.refusMiseEnLigne" 
+                                                    class="label label-warning" 
                     data-toggle="tooltip" data-placement="right" title="{{p.proposition.causeRefus?.details}}">Refusée</span>
-                    <span *ngIf="p.proposition.suppressionMiseEnLigne" style="color: red;">Hors-ligne</span>
-                    <span *ngIf="p.proposition.enLigne" style="color: green;">En ligne</span>
+                    <span *ngIf="p.proposition.suppressionMiseEnLigne" 
+                    class="label label-danger" >Hors-ligne</span>
+                    <span *ngIf="p.proposition.enLigne" 
+                    class="label label-success">En ligne</span>
                                                 </td>
                                             </tr>
                                         </tbody>

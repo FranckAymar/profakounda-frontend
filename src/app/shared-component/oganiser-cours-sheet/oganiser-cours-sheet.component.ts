@@ -276,7 +276,7 @@ error:String;
        idOrganisation : [''],
        titre : ['', Validators.required],
        organisation : ['', Validators.required],
-       telephone : ['', Validators.required],
+       telephone : ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
        dateDebut :  ['', Validators.required],
        dateFin  : ['', Validators.required],
        description  : ['', Validators.required],

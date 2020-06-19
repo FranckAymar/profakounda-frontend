@@ -26,7 +26,7 @@ export class ListFormationsComponent implements OnInit {
   lat: number = 5.304001315606169;
   lng: number = -4.049957191526247;
   radius: number = 1000;
-  zoom: number = 11;
+  zoom: number = 9;
 
 
   criterRecherche="";

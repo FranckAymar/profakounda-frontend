@@ -1,10 +1,10 @@
 import { URL } from 'src/app/API_url/config';
 import { ListFormationsService } from './../services/list-formations.service';
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { Ville } from 'src/app/admin/model/ville.model';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-list-formations',
   templateUrl: './list-formations.component.html',
@@ -13,6 +13,9 @@ import { Ville } from 'src/app/admin/model/ville.model';
 
 export class ListFormationsComponent implements OnInit {
 
+
+  screenHeight: number;
+    screenWidth: number;
 
   //QuerryUrl Params
   villeKey : string ;
@@ -54,6 +57,8 @@ export class ListFormationsComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.getScreenSize();
     
     this.getvalue() ;
    
@@ -84,15 +89,7 @@ export class ListFormationsComponent implements OnInit {
  
         this.totalPageArray = new Array(this.totalPage);
         this.propositionFormations = resp.data;
-
-        console.log(this.totalPage);
-        
-
-        console.log(this.sizeData);
-
-        console.log(resp);
-        
-        
+       this.goToTopPage(); 
       },
 
 
@@ -189,6 +186,31 @@ OnFiterDeFormationParVille(propositionFormation){
         console.log("Une erreur s'est produite: "+error);
       }
     )
+  }
+
+
+  goToTopPage(){
+
+    //Si la taille (largeur) de l'écran est comprise entre [990 , 2000]
+    if(this.screenWidth <= 2000 && this.screenWidth >= 990 ){
+      $('#list-scroll').offset().top;
+      $('#list-scroll').animate({ scrollTop: 0 }, 900); 
+    }else {
+
+      window.scroll(0,0);
+
+    }
+
+   
+  
+  }
+
+  //Pour recuperer la taille courante du navigateur
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+        this.screenHeight = window.innerHeight;
+        this.screenWidth = window.innerWidth;
+        
   }
 
 }

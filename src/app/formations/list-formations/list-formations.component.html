@@ -2,7 +2,7 @@
     (getFormationsFiltrees)= "OnFiltreFormation($event)"
     (getFormationsFiltreParVille)= "OnFiterDeFormationParVille($event)"
 ></app-search-bar>
-<section class="pop-cour">
+<section   class="pop-cour">
     <div class="container com-sp pad-bot-70">
         <div class="row">
             <div class="con-title">
@@ -10,9 +10,9 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div id="list-scroll"  class="col-md-8 list-scroll">
 
-            <div class="row" *ngFor="let propositionFormation of propositionFormations">
+            <div  class="row" *ngFor="let propositionFormation of propositionFormations">
 
                 <div class="col-md-12">
                    <app-card-formation
@@ -47,7 +47,7 @@
         </div>
 
 
-        <div class="col-md-4">
+        <div  class="col-md-4">
             <agm-map *ngIf="propositionFormations" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
                 <agm-marker 
                 *ngFor="let pf of propositionFormations" 

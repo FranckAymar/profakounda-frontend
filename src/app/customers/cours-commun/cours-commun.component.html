@@ -24,8 +24,8 @@
 
 
 <div style="margin-top: 5em;" class="container">
-        <div  class="row" style="width: 80%;">
-                <div *ngFor="let cours of coursCommuns" class="col-md-4">
+        <div  class="row" style="width: 80%; margin: 0 auto;">
+                <div *ngFor="let cours of coursCommuns" class="col-md-6">
 
 
                         <div class="ed-rese-grid ed-rese-grid-mar-bot-30">
@@ -58,15 +58,12 @@
                                         overflow: hidden;
                                         text-overflow: ellipsis;">{{cours.coursCommun.description}}</p>
                                         <p >{{cours.coursCommun.nombreInscrit}} inscrit(s)</p>
-                                        <div  class="row">
-                                                <div class=" col-md-6">
-                                                        <a [routerLink]="[cours.coursCommun.id]" class="read-line-btn">Détails</a>
-                                                </div>
-                                                <div class="col-md-6">
-                                                        <a (click)="loadCoursCommun(cours)"
-                                                        class="details-line-btn">Modifier</a>
+                                        <div  class="row" >
+                                                  <a [routerLink]="[cours.coursCommun.id]" class="read-line-btn" style="margin-right: 0.5em;">Détails</a>
+                                                <a style="border-color: d83d0c !important; 
+                                                        color: #d83d0c !important;" (click)="loadCoursCommun(cours)"
+                                                        class="read-line-btn">Modifier</a>
         
-                                                </div>
                                         </div>
                                 </div>
                         </div>

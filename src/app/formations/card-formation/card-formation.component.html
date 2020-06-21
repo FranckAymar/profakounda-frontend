@@ -1,5 +1,7 @@
 <div class="home-top-cour">
     <!--POPULAR COURSES IMAGE-->
+    <a [routerLink]="['/formations/details-formation', id]">
+
     <div class="col-md-3">
         <p>
             <img height="170" class="img-card-mob" 
@@ -7,6 +9,7 @@
                  alt="">
         </p>
     </div>
+    </a>
     <!--POPULAR COURSES: CONTENT-->
     <div class="col-md-9 home-top-cour-desc">
         <a [routerLink]="['/formations/details-formation', id]">
@@ -33,7 +36,7 @@
         <span class="home-top-cour-rat">{{ville}}</span>
         <div class="hom-list-share">
             <ul>
-                <li><a *ngIf="rayonIntervention" [routerLink]="['/formations/details-formation', id]"><i class="fa fa-bar-chart"
+                <li><a [routerLink]="['/formations/details-formation', id]"><i class="fa fa-bar-chart"
                             aria-hidden="true"></i> Details</a> </li>
                 <li *ngIf="rayonIntervention"><a (click)="onSendCoordMap(rayonIntervention)"><i class="fa fa-map-marker"
                             aria-hidden="true"></i>Sur la carte</a> </li>

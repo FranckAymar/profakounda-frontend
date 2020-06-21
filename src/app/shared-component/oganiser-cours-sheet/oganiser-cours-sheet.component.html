@@ -258,7 +258,8 @@
                             <ul *ngIf="publicCibleMdels.length > 0" class="list-group">
                                 <li *ngFor="let public of publicCibleMdels;let i =index; 
                                     let i=index" class="list-group-item">
-                                    {{public.niveau ? public.niveau.libelle :  'Tout niveau confondu' }} - Coût : {{public.cout}}
+                                    <p style="color: black;">
+                                        {{public.niveau ? public.niveau.libelle :  'Tout niveau confondu' }} - Coût : {{public.cout}}
                                     FCFA - {{public.filiere ? 'Filière : ' + public.filiere : 'Filière : Non précisée !'}}
 
                                     <span (click)="deletePublic(i)" class="trash">
@@ -269,6 +270,7 @@
                                         <i class="fa fa-lg fa-info"></i></span>
                                     <span (click)="loadPublicCible(public, i)" class="trash">
                                         <i class="fa fa-lg fa-edit"></i></span>
+                                    </p>
                                 </li>
                             </ul>
 

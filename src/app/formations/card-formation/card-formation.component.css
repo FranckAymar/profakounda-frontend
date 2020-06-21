@@ -115,7 +115,11 @@ section .section-title {
     cursor: pointer;
 }
 
+
+
 .list-form{
     display: inline;
     font-size: 1em;
+    
+
 }

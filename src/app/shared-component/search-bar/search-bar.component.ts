@@ -18,7 +18,6 @@ export class SearchBarComponent implements OnInit {
   designationVille="";
   villes : any =[];
   ville: Ville = {};
-
   @Output() getFormationsFiltrees = new EventEmitter<[]>() ;
   @Output() getFormationsFiltreParVille = new EventEmitter<[]>() ;
  
@@ -46,10 +45,12 @@ export class SearchBarComponent implements OnInit {
     (reponse)=>{   
       if(reponse["formations"])
       {
+        
         this.getFormationsFiltrees.emit(reponse["formations"]);
       }
       else
       {
+      
         this.getFormationsFiltrees.emit(reponse);
       }
     },

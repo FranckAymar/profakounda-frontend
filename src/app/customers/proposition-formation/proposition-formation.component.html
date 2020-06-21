@@ -84,8 +84,8 @@
                         <thead>
                             <tr>
                                 <th>Niveau enseigné</th>
-                                <th>Coût minimum</th>
-                                <th>Coût Maximum</th>
+                                <th>Coût</th>
+                                
     
                             </tr>
                         </thead>
@@ -94,7 +94,7 @@
                             <tr *ngFor="let n of p.contrats">
                                 <td>{{n.niveau?.libelle}} {{n.niveauTemporaire?.libelle}}</td>
                                 <td>{{n.minMontant}} Frcfa</td>
-                                <td>{{n.maxMontant}} Fcfa</td>
+                                <!-- <td>{{n.maxMontant}} Fcfa</td> -->
                                 <td><button data-toggle="modal" data-target="#niveauEnseigne" (click)="getContrat(n.id)"
                                         class="updateButton"><i class="fa fa-edit"></i></button></td>
                                 <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i
@@ -123,7 +123,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">SAISIE DE LA VILLE DE RESIDENCE</h5>
+                <h5 class="modal-title" id="exampleModalLabel">SAISIE DE LA VILLE ET COMMUNE</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -132,17 +132,33 @@
                 <!-- Libelle-->
 
                 <form (ngSubmit)="saveDemandeMiseEnLigne()" #z="ngForm">
-                                <mat-form-field style="width: 16em;">
-                                     <input type="text" required  
-                                                    placeholder="Renseignez votre ville de résidence svp"  [(ngModel)]="ville" aria-label="Number" matInput
-                                                    [formControl]="myControl4" [matAutocomplete]="auto4">
-                                                <mat-autocomplete #auto4="matAutocomplete">
-                                                    <mat-option *ngFor="let option of filteredOptions4 | async"  [value]="option.designation">
-                                                        {{option.designation}}
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                        </mat-form-field>
-                                        <button style="margin-top: 0.5em;" type="submit" [disabled]="myControl4.invalid"
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <mat-form-field style="width: 16em;">
+                                            <input type="text" required  
+                                                           placeholder="Votre ville de residence svp"  [(ngModel)]="ville" aria-label="Number" matInput
+                                                           [formControl]="myControl4" [matAutocomplete]="auto4">
+                                                       <mat-autocomplete #auto4="matAutocomplete">
+                                                           <mat-option *ngFor="let option of filteredOptions4 | async"  [value]="option.designation">
+                                                               {{option.designation}}
+                                                           </mat-option>
+                                                       </mat-autocomplete>
+                                               </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-form-field style="width: 16em;">
+                                            <input type="text" required  
+                                                           placeholder="Commune ou département"  [(ngModel)]="commune" aria-label="Number" matInput
+                                                           [formControl]="myControlCommune" [matAutocomplete]="autoCommune">
+                                                       <mat-autocomplete #autoCommune="matAutocomplete">
+                                                           <mat-option *ngFor="let option of filteredOptionsCommunes | async"  [value]="option.libelle">
+                                                               {{option.libelle}}
+                                                           </mat-option>
+                                                       </mat-autocomplete>
+                                               </mat-form-field>
+                                    </div>
+                                </div>
+                                        <button style="margin-top: 0.5em;" type="submit" [disabled]="myControl4.invalid || myControlCommune.invalid"
                                         class="btn btn-outline-info btn-block ">Enregistrer</button>
                 </form>
             </div>
@@ -176,7 +192,7 @@
                                 <span style="color: red;">Tous les niveaux</span></mat-checkbox>
                         </div>
                     </div>
-                    <mat-form-field *ngIf="!isAllNiveaux">
+                    <mat-form-field style="width: 37em;" *ngIf="!isAllNiveaux">
                         <input type="text"
                         placeholder="Niveau"
                             [(ngModel)]="niveauForme.designationNiveau"
@@ -190,8 +206,10 @@
                           </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
-                    
-                    <div class="row">
+                    <label for="prixMin">Coût:</label>
+                            <input name="prixMin" (ngModelChange)="nombreMinChange($event)" required [(ngModel)]="niveauForme.prixMin" type="number"
+                                id="prixMin" />
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <label for="prixMin">Prix min:</label>
                             <input name="prixMin" (ngModelChange)="nombreMinChange($event)" required [(ngModel)]="niveauForme.prixMin" type="number"
@@ -202,15 +220,15 @@
                             <input name="prixMax" (ngModelChange)="nombreMaxChange($event)" type="number" [(ngModel)]="niveauForme.prixMax" id="prixMax"
                                 required />
                         </div>
-                    </div>
+                    </div> -->
                     <div *ngIf="!isAllNiveaux">
-                        <button style="margin-top:0.5em;" *ngIf="!edit" [disabled]="f.invalid || myControl3.invalid || !isNombreMaxValid || !isNombreMinValid || !isPresentDoubleNumber " type="submit"
+                        <button style="margin-top:0.5em;" *ngIf="!edit" [disabled]="f.invalid || myControl3.invalid  || !isNombreMinValid " type="submit"
                         class="btn btn-primary">Enregistrer</button>
-                    <button style="margin-top:0.5em;" *ngIf="edit" [disabled]="f.invalid || myControl3.invalid || !isNombreMaxValid || !isNombreMinValid || !isPresentDoubleNumber" type="submit"
+                    <button style="margin-top:0.5em;" *ngIf="edit" [disabled]="f.invalid || myControl3.invalid ||  !isNombreMinValid " type="submit"
                         class="btn btn-success">Enregistrer</button>
                     </div>
                     <div *ngIf="isAllNiveaux">
-                        <button style="margin-top:0.5em;"  [disabled]="f.invalid  || !isNombreMaxValid || !isNombreMinValid || !isPresentDoubleNumber " type="submit"
+                        <button style="margin-top:0.5em;"  [disabled]="f.invalid   || !isNombreMinValid" type="submit"
                         class="btn btn-primary">Enregistrer</button>
                     </div>
                     
@@ -224,7 +242,7 @@
 </div>
 
 
-<div class="modal fade" id="modules" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modules"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -297,7 +315,7 @@
 </div>
 
 
-<div class="modal fade" id="disponibilite" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="disponibilite"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -390,7 +408,7 @@
 
 
 
-<div class="modal fade" id="ajouterDescription" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="ajouterDescription"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -436,7 +454,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="addDesc" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="addDesc"   tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

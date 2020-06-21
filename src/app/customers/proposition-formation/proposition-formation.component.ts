@@ -20,6 +20,7 @@ import { FormationService } from 'src/app/admin/services/formation.service';
 import { ParticulierService } from '../services/particulier.service';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { DemandeMiseEnLigne } from '../models/DemandeMiseEnLigne';
+import { CommuneService } from 'src/app/admin/services/commune.service';
 
 @Component({
   selector: 'app-proposition-formation',
@@ -53,8 +54,10 @@ export class PropositionFormationComponent implements OnInit {
   @Input() isAllModule:boolean =false;
   @Input() isAllNiveaux:boolean =false;
   @Input() ville:string;
+  @Input() commune:string;
   propositions: any = [];
-  formations: any = [];
+  formations: any = [];;
+  communes:any = []
   heure:Heure = new Heure('','');
   lambda:Lambda;
   isCheckCiclePrimaire= false ;
@@ -82,14 +85,17 @@ export class PropositionFormationComponent implements OnInit {
   myControl2 = new FormControl();
   myControl3 = new FormControl();
   myControl4 = new FormControl();
+  myControlCommune = new FormControl();
   coordMapModel : CoordMapModel ;
   filteredOptions: Observable<string[]>;
   filteredOptions2: Observable<string[]>;
   filteredOptions3: Observable<string[]>;
+  filteredOptionsCommunes: Observable<string[]>;
 
   constructor(private signInService:SignInService,
     private niveauService:NiveauService,
     private jourService:JourService,
+    private communeService:CommuneService,
     private particulierService:ParticulierService,
     private villeService:VilleService,
     private propositionFormationService:PropositionFormationService,
@@ -106,6 +112,7 @@ export class PropositionFormationComponent implements OnInit {
     this.onFetchJoursString();
     this.onFetchVillesObject();
     this.verifierVilleParticulier();
+    this.onFetchCommunes();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -121,6 +128,11 @@ export class PropositionFormationComponent implements OnInit {
       startWith(''),
       map(va => this._filter3(va))
     );
+    this.filteredOptionsCommunes = this.myControlCommune.valueChanges
+    .pipe(
+      startWith(''),
+      map(va => this._filterCommunes(va))
+    );
     this.filteredOptions4 = this.myControl4.valueChanges
     .pipe(
       startWith(''),
@@ -131,6 +143,11 @@ export class PropositionFormationComponent implements OnInit {
       const filterValue = value.toLowerCase();
   
       return this.villes.filter(option => option.designation.toLowerCase().includes(filterValue));
+    }
+    private _filterCommunes(value: string): string[] {
+      const filterValue = value.toLowerCase();
+  
+      return this.communes.filter(option => option.libelle.toLowerCase().includes(filterValue));
     }
     
     private _filter(value: string): string[] {
@@ -197,10 +214,11 @@ export class PropositionFormationComponent implements OnInit {
       this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
     }
     getMdemandemMiseEnLigneA(id:number){
-      this.demandeMiseEnLigne = new DemandeMiseEnLigne(id,'');
+      this.demandeMiseEnLigne = new DemandeMiseEnLigne(id,'','');
     }
     saveDemandeMiseEnLigne(){
       this.demandeMiseEnLigne.ville = this.ville;
+      this.demandeMiseEnLigne.commune = this.commune;
       this.propositionFormationService.demandeMiseEnLigneObject(this.demandeMiseEnLigne).subscribe(
         (response)=>{
           document.getElementById('showVilleModal').click();
@@ -548,6 +566,18 @@ this.propositionFormationService.rechercherDisponibilites(id)
       (error)=>{
         console.log("Erreur : "+error);
       }
+    )
+
+  }
+  onFetchCommunes() {
+    this.communeService.listCommunes().subscribe(
+      (response)=> {
+        this.communes = response;
+      },
+      (error)=> {
+        console.log("Une erreur est survenue");
+      }
+
     )
 
   }

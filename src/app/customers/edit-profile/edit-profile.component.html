@@ -62,10 +62,10 @@
     
                                     <mat-form-field style="width: 34em;">
                                         <input required type="text" formControlName="commune" [(ngModel)]="commune"
-                                            placeholder="Commune" aria-label="Number" matInput
+                                            placeholder="Commune ou département" aria-label="Number" matInput
                                             [formControl]="myControlCommune" [matAutocomplete]="autoCommune">
                                         <mat-autocomplete #autoCommune="matAutocomplete">
-                                            <mat-option *ngFor="let option of filteredOptionsCommunes | async" [value]="option">
+                                            <mat-option *ngFor="let option of filteredOptionsCommunes | async" [value]="option.libelle">
                                                 {{option.libelle}}
                                             </mat-option>
                                         </mat-autocomplete>

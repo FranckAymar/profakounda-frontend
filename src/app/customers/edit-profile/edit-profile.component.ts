@@ -147,6 +147,7 @@ init(){
     filiere:'',
     niveau:'',
     ville:['',Validators.required],
+    commune:['',Validators.required],
     username:localStorage.getItem(this.signInService.USERNAME)
   })
 }
@@ -211,6 +212,7 @@ getColor(){
           filiere: reponse['filiere'],
           niveau: reponse['niveau'],
           ville: reponse['ville'],
+          commune: reponse['commune']
         
         })
       },

@@ -100,8 +100,8 @@
                                 <thead>
                                     <tr>
                                         <th *ngIf="!propositionFormation.isAllNiveau">Niveaux</th>
-                                        <th class="align-text-right">Prix Minimun </th>
-                                        <th class="align-text-right">Prix Maximum(Mensuel)</th>
+                                        <th class="align-text-right">Coût</th>
+                                       
 
                                     </tr>
                                 </thead>
@@ -112,8 +112,8 @@
                                         <td class="align-text-right"><span
                                                 class="pro-user-act">{{contrat.minMontant | currency:'XOF'}}
                                             </span></td>
-                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant | currency:'XOF'}}
-                                                </span></td>
+                                        <!-- <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant | currency:'XOF'}}
+                                                </span></td> -->
 
                                     </tr>
                                 </tbody>

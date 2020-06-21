@@ -1,6 +1,6 @@
 <div class="home-top-cour">
     <!--POPULAR COURSES IMAGE-->
-    <div class="col-md-2">
+    <div class="col-md-3">
         <p>
             <img height="170" class="img-card-mob" 
                  src="{{urlServer}}/{{idParticulier}}?width=200&height=200" 
@@ -8,30 +8,32 @@
         </p>
     </div>
     <!--POPULAR COURSES: CONTENT-->
-    <div class="col-md-10 home-top-cour-desc">
-        <div>
-            <h3>{{code}}</h3>
-        </div>
-        <div>
-            <i *ngFor="let e of etoilesBrillants"  class="fa fa-star etoileNote"></i><i *ngFor="let eb of etoilesEteints"  class="fa fa-star etoile"></i> 
-        </div>
-        <h4   style="display: inline;" *ngFor="let moduleFomation of moduleFormations; let i = index"
-            [attr.data-index]="i">
-            {{moduleFomation.libelle}} <span *ngIf="moduleFormations.length !== i+1">/</span>
-        </h4>
-        <div *ngIf="isAllModule">
-            <h4   style="display: inline;" *ngFor="let c of contrats; let i = index"
-            [attr.data-index]="i">
-            {{c.niveau?.libelle}} {{c.niveauTemporaire?.libelle}}  <span *ngIf="contrats.length !== i+1">/</span>
+    <div class="col-md-9 home-top-cour-desc">
+        <a [routerLink]="['/formations/details-formation', id]">
+            <div>
+                <h3>{{code}}</h3>
+            </div>
+            <div>
+                <i *ngFor="let e of etoilesBrillants"  class="fa fa-star etoileNote"></i><i *ngFor="let eb of etoilesEteints"  class="fa fa-star etoile"></i> 
+            </div>
+            <h4   style="display: inline;" *ngFor="let moduleFomation of moduleFormations; let i = index"
+                [attr.data-index]="i">
+                {{moduleFomation.libelle}} <span *ngIf="moduleFormations.length !== i+1">/</span>
             </h4>
-        </div>
+            <div *ngIf="isAllModule">
+                <h4   style="display: inline;" *ngFor="let c of contrats; let i = index"
+                [attr.data-index]="i">
+                {{c.niveau?.libelle}} {{c.niveauTemporaire?.libelle}}  <span *ngIf="contrats.length !== i+1">/</span>
+                </h4>
+            </div>
+        </a>
        
         
         <p class="add-three-dot">{{description}}</p>
         <span class="home-top-cour-rat">{{ville}}</span>
         <div class="hom-list-share">
             <ul>
-                <li><a [routerLink]="['/formations/details-formation', id]"><i class="fa fa-bar-chart"
+                <li><a *ngIf="rayonIntervention" [routerLink]="['/formations/details-formation', id]"><i class="fa fa-bar-chart"
                             aria-hidden="true"></i> Details</a> </li>
                 <li *ngIf="rayonIntervention"><a (click)="onSendCoordMap(rayonIntervention)"><i class="fa fa-map-marker"
                             aria-hidden="true"></i>Sur la carte</a> </li>

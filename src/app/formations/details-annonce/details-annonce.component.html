@@ -25,6 +25,13 @@
                             <h4>{{propositionFormation.code}}</h4>
                         </li>
                         <li>{{propositionFormation.niveau?.libelle}}</li>
+                        <li>
+                            <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
+                           
+                        </li>
+                        <li>
+                            <p>{{propositionFormation.description}}</p>
+                        </li>
 
                     </ul>
                 </div>
@@ -43,16 +50,21 @@
                 <div class="udb">
 
                     <div class="udb-sec">
+
+                     <!--    <div class="tel">
+                        <a href=""><span><i style="color: white;" class="fa fa-phone fa-5x"></i></span></a>
+                       </div> -->
+
                         <input (click)="contactCustomer()" type="button" value="Me contacter"
-                            class="btn btn-lg btn-block my-2 light-btn">
+                            class="btn btn-lg btn-block my-2 light-btn"> 
                     </div>
 
 
 
-                    <div class="udb-sec udb-prof">
+                    <!-- <div class="udb-sec udb-prof">
                         <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
                         <p>{{propositionFormation.description}}</p>
-                    </div>
+                    </div> -->
 
                     <div *ngIf="propositionFormation.cyclePrimairePresent"  class="modal-header center">
                         <p class="alert alert-warning">
@@ -420,6 +432,12 @@
                                             type="tel" pattern="[0-9]*" 
                                             data-ng-model="name" class="validate">
                                         <label>Entrez votre numéro</label>
+                                        <small style="color: red;" 
+                                        *ngIf="operatorForm.controls.numero.errors?.required ||
+                                        operatorForm.controls.numero.errors?.maxlength ||
+                                        operatorForm.controls.numero.errors?.minlength " class="invalid-feedback">
+                                            Entrez un numéro de téléphone valide  (8 chiffres)
+                                    </small>
                                     </div>
 
                                     <button id="nextBtnPaiement" [disabled]="operatorForm.invalid" 

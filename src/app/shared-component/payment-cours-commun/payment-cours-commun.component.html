@@ -75,6 +75,12 @@
                     <input minlength="8" maxlength="8" formControlName="numero"
                         type="tel" pattern="[0-9]*"   class="validate">
                     <label>Entrez votre numéro</label>
+                    <small style="color: red;" 
+                        *ngIf="operatorForm.controls.numero.errors?.required ||
+                        operatorForm.controls.numero.errors?.maxlength ||
+                        operatorForm.controls.numero.errors?.minlength " class="invalid-feedback">
+                            Entrez un numéro de téléphone valide  (8 chiffres)
+                    </small>
                 </div>
 
                 <button id="nextBtnPaiement" [disabled]="operatorForm.invalid" 

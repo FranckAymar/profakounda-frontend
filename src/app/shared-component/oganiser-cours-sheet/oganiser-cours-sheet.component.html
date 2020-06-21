@@ -18,9 +18,11 @@
     <div class="row">
         <div class="col-md-12">
             <!--Information générale-->
-            <div id="content1">
+            <div   id="content1">
 
                 <form [formGroup]="coursCommunForm" (ngSubmit)="saveCoursCommun()">
+
+                    <div class="row">
 
                       
                         <mat-form-field>
@@ -98,13 +100,14 @@
                         </div>
                     </div>
 
+                    </div>
                    
 
 
-                    <div  style="margin-top: 1em;" class="row">
+                    <div   class="row ">
 
-                        <button id="" type="submit" [disabled]="coursCommunForm.invalid"
-                            class="btn btn-bg-color btn-block">Suivant</button>
+                        <button type="submit" [disabled]="coursCommunForm.invalid"
+                            class="btn btn-bg-color btn-block ">Suivant</button>
 
                     </div>
 
@@ -131,7 +134,7 @@
                         </form>
 
                         <button style="margin-top: 0.5em;" type="submit" (click)="next()"
-                            class="btn btn-bg-color btn-block">Suivant</button>
+                            class="btn btn-bg-color btn-block btn-float-bottom">Suivant</button>
 
                 </div>
             </div>
@@ -145,21 +148,20 @@
                             <form [formGroup]="coutGeneralForm">
                                 <div class="row d-flex " style="text-align: center;">
                                     <div class="col-md-6">
-                                        <div class="input-field s12">
+                                        <mat-form-field>
                                             <input [attr.disabled]="dataReceived?.coursCommun?.nombreInscrit > 0 ? '' : null "
-                                                     
-                                                    formControlName="cout" type="number" class="validate">
-                                            <label>Cout Général</label>
-                                        </div>
+                                             matInput formControlName="cout" required type="number" placeholder="Cout Général">
+                                        </mat-form-field>
+                                        
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="input-field s12">
+                                    <div class="col-md-5">
+                                        <mat-form-field>
                                             <input [attr.disabled]="isCheckIllimite ? '' : null"
-                                                formControlName="nbreMaxInscrits" type="number" class="validate">
-                                            <label>Nombre maximun d'inscrits</label>
-                                        </div>
+                                             matInput formControlName="nbreMaxInscrits" type="number" placeholder="Nombre maximun d'inscrits">
+                                        </mat-form-field>
+                                        
 
                                     </div>
                                     <div class="col-md-3">
@@ -274,7 +276,7 @@
                 <div class="row" style="margin-top: 40px;">
 
                     <button [disabled]="publicCibleMdels.length  == 0 && isCheckPublicCible || coutGeneralForm.invalid"
-                        (click)="savePublicCible()" class="btn btn-bg-color btn-block">Suivant</button>
+                        (click)="savePublicCible()" class="btn btn-bg-color btn-block btn-float-bottom">Suivant</button>
 
                 </div>
 
@@ -300,7 +302,7 @@
                             </agm-marker>
                         </agm-map>
 
-                        <button type="submit" class="btn btn-bg-color btn-block">Soumettre</button>
+                        <button type="submit" class="btn btn-bg-color btn-block btn-float-bottom">Soumettre</button>
 
 
                     </form>

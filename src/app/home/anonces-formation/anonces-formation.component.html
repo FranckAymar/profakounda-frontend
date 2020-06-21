@@ -11,7 +11,7 @@
             <p>Vous êtes un formateur ? Proposez vos cours <a style="color: #FF5722;" routerLink="/customers/formations">ici</a></p>
 
         </div>
-        <div class="row" *ngFor="let propositionFormation of propositionFormations">
+        <div class="row col-md-6" *ngFor="let propositionFormation of propositionFormations">
             <app-card-formation
             [idParticulier]= "propositionFormation.idParticulier"
             [code] = "propositionFormation.code"

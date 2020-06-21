@@ -28,7 +28,8 @@
                         <mat-form-field>
                             <input matInput formControlName="titre" required type="text" placeholder="Titre">
                         </mat-form-field>
-                        <small style="color: red;" *ngIf="coursCommunForm.controls.titre.errors?.required" class="invalid-feedback">
+                        <small style="color: red;" *ngIf="coursCommunForm.controls.titre.errors?.required" 
+                        class="invalid-feedback">
                             Un titre pour votre cours organisé est requis (Ex : Cours de renforcement du Lycée ProfAkounda)
                         </small>
 
@@ -140,13 +141,17 @@
             </div>
             <!--Public visé-->
             <div id="content3" class="hide">
-                <div class="row d-flex justify-content-center" style="text-align: center; margin-top: 2em;">
-                    <mat-checkbox style="width: 70%;" *ngIf="!isModify" (change)="checkBoxPublicChange()">
-                        Votre formation touchera-elle un public précis (Niveau d'étude) ?</mat-checkbox>
-                    <div class="col-md-9">
+                <div class="row" style=" margin-top: 2em;">
+                    <div style="text-align: center;">
+                       
+                            <p>Votre formation touchera-elle un public précis (Niveau d'étude) ?</p>
+                            <p><mat-checkbox *ngIf="!isModify" (change)="checkBoxPublicChange()">
+                            </mat-checkbox></p>
+                    </div>
+                    <div class="col-md-12">
                         <div *ngIf="!isCheckPublicCible" style="margin-top: 10px;" class="input-field s12">
                             <form [formGroup]="coutGeneralForm">
-                                <div class="row d-flex " style="text-align: center;">
+                                <div class="row " >
                                     <div class="col-md-6">
                                         <mat-form-field>
                                             <input [attr.disabled]="dataReceived?.coursCommun?.nombreInscrit > 0 ? '' : null "
@@ -178,9 +183,9 @@
 
                     </div>
                 </div>
-                <div *ngIf="isCheckPublicCible" class="row d-flex justify-content-center mt-5">
-                    <div class="row">
-                        <div class="d-flex justify-content-center col-md-4">
+                <div *ngIf="isCheckPublicCible" class="row mt-5">
+                    <div style="overflow-y: auto;"  class="row">
+                        <div class="col-md-4">
 
                             <form [formGroup]="publicCibleForm" (ngSubmit)="addPublicToTable()">
 
@@ -248,12 +253,13 @@
 
                         </div>
 
-                        <div class="col-md-8 d-flex justify-content-center">
+                        <div class="col-md-8">
 
                             <ul *ngIf="publicCibleMdels.length > 0" class="list-group">
                                 <li *ngFor="let public of publicCibleMdels;let i =index; 
                                     let i=index" class="list-group-item">
-                                    {{public.niveau ? public.niveau.libelle :  'Tout niveau confondu' }} - Coût : {{public.cout}}
+                                    <p style="color: black;">
+                                        {{public.niveau ? public.niveau.libelle :  'Tout niveau confondu' }} - Coût : {{public.cout}}
                                     FCFA - {{public.filiere ? 'Filière : ' + public.filiere : 'Filière : Non précisée !'}}
 
                                     <span (click)="deletePublic(i)" class="trash">
@@ -264,6 +270,7 @@
                                         <i class="fa fa-lg fa-info"></i></span>
                                     <span (click)="loadPublicCible(public, i)" class="trash">
                                         <i class="fa fa-lg fa-edit"></i></span>
+                                    </p>
                                 </li>
                             </ul>
 

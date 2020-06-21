@@ -1,73 +1,76 @@
-<section>
+<div class="col-md-12">
+
         <div class="head-2">
-                <div class="container">
-                        <div class="head-2-inn head-2-inn-padd-top">
-                                <h1>Mes cours organisés</h1>
-                                <div class="event-head-sub">
-                                        <ul>
-                                                <li>Total cours: {{coursCommuns.length}}</li>
-                                                <li>Total inscrits: {{totalInscrits}}</li>
-                                        </ul>
-                                </div>
+                <div class="head-2-inn head-2-inn-padd-top">
+                        <h1>Mes cours organisés</h1>
+                        <div class="event-head-sub">
+                                <ul>
+                                        <li>Total cours: {{coursCommuns.length}}</li>
+                                        <li>Total inscrits: {{totalInscrits}}</li>
+                                </ul>
                         </div>
-
                 </div>
+
+
         </div>
-</section>
-
-<div style="text-align: center; margin-top: 1em;">
-        <button (click)="goToOrganiserCours()" data-target="#addDesc" class="btn btn-info">
-                <i class="fa fa-plus">
-
-                </i> Organiser un cours</button>
-</div>
 
 
-<div style="margin-top: 5em;" class="container">
-        <div  class="row" style="width: 80%; margin: 0 auto;">
-                <div *ngFor="let cours of coursCommuns" class="col-md-6">
+        <div style="text-align: center; margin-top: 1em;">
+                <button (click)="goToOrganiserCours()" data-target="#addDesc" class="btn btn-info">
+                        <i class="fa fa-plus">
+
+                        </i> Organiser un cours</button>
+        </div>
 
 
-                        <div class="ed-rese-grid ed-rese-grid-mar-bot-30">
-                                <div class="state">
-                                        <kbd *ngIf="cours.coursCommun.enLigne">En ligne</kbd>
+        <div style="margin-top: 5em;">
+                <div class="row" style=" margin: 0 auto;">
+                        <div *ngFor="let cours of coursCommuns" class="col-md-4">
 
 
-                                        <kbd *ngIf="!cours.coursCommun.attenteMiseEnLigne && 
-                                                !cours.coursCommun.enLigne && 
-                                                !cours.coursCommun.refusMiseEnLigne &&
-                                                !cours.coursCommun.suppressionMiseEnLigne">En édition</kbd>
-                                        <kbd *ngIf="cours.coursCommun.attenteMiseEnLigne">En attende de
-                                                validation</kbd>
-                                        <kbd *ngIf="cours.coursCommun.refusMiseEnLigne" data-toggle="tooltip"
-                                                data-placement="right"
-                                                title="{{cours.coursCommun.causeRefus?.details}}">Refusée</kbd>
-                                        <kbd *ngIf="cours.coursCommun.suppressionMiseEnLigne">Hors-ligne</kbd>
+                                <div class="ed-rese-grid ed-rese-grid-mar-bot-30">
+                                        <div class="state">
+                                                <kbd *ngIf="cours.coursCommun.enLigne">En ligne</kbd>
 
-                                </div>
-                                <div class="ed-rsear-img ed-faci-full-top">
-                                        <img  height="250" src="{{urlServer}}/{{cours.coursCommun.id}}" alt="">
-                                </div>
-                                <div class="ed-rsear-dec ed-faci-full-bot">
-                                        <h4><a>{{cours.coursCommun?.organisation?.libelle}} -
-                                                        {{cours.coursCommun.titre}}</a></h4>
-                                        <p style="height: 8em;
-                                        max-width: 80%;
-                                        width: 80%;
-                                        white-space: pre-wrap;
-                                        overflow: hidden;
-                                        text-overflow: ellipsis;">{{cours.coursCommun.description}}</p>
-                                        <p >{{cours.coursCommun.nombreInscrit}} inscrit(s)</p>
-                                        <div  class="row" >
-                                                  <a [routerLink]="[cours.coursCommun.id]" class="read-line-btn" style="margin-right: 0.5em;">Détails</a>
-                                                <a style="border-color: d83d0c !important; 
-                                                        color: #d83d0c !important;" (click)="loadCoursCommun(cours)"
-                                                        class="read-line-btn">Modifier</a>
-        
+
+                                                <kbd *ngIf="!cours.coursCommun.attenteMiseEnLigne && 
+                                                        !cours.coursCommun.enLigne && 
+                                                        !cours.coursCommun.refusMiseEnLigne &&
+                                                        !cours.coursCommun.suppressionMiseEnLigne">En édition</kbd>
+                                                <kbd *ngIf="cours.coursCommun.attenteMiseEnLigne">En attende de
+                                                        validation</kbd>
+                                                <kbd *ngIf="cours.coursCommun.refusMiseEnLigne" data-toggle="tooltip"
+                                                        data-placement="right"
+                                                        title="{{cours.coursCommun.causeRefus?.details}}">Refusée</kbd>
+                                                <kbd *ngIf="cours.coursCommun.suppressionMiseEnLigne">Hors-ligne</kbd>
+
+                                        </div>
+                                        <div class="ed-rsear-img ed-faci-full-top">
+                                                <img height="250" src="{{urlServer}}/{{cours.coursCommun.id}}" alt="">
+                                        </div>
+                                        <div class="ed-rsear-dec ed-faci-full-bot">
+                                                <h4><a>{{cours.coursCommun?.organisation?.libelle}} -
+                                                                {{cours.coursCommun.titre}}</a></h4>
+                                                <p style="height: 8em;
+                                                max-width: 80%;
+                                                width: 80%;
+                                                white-space: pre-wrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;">{{cours.coursCommun.description}}</p>
+                                                <p>{{cours.coursCommun.nombreInscrit}} inscrit(s)</p>
+                                                <div class="row">
+                                                        <a [routerLink]="[cours.coursCommun.id]" class="read-line-btn"
+                                                                style="margin-right: 0.5em;">Détails</a>
+                                                        <a style="border-color: #d83d0c !important; 
+                                                                color: #d83d0c !important;"
+                                                                (click)="loadCoursCommun(cours)"
+                                                                class="read-line-btn">Modifier</a>
+
+                                                </div>
                                         </div>
                                 </div>
                         </div>
-                </div>
 
+                </div>
         </div>
 </div>

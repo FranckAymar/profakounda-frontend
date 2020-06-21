@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { startWith, map,expand } from 'rxjs/operators';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { CompressorService } from '../services/CompressorService';
+import { CommuneService } from 'src/app/admin/services/commune.service';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -30,12 +31,14 @@ export class EditProfileComponent implements OnInit {
    @Input() showMessage:boolean = false;
    @Input() filiere:string;
    @Input() niveau:string;
+   @Input() commune:string;
    @Input() ville:string;
    message:string;
    error:string;
    mes:string;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
+  communes: any=[] ;
   niveaux = [];
   villes : any = [];
   villesObject:any = [];
@@ -47,6 +50,8 @@ export class EditProfileComponent implements OnInit {
   myControl = new FormControl();
   myControl2 = new FormControl();
   myControl3 = new FormControl();
+  myControlCommune = new FormControl();
+  filteredOptionsCommunes: Observable<string[]>
   filteredOptions3: Observable<string[]>
   filteredOptions2: Observable<string[]>
   filteredOptions: Observable<string[]>;
@@ -54,6 +59,7 @@ export class EditProfileComponent implements OnInit {
               private niveauService:NiveauService,
               private particulierService:ParticulierService,
               private villeService:VilleService,
+              private communeService:CommuneService,
               private router:Router,
               private formBuilder:FormBuilder,
               private signInService:SignInService,
@@ -66,11 +72,17 @@ export class EditProfileComponent implements OnInit {
     this.onFetchFiliere();
     this.onFetchVilles();
     this.initPassword();
+    this.onFetchCommunes();
     this.onFetchVillesObject();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
       map(value => this._filter(value))
+    );
+    this.filteredOptionsCommunes = this.myControlCommune.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filterCommune(value))
     );
     this.filteredOptions3 = this.myControl3.valueChanges
     .pipe(
@@ -97,6 +109,11 @@ export class EditProfileComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.villesObject.filter(option => option.designation.toLowerCase().includes(filterValue));
+  }
+  private _filterCommune(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.communes.filter(option => option.libelle.toLowerCase().includes(filterValue));
   }
 
   villeChange(object){
@@ -259,6 +276,18 @@ getColor(){
     this.niveauService.fetchNiveauxString().subscribe(
       (response)=> {
         this.niveaux = response;
+      },
+      (error)=> {
+        console.log("Une erreur est survenue");
+      }
+
+    )
+
+  }
+  onFetchCommunes() {
+    this.communeService.listCommunes().subscribe(
+      (response)=> {
+        this.communes = response;
       },
       (error)=> {
         console.log("Une erreur est survenue");

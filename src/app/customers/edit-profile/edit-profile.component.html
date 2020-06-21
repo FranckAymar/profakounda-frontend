@@ -42,29 +42,43 @@
     
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <mat-form-field style="width: 16em;">
-                                                <input type="text" required  
-                                                    placeholder="Ville de résidence" formControlName="ville" [(ngModel)]="ville" aria-label="Number" matInput
-                                                    [formControl]="myControl2" [matAutocomplete]="auto2">
-                                                <mat-autocomplete #auto2="matAutocomplete">
-                                                    <mat-option *ngFor="let option of filteredOptions2 | async"  [value]="option.designation">
-                                                        {{option.designation}}
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <mat-form-field style="width: 16em;">
-    
-                                                <input  matInput formControlName="lieuHabitation"  type="text"
-                                                    placeholder="Lieu d'Habitation">
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
+                                    <mat-form-field style="width: 34em;">
+                                        <input type="text" required  
+                                            placeholder="Ville de résidence" formControlName="ville" [(ngModel)]="ville" aria-label="Number" matInput
+                                            [formControl]="myControl2" [matAutocomplete]="auto2">
+                                        <mat-autocomplete #auto2="matAutocomplete">
+                                            <mat-option *ngFor="let option of filteredOptions2 | async"  [value]="option.designation">
+                                                {{option.designation}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
                                     
     
+                                </div>
+                            </div>
+                            <div class="row">
+    
+                                <div class="col-md-6">
+    
+                                    <mat-form-field style="width: 34em;">
+                                        <input required type="text" formControlName="commune" [(ngModel)]="commune"
+                                            placeholder="Commune" aria-label="Number" matInput
+                                            [formControl]="myControlCommune" [matAutocomplete]="autoCommune">
+                                        <mat-autocomplete #autoCommune="matAutocomplete">
+                                            <mat-option *ngFor="let option of filteredOptionsCommunes | async" [value]="option">
+                                                {{option.libelle}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+    
+                                </div>
+                                <div class="col-md-6">
+    
+                                    <mat-form-field style="width: 34em;">
+    
+                                        <input  matInput formControlName="lieuHabitation"  type="text"
+                                            placeholder="Quartier">
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">

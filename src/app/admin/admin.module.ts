@@ -35,6 +35,7 @@ import { AdminCommonCourseComponent } from './admin-common-course/admin-common-c
 import { DetailsCoursCommunAdminComponent } from './details-cours-commun-admin/details-cours-commun-admin.component';
 import { CompteRenduCourscommunComponent } from './compte-rendu-courscommun/compte-rendu-courscommun.component';
 import { DemandeVirementComponent } from './demande-virement/demande-virement.component';
+import { CommuneService } from './services/commune.service';
 
 
 
@@ -191,6 +192,7 @@ const adminRouter : Routes = [
     ForfaitService,
     NiveauService,
     JourService,
+    CommuneService,
     VilleService,
     FormationService, 
     CauserefusService,

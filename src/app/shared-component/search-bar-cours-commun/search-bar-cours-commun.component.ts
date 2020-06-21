@@ -51,8 +51,14 @@ export class SearchBarCoursCommunComponent implements OnInit {
     this.addParameterInURl();
     this.coursCommunService.rechercherParCode(this.code).subscribe(
       (resp)=>{
-
+        if(resp["cours"])
+      {
+        this.getCoursCommunFiltrees.emit(resp["cours"]);
+       }
+      else{
         this.getCoursCommunFiltrees.emit(resp);
+       console.log(resp);
+      }
       }
     )
   }

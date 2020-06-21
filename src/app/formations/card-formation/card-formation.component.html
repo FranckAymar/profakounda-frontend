@@ -46,7 +46,7 @@
 </div>
 
 <!-- Team -->
-<section id="team" class="pb-5">
+<section id="team" class="">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-4">
@@ -55,15 +55,17 @@
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="{{urlServer}}/{{idParticulier}}?width=200&height=200" alt="card image"></p>
+                                    <p ><img style="margin-top: 1em;" class=" img-fluid" src="{{urlServer}}/{{idParticulier}}?width=200&height=200" alt="card image"></p>
                                     <h4 class="card-title">{{code}}</h4>
                                     <div>
                                         <i *ngFor="let e of etoilesBrillants"  class="fa fa-star etoileNoteMobile"></i><i *ngFor="let eb of etoilesEteints"  class="fa fa-star etoileMobile"></i> 
                                     </div>
-                                    <h4 class="list-form" *ngFor="let moduleFomation of moduleFormations; let i = index"
+                                   <div class="list-formdiv">
+                                        <h4 class="list-form" *ngFor="let moduleFomation of moduleFormations; let i = index"
                                         [attr.data-index]="i">
                                         {{moduleFomation.libelle}} <span *ngIf="moduleFormations.length !== i+1">/</span>
-                                    </h4>
+                                        </h4>
+                                   </div>
                                     <div *ngIf="isAllModule">
                                         <h4   style="display: inline;" *ngFor="let c of contrats; let i = index"
                                         [attr.data-index]="i">

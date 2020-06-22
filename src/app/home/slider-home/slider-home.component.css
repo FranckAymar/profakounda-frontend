@@ -5,7 +5,7 @@
     section{
         margin-top: 4.6em;
     }
-    
+   
   }
   
 .brightness img
@@ -15,6 +15,7 @@
         -moz-filter: brightness(35%);
         -o-filter: brightness(35%);
         -ms-filter: brightness(35%);
-        max-height: 633px !important;
+        max-height: 600px !important;
+        min-height: 250px !important;
     }
 

@@ -144,7 +144,7 @@
                 <div class="row" style=" margin-top: 2em;">
                     <div style="text-align: center;">
                        
-                            <p>Votre formation touchera-elle un public précis (Niveau d'étude) ?</p>
+                            <p>Par niveau ou module</p>
                             <p><mat-checkbox *ngIf="!isModify" (change)="checkBoxPublicChange()">
                             </mat-checkbox></p>
                     </div>
@@ -294,7 +294,7 @@
 
                 <div class="row" style="text-align: center;">
 
-                    <p>Précisez votre lieu</p>
+                    <p>Précisez le lieu d'execution</p>
 
                     <form [formGroup]="lieuInterventionForm" (submit)="saveLieuIntervention()">
 

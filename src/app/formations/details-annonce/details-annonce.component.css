@@ -32,6 +32,9 @@ small{
   color: red;
 
 }
+.udb{
+  padding:0px;
+}
 .etoileNote:hover{
   cursor: pointer;
 }

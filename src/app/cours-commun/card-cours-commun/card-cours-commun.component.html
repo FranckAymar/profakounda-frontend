@@ -1,4 +1,4 @@
-<div class="ed-rese-grid ed-rese-grid-mar-bot-30">
+<a [routerLink]="['/courscommun/details',cours.coursCommun.id]"><div class="ed-rese-grid ed-rese-grid-mar-bot-30">
     <div class="ed-rsear-img ed-faci-full-top">
         <img  height="250" src="{{urlServer}}/{{cours.coursCommun.id}}" alt="">
 </div>
@@ -13,3 +13,4 @@
             <a [routerLink]="['/courscommun/details',cours.coursCommun.id]"  class="details-line-btn">Détails</a> 
     </div>
 </div>
+</a>

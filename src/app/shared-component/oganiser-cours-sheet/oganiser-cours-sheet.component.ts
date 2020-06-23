@@ -120,6 +120,8 @@ error:String;
 
   ngOnInit() {
 
+    console.log(this.isCheckIllimite);
+    
 
     //Initialisation des params
     this.initFormCoursCommun();
@@ -170,8 +172,11 @@ error:String;
         || this.dataReceived.coursCommun.refusMiseEnLigne ||
         this.dataReceived.coursCommun.suppressionMiseEnLigne){
 
+          console.log("Modif");
+          
         this.isModify = true ;
-
+        this.isCheckIllimite = false;
+      
           //Si le cout commun est précisé
           if(this.dataReceived.coursCommun.cout !== null){
 

@@ -565,16 +565,18 @@ error:String;
 
   saveLieuIntervention(){
 
-
     this.lieuInterventionForm.get('idCoursCommun').setValue(this.idCoursCommun);
     this.lieuInterventionForm.get('latitude').setValue(this.lat);
     this.lieuInterventionForm.get('longitude').setValue(this.lng);
+
+    console.log(this.lieuInterventionForm.value);
+    
    
     this.coursCommunService.saveLieuIntervention(this.lieuInterventionForm.value).subscribe(
 
 
       (resp)=>{
-        this.demanderMiseEnLigne(this.idCoursCommun);
+       this.demanderMiseEnLigne(this.idCoursCommun);
 
       },
       (error)=>{
@@ -583,7 +585,7 @@ error:String;
       }
     )
 
-
+ 
     
   
   }
@@ -669,11 +671,19 @@ error:String;
 
   setAddress(adress){
     
-    this.lieuInterventionForm.get('libelle').setValue(adress.formatted_address);
-  
-    this.lat = adress['geometry'].location.lat() ;
-    this.lng = adress['geometry'].location.lng() ;
+    this.lieuInterventionForm.get('libelle').setValue(adress.input);
+    this.lat = 0;
+    this.lng = 0;
 
+    
+    if(adress.data !== null){
+      this.lieuInterventionForm.get('libelle').setValue(adress.data.formatted_address);
+  
+      this.lat = adress.data['geometry'].location.lng() ;
+      this.lng = adress.data['geometry'].location.lat() ;
+    }
+   
+ 
     
 
   }

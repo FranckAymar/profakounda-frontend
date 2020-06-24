@@ -142,8 +142,7 @@ export class DetailsCoursCommunComponent implements OnInit {
     this.coursCommunService.fetchDetailsCoursCommunForHome(this.idCoursCommun).subscribe(
 
       (resp) => {
-      
-        
+              
         
         this.cours = resp;
         this.initializeMap(this.cours.lieuIntervention);
@@ -248,9 +247,11 @@ export class DetailsCoursCommunComponent implements OnInit {
 
   initializeMap(lieuIntervetion){
 
+   if(lieuIntervetion){
     this.lat = lieuIntervetion.latitude;
     this.long = lieuIntervetion.longitude ;
     this.libelle = lieuIntervetion.libelle ;
+   }
 
   }
 

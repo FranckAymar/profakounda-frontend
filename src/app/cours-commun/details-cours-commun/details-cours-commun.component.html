@@ -1,9 +1,9 @@
 <section>
     <div  class="pro-cover">
 
-        <agm-map [latitude]="lat" [longitude]="long" [zoom]="17">
+        <agm-map *ngIf="long !==0 && lat !==0" [latitude]="long" [longitude]="lat" [zoom]="17">
 
-            <agm-marker [label]="libelle" [latitude]="lat" [longitude]="long" draggable="true"></agm-marker>
+            <agm-marker [label]="libelle" [latitude]="long" [longitude]="lat" draggable="true"></agm-marker>
         </agm-map>
     </div>
 

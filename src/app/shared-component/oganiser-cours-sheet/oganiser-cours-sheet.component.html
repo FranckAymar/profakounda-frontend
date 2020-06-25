@@ -116,16 +116,20 @@
 
             </div>
              <!--Upload Photo Organisation-->
-             <div style="overflow:auto;" id="content2" class="hide">
+             <div style="overflow-y:auto; overflow-x: hidden;" id="content2" class="hide">
                 <div class="row" style="text-align: center;" >
-                                  
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>            
                     <p>Touchez plus de cibles en ajoutant un logo à votre cours organisé</p>
                     <small>(Optionnel)</small>
+                   
                         <form id="file-upload-form" class="uploader">
                             <input (change)="onSelectFile($event)" id="file-upload" type="file" name="fileUpload" accept="image/*" />
                         
                             <label for="file-upload" id="file-drag">
-                            <img  height="250" id="file-image" src="{{ urlFile ? urlFile : '../../../assets/images/Stylo.png'}}" alt="Apercu">
+                            <img  height="250" id="file-image" 
+                                  src="{{ urlFile ? urlFile : '../../../assets/images/Stylo.png'}}" alt="Apercu">
                             <div id="start">
                                 <div>Selectionner une photo</div>
                                 <span id="file-upload-btn" class="btn btn-primary">Choisir</span>
@@ -134,8 +138,12 @@
                             </label>
                         </form>
 
-                        <button style="margin-top: 0.5em;" type="submit" (click)="next()"
-                            class="btn btn-bg-color btn-block btn-float-bottom">Suivant</button>
+                
+                        <button 
+                                style="margin-top: 0.5em;" type="submit" 
+                                (click)="next()"
+                                class="btn btn-bg-color btn-block btn-float-bottom">
+                                Suivant</button>
 
                 </div>
             </div>
@@ -301,10 +309,10 @@
                         <app-google-place [autocompleteInput]="libelleLieu" (setAddress)="setAddress($event)"
                             adressType="geocode"></app-google-place>
 
-                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"
-                            (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)">
+                        <agm-map [latitude]="lng" [longitude]="lat" [zoom]="zoom"
+                            (mapClick)="ajoutMarqueur($event.coords.lng, $event.coords.lat)">
 
-                            <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true">
+                            <agm-marker [latitude]="lng" [longitude]="lat" [markerDraggable]="true">
 
                             </agm-marker>
                         </agm-map>

@@ -1,3 +1,4 @@
+import { LoadingService } from './../../loading/services/loading.service';
 import { URL } from 'src/app/API_url/config';
 import { FiliereService } from './../../admin/services/filiere.service';
 import { SnackbarService } from './../services/snackbar.service';
@@ -35,6 +36,7 @@ export class OganiserCoursSheetComponent implements OnInit {
   isCheckIllimite = true ;
   isCheckIllimitePublicCible = true ;
   isModify = false ;
+  isNotUploadLoading = true;
 
   //COnst
   idCoursCommun : number ;
@@ -103,7 +105,8 @@ error:String;
     private router : Router,
     private snackBar: SnackbarService,
     private filiereService : FiliereService,
-    private compressor: CompressorService
+    private compressor: CompressorService,
+    private loadingService : LoadingService
 
   ) {
    
@@ -646,6 +649,8 @@ error:String;
 
   ajoutMarqueur(lat : number, lng : number) {
      
+    console.log(lat);
+    
     
     this.lat = lat ;
     this.lng = lng ;
@@ -836,6 +841,11 @@ recursiveCompress = (image: File, index, array) => {
       
     // }
     onSelectFile(event) {
+      
+      //Telechargement du logo en cours (Traitementt)
+    // this.loadingService.startLoading();
+
+      //Debut du traitement
       if(event.target.files.length > 0) {
         this.data = event.target.files;
         var reader = new FileReader();
@@ -890,7 +900,10 @@ recursiveCompress = (image: File, index, array) => {
 
         (resp)=>{
 
-          console.log(resp);
+          console.log("Ok");
+          
+         // this.loadingService.stopLoading();
+          this.isNotUploadLoading = true ;
           
         },
 

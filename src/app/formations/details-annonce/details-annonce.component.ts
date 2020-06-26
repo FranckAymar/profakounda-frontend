@@ -616,7 +616,7 @@ changeEtoile5(){
             resp.rayonIntervention.zoom);
 
         }
-        
+
         this.propositionFormation = resp ;
         
       },

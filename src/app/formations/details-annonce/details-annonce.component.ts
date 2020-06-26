@@ -68,13 +68,9 @@ export class DetailsAnnonceComponent implements OnInit {
     disponibilites : null,
     isAllNiveau : null,
     isAllModule : null,
-<<<<<<< HEAD
-    cyclePrimairePresent : false
-=======
     cyclePrimairePresent : null,
     commune : null,
     ville : null
->>>>>>> d287270a0cd4dbf4e34dc9bb1993e4d17cc52de4
     
   } ;
 

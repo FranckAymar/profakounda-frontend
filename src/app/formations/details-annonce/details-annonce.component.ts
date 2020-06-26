@@ -1,3 +1,4 @@
+import { LoadingService } from './../../loading/services/loading.service';
 import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { PaiementDetails } from './../model/niveau.model';
 import { Particulier } from './../../home/models/Particulier.model';
@@ -67,7 +68,13 @@ export class DetailsAnnonceComponent implements OnInit {
     disponibilites : null,
     isAllNiveau : null,
     isAllModule : null,
+<<<<<<< HEAD
     cyclePrimairePresent : false
+=======
+    cyclePrimairePresent : null,
+    commune : null,
+    ville : null
+>>>>>>> d287270a0cd4dbf4e34dc9bb1993e4d17cc52de4
     
   } ;
 
@@ -115,7 +122,8 @@ export class DetailsAnnonceComponent implements OnInit {
               private particulierService:ParticulierService,
               private avisService:AvisService,
               private snackbarService : SnackbarService,
-              private router : Router, ) { 
+              private router : Router,
+               ) { 
 
                 this.step = 'step1';
                 this.snapshot = router.routerState.snapshot;
@@ -593,6 +601,8 @@ changeEtoile5(){
     this.detaisFormationsService.getDetailFormation(this.idPropositionFormation).subscribe(
 
       (resp)=> {
+        console.log(resp);
+        
         if(localStorage.getItem(this.signInService.USERNAME))
         {
           if(resp["username"]===localStorage.getItem(this.signInService.USERNAME))

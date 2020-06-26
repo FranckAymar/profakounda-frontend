@@ -1,10 +1,10 @@
 <section>
     <div *ngIf="cours.lieuIntervention" class="pro-cover">
 
-        <agm-map [latitude]="cours.lieuIntervention?.latitude" [longitude]="cours.lieuIntervention?.longitude"
+        <agm-map [latitude]="cours.lieuIntervention?.longitude" [longitude]="cours.lieuIntervention?.latitude"
             [zoom]="zoom">
 
-            <agm-marker [latitude]="cours.lieuIntervention?.latitude" [longitude]="cours.lieuIntervention?.longitude"
+            <agm-marker [latitude]="cours.lieuIntervention?.longitude" [longitude]="cours.lieuIntervention?.latitude"
                 [label]="cours.lieuIntervention?.libelle"></agm-marker>
 
 

@@ -1121,9 +1121,11 @@
      color: #000000;
      margin: 0px;
 }
- .home-top-cour-desc h4 {
+
+ .home-top-cour-desc h4 span{
      font-size: 15px;
      padding-bottom: 8px;
+     font-weight: bold;
 }
  .home-top-cour-desc p {
      margin-bottom: 0px;
@@ -2299,7 +2301,7 @@
  .pro-user-bio ul li:last-child{
      padding-bottom: 0px;
 }
- .pro-user-bio ul li:nth-child(2){
+ .pro-user-bio ul li:nth-child(3){
      border-bottom: 1px solid #e9edf1;
      margin-bottom: 15px;
      padding-bottom: 15px;

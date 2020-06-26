@@ -5,7 +5,7 @@
     <div class="col-md-3">
         <p>
             <img height="170" class="img-card-mob" 
-                 src="{{urlServer}}/{{idParticulier}}?width=200&height=200" 
+                 src="{{urlServer}}/{{idParticulier}}" 
                  alt="">
         </p>
     </div>
@@ -17,16 +17,19 @@
                 <h3>{{code}}</h3>
             </div>
             <div>
-                <i *ngFor="let e of etoilesBrillants"  class="fa fa-star etoileNote"></i><i *ngFor="let eb of etoilesEteints"  class="fa fa-star etoile"></i> 
+                <i *ngFor="let e of etoilesBrillants"  class="fa fa-star etoileNote"></i>
+                <i *ngFor="let eb of etoilesEteints"  class="fa fa-star etoile"></i> 
             </div>
-            <h4   style="display: inline;" *ngFor="let moduleFomation of moduleFormations; let i = index"
-                [attr.data-index]="i">
-                {{moduleFomation.libelle}} <span *ngIf="moduleFormations.length !== i+1">/</span>
+                <h4 class="card-modules" >
+                 <span style="display: inline;" 
+                 *ngFor="let moduleFomation of moduleFormations; let i = index"
+             [attr.data-index]="i">{{moduleFomation.libelle}}<span *ngIf="moduleFormations.length !== i+1">/</span></span> 
+             
             </h4>
             <div *ngIf="isAllModule">
-                <h4   style="display: inline;" *ngFor="let c of contrats; let i = index"
-                [attr.data-index]="i">
-                {{c.niveau?.libelle}} {{c.niveauTemporaire?.libelle}}  <span *ngIf="contrats.length !== i+1">/</span>
+                <h4   >
+                 <span style="display: inline;" *ngFor="let c of contrats; let i = index"
+                [attr.data-index]="i"> {{c.niveau?.libelle}} {{c.niveauTemporaire?.libelle}} <span *ngIf="contrats.length !== i+1">/</span></span> 
                 </h4>
             </div>
         </a>
@@ -58,23 +61,23 @@
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p ><img style="margin-top: 1em;" class=" img-fluid" src="{{urlServer}}/{{idParticulier}}?width=200&height=200" alt="card image"></p>
+                                    <p ><img style="margin-top: 1em;" class=" img-fluid" src="{{urlServer}}/{{idParticulier}}" alt="card image"></p>
                                     <h4 class="card-title">{{code}}</h4>
                                     <div>
                                         <i *ngFor="let e of etoilesBrillants"  class="fa fa-star etoileNoteMobile"></i><i *ngFor="let eb of etoilesEteints"  class="fa fa-star etoileMobile"></i> 
                                     </div>
-                                   <div class="list-formdiv">
-                                        <h4 class="list-form" *ngFor="let moduleFomation of moduleFormations; let i = index"
-                                        [attr.data-index]="i">
-                                        {{moduleFomation.libelle}} <span *ngIf="moduleFormations.length !== i+1">/</span>
-                                        </h4>
+                                    <h4   class="card-modules modules-mob" >
+                                        <span style="display: inline" 
+                                        *ngFor="let moduleFomation of moduleFormations; let i = index"
+                                    [attr.data-index]="i">{{moduleFomation.libelle}}<span *ngIf="moduleFormations.length !== i+1">/</span></span> 
+                                    
+                                   </h4>
+                                   <div *ngIf="isAllModule">
+                                       <h4   class="card-modules modules-mob"  >
+                                        <span style="display: inline" *ngFor="let c of contrats; let i = index"
+                                       [attr.data-index]="i"> {{c.niveau?.libelle}} {{c.niveauTemporaire?.libelle}} <span *ngIf="contrats.length !== i+1">/</span></span> 
+                                       </h4>
                                    </div>
-                                    <div *ngIf="isAllModule">
-                                        <h4   style="display: inline;" *ngFor="let c of contrats; let i = index"
-                                        [attr.data-index]="i">
-                                        {{c.niveau?.libelle}} {{c.niveauTemporaire?.libelle}}  <span *ngIf="contrats.length !== i+1">/</span>
-                                        </h4>
-                                    </div>
                                     <p class="card-text">{{description}}</p>
                                     
                                     <span class="home-top-cour-rat">{{ville}}</span>

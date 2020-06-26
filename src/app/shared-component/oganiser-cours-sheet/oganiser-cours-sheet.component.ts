@@ -1,3 +1,4 @@
+import { LoadingService } from './../../loading/services/loading.service';
 import { URL } from 'src/app/API_url/config';
 import { FiliereService } from './../../admin/services/filiere.service';
 import { SnackbarService } from './../services/snackbar.service';
@@ -12,7 +13,7 @@ import { publicCibleModel } from './../../home/models/publiccible';
 import { LieuInterventionModel } from './../../home/models/lieuintervention';
 import { CoursCommunModel } from './../../home/models/courscommun';
 import { FormBuilder, FormGroup, Validators, Form, FormArray, FormControl } from '@angular/forms';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import * as $ from 'jquery';
 import { CompressorService } from 'src/app/customers/services/CompressorService';
@@ -35,6 +36,7 @@ export class OganiserCoursSheetComponent implements OnInit {
   isCheckIllimite = true ;
   isCheckIllimitePublicCible = true ;
   isModify = false ;
+  isNotUploadLoading = true;
 
   //COnst
   idCoursCommun : number ;
@@ -103,7 +105,9 @@ error:String;
     private router : Router,
     private snackBar: SnackbarService,
     private filiereService : FiliereService,
-    private compressor: CompressorService
+    private compressor: CompressorService,
+    private loadingService : LoadingService,
+    private ref: ChangeDetectorRef
 
   ) {
    
@@ -646,6 +650,8 @@ error:String;
 
   ajoutMarqueur(lat : number, lng : number) {
      
+    console.log(lat);
+    
     
     this.lat = lat ;
     this.lng = lng ;
@@ -836,6 +842,12 @@ recursiveCompress = (image: File, index, array) => {
       
     // }
     onSelectFile(event) {
+      
+      //Telechargement du logo en cours (Traitementt)
+    // this.loadingService.startLoading();
+      this.isNotUploadLoading = false;
+
+      //Debut du traitement
       if(event.target.files.length > 0) {
         this.data = event.target.files;
         var reader = new FileReader();
@@ -889,8 +901,10 @@ recursiveCompress = (image: File, index, array) => {
       this.coursCommunService.saveLogoCoursCommun(data).subscribe(
 
         (resp)=>{
-
-          console.log(resp);
+          
+          this.isNotUploadLoading = true ;
+          this.ref.detectChanges();
+          
           
         },
 

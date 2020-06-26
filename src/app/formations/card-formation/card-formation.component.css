@@ -6,6 +6,15 @@
     cursor: pointer !important;
 }
 
+.modules-mob{
+    padding-left: 0.5em; 
+    padding-right: 0.5em;
+}
+
+.modules-mob span{
+    font-weight: bold;
+}
+
 #team {
    display: none;
 }
@@ -49,7 +58,17 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 1em;
+    padding-right: 1em;
+    padding-left: 1em;
+
+}
+
+.card-modules{
+
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 }
 

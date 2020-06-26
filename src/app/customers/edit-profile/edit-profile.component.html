@@ -6,7 +6,7 @@
             <div class="box-inn-sp ">
                 <div class="inn-title">
                     
-                    <img  style="width: 10em;height: 10em; border-radius: 0.3em;" src="{{url}}" alt="">
+                    <img  style="width: 10em;height: 10em; border-radius: 0.3em;" src="{{urlFile}}" alt="">
                     <div style="float: right;">
                         <h4 style="background-color: red;">Editer profil</h4>
                     </div>
@@ -186,3 +186,16 @@
 
     </div>
 </div>
+
+<ng-template #firstDialog>
+  <p matDialogContent><em>Photo modifiée avec succès</em></p>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose>Ok</button>
+  </mat-dialog-actions>
+</ng-template>
+<ng-template #secondDialog>
+    <p matDialogContent><em>Modification effectuée avec succès</em></p>
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose>Ok</button>
+    </mat-dialog-actions>
+  </ng-template>

@@ -3,9 +3,14 @@
 </div>
 
 
+<div class="container-fluid containt-card">
+
+
 
 <div *ngFor="let p of propositions" style="margin-top: 1em;"class="col-md-12">
-    <div class="box-inn-sp">
+    
+
+    <div  class="box-inn-sp">
         <div class="inn-title">
             <a *ngIf="p.proposition.enLigne && 
                 p.nombreAvis" style="float: right;" 
@@ -25,36 +30,36 @@
             <h5 *ngIf="p.proposition.refusMiseEnLigne" style="color:darkorange;" 
                 data-toggle="tooltip" data-placement="right" title="{{p.proposition.causeRefus?.details}}">Refusée</h5>
             <h5 *ngIf="p.proposition.suppressionMiseEnLigne" style="color: red;">Hors-ligne</h5>
-
+            
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
                 <p>
                     <button data-toggle="modal" data-target="#ajouterDescription" (click)="getProposition(p.proposition)" class="btn btn-danger btn btn-block">Description</button>
                 </p>
-                <div *ngIf="!p.proposition.cyclePrimaire"  class="row">
+                <div *ngIf="!p.proposition.cyclePrimaire"   class="row ligne">
                     <div  style="margin-top: 0.5em !important;" class="col-md-3">
                         <button    (click)="addModule(p.modules,p.proposition.id,p.proposition.allModule,p.proposition.allNiveau)" type="button" data-toggle="modal" data-target="#modules"
                                 class="btn btn-info btn-block">
-                                Modules enseignés
+                                Modules enseignés <i *ngIf="p.isModule || p.proposition.allModule"  class="fa fa-check ok" aria-hidden="true"></i> <i *ngIf="!p.isModule && !p.proposition.allModule" class="fa fa-exclamation-triangle notOk"  aria-hidden="true"></i>
                         </button>
                     </div>
                     <div style="margin-top: 0.5em !important;" class="col-md-3">
                         <button style="margin-left: 1em;" (click)="addNiveau(p.proposition.id)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
                                 class="btn btn-primary btn-block">
-                                Niveau enseigné
+                                Niveau enseigné <i *ngIf="p.isContrat"  class="fa fa-check ok" aria-hidden="true"></i> <i *ngIf="!p.isContrat" class="fa fa-exclamation-triangle notOk"  aria-hidden="true"></i>
                         </button>
                     </div>
                     <div style="margin-top: 0.5em !important;" class="col-md-3">
                         <button style="margin-left: 1em;" (click)="addDisponibilite(p.proposition.id)" type="button" data-toggle="modal" data-target="#disponibilite"
                         class="btn btn-outline-success btn-block">
-                        Disponibilités
+                        Disponibilités <i *ngIf="p.isDisponibilite"  class="fa fa-check ok" aria-hidden="true"></i> <i *ngIf="!p.isDisponibilite" class="fa fa-exclamation-triangle notOk"  aria-hidden="true"></i>
                         </button>
                     </div>
                     <div  style="margin-top: 0.5em !important;" class="col-md-3">
                         <button  (click)="loadPropostion(p.proposition.id)" style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
                         class="btn btn-outline-dark btn-block">
-                        Zone Intervention
+                        Zone Intervention <i *ngIf="p.isRayonIntervention"  class="fa fa-check ok" aria-hidden="true"></i> <i *ngIf="!p.isRayonIntervention" class="fa fa-exclamation-triangle notOk"  aria-hidden="true"></i>
                         </button>   
                     </div>
                 </div>
@@ -107,22 +112,23 @@
                 
             </div>
            <div style="margin-top: 1em;">
-            <button   *ngIf="p.proposition.enLigne"    (click)="mettreHorsLigne(p.proposition.id)" class="btn btn-outline-info btnEnLigne">Mettre en hors ligne</button>
+            <button   *ngIf="p.proposition.enLigne"    (click)="mettreHorsLigne(p.proposition.id)" class="btn btn-outline-info btnEnLigne">Mettre hors ligne</button>
             <button   *ngIf="(!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && !p.proposition.allModule)" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
             <button  *ngIf="(!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && !p.proposition.allModule)" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
             <!--All module-->
             <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && p.proposition.allModule" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
             <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && p.proposition.allModule" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
            </div>
-        </div>
+       
+    </div>
     </div>
 </div>
-
+</div>
 <div class="modal fade" id="showVilleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div  class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">SAISIE DE LA VILLE ET COMMUNE</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -173,10 +179,10 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h5 class="modal-title" id="exampleModalLabel">AJOUTER UN NIVEAU</h5> -->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+            <div  class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">AJOUT D'UN NIVEAU</h5>
+                <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span style="background-color:white !important;"  aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">

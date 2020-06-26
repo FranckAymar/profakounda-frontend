@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-
+import { Component, OnInit, ViewChild, ElementRef, Input, TemplateRef } from '@angular/core';
+import { URL } from 'src/app/API_url/config';
 import { EMPTY } from 'rxjs';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
@@ -14,6 +14,8 @@ import { startWith, map,expand } from 'rxjs/operators';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { CompressorService } from '../services/CompressorService';
 import { CommuneService } from 'src/app/admin/services/commune.service';
+import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
+import { MatDialog } from '@angular/material';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -33,9 +35,12 @@ export class EditProfileComponent implements OnInit {
    @Input() niveau:string;
    @Input() commune:string;
    @Input() ville:string;
+   modificationSuccessMessage:string;
    message:string;
    error:string;
    mes:string;
+   urlFile;
+   urlServer = URL.getPhoto;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
   communes: any=[] ;
@@ -55,12 +60,16 @@ export class EditProfileComponent implements OnInit {
   filteredOptions3: Observable<string[]>
   filteredOptions2: Observable<string[]>
   filteredOptions: Observable<string[]>;
+  @ViewChild('firstDialog',null) firstDialog: TemplateRef<any>;
+  @ViewChild('secondDialog',null) secondDialog: TemplateRef<any>;
   constructor(private filiereService :FiliereService,
               private niveauService:NiveauService,
               private particulierService:ParticulierService,
               private villeService:VilleService,
               private communeService:CommuneService,
               private router:Router,
+              private dialog: MatDialog,
+              private snackbarService : SnackbarService,
               private formBuilder:FormBuilder,
               private signInService:SignInService,
               private compressor: CompressorService) { }
@@ -204,6 +213,7 @@ getColor(){
         this.ville = reponse['ville'];
        this.id = reponse['id'];
        this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
+       this.urlFile = this.urlServer +"/" + this.id ;
         this.userForm.patchValue({
           nom: reponse['nom'],
           prenoms: reponse['prenoms'],
@@ -223,8 +233,16 @@ getColor(){
   }
 
   onFileChange(event) {
+    
     if(event.target.files.length > 0) {
       this.data = event.target.files;
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); 
+  
+        //Apercu
+        reader.onload = (event) => {
+          this.urlFile = reader.result ;
+        }
         console.log('input: '  + this.data[0].size);
         const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
           expand(res => {
@@ -260,8 +278,10 @@ getColor(){
     this.particulierService.modifierPhoto(data).
     subscribe(
       (response)=>{
-       
-        alert("Photo modifiée avec succès.");
+        this.modificationSuccessMessage ="Photo modifiée avec succès";
+        //this.snackbarService.openSnackBar("Photo modifiée avec succès");
+        //alert("Photo modifier avec succès.");
+        this.dialog.open(this.firstDialog);
          
       },
       (error)=>{
@@ -333,7 +353,8 @@ getColor(){
       this.particulierService.onChangePassword(this.passwordModel)
     .subscribe(
       (response)=>{
-        alert("Modification effectuée avec succès.");
+        this.dialog.open(this.secondDialog);
+        //alert("Modification effectuée avec succès.");
         this.initPassword();
         localStorage.setItem(this.signInService.TOKEN,newToken);
         this.mes = '';
@@ -357,7 +378,9 @@ getColor(){
         this.error = response["error"]
         if(!this.error)
         {
-          alert("Modification effectuée avec succès."); 
+          this.modificationSuccessMessage ="Modification effectuée avec succès";
+          this.dialog.open(this.secondDialog);
+          //alert("Modification effectuée avec succès."); 
         this.rechercherPaticulierConnecter();
       
         //Rechargementt du component courant

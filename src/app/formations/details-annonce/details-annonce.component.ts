@@ -67,7 +67,7 @@ export class DetailsAnnonceComponent implements OnInit {
     disponibilites : null,
     isAllNiveau : null,
     isAllModule : null,
-    cyclePrimairePresent : null
+    cyclePrimairePresent : false
     
   } ;
 
@@ -610,7 +610,7 @@ changeEtoile5(){
             resp.rayonIntervention.zoom);
 
         }
-        
+
         this.propositionFormation = resp ;
         
       },

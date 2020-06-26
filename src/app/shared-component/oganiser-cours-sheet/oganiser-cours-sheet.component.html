@@ -139,11 +139,11 @@
                         </form>
 
                 
-                        <button 
+                        <button [disabled]="!isNotUploadLoading"
                                 style="margin-top: 0.5em;" type="submit" 
                                 (click)="next()"
                                 class="btn btn-bg-color btn-block btn-float-bottom">
-                                Suivant</button>
+                                {{ isNotUploadLoading ? 'Suivant' : 'Chargement en cours ...'}}</button>
 
                 </div>
             </div>

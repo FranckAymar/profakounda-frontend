@@ -13,7 +13,7 @@ import { publicCibleModel } from './../../home/models/publiccible';
 import { LieuInterventionModel } from './../../home/models/lieuintervention';
 import { CoursCommunModel } from './../../home/models/courscommun';
 import { FormBuilder, FormGroup, Validators, Form, FormArray, FormControl } from '@angular/forms';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import * as $ from 'jquery';
 import { CompressorService } from 'src/app/customers/services/CompressorService';
@@ -106,7 +106,8 @@ error:String;
     private snackBar: SnackbarService,
     private filiereService : FiliereService,
     private compressor: CompressorService,
-    private loadingService : LoadingService
+    private loadingService : LoadingService,
+    private ref: ChangeDetectorRef
 
   ) {
    
@@ -844,6 +845,7 @@ recursiveCompress = (image: File, index, array) => {
       
       //Telechargement du logo en cours (Traitementt)
     // this.loadingService.startLoading();
+      this.isNotUploadLoading = false;
 
       //Debut du traitement
       if(event.target.files.length > 0) {
@@ -899,11 +901,10 @@ recursiveCompress = (image: File, index, array) => {
       this.coursCommunService.saveLogoCoursCommun(data).subscribe(
 
         (resp)=>{
-
-          console.log("Ok");
           
-         // this.loadingService.stopLoading();
           this.isNotUploadLoading = true ;
+          this.ref.detectChanges();
+          
           
         },
 

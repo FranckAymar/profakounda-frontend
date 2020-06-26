@@ -18,3 +18,14 @@ agm-map {
     */
   }
   
+
+  @media only screen and (max-width: 600px){
+   
+    .col-md-8 {
+     padding: 0;
+     padding-right: 0; 
+     padding-left: 3px; 
+    }
+
+  }
+  

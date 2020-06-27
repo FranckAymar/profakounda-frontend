@@ -56,29 +56,29 @@
                         <p>Ecrivez nous maintenant !</p>
                     </div>
                     <!-- ENQUIRY FORM -->
-                    <form [formGroup]="contactUsForm" id="contact_form" name="contact_form"
+                    <form [formGroup]="contactUsForm" 
                         (submit)="sendMessage()">
                         <ul>
-                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
-                                <input formControlName="nom" type="text" id="f1" value="" name="f1" placeholder="Nom" >
+                            <li class="col-md-6 ">
+                                <input formControlName="nom" type="text" id="f1" name="f1" placeholder="Nom" >
                                 <small style="color: red;" *ngIf="contactUsForm.controls.nom.errors?.required" class="invalid-feedback">
                                     Champ requis
                                 </small>    
                              </li> 
                                               
-                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
-                                <input formControlName="telephone" type="tel" id="f3" value="" name="f3" placeholder="Contact" required=""> 
+                            <li class="col-md-6 ">
+                                <input formControlName="telephone" type="tel" id="f3" name="f3" placeholder="Contact" > 
                                
                             </li>
-                            <li class="col-md-12 col-sm-6 col-xs-12 contact-input-spac">
-                                <input formControlName="email" type="text" id="f4" value="" name="f4" 
-                                placeholder="Adresse e-mail" required=""> 
+                            <li class="col-md-12 ">
+                                <input formControlName="email" type="text" id="f4" name="f4" 
+                                placeholder="Adresse e-mail" > 
                                 <small style="color: red;" *ngIf="contactUsForm.controls.email.errors?.email" class="invalid-feedback">
                                     Champ email requis
                                 </small>   
                             </li>
-                            <li class="col-md-12 col-sm-12 col-xs-12 contact-input-spac">
-                                <textarea formControlName="message" id="f5" name="f5" required=""></textarea>
+                            <li class="col-md-12 ">
+                                <textarea formControlName="message" id="f5" name="f5" ></textarea>
                             </li>
                             <li class="col-md-6">
                                 <input [disabled]="contactUsForm.invalid" placeholder="Votre message" type="submit" value="Envoyer"> </li>

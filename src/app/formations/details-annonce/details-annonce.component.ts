@@ -557,6 +557,8 @@ changeEtoile5(){
             this.closeModalPayment.nativeElement.click() ;
             this.contactCustomer();
           }
+
+          this.initializeModalPayment();
           
         }else{
           alert("Une erreur s'est produite pendant le paiement.\nVérifiez votre numéro de téléphone ou votre code d'activation puis réessayer");

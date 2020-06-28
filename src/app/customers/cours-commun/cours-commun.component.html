@@ -61,10 +61,11 @@
                                                 <div class="row">
                                                         <a [routerLink]="[cours.coursCommun.id]" class="read-line-btn"
                                                                 style="margin-right: 0.5em;">Détails</a>
-                                                        <a style="border-color: #d83d0c !important; 
+                                                        <a *ngIf="!cours.coursCommun.isVirement" style="border-color: #d83d0c !important; 
                                                                 color: #d83d0c !important;"
                                                                 (click)="loadCoursCommun(cours)"
                                                                 class="read-line-btn">Modifier</a>
+                                                                <kbd style="background-color: green;" *ngIf="cours.coursCommun.isVirement">Virement effectué <span style="color: red; background-color: white;">{{cours.coursCommun.dateVirement | date: 'dd/MM/yyyy'}}</span></kbd>
 
                                                 </div>
                                         </div>

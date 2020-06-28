@@ -172,6 +172,7 @@ export const URL = {
     modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
     demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
     demandeVersement : consts.host+ consts.nameProject + 'particulier/demandeVirement',
+    accepterVirement : consts.host+ consts.nameProject + 'admin/validerVirement',
     demandeVersementAdmin : consts.host+ consts.nameProject + 'admin/demandeVirements',
     nombreDemandeVirement : consts.host+ consts.nameProject + 'admin/nombreDemandeVirement',
     recupererCoursCommunsInscritsParticulier : consts.host+ consts.nameProject + 'particulier/coursCommunsSelects',

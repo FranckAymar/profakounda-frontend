@@ -32,6 +32,9 @@ export class CoursCommunAdminService {
   nombreDemandeVirement() : Observable<any> {
     return this.httpClient.get(URL.nombreDemandeVirement);
   }
+  effectuerVirement(id) : Observable<any> {
+    return this.httpClient.post(URL.accepterVirement,id);
+  }
   fetchAllcoursCommunAdmin(critereFiltre?): Observable<any> {
 
     if (critereFiltre) {

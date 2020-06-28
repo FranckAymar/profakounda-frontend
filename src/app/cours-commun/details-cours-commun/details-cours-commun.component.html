@@ -87,7 +87,7 @@
                                 <div class="sdb-cl-tim">
                                     <div class="sdb-cl-day">
                                         <h5 style="text-align: center;" class="pro-user-act"> {{public.cout | currency:'XOF'}}</h5>
-                                        <p> Niveau : {{public.niveau?.libelle}}</p>
+                                        <p> Niveau : {{public.niveau ? public.niveau.libelle : 'Tout niveau confondu'}}</p>
                                         <p *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</p>
 
                                         <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>

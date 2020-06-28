@@ -1,177 +1,176 @@
- 
-       
-       
-      
-        
+<!--== User Details ==-->
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>5 DERNIERS COURS COMMUNS</h4>
 
-        <!--== User Details ==-->
-        <div class="sb2-2-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box-inn-sp">
-                        <div class="inn-title">
-                            <h4>5 DERNIERS COURS COMMUNS</h4>
-                           
-                        </div>
-                        <div class="tab-inn">
-                            <div class="table-responsive table-desi">
-                                <div style="width: 100%;overflow: auto;">
-                                    <table  class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Code du cours</th>
-                                                <th>Titre</th>
-                                                <th>Date de création</th>
-                                                <th>Nombre d'inscrits</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let c of coursCommuns">
-                                                
-                                                <td>{{c.coursCommun.codeCours}}</td>
-                                                <td>{{c.coursCommun.titre}}</td>
-                                                <td>{{c.coursCommun.dateCreation | date: 'dd-MM-yyyy'}}</td>
-                                                <td>{{c.coursCommun.nombreInscrit}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <div style="width: 100%;overflow: auto;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Code du cours</th>
+                                        <th>Titre</th>
+                                        <th>Date de création</th>
+                                        <th>Nombre d'inscrits</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let c of coursCommuns">
+
+                                        <td>{{c.coursCommun.codeCours}}</td>
+                                        <td>{{c.coursCommun.titre}}</td>
+                                        <td>{{c.coursCommun.dateCreation | date: 'dd-MM-yyyy'}}</td>
+                                        <td>{{c.coursCommun.nombreInscrit}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="sb2-2-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box-inn-sp">
-                        <div class="inn-title">
-                            <h4>5 DERNIERES PROPOSITIONS DE FORMATIONS</h4>
-                           
-                        </div>
-                        <div class="tab-inn">
-                            <div class="table-responsive table-desi">
-                                <div style="width: 100%;overflow: auto;">
-                                    <table  class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Description</th>
-                                                <th>Téléphone</th>
-                                                <th>Date de création</th>
+    </div>
+</div>
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>5 DERNIERES PROPOSITIONS DE FORMATIONS</h4>
+
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <div style="width: 100%;overflow: auto;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Téléphone</th>
+                                        <th>Date de création</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let p of propositions">
+
+                                        <td>
+                                            <p style="
                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let p of propositions">
-                                                
-                                                <td>{{p.proposition.description}}</td>
-                                                <td>{{p.proposition.telephone}}</td>
-                                                <td>{{p.proposition.dateCreation | date: 'dd-MM-yyyy'}}</td>
-                                                <td>
-                                                    <span *ngIf="!p.proposition.attenteMiseEnLigne && 
+                                                width: 10em;
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;">{{p.proposition.description}}</p>
+                                        </td>
+                                        <td>{{p.proposition.telephone}}</td>
+                                        <td>{{p.proposition.dateCreation | date: 'dd-MM-yyyy'}}</td>
+                                        <td>
+                                            <span *ngIf="!p.proposition.attenteMiseEnLigne && 
                                                     !p.proposition.enLigne && 
                                                     !p.proposition.refusMiseEnLigne &&
-                                                    !p.proposition.suppressionMiseEnLigne"
-                                                    class="label label-info">En édition</span>
-                                                    <span *ngIf="p.proposition.attenteMiseEnLigne" class="label label-info"
-                                                        >En attende de validation</span>
-                                                    <span *ngIf="p.proposition.refusMiseEnLigne" 
-                                                    class="label label-warning" 
-                    data-toggle="tooltip" data-placement="right" title="{{p.proposition.causeRefus?.details}}">Refusée</span>
-                    <span *ngIf="p.proposition.suppressionMiseEnLigne" 
-                    class="label label-danger" >Hors-ligne</span>
-                    <span *ngIf="p.proposition.enLigne" 
-                    class="label label-success">En ligne</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                                    !p.proposition.suppressionMiseEnLigne" class="label label-info">En
+                                                édition</span>
+                                            <span *ngIf="p.proposition.attenteMiseEnLigne" class="label label-info">En
+                                                attende de validation</span>
+                                            <span *ngIf="p.proposition.refusMiseEnLigne" class="label label-warning"
+                                                data-toggle="tooltip" data-placement="right"
+                                                title="{{p.proposition.causeRefus?.details}}">Refusée</span>
+                                            <span *ngIf="p.proposition.suppressionMiseEnLigne"
+                                                class="label label-danger">Hors-ligne</span>
+                                            <span *ngIf="p.proposition.enLigne" class="label label-success">En
+                                                ligne</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="sb2-2-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box-inn-sp">
-                        <div class="inn-title">
-                            <h4>10 DERNIERES INSCRIPTIONS</h4>
-                           
-                        </div>
-                        <div class="tab-inn">
-                            <div class="table-responsive table-desi">
-                                <div style="width: 100%;overflow: auto;">
-                                    <table  class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Code</th>
-                                                <th>Nom</th>
-                                                <th>Prénoms</th>
-                                                <th>Titre du cours</th>
-                                                <th>Date d'inscription</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let i of inscrits">
-                                                
-                                                <td>{{i.code}}</td>
-                                                <td>{{i.nom}}</td>
-                                                <td>{{i.prenoms}}</td>
-                                                <td>{{i.coursCommun?.titre}} {{i.publicVise?.coursCommun.titre}}</td>
-                                                <td>{{i.dateInscription | date: 'dd-MM-yyyy'}}</td>
-                                               
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="sb2-2-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box-inn-sp">
-                        <div class="inn-title">
-                            <h4>5 DERNIERS PAIEMENTS ACTIFS</h4>
-                           
-                        </div>
-                        <div class="tab-inn">
-                            <div class="table-responsive table-desi">
-                                <div style="width: 100%; overflow: auto;">
-                                    <div style="width: 100%;overflow: auto;">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Forfait</th>
-                                                    <th>Requete(s) restante(s)</th>
-                                                    <th>Date de paiement</th>
-                                                    <th>Date d'expiration</th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let paiement of paiements">
-                                                    <td>{{paiement.nomForfait}}</td>
-                                                    <td>{{paiement.nbreRequeteRestante}}</td>
-                                                    <td>{{paiement.datePaiement |date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                                                    <td>{{paiement.dateFin |date:"yyyy-MM-dd HH:mm:ss"}}</td>
-                                                    
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+</div>
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>10 DERNIERES INSCRIPTIONS</h4>
 
-        
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <div style="width: 100%;overflow: auto;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Nom</th>
+                                        <th>Prénoms</th>
+                                        <th>Titre du cours</th>
+                                        <th>Date d'inscription</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let i of inscrits">
+
+                                        <td>{{i.code}}</td>
+                                        <td>{{i.nom}}</td>
+                                        <td>{{i.prenoms}}</td>
+                                        <td>{{i.coursCommun?.titre}} {{i.publicVise?.coursCommun.titre}}</td>
+                                        <td>{{i.dateInscription | date: 'dd-MM-yyyy'}}</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>5 DERNIERS PAIEMENTS ACTIFS</h4>
+
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <div style="width: 100%; overflow: auto;">
+                            <div style="width: 100%;overflow: auto;">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Forfait</th>
+                                            <th>Requete(s) restante(s)</th>
+                                            <th>Date de paiement</th>
+                                            <th>Date d'expiration</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let paiement of paiements">
+                                            <td>{{paiement.nomForfait}}</td>
+                                            <td>{{paiement.nbreRequeteRestante}}</td>
+                                            <td>{{paiement.datePaiement |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                            <td>{{paiement.dateFin |date:"yyyy-MM-dd HH:mm:ss"}}</td>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

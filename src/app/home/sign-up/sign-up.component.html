@@ -23,11 +23,12 @@
                 <div *ngIf="error" class="alert alert-danger">
                     {{error}}
                 </div>
-                <div *ngIf="inscriptionSucess" class="modal-header center alert alert-success">
+                <div  *ngIf="inscriptionSucess" class="modal-header center alert alert-success">
                   <div style="padding: 0.5em;"   class="row">
                     <p><strong>Inscription effectuée !</strong></p>
                     <p>Un mail de confirmation vous a été envoyé sur votre adresse email. Si le mail ne vous est pas parvenu, vérifiez vos <strong>spams</strong> ou 
                         <a style="cursor: pointer;color:blue;" (click)="onRevoyerEmail()">renvoyez le mail de confirmation.</a> </p>
+                        <p>Cliquez<a style="cursor: pointer;color:blue;" routerLink="/home/sign-in"> ici</a> pour vous connecter</p>
                   </div>
                 </div>
                

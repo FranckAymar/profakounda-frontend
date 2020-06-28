@@ -2,11 +2,16 @@
     <div class="ed-rsear-img ed-faci-full-top">
         <img  height="250" src="{{urlServer}}/{{cours.coursCommun.id}}" alt="">
 </div>
-
-    <div  class="ed-rsear-dec ed-faci-full-bot">
-            <h4><a>  {{cours.coursCommun.organisation.libelle}} - <span style="color: #896BEE;font-size: 14px;">{{cours.coursCommun.titre}}</span></a></h4>
+    <div class="ed-rsear-dec ed-faci-full-bot">
+            <h4><p  style="height: 4em;
+                        width: 100%;
+                        white-space: pre-wrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;"
+            
+            ><a>{{cours.coursCommun.organisation.libelle}}<br><span style="color: #896BEE;font-size: 14px;">{{cours.coursCommun.titre}}</span></a></p></h4>
             <p style="height: 8em;
-                        width: 25em;
+                        width: 100%;
                         white-space: pre-wrap;
                         overflow: hidden;
                         text-overflow: ellipsis;"

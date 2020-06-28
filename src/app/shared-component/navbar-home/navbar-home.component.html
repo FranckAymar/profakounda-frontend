@@ -22,14 +22,15 @@
                             </li>
                         </ul>
                         <ul>
-                            <li><a *ngIf="authenticated" (click)="close()" href="#" routerLink ="/customers" >Mon Tableau de bord</a>
+                            <li><a *ngIf="authenticated" (click)="close()"
+                                [routerLink]="profile ==='ROLE_PARTICULIER' ? ['/customers'] : ['/admin']" routerLink ="/customers" >Mon Tableau de bord</a>
                             </li>
                         </ul>
                         <h4>Formations</h4>
                         <ul >
                             <li><a (click)="close()" routerLink ="/formations">Nos formateurs</a></li>
                             <li><a (click)="close()" routerLink ="/courscommun">Les cours organisés</a></li>
-                            <li><a (click)="close()" routerLink ="">Contactez-nous</a></li>
+                            <li><a (click)="close()" routerLink ="/contactus">Contactez-nous</a></li>
 
 
                         </ul>
@@ -111,7 +112,7 @@
                                 <!-- MEGA MENU 1 -->
                             </li>
                             <li class="admi-menu">
-                                <a routerLink ="/" class="mm-arr">Contactez-nous</a>
+                                <a routerLink ="/contactus" class="mm-arr">Contactez-nous</a>
                                 <!-- MEGA MENU 1 -->
                             </li>
                         </ul>

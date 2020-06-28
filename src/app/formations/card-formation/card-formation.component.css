@@ -11,6 +11,19 @@
     padding-right: 0.5em;
 }
 
+.modules-mob p{
+    height: 3em;
+    width: 100%;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-modules span {
+    width: 100%;
+}
+
+
 .modules-mob span{
     font-weight: bold;
 }
@@ -71,6 +84,7 @@
     text-overflow: ellipsis;
 
 }
+
 
 
 

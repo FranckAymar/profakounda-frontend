@@ -201,5 +201,11 @@ export const URL = {
     inscriptioncourscommun : consts.host+ consts.nameProject + 'particulier/inscriptioncourscommun',
     inscriptionpubliccible : consts.host+ consts.nameProject + 'particulier/inscriptionpubliccible',
     recupererInscrit :  consts.host+ consts.nameProject + 'recupererinscrits',
-    verifiedLastInscription :  consts.host+ consts.nameProject + 'particulier/verifiedLastInscription'
+    verifiedLastInscription :  consts.host+ consts.nameProject + 'particulier/verifiedLastInscription',
+
+
+
+    //Contact us
+    sendMessageContactUs :  consts.host+ consts.nameProject + 'enregistrerContact',
+
 }

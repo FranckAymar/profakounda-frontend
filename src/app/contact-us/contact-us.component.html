@@ -1,0 +1,94 @@
+<!-- MOBILE MENU -->
+
+<body>
+
+    <app-navbar-home></app-navbar-home>
+    <!--SECTION START-->
+    <div style="margin-top: 3em;">
+        <div class="container com-sp pad-bot-70">
+            <div class="row">
+                <div class="cor about-sp">
+                    <div class="ed-about-tit">
+                        <div class="con-title">
+                            <h2>Contactez <span>Nous</span></h2>
+                            <p>Vous avez des questions ? Vous voulez signaler un bug ?<br>N'hésitez pas à remplir le formulaire pour nous joindre.
+                                Notre équipe se fera un plaisir d'apporter des réponses à toutes vos questions ou préoccupations éventuelles.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pg-contact">
+                        <!-- <div class="col-md-3 col-sm-6 col-xs-12 new-con new-con1">
+                            <h2>Educate <span>Master</span></h2>
+                            <p>We Provide Outsourced Software Development Services To Over 50 Clients From 21 Countries.
+                            </p>
+                        </div> -->
+                        <div class="col-md-6 col-sm-6 col-xs-12 new-con new-con1"> <img src="img/contact/1.html" alt="">
+                            <h4>Addresse</h4>
+                            <p>Abidjan, Côte d'Ivoire</p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 new-con new-con3"> <img src="img/contact/2.html" alt="">
+                            <h4>Contact</h4>
+                            <p>
+
+ <a href="mailto:support@profkounda.com" class="contact-icon">Email:
+                                    support@profkounda.com</a> </p>
+                        </div>
+                        <!-- <div class="col-md-3 col-sm-6 col-xs-12 new-con new-con4"> <img src="img/contact/3.html" alt="">
+                            <h4></h4>
+                            <p> <a href="#">Website: www.profakounda.com</a>
+                                 <br> <a href="#">Facebook: www.facebook/profakounda</a>
+                                <br> <a href="#">Blog: www.blog.mycompany.com</a> </p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--SECTION END-->
+    <div id="map">
+        <div class="row contact-map">
+            <!-- IFRAME: GET YOUR LOCATION FROM GOOGLE MAP -->
+            <iframe width="425" height="350" frameborder="0" scrolling="no" 
+                    marginheight="0" marginwidth="0" 
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=-17.731933593750004%2C-4.477856485570586%2C9.799804687500002%2C14.987239525774259&amp;layer=mapnik&amp;marker=5.331644153439766%2C-3.966064453125" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=5.332&amp;mlon=-3.966#map=6/5.332/-3.966">Afficher une carte plus grande</a></small>              <div class="container">
+                <div class="overlay-contact footer-part footer-part-form">
+                    <div class="map-head">
+                        <p>Ecrivez nous maintenant !</p>
+                    </div>
+                    <!-- ENQUIRY FORM -->
+                    <form [formGroup]="contactUsForm" id="contact_form" name="contact_form"
+                        (submit)="sendMessage()">
+                        <ul>
+                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
+                                <input formControlName="nom" type="text" id="f1" value="" name="f1" placeholder="Nom" >
+                                <small style="color: red;" *ngIf="contactUsForm.controls.nom.errors?.required" class="invalid-feedback">
+                                    Champ requis
+                                </small>    
+                             </li> 
+                                              
+                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
+                                <input formControlName="telephone" type="tel" id="f3" value="" name="f3" placeholder="Contact" required=""> 
+                               
+                            </li>
+                            <li class="col-md-12 col-sm-6 col-xs-12 contact-input-spac">
+                                <input formControlName="email" type="text" id="f4" value="" name="f4" 
+                                placeholder="Adresse e-mail" required=""> 
+                                <small style="color: red;" *ngIf="contactUsForm.controls.email.errors?.email" class="invalid-feedback">
+                                    Champ email requis
+                                </small>   
+                            </li>
+                            <li class="col-md-12 col-sm-12 col-xs-12 contact-input-spac">
+                                <textarea formControlName="message" id="f5" name="f5" required=""></textarea>
+                            </li>
+                            <li class="col-md-6">
+                                <input [disabled]="contactUsForm.invalid" placeholder="Votre message" type="submit" value="Envoyer"> </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+
+
+</body>

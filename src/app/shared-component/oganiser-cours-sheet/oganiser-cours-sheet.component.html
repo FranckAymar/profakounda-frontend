@@ -153,8 +153,10 @@
                     <div style="text-align: center;">
                        
                             <p>Par niveau ou module</p>
-                            <p><mat-checkbox *ngIf="!isModify" (change)="checkBoxPublicChange()">
-                            </mat-checkbox></p>
+                            <p>
+                            <mat-checkbox *ngIf="!isModify" (change)="checkBoxPublicChange()">
+                            </mat-checkbox>
+                            </p>
                     </div>
                     <div class="col-md-12">
                         <div *ngIf="!isCheckPublicCible" style="margin-top: 10px;" class="input-field s12">

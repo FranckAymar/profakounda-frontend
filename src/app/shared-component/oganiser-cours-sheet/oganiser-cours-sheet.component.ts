@@ -175,8 +175,6 @@ error:String;
         || this.dataReceived.coursCommun.enLigne 
         || this.dataReceived.coursCommun.refusMiseEnLigne ||
         this.dataReceived.coursCommun.suppressionMiseEnLigne){
-
-          console.log("Modif");
           
         this.isModify = true ;
         this.isCheckIllimite = false;
@@ -667,8 +665,10 @@ error:String;
       this.idCoursCommun = params['courscommunedit'];
             });  
 
-      this.urlFile = this.urlServer +"/" + this.idCoursCommun ;
+            if(this.idCoursCommun !== undefined){
+              this.urlFile = this.urlServer +"/" + this.idCoursCommun ;
 
+            }
       }
 
   /*

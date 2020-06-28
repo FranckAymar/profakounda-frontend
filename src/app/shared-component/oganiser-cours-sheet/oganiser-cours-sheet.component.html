@@ -117,10 +117,7 @@
             </div>
              <!--Upload Photo Organisation-->
              <div style="overflow-y:auto; overflow-x: hidden;" id="content2" class="hide">
-                <div class="row" style="text-align: center;" >
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
-                      </div>            
+                <div class="row" style="text-align: center;" >     
                     <p>Touchez plus de cibles en ajoutant un logo à votre cours organisé</p>
                     <small>(Optionnel)</small>
                    
@@ -128,8 +125,11 @@
                             <input (change)="onSelectFile($event)" id="file-upload" type="file" name="fileUpload" accept="image/*" />
                         
                             <label for="file-upload" id="file-drag">
-                            <img  height="250" id="file-image" 
-                                  src="{{ urlFile ? urlFile : '../../../assets/images/Stylo.png'}}" alt="Apercu">
+                            <img *ngIf="urlFile"  height="250" id="file-image" 
+                                  [src]="urlFile" alt="Apercu">
+                            <img *ngIf="!urlFile"  
+                                    src="../../../assets/images/Stylo.png" 
+                                     height="250" id="file-image" alt="Apercu">
                             <div id="start">
                                 <div>Selectionner une photo</div>
                                 <span id="file-upload-btn" class="btn btn-primary">Choisir</span>
@@ -139,12 +139,16 @@
                         </form>
 
                 
-                        <button [disabled]="!isNotUploadLoading"
-                                style="margin-top: 0.5em;" type="submit" 
-                                (click)="next()"
-                                class="btn btn-bg-color btn-block btn-float-bottom">
-                                {{ isNotUploadLoading ? 'Suivant' : 'Chargement en cours ...'}}</button>
 
+                </div>
+
+                <div class="row">
+
+                    <button [disabled]="!isNotUploadLoading"
+                    style="margin-top: 0.5em;" type="submit" 
+                    (click)="next()"
+                    class="btn btn-bg-color btn-block">
+                    {{ isNotUploadLoading ? 'Suivant' : 'Chargement en cours ...'}}</button>
                 </div>
             </div>
             <!--Public visé-->

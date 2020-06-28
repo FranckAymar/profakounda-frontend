@@ -2,6 +2,10 @@
 $theme:       #FF5722;
 $dark-text:   #5f6982;  
   
+.align-bottom{
+  position : absolute;
+  bottom   : 0
+}
 
 
 .loader {
@@ -283,11 +287,6 @@ form input{
   font-size: 1em;
  }
 
- .btn-float-bottom{
-
- // position: absolute;
-  //bottom: 0;
- }
  .cout{
    margin-top: 8px;
  }

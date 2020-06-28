@@ -58,7 +58,7 @@
                             <td>{{p.coursCommun.compteRendu.revenuClient | currency:'XOF'}} </td>
                             <td>{{p.coursCommun.compteRendu.revenuOperateur | currency:'XOF'}} </td>
                             <td *ngIf="p.coursCommun.demandeVirement"><span style="font-weight: bold;">{{p.coursCommun.dateDemandeVirement | date:'dd-MM-yyyy HH:ss'}}</span> </td>
-                            <td *ngIf="p.coursCommun.demandeVirement"><button  class="btn btn-danger">virement</button></td>
+                            <td *ngIf="p.coursCommun.demandeVirement"><button (click)="effectuerVirement(p.coursCommun.id)"  class="btn btn-danger">virement</button></td>
                         </tr>
                     </tbody>
                 </table>

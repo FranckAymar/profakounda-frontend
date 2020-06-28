@@ -21,7 +21,18 @@ export class DemandeVirementComponent implements OnInit {
     this.onFetchDemandeVirements();
   }
 
+  effectuerVirement(id){
+   
+    this.coursCommunAdminService.effectuerVirement(id).subscribe(
+      (resp) => {
+       this.onFetchDemandeVirements();
+      },
+      (error) => {
+        console.log(error);
+      }
 
+    )
+  }
   onFetchDemandeVirements(){
 
     

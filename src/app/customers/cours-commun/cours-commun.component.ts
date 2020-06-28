@@ -65,7 +65,6 @@ export class CoursCommunComponent implements OnInit {
   }
 
   goToOrganiserCours(): void {
-
     this.openDialog({});
   
   };

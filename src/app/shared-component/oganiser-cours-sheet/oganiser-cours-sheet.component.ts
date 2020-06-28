@@ -889,6 +889,54 @@ recursiveCompress = (image: File, index, array) => {
               }
     }
 
+    onSelectAffichePubFile(event) {
+      
+      //Telechargement du logo en cours (Traitementt)
+    // this.loadingService.startLoading();
+      this.isNotUploadLoading = false;
+
+      //Debut du traitement
+      if(event.target.files.length > 0) {
+        this.data = event.target.files;
+        var reader = new FileReader();
+  
+        reader.readAsDataURL(event.target.files[0]); 
+  
+        //Apercu
+        reader.onload = (event) => {
+          this.urlFile = reader.result ;
+        }
+          console.log('input: '  + this.data[0].size);
+          const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
+            expand(res => {
+              return res.index > res.array.length - 1
+                ? EMPTY
+                : this.recursiveCompress( this.data[res.index], res.index, this.data );
+            }),
+          );
+          compress.subscribe(res => {
+            if (res.index > res.array.length - 1) {
+            //Code block after completing all compression
+              console.log('Compression successful ' + this.compressedImages);
+              let file = this.compressedImages[0];
+  
+              let input = new FormData();
+              if(this.data[0].size>512000)
+              {
+                input.append('affiche',file);
+              }
+              else
+              {
+                input.append('affiche',this.data[0]);
+              }
+              input.append('idCoursCommun', this.idCoursCommun.toString());
+              this.saveAfficheCoursCommun(input);
+             
+            }
+          });
+              }
+    }
+
 
     saveLogoCoursCommun(data:FormData){
       
@@ -899,6 +947,32 @@ recursiveCompress = (image: File, index, array) => {
       // formData.append('picture', pictureData);
 
       this.coursCommunService.saveLogoCoursCommun(data).subscribe(
+
+        (resp)=>{
+          
+          this.isNotUploadLoading = true ;
+          this.ref.detectChanges();
+          
+          
+        },
+
+        (error)=>{
+
+          console.log(error);
+          
+        }
+      )
+
+    }
+    saveAfficheCoursCommun(data:FormData){
+      
+
+      // let formData = new FormData();
+
+      // formData.append('idCoursCommun', this.idCoursCommun.toString());
+      // formData.append('picture', pictureData);
+
+      this.coursCommunService.saveAffichePubCoursCommun(data).subscribe(
 
         (resp)=>{
           

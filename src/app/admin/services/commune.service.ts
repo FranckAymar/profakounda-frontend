@@ -8,4 +8,7 @@ export class CommuneService{
     listCommunes(){
         return this.httpClient.get(URL.listCommunes);
     }
+    saveCommune(data){
+        return this.httpClient.post(URL.enregistrerCommune,data);
+    }
 }

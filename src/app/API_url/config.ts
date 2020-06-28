@@ -54,7 +54,9 @@ export const URL = {
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
     renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
+    //COMMUNES
     listCommunes : consts.host+ consts.nameProject +'/communes',
+    enregistrerCommune : consts.host+ consts.nameProject +'admin/enregistrerCommune',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
     verifier : consts.host+ consts.nameProject +'verifier',
@@ -174,6 +176,7 @@ export const URL = {
     demandeVersement : consts.host+ consts.nameProject + 'particulier/demandeVirement',
     accepterVirement : consts.host+ consts.nameProject + 'admin/validerVirement',
     demandeVersementAdmin : consts.host+ consts.nameProject + 'admin/demandeVirements',
+    virements : consts.host+ consts.nameProject + 'admin/virements',
     nombreDemandeVirement : consts.host+ consts.nameProject + 'admin/nombreDemandeVirement',
     recupererCoursCommunsInscritsParticulier : consts.host+ consts.nameProject + 'particulier/coursCommunsSelects',
     coursCommunsParCode : consts.host+ consts.nameProject + '/home/coursCommunsParCode',

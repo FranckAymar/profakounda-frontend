@@ -29,6 +29,9 @@ export class CoursCommunAdminService {
   demandeVirementAdmin() : Observable<any> {
     return this.httpClient.get(URL.demandeVersementAdmin);
   }
+  virements() : Observable<any> {
+    return this.httpClient.get(URL.virements);
+  }
   nombreDemandeVirement() : Observable<any> {
     return this.httpClient.get(URL.nombreDemandeVirement);
   }
@@ -36,7 +39,6 @@ export class CoursCommunAdminService {
     return this.httpClient.post(URL.accepterVirement,id);
   }
   fetchAllcoursCommunAdmin(critereFiltre?): Observable<any> {
-
     if (critereFiltre) {
       let params = new HttpParams().set("critereFiltre", critereFiltre);
       return this.httpClient.get(URL.allCoursCommunAdmin, { params: params });

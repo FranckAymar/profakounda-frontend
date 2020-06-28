@@ -36,6 +36,8 @@ import { DetailsCoursCommunAdminComponent } from './details-cours-commun-admin/d
 import { CompteRenduCourscommunComponent } from './compte-rendu-courscommun/compte-rendu-courscommun.component';
 import { DemandeVirementComponent } from './demande-virement/demande-virement.component';
 import { CommuneService } from './services/commune.service';
+import { VirementComponent } from './virement/virement.component';
+import { CommuneComponent } from './commune/commune.component';
 
 
 
@@ -148,6 +150,14 @@ const adminRouter : Routes = [
         path : 'demandeVirements',
         component : DemandeVirementComponent
         
+      },
+      {
+        path : 'virements',
+        component : VirementComponent
+      },
+      {
+        path : 'commune',
+        component : CommuneComponent
       }
 
     ]}
@@ -180,7 +190,9 @@ const adminRouter : Routes = [
                 AdminCommonCourseComponent,
                 DetailsCoursCommunAdminComponent,
                 CompteRenduCourscommunComponent,
-                DemandeVirementComponent],
+                DemandeVirementComponent,
+                VirementComponent,
+                CommuneComponent],
   imports: [
     RouterModule.forChild(adminRouter),
     SharedModule

@@ -1,0 +1,41 @@
+<div class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <h4><i class="fa fa-money"></i> Liste des virements effectués</h4>
+        </div>
+        <div class="tab-inn">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Organisation</th>
+                            <th>Téléphone </th>
+                            <th>Nombre d'inscrits </th>
+                            <th>Point globale </th>
+                            <th>Révénu client </th>
+                            <th>Révénu profAkounda</th>
+                            <th>Date demande virement</th>
+                            <th>Date  virement</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <p *ngIf="virements.length == 0">Aucun élément</p>
+                        <tr *ngFor="let p of virements">
+                            <td>{{p.coursCommun.organisation.libelle}}</td>
+                            <td>{{p.coursCommun.telephone}}</td>
+                            <td>{{p.coursCommun.compteRendu.nombreInscrits}}</td>
+                            <td>{{p.coursCommun.compteRendu.pointGlobale | currency:'XOF'}}</td>
+                            <td>{{p.coursCommun.compteRendu.revenuClient | currency:'XOF'}} </td>
+                            <td>{{p.coursCommun.compteRendu.revenuOperateur | currency:'XOF'}} </td>
+                            <td ><span style="font-weight: bold;">{{p.coursCommun.dateDemandeVirement | date:'dd-MM-yyyy HH:ss'}}</span> </td>
+                            <td ><span style="font-weight: bold;">{{p.coursCommun.dateVirement | date:'dd-MM-yyyy'}}</span> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          
+
+        </div>
+    </div>
+</div>

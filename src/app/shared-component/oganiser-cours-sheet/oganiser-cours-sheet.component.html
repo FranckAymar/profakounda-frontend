@@ -7,7 +7,7 @@
         <div class="col-md-12 stepper">
             <ul class="progressbar">
                 <li id="step1" class="active">Détails</li>
-                <li id="step2" class="active">Photos</li>
+                <li id="step2">Photos</li>
                 <li id="step3">Modalités</li>
                 <li id="step4">Lieu</li>
             </ul>
@@ -118,29 +118,63 @@
              <!--Upload Photo Organisation-->
              <div style="overflow-y:auto; overflow-x: hidden;" id="content2" class="hide">
                 <div class="row" style="text-align: center;" >     
-                    <p>Touchez plus de cibles en ajoutant un logo à votre cours organisé</p>
-                    <small>(Optionnel)</small>
+                    <div class="col-md-6">
+                        <p>Touchez plus de cibles en ajoutant une affiche publicitaire à votre cours organisé</p>
+                   
+                    </div>
+
+                    <div class="col-md-6">
+                        <p>Si votre organisation dispose d'un logo, n'hésitez pas l'ajouter.</p>
+                       
+                </div>
+            </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>(Optionnel)</small>
                    
                         <form id="file-upload-form" class="uploader">
-                            <input (change)="onSelectFile($event)" id="file-upload" type="file" name="fileUpload" accept="image/*" />
+                            <input (change)="onSelectAffichePubFile($event)" id="file-upload" type="file" name="fileUpload" accept="image/*" />
                         
                             <label for="file-upload" id="file-drag">
-                            <img *ngIf="urlFile"  height="250" id="file-image" 
-                                  [src]="urlFile" alt="Apercu">
-                            <img *ngIf="!urlFile"  
+                            <img *ngIf="urlFileAffiche"  height="250" id="file-image" 
+                                  [src]="urlFileAffiche" alt="Apercu">
+                            <img *ngIf="!urlFileAffiche"  
                                     src="../../../assets/images/Stylo.png" 
                                      height="250" id="file-image" alt="Apercu">
                             <div id="start">
-                                <div>Selectionner une photo</div>
+                                <div>Selectionner une affiche publicitaire</div>
                                 <span id="file-upload-btn" class="btn btn-primary">Choisir</span>
                             </div>
                            
                             </label>
                         </form>
+                    </div>
+                    <div class="col-md-6">
+
+                        <small>(Optionnel)</small>
+                   
+                        <form id="file-upload-form2" class="uploader">
+                            <input (change)="onSelectFileLogo($event)" id="file-upload2" type="file" name="fileUpload2" accept="image/*" />
+                        
+                            <label for="file-upload2" id="file-drag2">
+                            <img *ngIf="urlFileLogo"  height="250" id="file-image2" 
+                                  [src]="urlFileLogo" alt="Apercu">
+                            <img *ngIf="!urlFileLogo"  
+                                    src="../../../assets/images/Stylo.png" 
+                                     height="250" id="file-image2" alt="Apercu">
+                            <div id="start2">
+                                <div>Selectionner un logo</div>
+                                <span id="file-upload-btn2" class="btn btn-primary">Choisir</span>
+                            </div>
+                           
+                            </label>
+                        </form>
+                    </div>
+
+                    </div>
 
                 
-
-                </div>
 
                 <div class="row">
 

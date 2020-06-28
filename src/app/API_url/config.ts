@@ -181,6 +181,9 @@ export const URL = {
     coursCommunsParOrganisation : consts.host+ consts.nameProject + '/home/coursCommunsParOrganisation',
     modifierLogoCoursCommun : consts.host+ consts.nameProject + 'particulier/uploadLogo',
     getLogoCoursCommun : consts.host+ consts.nameProject + 'logoCoursCommun',
+    modifierAffichePubCoursCommun : consts.host+ consts.nameProject + 'particulier/uploadaffichepub',
+    getAffichePubCoursCommun : consts.host+ consts.nameProject + 'afficheCoursCommun',
+    
     //cours Commun admin
     listeCoursCommuns : consts.host+ consts.nameProject + 'admin/coursCommuns',
     comptabiliteCoursCommun : consts.host+ consts.nameProject + 'admin/comptabilite',

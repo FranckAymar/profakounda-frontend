@@ -158,6 +158,9 @@ demandeVirement(id) : Observable<any> {
    saveLogoCoursCommun(formdata) : Observable<any>{
     return this.http.post(URL.modifierLogoCoursCommun, formdata);
    }
+   saveAffichePubCoursCommun(formdata) : Observable<any>{
+    return this.http.post(URL.modifierAffichePubCoursCommun, formdata);
+   }
 
 
 }

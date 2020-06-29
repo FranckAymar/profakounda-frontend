@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardCoursCommunComponent implements OnInit {
 
 
-  urlServer = URL.getLogoCoursCommun;
+  urlServer = URL.getAffichePubCoursCommun;
 
 
   @Input() cours;

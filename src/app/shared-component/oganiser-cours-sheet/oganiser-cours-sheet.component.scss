@@ -2,6 +2,10 @@
 $theme:       #FF5722;
 $dark-text:   #5f6982;  
   
+.align-bottom{
+  position : absolute;
+  bottom   : 0
+}
 
 
 .loader {
@@ -194,6 +198,18 @@ h2 {
       display: none;
     }
   }
+
+  #file-image2 {
+    display: inline;
+    margin: 0 auto .5rem auto;
+    width: auto;
+    height: auto;
+    max-width: 180px;
+    &.hidden {
+      display: none;
+    }
+  }
+  
   
   #notimage {
     display: block;
@@ -283,11 +299,6 @@ form input{
   font-size: 1em;
  }
 
- .btn-float-bottom{
-
- // position: absolute;
-  //bottom: 0;
- }
  .cout{
    margin-top: 8px;
  }

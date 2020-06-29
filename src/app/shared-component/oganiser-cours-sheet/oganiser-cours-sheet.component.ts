@@ -42,8 +42,11 @@ export class OganiserCoursSheetComponent implements OnInit {
   idCoursCommun : number ;
   libelleLieu : string ;
   currentIndex : number = undefined ;
-  urlFile;
-  urlServer = URL.getLogoCoursCommun;
+  urlFileLogo;
+  urlFileAffiche ;
+  urlServerLogo = URL.getLogoCoursCommun;
+  urlServerAffiche = URL.getAffichePubCoursCommun;
+
   //FormGroup
   coursCommunForm : FormGroup;
   publicCibleForm : FormGroup;
@@ -153,19 +156,14 @@ error:String;
       map(value => this._filterFiliere(value))
     );
     
-    
-    console.log(this.dataReceived);
-    
-       
-
     if(this.dataReceived.coursCommun){
 
 
       this.idCoursCommun = this.dataReceived.coursCommun.id ;
 
       //Recuperation de la photo
-      this.urlFile = this.urlServer +"/" + this.idCoursCommun ;
-
+      this.urlFileLogo = this.urlServerLogo +"/" + this.idCoursCommun ;
+      this.urlFileAffiche = this.urlServerAffiche  +"/" + this.idCoursCommun ;
 
       //Mode modification activé      
 
@@ -175,8 +173,6 @@ error:String;
         || this.dataReceived.coursCommun.enLigne 
         || this.dataReceived.coursCommun.refusMiseEnLigne ||
         this.dataReceived.coursCommun.suppressionMiseEnLigne){
-
-          console.log("Modif");
           
         this.isModify = true ;
         this.isCheckIllimite = false;
@@ -195,8 +191,6 @@ error:String;
       this.initializeInput(this.dataReceived);
 
     }
-
-    
 
   }
 
@@ -383,7 +377,6 @@ error:String;
   //Method for stepper 
 
   goToStep2(){
-    $("#content1").addClass('hide');
       $("#content1").addClass('hide');
       $("#content2").removeClass('hide');
       this.step = 'step2';
@@ -409,8 +402,6 @@ error:String;
     this.step = 'step4';
 
     $("#step4").addClass("active");
-
-    $("#nextButton").addClass("hide");
   }
 
 
@@ -667,8 +658,10 @@ error:String;
       this.idCoursCommun = params['courscommunedit'];
             });  
 
-      this.urlFile = this.urlServer +"/" + this.idCoursCommun ;
-
+            if(this.idCoursCommun !== undefined){
+              this.urlFileLogo = this.urlServerLogo +"/" + this.idCoursCommun ;
+              this.urlFileAffiche = this.urlServerAffiche +"/" + this.idCoursCommun
+            }
       }
 
   /*
@@ -841,7 +834,7 @@ recursiveCompress = (image: File, index, array) => {
 
       
     // }
-    onSelectFile(event) {
+    onSelectFileLogo(event) {
       
       //Telechargement du logo en cours (Traitementt)
     // this.loadingService.startLoading();
@@ -856,7 +849,7 @@ recursiveCompress = (image: File, index, array) => {
   
         //Apercu
         reader.onload = (event) => {
-          this.urlFile = reader.result ;
+          this.urlFileLogo = reader.result ;
         }
           console.log('input: '  + this.data[0].size);
           const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
@@ -904,7 +897,7 @@ recursiveCompress = (image: File, index, array) => {
   
         //Apercu
         reader.onload = (event) => {
-          this.urlFile = reader.result ;
+          this.urlFileAffiche = reader.result ;
         }
           console.log('input: '  + this.data[0].size);
           const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
@@ -964,6 +957,8 @@ recursiveCompress = (image: File, index, array) => {
       )
 
     }
+
+
     saveAfficheCoursCommun(data:FormData){
       
 

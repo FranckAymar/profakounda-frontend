@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material';
 export class CoursCommunComponent implements OnInit {
 
 
-  urlServer = URL.getLogoCoursCommun;
+  urlServer = URL.getAffichePubCoursCommun;
 
 
   coursCommuns = [] ;

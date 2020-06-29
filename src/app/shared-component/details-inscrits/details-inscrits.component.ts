@@ -63,6 +63,9 @@ export class DetailsInscritsComponent implements OnInit {
   //     title: 'Liste des inscrits',
   //     author: 'ProfAkounda'
   // });
+
+  console.log(this.dataReceived);
+  
   
     if(this.dataReceived.details.id)
     {
@@ -81,8 +84,22 @@ export class DetailsInscritsComponent implements OnInit {
     if (this.dataReceived.details.publicCible) {
       pdf.add(new Txt('Organisation : ' + this.dataReceived.details.cours.organisation.libelle).bold().end);
       pdf.add(new Txt('Titre : ' + this.dataReceived.details.cours.titre).margin([0,5,0,0]).end);
-      pdf.add(new Txt('Niveau : ' + this.dataReceived.details.publicCible.niveau ? this.dataReceived.details.publicCible.niveau.libelle : 'Tout niveau confondu').margin([0,5,0,0]).end);
+
+      if(this.dataReceived.details.publicCible.niveau === null ){
+        pdf.add(new Txt('Niveau : ' + 'Tout niveau confondu').margin([0,5,0,0]).end);
+
+      }else {
+        pdf.add(new Txt('Niveau : ' + this.dataReceived.details.publicCible.niveau.libelle).margin([0,5,0,0]).end);
+
+      }
+     
+     if(this.dataReceived.details.publicCible.filiere !== ""){
       pdf.add(new Txt('Filière : ' + this.dataReceived.details.publicCible.filiere).margin([0,5,0,0]).end);
+
+     }else {
+      pdf.add(new Txt('Filière : ' + 'Toute filière confondue').margin([0,5,0,0]).end);
+
+     }
       pdf.add(new Txt('Formations : ' + this.getFormationsForPublic(this.dataReceived.details.publicCible)).margin([0,5,0,0]).end);
 
      //Cas d'un cours général

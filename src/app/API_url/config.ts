@@ -214,5 +214,6 @@ export const URL = {
 
     //Contact us
     sendMessageContactUs :  consts.host+ consts.nameProject + 'enregistrerContact',
+    getAllContactMessage :  consts.host+ consts.nameProject + 'admin/contacts',
 
 }

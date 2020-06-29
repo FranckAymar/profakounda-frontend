@@ -159,8 +159,6 @@ export const URL = {
     ajouterFavoris :  consts.host+ consts.nameProject + 'particulier/enregistrerfavoris',
     supprimerFavoris :  consts.host+ consts.nameProject + 'particulier/supprimerfavorisparticulier',
     recupererFavoris : consts.host+ consts.nameProject + 'particulier/favorisparticulier',
-
-
     //COurs commun 
     enregistrerCoursCommun : consts.host+ consts.nameProject + 'particulier/enregistrercourscommun',
     modifierCoursCommun : consts.host+ consts.nameProject + 'particulier/modifiercourscommun',

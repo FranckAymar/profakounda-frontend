@@ -57,7 +57,7 @@ export class SearchBarCoursCommunComponent implements OnInit {
        }
       else{
         this.getCoursCommunFiltrees.emit(resp);
-       console.log(resp);
+      
       }
       }
     )
@@ -69,7 +69,14 @@ export class SearchBarCoursCommunComponent implements OnInit {
     this.coursCommunService.rechercherParOrganisation(this.organisationName).subscribe(
       (resp)=>{
 
-        this.getCoursCommunFiltrees.emit(resp);
+        if(resp['cours'])
+        {
+          this.getCoursCommunFiltrees.emit(resp['cours']);
+        }
+        else
+        {
+          this.getCoursCommunFiltrees.emit(resp);
+        }
       }
     )
   }

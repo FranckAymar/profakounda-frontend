@@ -118,25 +118,14 @@
              <!--Upload Photo Organisation-->
              <div style="overflow-y:auto; overflow-x: hidden;" id="content2" class="hide">
                 <div class="row" style="text-align: center;" >     
-                    <div class="col-md-6">
-                        <p>Touchez plus de cibles en ajoutant une affiche publicitaire à votre cours organisé</p>
+                                       
+                        <form  class="uploader">
+                            <p>Touchez plus de cibles en ajoutant une affiche publicitaire à votre cours organisé</p>
                    
-                    </div>
-
-                    <div class="col-md-6">
-                        <p>Si votre organisation dispose d'un logo, n'hésitez pas l'ajouter.</p>
-                       
-                </div>
-            </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <small>(Optionnel)</small>
-                   
-                        <form id="file-upload-form" class="uploader">
-                            <input (change)="onSelectAffichePubFile($event)" id="file-upload" type="file" name="fileUpload" accept="image/*" />
+                            <small>(Optionnel)</small>
+                            <input (change)="onSelectAffichePubFile($event)" id="file-upload1" type="file" name="fileUpload" accept="image/*" />
                         
-                            <label for="file-upload" id="file-drag">
+                            <label for="file-upload1" id="file-drag">
                             <img *ngIf="urlFileAffiche"  height="250" id="file-image" 
                                   [src]="urlFileAffiche" alt="Apercu">
                             <img *ngIf="!urlFileAffiche"  
@@ -149,12 +138,12 @@
                            
                             </label>
                         </form>
-                    </div>
-                    <div class="col-md-6">
 
-                        <small>(Optionnel)</small>
+                     
                    
-                        <form id="file-upload-form2" class="uploader">
+                        <form    class="uploader2">
+                            <p>Si votre organisation dispose d'un logo, n'hésitez pas l'ajouter.</p>
+                            <small>(Optionnel)</small>
                             <input (change)="onSelectFileLogo($event)" id="file-upload2" type="file" name="fileUpload2" accept="image/*" />
                         
                             <label for="file-upload2" id="file-drag2">
@@ -170,11 +159,9 @@
                            
                             </label>
                         </form>
-                    </div>
+            </div>
 
-                    </div>
-
-                
+                     
 
                 <div class="row">
 

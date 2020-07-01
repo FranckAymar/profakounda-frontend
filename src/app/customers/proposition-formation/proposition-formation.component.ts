@@ -112,7 +112,7 @@ export class PropositionFormationComponent implements OnInit {
     this.onFetchJoursString();
     this.onFetchVillesObject();
     this.verifierVilleParticulier();
-    this.onFetchCommunes();
+    // this.onFetchCommunes();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -215,6 +215,21 @@ export class PropositionFormationComponent implements OnInit {
     }
     getMdemandemMiseEnLigneA(id:number){
       this.demandeMiseEnLigne = new DemandeMiseEnLigne(id,'','');
+    }
+    mousedown(){
+    
+      this.communeService.listCommunesParVille(this.ville).subscribe(
+        (resp)=>{
+          
+          this.communes = resp;
+        },
+        (error)=>{
+         
+          
+          this.communes = [];
+        }
+      )
+      
     }
     saveDemandeMiseEnLigne(){
       this.demandeMiseEnLigne.ville = this.ville;

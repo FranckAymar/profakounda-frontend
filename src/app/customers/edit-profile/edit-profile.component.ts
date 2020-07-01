@@ -81,7 +81,7 @@ export class EditProfileComponent implements OnInit {
     this.onFetchFiliere();
     this.onFetchVilles();
     this.initPassword();
-    this.onFetchCommunes();
+    // this.onFetchCommunes();
     this.onFetchVillesObject();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
@@ -367,8 +367,24 @@ getColor(){
     else
     {
       this.mes = "Ancien mot de passe inexact";
-      console.log("Ancien mot de passe inexact");
+      
     }
+  }
+  
+  mousedown(){
+    
+    this.communeService.listCommunesParVille(this.ville).subscribe(
+      (resp)=>{
+        
+        this.communes = resp;
+      },
+      (error)=>{
+       
+        
+        this.communes = [];
+      }
+    )
+    
   }
   onUpdateParticulier(){
    

@@ -56,6 +56,7 @@ export const URL = {
     renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
     //COMMUNES
     listCommunes : consts.host+ consts.nameProject +'/communes',
+    communeParVille : consts.host+ consts.nameProject +'/rechercherCommuneParVille',
     enregistrerCommune : consts.host+ consts.nameProject +'admin/enregistrerCommune',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',

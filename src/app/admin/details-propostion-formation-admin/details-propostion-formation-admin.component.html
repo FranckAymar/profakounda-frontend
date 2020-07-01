@@ -57,25 +57,26 @@
 
 
                 <div class="udb-sec udb-cour-stat">
-                    <h4><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
+                    <h4 *ngIf="!detailsPropositionFormation.propositionFormation.allNiveau"><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
+                    <h4 *ngIf="detailsPropositionFormation.propositionFormation.allNiveau"><img src="../../assets/images/icon/db3.png" alt="" />Cout</h4>
                     <div class="pro-con-table">
                         <table class="bordered responsive-table">
                             <thead>
                                 <tr>
-                                    <th>Niveaux</th>
-                                    <th class="align-text-right">Prix Minimun </th>
-                                    <th class="align-text-right">Prix Maximum(Mensuel)</th>
+                                    <th *ngIf="!detailsPropositionFormation.propositionFormation.allNiveau">Niveaux</th>
+                                    <th class="align-text-right">Coût</th>
+                                    <!-- <th class="align-text-right">Prix Maximum(Mensuel)</th> -->
 
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <tr *ngFor="let contrat of detailsPropositionFormation?.contrats">
-                                    <td>{{contrat.niveau.libelle}}</td>
+                                    <td>{{contrat.niveau?.libelle}}</td>
                                     <td class="align-text-right"><span class="pro-user-act">{{contrat.minMontant}}
                                             FCFA</span></td>
-                                    <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}}
-                                            FCFA</span></td>
+                                    <!-- <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}}
+                                            FCFA</span></td> -->
 
                                 </tr>
                             </tbody>

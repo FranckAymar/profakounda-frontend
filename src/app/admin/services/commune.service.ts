@@ -11,4 +11,7 @@ export class CommuneService{
     saveCommune(data){
         return this.httpClient.post(URL.enregistrerCommune,data);
     }
+    listCommunesParVille(data:string){
+        return this.httpClient.post(URL.communeParVille,data);
+    }
 }

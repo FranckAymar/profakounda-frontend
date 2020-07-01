@@ -68,7 +68,6 @@ export class DetailsPropostionFormationAdminComponent implements OnInit {
 
       (resp)=>{
 
-
         if(resp.rayonIntervention){
           this.inititalizeCoordMap(resp.rayonIntervention.latitude,
             resp.rayonIntervention.longitude,

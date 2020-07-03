@@ -142,7 +142,7 @@
                                     <div class="col-md-6">
                                         <mat-form-field style="width: 16em;">
                                             <input type="text" required  
-                                                           placeholder="Votre ville de residence svp" (mousedown)="villemousekeydown()"   [(ngModel)]="ville" aria-label="Number" matInput
+                                                           placeholder="Votre ville de residence svp"    [(ngModel)]="ville" aria-label="Number" matInput
                                                            [formControl]="myControl4" [matAutocomplete]="auto4">
                                                        <mat-autocomplete #auto4="matAutocomplete">
                                                            <mat-option *ngFor="let option of filteredOptions4 | async"  [value]="option.designation">

@@ -369,6 +369,9 @@ getColor(){
       
     }
   }
+  villemousekeydown(){
+    this.commune ="";
+  }
   mouseup(){
     if(this.myControl2.value==="")
     {

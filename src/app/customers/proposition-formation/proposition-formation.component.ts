@@ -78,6 +78,7 @@ export class PropositionFormationComponent implements OnInit {
   zoom : number = 15 ; 
   errorNiveaux:string;
   errorModule:string;
+  isVille:boolean = true;
   errorProposition:string;
   errorJour:string;
   filteredOptions4: Observable<string[]>
@@ -183,6 +184,24 @@ export class PropositionFormationComponent implements OnInit {
       this.validDoubleNumber();
      
     }
+    villemousekeydown(){
+      this.commune ="";
+    }
+    
+    mouseleave(){
+      
+      if(this.myControl4.value===undefined || this.myControl4.value==="")
+      {
+        
+        this.myControlCommune.value == "";
+        this.commune =""
+        this.isVille = false;
+      }
+      else{
+        this.isVille =true;
+      }
+      
+    }
     nombreMaxChange(event){
       if(event < 0){
         this.isNombreMaxValid = false;
@@ -217,7 +236,7 @@ export class PropositionFormationComponent implements OnInit {
       this.demandeMiseEnLigne = new DemandeMiseEnLigne(id,'','');
     }
     mousedown(){
-    
+      
       this.communeService.listCommunesParVille(this.ville).subscribe(
         (resp)=>{
           

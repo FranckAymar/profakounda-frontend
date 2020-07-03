@@ -69,8 +69,9 @@
                                 style="color:#DA7F5C">{{cours.coursCommun?.compteRendu?.revenuClient | currency:'XOF'}}</span>
                         </li>
                         <li style="margin-top: 1em;">
-                            <span *ngIf="cours.coursCommun?.demandeVirement" style="color: red;font-weight: bold;">Virement en cours de traitement....<i class="fa fa-spinner"></i></span>
-                            <button *ngIf="!cours.coursCommun?.demandeVirement && cours.coursCommun?.compteRendu?.pointGlobale != 0" data-target="#demandeVirementAlerte" data-toggle="modal" class="btn btn-info">Demande de virement</button>
+                            <span *ngIf="cours.coursCommun.isVirement" style="color: green;font-weight: bold;">Virement effectué</span>
+                            <span *ngIf="cours.coursCommun?.demandeVirement && !cours.coursCommun.isVirement" style="color: red;font-weight: bold;">Virement en cours de traitement....<i class="fa fa-spinner"></i></span>
+                            <button *ngIf="!cours.coursCommun?.demandeVirement && cours.coursCommun?.compteRendu?.pointGlobale != 0 && !cours.coursCommun.isVirement" data-target="#demandeVirementAlerte" data-toggle="modal" class="btn btn-info">Demande de virement</button>
                         </li>
                     </ul>
                 </div>
@@ -90,7 +91,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div *ngIf="!cours.coursCommun.isVirement" class="col-md-6">
 
                             <div *ngIf="cours.coursCommun?.cout" class="udb-sec">
                                 <a (click)="onFermerInscriptionCoursCommun()"

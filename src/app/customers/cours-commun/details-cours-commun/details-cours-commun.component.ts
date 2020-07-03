@@ -15,7 +15,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DetailsCoursCommunComponent implements OnInit {
 
-  urlServer = URL.getLogoCoursCommun;
+  urlServer = URL.getAffichePubCoursCommun;
 
   zoom = 17 ;
 
@@ -153,6 +153,7 @@ export class DetailsCoursCommunComponent implements OnInit {
 
     const dialogRef = this.dialog.open(DetailsInscritsComponent, {
       width: '1000px',
+      height : '600px',
       data: data,
 
     });

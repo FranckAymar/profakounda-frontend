@@ -16,7 +16,7 @@ import { Component, OnInit } from '@angular/core';
 export class DetailsCoursCommunComponent implements OnInit {
 
 
-  urlServer = URL.getLogoCoursCommun;
+  urlServer = URL.getAffichePubCoursCommun;
 
 
   idCoursCommun: number;

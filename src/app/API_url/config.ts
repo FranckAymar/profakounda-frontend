@@ -54,7 +54,9 @@ export const URL = {
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
     renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
+    //COMMUNES
     listCommunes : consts.host+ consts.nameProject +'/communes',
+    enregistrerCommune : consts.host+ consts.nameProject +'admin/enregistrerCommune',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
     verifier : consts.host+ consts.nameProject +'verifier',
@@ -172,7 +174,9 @@ export const URL = {
     modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
     demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
     demandeVersement : consts.host+ consts.nameProject + 'particulier/demandeVirement',
+    accepterVirement : consts.host+ consts.nameProject + 'admin/validerVirement',
     demandeVersementAdmin : consts.host+ consts.nameProject + 'admin/demandeVirements',
+    virements : consts.host+ consts.nameProject + 'admin/virements',
     nombreDemandeVirement : consts.host+ consts.nameProject + 'admin/nombreDemandeVirement',
     recupererCoursCommunsInscritsParticulier : consts.host+ consts.nameProject + 'particulier/coursCommunsSelects',
     coursCommunsParCode : consts.host+ consts.nameProject + '/home/coursCommunsParCode',
@@ -181,6 +185,9 @@ export const URL = {
     coursCommunsParOrganisation : consts.host+ consts.nameProject + '/home/coursCommunsParOrganisation',
     modifierLogoCoursCommun : consts.host+ consts.nameProject + 'particulier/uploadLogo',
     getLogoCoursCommun : consts.host+ consts.nameProject + 'logoCoursCommun',
+    modifierAffichePubCoursCommun : consts.host+ consts.nameProject + 'particulier/uploadaffichepub',
+    getAffichePubCoursCommun : consts.host+ consts.nameProject + 'afficheCoursCommun',
+    
     //cours Commun admin
     listeCoursCommuns : consts.host+ consts.nameProject + 'admin/coursCommuns',
     comptabiliteCoursCommun : consts.host+ consts.nameProject + 'admin/comptabilite',

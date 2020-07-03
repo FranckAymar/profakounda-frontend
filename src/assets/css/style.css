@@ -2510,7 +2510,7 @@
      float: left;
      width: 40%;
      background: url('../images/login.html') #002147 no-repeat center center;
-     padding: 12.5% 6%;
+     padding: 26.5% 6%;
      color: #fff;
      height: 100%;
      bottom: 0px;
@@ -5685,6 +5685,14 @@ input:not(:focus):valid ~ .floating-label{
 .ed-rese-grid-mar-bot-30{
 	margin-bottom:30px;
 }
+
+@media screen  and (max-width: 990px){
+    .ed-rese-grid{
+         margin: 8px 0px;;
+    }
+
+}
+
 .s17-eve-time {
     width: 100%;
     border-bottom: 1px solid #ececec;

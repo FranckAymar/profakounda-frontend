@@ -8,10 +8,11 @@
         </div>
         <div style="text-align: center;" *ngIf="propositionFormations.length == 0" >
             <p>Aucun formateurs disponibles</p>
-            <p>Vous êtes un formateur ? Proposez vos cours <a style="color: #FF5722;" routerLink="/customers/formations">ici</a></p>
+            <p>Vous êtes un formateur ? Proposez vos cours <a style="color: #FF5722; cursor: pointer;" (click)="goToDashboard()">ici</a></p>
 
         </div>
-        <div class="row col-md-6" *ngFor="let propositionFormation of propositionFormations">
+       <div class="row">
+        <div class=" col-md-6" *ngFor="let propositionFormation of propositionFormations">
             <app-card-formation
             [idParticulier]= "propositionFormation.idParticulier"
             [code] = "propositionFormation.code"
@@ -26,10 +27,13 @@
             [id] = "propositionFormation.id"
             ></app-card-formation>
         </div>
-        <div  class="con-title">
-            <a [routerLink]="['/formations']">
-                <p>Voir plus ...</p>
-            </a>
+       </div>
+        <div class="row">
+            <div  class="con-title">
+                <a [routerLink]="['/formations']">
+                    <p>Plus de détails ...</p>
+                </a>
+            </div>
         </div>
        
     </div> 

@@ -40,6 +40,7 @@ export class EditProfileComponent implements OnInit {
    error:string;
    mes:string;
    urlFile;
+   isVille:boolean = true;
    urlServer = URL.getPhoto;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
@@ -125,9 +126,7 @@ export class EditProfileComponent implements OnInit {
     return this.communes.filter(option => option.libelle.toLowerCase().includes(filterValue));
   }
 
-  villeChange(object){
-    console.log(object);
-  }
+ 
 ///Compress File
 
 recursiveCompress = (image: File, index, array) => {
@@ -370,9 +369,21 @@ getColor(){
       
     }
   }
+  mouseup(){
+    if(this.myControl2.value==="")
+    {
+      this.myControlCommune.value == "";
+      this.commune =""
+      this.isVille = false;
+    }
+    else{
+      this.isVille =true;
+    }
+    
+  }
   
   mousedown(){
-    
+    this.commune =""
     this.communeService.listCommunesParVille(this.ville).subscribe(
       (resp)=>{
         

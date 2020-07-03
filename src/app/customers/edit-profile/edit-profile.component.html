@@ -3,7 +3,7 @@
 <div  class="sb2-2-3">
     <div  class="row">
         <div class="col-md-12">
-            <div class="box-inn-sp ">
+            <div class="box-inn-sp">
                 <div class="inn-title">
                     
                     <img  style="width: 10em;height: 10em; border-radius: 0.3em;" src="{{urlFile}}" alt="">
@@ -44,7 +44,7 @@
                                 <div class="col-md-6">
                                     <mat-form-field style="width: 34em;">
                                         <input type="text" required  
-                                            placeholder="Ville de résidence"  formControlName="ville" [(ngModel)]="ville" aria-label="Number" matInput
+                                            placeholder="Ville de résidence" (mousedown)="villemousekeydown()"  formControlName="ville" [(ngModel)]="ville" aria-label="Number" matInput
                                             [formControl]="myControl2" [matAutocomplete]="auto2">
                                         <mat-autocomplete #auto2="matAutocomplete">
                                             <mat-option *ngFor="let option of filteredOptions2 | async"  [value]="option.designation">
@@ -59,9 +59,9 @@
                             <div class="row">
     
                                 <div class="col-md-6">
-    
+                                    <span *ngIf="!isVille" style="color: red;font-size: 0.8em !important;">Vous avez oublier de saisir votre ville de résidence.</span>
                                     <mat-form-field style="width: 34em;">
-                                        <input required type="text" (mousedown)="mousedown()"  formControlName="commune" [(ngModel)]="commune"
+                                        <input required type="text"  (mousedown)="mousedown()" (mouseleave)="mouseup()"  formControlName="commune" [(ngModel)]="commune"
                                             placeholder="Commune ou département" aria-label="Number" matInput
                                             [formControl]="myControlCommune" [matAutocomplete]="autoCommune">
                                         <mat-autocomplete #autoCommune="matAutocomplete">
@@ -70,7 +70,7 @@
                                             </mat-option>
                                         </mat-autocomplete>
                                     </mat-form-field>
-    
+                                    
                                 </div>
                                 <div class="col-md-6">
     

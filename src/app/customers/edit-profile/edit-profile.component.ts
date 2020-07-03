@@ -369,11 +369,9 @@ getColor(){
       
     }
   }
-  villemousekeydown(){
-    this.commune ="";
-  }
+  
   mouseup(){
-    if(this.myControl2.value==="")
+    if(this.myControl2.value==="" || this.myControl2.value===undefined)
     {
       this.myControlCommune.value == "";
       this.commune =""
@@ -386,7 +384,7 @@ getColor(){
   }
   
   mousedown(){
-    this.commune =""
+    
     this.communeService.listCommunesParVille(this.ville).subscribe(
       (resp)=>{
         

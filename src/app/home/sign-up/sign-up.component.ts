@@ -79,6 +79,7 @@ getColor(){
         if(response["success"])
         { 
           this.inscriptionSucess = true ;
+          this.message = "";
           this.snackbarService.openSnackBar('Inscription effectuée avec succès');
           this.router.navigate(["/home/sign-up"]);
           this.formInitialisation();

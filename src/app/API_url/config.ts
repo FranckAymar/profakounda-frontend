@@ -56,6 +56,7 @@ export const URL = {
     renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
     //COMMUNES
     listCommunes : consts.host+ consts.nameProject +'/communes',
+    communeParVille : consts.host+ consts.nameProject +'/rechercherCommuneParVille',
     enregistrerCommune : consts.host+ consts.nameProject +'admin/enregistrerCommune',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
@@ -159,8 +160,6 @@ export const URL = {
     ajouterFavoris :  consts.host+ consts.nameProject + 'particulier/enregistrerfavoris',
     supprimerFavoris :  consts.host+ consts.nameProject + 'particulier/supprimerfavorisparticulier',
     recupererFavoris : consts.host+ consts.nameProject + 'particulier/favorisparticulier',
-
-
     //COurs commun 
     enregistrerCoursCommun : consts.host+ consts.nameProject + 'particulier/enregistrercourscommun',
     modifierCoursCommun : consts.host+ consts.nameProject + 'particulier/modifiercourscommun',
@@ -214,5 +213,6 @@ export const URL = {
 
     //Contact us
     sendMessageContactUs :  consts.host+ consts.nameProject + 'enregistrerContact',
+    getAllContactMessage :  consts.host+ consts.nameProject + 'admin/contacts',
 
 }

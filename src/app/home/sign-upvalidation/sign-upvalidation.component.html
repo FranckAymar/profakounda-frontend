@@ -26,7 +26,9 @@
                   </div>
                   <div  *ngIf="isValid==0" class="modal-header center alert alert-success">
                     <div style="padding: 0.5em;"   class="row">
-                      <p>Super ! Votre compte a été activé avec succès, connectez-vous svp</p>
+                      <p>Super ! Votre compte a été activé avec succès</p>
+                      <p>Cliquez<a style="cursor: pointer;color:blue;" routerLink="/home/sign-in"> ici</a> pour vous connecter</p>
+
                     </div>
                   </div>
                   <div *ngIf="isValid==2"  class="modal-header center alert alert-warning">

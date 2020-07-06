@@ -19,6 +19,7 @@
                             <h4>{{cours.coursCommun?.organisation.libelle}}</h4>
                         </li>
                         <li>{{cours.coursCommun?.titre}}</li>
+                        <li>Code: <strong>{{cours.coursCommun.codeCours}}</strong></li>
                         <li>
                             <h5 style="text-align: center;" *ngIf="cours.coursCommun?.cout" class="pro-user-act">
                                 {{cours.coursCommun?.cout | currency:'XOF'}} </h5>

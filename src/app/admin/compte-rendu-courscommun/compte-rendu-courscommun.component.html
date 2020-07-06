@@ -53,7 +53,7 @@
                             <th>Point globale </th>
                             <th>Révénu client </th>
                             <th>Révénu profAkounda</th>
-                            <th>Date demande virement</th>
+                           
                             
                         </tr>
                     </thead>
@@ -68,8 +68,7 @@
                             <td>{{p.coursCommun.compteRendu.pointGlobale | currency:'XOF'}}</td>
                             <td>{{p.coursCommun.compteRendu.revenuClient | currency:'XOF'}} </td>
                             <td>{{p.coursCommun.compteRendu.revenuOperateur | currency:'XOF'}} </td>
-                            <td *ngIf="p.coursCommun.demandeVirement"><span style="font-weight: bold;">{{p.coursCommun.dateDemandeVirement | date:'dd-MM-yyyy HH:ss'}}</span> </td>
-                            <td *ngIf="p.coursCommun.demandeVirement"><button  class="btn btn-danger">virement</button></td>
+                            
                         </tr>
                     </tbody>
                 </table>

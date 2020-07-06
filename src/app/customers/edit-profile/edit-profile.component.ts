@@ -40,6 +40,7 @@ export class EditProfileComponent implements OnInit {
    error:string;
    mes:string;
    urlFile;
+   isVille:boolean = true;
    urlServer = URL.getPhoto;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
@@ -81,7 +82,7 @@ export class EditProfileComponent implements OnInit {
     this.onFetchFiliere();
     this.onFetchVilles();
     this.initPassword();
-    this.onFetchCommunes();
+    // this.onFetchCommunes();
     this.onFetchVillesObject();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
@@ -125,9 +126,7 @@ export class EditProfileComponent implements OnInit {
     return this.communes.filter(option => option.libelle.toLowerCase().includes(filterValue));
   }
 
-  villeChange(object){
-    console.log(object);
-  }
+ 
 ///Compress File
 
 recursiveCompress = (image: File, index, array) => {
@@ -367,8 +366,37 @@ getColor(){
     else
     {
       this.mes = "Ancien mot de passe inexact";
-      console.log("Ancien mot de passe inexact");
+      
     }
+  }
+  
+  mouseup(){
+    if(this.myControl2.value==="" || this.myControl2.value===undefined)
+    {
+      this.myControlCommune.value == "";
+      this.commune =""
+      this.isVille = false;
+    }
+    else{
+      this.isVille =true;
+    }
+    
+  }
+  
+  mousedown(){
+    
+    this.communeService.listCommunesParVille(this.ville).subscribe(
+      (resp)=>{
+        
+        this.communes = resp;
+      },
+      (error)=>{
+       
+        
+        this.communes = [];
+      }
+    )
+    
   }
   onUpdateParticulier(){
    

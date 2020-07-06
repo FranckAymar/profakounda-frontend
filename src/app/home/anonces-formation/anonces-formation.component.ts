@@ -1,3 +1,5 @@
+import { SignInService } from './../services/sign-in.service';
+import { Router } from '@angular/router';
 import { ListFormationsService } from './../../formations/services/list-formations.service';
 import { URL } from './../../API_url/config';
 import { Component, OnInit } from '@angular/core';
@@ -21,7 +23,9 @@ export class AnoncesFormationComponent implements OnInit {
   totalPage: number
   totalPageArray: Array<any>;
 isNombreMaxAtteint:boolean = false;
-  constructor(private listFormationsService : ListFormationsService) { }
+  constructor(private listFormationsService : ListFormationsService,
+      private router : Router,
+      private signInService : SignInService) { }
 
   ngOnInit() {
 
@@ -52,6 +56,19 @@ isNombreMaxAtteint:boolean = false;
       }
     )
 
+  }
+
+
+  goToDashboard(){
+    
+
+    if(sessionStorage.getItem(this.signInService.TOKEN) !==null){
+      this.router.navigateByUrl('/customers/formations') ;
+
+    }else{
+      this.router.navigateByUrl('home/sign-in') ;
+
+    }
   }
 
 

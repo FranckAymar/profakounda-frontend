@@ -15,4 +15,7 @@ export class ContactServiceService {
 
     return this.http.post(URL.sendMessageContactUs, data);
   }
+  getAllContactsMessages() : Observable<any>{
+    return this.http.get(URL.getAllContactMessage);
+  }
 }

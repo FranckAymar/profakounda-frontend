@@ -38,6 +38,7 @@ import { DemandeVirementComponent } from './demande-virement/demande-virement.co
 import { CommuneService } from './services/commune.service';
 import { VirementComponent } from './virement/virement.component';
 import { CommuneComponent } from './commune/commune.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -158,6 +159,10 @@ const adminRouter : Routes = [
       {
         path : 'commune',
         component : CommuneComponent
+      },
+      {
+        path : 'messages',
+        component : ContactComponent
       }
 
     ]}
@@ -192,7 +197,8 @@ const adminRouter : Routes = [
                 CompteRenduCourscommunComponent,
                 DemandeVirementComponent,
                 VirementComponent,
-                CommuneComponent],
+                CommuneComponent,
+                ContactComponent],
   imports: [
     RouterModule.forChild(adminRouter),
     SharedModule

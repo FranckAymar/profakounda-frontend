@@ -7,11 +7,9 @@ import { SignInService } from 'src/app/home/services/sign-in.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { PropositionFormationService } from '../services/propositionFormation.service';
 import { Niveau } from 'src/app/admin/model/niveau.model';
-import { Jour } from '../models/jour.model';
 import { Heure } from '../models/heure.model';
 import { PropositionFormation } from '../models/PropositionFormation.model';
 import { Lambda } from '../models/lambda.model';
-import { trigger } from '@angular/animations';
 import { JourService } from '../services/Jour.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -78,6 +76,7 @@ export class PropositionFormationComponent implements OnInit {
   zoom : number = 15 ; 
   errorNiveaux:string;
   errorModule:string;
+  isVille:boolean = true;
   errorProposition:string;
   errorJour:string;
   filteredOptions4: Observable<string[]>
@@ -112,7 +111,7 @@ export class PropositionFormationComponent implements OnInit {
     this.onFetchJoursString();
     this.onFetchVillesObject();
     this.verifierVilleParticulier();
-    this.onFetchCommunes();
+    // this.onFetchCommunes();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -183,6 +182,24 @@ export class PropositionFormationComponent implements OnInit {
       this.validDoubleNumber();
      
     }
+    villemousekeydown(){
+      this.commune ="";
+    }
+    
+    mouseleave(){
+      
+      if(this.myControl4.value===undefined || this.myControl4.value==="")
+      {
+        
+        this.myControlCommune.value == "";
+        this.commune =""
+        this.isVille = false;
+      }
+      else{
+        this.isVille =true;
+      }
+      
+    }
     nombreMaxChange(event){
       if(event < 0){
         this.isNombreMaxValid = false;
@@ -215,6 +232,21 @@ export class PropositionFormationComponent implements OnInit {
     }
     getMdemandemMiseEnLigneA(id:number){
       this.demandeMiseEnLigne = new DemandeMiseEnLigne(id,'','');
+    }
+    mousedown(){
+      
+      this.communeService.listCommunesParVille(this.ville).subscribe(
+        (resp)=>{
+          
+          this.communes = resp;
+        },
+        (error)=>{
+         
+          
+          this.communes = [];
+        }
+      )
+      
     }
     saveDemandeMiseEnLigne(){
       this.demandeMiseEnLigne.ville = this.ville;
@@ -760,16 +792,21 @@ this.propositionFormationService.rechercherDisponibilites(id)
   }
 
 
-  getAddress(place: object) { 
+  getAddress(resp: object) { 
 
-
-    let lat = place['geometry'].location.lat() ;
-    let long = place['geometry'].location.lng() ;
+    if(resp['data'] !== null){
+      
+    console.log(resp);
+    
+    let lat = resp['data']['geometry'].location.lat() ;
+    let long = resp['data']['geometry'].location.lng() ;
 
     
 
     this.lat = lat;
     this.lng = long;
+    }
+    
 
   }
 

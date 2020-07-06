@@ -80,7 +80,6 @@ export class CommuneComponent implements OnInit {
   onFetchCommunes(){
     this.communeService.listCommunes().subscribe(
       (resp)=>{
-        console.log(resp)
         this.communes = resp;
       },
       (error)=>{

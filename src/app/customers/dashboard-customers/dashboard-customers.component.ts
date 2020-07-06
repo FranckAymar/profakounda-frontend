@@ -26,7 +26,6 @@ paiements:any =  [];
   onFetchStatistiquesInscrits(){
     this.inscriptionService.statistiquesInscritsParJour().subscribe(
       (resp)=>{
-        console.log("Statistiques des inscrits......");
         console.log(resp);
       },
       (error)=>{
@@ -37,8 +36,7 @@ paiements:any =  [];
   onFetchPaiements(){
     this.paiementService.getPaiementsActifDashboard().subscribe(
       (response)=>{
-        console.log("Paiements Actif....");
-        console.log(response);
+        //console.log("Paiements Actif....");
         this.paiements = response;
       },
       (error)=>{
@@ -49,8 +47,8 @@ paiements:any =  [];
   onFetchDernieresInscriptions(){
     this.inscriptionService.getDashBoardInscrits().subscribe(
       (response)=>{
-        console.log("Inscrits DashBoard.....");
-        console.log(response);
+        //console.log("Inscrits DashBoard.....");
+        //console.log(response);
         this.inscrits = response;
       },
       (error)=>{
@@ -61,8 +59,8 @@ paiements:any =  [];
   onFetchDerniersCoursCommuns(){
     this.coursCommunService.getDashBoardCoursCommuns().subscribe(
       (response)=>{
-        console.log("Derniere cours communs DashBoard.....");
-        console.log(response);
+       // console.log("Derniere cours communs DashBoard.....");
+       // console.log(response);
         this.coursCommuns = response;
       },
       (error)=>{
@@ -73,8 +71,8 @@ paiements:any =  [];
   onFetchDernieresPropositions(){
     this.propositionService.getDashBoardPropositions().subscribe(
       (response)=>{
-        console.log("Dernieres Propositions de formations DashBoard.....");
-        console.log(response);
+        //console.log("Dernieres Propositions de formations DashBoard.....");
+        //console.log(response);
         this.propositions = response;
       },
       (error)=>{

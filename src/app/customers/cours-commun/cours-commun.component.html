@@ -3,6 +3,7 @@
         <div class="head-2">
                 <div class="head-2-inn head-2-inn-padd-top">
                         <h1>Mes cours organisés</h1>
+                        <p>Créez et gérez vos différents cours organisés (séminaires, cours de renforcement, cours de préparation,...)</p>
                         <div class="event-head-sub">
                                 <ul>
                                         <li>Total cours: {{coursCommuns.length}}</li>
@@ -14,7 +15,6 @@
 
         </div>
 
-
         <div style="text-align: center; margin-top: 1em;">
                 <button (click)="goToOrganiserCours()" data-target="#addDesc" class="btn btn-info">
                         <i class="fa fa-plus">
@@ -24,6 +24,7 @@
 
 
         <div style="margin-top: 5em;">
+                <p style="text-align: center;" *ngIf="coursCommuns.length === 0">Aucun organisé pour le moment</p>
                 <div class="row" style=" margin: 0 auto;">
                         <div *ngFor="let cours of coursCommuns" class="col-md-4">
 

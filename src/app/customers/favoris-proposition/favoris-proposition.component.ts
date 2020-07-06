@@ -22,7 +22,7 @@ export class FavorisPropositionComponent implements OnInit {
 
       (resp)=>{
         this.propositionFormations = resp ;
-        console.log(resp);
+        //console.log(resp);
         
       },
       (error)=>{

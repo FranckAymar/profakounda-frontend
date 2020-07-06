@@ -53,7 +53,6 @@ export class DetailsCoursCommunComponent implements OnInit {
       (resp)=>{
         this.cours = resp ;
         this.idCoursCommun = resp["coursCommun"].id;
-        console.log(resp);
         
       },
       (error)=>{
@@ -111,7 +110,6 @@ export class DetailsCoursCommunComponent implements OnInit {
 
       (resp)=>{
 
-        console.log(resp);
 
         if(type ==='publicCible'){
           

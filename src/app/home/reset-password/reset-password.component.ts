@@ -87,7 +87,6 @@ verifyToken(token) {
 
 onResetPassword() {
 
-  console.log('test');
   
   this.resetPassService.resetPassword(this.resetPasswordForm.value, this.token).subscribe(
 
@@ -100,7 +99,6 @@ onResetPassword() {
       
       if(resp.code === 0) {
 
-        console.log('test');
 
         alert("Renitialisation effectuée avec succès") ;
         this.router.navigateByUrl('/home/sign-in');

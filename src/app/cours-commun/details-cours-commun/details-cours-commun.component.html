@@ -1,9 +1,9 @@
 <section>
     <div  class="pro-cover">
 
-        <agm-map *ngIf="long !==0 && lat !==0" [latitude]="long" [longitude]="lat" [zoom]="17">
+        <agm-map *ngIf="long !==0 && lat !==0" [latitude]="lat" [longitude]="long" [zoom]="17">
 
-            <agm-marker [label]="libelle" [latitude]="long" [longitude]="lat" draggable="true"></agm-marker>
+            <agm-marker [label]="libelle" [latitude]="lat" [longitude]="long" draggable="true"></agm-marker>
         </agm-map>
     </div>
 
@@ -19,7 +19,7 @@
                             <h4>{{cours.coursCommun?.organisation.libelle}}</h4>
                         </li>
                         <li>{{cours.coursCommun?.titre}}</li>
-                        <li>Code: <strong>{{cours.coursCommun.codeCours}}</strong></li>
+                        <li>Code: <strong>{{cours.coursCommun?.codeCours}}</strong></li>
                         <li>
                             <h5 style="text-align: center;" *ngIf="cours.coursCommun?.cout" class="pro-user-act">
                                 {{cours.coursCommun?.cout | currency:'XOF'}} </h5>
@@ -56,6 +56,7 @@
                     <div style="padding: 0.5em;"   class="row">
                       <p><strong>Demande de paiement envoyé !</strong></p>
                       <p>Un mail de confirmation vous sera envoyé une fois le paiement confirmé !</p> 
+                      <p>Cliquez ensuite <a style="color: blue;" routerLink="customers/paiements">ici</a> pour l'impression de votre reçu de paiement.</p>
                     </div>
                   </div>
   

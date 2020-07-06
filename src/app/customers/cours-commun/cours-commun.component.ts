@@ -29,7 +29,6 @@ export class CoursCommunComponent implements OnInit {
 
   ngOnInit() {
     this.onFectCoursCommun();
-    console.log(this.coursCommuns);
     
   }
 
@@ -75,7 +74,6 @@ export class CoursCommunComponent implements OnInit {
     this.coursCommunService.fetchCoursCommun().subscribe(
 
       (resp)=>{
-        console.log(resp);
         this.coursCommuns = resp ;
         this.calculTotalInscrit(this.coursCommuns);
         

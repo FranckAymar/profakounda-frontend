@@ -43,7 +43,7 @@ export class PaymentCoursCommunComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.dataReceived);
+   // console.log(this.dataReceived);
     
 
     this.initIdentificationForm();
@@ -151,14 +151,14 @@ export class PaymentCoursCommunComponent implements OnInit {
       token : this.tokenPaymentOrange
     }
 
-    console.log(data.idPublicCible);
+   // console.log(data.idPublicCible);
     
 
     this.inscriptionService.inscriptionCoursOrganise(data).subscribe(
 
       (resp)=>{
 
-        console.log(resp);
+       // console.log(resp);
         
 
         if(resp.code == 0){

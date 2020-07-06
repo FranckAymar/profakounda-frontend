@@ -88,7 +88,6 @@ getColor(){
    
       },
       (error)=>{
-        console.log(particulier);
         console.log("Une erreur s'est produite: "+error);
       }
     )

@@ -13,7 +13,7 @@ import { publicCibleModel } from './../../home/models/publiccible';
 import { LieuInterventionModel } from './../../home/models/lieuintervention';
 import { CoursCommunModel } from './../../home/models/courscommun';
 import { FormBuilder, FormGroup, Validators, Form, FormArray, FormControl } from '@angular/forms';
-import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import * as $ from 'jquery';
 import { CompressorService } from 'src/app/customers/services/CompressorService';
@@ -25,7 +25,7 @@ declare var $: any;
   templateUrl: './oganiser-cours-sheet.component.html',
   styleUrls: ['./oganiser-cours-sheet.component.scss']
 })
-export class OganiserCoursSheetComponent implements OnInit {
+export class OganiserCoursSheetComponent implements OnInit{
 
   // initial center position for the map
   initialLat: number = 5.338390;
@@ -56,8 +56,8 @@ export class OganiserCoursSheetComponent implements OnInit {
 
   //Variable for map
 
-  lat: number =   5.3176661 ;
-  lng: number = -4.0899911 ;
+  lat =  5.356709  ;
+  lng = -3.968500  ;
   zoom : number = 15 ; 
 
   step : string ;
@@ -80,7 +80,7 @@ export class OganiserCoursSheetComponent implements OnInit {
   lieuInterventionModel : LieuInterventionModel = {} ;
   publicCibleMdel : publicCibleModel = {} ;
   publicCibleMdels : publicCibleModel[] = [] ;
-error:String;
+  error:String;
   formationsModel = [];
   niveauModel = {};
   data: FileList;
@@ -116,8 +116,9 @@ error:String;
    
 
     this.step = 'step1';
-
+    
    }
+  
 
    //For autocomplete
   filteredOrganisations: Observable<any[]>;
@@ -126,9 +127,7 @@ error:String;
 
 
   ngOnInit() {
-
-    console.log(this.isCheckIllimite);
-    
+        
 
     //Initialisation des params
     this.initFormCoursCommun();
@@ -156,8 +155,15 @@ error:String;
       map(value => this._filterFiliere(value))
     );
     
+
+    //Modification
     if(this.dataReceived.coursCommun){
 
+
+      
+
+     // console.log("modification en cours");
+      
 
       this.idCoursCommun = this.dataReceived.coursCommun.id ;
 
@@ -189,7 +195,7 @@ error:String;
       }
     
       this.initializeInput(this.dataReceived);
-
+      this.initializeLieuIntervention(this.dataReceived);
     }
 
   }
@@ -197,6 +203,8 @@ error:String;
 
   initializeInput(data){
 
+
+  
     
     this.coursCommunForm.patchValue(
 
@@ -249,24 +257,48 @@ error:String;
 
     }
 
-    
-    this.lieuInterventionForm.patchValue(
 
-      {
-        id : data.lieuIntervention.id,
-        longitude : data.lieuIntervention.longitude,
-        latitude :  data.lieuIntervention.latitude,
-        libelle :  data.lieuIntervention.libelle,
-
-      }
-
-    )
-
-    this.lat =  data.lieuIntervention.latitude ;
-    this.lng =  data.lieuIntervention.longitude;
-    this.libelleLieu = data.lieuIntervention.libelle;
   }
 
+
+  initializeLieuIntervention(data){
+
+   
+
+    if(data.lieuIntervention){
+      this.lieuInterventionForm.patchValue(
+
+        {
+          id : data.lieuIntervention.id,
+          longitude : data.lieuIntervention.longitude,
+          latitude :  data.lieuIntervention.latitude,
+          libelle :  data.lieuIntervention.libelle,
+  
+        }
+  
+      );
+
+     
+      
+      let lat = data.lieuIntervention.latitude ;
+      let lng = data.lieuIntervention.longitude;
+      this.lat =  lat ;
+      this.lng =  lng;
+      this.libelleLieu = data.lieuIntervention.libelle;
+  
+      console.log(this.lat);
+    
+
+      
+    }else{
+
+      console.log('initialisation');
+      
+      this.lat =  5.356709  ;
+      this.lng = -3.968500  ;
+    }
+
+  }
 
 
 
@@ -542,6 +574,9 @@ error:String;
 
       (resp)=>{
         this.next();
+
+        this.initializeLieuIntervention(this.dataReceived);
+
         
       },
       (error)=>{
@@ -564,7 +599,6 @@ error:String;
     this.lieuInterventionForm.get('latitude').setValue(this.lat);
     this.lieuInterventionForm.get('longitude').setValue(this.lng);
 
-    console.log(this.lieuInterventionForm.value);
     
    
     this.coursCommunService.saveLieuIntervention(this.lieuInterventionForm.value).subscribe(
@@ -624,7 +658,11 @@ error:String;
         this.error = resp['error'];
         if(!this.error)
         {
+          this.initializeLieuIntervention(this.dataReceived);
           this.next();
+          //On initialise la latitude et la longitude
+
+
         }
        
         
@@ -639,9 +677,9 @@ error:String;
   }
 
 
-  ajoutMarqueur(lat : number, lng : number) {
+  ajoutMarqueur(event,lat : number, lng : number) {
      
-    console.log(lat);
+    console.log(event);
     
     
     this.lat = lat ;
@@ -671,15 +709,17 @@ error:String;
   setAddress(adress){
     
     this.lieuInterventionForm.get('libelle').setValue(adress.input);
-    this.lat = 0;
-    this.lng = 0;
-
+   
     
     if(adress.data !== null){
       this.lieuInterventionForm.get('libelle').setValue(adress.data.formatted_address);
   
-      this.lat = adress.data['geometry'].location.lng() ;
-      this.lng = adress.data['geometry'].location.lat() ;
+      this.lat = adress.data['geometry'].location.lat() ;
+      this.lng = adress.data['geometry'].location.lng() ;
+    }else{
+      this.lat = 0;
+      this.lng = 0;
+  
     }
    
  
@@ -806,7 +846,7 @@ recursiveCompress = (image: File, index, array) => {
     map(response => {
 
     //Code block after completing each compression
-      console.log('compressed ' + index + image.name);
+      //console.log('compressed ' + index + image.name);
       this.compressedImages.push(response);
       return {
         data: response,
@@ -851,7 +891,7 @@ recursiveCompress = (image: File, index, array) => {
         reader.onload = (event) => {
           this.urlFileLogo = reader.result ;
         }
-          console.log('input: '  + this.data[0].size);
+          //console.log('input: '  + this.data[0].size);
           const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
             expand(res => {
               return res.index > res.array.length - 1
@@ -862,7 +902,7 @@ recursiveCompress = (image: File, index, array) => {
           compress.subscribe(res => {
             if (res.index > res.array.length - 1) {
             //Code block after completing all compression
-              console.log('Compression successful ' + this.compressedImages);
+             // console.log('Compression successful ' + this.compressedImages);
               let file = this.compressedImages[0];
   
               let input = new FormData();
@@ -899,7 +939,7 @@ recursiveCompress = (image: File, index, array) => {
         reader.onload = (event) => {
           this.urlFileAffiche = reader.result ;
         }
-          console.log('input: '  + this.data[0].size);
+          //console.log('input: '  + this.data[0].size);
           const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
             expand(res => {
               return res.index > res.array.length - 1
@@ -910,7 +950,7 @@ recursiveCompress = (image: File, index, array) => {
           compress.subscribe(res => {
             if (res.index > res.array.length - 1) {
             //Code block after completing all compression
-              console.log('Compression successful ' + this.compressedImages);
+              //console.log('Compression successful ' + this.compressedImages);
               let file = this.compressedImages[0];
   
               let input = new FormData();

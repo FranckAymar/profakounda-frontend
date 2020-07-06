@@ -76,7 +76,6 @@ export class NiveauComponent implements OnInit {
 
     this.niveauService.fetchNiveaux(this.page, this.numberDataOfPage).subscribe(
       (resp)=> {
-        console.log(resp);
 
         this.sizeData = resp.totalData ;
         
@@ -138,7 +137,6 @@ export class NiveauComponent implements OnInit {
   }
 
   onUpdateNiveau(formData){
-    console.log(formData);
     this.niveauService.updateNiveau(formData)
     .subscribe(
       (response)=>{

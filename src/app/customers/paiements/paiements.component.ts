@@ -113,11 +113,11 @@ color:string;
 
       (resp)=>{
 
-        console.log(resp);
+        //console.log(resp);
         
 
         this.myCoursCommuns = resp;
-        console.log(this.myCoursCommuns);
+       // console.log(this.myCoursCommuns);
 
       },
 
@@ -131,7 +131,6 @@ color:string;
   
   onGenerateRecuPaiement(data){
 
-    console.log(data);
     
     PdfMakeWrapper.setFonts(pdfFonts);
    

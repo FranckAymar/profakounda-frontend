@@ -94,7 +94,6 @@ export class DetailsCoursCommunComponent implements OnInit {
       return;
     }
  
-    console.log(this.snapshot);
     
 
     this.router.navigate(['/home/sign-in'],     
@@ -146,7 +145,6 @@ export class DetailsCoursCommunComponent implements OnInit {
         
         this.cours = resp;
         this.initializeMap(this.cours.lieuIntervention);
-        console.log(this.cours);
 
 
       },
@@ -198,7 +196,6 @@ export class DetailsCoursCommunComponent implements OnInit {
       });
 
     } else {
-      console.log("publicible");
 
       this.router.navigate([], {
         relativeTo: this.route,

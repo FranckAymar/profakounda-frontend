@@ -12,6 +12,7 @@
                                 <th></th>
                                 <th>Par :</th> 
                                 <th>Forfait</th>
+                                <th>Coût</th>
                                 <th>Requete(s) restante(s)</th>
                                 <th>Date de paiement</th>
                                 <th>Date d'expiration</th>
@@ -23,6 +24,7 @@
                                 <td><span class="list-img"><img src="{{urlServer}}/{{paiement.particulier.id}}" alt=""></span>
                                 <td>{{paiement.particulier.nom}} {{paiement.particulier.prenoms}} </td>
                                 <td>{{paiement.forfait.name}}</td>
+                                <td>{{paiement.forfait.montant}} Fr</td>
                                 <td>{{paiement.nbreRequeteRestante}}</td>
                                 <td>{{paiement.datePaiement |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                                 <td>{{paiement.dateFin |date:"yyyy-MM-dd HH:mm:ss"}}</td>

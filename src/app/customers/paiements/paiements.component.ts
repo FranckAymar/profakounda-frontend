@@ -137,7 +137,6 @@ color:string;
    
     const pdf = new PdfMakeWrapper();
     pdf.header(new Txt('www.profakounda.com').alignment('center').end)
-   
     if(data.modePaiement=="OM_SKAN")
     {
       this.operateur="Orange Money"
@@ -179,7 +178,7 @@ color:string;
       
       pdf.add(new Columns([new Txt('Montant :').margin([0,10,0,0]).bold().end, new Txt('Opérateur:').margin([0,10,0,0]).bold().end]).end);
       pdf.add(new Columns([new Txt(data.coursCommun ? data.coursCommun.cout : data.publicCible.cout + 'FCFA').end, new Txt(this.operateur).color(this.color).end]).end);
-     
+    
       pdf.add(new Txt('Téléphone:').margin([0,10,0,0]).bold().end)
       pdf.add(new Txt(data.numeroPaiement).end)
       pdf.footer(new Txt('Toute tentative de falsification est passible de poursuites judiciaires.').alignment('center').end);

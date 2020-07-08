@@ -38,6 +38,7 @@
                             <tr>
                                 <th>Identifiant</th>
                                 <th>Par :</th>
+                                <th>numero</th>
                                 <th>Date création</th>
                                 <th>Date demande en Ligne</th>
                                 <th>Date Mise en Ligne</th>
@@ -50,6 +51,7 @@
                             <tr *ngFor="let p of propositionsFormations">
                                 <td>{{p.id}}</td>
                                 <td>{{p.particulier?.nom}} {{p.particulier?.prenoms}}</td>
+                                <td>{{p.particulier.telephone}}</td>
                                 <td>{{p.dateCreation |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                                 <td>{{p.dateDemandeMiseEnLigne |date:"yyyy-MM-dd HH:mm:ss"}}</td>
                                 <td>{{p.dateMiseEnLigne |date:"yyyy-MM-dd HH:mm:ss"}} </td>

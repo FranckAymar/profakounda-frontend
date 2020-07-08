@@ -24,6 +24,16 @@
                         <h4>{{detailsPropositionFormation?.particulier?.prenoms}}</h4>
                     </li>
                     <li>{{detailsPropositionFormation?.particulier?.niveau?.libelle}}</li>
+                    <li>
+                        <h4>{{detailsPropositionFormation.particulier.code}}</h4>
+                    </li>
+                    <li>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> 
+                            
+                        {{detailsPropositionFormation.particulier.ville.designation}} 
+                        <span>,</span>
+                        {{detailsPropositionFormation.particulier.commune.libelle}}
+                    </li>
                 </ul>
             </div>
 
@@ -72,7 +82,7 @@
 
                             <tbody>
                                 <tr *ngFor="let contrat of detailsPropositionFormation?.contrats">
-                                    <td>{{contrat.niveau?.libelle}}</td>
+                                    <td>{{contrat.niveau?.libelle}} {{contrat.niveauTemporaire?.libelle}}</td>
                                     <td class="align-text-right"><span class="pro-user-act">{{contrat.minMontant}}
                                             FCFA</span></td>
                                     <!-- <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}}

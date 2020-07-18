@@ -752,6 +752,7 @@ changeEtoile5(){
 
   
 
+
     if(!this.signInService.isLogged()){
        //Ouverture de la modal
        this.openModalPayment.nativeElement.click() ;

@@ -1,3 +1,4 @@
+import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
 import { URL } from 'src/app/API_url/config';
 import { CauserefusService } from './../services/causerefus.service';
 import { PropostionFormationsAdminService } from './../services/propostion-formations-admin.service';
@@ -43,7 +44,8 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
 
   constructor(private propostionFormService : PropostionFormationsAdminService,
-            private refusService : CauserefusService) { }
+            private refusService : CauserefusService,
+            private snackbarService : SnackbarService) { }
 
   ngOnInit() {
     //Rechercher toute les formations
@@ -119,7 +121,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
       (resp)=>{
         
-        alert("mise en ligne accordé") ;
+        this.snackbarService.openSnackBar('Mise en ligne réussie')
         this.onFetchPropositionFormation(this.critereFiltre)
 
       },
@@ -142,7 +144,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
 
       (resp)=>{
-        alert("Refus validé") ;
+        this.snackbarService.openSnackBar('Action effectuée avec succès')
         document.getElementById('closeModalChoixRefus').click() ;
         this.onFetchPropositionFormation(this.critereFiltre) ;
       },

@@ -27,7 +27,6 @@ export class AdminGuard implements CanActivate {
       return true;
 
     } else {
-      console.log('TEST');
       
       this.router.navigateByUrl('/error401') ;
       return false;

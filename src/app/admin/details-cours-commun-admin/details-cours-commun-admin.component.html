@@ -56,12 +56,13 @@
                     <div  *ngIf="!detailsCoursCommun.coursCommun?.cout"  class="udb-sec udb-time">
                         <h4><img src="images/icon/db4.png" alt="" /> Public cible</h4>
                         <div class="tour_head1 udb-time-line days">
-                            <ul>
-                                <li *ngFor="let public of detailsCoursCommun.publicCible" class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <ul *ngIf="detailsCoursCommun.publicCible">
+                                <li *ngFor="let public of detailsCoursCommun.publicCible" 
+                                        class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     <div class="sdb-cl-tim">
                                         <div class="sdb-cl-day">
                                             <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA</h5>
-                                            <span> Niveau : {{public.niveau.libelle}}</span>
+                                            <span> Niveau : {{public.niveau?.libelle}}</span>
                                             
                                         </div>
                                         <div class="sdb-cl-class">

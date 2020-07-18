@@ -40,7 +40,7 @@ isNombreMaxAtteint:boolean = false;
   goToDashboard(){
 
 
-    if(sessionStorage.getItem(this.signInService.TOKEN) !==null){
+    if(localStorage.getItem(this.signInService.TOKEN) !==null){
       this.router.navigateByUrl('/customers/courscommun') ;
 
     }else{

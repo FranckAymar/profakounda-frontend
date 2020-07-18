@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="box-inn-sp">
         <div class="inn-title">
-            <h4>Mes paiements</h4>
+            <h4>Mes forfaits</h4>
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
@@ -17,6 +17,8 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <p *ngIf="paiements.length === 0">Vous n'avez effectué aucun achat de forfait pour le moment.
+                                Cliquez <a style="color: blue;" routerLink="/formations">ici</a> pour consulter la liste des formateurs</p>
                             <tr *ngFor="let paiement of paiements">
                                 <td>{{paiement.nomForfait}}</td>
                                 <td>{{paiement.nbreRequeteRestante}}</td>
@@ -44,7 +46,7 @@
 <div style="margin-top: 3em;" class="col-md-12">
     <div class="box-inn-sp">
         <div class="inn-title">
-            <h4>Mes cours communs</h4>
+            <h4>Mes reçus d'inscriptions</h4>
         </div>
        
         <div class="tab-inn">
@@ -56,10 +58,12 @@
                                 <th>Organisation</th>
                                 <th>Nom</th>
                                 <th>Prenom</th>
-                                <th>Date inscription</th> 
+                                <th>Date d'inscription</th> 
                             </tr>
                         </thead>
                         <tbody>
+                            <p *ngIf="myCoursCommuns.length === 0">Vous ne vous êtes pas encore inscrits à un cours.
+                                Cliquez <a style="color: blue;" routerLink="/courscommun">ici</a> pour consulter des cours organisés</p>
                             <tr  *ngFor="let cours  of myCoursCommuns">
                                 <td>{{ cours.coursCommun ?  cours.coursCommun?.organisation.libelle :
                                     cours.publicCible.coursCommun.organisation.libelle}}</td>

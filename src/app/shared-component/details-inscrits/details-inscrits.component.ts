@@ -33,7 +33,7 @@ export class DetailsInscritsComponent implements OnInit {
   ngOnInit() { 
 
     this.bodyOfTable.push(this.headersTable);
-    console.log(this.dataReceived);
+    //console.log(this.dataReceived);
 
   }
 
@@ -64,7 +64,7 @@ export class DetailsInscritsComponent implements OnInit {
   //     author: 'ProfAkounda'
   // });
 
-  console.log(this.dataReceived);
+  //console.log(this.dataReceived);
   
   
     if(this.dataReceived.details.id)

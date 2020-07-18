@@ -35,8 +35,7 @@ export class DashboardHomeComponent implements OnInit {
     this.dashboardService.fetchDetailsDashboard().subscribe(
 
       (resp)=>{
-        console.log(resp);
-        
+      
 
         this.detailsDahboard = resp ;
       },

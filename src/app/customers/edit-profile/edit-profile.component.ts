@@ -134,7 +134,7 @@ recursiveCompress = (image: File, index, array) => {
     map(response => {
 
     //Code block after completing each compression
-      console.log('compressed ' + index + image.name);
+     // console.log('compressed ' + index + image.name);
       this.compressedImages.push(response);
       return {
         data: response,
@@ -242,7 +242,7 @@ getColor(){
         reader.onload = (event) => {
           this.urlFile = reader.result ;
         }
-        console.log('input: '  + this.data[0].size);
+       // console.log('input: '  + this.data[0].size);
         const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
           expand(res => {
             return res.index > res.array.length - 1
@@ -253,7 +253,7 @@ getColor(){
         compress.subscribe(res => {
           if (res.index > res.array.length - 1) {
           //Code block after completing all compression
-            console.log('Compression successful ' + this.compressedImages);
+           // console.log('Compression successful ' + this.compressedImages);
             let file = this.compressedImages[0];
 
             let input = new FormData();
@@ -333,7 +333,7 @@ getColor(){
     this.villeService.onFetchVilles().subscribe(
       (response)=> {
         this.villesObject = response;
-        console.log(response);
+       // console.log(response);
       },
       (error)=> {
         console.log("Une erreur est survenue");

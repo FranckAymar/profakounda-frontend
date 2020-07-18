@@ -1,3 +1,4 @@
+import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
 import { CoordMapModel } from './../models/CoordModel';
 import { Component, OnInit, Input, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { NiveauForme } from '../models/NiveauForme.model';
@@ -98,7 +99,8 @@ export class PropositionFormationComponent implements OnInit {
     private particulierService:ParticulierService,
     private villeService:VilleService,
     private propositionFormationService:PropositionFormationService,
-    private formationService:FormationService
+    private formationService:FormationService,
+    private snackbarService : SnackbarService
     ) { 
       
     }
@@ -169,7 +171,7 @@ export class PropositionFormationComponent implements OnInit {
     }
     checkBoxCylePrimaire(){
       this.isCheckCiclePrimaire = !this.isCheckCiclePrimaire ;
-      console.log(this.isCheckCiclePrimaire);
+     // console.log(this.isCheckCiclePrimaire);
     }
     nombreMinChange(event){
       if(event < 0){
@@ -359,7 +361,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
       this.modules = m;
       this.id = id;
       this.alNiv = alNi;
-      console.log(this.alNiv);
+      //console.log(this.alNiv);
       this.module = new Module(0,'',id,localStorage.getItem(this.signInService.USERNAME));
     }
     
@@ -367,7 +369,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
       this.villeService.onFetchVilles().subscribe(
         (response)=> {
           this.villes = response;
-          console.log(response);
+         // console.log(response);
         },
         (error)=> {
           console.log("Une erreur est survenue");
@@ -388,7 +390,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
               this.errorProposition = response["error"];
               if(!this.errorProposition)
               {
-                alert("modification effectuée avec succès.");
+                this.snackbarService.openSnackBar("Modification effectuée avec succès. Une validation est requise par notre équipe d'adiministration avant sa mise en ligne.")
                 document.getElementById('ajouterDescription').click();
                 this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
                 this.rechercherProposition();
@@ -445,8 +447,8 @@ this.propositionFormationService.rechercherDisponibilites(id)
   }
   onSaveLevelTeach(object){
     if(this.isAllNiveaux){
-      console.log(object);
-      console.log("Enregistrer tout les niveaux");
+      //console.log(object);
+      //console.log("Enregistrer tout les niveaux");
       this.propositionFormationService.addAllNiveaux(object).subscribe(
         (resp)=>{
           document.getElementById('niveauEnseigne').click();
@@ -592,8 +594,8 @@ this.propositionFormationService.rechercherDisponibilites(id)
         this.onFetchFormations();
         this.module = new Module(response['id'],response['designation'],response['propositionId'],localStorage.getItem(this.signInService.USERNAME));
         this.isAllModule = response['allModule'];
-        console.log(response)
-        console.log(this.isAllModule)
+        //console.log(response)
+       // console.log(this.isAllModule)
       },
       (error)=>{
         console.log("Erreur : "+error);
@@ -699,7 +701,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
     .subscribe(
       (response)=>{
         this.propositions = response;
-        console.log(response);
+        //console.log(response);
       },
       (error)=>{
         console.log("Erreur : "+error);
@@ -768,7 +770,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
     this.propositionFormationService.saveCoordMap(this.coordMapModel, this.propostionLoad).subscribe(
 
       (resp) => {
-          console.log(resp);
+          //console.log(resp);
           this.rechercherProposition();
       },
 
@@ -796,7 +798,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
 
     if(resp['data'] !== null){
       
-    console.log(resp);
+    //console.log(resp);
     
     let lat = resp['data']['geometry'].location.lat() ;
     let long = resp['data']['geometry'].location.lng() ;

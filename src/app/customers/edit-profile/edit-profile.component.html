@@ -59,7 +59,7 @@
                             <div class="row">
     
                                 <div class="col-md-6">
-                                    <span *ngIf="!isVille" style="color: red;font-size: 0.8em !important;">Vous avez oublier de saisir votre ville de résidence.</span>
+                                    <span *ngIf="!isVille" style="color: red;font-size: 0.8em !important;">Saisissez d'abord votre ville de résidence</span>
                                     <mat-form-field style="width: 34em;">
                                         <input required type="text"  (mousedown)="mousedown()" (mouseleave)="mouseup()"  formControlName="commune" [(ngModel)]="commune"
                                             placeholder="Commune ou département" aria-label="Number" matInput

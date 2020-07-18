@@ -22,7 +22,6 @@ export class VirementComponent implements OnInit {
 
       (resp) => {
        
-        console.log(resp)
        this.virements = resp;
       
        

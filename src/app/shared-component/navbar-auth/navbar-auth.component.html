@@ -46,10 +46,11 @@
                                   <h4 *ngIf="authorisation">Tableau de bord</h4>
                                   <div *ngIf="authorisation" class="sb2-13">
                                     <ul>  
-                                        <li><a (click)="close()" routerLink="formations">Proposition de formation</a></li>
-                                        <li><a (click)="close()" routerLink="courscommun">Organiser un cours</a></li>
-                                        <li><a (click)="close()" routerLink="paiements">Mes paiements</a></li>
-                                        <li><a (click)="close()" routerLink="favoris">Mes favoris</a></li>
+                                        <li><a  (click)="close()" routerLink="formations"><i class="fa fa-plus"></i>Proposer une formation</a></li>
+                                        <li><a  (click)="close()" routerLink="courscommun"><i class="fa fa-plus"></i>Organiser un cours</a></li>
+                                        <li><a  (click)="close()" routerLink="paiements"><i class="fa fa-money"></i>Mes paiements</a></li>
+                                        <li><a  (click)="close()" routerLink="favoris"><i class="fa fa-heart"></i>Mes favoris</a></li>
+                            
                                     </ul>
                                 </div>
                             </div>

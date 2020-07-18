@@ -141,12 +141,12 @@ OnFiterDeFormationParVille(propositionFormation){
   }
 
   mapClick(event) {
-    console.log(event);
+   // console.log(event);
     
   }
 
   zoomChange(event){
-    console.log(event);
+    //console.log(event);
     
   }
 

@@ -132,7 +132,7 @@ export class SearchBarCoursCommunComponent implements OnInit {
     this.coursCommunService.fetchOrganisationList().subscribe(
       (response)=> {
         this.organisationObject = response;
-        console.log(response);
+       // console.log(response);
       },
       (error)=> {
         console.log("Une erreur est survenue");

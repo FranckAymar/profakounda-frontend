@@ -63,9 +63,12 @@ isNombreMaxAtteint:boolean = false;
 
   goToDashboard(){
     
+    
 
-    if(sessionStorage.getItem(this.signInService.TOKEN) !==null){
-      this.router.navigateByUrl('/customers/formations') ;
+    if(localStorage.getItem(this.signInService.TOKEN) !== null){
+      console.log('ok');
+      
+      this.router.navigateByUrl('customers/formations') ;
 
     }else{
       this.router.navigateByUrl('home/sign-in') ;

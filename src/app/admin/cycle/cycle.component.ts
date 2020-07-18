@@ -29,7 +29,6 @@ export class CycleComponent implements OnInit {
 
       (response)=> {
         this.cycles = response.response ;
-        console.log(response.response)
       },
 
       (error)=> {
@@ -81,7 +80,6 @@ export class CycleComponent implements OnInit {
       (reponse)=>{
        this.cycle1.id = reponse["id"];
        this.cycle1.libelle = reponse["libelle"]
-       console.log(this.cycle1);
       },
       (erreur)=>{
         console.log("Une erreur s'est produite: "+erreur);

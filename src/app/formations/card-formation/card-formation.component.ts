@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { Router, RouterStateSnapshot, RouterState } from '@angular/router';
 import { SignInService } from './../../home/services/sign-in.service';
 import { URL } from '../../API_url/config';
@@ -46,6 +47,7 @@ export class CardFormationComponent implements OnInit {
   constructor(private favorisService : FavorisService,
                private signInService : SignInService,
                private router : Router, 
+               private snackBarSevice : SnackbarService
                ) {
 
                 this.state = router.routerState;
@@ -108,8 +110,8 @@ export class CardFormationComponent implements OnInit {
     this.favorisService.addFavoris(favorisModel).subscribe(
 
       (resp)=>{
-          console.log("Ajouter avec succès");
           
+          this.snackBarSevice.openSnackBar('Ajouter aux favoris')
       },
 
       (error) => {

@@ -29,7 +29,7 @@
 
                         </li>
                         <li>
-                            fin : <span>{{cours.coursCommun?.dateFin}}</span>
+                            fin : <span>{{cours.coursCommun?.dateFin |date:"dd MMMM yyyy "}}</span>
                         </li>
 
                         <li *ngIf="cours.coursCommun?.cout">

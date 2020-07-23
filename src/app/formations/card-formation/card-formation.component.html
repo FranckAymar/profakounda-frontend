@@ -34,7 +34,8 @@
         </a>
 
 
-        <p class="add-three-dot">{{description}}</p>
+        
+        <p  [innerHTML]="description" class="add-three-dot"></p>
         <span class="home-top-cour-rat">{{ville}}</span>
         <div class="hom-list-share">
             <ul>
@@ -81,7 +82,7 @@
                                                         *ngIf="contrats.length !== i+1">/</span></span>
                                             </p>
                                     </div>
-                                    <p class="card-text">{{description}}</p>
+                                    <p  [innerHTML]="description" class="card-text"></p>
 
                                     <span class="home-top-cour-rat">{{ville}}</span>
 

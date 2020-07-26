@@ -35,7 +35,7 @@
 
 
         
-        <p  [innerHTML]="description" class="add-three-dot"></p>
+        <p style="height: 2em;" [innerHTML]="description" class="add-three-dot"></p>
         <span class="home-top-cour-rat">{{ville}}</span>
         <div class="hom-list-share">
             <ul>
@@ -82,7 +82,10 @@
                                                         *ngIf="contrats.length !== i+1">/</span></span>
                                             </p>
                                     </div>
-                                    <p  [innerHTML]="description" class="card-text"></p>
+                                    <div class="card-text">
+                                        <p  [innerHTML]="description" ></p>
+
+                                    </div>
 
                                     <span class="home-top-cour-rat">{{ville}}</span>
 

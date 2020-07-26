@@ -95,7 +95,7 @@ onResetPassword() {
 
     (resp)=> {
       
-      console.log(resp);
+     // console.log(resp);
       
       if(resp.code === 0) {
 

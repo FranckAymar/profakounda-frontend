@@ -26,6 +26,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   selector: 'app-proposition-formation',
   templateUrl: './proposition-formation.component.html',
   styleUrls: ['./proposition-formation.component.css']
+
 })
 
 export class PropositionFormationComponent implements OnInit {

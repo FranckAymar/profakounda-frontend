@@ -599,11 +599,10 @@ changeEtoile5(){
     this.detaisFormationsService.getDetailFormation(this.idPropositionFormation).subscribe(
 
       (resp)=> {
-        console.log(resp);
-        
+
         if(localStorage.getItem(this.signInService.USERNAME))
         {
-          if(resp["username"]===localStorage.getItem(this.signInService.USERNAME))
+          if(resp["isPublicher"])
           {
             this.isProprio = true;
           }

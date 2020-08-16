@@ -32,13 +32,8 @@
                                 <span *ngIf="propositionFormation.commune">,</span>
                                 {{propositionFormation?.commune ? propositionFormation.commune : ''}}
                         </li>
-                        <li>
-                            <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
-                           
-                        </li>
-                        <li>
-                            <p>{{propositionFormation.description}}</p>
-                        </li>
+                        
+                       
 
                     </ul>
                 </div>
@@ -52,6 +47,12 @@
                       <p>Cliquez sur le bouton <strong>Me contacter</strong> une fois le paiement confirmé ! </p> 
                     </div>
                   </div>
+
+
+                <div class="udb-sec">
+                    <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
+                        <p [innerHTML]="propositionFormation.description"></p>
+                 </div>
   
 
                 <div class="udb">

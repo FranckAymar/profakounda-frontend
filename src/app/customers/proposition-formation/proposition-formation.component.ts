@@ -20,6 +20,7 @@ import { ParticulierService } from '../services/particulier.service';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { DemandeMiseEnLigne } from '../models/DemandeMiseEnLigne';
 import { CommuneService } from 'src/app/admin/services/commune.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-proposition-formation',
@@ -28,6 +29,17 @@ import { CommuneService } from 'src/app/admin/services/commune.service';
 })
 
 export class PropositionFormationComponent implements OnInit {
+
+
+  public Editor = ClassicEditor;
+
+  public configEditor = {
+    language: 'fr',
+    placeholder: "La description ne doit pas contenir d'informations personnelles (Numéro de téléphone, email, ...). Toute modification de la description d'une proposition de formation déjà en ligne doit être validée par l'équipe de ProfAkounda.",
+    toolbar : [ 'heading', '|', 'bold', 'italic', 'underline', '|', 'NumberedList', 'BulletedList', 'Undo', 'Redo' ] 
+  };
+
+
 
   public model: Niveau;
   @Input() edit:boolean = false;
@@ -104,6 +116,8 @@ export class PropositionFormationComponent implements OnInit {
     ) { 
       
     }
+
+
 
     
   ngOnInit() {

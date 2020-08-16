@@ -32,8 +32,10 @@ export class CardFormationComponent implements OnInit {
   @Input() etoilesBrillants : [] ;
   @Input() description : string ;
   @Input() ville : string ;
+  @Input() villeTemp : string ;
   @Input() id : number ;
   @Input() rayonIntervention : {} ;
+  @Input() commune : string;
   @Input() isFavoris ;
 
 
@@ -58,6 +60,15 @@ export class CardFormationComponent implements OnInit {
   ngOnInit() {
   }
 
+  mouseOver(){
+    if(this.commune)
+    {
+      this.ville = this.commune;
+    }
+  }
+  mouseLeave(){
+    this.ville = this.villeTemp;
+  }
   onSendCoordMap(coord){
     this.coordMapEvent.emit(coord) ;
     

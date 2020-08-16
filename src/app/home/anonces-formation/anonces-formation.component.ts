@@ -16,6 +16,7 @@ export class AnoncesFormationComponent implements OnInit {
   //Nombre de données à chargées à chaque page
   numberDataOfPage: number = 15;
   //Page courante
+  texte:string;
   page: number = 1;
   //Taille totale des données en base de données
   sizeData: number;
@@ -33,7 +34,8 @@ isNombreMaxAtteint:boolean = false;
     
   }
 
-
+  
+  
   onGetListFormation() {
 
 

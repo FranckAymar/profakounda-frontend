@@ -43,7 +43,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
   urlServer = URL.getPhoto
 
 
-  constructor(private propostionFormService : PropostionFormationsAdminService,
+  constructor(private propostionFormAdminService : PropostionFormationsAdminService,
             private refusService : CauserefusService,
             private snackbarService : SnackbarService) { }
 
@@ -80,7 +80,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
     confirm('Etes vous sur de cette action ?') ;
 
-    this.propostionFormService.supprimerMiseEnLigne(id).subscribe(
+    this.propostionFormAdminService.supprimerMiseEnLigne(id).subscribe(
     
       (response)=>{ 
         this.onFetchPropositionFormation(this.critereFiltre) ;
@@ -96,7 +96,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
   onFetchPropositionFormation(critereFiltre? : number){
 
     
-    this.propostionFormService.fetchProposition(critereFiltre).subscribe(
+    this.propostionFormAdminService.fetchProposition(critereFiltre).subscribe(
 
 
       (resp) => {
@@ -116,7 +116,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
 
   onAccorderMiseEnLigne(idProposition){
-    this.propostionFormService.mettreEnLigne(idProposition).subscribe(
+    this.propostionFormAdminService.mettreEnLigne(idProposition).subscribe(
 
 
       (resp)=>{
@@ -140,7 +140,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
   onRefuserMiseEnLigne(){
 
-    this.propostionFormService.refuserMiseEnLigne(this.idPropositionCourante, this.causeRefusId).subscribe(
+    this.propostionFormAdminService.refuserMiseEnLigne(this.idPropositionCourante, this.causeRefusId).subscribe(
 
 
       (resp)=>{

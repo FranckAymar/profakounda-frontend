@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { CauserefusService } from './../services/causerefus.service';
 import { ActivatedRoute } from '@angular/router';
@@ -39,10 +40,13 @@ export class DetailsPropostionFormationAdminComponent implements OnInit {
   } ;
   idPropositionFormation;
 
+  causeRefusForm : FormGroup ;
+
   constructor(private propostionFormAdminService : PropostionFormationsAdminService,
               private route : ActivatedRoute,
               private causeRefusService : CauserefusService,
-              private snackbarService : SnackbarService) { }
+              private snackbarService : SnackbarService,
+              private formBuilder : FormBuilder) { }
 
 
 
@@ -52,6 +56,16 @@ export class DetailsPropostionFormationAdminComponent implements OnInit {
     this.onFetchCauseRefus();
     this.onDetailsPropostionFormation(this.idPropositionFormation) ;
    
+    this.initForm() ;
+  }
+
+  initForm(){
+
+    this.causeRefusForm = this.formBuilder.group(
+      {
+        cause : ['']
+      }
+    )
   }
 
   selectRefus(id){
@@ -145,9 +159,8 @@ onMettreEnLigne(){
 
 onRefuserMiseEnLigne(){
  
-  console.log(this.causeRefusId);
-  
  
+  this.causeRefusId = this.causeRefusForm.get('cause').value
   if(confirm("Refuser Mise en ligne ?")){
     this.propostionFormAdminService.refuserMiseEnLigne(this.detailsPropositionFormation.propositionFormation.id, this.causeRefusId).subscribe(
 

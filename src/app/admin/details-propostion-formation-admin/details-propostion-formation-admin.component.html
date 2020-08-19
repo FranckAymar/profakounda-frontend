@@ -186,21 +186,23 @@
             </div>
             <div class="modal-body">
                 <!-- Libelle-->
+              <form [formGroup]= "causeRefusForm" >
+
                 <div class="form-group">
                     <label>Cause du refus :</label>
-                    <mat-form-field>
-                        <mat-select [ngModel]="causeRefusId">
-                            <mat-option *ngFor="let cf of causeRefusTab" [(value)]="cf.id">
-                                {{cf.titre}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
 
+                    <select class="form-control" id="refus" formControlName="cause"  [ngModel]="causeRefusId" required>
+                        <option *ngFor="let cf of causeRefusTab" [ngValue]="cf.id">{{cf.titre}}</option>
+                    </select>
+                             
                     <!-- <select class="form-control" [(ngModel)]="causeRefusId">
                         <option *ngFor="let cf of causeRefusTab" [ngValue]="cf.id">
                             {{cf.titre}}</option>
                     </select> -->
                 </div>
                 <button (click)="onRefuserMiseEnLigne()" type="submit" class="btn btn-primary">Enregistrer</button>
+
+            </form>
             </div>
             <div class="modal-footer">
                 <button id="closeModalChoixRefus" type="button" class="btn btn-danger"

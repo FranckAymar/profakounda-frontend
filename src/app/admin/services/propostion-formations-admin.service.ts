@@ -29,7 +29,7 @@ export class PropostionFormationsAdminService {
 
   }
 
-  supprimerMiseEnLigne(id:number){ 
+  supprimerMiseEnLigne(id) : Observable<any> { 
 
     return this.httpClient.post(URL.supprimerMiseEnligne,id);
  }

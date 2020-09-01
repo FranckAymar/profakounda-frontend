@@ -66,7 +66,7 @@ isNombreMaxAtteint:boolean = false;
     
 
     if(localStorage.getItem(this.signInService.TOKEN) !== null){
-      console.log('ok');
+   //   console.log('ok');
       
       this.router.navigateByUrl('customers/formations') ;
 

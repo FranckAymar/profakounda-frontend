@@ -541,7 +541,7 @@ changeEtoile5(){
 
       (resp)=>{
 
-        console.log(resp);
+        //console.log(resp);
         
 
         if(resp.code == 0){
@@ -599,7 +599,8 @@ changeEtoile5(){
     this.detaisFormationsService.getDetailFormation(this.idPropositionFormation).subscribe(
 
       (resp)=> {
-
+       console.log(resp);
+        
         if(localStorage.getItem(this.signInService.USERNAME))
         {
           if(resp["isPublicher"])

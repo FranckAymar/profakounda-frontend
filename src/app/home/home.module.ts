@@ -15,6 +15,7 @@ import { SliderHomeComponent } from './slider-home/slider-home.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AvisService } from './services/avis.service';
 import { AnnoncesCourscommunComponent } from './annonces-courscommun/annonces-courscommun.component';
+import { DescriptionComponent } from './description/description.component';
 const homeRouter = [
 
 
@@ -68,6 +69,7 @@ const homeRouter = [
     ResetPasswordComponent,
     SignUpvalidationComponent,
     AnnoncesCourscommunComponent,
+    DescriptionComponent,
    
    ],
   imports: [

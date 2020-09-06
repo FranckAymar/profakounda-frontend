@@ -33,11 +33,11 @@ export class AllCustomersComponent implements OnInit {
   }
 
   envoyerMessageCompte(){
-    console.log("Click")
-    console.log(this.message);
     this.particulierService.envoyerMessageCompte(this.message).subscribe(
       (response)=>{
-        console.log('Message envoyé avec succès.');
+        alert('Message envoyé avec succès.');
+        this.message = new Message('','','0');
+  
       },
       (error)=>{
         console.log("Une erreur s'est produite");

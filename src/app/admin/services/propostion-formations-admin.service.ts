@@ -22,7 +22,9 @@ export class PropostionFormationsAdminService {
     return this.httpClient.get(URL.recupererAllPropostionFormation);
 
   }
-
+  envoyerAlertePropositionEnEdition() : Observable<any>{
+    return this.httpClient.get(URL.envoyerAlerteProposition);
+}
   fetchPropositionParId(idProposition): Observable<any> {
     
     return this.httpClient.get(URL.recupererAllPropostionFormation+ "/"+ idProposition );

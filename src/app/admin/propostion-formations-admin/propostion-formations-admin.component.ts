@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 
 import * as $ from 'jquery';
 import { MatGridTileHeaderCssMatStyler } from '@angular/material';
+import { PropositionFormationService } from 'src/app/customers/services/propositionFormation.service';
 
 @Component({
   selector: 'app-propostion-formations-admin',
@@ -56,7 +57,16 @@ export class PropostionFormationsAdminComponent implements OnInit {
   }
 
 
- 
+ envoyerAlerteProposition(){
+  this.propostionFormAdminService.envoyerAlertePropositionEnEdition().subscribe(
+    (reponse)=>{
+
+    },
+    (error)=>{
+      console.log('Une erreur s\'est produite');
+    }
+  )
+ }
 
   onFetchCauseRefus(){
 

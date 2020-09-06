@@ -30,6 +30,9 @@ export class ParticulierService {
     verifierVilleParticulier() {
         return this.httpClient.get(URL.verifierVilleParticulier);
     }
+    envoyerMessageCompte(data) {
+        return this.httpClient.post(URL.envoyerMessageCompte,data);
+    }
     getPhoto(id: number) {
         return this.httpClient.post(URL.getPhoto, id);
     }

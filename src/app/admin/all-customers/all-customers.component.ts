@@ -1,6 +1,7 @@
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { URL } from 'src/app/API_url/config';
 import { Component, OnInit } from '@angular/core';
+import { Message } from '../model/message';
 
 @Component({
   selector: 'app-all-customers',
@@ -24,13 +25,25 @@ export class AllCustomersComponent implements OnInit {
   totalPageArray : Array<any> ;
 
   particuliers;
-
+  message:Message = new Message('','','0');
   constructor(private particulierService: ParticulierService) { }
 
   ngOnInit() {
     this.onFetchAllCustomer(this.page);
   }
 
+  envoyerMessageCompte(){
+    console.log("Click")
+    console.log(this.message);
+    this.particulierService.envoyerMessageCompte(this.message).subscribe(
+      (response)=>{
+        console.log('Message envoyé avec succès.');
+      },
+      (error)=>{
+        console.log("Une erreur s'est produite");
+      }
+    )
+  }
   onFetchAllCustomer(pageActive : number){
 
     this.page =  pageActive ;

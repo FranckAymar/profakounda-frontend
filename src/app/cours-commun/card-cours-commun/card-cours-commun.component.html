@@ -1,8 +1,8 @@
-<a  [routerLink]="['/courscommun/details',cours.coursCommun.id]"><div class="ed-rese-grid ed-rese-grid-mar-bot-30">
+<div class="ed-rese-grid ed-rese-grid-mar-bot-30">
     <div class="ed-rsear-img ed-faci-full-top">
         <img  height="250" src="{{urlServer}}/{{cours.coursCommun.id}}" alt="">
 </div>
-    <div class="ed-rsear-dec ed-faci-full-bot">
+   <div class="ed-rsear-dec ed-faci-full-bot">
             <h4><p  style="height: 4em;
                         width: 100%;
                         white-space: pre-wrap;
@@ -10,13 +10,17 @@
                         text-overflow: ellipsis;"
             
             ><a>{{cours.coursCommun.organisation.libelle}}<br><span style="color: #896BEE;font-size: 14px;">{{cours.coursCommun.titre}}</span></a></p></h4>
+
+            
             <p style="height: 8em;
                         width: 80%;
-                        white-space: pre-wrap;
+                        white-space: pre-wrap; 
                         overflow: hidden;
                         text-overflow: ellipsis;"
-            >{{cours.coursCommun.description}}</p>
+            >{{cours.coursCommun.description}}</p> 
             <a [routerLink]="['/courscommun/details',cours.coursCommun.id]"  class="details-line-btn">Détails</a> 
+            <div class="fb-share-button" data-href="https://profAkounda.com/courscommun/details" aria-placeholder="voici mon cours commun" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FprofAkounda.com%2Fcourscommun%2Fdetails/{{cours.coursCommun.id}}" class="fb-xfbml-parse-ignore">Partager</a></div>
+            
+            
     </div>
-</div>
-</a>
+</div> 

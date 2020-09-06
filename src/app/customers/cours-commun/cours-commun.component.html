@@ -1,5 +1,8 @@
 <div class="col-md-12">
 
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v8.0" nonce="v6DsT2u2"></script>
+
         <div class="head-2">
                 <div class="head-2-inn head-2-inn-padd-top">
                         <h1>Mes cours organisés</h1>
@@ -66,8 +69,19 @@
                                                                 color: #d83d0c !important;"
                                                                 (click)="loadCoursCommun(cours)"
                                                                 class="read-line-btn">Modifier</a>
+                                                                <a  class="read-line-btn"   href="https://www.facebook.com/sharer/sharer.php?u=https//www.profAkounda.html"
+                                                                style="margin-right: 0.5em;"><i _ngcontent-hao-c3="" aria-hidden="false" class="fa fa-facebook"></i></a>
+
+                                                                <div class="fb-share-button" data-href="http://profAkounda/customers/courscommun" data-layout="button_count" data-size="large">
+                                                                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2FprofAkounda%2Fcustomers%2Fcourscommun&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
+                                                                </div>
+                                                                
+                                                                <a  class="read-line-btn" href="https://www.twitter.com/intent/tweet?url=%3A%2F%2Fvenez vous inscrire a mon cours commun en MATLAB en cliquant sur ce lien https//www.profAkounda.com"
+                                                                style="margin-right: 0.5em;"><i _ngcontent-hao-c3="" aria-hidden="false" class="fa fa-twitter"></i></a>
+                                                                
                                                                 <kbd style="color: green;background-color: white;" *ngIf="cours.coursCommun.isVirement">Virement effectué <span style="color: red; background-color: white;">{{cours.coursCommun.dateVirement | date: 'dd/MM/yyyy'}}</span></kbd>
 
+ 
                                                 </div>
                                         </div>
                                 </div>

@@ -2,6 +2,8 @@
     <div class="box-inn-sp">
         <div class="inn-title">
             <h4>Tous les utilisateurs</h4>
+            <!-- (click)="envoyerAlerteActivationCompte()" -->
+            <button style="float: right;" data-toggle="modal" data-target="#sendMessage"  class="btn btn-info">Envoyer message</button>
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
@@ -36,6 +38,44 @@
                     <li [ngClass]="{'active': (i+1) === page }" 
                     (click)= "onFetchAllCustomer(i+1)" *ngFor="let p of totalPageArray ; let i=index"><a>{{i+1}}</a></li>
                 </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="sendMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Libelle-->
+                    <div class="form-group">
+                        <label for="object">objet:</label>
+                        <input type="text" [(ngModel)]="message.objet" id="object" class="fornm-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea [(ngModel)]="message.message" class="form-control" id="message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="compte">Type de compte:</label>
+                        <select class="form-control" id="compte" [(ngModel)]="message.etatCompte"  required>
+                            <option  value="0">Tous les comptes</option>
+                            <option  value="1">Comptes actifs</option>
+                            <option  value="2">Comptes Inactifs</option>
+                            <!-- <option *ngFor="let cf of causeRefusTab" [ngValue]="cf.id">{{cf.titre}}</option> -->
+                        </select>
+                    </div>
+                    <button (click)="envoyerMessageCompte()" type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
+            <div class="modal-footer"> 
+                <button id="closeModalChoixRefus" type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>

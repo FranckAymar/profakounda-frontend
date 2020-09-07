@@ -54,6 +54,7 @@ export const URL = {
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
     renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
+    envoyerMessageCompte : consts.host+ consts.nameProject +'admin/envoyerMessageCompte',
     //COMMUNES
     listCommunes : consts.host+ consts.nameProject +'/communes',
     communeParVille : consts.host+ consts.nameProject +'/rechercherCommuneParVille',
@@ -101,6 +102,7 @@ export const URL = {
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
     demandeMiseHorsLigne: consts.host+ consts.nameProject +'particulier/mettrehorsligne',
     demandeMiseEnLigneObject: consts.host+ consts.nameProject +'particulier/demandemiseenligneObject',
+    envoyerAlerteProposition : consts.host+ consts.nameProject +'admin/envoyerAlerteProposition',
     //DASHBOARD PARTICULIER
     getDashBoardProposition: consts.host+ consts.nameProject +'particulier/dashboard/propositions',
     getDashBoardCoursCommun: consts.host+ consts.nameProject +'particulier/dashboard/coursCommuns',

@@ -85,6 +85,7 @@ export class PropositionFormationService{
         let params = new HttpParams().set("page", page).set("total", numberDataOfPage) ;
         return this.httpClient.get(URL.getAllPparticulierPropositions, {params : params});
     }
+    
 
     demandeMiseEnLigne(idPrposition) : Observable<any> {
         return this.httpClient.post(URL.demandeMiseEnLigne,idPrposition);

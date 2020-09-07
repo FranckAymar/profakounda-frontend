@@ -16,11 +16,14 @@
                         width: 80%;
                         white-space: pre-wrap; 
                         overflow: hidden;
-                        text-overflow: ellipsis;"
+                        text-overflow: ellipsis;" 
             >{{cours.coursCommun.description}}</p> 
-            <a [routerLink]="['/courscommun/details',cours.coursCommun.id]"  class="details-line-btn">Détails</a> 
-            <div class="fb-share-button" data-href="https://profAkounda.com/courscommun/details" aria-placeholder="voici mon cours commun" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FprofAkounda.com%2Fcourscommun%2Fdetails/{{cours.coursCommun.id}}" class="fb-xfbml-parse-ignore">Partager</a></div>
             
+            <a [routerLink]="['/courscommun/details',cours.coursCommun.id]"  class="details-line-btn">Détails</a> 
+            <a  class="read-line-btn" data-href="https://profAkounda.com/courscommun/details"  target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FprofAkounda.com%2Fcourscommun%2Fdetails/{{cours.coursCommun.id}}"
+                style="margin-left:2em;"><i _ngcontent-hao-c3="" aria-hidden="false" class="fa fa-facebook"  ></i></a> 
+
+           
             
     </div>
 </div> 

@@ -22,8 +22,8 @@ export class PropostionFormationsAdminService {
     return this.httpClient.get(URL.recupererAllPropostionFormation);
 
   }
-  envoyerAlertePropositionEnEdition() : Observable<any>{
-    return this.httpClient.get(URL.envoyerAlerteProposition);
+  envoyerMessageProposition(data) : Observable<any>{
+    return this.httpClient.post(URL.envoyerMessageProposition,data);
 }
   fetchPropositionParId(idProposition): Observable<any> {
     

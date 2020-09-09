@@ -102,7 +102,7 @@ export const URL = {
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
     demandeMiseHorsLigne: consts.host+ consts.nameProject +'particulier/mettrehorsligne',
     demandeMiseEnLigneObject: consts.host+ consts.nameProject +'particulier/demandemiseenligneObject',
-    envoyerAlerteProposition : consts.host+ consts.nameProject +'admin/envoyerAlerteProposition',
+    envoyerMessageProposition : consts.host+ consts.nameProject +'admin/envoyerMessageProposition',
     //DASHBOARD PARTICULIER
     getDashBoardProposition: consts.host+ consts.nameProject +'particulier/dashboard/propositions',
     getDashBoardCoursCommun: consts.host+ consts.nameProject +'particulier/dashboard/coursCommuns',

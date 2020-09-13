@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { MatGridTileHeaderCssMatStyler } from '@angular/material';
 import { PropositionFormationService } from 'src/app/customers/services/propositionFormation.service';
+import { Message } from '../model/message';
+
 
 @Component({
   selector: 'app-propostion-formations-admin',
@@ -43,7 +45,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
   urlServer = URL.getPhoto
 
-
+  message:Message = new Message('','','0');
   constructor(private propostionFormAdminService : PropostionFormationsAdminService,
             private refusService : CauserefusService,
             private snackbarService : SnackbarService) { }
@@ -57,10 +59,11 @@ export class PropostionFormationsAdminComponent implements OnInit {
   }
 
 
- envoyerAlerteProposition(){
-  this.propostionFormAdminService.envoyerAlertePropositionEnEdition().subscribe(
+ envoyerMessageProposition(){
+  this.propostionFormAdminService.envoyerMessageProposition(this.message).subscribe(
     (reponse)=>{
-
+      this.message = new Message('','','0');
+      alert('Message envoyer avec succès.');
     },
     (error)=>{
       console.log('Une erreur s\'est produite');

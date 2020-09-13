@@ -2,7 +2,7 @@
     <div class="box-inn-sp">
         <div class="inn-title">
             <h4>Tous les propostions de formations</h4>
-            <!-- <button style="float: right;" (click)="envoyerAlerteProposition()" class="btn btn-info">Envoyer Alerte finalisation édition</button> -->
+            <button data-toggle="modal" data-target="#sendMessage" style="float: right;"  class="btn btn-info">Envoyer message</button>
         </div>
         <div class="container">
             <div class="row">
@@ -160,3 +160,40 @@
     </div>
 </div>
 
+<div class="modal fade" id="sendMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Libelle-->
+                    <div class="form-group">
+                        <label for="object">Objet:</label>
+                        <input type="text" [(ngModel)]="message.objet" id="object" class="fornm-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea [(ngModel)]="message.message" class="form-control" id="message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="compte">Etat:</label>
+                        <select class="form-control" id="compte" [(ngModel)]="message.etatCompte"  required>
+                            <option  value="0" selected="selected">Tous</option>
+                            <option  value="1">En ligne</option>
+                            <option  value="2">En attente</option>
+                            <option  value="3">Réfusées</option>
+                            <option  value="4">En edition</option>
+                        </select>
+                    </div>
+                    <button (click)="envoyerMessageProposition()" type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
+            <div class="modal-footer"> 
+                <button id="closeModalChoixRefus" type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,3 +2,8 @@
     display: inline-block;
     margin: 1em;
 }
+
+a {
+
+    cursor: pointer;
+}

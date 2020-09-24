@@ -22,7 +22,7 @@ export class CardCoursCommunComponent implements OnInit {
 
   chargerTwitter(){
     var url="https://profAkounda.com/courscommun/details/"+this.cours.coursCommun.id;
-    var siteUrl="https://twitter.com/intent/tweet?text=Hello ! voici%20mon%20cours%20commun  " +encodeURIComponent(url);
+    var siteUrl="https://twitter.com/intent/tweet?text=Hello ! Inscrivez-vous%20à%20mon%20cours%20organisé%20en%20cliquant%20sur%20le%20lien%20ci-dessous  " +encodeURIComponent(url);
     window.open(siteUrl,"partage");
   }
 

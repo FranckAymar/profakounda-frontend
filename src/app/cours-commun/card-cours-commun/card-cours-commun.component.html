@@ -8,6 +8,8 @@
                         white-space: pre-wrap;
                         overflow: hidden;
                         text-overflow: ellipsis;"
+
+                        
             
             ><a>{{cours.coursCommun.organisation.libelle}}<br><span style="color: #896BEE;font-size: 14px;">{{cours.coursCommun.titre}}</span></a></p></h4>
 
@@ -15,17 +17,31 @@
             <p style="height: 8em;
                         width: 80%;
                         white-space: pre-wrap; 
-                        overflow: hidden;
+                        overflow: hidden; 
                         text-overflow: ellipsis;" 
             >{{cours.coursCommun.description}}</p> 
-            
-            <a [routerLink]="['/courscommun/details',cours.coursCommun.id]"  class="details-line-btn">Détails</a> 
-            <a  class="read-line-btn" data-href="https://profAkounda.com/courscommun/details"  target="_blank" 
-            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FprofAkounda.com%2Fcourscommun%2Fdetails/{{cours.coursCommun.id}}"
-                style="margin-left:2em;">
-                <i _ngcontent-hao-c3="" aria-hidden="false" class="fa fa-facebook"  ></i></a> 
-
-           
-            
+            <div class="detail" id="div">
+               <a [routerLink]="['/courscommun/details',cours.coursCommun.id]"  class="details-line-btn">Détails</a> 
+            </div>
+         
+            <div class="dropup" id="div">
+                <button  style="background-color: white; color: yellowgreen;" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i  class="fa fa-share-alt" aria-hidden="true"></i> partager
+                   <span class="caret"></span>
+                </button>
+                
+                    <ul class="dropdown-menu" aria-labelledby="share"> 
+                        <li class="dropdown-item" (click)="chargerTwitter()">
+                            <a  target="_blank"><i _ngcontent-vsn-c7=""  aria-hidden="true"   class="fa fa-twitter-square"></i>twitter</a>
+                        </li>
+                        <li (click)="chargerFace()" class="dropdown-item">
+                            <a    target="_blank"><i _ngcontent-vsn-c7="" aria-hidden="true"  style="margin-top: 0.5em;margin-bottom: 0.5em;" class="fa fa-facebook-square"></i>facebook</a>
+                        </li>
+                        <li (click)="chargerLink()" class="dropdown-item">
+                            <a    target="_blank"><i _ngcontent-vsn-c7="" aria-hidden="true"  class="fa fa-linkedin-square"></i>linkedin</a>
+                        </li>
+                    </ul>
+            </div>
+        
     </div>
 </div> 

@@ -11,12 +11,30 @@ export class CardCoursCommunComponent implements OnInit {
 
   urlServer = URL.getAffichePubCoursCommun;
 
-
+ 
   @Input() cours;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {      
+   
   }
 
+  chargerTwitter(){
+    var url="https://profAkounda.com/courscommun/details/"+this.cours.coursCommun.id;
+    var siteUrl="https://twitter.com/intent/tweet?text=Hello ! voici%20mon%20cours%20commun  " +encodeURIComponent(url);
+    window.open(siteUrl,"partage");
+  }
+
+  chargerFace(){
+    var url="https://profAkounda.com/courscommun/details/"+this.cours.coursCommun.id;
+    var siteUrl="https://www.facebook.com/sharer/sharer.php?u=" +encodeURIComponent(url);
+    window.open(siteUrl,"partage");
+  }
+
+  chargerLink(){ 
+    var url="https://profAkounda.com/courscommun/details/"+this.cours.coursCommun.id;
+    var siteUrl="https://www.linkedin.com/shareArticle?url=" +encodeURIComponent(url);
+    window.open(siteUrl,"partage");
+  }
 }

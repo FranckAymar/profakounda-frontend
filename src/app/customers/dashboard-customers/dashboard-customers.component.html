@@ -60,12 +60,12 @@
                                     <tr *ngFor="let p of propositions">
 
                                         <td>
-                                            <p style="
-                                               
+                                            <p [innerHTML]="p.proposition.description" style="
+                                               height: 2em;
                                                 width: 10em;
                                                 white-space: nowrap;
                                                 overflow: hidden;
-                                                text-overflow: ellipsis;">{{p.proposition.description}}</p>
+                                                text-overflow: ellipsis;"></p>
                                         </td>
                                         <td>{{p.proposition.telephone}}</td>
                                         <td>{{p.proposition.dateCreation | date: 'dd-MM-yyyy'}}</td>

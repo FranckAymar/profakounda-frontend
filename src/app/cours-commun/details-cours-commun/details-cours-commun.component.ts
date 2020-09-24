@@ -7,6 +7,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router, RouterStateSnapshot, RouterState } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-details-cours-commun',
@@ -47,6 +48,7 @@ export class DetailsCoursCommunComponent implements OnInit {
               private signService: SignInService,
               private inscritService : InscriptioncourscommunService,
               private snack : SnackbarService,
+              private titleService: Title
     ) {
 
     this.state = router.routerState;
@@ -145,6 +147,8 @@ export class DetailsCoursCommunComponent implements OnInit {
         
         this.cours = resp;
         this.initializeMap(this.cours.lieuIntervention);
+        //On actualise le titre de la page HTML
+        this.titleService.setTitle(this.cours.coursCommun.titre);
 
 
       },

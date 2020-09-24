@@ -7,6 +7,7 @@ import { InscriptioncourscommunService } from './../../../cours-commun/inscripti
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from '../../services/cours-commun-service.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-details-cours-commun',
@@ -38,7 +39,8 @@ export class DetailsCoursCommunComponent implements OnInit {
               private router : Router,
               private inscriptionService : InscriptioncourscommunService,
               private dialog : MatDialog,
-              private snackService : SnackbarService) { }
+              private snackService : SnackbarService,
+              private titleService: Title ) { }
 
   ngOnInit() {
     this.getIdCoursCommun() ;
@@ -51,16 +53,19 @@ export class DetailsCoursCommunComponent implements OnInit {
     this.coursCommunService.fetchCoursCommun(this.idCoursCommun).subscribe(
 
       (resp)=>{
+        console.log(resp);
+        
         this.cours = resp ;
         this.idCoursCommun = resp["coursCommun"].id;
-        
+        //On actualise le titre de la page HTML
+        this.titleService.setTitle(resp["coursCommun"].titre);
       },
       (error)=>{
         console.log(error);
         
       }
     )
-
+ 
   }
 
   demandeVersement(){

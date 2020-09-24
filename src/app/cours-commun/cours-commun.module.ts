@@ -20,7 +20,8 @@ const coursCommunRouter = [
       },
       {
         path : 'details/:id', 
-        component : DetailsCoursCommunComponent 
+        component : DetailsCoursCommunComponent,
+      
         
       } 
 

@@ -67,7 +67,6 @@ getColor(){
     .subscribe(
       (response)=>{
         sessionStorage.setItem("mail",particulier.email);
-        this.mailSaisi = sessionStorage.getItem("mail");
         this.formInitialisation();
         this.error =response["error"];      
         if(response["success"])
@@ -87,6 +86,7 @@ getColor(){
   }
 
   onRevoyerEmail(){
+    this.mailSaisi = sessionStorage.getItem("mail");
     this.particulierService.revoyerEmail(this.mailSaisi).subscribe(
       (Response)=>{
         alert("mail belle et bien revoiyé");

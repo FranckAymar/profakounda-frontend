@@ -72,17 +72,16 @@ export class SignInComponent implements OnInit {
 
  
       (response) => {
-
-
+          
           let authorities = response.authorities ;    
           let authority = authorities[0].authority;
 
           //Sauvegarde du token
-          sessionStorage.setItem(this.TOKEN, token);
+          localStorage.setItem(this.TOKEN, token);
             //Sauvegarde de l'authorité
-          sessionStorage.setItem(this.AUHORITY, authority);
+          localStorage.setItem(this.AUHORITY, authority);
             //Sauvegarde du username
-          sessionStorage.setItem(this.USERNAME, username);
+          localStorage.setItem(this.USERNAME, username);
      
           //Si l'utilisateur est un admin
           if (authority === 'ROLE_ADMIN') {
@@ -99,7 +98,8 @@ export class SignInComponent implements OnInit {
       (error) => {
         
         if(error.status === 401) {
-
+          console.log(error);
+          
           this.errorInternet = false ;
           this.isFailed = true ;
           //this.snackService.openSnackBar('Vérifier vos informations de connexion. Votre compte est-il actif ?');

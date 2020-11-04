@@ -10,6 +10,20 @@
     color: white;
     background: red;
 }
+.box-inn-sp{
+    border-bottom: 1.5px solid #E66030;
+    border-top: 2px solid #E66030;
+}
+.inn-title{
+  border-bottom: 2px solid #E66030;
+}
+
+.ok{
+    color: #ADFF2F;
+}
+.notOk{
+    color:red;
+}
 i{
     background: none;
 }

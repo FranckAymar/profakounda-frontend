@@ -2,14 +2,18 @@
 
 <!-- POPULAR COURSES -->
 <section class="pop-cour">
-    <div class="container com-sp pad-bot-70">
+    <div class="container com-sp">
         <div class="row">
             <div class="con-title">
-                <h2>Nos <span>cours Organisés</span></h2>
+                <h2>Les <span>cours Organisés</span></h2>
             </div>
         </div>
-        
-  <div class="container">
+        <div style="text-align: center;" *ngIf="coursCommuns.length == 0" >
+            <p>Aucun cours organisés pour le moment.</p>
+            <p>Vous désirez organiser un cours ? N'hésitez pas, mettez votre cours en  ligne <a style="color: #FF5722;" routerLink="/customers/courscommun">ici</a></p>
+
+        </div>  
+        <div class="container">
 
     <div class="row">
         <div *ngFor="let cours of coursCommuns" class="col-md-4 col-mobile">
@@ -19,7 +23,7 @@
 </div>
   </div>
        
-        <div class="con-title">
+        <div *ngIf="isNombreMaxAtteint" class="con-title">
             <a [routerLink]="['/courscommun']">
                 <p>Voir plus ...</p>
             </a>

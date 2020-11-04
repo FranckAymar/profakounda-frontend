@@ -22,14 +22,16 @@ export class PropostionFormationsAdminService {
     return this.httpClient.get(URL.recupererAllPropostionFormation);
 
   }
-
+  envoyerMessageProposition(data) : Observable<any>{
+    return this.httpClient.post(URL.envoyerMessageProposition,data);
+}
   fetchPropositionParId(idProposition): Observable<any> {
     
     return this.httpClient.get(URL.recupererAllPropostionFormation+ "/"+ idProposition );
 
   }
 
-  supprimerMiseEnLigne(id:number){ 
+  supprimerMiseEnLigne(id) : Observable<any> { 
 
     return this.httpClient.post(URL.supprimerMiseEnligne,id);
  }

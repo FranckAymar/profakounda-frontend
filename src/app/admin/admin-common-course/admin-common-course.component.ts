@@ -1,3 +1,4 @@
+import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
 import { CoursCommunAdminService } from './../services/cours-commun-admin.service';
 import { Component, OnInit } from '@angular/core';
 import { CauserefusService } from '../services/causerefus.service';
@@ -9,7 +10,9 @@ import { CauserefusService } from '../services/causerefus.service';
 })
 export class AdminCommonCourseComponent implements OnInit {
 
-  constructor(private coursCommunAdminService : CoursCommunAdminService, private refusService:CauserefusService) { }
+  constructor(private coursCommunAdminService : CoursCommunAdminService,
+             private refusService:CauserefusService,
+             private snackbarService : SnackbarService) { }
 
   courCommuns= [];
 
@@ -70,8 +73,7 @@ export class AdminCommonCourseComponent implements OnInit {
 
       (resp)=>{
         
-        alert("mise en ligne accordé") ;
-
+        this.snackbarService.openSnackBar('Mise en ligne accordée')
         this.onFetchAllcoursCommunAdmin();
 
       },
@@ -95,7 +97,7 @@ export class AdminCommonCourseComponent implements OnInit {
 
 
       (resp)=>{
-        alert("Refus validé") ;
+        this.snackbarService.openSnackBar('Refus validé')
         document.getElementById('closeModalChoixRefus').click() ;
          this.onFetchAllcoursCommunAdmin();
       },

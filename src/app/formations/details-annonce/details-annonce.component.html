@@ -25,27 +25,64 @@
                             <h4>{{propositionFormation.code}}</h4>
                         </li>
                         <li>{{propositionFormation.niveau?.libelle}}</li>
+                        <li>
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> 
+                                
+                                {{propositionFormation?.ville ? propositionFormation.ville : '' }} 
+                                <span *ngIf="propositionFormation.commune">,</span>
+                                {{propositionFormation?.commune ? propositionFormation.commune : ''}}
+                        </li>
+                        
+                       
 
                     </ul>
                 </div>
 
             </div>
             <div class="col-md-9">
+
+                <div *ngIf="paymentWaiting" class="modal-header center alert alert-success">
+                    <div style="padding: 0.5em;"   class="row">
+                      <p><strong>Demande de paiement envoyée !</strong></p>
+                      <p>Cliquez sur le bouton <strong>Me contacter</strong> une fois le paiement confirmé ! </p> 
+                    </div>
+                  </div>
+
+
+                <div class="udb-sec">
+                    <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
+                        <p [innerHTML]="propositionFormation.description"></p>
+                 </div>
+  
+
                 <div class="udb">
 
                     <div class="udb-sec">
-                        <input (click)="contactCustomer()" type="button" value="Me contacter"
-                            class="btn btn-lg btn-block my-2 light-btn">
+
+                     <!--    <div class="tel">
+                        <a href=""><span><i style="color: white;" class="fa fa-phone fa-5x"></i></span></a>
+                       </div> -->
+
+                        <button id="meContacterBtn" (click)="contactCustomer()" style="border-radius:10em;
+                                                                    background-color:#002147 !important;height: 3.5em;
+                                                                    font-weight: 1000;"  
+                            class="btn btn-lg btn-block my-2"><i style="font-size: 25px;" class="fa fa-phone"></i> Me contacter </button>
                     </div>
 
 
 
-                    <div class="udb-sec udb-prof">
+                    <!-- <div class="udb-sec udb-prof">
                         <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
                         <p>{{propositionFormation.description}}</p>
+                    </div> -->
+
+                    <div *ngIf="propositionFormation.cyclePrimairePresent"  class="modal-header center">
+                        <p class="alert alert-warning">
+                            Pour les niveaux touchant les <strong>cours préparatoires (CP), les cours élémentaires (CE) ou les cours moyens (CM),</strong>  
+                            toutes les matières seront dispensées par cet enseignant.</p>
                     </div>
 
-                    <div class="udb-sec udb-cour">
+                    <div *ngIf="!propositionFormation.isAllModule" class="udb-sec udb-cour">
                         <h4><img src="../../assets/images/icon/db2.png" alt="" /> Mes Formations</h4>
                         <div class="sdb-cours">
                             <ul>
@@ -65,27 +102,28 @@
                     </div>
 
 
-                    <div class="udb-sec udb-cour-stat">
-                        <h4><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
+                    <div  class="udb-sec udb-cour-stat">
+                        <h4 *ngIf="!propositionFormation.isAllNiveau"><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
+                        <h4 *ngIf="propositionFormation.isAllNiveau"> <i class="fa fa-money"></i> COÛT</h4>
                         <div class="pro-con-table table-responsive">
                             <table class="bordered table">
                                 <thead>
                                     <tr>
-                                        <th>Niveaux</th>
-                                        <th class="align-text-right">Prix Minimun </th>
-                                        <th class="align-text-right">Prix Maximum(Mensuel)</th>
+                                        <th *ngIf="!propositionFormation.isAllNiveau">Niveaux</th>
+                                        <th class="align-text-right">Coût</th>
+                                       
 
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <tr *ngFor="let contrat of propositionFormation.contrats">
-                                        <td>{{contrat.niveau.libelle}}</td>
+                                        <td *ngIf="!propositionFormation.isAllNiveau">{{contrat.niveau?.libelle}} {{contrat.niveauTemporaire?.libelle}}</td>
                                         <td class="align-text-right"><span
                                                 class="pro-user-act">{{contrat.minMontant | currency:'XOF'}}
                                             </span></td>
-                                        <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant | currency:'XOF'}}
-                                                </span></td>
+                                        <!-- <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant | currency:'XOF'}}
+                                                </span></td> -->
 
                                     </tr>
                                 </tbody>
@@ -227,6 +265,10 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12 stepper">
+                                <div style="text-align: right; margin-bottom: 1em;" class="row">   
+                                    <a (click)="initializeModalPayment()" data-dismiss="modal"  id="ed-mi-close" class="ed-mi-close"><i class="fa fa-times" style="color: gainsboro;"></i></a>
+                            
+                                </div>
                                 <ul class="progressbar">
                                     <li id="step1" class="active"><span class="headersStepper">Connexion</span></li>
                                     <li id="step2"><span class="headersStepper">Forfaits</span></li>
@@ -273,8 +315,8 @@
                                         </div>
 
                                     </form>
-                                    <p (click)="goToSignUp()" class="text-center"><button class="btn-link">Create an
-                                            Account</button></p>
+                                    <p (click)="goToSignUp()" class="text-center"><button class="btn-link">Creer
+                                            un compte</button></p>
                                 </div>
                                 <!--Inscription-->
                                 <div id="content1-signup" class="hide">
@@ -326,6 +368,10 @@
                                 <!--Forfaits-->
                                 <div id="content2" class="hide">
 
+                                    <p style="margin-top: 0.5em;" style="text-align: center;">Un <strong>forfait</strong> 
+                                        vous donne accès aux contacts d'un formateur.
+                                    <br>Le nombre de <strong>requêtes</strong> d'un forfait constitue le nombre de formateurs que vous pouvez 
+                                    consulter sachant qu'un contact vous coûtera une requête.</p>
                                     <div class="tab-inn">
                                         <div style="width: 100%;overflow: auto;" class="table-responsive table-desi">
                                             <table class="table table-hover">
@@ -366,24 +412,27 @@
                                 </div>
                                 <!--Mode de paiement-->
                                 <div id="content3" class=" hide">
+                                    <form [formGroup]="operatorForm" (submit)="next()">
 
                                     <div class="form-check-inline text-center">
 
                                         <p>Choississez un opérateur :</p>
-
                                         <div class="row">
-                                            <input (change)="modePaiemenentValidation()" type="radio" value="MOMO_SKAN"
-                                                name="operateur" [(ngModel)]="paiementDetails.modePaiement"
-                                                class="filled-in" id="mtn" />
+                                            <input  type="radio" value="MOMO_SKAN"
+                                            formControlName="operator" name="operator" 
+                                            [(ngModel)]="paiementDetails.modePaiement"
+                                            class="filled-in" id="mtn" />
                                             <label for="mtn">MTN CI</label>
 
-                                            <input (change)="modePaiemenentValidation()" value="MOOV_SKAN" type="radio"
-                                                name="operateur" [(ngModel)]="paiementDetails.modePaiement"
-                                                class="filled-in" id="moov" />
-                                            <label for="moov">MOOV CI</label>
+                                         <!--    <input disabled  value="MOOV_SKAN" type="radio"
+                                            formControlName="operator" name="operator" 
+                                            [(ngModel)]="paiementDetails.modePaiement"
+                                            class="filled-in" id="moov" />
+                                            <label for="moov">MOOV CI</label> -->
 
-                                            <input (change)="modePaiemenentValidation()" value="OM_SKAN" type="radio"
-                                                name="operateur" [(ngModel)]="paiementDetails.modePaiement"
+                                            <input  value="OM_SKAN" type="radio"
+                                            formControlName="operator" name="operator" 
+                                            [(ngModel)]="paiementDetails.modePaiement"
                                                 class="filled-in" id="orange" />
                                             <label for="orange">ORANGE CI</label>
 
@@ -391,15 +440,23 @@
                                     </div>
 
                                     <div class="input-field s12">
-                                        <input (ngModelChange)="modePaiemenentValidation()"
-                                            [(ngModel)]="paiementDetails.numeroPaiement" type="number"
+                                        <input 
+                                            formControlName="numero"
+                                            [(ngModel)]="paiementDetails.numeroPaiement" 
+                                            type="tel" pattern="[0-9]*" 
                                             data-ng-model="name" class="validate">
                                         <label>Entrez votre numéro</label>
+                                        <small style="color: red;" 
+                                        *ngIf="operatorForm.controls.numero.errors?.required ||
+                                        operatorForm.controls.numero.errors?.maxlength ||
+                                        operatorForm.controls.numero.errors?.minlength " class="invalid-feedback">
+                                            Entrez un numéro de téléphone valide  (8 chiffres)
+                                    </small>
                                     </div>
 
-                                    <button id="nextBtnPaiement" disabled (click)=next()
+                                    <button id="nextBtnPaiement" [disabled]="operatorForm.invalid" 
                                         class="btn btn-bg-color btn-block">Suivant</button>
-
+                                </form>
                                 </div>
                             </div>
 
@@ -434,8 +491,8 @@
                                     <div *ngIf="paiementDetails.modePaiement === 'OM_SKAN'">
                                         <img src="../../../assets/img/logo_OM.jpg" width="100" height="100" alt="">
                                         <p>Veuillez générer un <strong>code de confirmation</strong> en tapant le
-                                            code USSD suivant :
-                                            <br><strong>#144*8#</strong></p>
+                                            code USSD suivant sur votre téléphone:
+                                            <br><strong>#144*82#</strong></p>
 
                                         <div class="input-field s12">
                                             <input (ngModelChange)="modePaiemenentValidation()"
@@ -483,7 +540,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-
+                    <div class="modal-header center alert alert-success">
+                        <div style="padding: 0.5em;"   class="row">
+                          <p>N'hésitez pas à signaler au formateur que vous le contactez grâce à ProfAkounda !</p>
+                          <p>L'équipe de ProfAkounda vous remercie.</p>
+                        </div>
+                      </div>
                     <div class="columns">
                         <ul class="price">
                             <li>Nom : <strong>{{particulierDetail.nom}}</strong></li>
@@ -505,5 +567,5 @@
 
 
 
-    <button #openModalPayment [hidden]="true" data-toggle="modal" data-target="#modalPayment"></button>
+    <button data-backdrop="static" data-keyboard="false" #openModalPayment [hidden]="true" data-toggle="modal" data-target="#modalPayment"></button>
     <button #openParticulierDetails [hidden]="true" data-toggle="modal" data-target="#particulierDetails"></button>

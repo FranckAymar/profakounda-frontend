@@ -19,18 +19,24 @@
             </div>
             <div class="log-in-pop-right">
                 <h4>Validation de compte</h4>
-                <div *ngIf="isValid==1" class="modal-header center">
-                    <span class="alert alert-danger">Le lien est incorrect !</span>
-                </div>
-                <div *ngIf="isValid==0" class="modal-header center" >
-                    <span class="alert alert-success"> Super ! Votre compte a été activé avec succès, connectez-vous svp</span>
+                <div *ngIf="isValid==1" class="modal-header center alert alert-danger">
+                    <div style="padding: 0.5em;"   class="row">
+                      <p>Le lien est incorrect !</p>
+                    </div>
+                  </div>
+                  <div  *ngIf="isValid==0" class="modal-header center alert alert-success">
+                    <div style="padding: 0.5em;"   class="row">
+                      <p>Super ! Votre compte a été activé avec succès</p>
+                      <p>Cliquez<a style="cursor: pointer;color:blue;" routerLink="/home/sign-in"> ici</a> pour vous connecter</p>
 
-                </div>
-                <div *ngIf="isValid==2" class="modal-header center" >
-                    <span class="alert alert-warning">  Votre compte est deja activé, connectez-vous svp</span>
-
-                </div>
-                                    
+                    </div>
+                  </div>
+                  <div *ngIf="isValid==2"  class="modal-header center alert alert-warning">
+                    <div style="padding: 0.5em;"   class="row">
+                      <p>Votre compte est deja activé, connectez-vous svp</p> 
+                    </div>
+                  </div>
+                        
             </div>
         </div>
     </div>

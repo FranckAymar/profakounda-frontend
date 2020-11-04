@@ -6,15 +6,39 @@
     cursor: pointer !important;
 }
 
+.modules-mob{
+    padding-left: 0.5em; 
+    padding-right: 0.5em;
+}
+
+.modules-mob p{
+    /*height: 3em;*/
+    width: 100%;
+    max-height: 2em;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-modules span {
+    width: 100%;
+}
+
+
+.modules-mob span{
+    font-weight: bold;
+}
+
 #team {
    display: none;
 }
 .etoileNote,.etoile{
-    margin-left: 0.7em;
-    font-size: 1.5em;
+    margin-right: 0.7em;
+    font-size: 1.2em;
   }
+  
   .etoileNoteMobile,.etoileMobile{
-    margin-left: 0.5em;
+    margin-right: 0.5em;
     font-size: 1em;
   }
 .etoileNote,.etoileNoteMobile{
@@ -45,12 +69,24 @@
 .card-text{
 
     width: 100%;
+    max-height: 2em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 1em;
+    padding-right: 1em;
+    padding-left: 1em;
 
 }
+
+.card-modules{
+
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
 
 
 
@@ -114,7 +150,11 @@ section .section-title {
     cursor: pointer;
 }
 
+
+
 .list-form{
     display: inline;
     font-size: 1em;
+    
+
 }

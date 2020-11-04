@@ -48,7 +48,6 @@ export class ForfaitComponent implements OnInit {
     this.forfaitService.fetchForfait().subscribe(
 
       (response)=> {
-          console.log(response.response) ;
           this.forfaits = response.response ;
       },
 

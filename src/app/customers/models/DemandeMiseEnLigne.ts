@@ -1,3 +1,3 @@
 export class DemandeMiseEnLigne{
-    constructor(public id:number,public ville:String){}
+    constructor(public id:number,public ville:String,public commune:String){}
 }

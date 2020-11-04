@@ -1,3 +1,6 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { SnackbarService } from './../../shared-component/services/snackbar.service';
+import { CauserefusService } from './../services/causerefus.service';
 import { ActivatedRoute } from '@angular/router';
 import { URL } from 'src/app/API_url/config';
 import { PropostionFormationsAdminService } from './../services/propostion-formations-admin.service';
@@ -21,6 +24,9 @@ export class DetailsPropostionFormationAdminComponent implements OnInit {
     
       urlServer = URL.getPhoto
 
+      causeRefusTab = [];
+      causeRefusId   ;
+
 
   detailsPropositionFormation = {
 
@@ -32,20 +38,40 @@ export class DetailsPropostionFormationAdminComponent implements OnInit {
     disponibilites : null
 
   } ;
-  idPropositionFormation : number;
+  idPropositionFormation;
 
-  constructor(private propostionFormService : PropostionFormationsAdminService,
-              private route : ActivatedRoute) { }
+  causeRefusForm : FormGroup ;
+
+  constructor(private propostionFormAdminService : PropostionFormationsAdminService,
+              private route : ActivatedRoute,
+              private causeRefusService : CauserefusService,
+              private snackbarService : SnackbarService,
+              private formBuilder : FormBuilder) { }
 
 
 
   ngOnInit() {
 
     this.getIdFormation() ;
+    this.onFetchCauseRefus();
     this.onDetailsPropostionFormation(this.idPropositionFormation) ;
    
+    this.initForm() ;
   }
 
+  initForm(){
+
+    this.causeRefusForm = this.formBuilder.group(
+      {
+        cause : ['']
+      }
+    )
+  }
+
+  selectRefus(id){
+    console.log(id);
+    
+  }
     //Recuperer l'id dans l'URL
     getIdFormation() {
 
@@ -64,11 +90,12 @@ export class DetailsPropostionFormationAdminComponent implements OnInit {
   onDetailsPropostionFormation(idProposition){
 
       
-    this.propostionFormService.fetchPropositionParId(idProposition).subscribe(
+    this.propostionFormAdminService.fetchPropositionParId(idProposition).subscribe(
 
       (resp)=>{
 
-
+        console.log(resp);
+        
         if(resp.rayonIntervention){
           this.inititalizeCoordMap(resp.rayonIntervention.latitude,
             resp.rayonIntervention.longitude,
@@ -100,6 +127,99 @@ inititalizeCoordMap(lat : number, long : number, radius : number, zoom:  number)
 }
 
 
+
+onMettreEnLigne(){
+
+  if(confirm("Mettre en ligne ?")){
+
+
+    this.propostionFormAdminService.mettreEnLigne(this.detailsPropositionFormation.propositionFormation.id).subscribe(
+
+      (resp)=>{
+        this.snackbarService.openSnackBar('Action effectuée avec succès')
+        this.onDetailsPropostionFormation(this.idPropositionFormation) ;
+  
+  
+
+      },
+
+
+      (error)=>{
+       
+        console.log(error);
+        
+      }
+    )
+
+
+  }
+
+}
+
+
+onRefuserMiseEnLigne(){
+ 
+ 
+  this.causeRefusId = this.causeRefusForm.get('cause').value
+  if(confirm("Refuser Mise en ligne ?")){
+    this.propostionFormAdminService.refuserMiseEnLigne(this.detailsPropositionFormation.propositionFormation.id, this.causeRefusId).subscribe(
+
+
+      (resp)=>{
+        this.snackbarService.openSnackBar('Action effectuée avec succès')
+        document.getElementById('closeModalChoixRefus').click() ;
+        this.onDetailsPropostionFormation(this.idPropositionFormation) ;
+      },
+      (error)=>{
+  
+        console.log(error);
+        
+      }
+      
+    )
+  }
+}
+
+onMettreHorsLigne(){
+
+  if(confirm("Mettre hors ligne ?")){
+
+  this.propostionFormAdminService.supprimerMiseEnLigne(this.detailsPropositionFormation.propositionFormation.id).subscribe(
+
+    (resp)=>{
+
+      this.snackbarService.openSnackBar('Action effectuée avec succès')
+      this.onDetailsPropostionFormation(this.idPropositionFormation) ;
+
+    },
+
+    (error)=>{
+
+      console.log(error);
+      
+    }
+  )
+  }
+}
+
+
+
+onFetchCauseRefus(){
+
+  this.causeRefusService.fetchRefus().subscribe(
+
+    (resp)=>{
+
+      this.causeRefusTab = resp ;
+    },
+
+    (error)=>{
+
+      console.log(error);
+      
+    }
+  )
+}
 
 
 

@@ -1,0 +1,70 @@
+<div class="col-md-12">
+    <div class="box-inn-sp">
+        <div class="inn-title">
+            <h4><i class="fa fa-money"></i> Les demandes de virement</h4>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div style="margin-top: 1em;margin-bottom: 0.3em;" class="pro-user-bio">
+                        <h4>COMPTE RENDU DES DEMANDES</h4>
+                        <ul>
+                            <li style="background-color: #DA7F5C; color: white;border-radius: 0.2em;padding-left: 0.1em;">
+                                Point Transactions : <span style="color: white;">{{revenuGlobale.pointGlobale | currency:'XOF'}}</span>
+                            </li>
+                            <li>
+                                Révénu profAkounda : <span>{{revenuGlobale.revenuProfAkounda | currency:'XOF'}}</span>
+                            </li>
+                            <li style="background-color: #002147; border-radius: 0.2em;padding-left: 0.1em;">
+                               <span style="color: white;"> Révénu Exterieur :</span> <span style="color:#DA7F5C">{{revenuGlobale.revenuExterieur | currency:'XOF'}} </span>
+                            </li>
+            
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    
+                   
+                </div>
+                <div class="col-md-4"></div>
+    
+            </div>
+    
+        </div>
+       
+        <div class="tab-inn">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Organisation</th>
+                            <th>Téléphone </th>
+                            <th>Nombre d'inscrits </th>
+                            <th>Point globale </th>
+                            <th>Révénu client </th>
+                            <th>Révénu profAkounda</th>
+                            <th>Date demande virement</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <p *ngIf="resultats.length == 0">Aucun élément</p>
+                        <tr *ngFor="let p of resultats">
+                            <td>{{p.coursCommun.organisation.libelle}}</td>
+                            <td>{{p.coursCommun.telephone}}</td>
+                            <td>{{p.coursCommun.compteRendu.nombreInscrits}}</td>
+                            <td>{{p.coursCommun.compteRendu.pointGlobale | currency:'XOF'}}</td>
+                            <td>{{p.coursCommun.compteRendu.revenuClient | currency:'XOF'}} </td>
+                            <td>{{p.coursCommun.compteRendu.revenuOperateur | currency:'XOF'}} </td>
+                            <td *ngIf="p.coursCommun.demandeVirement"><span style="font-weight: bold;">{{p.coursCommun.dateDemandeVirement | date:'dd-MM-yyyy HH:ss'}}</span> </td>
+                            <td *ngIf="p.coursCommun.demandeVirement"><button (click)="effectuerVirement(p.coursCommun.id)"  class="btn btn-danger">virement</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          
+
+        </div>
+    </div>
+</div>

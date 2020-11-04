@@ -1,3 +1,4 @@
+import { URL } from 'src/app/API_url/config';
 import { Component, OnInit, Input } from '@angular/core';
 import { CoursCommunAdminService } from '../services/cours-commun-admin.service';
 import { ActivatedRoute } from '@angular/router';
@@ -8,6 +9,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./details-cours-commun-admin.component.css']
 })
 export class DetailsCoursCommunAdminComponent implements OnInit {
+
+
+  urlServer = URL.getLogoCoursCommun;
 
 
   @Input() detailsCoursCommun = {

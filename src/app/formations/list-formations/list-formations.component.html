@@ -2,17 +2,19 @@
     (getFormationsFiltrees)= "OnFiltreFormation($event)"
     (getFormationsFiltreParVille)= "OnFiterDeFormationParVille($event)"
 ></app-search-bar>
-<section class="pop-cour">
+<section   class="pop-cour">
     <div class="container com-sp pad-bot-70">
         <div class="row">
             <div class="con-title">
-                <h2>Nos <span>Répétiteurs</span></h2>
+                <h2>Les <span>Formateurs</span></h2>
             </div>
         </div>
-
-        <div class="col-md-8">
-
-            <div class="row" *ngFor="let propositionFormation of propositionFormations">
+        
+        <div id="list-scroll"  class="col-md-8 list-scroll">
+            <div *ngIf="propositionFormations.length == 0" style="width: 20em;margin: auto;">
+                <span style="color: crimson;"  >Aucun resultat  correspondant.</span>
+            </div>
+            <div  class="row" *ngFor="let propositionFormation of propositionFormations">
 
                 <div class="col-md-12">
                    <app-card-formation
@@ -21,8 +23,13 @@
                     [moduleFormations] = "propositionFormation.moduleFormations"
                     [etoilesEteints] = "propositionFormation.etoilesEteints"
                     [etoilesBrillants] = "propositionFormation.etoilesBrillants"
+                    [contrats] = "propositionFormation.contrats"
+                    [isAllModule] = "propositionFormation.isAllModule"
+                    [cyclePrimairePresente] = "propositionFormation.cyclePrimairePresent"
                     [description] = "propositionFormation.description"
                     [ville] = "propositionFormation.ville"
+                    [villeTemp] = "propositionFormation.ville"
+                    [commune] = "propositionFormation.commune?.libelle" 
                     [id] = "propositionFormation.id"
                     [rayonIntervention] = "propositionFormation.rayonIntervention"
                     [isFavoris] = "propositionFormation.isFavoris"     
@@ -34,7 +41,7 @@
 
 
             </div>
-            <div class="pg-pagina">
+            <div  class="pg-pagina">
                 <ul class="pagination">
                     <li [ngClass]="{'active': (i+1) === page }" (click)="onGetListFormation(i+1)"
                         *ngFor="let p of totalPageArray ; let i=index"><a>{{i+1}}</a></li>
@@ -44,13 +51,13 @@
         </div>
 
 
-        <div class="col-md-4">
+        <div  class="col-md-4">
             <agm-map *ngIf="propositionFormations" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
                 <agm-marker 
                 *ngFor="let pf of propositionFormations" 
                 [latitude]="pf.rayonIntervention?.latitude"
                 [longitude]="pf.rayonIntervention?.longitude"
-                [label]="pf.code">
+                [label]="pf.code"> 
                 </agm-marker>
 
                 <agm-circle *ngFor="let pf of propositionFormations" [latitude]="pf.rayonIntervention?.latitude"

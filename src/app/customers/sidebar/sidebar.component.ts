@@ -14,7 +14,6 @@ export class SidebarComponent implements OnInit {
   id: number;
   urlServer = URL.getPhoto;
   particulier : Particulier
-
   constructor(private particulierService: ParticulierService,
     private signInService: SignInService) { }
 
@@ -26,10 +25,9 @@ export class SidebarComponent implements OnInit {
   }
 
   rechercherPaticulierConnecter() {
-    this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
+    this.particulierService.rechercherParticulier(localStorage.getItem(this.signInService.USERNAME))
       .subscribe(
         (reponse) => {
-          
           this.particulier = reponse;
         },
         (error) => {

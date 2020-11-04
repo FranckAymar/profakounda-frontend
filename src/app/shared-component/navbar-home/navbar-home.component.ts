@@ -19,7 +19,7 @@ export class NavbarHomeComponent implements OnInit {
   ngOnInit() {
     //Vérifie si l'utilisateur est connecté
     this.authenticated = this.signInService.isLogged() ;
-    this.profile = sessionStorage.getItem(this.signInService.AUHORITY);
+    this.profile = localStorage.getItem(this.signInService.AUHORITY);
     
     
     this.loadJavaScript();

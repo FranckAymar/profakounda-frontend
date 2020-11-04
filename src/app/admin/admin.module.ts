@@ -34,6 +34,11 @@ import { DetailsPropostionFormationAdminComponent } from './details-propostion-f
 import { AdminCommonCourseComponent } from './admin-common-course/admin-common-course.component';
 import { DetailsCoursCommunAdminComponent } from './details-cours-commun-admin/details-cours-commun-admin.component';
 import { CompteRenduCourscommunComponent } from './compte-rendu-courscommun/compte-rendu-courscommun.component';
+import { DemandeVirementComponent } from './demande-virement/demande-virement.component';
+import { CommuneService } from './services/commune.service';
+import { VirementComponent } from './virement/virement.component';
+import { CommuneComponent } from './commune/commune.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -141,6 +146,23 @@ const adminRouter : Routes = [
         path : 'comptabilite',
         component : CompteRenduCourscommunComponent
         
+      },
+      {
+        path : 'demandeVirements',
+        component : DemandeVirementComponent
+        
+      },
+      {
+        path : 'virements',
+        component : VirementComponent
+      },
+      {
+        path : 'commune',
+        component : CommuneComponent
+      },
+      {
+        path : 'messages',
+        component : ContactComponent
       }
 
     ]}
@@ -172,7 +194,11 @@ const adminRouter : Routes = [
                 DetailsPropostionFormationAdminComponent,
                 AdminCommonCourseComponent,
                 DetailsCoursCommunAdminComponent,
-                CompteRenduCourscommunComponent],
+                CompteRenduCourscommunComponent,
+                DemandeVirementComponent,
+                VirementComponent,
+                CommuneComponent,
+                ContactComponent],
   imports: [
     RouterModule.forChild(adminRouter),
     SharedModule
@@ -184,6 +210,7 @@ const adminRouter : Routes = [
     ForfaitService,
     NiveauService,
     JourService,
+    CommuneService,
     VilleService,
     FormationService, 
     CauserefusService,

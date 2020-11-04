@@ -23,7 +23,6 @@ export class CompteRenduCourscommunComponent implements OnInit {
     this.onFetchOrganisations();
   }
   rechercherpointParOrganisation(){
-    console.log(this.idOrganisation);
     
     this.coursCommunAdminService.fetchCoursComptabiliteByOrganisation(this.idOrganisation).subscribe(
 

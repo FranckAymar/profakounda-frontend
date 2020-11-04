@@ -1,3 +1,6 @@
+import { LoadingService } from './../../loading/services/loading.service';
+import { SnackbarService } from './../../shared-component/services/snackbar.service';
+import { PaiementDetails } from './../model/niveau.model';
 import { Particulier } from './../../home/models/Particulier.model';
 import { PaiementService } from './../services/paiement.service';
 import { ForfaitService } from './../../admin/services/forfait.service';
@@ -17,7 +20,7 @@ declare var $: any;
 
 @Component({
   selector: 'app-details-annonce',
-  templateUrl: './details-annonce.component.html',
+  templateUrl: './details-annonce.component.html', 
   styleUrls: ['./details-annonce.component.css']
 })
 export class DetailsAnnonceComponent implements OnInit {
@@ -31,6 +34,7 @@ export class DetailsAnnonceComponent implements OnInit {
   
   //Variable for condition
   isFailed: boolean;
+  paymentWaiting : boolean = false ;
   isConnected:boolean=false;
   isProprio:boolean=false;
   etoile1:boolean = false;
@@ -50,6 +54,7 @@ export class DetailsAnnonceComponent implements OnInit {
   //Model
     idPropositionFormation : number ;
     avis:Avis;
+  
    
     propositionFormation = {
     code : null,
@@ -61,19 +66,15 @@ export class DetailsAnnonceComponent implements OnInit {
     modulesFormations : null,
     contrats : null,
     disponibilites : null,
+    isAllNiveau : null,
+    isAllModule : null,
+    cyclePrimairePresent : null,
+    commune : null,
+    ville : null
     
   } ;
 
-  paiementDetails = {
-
-    forfait: null,
-    forfaitId : null,
-    username : null,
-    numeroPaiement : null,
-    modePaiement : null,
-    token : null
-
-  }
+  paiementDetails : PaiementDetails = {} ;
 
   //Tableaux
 
@@ -104,6 +105,8 @@ export class DetailsAnnonceComponent implements OnInit {
   //Form
   sigInForm : FormGroup ;
   singUpForm : FormGroup ;
+  operatorForm : FormGroup ;
+
 
   constructor(private detaisFormationsService : DetaisFormationsService,
               private route : ActivatedRoute,
@@ -114,8 +117,9 @@ export class DetailsAnnonceComponent implements OnInit {
               private paiementService : PaiementService,
               private particulierService:ParticulierService,
               private avisService:AvisService,
-
-              private router : Router, ) { 
+              private snackbarService : SnackbarService,
+              private router : Router,
+               ) { 
 
                 this.step = 'step1';
                 this.snapshot = router.routerState.snapshot;
@@ -131,6 +135,7 @@ export class DetailsAnnonceComponent implements OnInit {
     this.onGetDetailPropositionFormation() ; 
     this.initSignInForm() ;
     this.initSignUpForm() ;
+    this.initOperatorForm();
   }
 
 getColor1(){
@@ -267,6 +272,17 @@ changeEtoile5(){
     })
 
   }
+  initOperatorForm(){
+
+    this.operatorForm = this.formBuilder.group(
+
+      {
+        operator : ['', Validators.required],
+        numero : ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]]
+      }
+    )
+  
+  }
 
   initSignUpForm(){
     this.singUpForm = this.formBuilder.group({
@@ -281,9 +297,9 @@ changeEtoile5(){
   );
   }
   getCodeParticulier(){
-    if(sessionStorage.getItem(this.signInService.USERNAME))
+    if(localStorage.getItem(this.signInService.USERNAME))
     {
-      this.particulierService.getCodeParticilier(sessionStorage.getItem(this.signInService.USERNAME)).subscribe(
+      this.particulierService.getCodeParticilier(localStorage.getItem(this.signInService.USERNAME)).subscribe(
         (response)=>{
           this.id = response["id"];
         },
@@ -315,7 +331,7 @@ changeEtoile5(){
     });
     if(this.avis.id != 0)
     {
-      this.avis = new Avis(this.avis.id,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,sessionStorage.getItem(this.signInService.USERNAME));
+      this.avis = new Avis(this.avis.id,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,localStorage.getItem(this.signInService.USERNAME));
      this.avisService.modifierAvis(this.avis).subscribe(
      (response)=>{
       this.etoile1 = false;
@@ -324,7 +340,7 @@ changeEtoile5(){
       this.etoile4 = false;
       this.etoile5 = false;
       this.success = response["success"];
-     this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,sessionStorage.getItem(this.signInService.USERNAME));
+     this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,localStorage.getItem(this.signInService.USERNAME));
      this.onGetDetailPropositionFormation();
      },
      (error)=>{
@@ -334,7 +350,7 @@ changeEtoile5(){
     }
     else
     {
-      this.avis = new Avis(0,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,sessionStorage.getItem(this.signInService.USERNAME));
+      this.avis = new Avis(0,this.idPropositionFormation,this.etoile1,this.etoile2,this.etoile3,this.etoile4,this.etoile5,this.avis.commentaire,note,localStorage.getItem(this.signInService.USERNAME));
      this.avisService.enregistrerAvis(this.avis).subscribe(
      (response)=>{
        if(response["error"])
@@ -349,7 +365,7 @@ changeEtoile5(){
          this.etoile4 = false;
          this.etoile5 = false;
          this.success = response["success"];
-        this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,sessionStorage.getItem(this.signInService.USERNAME));
+        this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,localStorage.getItem(this.signInService.USERNAME));
         this.onGetDetailPropositionFormation();
        }
      },
@@ -384,11 +400,11 @@ changeEtoile5(){
           let authority = authorities[0].authority;
 
           //Sauvegarde du token
-          sessionStorage.setItem(this.signInService.TOKEN, token);
+          localStorage.setItem(this.signInService.TOKEN, token);
             //Sauvegarde de l'authorité
-          sessionStorage.setItem(this.signInService.AUHORITY, authority);
+          localStorage.setItem(this.signInService.AUHORITY, authority);
             //Sauvegarde du username
-          sessionStorage.setItem(this.signInService.USERNAME, username);
+          localStorage.setItem(this.signInService.USERNAME, username);
     
           //Vérifier si l'utulilisateur a un forfait actif
           this.detaisFormationsService
@@ -515,12 +531,9 @@ changeEtoile5(){
   //Proceder au payement
   onProcessToPayment() {
 
-    if(this.paiementDetails.modePaiement === "MOMO_SKAN" || this.paiementDetails.modePaiement === "MOOV_SKAN"){
-      alert('Pas encore disponible') ;
-      return ;
-    }
+   
 
-    this.paiementDetails.username = sessionStorage.getItem(this.signInService.USERNAME) ;
+    this.paiementDetails.username = localStorage.getItem(this.signInService.USERNAME) ;
     this.paiementDetails.forfaitId = this.paiementDetails.forfait.id ;
 
     this.paiementService.processToPayment(this.paiementDetails).subscribe(
@@ -528,12 +541,27 @@ changeEtoile5(){
 
       (resp)=>{
 
+        //console.log(resp);
+        
+
         if(resp.code == 0){
-          alert('Payement effectué');
-          this.closeModalPayment.nativeElement.click() ;
-          this.contactCustomer();
+
+          if(this.paiementDetails.modePaiement === "MOMO_SKAN" || this.paiementDetails.modePaiement === "MOOV_SKAN"){
+
+            this.snackbarService.openSnackBar('Un SMS de confirmation vous a été envoyé. \nVeuillez confirmer votre paiement.')
+            this.closeModalPayment.nativeElement.click() ;
+            this.paymentWaiting = true ;
+
+          }else {
+            this.snackbarService.openSnackBar('Payement effectué avec succès, profitez de votre forfait')
+            this.closeModalPayment.nativeElement.click() ;
+            this.contactCustomer();
+          }
+
+          this.initializeModalPayment();
+          
         }else{
-          alert("Une erreur s'est produite pendant le paiement.\nVérifiez votre numéro de téléphone ou votre code d'activation");
+          alert("Une erreur s'est produite pendant le paiement.\nVérifiez votre numéro de téléphone ou votre code d'activation puis réessayer");
         }
       },
 
@@ -555,7 +583,7 @@ changeEtoile5(){
 
       ( p ) =>{
          this.idPropositionFormation = p['id'] ;
-         this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,sessionStorage.getItem(this.signInService.USERNAME));
+         this.avis = new Avis(0,this.idPropositionFormation,false,false,false,false,false,"",0,localStorage.getItem(this.signInService.USERNAME));
       }
     ) ;
 
@@ -571,16 +599,18 @@ changeEtoile5(){
     this.detaisFormationsService.getDetailFormation(this.idPropositionFormation).subscribe(
 
       (resp)=> {
-        if(sessionStorage.getItem(this.signInService.USERNAME))
+       console.log(resp);
+        
+        if(localStorage.getItem(this.signInService.USERNAME))
         {
-          if(resp["username"]===sessionStorage.getItem(this.signInService.USERNAME))
+          if(resp["isPublicher"])
           {
             this.isProprio = true;
           }
           this.isConnected = true;
         }
        this.tabAvis = resp["avis"];
-        
+       
         if(resp.rayonIntervention){
           this.inititalizeCoordMap(resp.rayonIntervention.latitude,
             resp.rayonIntervention.longitude,
@@ -588,7 +618,7 @@ changeEtoile5(){
             resp.rayonIntervention.zoom);
 
         }
-        
+
         this.propositionFormation = resp ;
         
       },
@@ -603,10 +633,32 @@ changeEtoile5(){
   }
 
 
+  initializeModalPayment(){
+
+    this.paiementDetails = {} 
+    this.step = 'step1';
+
+    //Initialisation HTML
+    $("#content2").addClass('hide');
+    $("#content3").addClass('hide');
+    $("#content4").addClass('hide');
+    $("#content5").addClass('hide');
+
+
+    $("#step2").removeClass("active");
+    $("#step3").removeClass("active");
+    $("#step4").removeClass("active");
+    $("#step5").removeClass("active");
+
+
+
+  }
+
+
   //Method for stepper 
 
   goToStep2(){
-    $("#content1-signin").addClass('hide');
+      $("#content1-signin").addClass('hide');
       $("#content1-signup").addClass('hide');
       $("#content2").removeClass('hide');
       this.step = 'step2';
@@ -699,6 +751,7 @@ changeEtoile5(){
   contactCustomer() {
 
   
+
 
     if(!this.signInService.isLogged()){
        //Ouverture de la modal
@@ -810,5 +863,6 @@ changeEtoile5(){
 
   }
   
+
 
 }

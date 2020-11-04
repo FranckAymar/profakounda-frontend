@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { Router, RouterStateSnapshot, RouterState } from '@angular/router';
 import { SignInService } from './../../home/services/sign-in.service';
 import { URL } from '../../API_url/config';
@@ -24,12 +25,17 @@ export class CardFormationComponent implements OnInit {
   @Input() code : string ;
   @Input() idParticulier : number ;
   @Input() moduleFormations : [] ;
+  @Input() contrats : [] ;
+  @Input() isAllModule : boolean = false ;
+  @Input() cyclePrimairePresente : boolean = false ;
   @Input() etoilesEteints : [] ;
   @Input() etoilesBrillants : [] ;
   @Input() description : string ;
   @Input() ville : string ;
+  @Input() villeTemp : string ;
   @Input() id : number ;
   @Input() rayonIntervention : {} ;
+  @Input() commune : string;
   @Input() isFavoris ;
 
 
@@ -41,6 +47,7 @@ export class CardFormationComponent implements OnInit {
   constructor(private favorisService : FavorisService,
                private signInService : SignInService,
                private router : Router, 
+               private snackBarSevice : SnackbarService
                ) {
 
                 this.state = router.routerState;
@@ -53,6 +60,15 @@ export class CardFormationComponent implements OnInit {
   ngOnInit() {
   }
 
+  mouseOver(){
+    if(this.commune)
+    {
+      this.ville = this.commune;
+    }
+  }
+  mouseLeave(){
+    this.ville = this.villeTemp;
+  }
   onSendCoordMap(coord){
     this.coordMapEvent.emit(coord) ;
     
@@ -94,8 +110,8 @@ export class CardFormationComponent implements OnInit {
     this.favorisService.addFavoris(favorisModel).subscribe(
 
       (resp)=>{
-          console.log("Ajouter avec succès");
           
+          this.snackBarSevice.openSnackBar('Ajouter aux favoris')
       },
 
       (error) => {

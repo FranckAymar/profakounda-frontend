@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, OnChanges } from '@angular/core';
 declare var google; 
 
 
@@ -8,7 +8,7 @@ declare var google;
   templateUrl: './google-place.component.html',
   styleUrls: ['./google-place.component.css']
 })
-export class GooglePlaceComponent implements OnInit, AfterViewInit {
+export class GooglePlaceComponent implements OnInit, AfterViewInit, OnChanges {
 
 
   @Input() adressType: string;
@@ -20,6 +20,10 @@ export class GooglePlaceComponent implements OnInit, AfterViewInit {
 
   constructor() {
 
+  }
+
+  ngOnChanges(changes) {
+    this.emitInput();
   }
 
   ngOnInit() {
@@ -43,7 +47,12 @@ export class GooglePlaceComponent implements OnInit, AfterViewInit {
   }
 
   invokeEvent(place: Object) {
-    this.setAddress.emit(place);
+    this.setAddress.emit({data : place, input : this.autocompleteInput});
   }
 
+
+  emitInput(){
+    this.setAddress.emit({data : null, input : this.autocompleteInput});
+
+  }
 }

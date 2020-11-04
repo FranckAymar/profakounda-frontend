@@ -4,9 +4,8 @@
 
         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 
-        <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="false"
-              [radius]="radius" [clickable]="false"
-            >
+        <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="false" [radius]="radius"
+            [clickable]="false">
         </agm-circle>
     </agm-map>
 </div>
@@ -20,10 +19,34 @@
             </div>
             <div class="pro-user-bio">
                 <ul>
+
+                    <li>
+                        <h4>Etat : <strong>
+                                <span *ngIf="detailsPropositionFormation.propositionFormation.enLigne"
+                                    class="label label-success">En ligne</span>
+                                <span *ngIf="detailsPropositionFormation.propositionFormation.attenteMiseEnLigne"
+                                    class="label label-info">En attente</span>
+                                <span *ngIf="detailsPropositionFormation.propositionFormation.refusMiseEnLigne"
+                                    class="label label-danger">Refusé</span>
+                                <span *ngIf="detailsPropositionFormation.propositionFormation.suppressionMiseEnLigne"
+                                    class="label label-primary">Hors-ligne</span>
+
+                            </strong></h4>
+                    </li>
                     <li>
                         <h4>{{detailsPropositionFormation?.particulier?.prenoms}}</h4>
                     </li>
                     <li>{{detailsPropositionFormation?.particulier?.niveau?.libelle}}</li>
+                    <li>
+                        <h4>{{detailsPropositionFormation.particulier.code}}</h4>
+                    </li>
+                    <li>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+
+                        {{detailsPropositionFormation.particulier.ville.designation}}
+                        <span>,</span>
+                        {{detailsPropositionFormation.particulier.commune.libelle}}
+                    </li>
                 </ul>
             </div>
 
@@ -31,9 +54,40 @@
         <div class="col-md-9">
             <div class="udb">
 
-            <div class="udb-sec udb-prof">
+                <div class="udb-sec">
+
+                    <div class="udb-sec">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a (click)="onMettreEnLigne()" style="width: 100%; 
+                                color: green !important ;
+                                border: 1px solid green !important ;" class="details-line-btn">Accepter</a>
+
+                            </div>
+                            <div class="col-md-4">
+                                <a data-toggle="modal" data-target="#ajouterRefus" style="width: 100%; "
+                                    class="details-line-btn">Refuser</a>
+
+                            </div>
+
+                            <div class="col-md-4">
+                                <a (click)="onMettreHorsLigne()" style="width: 100%;
+                                color: black !important ;
+                                border: 1px solid black !important ;" class="details-line-btn">Mettre hors-ligne</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="udb-sec udb-prof">
                     <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
-                    <p>{{detailsPropositionFormation.propositionFormation?.description}}</p>
+                    <p [innerHTML]="detailsPropositionFormation.propositionFormation?.description"></p>
+
                 </div>
 
                 <div class="udb-sec udb-cour">
@@ -57,25 +111,28 @@
 
 
                 <div class="udb-sec udb-cour-stat">
-                    <h4><img src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
+                    <h4 *ngIf="!detailsPropositionFormation.propositionFormation.allNiveau"><img
+                            src="../../assets/images/icon/db3.png" alt="" />Niveaux cibles</h4>
+                    <h4 *ngIf="detailsPropositionFormation.propositionFormation.allNiveau"><img
+                            src="../../assets/images/icon/db3.png" alt="" />Cout</h4>
                     <div class="pro-con-table">
                         <table class="bordered responsive-table">
                             <thead>
                                 <tr>
-                                    <th>Niveaux</th>
-                                    <th class="align-text-right">Prix Minimun </th>
-                                    <th class="align-text-right">Prix Maximum(Mensuel)</th>
+                                    <th *ngIf="!detailsPropositionFormation.propositionFormation.allNiveau">Niveaux</th>
+                                    <th class="align-text-right">Coût</th>
+                                    <!-- <th class="align-text-right">Prix Maximum(Mensuel)</th> -->
 
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <tr *ngFor="let contrat of detailsPropositionFormation?.contrats">
-                                    <td>{{contrat.niveau.libelle}}</td>
+                                    <td>{{contrat.niveau?.libelle}} {{contrat.niveauTemporaire?.libelle}}</td>
                                     <td class="align-text-right"><span class="pro-user-act">{{contrat.minMontant}}
                                             FCFA</span></td>
-                                    <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}}
-                                            FCFA</span></td>
+                                    <!-- <td class="align-text-right"><span class="pro-user-act">{{contrat.maxMontant}}
+                                            FCFA</span></td> -->
 
                                 </tr>
                             </tbody>
@@ -112,6 +169,44 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="ajouterRefus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Libelle-->
+              <form [formGroup]= "causeRefusForm" >
+
+                <div class="form-group">
+                    <label>Cause du refus :</label>
+
+                    <select class="form-control" id="refus" formControlName="cause"  [ngModel]="causeRefusId" required>
+                        <option *ngFor="let cf of causeRefusTab" [ngValue]="cf.id">{{cf.titre}}</option>
+                    </select>
+                             
+                    <!-- <select class="form-control" [(ngModel)]="causeRefusId">
+                        <option *ngFor="let cf of causeRefusTab" [ngValue]="cf.id">
+                            {{cf.titre}}</option>
+                    </select> -->
+                </div>
+                <button (click)="onRefuserMiseEnLigne()" type="submit" class="btn btn-primary">Enregistrer</button>
+
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button id="closeModalChoixRefus" type="button" class="btn btn-danger"
+                    data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>

@@ -22,18 +22,21 @@ export class SignInService {
 
     }
  
+    verifier(){
+        return this.http.get(URL.verifier) ;
+    }
 
     logout() {
 
-        sessionStorage.removeItem(this.TOKEN);
-        sessionStorage.removeItem(this.USERNAME);
-        sessionStorage.removeItem(this.AUHORITY);
+        localStorage.removeItem(this.TOKEN);
+        localStorage.removeItem(this.USERNAME);
+        localStorage.removeItem(this.AUHORITY);
     }
 
 
     isLogged() {
 
-        let token = sessionStorage.getItem(this.TOKEN)
+        let token = localStorage.getItem(this.TOKEN)
 
         if (token === null) {
             return false

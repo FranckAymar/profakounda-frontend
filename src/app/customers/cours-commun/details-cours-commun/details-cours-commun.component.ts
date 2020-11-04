@@ -1,3 +1,4 @@
+import { URL } from 'src/app/API_url/config';
 import { AlertComponent } from './../../../shared-component/alert/alert.component';
 import { SnackbarService } from './../../../shared-component/services/snackbar.service';
 import { DetailsInscritsComponent } from './../../../shared-component/details-inscrits/details-inscrits.component';
@@ -6,6 +7,7 @@ import { InscriptioncourscommunService } from './../../../cours-commun/inscripti
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from '../../services/cours-commun-service.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-details-cours-commun',
@@ -14,6 +16,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DetailsCoursCommunComponent implements OnInit {
 
+  urlServer = URL.getAffichePubCoursCommun;
 
   zoom = 17 ;
 
@@ -36,7 +39,8 @@ export class DetailsCoursCommunComponent implements OnInit {
               private router : Router,
               private inscriptionService : InscriptioncourscommunService,
               private dialog : MatDialog,
-              private snackService : SnackbarService) { }
+              private snackService : SnackbarService,
+              private titleService: Title ) { }
 
   ngOnInit() {
     this.getIdCoursCommun() ;
@@ -49,20 +53,31 @@ export class DetailsCoursCommunComponent implements OnInit {
     this.coursCommunService.fetchCoursCommun(this.idCoursCommun).subscribe(
 
       (resp)=>{
-        this.cours = resp ;
-        this.idCoursCommun = resp["coursCommun"].id;
         console.log(resp);
         
+        this.cours = resp ;
+        this.idCoursCommun = resp["coursCommun"].id;
+        //On actualise le titre de la page HTML
+        this.titleService.setTitle(resp["coursCommun"].titre);
       },
       (error)=>{
         console.log(error);
         
       }
     )
-
+ 
   }
 
-  
+  demandeVersement(){
+    this.coursCommunService.demandeVirement(this.idCoursCommun).subscribe(
+      (resp)=>{
+        this.onFectCoursCommun();
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
   //Recuperer l'id dans l'URL
   getIdCoursCommun() {
 
@@ -100,7 +115,6 @@ export class DetailsCoursCommunComponent implements OnInit {
 
       (resp)=>{
 
-        console.log(resp);
 
         if(type ==='publicCible'){
           
@@ -142,6 +156,7 @@ export class DetailsCoursCommunComponent implements OnInit {
 
     const dialogRef = this.dialog.open(DetailsInscritsComponent, {
       width: '1000px',
+      height : '600px',
       data: data,
 
     });

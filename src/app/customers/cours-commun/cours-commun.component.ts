@@ -1,3 +1,5 @@
+import { URL } from 'src/app/API_url/config';
+import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from './../services/cours-commun-service.service';
 import { OganiserCoursSheetComponent } from './../../shared-component/oganiser-cours-sheet/oganiser-cours-sheet.component';
@@ -12,6 +14,9 @@ import { MatDialog } from '@angular/material';
 export class CoursCommunComponent implements OnInit {
 
 
+  urlServer = URL.getAffichePubCoursCommun;
+
+
   coursCommuns = [] ;
   totalInscrits : number = 0 ;
 
@@ -19,11 +24,11 @@ export class CoursCommunComponent implements OnInit {
               private coursCommunService : CoursCommunService,
               private route : ActivatedRoute,
               private router : Router,
+              private snack : SnackbarService
           ) { }
 
   ngOnInit() {
     this.onFectCoursCommun();
-    console.log(this.coursCommuns);
     
   }
 
@@ -40,6 +45,7 @@ export class CoursCommunComponent implements OnInit {
       const dialogRef = this.dialog.open(OganiserCoursSheetComponent, {
         disableClose : true ,
         width: '1000px',
+        height : '600px',
         data: data,
         
         });
@@ -58,7 +64,6 @@ export class CoursCommunComponent implements OnInit {
   }
 
   goToOrganiserCours(): void {
-
     this.openDialog({});
   
   };
@@ -69,7 +74,6 @@ export class CoursCommunComponent implements OnInit {
     this.coursCommunService.fetchCoursCommun().subscribe(
 
       (resp)=>{
-        console.log(resp);
         this.coursCommuns = resp ;
         this.calculTotalInscrit(this.coursCommuns);
         
@@ -116,6 +120,7 @@ export class CoursCommunComponent implements OnInit {
 
   calculTotalInscrit(coursCommuns){
 
+    this.totalInscrits = 0 ;
     coursCommuns.forEach(element => {
             
       this.totalInscrits += element.coursCommun.nombreInscrit;

@@ -1,3 +1,4 @@
+import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
 import { URL } from 'src/app/API_url/config';
 import { CauserefusService } from './../services/causerefus.service';
 import { PropostionFormationsAdminService } from './../services/propostion-formations-admin.service';
@@ -5,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
 
 import * as $ from 'jquery';
 import { MatGridTileHeaderCssMatStyler } from '@angular/material';
+import { PropositionFormationService } from 'src/app/customers/services/propositionFormation.service';
+import { Message } from '../model/message';
+
 
 @Component({
   selector: 'app-propostion-formations-admin',
@@ -41,9 +45,10 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
   urlServer = URL.getPhoto
 
-
-  constructor(private propostionFormService : PropostionFormationsAdminService,
-            private refusService : CauserefusService) { }
+  message:Message = new Message('','','0');
+  constructor(private propostionFormAdminService : PropostionFormationsAdminService,
+            private refusService : CauserefusService,
+            private snackbarService : SnackbarService) { }
 
   ngOnInit() {
     //Rechercher toute les formations
@@ -54,7 +59,17 @@ export class PropostionFormationsAdminComponent implements OnInit {
   }
 
 
- 
+ envoyerMessageProposition(){
+  this.propostionFormAdminService.envoyerMessageProposition(this.message).subscribe(
+    (reponse)=>{
+      this.message = new Message('','','0');
+      alert('Message envoyer avec succès.');
+    },
+    (error)=>{
+      console.log('Une erreur s\'est produite');
+    }
+  )
+ }
 
   onFetchCauseRefus(){
 
@@ -78,7 +93,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
     confirm('Etes vous sur de cette action ?') ;
 
-    this.propostionFormService.supprimerMiseEnLigne(id).subscribe(
+    this.propostionFormAdminService.supprimerMiseEnLigne(id).subscribe(
     
       (response)=>{ 
         this.onFetchPropositionFormation(this.critereFiltre) ;
@@ -94,7 +109,7 @@ export class PropostionFormationsAdminComponent implements OnInit {
   onFetchPropositionFormation(critereFiltre? : number){
 
     
-    this.propostionFormService.fetchProposition(critereFiltre).subscribe(
+    this.propostionFormAdminService.fetchProposition(critereFiltre).subscribe(
 
 
       (resp) => {
@@ -114,12 +129,12 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
 
   onAccorderMiseEnLigne(idProposition){
-    this.propostionFormService.mettreEnLigne(idProposition).subscribe(
+    this.propostionFormAdminService.mettreEnLigne(idProposition).subscribe(
 
 
       (resp)=>{
         
-        alert("mise en ligne accordé") ;
+        this.snackbarService.openSnackBar('Mise en ligne réussie')
         this.onFetchPropositionFormation(this.critereFiltre)
 
       },
@@ -138,11 +153,11 @@ export class PropostionFormationsAdminComponent implements OnInit {
 
   onRefuserMiseEnLigne(){
 
-    this.propostionFormService.refuserMiseEnLigne(this.idPropositionCourante, this.causeRefusId).subscribe(
+    this.propostionFormAdminService.refuserMiseEnLigne(this.idPropositionCourante, this.causeRefusId).subscribe(
 
 
       (resp)=>{
-        alert("Refus validé") ;
+        this.snackbarService.openSnackBar('Action effectuée avec succès')
         document.getElementById('closeModalChoixRefus').click() ;
         this.onFetchPropositionFormation(this.critereFiltre) ;
       },

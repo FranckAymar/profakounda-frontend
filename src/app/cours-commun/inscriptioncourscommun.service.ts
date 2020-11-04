@@ -11,6 +11,12 @@ export class InscriptioncourscommunService {
   constructor(private http : HttpClient) { }
 
 
+  inscriptionCoursOrganise(data) : Observable<any> {
+
+    return this.http.post(URL.inscritptionCoursOrganise, data);
+
+  }
+
   saveInscritsCoursCommun(data) : Observable<any>{
 
     return this.http.post(URL.inscriptioncourscommun, data);
@@ -20,6 +26,18 @@ export class InscriptioncourscommunService {
   saveInscritsPublicCible(data) : Observable<any>{
 
     return this.http.post(URL.inscriptionpubliccible, data);
+  
+  
+  }
+  getDashBoardInscrits() : Observable<any>{
+
+    return this.http.get(URL.getDashBoardInscritsCoursCommuns);
+  
+  
+  }
+  statistiquesInscritsParJour() : Observable<any>{
+
+    return this.http.get(URL.getStatistiquesInscrits);
   
   
   }

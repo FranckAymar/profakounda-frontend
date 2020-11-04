@@ -1,3 +1,4 @@
+import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
 import { CoordMapModel } from './../models/CoordModel';
 import { Component, OnInit, Input, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { NiveauForme } from '../models/NiveauForme.model';
@@ -7,11 +8,9 @@ import { SignInService } from 'src/app/home/services/sign-in.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { PropositionFormationService } from '../services/propositionFormation.service';
 import { Niveau } from 'src/app/admin/model/niveau.model';
-import { Jour } from '../models/jour.model';
 import { Heure } from '../models/heure.model';
 import { PropositionFormation } from '../models/PropositionFormation.model';
 import { Lambda } from '../models/lambda.model';
-import { trigger } from '@angular/animations';
 import { JourService } from '../services/Jour.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -20,20 +19,42 @@ import { FormationService } from 'src/app/admin/services/formation.service';
 import { ParticulierService } from '../services/particulier.service';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { DemandeMiseEnLigne } from '../models/DemandeMiseEnLigne';
+import { CommuneService } from 'src/app/admin/services/commune.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-proposition-formation',
   templateUrl: './proposition-formation.component.html',
   styleUrls: ['./proposition-formation.component.css']
+
 })
 
 export class PropositionFormationComponent implements OnInit {
+
+
+  public Editor = ClassicEditor;
+
+  public configEditor = {
+    language: 'fr',
+    placeholder: "La description ne doit pas contenir d'informations personnelles (Numéro de téléphone, email, ...). Toute modification de la description d'une proposition de formation déjà en ligne doit être validée par l'équipe de ProfAkounda.",
+    toolbar : [ 'heading', '|', 'bold', 'italic', 'underline', '|', 'NumberedList', 'BulletedList', 'Undo', 'Redo' ] 
+  };
+
+
 
   public model: Niveau;
   @Input() edit:boolean = false;
   @Input() editModule:boolean = false;
   @Input() isVilleExist:boolean;
   joursString:any = [];
+  id:number;
+  alMod:boolean = false;
+  alNiv:boolean = false;
+  isNombreMinValid:boolean = false;
+  isNombreMaxValid:boolean = false;
+  isPresentDoubleNumber:boolean = false;
+  nombreMin:number;
+  nombreMax:number;
   niveaux=[];
   descriptionHasChange:boolean = false;
   niveauxEnseignes: any = [];
@@ -42,18 +63,24 @@ export class PropositionFormationComponent implements OnInit {
   hours: any = [];
   jours: any = [];
   villes:any = [];
+  @Input() isAllModule:boolean =false;
+  @Input() isAllNiveaux:boolean =false;
   @Input() ville:string;
+  @Input() commune:string;
   propositions: any = [];
-  formations: any = [];
+  formations: any = [];;
+  communes:any = []
   heure:Heure = new Heure('','');
   lambda:Lambda;
-  @Input() propositionFormation:PropositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME)); ;
+  isCheckCiclePrimaire= false ;
+  @Input() propositionFormation:PropositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME)); ;
   @Input() numberOfTable:number;
   demandeMiseEnLigne:DemandeMiseEnLigne;
-  disponibilite:Disponibilite = new Disponibilite('',[],null,sessionStorage.getItem(this.signInService.USERNAME));
-  proposition:PropositionFormation= new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
-  niveauForme:NiveauForme = new NiveauForme(0,'',null,null,null,sessionStorage.getItem(this.signInService.USERNAME)); ;
-  module:Module = new Module(0,'',null,sessionStorage.getItem(this.signInService.USERNAME));;
+  
+  disponibilite:Disponibilite = new Disponibilite('',[],null,localStorage.getItem(this.signInService.USERNAME));
+  proposition:PropositionFormation= new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
+  niveauForme:NiveauForme = new NiveauForme(0,'',null,null,null,localStorage.getItem(this.signInService.USERNAME)); ;
+  module:Module = new Module(0,'',null,localStorage.getItem(this.signInService.USERNAME));;
   propostionLoad = {} ;
   //Variable for map
 
@@ -63,6 +90,7 @@ export class PropositionFormationComponent implements OnInit {
   zoom : number = 15 ; 
   errorNiveaux:string;
   errorModule:string;
+  isVille:boolean = true;
   errorProposition:string;
   errorJour:string;
   filteredOptions4: Observable<string[]>
@@ -70,21 +98,27 @@ export class PropositionFormationComponent implements OnInit {
   myControl2 = new FormControl();
   myControl3 = new FormControl();
   myControl4 = new FormControl();
+  myControlCommune = new FormControl();
   coordMapModel : CoordMapModel ;
   filteredOptions: Observable<string[]>;
   filteredOptions2: Observable<string[]>;
   filteredOptions3: Observable<string[]>;
+  filteredOptionsCommunes: Observable<string[]>;
 
   constructor(private signInService:SignInService,
     private niveauService:NiveauService,
     private jourService:JourService,
+    private communeService:CommuneService,
     private particulierService:ParticulierService,
     private villeService:VilleService,
     private propositionFormationService:PropositionFormationService,
-    private formationService:FormationService
+    private formationService:FormationService,
+    private snackbarService : SnackbarService
     ) { 
       
     }
+
+
 
     
   ngOnInit() {
@@ -94,6 +128,7 @@ export class PropositionFormationComponent implements OnInit {
     this.onFetchJoursString();
     this.onFetchVillesObject();
     this.verifierVilleParticulier();
+    // this.onFetchCommunes();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -109,6 +144,11 @@ export class PropositionFormationComponent implements OnInit {
       startWith(''),
       map(va => this._filter3(va))
     );
+    this.filteredOptionsCommunes = this.myControlCommune.valueChanges
+    .pipe(
+      startWith(''),
+      map(va => this._filterCommunes(va))
+    );
     this.filteredOptions4 = this.myControl4.valueChanges
     .pipe(
       startWith(''),
@@ -119,6 +159,11 @@ export class PropositionFormationComponent implements OnInit {
       const filterValue = value.toLowerCase();
   
       return this.villes.filter(option => option.designation.toLowerCase().includes(filterValue));
+    }
+    private _filterCommunes(value: string): string[] {
+      const filterValue = value.toLowerCase();
+  
+      return this.communes.filter(option => option.libelle.toLowerCase().includes(filterValue));
     }
     
     private _filter(value: string): string[] {
@@ -139,15 +184,90 @@ export class PropositionFormationComponent implements OnInit {
     changeDescritpion(){
       this.descriptionHasChange = true;
     }
+    checkBoxCylePrimaire(){
+      this.isCheckCiclePrimaire = !this.isCheckCiclePrimaire ;
+     // console.log(this.isCheckCiclePrimaire);
+    }
+    nombreMinChange(event){
+      if(event < 0){
+        this.isNombreMinValid = false;
+      }
+      else{
+        this.isNombreMinValid = true;
+        this.nombreMin = event;
+      }
+      this.validDoubleNumber();
+     
+    }
+    villemousekeydown(){
+      this.commune ="";
+    }
+    
+    mouseleave(){
+      
+      if(this.myControl4.value===undefined || this.myControl4.value==="")
+      {
+        
+        this.myControlCommune.value == "";
+        this.commune =""
+        this.isVille = false;
+      }
+      else{
+        this.isVille =true;
+      }
+      
+    }
+    nombreMaxChange(event){
+      if(event < 0){
+        this.isNombreMaxValid = false;
+      }
+      else{
+        this.isNombreMaxValid = true;
+        this.nombreMax = event;
+      }
+      this.validDoubleNumber();
+     
+    }
+    checkAllModuleChange(){
+      this.isAllModule = !this.isAllModule;
+    }
+    checkAllNiveauxChange(){
+      this.isAllNiveaux = !this.isAllNiveaux;
+    }
+    validDoubleNumber(){
+      if((this.nombreMin && this.nombreMax) && (this.nombreMin<this.nombreMax)){
+        this.isPresentDoubleNumber = true;
+      }
+      else
+      {
+        this.isPresentDoubleNumber = false;
+      }
+    }
     adProposition(){
       this.errorProposition = "";
-      this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+      this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
     }
     getMdemandemMiseEnLigneA(id:number){
-      this.demandeMiseEnLigne = new DemandeMiseEnLigne(id,'');
+      this.demandeMiseEnLigne = new DemandeMiseEnLigne(id,'','');
+    }
+    mousedown(){
+      
+      this.communeService.listCommunesParVille(this.ville).subscribe(
+        (resp)=>{
+          
+          this.communes = resp;
+        },
+        (error)=>{
+         
+          
+          this.communes = [];
+        }
+      )
+      
     }
     saveDemandeMiseEnLigne(){
       this.demandeMiseEnLigne.ville = this.ville;
+      this.demandeMiseEnLigne.commune = this.commune;
       this.propositionFormationService.demandeMiseEnLigneObject(this.demandeMiseEnLigne).subscribe(
         (response)=>{
           document.getElementById('showVilleModal').click();
@@ -186,7 +306,29 @@ export class PropositionFormationComponent implements OnInit {
   }
     addNiveau(id){
       this.edit = false;
-      this.niveauForme = new NiveauForme(0,'',null,null,id,sessionStorage.getItem(this.signInService.USERNAME));
+      this.propositionFormationService.getAllAnivaux(id).subscribe(
+        (resp)=>{
+          if(resp['contrat']){
+            this.isNombreMaxValid = true;
+            this.isNombreMinValid = true;
+            this.isPresentDoubleNumber = true;
+            this.nombreMax = resp['contrat'].maxMontant;
+            this.nombreMin = resp['contrat'].minMontant;
+            this.niveauForme = new NiveauForme(resp['contrat'].id,'',resp['contrat'].minMontant,resp['contrat'].maxMontant,id,localStorage.getItem(this.signInService.USERNAME));
+          }
+          else
+          {
+            this.booleenParDefaut();
+            this.niveauForme = new NiveauForme(0,'',null,null,id,localStorage.getItem(this.signInService.USERNAME));
+          }
+          this.isAllNiveaux = resp['allNiveau'];
+          this.alMod = resp['allModule'];
+        },
+        (error)=>{
+          console.log(error);
+        }
+      )
+     
     }
     addHour(){
       this.hours.push(this.heure);
@@ -194,8 +336,9 @@ export class PropositionFormationComponent implements OnInit {
     }
     getProposition(proposition){
       this.descriptionHasChange = false;
+      this.isCheckCiclePrimaire =proposition.cyclePrimaire;
       this.errorProposition = "";
-      this.propositionFormation = new PropositionFormation(proposition.id,proposition.description,proposition.telephone,this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+      this.propositionFormation = new PropositionFormation(proposition.id,proposition.description,proposition.telephone,this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
      
     }
     verifierVilleParticulier(){
@@ -211,7 +354,7 @@ export class PropositionFormationComponent implements OnInit {
       )
     }
     addDisponibilite(id){
-      this.proposition= new PropositionFormation(id,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+      this.proposition= new PropositionFormation(id,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
       this.rechercherDisponibilite(id);
      
      }
@@ -220,25 +363,28 @@ this.propositionFormationService.rechercherDisponibilites(id)
     .subscribe(
       (response)=>{
         this.disponibilites = response;
-        this.disponibilite = new Disponibilite('',[],id,sessionStorage.getItem(this.signInService.USERNAME));
+        this.disponibilite = new Disponibilite('',[],id,localStorage.getItem(this.signInService.USERNAME));
       },
       (error)=>{
         console.log("Erreur : "+error);
       }
     )
      }
-    addModule(m,id){
+    addModule(m,id,va,alNi){
       this.editModule = false;
+      this.isAllModule = va;
       this.modules = m;
-      this.module = new Module(0,'',id,sessionStorage.getItem(this.signInService.USERNAME));
-      console.log(this.module);
+      this.id = id;
+      this.alNiv = alNi;
+      //console.log(this.alNiv);
+      this.module = new Module(0,'',id,localStorage.getItem(this.signInService.USERNAME));
     }
     
     onFetchVillesObject() {
       this.villeService.onFetchVilles().subscribe(
         (response)=> {
           this.villes = response;
-          console.log(response);
+         // console.log(response);
         },
         (error)=> {
           console.log("Une erreur est survenue");
@@ -247,19 +393,21 @@ this.propositionFormationService.rechercherDisponibilites(id)
       )
   
     }
+
+    
     enregistrerProposition(){
         if(this.propositionFormation.id !=0)
         {
-          this.proposition= new PropositionFormation(this.propositionFormation.id,this.propositionFormation.description,this.propositionFormation.telephone,this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+          this.proposition= new PropositionFormation(this.propositionFormation.id,this.propositionFormation.description,this.propositionFormation.telephone,this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
           this.propositionFormationService.modifierProposition(this.proposition)
           .subscribe(
             (response)=>{
               this.errorProposition = response["error"];
               if(!this.errorProposition)
               {
-                alert("modification effectuée avec succès.");
+                this.snackbarService.openSnackBar("Modification effectuée avec succès. Une validation est requise par notre équipe d'adiministration avant sa mise en ligne.")
                 document.getElementById('ajouterDescription').click();
-                this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+                this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
                 this.rechercherProposition();
               }
               
@@ -270,13 +418,14 @@ this.propositionFormationService.rechercherDisponibilites(id)
           )
         }
         else{
+          
           this.propositionFormationService.enregistrerProposition(this.propositionFormation)
       .subscribe(
         (response)=>{
           this.errorProposition = response["error"];
           if(!this.errorProposition)
           {
-            this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,sessionStorage.getItem(this.signInService.USERNAME));
+            this.propositionFormation = new PropositionFormation(0,'','',this.descriptionHasChange,localStorage.getItem(this.signInService.USERNAME));
            document.getElementById('addDesc').click();
             this.rechercherProposition();
           }
@@ -288,6 +437,11 @@ this.propositionFormationService.rechercherDisponibilites(id)
       )
         }
       
+    }
+    booleenParDefaut(){
+      this.isNombreMaxValid = false;
+      this.isNombreMinValid = false;
+      this.isPresentDoubleNumber = false;
     }
 
     
@@ -307,16 +461,35 @@ this.propositionFormationService.rechercherDisponibilites(id)
 
   }
   onSaveLevelTeach(object){
+    if(this.isAllNiveaux){
+      //console.log(object);
+      //console.log("Enregistrer tout les niveaux");
+      this.propositionFormationService.addAllNiveaux(object).subscribe(
+        (resp)=>{
+          document.getElementById('niveauEnseigne').click();
+          this.rechercherProposition();
+        },
+        (error)=>{
+          console.log(error);
+        }
+      )
+    }
+    else{
+      this.saveNiveaux(object);
+    }
+  }
+  saveNiveaux(object){
     if(!this.edit)
     {
-  
+      this.booleenParDefaut();
       this.propositionFormationService.onSaveNiveauEnseigne(object)
     .subscribe(
       (response)=>{
         this.errorNiveaux = response['error'];
         if(!this.errorNiveaux)
         {
-          this.niveauForme = new NiveauForme(0,'',null,null,0,sessionStorage.getItem(this.signInService.USERNAME));
+         
+          this.niveauForme = new NiveauForme(0,'',null,null,0,localStorage.getItem(this.signInService.USERNAME));
           document.getElementById('niveauEnseigne').click();
         }
         this.rechercherProposition();
@@ -335,7 +508,8 @@ this.propositionFormationService.rechercherDisponibilites(id)
         this.errorNiveaux = response['error'];
         if(!this.errorNiveaux)
         {
-          this.niveauForme = new NiveauForme(0,'',null,null,0,sessionStorage.getItem(this.signInService.USERNAME));
+          this.booleenParDefaut();
+          this.niveauForme = new NiveauForme(0,'',null,null,0,localStorage.getItem(this.signInService.USERNAME));
           document.getElementById('niveauEnseigne').click();
         }
         this.rechercherProposition();
@@ -346,9 +520,27 @@ this.propositionFormationService.rechercherDisponibilites(id)
       }
     )
     }
-    
   }
   onSaveModule(data){
+    if(this.isAllModule){
+      this.propositionFormationService.addAllModule(this.id).subscribe(
+        (resp)=>{
+          this.rechercherProposition();
+          
+          this.isAllModule = false;
+          document.getElementById('modules').click();
+        },
+        (error)=>{
+          console.log(error);
+        }
+      )
+    }
+    else{
+      this.enregistrerModule(data);
+    }
+    
+  }
+  enregistrerModule(data){
     if(!this.editModule)
     {
         this.propositionFormationService.onSaveModule(data)
@@ -358,7 +550,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
           this.modules = response['modules'];
           if(!this.errorModule)
           {
-            this.module = new Module(0,'',response["propositionId"],sessionStorage.getItem(this.signInService.USERNAME));
+            this.module = new Module(0,'',response["propositionId"],localStorage.getItem(this.signInService.USERNAME));
           }
         this.onFetchFormations();
         this.rechercherProposition();
@@ -376,7 +568,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
           this.modules = response['modules'];
           if(!this.errorModule)
           {
-            this.module = new Module(0,'',response["propositionId"],sessionStorage.getItem(this.signInService.USERNAME));
+            this.module = new Module(0,'',response["propositionId"],localStorage.getItem(this.signInService.USERNAME));
             this.editModule = false;
           }
         this.onFetchFormations();
@@ -396,7 +588,12 @@ this.propositionFormationService.rechercherDisponibilites(id)
     .subscribe(
       (response)=>{
         this.onFetchNiveaux();
-        this.niveauForme = new NiveauForme(response['id'],response['niveau'],response['prixMin'],response['prixMax'],response['propositionId'],sessionStorage.getItem(this.signInService.USERNAME))
+        this.niveauForme = new NiveauForme(response['id'],response['niveau'],response['prixMin'],response['prixMax'],response['propositionId'],localStorage.getItem(this.signInService.USERNAME))
+        this.nombreMax = response['prixMax'];
+        this.nombreMin = response['prixMin'];
+        this.isNombreMaxValid = true;
+        this.isNombreMinValid = true;
+        this.isPresentDoubleNumber = true;
       },
       (error)=>{
         console.log("Erreur : "+error);
@@ -410,13 +607,39 @@ this.propositionFormationService.rechercherDisponibilites(id)
     .subscribe(
       (response)=>{
         this.onFetchFormations();
-        this.module = new Module(response['id'],response['designation'],response['propositionId'],sessionStorage.getItem(this.signInService.USERNAME));
+        this.module = new Module(response['id'],response['designation'],response['propositionId'],localStorage.getItem(this.signInService.USERNAME));
+        this.isAllModule = response['allModule'];
+        //console.log(response)
+       // console.log(this.isAllModule)
       },
       (error)=>{
         console.log("Erreur : "+error);
       }
     )
 
+  }
+  onFetchCommunes() {
+    this.communeService.listCommunes().subscribe(
+      (response)=> {
+        this.communes = response;
+      },
+      (error)=> {
+        console.log("Une erreur est survenue");
+      }
+
+    )
+
+  }
+  mettreHorsLigne(id){
+    this.propositionFormationService.demandeMiseEnHorsLigne(id)
+    .subscribe(
+      (response)=>{
+        this.rechercherProposition();
+      },
+      (error)=>{
+        console.log("Erreur : "+error);
+      }
+    )
   }
   getMdemandemMiseEnLigne(id){
     this.propositionFormationService.demandeMiseEnLigne(id)
@@ -444,7 +667,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
     )
   }
   deleteDay(dayId){
-    this.lambda = new Lambda(dayId,sessionStorage.getItem(this.signInService.USERNAME),this.proposition.id);
+    this.lambda = new Lambda(dayId,localStorage.getItem(this.signInService.USERNAME),this.proposition.id);
     this.propositionFormationService.deleteDisponibiliteByDay(this.lambda)
     .subscribe(
       (response)=>{
@@ -476,7 +699,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
     this.propositionFormationService.deleteModuleById(id)
     .subscribe(
       (response)=>{
-        this.module = new Module(0,'',response['propositionId'],sessionStorage.getItem(this.signInService.USERNAME));
+        this.module = new Module(0,'',response['propositionId'],localStorage.getItem(this.signInService.USERNAME));
         this.modules = response['modules'];
         this.onFetchFormations();
       },
@@ -489,11 +712,11 @@ this.propositionFormationService.rechercherDisponibilites(id)
 
   
   rechercherProposition(){
-    this.propositionFormationService.rechercherProposition(sessionStorage.getItem(this.signInService.USERNAME))
+    this.propositionFormationService.rechercherProposition(localStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (response)=>{
-        
         this.propositions = response;
+        //console.log(response);
       },
       (error)=>{
         console.log("Erreur : "+error);
@@ -504,7 +727,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
   modifierDescription(){
     this.propositionFormation.description = this.proposition.description;
     this.propositionFormation.id = this.proposition.id;
-    this.proposition.username = sessionStorage.getItem(this.signInService.USERNAME);
+    this.proposition.username = localStorage.getItem(this.signInService.USERNAME);
   }
  
   onSaveDisponibilite(data){
@@ -513,7 +736,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
     .subscribe(
       (response)=>{
         this.errorJour = response["error"];
-        // this.disponibilite = new Disponibilite('',[],response["propositionId"],sessionStorage.getItem(this.signInService.USERNAME));
+        // this.disponibilite = new Disponibilite('',[],response["propositionId"],localStorage.getItem(this.signInService.USERNAME));
           this.hours =[];
         this.rechercherDisponibilite(response["propositionId"]);
         this.onFetchJoursString();
@@ -562,7 +785,7 @@ this.propositionFormationService.rechercherDisponibilites(id)
     this.propositionFormationService.saveCoordMap(this.coordMapModel, this.propostionLoad).subscribe(
 
       (resp) => {
-          console.log(resp);
+          //console.log(resp);
           this.rechercherProposition();
       },
 
@@ -586,16 +809,21 @@ this.propositionFormationService.rechercherDisponibilites(id)
   }
 
 
-  getAddress(place: object) { 
+  getAddress(resp: object) { 
 
-
-    let lat = place['geometry'].location.lat() ;
-    let long = place['geometry'].location.lng() ;
+    if(resp['data'] !== null){
+      
+    //console.log(resp);
+    
+    let lat = resp['data']['geometry'].location.lat() ;
+    let long = resp['data']['geometry'].location.lng() ;
 
     
 
     this.lat = lat;
     this.lng = long;
+    }
+    
 
   }
 

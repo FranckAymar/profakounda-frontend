@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ParticulierService } from '../../customers/services/particulier.service';
 import { Router } from '@angular/router';
@@ -16,7 +17,12 @@ export class SignUpComponent implements OnInit {
   error :string;
   message:string;
   mailSaisi:String
-  constructor(private particulierService:ParticulierService,private router:Router,private formBuilder:FormBuilder) { }
+  inscriptionSucess : boolean = false ;
+  constructor(private particulierService:ParticulierService,
+              private router:Router,
+              private formBuilder:FormBuilder,
+              private snackbarService : SnackbarService) { }
+ 
   ngOnInit() {
     this.formInitialisation();
   }
@@ -66,12 +72,19 @@ getColor(){
     this.particulierService.saveParticulier(particulier)
     .subscribe(
       (response)=>{
+<<<<<<< HEAD
         sessionStorage.setItem("mail",particulier.email);
+=======
+        localStorage.setItem("mail",particulier.email);
+        this.mailSaisi = localStorage.getItem("mail");
+>>>>>>> 92838e9f2f1c81805594798d1321c99ac2a4de27
         this.formInitialisation();
         this.error =response["error"];      
         if(response["success"])
         { 
-          alert('Inscription effectuée avec succès; verifier votre mail et cliquer sur le lien de validation');
+          this.inscriptionSucess = true ;
+          this.message = "";
+          this.snackbarService.openSnackBar('Inscription effectuée avec succès');
           this.router.navigate(["/home/sign-up"]);
           this.formInitialisation();
        
@@ -79,7 +92,6 @@ getColor(){
    
       },
       (error)=>{
-        console.log(particulier);
         console.log("Une erreur s'est produite: "+error);
       }
     )
@@ -88,8 +100,8 @@ getColor(){
   onRevoyerEmail(){
     this.mailSaisi = sessionStorage.getItem("mail");
     this.particulierService.revoyerEmail(this.mailSaisi).subscribe(
-      (Response)=>{
-        alert("mail belle et bien revoiyé");
+      (response)=>{
+        this.snackbarService.openSnackBar('Mail de confirmation renvoyé avec succès')
       },
       (error)=>{
         console.log("Une erreur s'est produite: "+error);

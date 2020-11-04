@@ -3,9 +3,10 @@
 <div  class="sb2-2-3">
     <div  class="row">
         <div class="col-md-12">
-            <div class="box-inn-sp ">
+            <div class="box-inn-sp">
                 <div class="inn-title">
-                    <img style="width: 10em;height: 10em; border-radius: 0.3em;" src="{{url}}" alt="">
+                    
+                    <img  style="width: 10em;height: 10em; border-radius: 0.3em;" src="{{urlFile}}" alt="">
                     <div style="float: right;">
                         <h4 style="background-color: red;">Editer profil</h4>
                     </div>
@@ -41,29 +42,43 @@
     
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <mat-form-field style="width: 16em;">
-                                                <input type="text" required  
-                                                    placeholder="Ville de résidence" formControlName="ville" [(ngModel)]="ville" aria-label="Number" matInput
-                                                    [formControl]="myControl2" [matAutocomplete]="auto2">
-                                                <mat-autocomplete #auto2="matAutocomplete">
-                                                    <mat-option *ngFor="let option of filteredOptions2 | async"  [value]="option.designation">
-                                                        {{option.designation}}
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <mat-form-field style="width: 16em;">
-    
-                                                <input  matInput formControlName="lieuHabitation"  type="text"
-                                                    placeholder="Lieu d'Habitation">
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
+                                    <mat-form-field style="width: 34em;">
+                                        <input type="text" required  
+                                            placeholder="Ville de résidence"   formControlName="ville" [(ngModel)]="ville" aria-label="Number" matInput
+                                            [formControl]="myControl2" [matAutocomplete]="auto2">
+                                        <mat-autocomplete #auto2="matAutocomplete">
+                                            <mat-option *ngFor="let option of filteredOptions2 | async"  [value]="option.designation">
+                                                {{option.designation}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
                                     
     
+                                </div>
+                            </div>
+                            <div class="row">
+    
+                                <div class="col-md-6">
+                                    <span *ngIf="!isVille" style="color: red;font-size: 0.8em !important;">Saisissez d'abord votre ville de résidence</span>
+                                    <mat-form-field style="width: 34em;">
+                                        <input required type="text"  (mousedown)="mousedown()" (mouseleave)="mouseup()"  formControlName="commune" [(ngModel)]="commune"
+                                            placeholder="Commune ou département" aria-label="Number" matInput
+                                            [formControl]="myControlCommune" [matAutocomplete]="autoCommune">
+                                        <mat-autocomplete #autoCommune="matAutocomplete">
+                                            <mat-option *ngFor="let option of filteredOptionsCommunes | async" [value]="option.libelle">
+                                                {{option.libelle}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                    
+                                </div>
+                                <div class="col-md-6">
+    
+                                    <mat-form-field style="width: 34em;">
+    
+                                        <input  matInput formControlName="lieuHabitation"  type="text"
+                                            placeholder="Quartier">
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
@@ -96,6 +111,20 @@
                                     </mat-form-field>
                                 </div>
                             </div>
+                            <!-- <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field style="width: 34em;">
+    
+                                        <input matInput formControlName="telephone"  type="text" placeholder="Téléphone">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field style="width: 34em;">
+    
+                                        <input matInput formControlName="telephone"  type="text" placeholder="Téléphone">
+                                    </mat-form-field>
+                                </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <input type="file" (change)="onFileChange($event)" accept="image/*" #fileInput class="validate">
@@ -157,3 +186,16 @@
 
     </div>
 </div>
+
+<ng-template #firstDialog>
+  <p matDialogContent><em>Photo modifiée avec succès</em></p>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose>Ok</button>
+  </mat-dialog-actions>
+</ng-template>
+<ng-template #secondDialog>
+    <p matDialogContent><em>Modification effectuée avec succès</em></p>
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose>Ok</button>
+    </mat-dialog-actions>
+  </ng-template>

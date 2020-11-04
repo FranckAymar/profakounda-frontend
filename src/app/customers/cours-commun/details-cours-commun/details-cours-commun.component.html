@@ -1,11 +1,11 @@
 <section>
     <div *ngIf="cours.lieuIntervention" class="pro-cover">
 
-        <agm-map [latitude]="cours.lieuIntervention.latitude" [longitude]="cours.lieuIntervention.longitude"
+        <agm-map [latitude]="cours.lieuIntervention?.latitude" [longitude]="cours.lieuIntervention?.longitude"
             [zoom]="zoom">
 
-            <agm-marker [latitude]="cours.lieuIntervention.latitude" [longitude]="cours.lieuIntervention.longitude"
-                [label]="cours.lieuIntervention.libelle"></agm-marker>
+            <agm-marker [latitude]="cours.lieuIntervention?.latitude" [longitude]="cours.lieuIntervention?.longitude"
+                [label]="cours.lieuIntervention?.libelle"></agm-marker>
 
 
         </agm-map>
@@ -15,7 +15,7 @@
         <div class="container pg-inn">
             <div class="col-md-3">
                 <div class="pro-user">
-                    <img src="../../../assets/images/logo.png" alt="user">
+                    <img  height="250" src="{{urlServer}}/{{cours.coursCommun?.id}}" alt="">
                 </div>
                 <div class="pro-user-bio">
                     <ul>
@@ -23,6 +23,7 @@
                             <h4>{{cours.coursCommun?.organisation.libelle}}</h4>
                         </li>
                         <li>{{cours.coursCommun?.titre}}</li>
+                        <li>Code: <strong> {{cours.coursCommun.codeCours}}</strong></li>
                         <li>
                             <h5 style="text-align: center;" *ngIf="cours.coursCommun?.cout" class="pro-user-act">
                                 {{cours.coursCommun?.cout | currency:'XOF'}}</h5>
@@ -40,34 +41,39 @@
                             <span *ngIf="cours.coursCommun?.inscriptionFermer === false">Ouvert</span>
                         </li>
                         <li *ngIf="cours.coursCommun?.nbreMaxInscrits">
-                            <span>{{cours.coursCommun.nbreMaxInscrits - cours.coursCommun.nombreInscrit}}</span> places
+                            <span>{{cours.coursCommun?.nbreMaxInscrits - cours.coursCommun?.nombreInscrit}}</span> places
                             disponibles
                         </li>
                         <li *ngIf="!cours.coursCommun?.nbreMaxInscrits && cours.coursCommun?.cout">
-                            <span>Places disponibles <strong>illimitées</strong> </span>
+                            <span>Places disponibles: <strong>illimitées</strong> </span>
                         </li>
-
-
+                        <li >
+                            <span><i class="fa fa-map-marker" aria-hidden="true"></i>: <strong>{{cours.lieuIntervention?.libelle}}</strong> </span>
+                        </li>
                     </ul>
                 </div>
                 <div style="margin-top: 1em;margin-bottom: 0.3em;" class="pro-user-bio">
                     <h4> <i class="fa fa-money"></i> COMPTE RENDU</h4>
                     <ul>
                         <li>
-                            Nombre inscrits : <span>{{cours.coursCommun.compteRendu?.nombreInscrits}}</span>
+                            Nombre inscrits : <span>{{cours.coursCommun?.compteRendu?.nombreInscrits}}</span>
                         </li>
                         <li style="background-color: #DA7F5C; color: white;border-radius: 0.2em;padding-left: 0.1em;">
                             Point Transactions : <span
-                                style="color: white;">{{cours.coursCommun.compteRendu?.pointGlobale | currency:'XOF'}}</span>
+                                style="color: white;">{{cours.coursCommun?.compteRendu?.pointGlobale | currency:'XOF'}}</span>
                         </li>
                         <li>
-                            Pourcentage operateur : <span>{{cours.coursCommun.compteRendu?.pourcentageOperateur}}%</span>
+                            Pourcentage operateur : <span>{{cours.coursCommun?.compteRendu?.pourcentageOperateur}}%</span>
                         </li>
                         <li style="background-color: #002147; border-radius: 0.2em;padding-left: 0.1em;">
                             <span style="color: white;"> Révénu cours :</span> <span
-                                style="color:#DA7F5C">{{cours.coursCommun.compteRendu?.revenuClient | currency:'XOF'}}</span>
+                                style="color:#DA7F5C">{{cours.coursCommun?.compteRendu?.revenuClient | currency:'XOF'}}</span>
                         </li>
-
+                        <li style="margin-top: 1em;">
+                            <span *ngIf="cours.coursCommun.isVirement" style="color: green;font-weight: bold;">Virement effectué</span>
+                            <span *ngIf="cours.coursCommun?.demandeVirement && !cours.coursCommun.isVirement" style="color: red;font-weight: bold;">Virement en cours de traitement....<i class="fa fa-spinner"></i></span>
+                            <button *ngIf="!cours.coursCommun?.demandeVirement && cours.coursCommun?.compteRendu?.pointGlobale != 0 && !cours.coursCommun.isVirement" data-target="#demandeVirementAlerte" data-toggle="modal" class="btn btn-info">Demande de virement</button>
+                        </li>
                     </ul>
                 </div>
 
@@ -82,21 +88,21 @@
                             <div (click)="onFetchInscrits(cours.coursCommun)" *ngIf="cours.coursCommun?.cout"
                                 class="udb-sec">
                                 <a style="width: 100%;" class="details-line-btn">Details
-                                    ({{cours.coursCommun.nombreInscrit}} inscrits)</a>
+                                    ({{cours.coursCommun?.nombreInscrit}} inscrits)</a>
 
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div *ngIf="!cours.coursCommun.isVirement" class="col-md-6">
 
                             <div *ngIf="cours.coursCommun?.cout" class="udb-sec">
                                 <a (click)="onFermerInscriptionCoursCommun()"
-                                    *ngIf="cours.coursCommun.nbreMaxInscrits !== cours.coursCommun.nombreInscrit"
+                                    *ngIf="cours.coursCommun?.nbreMaxInscrits !== cours.coursCommun?.nombreInscrit"
                                     style="width: 100%;" class="read-line-btn">
-                                    {{cours.coursCommun.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
+                                    {{cours.coursCommun?.inscriptionFermer == true ? 'Ouvrir' : 'Fermer'}}
                                 </a>
 
                                 <a (click)="openAlert('coursGeneral')"
-                                    *ngIf="cours.coursCommun.nbreMaxInscrits === cours.coursCommun.nombreInscrit"
+                                    *ngIf="cours.coursCommun?.nbreMaxInscrits === cours.coursCommun?.nombreInscrit"
                                     style="width: 100%;" class="read-line-btn">
                                     Ouvrir
                                 </a>
@@ -112,7 +118,7 @@
 
                 <div class="udb-sec udb-prof">
                     <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
-                    <p>{{cours.coursCommun?.description}}</p>
+                    <p style="font-size: 15px;">{{cours.coursCommun?.description}}</p>
                 </div>
 
                 <div *ngIf="!cours.coursCommun?.cout" class="udb-sec udb-time">
@@ -125,8 +131,8 @@
                                     <div class="sdb-cl-day">
                                         <h5 style="text-align: center;" class="pro-user-act"> {{public.cout | currency:'XOF'}}
                                         </h5>
-                                        <p> Niveau : {{public.niveau.libelle}}</p>
-                                        <p *ngIf="public.filiere"> Filiere : {{public.filiere.libelle}}</p>
+                                        <p> Niveau : {{public.niveau?.libelle}}</p>
+                                        <p *ngIf="public.filiere"> Filiere : {{public.filiere?.libelle}}</p>
 
                                         <p *ngIf="public.inscriptionFermer === true"> Etat : Fermé</p>
                                         <p *ngIf="public.inscriptionFermer === false"> Etat : Ouvert</p>
@@ -196,4 +202,23 @@
 
     </div>
 
+    <div class="modal fade" id="demandeVirementAlerte" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ATTENTION!!!!</h5>
+                
+            </div>
+            <div class="modal-body alert alert-danger">
+                <div>Cette action est irreversible.Après versement aucune inscription ne sera possible.</div>
+            </div>
+            <div class="modal-footer">
+                <button style="margin-left: 1em;" type="button"  class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="demandeVersement()"  class="btn btn-primary" data-dismiss="modal">Confirmer demande</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
 </section>

@@ -51,8 +51,14 @@ export class SearchBarCoursCommunComponent implements OnInit {
     this.addParameterInURl();
     this.coursCommunService.rechercherParCode(this.code).subscribe(
       (resp)=>{
-
+        if(resp["cours"])
+      {
+        this.getCoursCommunFiltrees.emit(resp["cours"]);
+       }
+      else{
         this.getCoursCommunFiltrees.emit(resp);
+      
+      }
       }
     )
   }
@@ -63,7 +69,14 @@ export class SearchBarCoursCommunComponent implements OnInit {
     this.coursCommunService.rechercherParOrganisation(this.organisationName).subscribe(
       (resp)=>{
 
-        this.getCoursCommunFiltrees.emit(resp);
+        if(resp['cours'])
+        {
+          this.getCoursCommunFiltrees.emit(resp['cours']);
+        }
+        else
+        {
+          this.getCoursCommunFiltrees.emit(resp);
+        }
       }
     )
   }
@@ -119,7 +132,7 @@ export class SearchBarCoursCommunComponent implements OnInit {
     this.coursCommunService.fetchOrganisationList().subscribe(
       (response)=> {
         this.organisationObject = response;
-        console.log(response);
+       // console.log(response);
       },
       (error)=> {
         console.log("Une erreur est survenue");

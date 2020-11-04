@@ -22,14 +22,15 @@
                             </li>
                         </ul>
                         <ul>
-                            <li><a *ngIf="authenticated" (click)="close()" href="#" routerLink ="/customers" >Mon Tableau de bord</a>
+                            <li><a *ngIf="authenticated" (click)="close()"
+                                [routerLink]="profile ==='ROLE_PARTICULIER' ? ['/customers'] : ['/admin']" routerLink ="/customers" >Mon Tableau de bord</a>
                             </li>
                         </ul>
                         <h4>Formations</h4>
-                        <ul *ngIf="authenticated">
-                            <li><a (click)="close()" routerLink ="/formations">Nos répétiteurs</a></li>
-                            <li><a (click)="close()" routerLink ="/courscommun">Nos cours organisés</a></li>
-                            <li><a (click)="close()" routerLink ="">Contactez-nous</a></li>
+                        <ul >
+                            <li><a (click)="close()" routerLink ="/formations">Nos formateurs</a></li>
+                            <li><a (click)="close()" routerLink ="/courscommun">Les cours organisés</a></li>
+                            <li><a (click)="close()" routerLink ="/contactus">Contactez-nous</a></li>
 
 
                         </ul>
@@ -56,7 +57,7 @@
                 <div class="col-md-12">
                     <div class="ed-com-t1-left">
                         <ul>
-                            <li><a href="#">Besoin d'aide ? : support@profakounda.com</a>
+                            <li><a href="mailto:support@profkounda.com">Besoin d'aide ? : support@profakounda.com</a>
                             </li>
                         </ul>
                     </div>
@@ -77,12 +78,12 @@
                     </div>
                     <div class="ed-com-t1-social">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <li><a href="https://www.facebook.com/profakounda"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                            <!-- <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                             </li>
                             <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -111,7 +112,7 @@
                                 <!-- MEGA MENU 1 -->
                             </li>
                             <li class="admi-menu">
-                                <a routerLink ="/" class="mm-arr">Contactez-nous</a>
+                                <a routerLink ="/contactus" class="mm-arr">Contactez-nous</a>
                                 <!-- MEGA MENU 1 -->
                             </li>
                         </ul>

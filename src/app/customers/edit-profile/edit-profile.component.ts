@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-
+import { Component, OnInit, ViewChild, ElementRef, Input, TemplateRef } from '@angular/core';
+import { URL } from 'src/app/API_url/config';
 import { EMPTY } from 'rxjs';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
@@ -13,6 +13,9 @@ import { Observable } from 'rxjs';
 import { startWith, map,expand } from 'rxjs/operators';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { CompressorService } from '../services/CompressorService';
+import { CommuneService } from 'src/app/admin/services/commune.service';
+import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
+import { MatDialog } from '@angular/material';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -30,12 +33,18 @@ export class EditProfileComponent implements OnInit {
    @Input() showMessage:boolean = false;
    @Input() filiere:string;
    @Input() niveau:string;
+   @Input() commune:string;
    @Input() ville:string;
+   modificationSuccessMessage:string;
    message:string;
    error:string;
    mes:string;
+   urlFile;
+   isVille:boolean = true;
+   urlServer = URL.getPhoto;
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
   filieres=[] ;
+  communes: any=[] ;
   niveaux = [];
   villes : any = [];
   villesObject:any = [];
@@ -47,14 +56,21 @@ export class EditProfileComponent implements OnInit {
   myControl = new FormControl();
   myControl2 = new FormControl();
   myControl3 = new FormControl();
+  myControlCommune = new FormControl();
+  filteredOptionsCommunes: Observable<string[]>
   filteredOptions3: Observable<string[]>
   filteredOptions2: Observable<string[]>
   filteredOptions: Observable<string[]>;
+  @ViewChild('firstDialog',null) firstDialog: TemplateRef<any>;
+  @ViewChild('secondDialog',null) secondDialog: TemplateRef<any>;
   constructor(private filiereService :FiliereService,
               private niveauService:NiveauService,
               private particulierService:ParticulierService,
               private villeService:VilleService,
+              private communeService:CommuneService,
               private router:Router,
+              private dialog: MatDialog,
+              private snackbarService : SnackbarService,
               private formBuilder:FormBuilder,
               private signInService:SignInService,
               private compressor: CompressorService) { }
@@ -66,11 +82,17 @@ export class EditProfileComponent implements OnInit {
     this.onFetchFiliere();
     this.onFetchVilles();
     this.initPassword();
+    // this.onFetchCommunes();
     this.onFetchVillesObject();
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
       map(value => this._filter(value))
+    );
+    this.filteredOptionsCommunes = this.myControlCommune.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filterCommune(value))
     );
     this.filteredOptions3 = this.myControl3.valueChanges
     .pipe(
@@ -98,10 +120,13 @@ export class EditProfileComponent implements OnInit {
 
     return this.villesObject.filter(option => option.designation.toLowerCase().includes(filterValue));
   }
+  private _filterCommune(value: string): string[] {
+    const filterValue = value.toLowerCase();
 
-  villeChange(object){
-    console.log(object);
+    return this.communes.filter(option => option.libelle.toLowerCase().includes(filterValue));
   }
+
+ 
 ///Compress File
 
 recursiveCompress = (image: File, index, array) => {
@@ -109,7 +134,7 @@ recursiveCompress = (image: File, index, array) => {
     map(response => {
 
     //Code block after completing each compression
-      console.log('compressed ' + index + image.name);
+     // console.log('compressed ' + index + image.name);
       this.compressedImages.push(response);
       return {
         data: response,
@@ -130,7 +155,8 @@ init(){
     filiere:'',
     niveau:'',
     ville:['',Validators.required],
-    username:sessionStorage.getItem(this.signInService.USERNAME)
+    commune:['',Validators.required],
+    username:localStorage.getItem(this.signInService.USERNAME)
   })
 }
 initPassword(){
@@ -138,7 +164,7 @@ initPassword(){
     lastPassword:['',Validators.required],
     password:['',Validators.required],
     passwordConfirm:['',Validators.required],
-    username:sessionStorage.getItem(this.signInService.USERNAME)
+    username:localStorage.getItem(this.signInService.USERNAME)
   })
 }
 
@@ -178,7 +204,7 @@ getColor(){
 
 
   rechercherPaticulierConnecter(){
-    this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
+    this.particulierService.rechercherParticulier(localStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (reponse)=>{
         this.niveau = reponse['niveau'];
@@ -186,6 +212,7 @@ getColor(){
         this.ville = reponse['ville'];
        this.id = reponse['id'];
        this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
+       this.urlFile = this.urlServer +"/" + this.id ;
         this.userForm.patchValue({
           nom: reponse['nom'],
           prenoms: reponse['prenoms'],
@@ -194,6 +221,7 @@ getColor(){
           filiere: reponse['filiere'],
           niveau: reponse['niveau'],
           ville: reponse['ville'],
+          commune: reponse['commune']
         
         })
       },
@@ -204,9 +232,17 @@ getColor(){
   }
 
   onFileChange(event) {
+    
     if(event.target.files.length > 0) {
       this.data = event.target.files;
-        console.log('input: '  + this.data[0].size);
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); 
+  
+        //Apercu
+        reader.onload = (event) => {
+          this.urlFile = reader.result ;
+        }
+       // console.log('input: '  + this.data[0].size);
         const compress = this.recursiveCompress( this.data[0], 0, this.data ).pipe(
           expand(res => {
             return res.index > res.array.length - 1
@@ -217,7 +253,7 @@ getColor(){
         compress.subscribe(res => {
           if (res.index > res.array.length - 1) {
           //Code block after completing all compression
-            console.log('Compression successful ' + this.compressedImages);
+           // console.log('Compression successful ' + this.compressedImages);
             let file = this.compressedImages[0];
 
             let input = new FormData();
@@ -229,7 +265,7 @@ getColor(){
             {
               input.append('photo',this.data[0]);
             }
-            input.append('username',sessionStorage.getItem(this.signInService.USERNAME));
+            input.append('username',localStorage.getItem(this.signInService.USERNAME));
             this.uploadFile(input);
            
           }
@@ -241,8 +277,10 @@ getColor(){
     this.particulierService.modifierPhoto(data).
     subscribe(
       (response)=>{
-       
-        alert("Photo modifiée avec succès.");
+        this.modificationSuccessMessage ="Photo modifiée avec succès";
+        //this.snackbarService.openSnackBar("Photo modifiée avec succès");
+        //alert("Photo modifier avec succès.");
+        this.dialog.open(this.firstDialog);
          
       },
       (error)=>{
@@ -267,6 +305,18 @@ getColor(){
     )
 
   }
+  onFetchCommunes() {
+    this.communeService.listCommunes().subscribe(
+      (response)=> {
+        this.communes = response;
+      },
+      (error)=> {
+        console.log("Une erreur est survenue");
+      }
+
+    )
+
+  }
   onFetchVilles() {
     this.villeService.onFetchVillesString().subscribe(
       (response)=> {
@@ -283,7 +333,7 @@ getColor(){
     this.villeService.onFetchVilles().subscribe(
       (response)=> {
         this.villesObject = response;
-        console.log(response);
+       // console.log(response);
       },
       (error)=> {
         console.log("Une erreur est survenue");
@@ -293,18 +343,19 @@ getColor(){
 
   }
   changePassword(){
-    let token = btoa( sessionStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['lastPassword']);
-    let sesToken = sessionStorage.getItem(this.signInService.TOKEN);
+    let token = btoa( localStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['lastPassword']);
+    let sesToken = localStorage.getItem(this.signInService.TOKEN);
     if(token === sesToken)
     {
-      let newToken = btoa( sessionStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['password']);
-      this.passwordModel = new PasswordModel(this.passwordForm.value['lastPassword'],this.passwordForm.value['password'],this.passwordForm.value['passwordConfirm'],sessionStorage.getItem(this.signInService.USERNAME));
+      let newToken = btoa( localStorage.getItem(this.signInService.USERNAME) + ':' + this.passwordForm.value['password']);
+      this.passwordModel = new PasswordModel(this.passwordForm.value['lastPassword'],this.passwordForm.value['password'],this.passwordForm.value['passwordConfirm'],localStorage.getItem(this.signInService.USERNAME));
       this.particulierService.onChangePassword(this.passwordModel)
     .subscribe(
       (response)=>{
-        alert("Modification effectuée avec succès.");
+        this.dialog.open(this.secondDialog);
+        //alert("Modification effectuée avec succès.");
         this.initPassword();
-        sessionStorage.setItem(this.signInService.TOKEN,newToken);
+        localStorage.setItem(this.signInService.TOKEN,newToken);
         this.mes = '';
       },
       (error)=>{
@@ -315,8 +366,37 @@ getColor(){
     else
     {
       this.mes = "Ancien mot de passe inexact";
-      console.log("Ancien mot de passe inexact");
+      
     }
+  }
+  
+  mouseup(){
+    if(this.myControl2.value==="" || this.myControl2.value===undefined)
+    {
+      this.myControlCommune.value == "";
+      this.commune =""
+      this.isVille = false;
+    }
+    else{
+      this.isVille =true;
+    }
+    
+  }
+  
+  mousedown(){
+    
+    this.communeService.listCommunesParVille(this.ville).subscribe(
+      (resp)=>{
+        
+        this.communes = resp;
+      },
+      (error)=>{
+       
+        
+        this.communes = [];
+      }
+    )
+    
   }
   onUpdateParticulier(){
    
@@ -326,7 +406,9 @@ getColor(){
         this.error = response["error"]
         if(!this.error)
         {
-          alert("Modification effectuée avec succès."); 
+          this.modificationSuccessMessage ="Modification effectuée avec succès";
+          this.dialog.open(this.secondDialog);
+          //alert("Modification effectuée avec succès."); 
         this.rechercherPaticulierConnecter();
       
         //Rechargementt du component courant

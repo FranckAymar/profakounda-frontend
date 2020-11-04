@@ -1,3 +1,4 @@
+import { SharedModule } from './shared-component/shared.module';
 import { CoursCommunModule } from './cours-commun/cours-commun.module';
 import { FormationsModule } from './formations/formations.module';
 import { CustomersModule } from './customers/customers.module';
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingInterceptor } from './LoadingInterceptor';
 import { FormsModule } from '@angular/forms';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 
 
@@ -34,6 +36,10 @@ const appRouter : Routes = [
   ,
   {
     path :'courscommun', redirectTo :'/courscommun'
+  }
+  ,
+  {
+    path :'contactus', component : ContactUsComponent
   },{
     path: "**", redirectTo :'/error404'
   },
@@ -46,6 +52,7 @@ const appRouter : Routes = [
   declarations: [
     AppComponent,
     LoadingComponent,
+    ContactUsComponent,
     
   ],
   imports: [
@@ -58,6 +65,7 @@ const appRouter : Routes = [
     ErrorPageModule,
     FormsModule,
     RouterModule.forRoot(appRouter, {scrollPositionRestoration: 'enabled'}),
+    SharedModule
   
         
   

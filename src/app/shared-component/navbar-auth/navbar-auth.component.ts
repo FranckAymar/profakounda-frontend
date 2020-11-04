@@ -17,7 +17,7 @@ export class NavbarAuthComponent implements OnInit {
   @Input() url:string ;
   prenoms:string;
   nom:string;
-
+  authorisation:any;
   constructor(private signInService : SignInService , 
               private router : Router,private particulierService:ParticulierService) {
 
@@ -32,14 +32,25 @@ export class NavbarAuthComponent implements OnInit {
     
     this.rechercherPaticulierConnecter();
     this.loadJavaScript() ;
- 
+    this.verifier();
   }
 
+  verifier(){
+    this.signInService.verifier().subscribe(
+      (response)=>{
+        this.authorisation = response;
+        
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
 close(){
   document.getElementById('ed-mi-close').click();
 }
   rechercherPaticulierConnecter(){
-    this.particulierService.rechercherParticulier(sessionStorage.getItem(this.signInService.USERNAME))
+    this.particulierService.rechercherParticulier(localStorage.getItem(this.signInService.USERNAME))
     .subscribe(
       (reponse)=>{
        this.id = reponse['id'];

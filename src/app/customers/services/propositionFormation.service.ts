@@ -20,6 +20,9 @@ export class PropositionFormationService{
      getContratById(id:Number){
         return this.httpClient.post(URL.getContrat,id);
     }
+    getAllAnivaux(id:Number){
+        return this.httpClient.post(URL.allNiveauVerification,id);
+    }
     getModuleById(id:Number){
         return this.httpClient.post(URL.getModule,id);
     }
@@ -50,13 +53,21 @@ export class PropositionFormationService{
      onUpdateModule(data){
         return this.httpClient.post(URL.modifierModule,data);
      }
-
+     getDashBoardPropositions(){
+        return this.httpClient.get(URL.getDashBoardProposition);
+     }
      //PROPOSITION
      rechercherProposition(username:String){
         return this.httpClient.post(URL.rechercherPropositions,username);
     }
+    addAllModule(id:Number){
+        return this.httpClient.post(URL.addAllModule,id);
+    }
+    addAllNiveaux(data){
+        return this.httpClient.post(URL.addAllNiveaux,data);
+    }
     enregistrerProposition(data){
-        return this.httpClient.post(URL.enregsitrerProposition,data);
+         return this.httpClient.post(URL.enregsitrerProposition,data);
      }
      modifierProposition(data){
         return this.httpClient.post(URL.modifierProposition,data);
@@ -74,9 +85,13 @@ export class PropositionFormationService{
         let params = new HttpParams().set("page", page).set("total", numberDataOfPage) ;
         return this.httpClient.get(URL.getAllPparticulierPropositions, {params : params});
     }
+    
 
     demandeMiseEnLigne(idPrposition) : Observable<any> {
         return this.httpClient.post(URL.demandeMiseEnLigne,idPrposition);
+    }
+    demandeMiseEnHorsLigne(idPrposition) : Observable<any> {
+        return this.httpClient.post(URL.demandeMiseHorsLigne,idPrposition);
     }
     demandeMiseEnLigneObject(data) : Observable<any> {
         return this.httpClient.post(URL.demandeMiseEnLigneObject,data);

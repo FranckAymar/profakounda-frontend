@@ -1,7 +1,7 @@
 import { publicCibleModel } from './../../home/models/publiccible';
 import { URL } from 'src/app/API_url/config';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -19,6 +19,18 @@ export class CoursCommunService {
     return this.http.get(URL.recupererCoursCommunHome);
 
   }
+  fetchCoursCommunForHomeGlobale(page? : any , total? : any):Observable<any>{
+
+    if(page && total){
+      
+      let params = new HttpParams().set("page", page).set("total", total);
+      return this.http.get(URL.recupererListCoursCommunHome, {params : params});
+
+    }
+    return this.http.get(URL.recupererListCoursCommunHome);
+
+  }
+
 
 
   fetchDetailsCoursCommunForHome(id?) :Observable<any> {
@@ -83,6 +95,11 @@ export class CoursCommunService {
   demandeMiseEnLigne(idPrposition) : Observable<any> {
     return this.http.post(URL.demandeMiseEnligneCourCommun,idPrposition);
 }
+demandeVirement(id) : Observable<any> {
+  return this.http.post(URL.demandeVersement,id);
+}
+
+
 
 
   rechercherParCode(code) : Observable<any>{
@@ -97,6 +114,10 @@ export class CoursCommunService {
     
     
   }
+  getDashBoardCoursCommuns(){
+    return this.http.get(URL.getDashBoardCoursCommun);
+  }
+
 
   rechercherParOrganisation(organisationName): Observable<any> {
  
@@ -109,7 +130,11 @@ export class CoursCommunService {
     }
   }
 
-  fectchCoursCommunSelect(): Observable<any> {
+  fectchCoursCommunSelect(id?): Observable<any> {
+    if(id){
+      return this.http.get(URL.recupererCoursCommunsInscritsParticulier + "/" + id);
+
+    }
     return this.http.get(URL.recupererCoursCommunsInscritsParticulier);
    }
 
@@ -131,6 +156,12 @@ export class CoursCommunService {
    }
 
 
+   saveLogoCoursCommun(formdata) : Observable<any>{
+    return this.http.post(URL.modifierLogoCoursCommun, formdata);
+   }
+   saveAffichePubCoursCommun(formdata) : Observable<any>{
+    return this.http.post(URL.modifierAffichePubCoursCommun, formdata);
+   }
 
 
 }

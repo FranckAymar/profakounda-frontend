@@ -1,5 +1,5 @@
 import { LoadingService } from './services/loading.service';
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.css']
 })
-export class LoadingComponent implements OnInit, AfterViewChecked {
+export class LoadingComponent implements OnInit, AfterViewInit {
 
 
   loading: boolean = false;
@@ -16,11 +16,10 @@ export class LoadingComponent implements OnInit, AfterViewChecked {
 
   constructor(private loadingScreenService: LoadingService) {
   }
-  ngAfterViewChecked(): void {
+  ngAfterViewInit(): void {
 
       //Modification de loading si une valeur est émise depuis le service LoadingService
 
-    
     this.loadingSubscription = this.loadingScreenService.loadingStatus.subscribe(
       (value) => {
       this.loading = value;
@@ -29,7 +28,10 @@ export class LoadingComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-    
+    this.loadingSubscription = this.loadingScreenService.loadingStatus.subscribe(
+      (value) => {
+      this.loading = value;
+    });
   }
 
   ngOnDestroy() {

@@ -13,6 +13,13 @@ export class ListFormationsService {
     private httpClient: HttpClient, private signInService : SignInService
   ) { }
 
+    //Recuperer les prpositions de fromations pour la pafe d'accueil
+  getListPropositionFormationsForHome(): Observable<any> {
+
+   
+    return this.httpClient.get(URL.rechercherPropositionEnLigneHome);
+  }
+
   getListPropositionFormations(page?, numberDataOfPage?): Observable<any> {
 
     let params = new HttpParams().set("page", page).set("total", numberDataOfPage);
@@ -30,13 +37,12 @@ getFilterFormation(filtre,designationVille) : Observable<any> {
     }
     else if(filtre===""){
       filtre="undefined";
-        if(designationVille==="Toutes"){
+        if(designationVille==="Toutes"||designationVille==undefined){
           return this.httpClient.get(URL.listPropositionFormationsEnligne);
         }
         else return this.httpClient.get(URL.filterDeFormationParVille+"/"+designationVille+"/"+ filtre);
     }
     else if(filtre===" "){
-      
       return this.httpClient.get(URL.listPropositionFormationsEnligne);
     }
     else{

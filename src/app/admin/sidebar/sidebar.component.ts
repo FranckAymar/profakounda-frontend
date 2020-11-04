@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursCommunAdminService } from '../services/cours-commun-admin.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private coursCommunService:CoursCommunAdminService) { }
+nombreDemandeVirement:any;
   ngOnInit() {
+    this.onFechNombreDemandeVirement();
   }
 
+  onFechNombreDemandeVirement(){
+    this.coursCommunService.nombreDemandeVirement().subscribe(
+      (resp)=>{
+        this.nombreDemandeVirement = resp;
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
 }

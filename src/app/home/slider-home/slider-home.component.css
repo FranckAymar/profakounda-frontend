@@ -5,5 +5,22 @@
     section{
         margin-top: 4.6em;
     }
+   
+  }
+  @media only screen and (min-width: 600px) {
+    .brightness img{
+        height: 600px !important;
+    }
   }
   
+.brightness img
+{
+        filter: brightness(35%);
+        -webkit-filter: brightness(35%);
+        -moz-filter: brightness(35%);
+        -o-filter: brightness(35%);
+        -ms-filter: brightness(35%);
+        max-height: 600px !important;
+        min-height: 250px !important;
+    }
+

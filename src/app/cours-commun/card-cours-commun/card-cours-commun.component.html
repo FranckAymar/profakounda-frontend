@@ -1,15 +1,47 @@
 <div class="ed-rese-grid ed-rese-grid-mar-bot-30">
     <div class="ed-rsear-img ed-faci-full-top">
-            <img src="../../../assets/images/logo.png" alt="">
-    </div>
-    <div class="ed-rsear-dec ed-faci-full-bot">
-            <h4><a>  {{cours.coursCommun.organisation.libelle}} - {{cours.coursCommun.titre}}</a></h4>
-            <p style="height: 8em;
-                        width: 25em;
+        <img  height="250" src="{{urlServer}}/{{cours.coursCommun.id}}" alt="">
+</div>
+   <div class="ed-rsear-dec ed-faci-full-bot">
+            <h4><p  style="height: 4em;
+                        width: 100%;
                         white-space: pre-wrap;
                         overflow: hidden;
                         text-overflow: ellipsis;"
-            >{{cours.coursCommun.description}}</p>
-            <a [routerLink]="['/courscommun/details',cours.coursCommun.id]"  class="details-line-btn">Détails</a> 
+
+                        
+            
+            ><a>{{cours.coursCommun.organisation.libelle}}<br><span style="color: #896BEE;font-size: 14px;">{{cours.coursCommun.titre}}</span></a></p></h4>
+
+            
+            <p style="height: 8em;
+                        width: 80%;
+                        white-space: pre-wrap; 
+                        overflow: hidden; 
+                        text-overflow: ellipsis;" 
+            >{{cours.coursCommun.description}}</p> 
+            <div class="detail" id="div">
+               <a [routerLink]="['/courscommun/details',cours.coursCommun.id]"  class="details-line-btn">Détails</a> 
+            </div>
+         
+            <div class="dropup" id="div">
+                <button class="details-line-btn"   type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i  class="fa fa-share-alt" aria-hidden="true"></i> 
+                   <span class="caret"></span>
+                </button>
+                
+                    <ul class="dropdown-menu" aria-labelledby="share"> 
+                        <li class="dropdown-item" (click)="chargerTwitter()">
+                            <a  target="_blank"><i  aria-hidden="true" style="margin: 0.5em;"   class="fa fa-twitter-square"></i>Twitter</a>
+                        </li>
+                        <li (click)="chargerFace()" class="dropdown-item">
+                            <a    target="_blank"><i aria-hidden="true"  style="margin: 0.5em;" class="fa fa-facebook-square"></i>Facebook</a>
+                        </li>
+                        <li (click)="chargerLink()" class="dropdown-item">
+                            <a    target="_blank"><i aria-hidden="true"  style="margin: 0.5em;" class="fa fa-linkedin-square"></i>Linkedin</a>
+                        </li>
+                    </ul>
+            </div>
+        
     </div>
-</div>
+</div> 

@@ -15,8 +15,7 @@
         <div class="container pg-inn">
             <div class="col-md-3">
                 <div class="pro-user">
-                    <img 
-                        src="../../../assets/images/logo.png" alt="user">
+                    <img  height="250" src="{{urlServer}}/{{detailsCoursCommun.coursCommun.id}}" alt="">
                 </div>
                 <div class="pro-user-bio">
                     <ul>
@@ -24,6 +23,7 @@
                             <h4>{{detailsCoursCommun.coursCommun?.organisation.libelle}}</h4>
                         </li>
                         <li>{{detailsCoursCommun.coursCommun?.titre}}</li>
+                        <li> <h5>Auteur: {{detailsCoursCommun.coursCommun?.particulier.prenoms}} </h5>  </li>
                         <li>
                            <h5 style="text-align: center;" *ngIf="detailsCoursCommun.coursCommun?.cout" class="pro-user-act">{{detailsCoursCommun.coursCommun?.cout}} FCFA</h5>
                         </li>
@@ -56,12 +56,13 @@
                     <div  *ngIf="!detailsCoursCommun.coursCommun?.cout"  class="udb-sec udb-time">
                         <h4><img src="images/icon/db4.png" alt="" /> Public cible</h4>
                         <div class="tour_head1 udb-time-line days">
-                            <ul>
-                                <li *ngFor="let public of detailsCoursCommun.publicCible" class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <ul *ngIf="detailsCoursCommun.publicCible">
+                                <li *ngFor="let public of detailsCoursCommun.publicCible" 
+                                        class="l-info-pack-plac"> <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     <div class="sdb-cl-tim">
                                         <div class="sdb-cl-day">
                                             <h5 style="text-align: center;" class="pro-user-act"> {{public.cout}} FCFA</h5>
-                                            <span> Niveau : {{public.niveau.libelle}}</span>
+                                            <span> Niveau : {{public.niveau?.libelle}}</span>
                                             
                                         </div>
                                         <div class="sdb-cl-class">

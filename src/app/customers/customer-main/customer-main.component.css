@@ -21,7 +21,7 @@
   .sb2-2 {
    
     float: left;
-    width: 100%;
+    /*width: 100%;*/
     padding: 0px !important;
     margin-left: 20%;
     background: #e3e8ea;

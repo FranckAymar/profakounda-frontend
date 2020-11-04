@@ -1,14 +1,15 @@
 <div style="height: 500px !important; overflow: visible;">
-    <div style="text-align: right; margin-bottom: 1em;" class="row">   
-        <a  id="ed-mi-close" matDialogClose class="ed-mi-close"><i class="fa fa-times" style="color: gainsboro;"></i></a>
+    <div style="text-align: right; margin-bottom: 1em;" class="row">
+        <a id="ed-mi-close" matDialogClose class="ed-mi-close"><i class="fa fa-times" style="color: gainsboro;"></i></a>
 
     </div>
     <div class="row">
         <div class="col-md-12 stepper">
             <ul class="progressbar">
                 <li id="step1" class="active">Détails</li>
-                <li id="step2">Modalités</li>
-                <li id="step3">Lieu</li>
+                <li id="step2">Photos</li>
+                <li id="step3">Modalités</li>
+                <li id="step4">Lieu</li>
             </ul>
         </div>
 
@@ -21,82 +22,188 @@
 
                 <form [formGroup]="coursCommunForm" (ngSubmit)="saveCoursCommun()">
 
-                    <div class="input-field s12">
-                        <input formControlName="titre" type="text" class="validate">
-                        <label>Titre</label>
-                    </div>
-
-                    <div class="input-field s12">
-                        <input formControlName="organisation" [matAutocomplete]="auto" type="text" class="validate">
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let organisation of filteredOrganisations | async"
-                                [value]="organisation.libelle">
-                                {{organisation.libelle}}
-                            </mat-option>
-                        </mat-autocomplete>
-                        <label>Organisation</label>
-                    </div>
+                    <div style="overflow-y: auto;" class="row">
 
 
-                    <div class="input-field s12">
-                        <input formControlName="telephone" type="text" class="validate">
-                        <label>Numéro de téléphone</label>
-                    </div>
+                        <mat-form-field>
+                            <input matInput formControlName="titre" required type="text" placeholder="Titre">
+                        </mat-form-field>
+                        <small style="color: red;" *ngIf="coursCommunForm.controls.titre.errors?.required"
+                            class="invalid-feedback">
+                            Un titre pour votre cours organisé est requis (Ex : Cours de renforcement du Lycée
+                            ProfAkounda)
+                        </small>
+
+                        <div class="input-field s12">
+                            <mat-form-field>
+                                <input type="text" required placeholder="Organisation" formControlName="organisation"
+                                    matInput [matAutocomplete]="auto">
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let organisation of filteredOrganisations | async"
+                                        [value]="organisation.libelle">
+                                        {{organisation.libelle}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            <small style="color: red;" *ngIf="coursCommunForm.controls.organisation.errors?.required"
+                                class="invalid-feedback">
+                                Précisez votre organisation (Ex : Assocication des Professeurs du Lycée ProfAkounda)
+                            </small>
+
+                        </div>
 
 
-                    <div class="input-field s12">
+                        <!-- <input formControlName="telephone" type="text" class="validate">
+                        <label>Numéro de téléphone</label> -->
+                        <mat-form-field>
+                            <input matInput formControlName="telephone" required type="text" placeholder="Téléphone">
+                        </mat-form-field>
+                        <small style="color: red;" *ngIf="coursCommunForm.controls.telephone.errors?.required ||
+                                 coursCommunForm.controls.telephone.errors?.maxlength ||
+                                 coursCommunForm.controls.telephone.errors?.minlength " class="invalid-feedback">
+                            Entrez un numéro de téléphone valide (8 chiffres)
+                        </small>
 
-                        <textarea formControlName="description" maxChars="1000" class="form-control" name="description"
+                        <div class="input-field s12">
+
+                            <!-- <textarea formControlName="description" maxChars="1000" class="form-control" name="description"
                             id="" cols="30" rows="5">
 
                         </textarea>
-                        <label>Description</label>
+                        <label>Description</label> -->
+                            <mat-form-field>
+                                <textarea matInput required placeholder="Description" formControlName="description"
+                                    maxChars="1000" class="form-control" name="description" id="" cols="30" rows="5">
+
+                            </textarea>
+                            </mat-form-field>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="">
+                                <small>Date de début du cours</small>
+                                <input formControlName="dateDebut" type="date" class="validate">
+                                <small style="color: red;" *ngIf="coursCommunForm.controls.dateDebut.errors?.required"
+                                    class="invalid-feedback">
+                                    Précisez la date du début de votre cours organisé
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="">
+                                <small>Date de fin du cours</small>
+                                <input formControlName="dateFin" type="date" class="validate">
+                                <small style="color: red;" *ngIf="coursCommunForm.controls.dateFin.errors?.required"
+                                    class="invalid-feedback">
+                                    Précisez la date de fin de votre cours organisé
+                                </small>
+                            </div>
+                        </div>
 
                     </div>
 
-                    <div class="">
-                        <small>Date de début du cours</small>
-                        <input formControlName="dateDebut" type="date" class="validate">
-                    </div>
 
-                    <div class="">
-                        <small>Date de fin du cours</small>
-                        <input formControlName="dateFin" type="date" class="validate">
-                    </div>
 
-                    <div class="row">
+                    <div class="row ">
 
-                        <button id="" type="submit" [disabled]="coursCommunForm.invalid"
-                            class="btn btn-bg-color btn-block">Suivant</button>
+                        <button type="submit" [disabled]="coursCommunForm.invalid"
+                            class="btn btn-bg-color btn-block ">Suivant</button>
 
                     </div>
 
                 </form>
 
             </div>
+            <!--Upload Photo Organisation-->
+            <div style="overflow-y:auto; overflow-x: hidden;" id="content2" class="hide">
+                <div class="row" style="text-align: center;">
+
+                    <form class="uploader">
+                        <p>Touchez plus de cibles en ajoutant une affiche publicitaire à votre cours organisé</p>
+
+                        <small>(Optionnel)</small>
+                        <input (change)="onSelectAffichePubFile($event)" id="file-upload1" type="file" name="fileUpload"
+                            accept="image/*" />
+
+                        <label for="file-upload1" id="file-drag">
+                            <img *ngIf="urlFileAffiche" height="250" id="file-image" [src]="urlFileAffiche"
+                                alt="Apercu">
+                            <img *ngIf="!urlFileAffiche" src="../../../assets/images/Stylo.png" height="250"
+                                id="file-image" alt="Apercu">
+                            <div id="start">
+                                <div>Selectionner une affiche publicitaire</div>
+                                <span id="file-upload-btn" class="btn btn-primary">Choisir</span>
+                            </div>
+
+                        </label>
+                    </form>
+
+
+
+                    <form class="uploader2">
+                        <p>Si votre organisation dispose d'un logo, n'hésitez pas l'ajouter.</p>
+                        <small>(Optionnel)</small>
+                        <input (change)="onSelectFileLogo($event)" id="file-upload2" type="file" name="fileUpload2"
+                            accept="image/*" />
+
+                        <label for="file-upload2" id="file-drag2">
+                            <img *ngIf="urlFileLogo" height="250" id="file-image2" [src]="urlFileLogo" alt="Apercu">
+                            <img *ngIf="!urlFileLogo" src="../../../assets/images/Stylo.png" height="250"
+                                id="file-image2" alt="Apercu">
+                            <div id="start2">
+                                <div>Selectionner un logo</div>
+                                <span id="file-upload-btn2" class="btn btn-primary">Choisir</span>
+                            </div>
+
+                        </label>
+                    </form>
+                </div>
+
+
+
+                <div class="row">
+
+                    <button [disabled]="!isNotUploadLoading" style="margin-top: 0.5em;" type="submit" (click)="next()"
+                        class="btn btn-bg-color btn-block">
+                        {{ isNotUploadLoading ? 'Suivant' : 'Chargement en cours ...'}}</button>
+                </div>
+            </div>
             <!--Public visé-->
-            <div id="content2" class="hide">
-                <div class="row d-flex justify-content-center" style="text-align: center; margin-top: 2em;">
-                    <mat-checkbox style="width: 70%;" *ngIf="!isModify" (change)="checkBoxPublicChange()">
-                        Votre formation touchera-elle un public précis (Niveau d'étude) ?</mat-checkbox>
-                    <div class="col-md-9">
+            <div id="content3" class="hide">
+                <div class="row" style=" margin-top: 2em;">
+                    <div style="text-align: center;">
+
+                        <p>Par niveau ou module</p>
+                        <p>
+                            <mat-checkbox *ngIf="!isModify" (change)="checkBoxPublicChange()">
+                            </mat-checkbox>
+                        </p>
+                    </div>
+                    <div class="col-md-12">
                         <div *ngIf="!isCheckPublicCible" style="margin-top: 10px;" class="input-field s12">
                             <form [formGroup]="coutGeneralForm">
-                                <div class="row d-flex " style="text-align: center;">
+                                <div class="row ">
                                     <div class="col-md-6">
-                                        <div class="input-field s12">
-                                            <input formControlName="cout" type="number" class="validate">
-                                            <label>Cout Général</label>
-                                        </div>
+                                        <mat-form-field>
+                                            <input
+                                                [attr.disabled]="dataReceived?.coursCommun?.nombreInscrit > 0 ? '' : null "
+                                                matInput formControlName="cout" required type="number"
+                                                placeholder="Cout Général">
+                                        </mat-form-field>
+
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="input-field s12">
+                                    <div class="col-md-5">
+                                        <div class="cout">
                                             <input [attr.disabled]="isCheckIllimite ? '' : null"
-                                                formControlName="nbreMaxInscrits" type="number" class="validate">
-                                            <label>Nombre maximun d'inscrits</label>
+                                                formControlName="nbreMaxInscrits" type="number"
+                                                placeholder="Nombre maximun d'inscrits">
                                         </div>
+
 
                                     </div>
                                     <div class="col-md-3">
@@ -113,33 +220,34 @@
 
                     </div>
                 </div>
-                <div *ngIf="isCheckPublicCible" class="row d-flex justify-content-center mt-5">
-                    <div class="row">
-                        <div class="d-flex justify-content-center col-md-4">
+                <div *ngIf="isCheckPublicCible" class="row mt-5">
+                    <div style="overflow-y: auto;" class="row">
+                        <div class="col-md-4">
 
                             <form [formGroup]="publicCibleForm" (ngSubmit)="addPublicToTable()">
 
                                 <mat-form-field>
-                                    <mat-label>Niveau</mat-label>
+                                    <mat-label>Niveau (optionnel)</mat-label>
                                     <mat-select [compareWith]="comparer" formControlName="niveau">
+                                        <mat-option>
+                                        </mat-option>
                                         <mat-option *ngFor="let niveau of niveaux" [(value)]="niveau">
                                             {{niveau.libelle}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
 
-
-                                <div class="input-field s12">
-                                    <input matInput formControlName="filiere" [matAutocomplete]="auto" type="text"
-                                        class="validate">
+                                <mat-form-field>
+                                    <input type="text" placeholder="Filière (optionnel)" formControlName="filiere"
+                                        matInput [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete">
                                         <mat-option *ngFor="let filiere of filteredFilieres | async"
                                             [value]="filiere.libelle">
                                             {{filiere.libelle}}
                                         </mat-option>
                                     </mat-autocomplete>
-                                    <label>Filière (optionnel)</label>
-                                </div>
+                                </mat-form-field>
+
 
 
                                 <mat-form-field>
@@ -152,7 +260,8 @@
                                 </mat-form-field>
 
                                 <div style="margin-top: 10px;" class="input-field s12">
-                                    <input formControlName="cout" type="number" class="validate">
+                                    <input [attr.disabled]="dataReceived?.coursCommun?.nombreInscrit > 0 ? '' : null"
+                                        formControlName="cout" type="number" class="validate">
                                     <label>Cout</label>
                                 </div>
 
@@ -180,23 +289,26 @@
 
                         </div>
 
-                        <div class="col-md-8 d-flex justify-content-center">
+                        <div class="col-md-8">
 
                             <ul *ngIf="publicCibleMdels.length > 0" class="list-group">
                                 <li *ngFor="let public of publicCibleMdels;let i =index; 
                                     let i=index" class="list-group-item">
-                                    {{public.niveau.libelle}} - Coût : {{public.cout}}
-                                    FCFA-{{public.filiere ? 'Filière : ' + public.filiere : 'Filière : Non précisée !'}}
+                                    <p style="color: black;">
+                                        {{public.niveau ? public.niveau.libelle :  'Tout niveau confondu' }} - Coût :
+                                        {{public.cout}}
+                                        FCFA -
+                                        {{public.filiere ? 'Filière : ' + public.filiere : 'Filière : Non précisée !'}}
 
-
-                                    <span (click)="deletePublic(i)" class="trash">
-                                        <i class="fa fa-trash"></i></span>
-                                    <span data-toggle="tooltip" data-placement="right"
-                                        title="Nombre de places : {{public.nbreMaxInscrits}} ; {{getFormationsForPublic(public)}}"
-                                        class="info">
-                                        <i class="fa fa-lg fa-info"></i></span>
-                                    <span (click)="loadPublicCible(public, i)" class="trash">
-                                        <i class="fa fa-lg fa-edit"></i></span>
+                                        <span (click)="deletePublic(i)" class="trash">
+                                            <i class="fa fa-trash"></i></span>
+                                        <span data-toggle="tooltip" data-placement="right"
+                                            title="Nombre de places : {{public.nbreMaxInscrits}} ; {{getFormationsForPublic(public)}}"
+                                            class="info">
+                                            <i class="fa fa-lg fa-info"></i></span>
+                                        <span (click)="loadPublicCible(public, i)" class="trash">
+                                            <i class="fa fa-lg fa-edit"></i></span>
+                                    </p>
                                 </li>
                             </ul>
 
@@ -209,33 +321,42 @@
                 <div class="row" style="margin-top: 40px;">
 
                     <button [disabled]="publicCibleMdels.length  == 0 && isCheckPublicCible || coutGeneralForm.invalid"
-                        (click)="savePublicCible()" class="btn btn-bg-color btn-block">Suivant</button>
+                        (click)="savePublicCible()" class="btn btn-bg-color btn-block btn-float-bottom">Suivant</button>
 
                 </div>
 
             </div>
 
             <!--Lieu intervention-->
-            <div id="content3" class="hide">
+            <div id="content4" class="hide">
 
                 <div class="row" style="text-align: center;">
 
-                    <p>Précisez votre lieu</p>
+                    <p>Précisez le lieu d'execution</p>
 
                     <form [formGroup]="lieuInterventionForm" (submit)="saveLieuIntervention()">
 
                         <app-google-place [autocompleteInput]="libelleLieu" (setAddress)="setAddress($event)"
                             adressType="geocode"></app-google-place>
 
-                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"
-                            (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)">
 
-                            <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true">
+                        <!--  <div *ngIf="lat ==0 && lng == 0" class="loader"> -->
+                        <div *ngIf="lat ==0 && lng == 0">
+                            <p>En cours chargement ...</p>
+                            <p>Vous pouvez toute fois procéder à l'enregistrement, vos coordonnées seront prises en
+                                compte.
+                            </p>
+
+                        </div>
+                        <agm-map *ngIf="lat !==0 && lng !== 0" [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+                            (mapClick)="ajoutMarqueur( $event, $event.coords.lat, $event.coords.lng)">
+
+                            <agm-marker [latitude]="lat" [longitude]="lng">
 
                             </agm-marker>
                         </agm-map>
 
-                        <button type="submit" class="btn btn-bg-color btn-block">Soumettre</button>
+                        <button type="submit" class="btn btn-bg-color btn-block btn-float-bottom">Soumettre</button>
 
 
                     </form>

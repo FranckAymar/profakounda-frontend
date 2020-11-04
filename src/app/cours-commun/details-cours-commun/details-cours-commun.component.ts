@@ -1,3 +1,4 @@
+import { URL } from 'src/app/API_url/config';
 import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { InscriptioncourscommunService } from './../inscriptioncourscommun.service';
 import { SignInService } from './../../home/services/sign-in.service';
@@ -6,6 +7,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router, RouterStateSnapshot, RouterState } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-details-cours-commun',
@@ -13,6 +15,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details-cours-commun.component.css']
 })
 export class DetailsCoursCommunComponent implements OnInit {
+
+
+  urlServer = URL.getAffichePubCoursCommun;
+
 
   idCoursCommun: number;
   idPublicCible: number;
@@ -22,6 +28,8 @@ export class DetailsCoursCommunComponent implements OnInit {
     publicCible: null,
   };
   action: string;
+
+  paymentWaiting : boolean;
 
 
   //Sauvegarder l'URL courante 
@@ -40,6 +48,7 @@ export class DetailsCoursCommunComponent implements OnInit {
               private signService: SignInService,
               private inscritService : InscriptioncourscommunService,
               private snack : SnackbarService,
+              private titleService: Title
     ) {
 
     this.state = router.routerState;
@@ -87,7 +96,6 @@ export class DetailsCoursCommunComponent implements OnInit {
       return;
     }
  
-    console.log(this.snapshot);
     
 
     this.router.navigate(['/home/sign-in'],     
@@ -119,6 +127,9 @@ export class DetailsCoursCommunComponent implements OnInit {
       if(result.etat === 'reussie'){
         this.onFectCoursCommun();
         return ;
+      }else if (result.etat === 'enAttente'){
+        this.paymentWaiting = true ;
+        return
       }
 
       this.snack.openSnackBar("Une erreur s'est produite pendant le paiement")
@@ -132,12 +143,12 @@ export class DetailsCoursCommunComponent implements OnInit {
     this.coursCommunService.fetchDetailsCoursCommunForHome(this.idCoursCommun).subscribe(
 
       (resp) => {
-      
-        
+              
         
         this.cours = resp;
         this.initializeMap(this.cours.lieuIntervention);
-        console.log(this.cours);
+        //On actualise le titre de la page HTML
+        this.titleService.setTitle(this.cours.coursCommun.titre);
 
 
       },
@@ -189,7 +200,6 @@ export class DetailsCoursCommunComponent implements OnInit {
       });
 
     } else {
-      console.log("publicible");
 
       this.router.navigate([], {
         relativeTo: this.route,
@@ -238,9 +248,11 @@ export class DetailsCoursCommunComponent implements OnInit {
 
   initializeMap(lieuIntervetion){
 
+   if(lieuIntervetion){
     this.lat = lieuIntervetion.latitude;
     this.long = lieuIntervetion.longitude ;
     this.libelle = lieuIntervetion.libelle ;
+   }
 
   }
 

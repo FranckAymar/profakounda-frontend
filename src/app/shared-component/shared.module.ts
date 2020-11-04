@@ -19,6 +19,7 @@ import { SearchBarCoursCommunComponent } from './search-bar-cours-commun/search-
 import { AlertComponent } from './alert/alert.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -47,6 +48,7 @@ registerLocaleData(localeFr);
       apiKey: 'AIzaSyCud6-IOzGf04McqnGvz3z-pCdDEhci9Jw'
     }) ,
     MaterialDesignModule,
+    CKEditorModule  ,
   ],
   exports : [
     CardFormationComponent,
@@ -58,6 +60,7 @@ registerLocaleData(localeFr);
     FormsModule, 
     ReactiveFormsModule,
     MaterialDesignModule,
+    CKEditorModule,
      AgmCoreModule ,
      NavbarAuthComponent,
      NavbarHomeComponent,

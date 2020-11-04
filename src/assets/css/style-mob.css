@@ -147,7 +147,7 @@
          padding: 7%;
     }
      .log-in-pop {
-         width: 75%;
+         width: 100%;
     }
      .modal-open .modal {
          width: 100%;
@@ -480,9 +480,9 @@
 .ed-rsear-dec {
     padding: 8px 15px;
 }
-.ed-rsear-img img{
+/* .ed-rsear-img img{
 	width:70px;
-}
+} */
 }
 
 /*-------------------------------------------------------*/

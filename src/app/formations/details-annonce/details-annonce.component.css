@@ -32,6 +32,9 @@ small{
   color: red;
 
 }
+.udb{
+  padding:0px;
+}
 .etoileNote:hover{
   cursor: pointer;
 }
@@ -148,6 +151,15 @@ small{
   font-size: 18px;
 }
 
+
+.tel{
+  width: 7em;
+  height: 7em;
+  background-color: #007BFF;
+  border: 2px #007BFF solid;
+  border-radius: 100%;
+}
+
 /* Change the width of the three columns to 100%
 (to stack horizontally on small screens) */
 @media only screen and (max-width: 600px) {
@@ -162,4 +174,9 @@ small{
 
     display: none;
   }
+}
+
+
+#meContacterBtn:hover {
+  color: #FF5722 !important;
 }

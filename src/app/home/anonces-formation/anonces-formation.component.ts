@@ -1,3 +1,5 @@
+import { SignInService } from './../services/sign-in.service';
+import { Router } from '@angular/router';
 import { ListFormationsService } from './../../formations/services/list-formations.service';
 import { URL } from './../../API_url/config';
 import { Component, OnInit } from '@angular/core';
@@ -14,14 +16,17 @@ export class AnoncesFormationComponent implements OnInit {
   //Nombre de données à chargées à chaque page
   numberDataOfPage: number = 15;
   //Page courante
+  texte:string;
   page: number = 1;
   //Taille totale des données en base de données
   sizeData: number;
   //Nombre de page totals
   totalPage: number
   totalPageArray: Array<any>;
-
-  constructor(private listFormationsService : ListFormationsService) { }
+isNombreMaxAtteint:boolean = false;
+  constructor(private listFormationsService : ListFormationsService,
+      private router : Router,
+      private signInService : SignInService) { }
 
   ngOnInit() {
 
@@ -29,17 +34,19 @@ export class AnoncesFormationComponent implements OnInit {
     
   }
 
-
+  
+  
   onGetListFormation() {
 
 
-    this.listFormationsService.getListPropositionFormations().subscribe(
+    this.listFormationsService.getListPropositionFormationsForHome().subscribe(
 
       
       (resp) =>{
-    
-        this.propositionFormations = resp ;
-
+       
+        this.propositionFormations = resp['formations'] ;
+        this.isNombreMaxAtteint = resp['nombreMaxAtteint'];
+      
       },
 
       
@@ -51,6 +58,22 @@ export class AnoncesFormationComponent implements OnInit {
       }
     )
 
+  }
+
+
+  goToDashboard(){
+    
+    
+
+    if(localStorage.getItem(this.signInService.TOKEN) !== null){
+   //   console.log('ok');
+      
+      this.router.navigateByUrl('customers/formations') ;
+
+    }else{
+      this.router.navigateByUrl('home/sign-in') ;
+
+    }
   }
 
 

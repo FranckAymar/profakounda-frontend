@@ -21,7 +21,6 @@ export class VilleComponent implements OnInit {
     this.ville = new Ville(0,'',0,0);
       }
       upDateVille(ville){
-        console.log(ville);
         this.ville = new Ville(ville.id,ville.designation,ville.longitude,ville.latitude);
           }
       onFetchVilles()

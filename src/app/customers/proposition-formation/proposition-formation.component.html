@@ -3,9 +3,14 @@
 </div>
 
 
+<div class="container-fluid containt-card">
+
+
 
 <div *ngFor="let p of propositions" style="margin-top: 1em;"class="col-md-12">
-    <div class="box-inn-sp">
+    
+
+    <div  class="box-inn-sp">
         <div class="inn-title">
             <a *ngIf="p.proposition.enLigne && 
                 p.nombreAvis" style="float: right;" 
@@ -25,60 +30,80 @@
             <h5 *ngIf="p.proposition.refusMiseEnLigne" style="color:darkorange;" 
                 data-toggle="tooltip" data-placement="right" title="{{p.proposition.causeRefus?.details}}">Refusée</h5>
             <h5 *ngIf="p.proposition.suppressionMiseEnLigne" style="color: red;">Hors-ligne</h5>
-
+            
         </div>
         <div class="tab-inn">
             <div class="table-responsive table-desi">
                 <p>
                     <button data-toggle="modal" data-target="#ajouterDescription" (click)="getProposition(p.proposition)" class="btn btn-danger btn btn-block">Description</button>
                 </p>
-                <div  class="row">
-                    <div style="margin-top: 0.5em !important;" class="col-md-3">
-                        <button   (click)="addModule(p.modules,p.proposition.id)" type="button" data-toggle="modal" data-target="#modules"
+                <div *ngIf="!p.proposition.cyclePrimaire"   class="row ligne">
+                    <div  style="margin-top: 0.5em !important;" class="col-md-3">
+                        <button    (click)="addModule(p.modules,p.proposition.id,p.proposition.allModule,p.proposition.allNiveau)" type="button" data-toggle="modal" data-target="#modules"
                                 class="btn btn-info btn-block">
-                                Modules enseignés
+                                Modules enseignés <i *ngIf="p.isModule || p.proposition.allModule"  class="fa fa-check ok" aria-hidden="true"></i> <i *ngIf="!p.isModule && !p.proposition.allModule" class="fa fa-exclamation-triangle notOk"  aria-hidden="true"></i>
                         </button>
                     </div>
                     <div style="margin-top: 0.5em !important;" class="col-md-3">
                         <button style="margin-left: 1em;" (click)="addNiveau(p.proposition.id)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
                                 class="btn btn-primary btn-block">
-                                Niveau enseigné
+                                Niveau enseigné <i *ngIf="p.isContrat"  class="fa fa-check ok" aria-hidden="true"></i> <i *ngIf="!p.isContrat" class="fa fa-exclamation-triangle notOk"  aria-hidden="true"></i>
                         </button>
                     </div>
                     <div style="margin-top: 0.5em !important;" class="col-md-3">
                         <button style="margin-left: 1em;" (click)="addDisponibilite(p.proposition.id)" type="button" data-toggle="modal" data-target="#disponibilite"
                         class="btn btn-outline-success btn-block">
-                        Disponibilités
+                        Disponibilités <i *ngIf="p.isDisponibilite"  class="fa fa-check ok" aria-hidden="true"></i> <i *ngIf="!p.isDisponibilite" class="fa fa-exclamation-triangle notOk"  aria-hidden="true"></i>
                         </button>
                     </div>
                     <div  style="margin-top: 0.5em !important;" class="col-md-3">
+                        <button  (click)="loadPropostion(p.proposition.id)" style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
+                        class="btn btn-outline-dark btn-block">
+                        Zone Intervention <i *ngIf="p.isRayonIntervention"  class="fa fa-check ok" aria-hidden="true"></i> <i *ngIf="!p.isRayonIntervention" class="fa fa-exclamation-triangle notOk"  aria-hidden="true"></i>
+                        </button>   
+                    </div>
+                </div>
+                <div *ngIf="p.proposition.cyclePrimaire"  class="row">
+                    
+                    <div style="margin-top: 0.5em !important;" class="col-md-4">
+                        <button style="margin-left: 1em;" (click)="addNiveau(p.proposition.id,p.proposition.allNiveau)" type="button" data-toggle="modal" data-target="#niveauEnseigne"
+                                class="btn btn-primary btn-block">
+                                Niveau enseigné
+                        </button>
+                    </div>
+                    <div style="margin-top: 0.5em !important;" class="col-md-4">
+                        <button style="margin-left: 1em;" (click)="addDisponibilite(p.proposition.id)" type="button" data-toggle="modal" data-target="#disponibilite"
+                        class="btn btn-outline-success btn-block">
+                        Disponibilités
+                        </button>
+                    </div>
+                    <div  style="margin-top: 0.5em !important;" class="col-md-4">
                         <button  (click)="loadPropostion(p.proposition.id)" style="margin-left: 1em;" type="button" data-toggle="modal" data-target="#zoneIntervention"
                         class="btn btn-outline-dark btn-block">
                         Zone Intervention
                         </button>   
                     </div>
                 </div>
-                <div style="width: 100%; overflow: auto;">
+                <div *ngIf="!p.proposition.allNiveau"  style="width: 100%; overflow: auto;">
                     <table  class="table table-hover">
                         <thead>
                             <tr>
                                 <th>Niveau enseigné</th>
-                                <th>Coût minimum</th>
-                                <th>Coût Maximum</th>
+                                <th>Coût</th>
+                                
     
                             </tr>
                         </thead>
                         <tbody>
     
                             <tr *ngFor="let n of p.contrats">
-                                <td>{{n.niveau.libelle}}</td>
-                                <td>{{n.minMontant}} Eco</td>
-                                <td>{{n.maxMontant}} Eco</td>
+                                <td>{{n.niveau?.libelle}} {{n.niveauTemporaire?.libelle}}</td>
+                                <td>{{n.minMontant}} Frcfa</td>
+                                <!-- <td>{{n.maxMontant}} Fcfa</td> -->
                                 <td><button data-toggle="modal" data-target="#niveauEnseigne" (click)="getContrat(n.id)"
                                         class="updateButton"><i class="fa fa-edit"></i></button></td>
                                 <td><button (click)="deleteContrat(n.id)" class="deleteButton"><i
                                             class="fa fa-times"></i></button></td>
-    
                             </tr>
     
                         </tbody>
@@ -86,18 +111,25 @@
                 </div>
                 
             </div>
-            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention" data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
-            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention" (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
-        </div>
+           <div style="margin-top: 1em;">
+            <button   *ngIf="p.proposition.enLigne"    (click)="mettreHorsLigne(p.proposition.id)" class="btn btn-outline-info btnEnLigne">Mettre hors ligne</button>
+            <button   *ngIf="(!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && !p.proposition.allModule)" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button  *ngIf="(!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && !p.proposition.allModule)" [disabled]="!p.isContrat || !p.isModule || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <!--All module-->
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && !isVilleExist && p.proposition.allModule" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " data-toggle="modal" data-target="#showVilleModal"  (click)="getMdemandemMiseEnLigneA(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+            <button  *ngIf="!p.proposition.enLigne && !p.proposition.attenteMiseEnLigne && isVilleExist && p.proposition.allModule" [disabled]="!p.isContrat  || !p.isDisponibilite || !p.isRayonIntervention " (click)="getMdemandemMiseEnLigne(p.proposition.id)" class="btn btn-warning btnEnLigne">Mettre en ligne</button>
+           </div>
+       
+    </div>
     </div>
 </div>
-
+</div>
 <div class="modal fade" id="showVilleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">SAISIE DE LA VILLE DE RESIDENCE</h5>
+            <div  class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">SAISIE DE LA VILLE ET COMMUNE</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -106,17 +138,35 @@
                 <!-- Libelle-->
 
                 <form (ngSubmit)="saveDemandeMiseEnLigne()" #z="ngForm">
-                                <mat-form-field style="width: 16em;">
-                                     <input type="text" required  
-                                                    placeholder="Renseignez votre ville de résidence svp"  [(ngModel)]="ville" aria-label="Number" matInput
-                                                    [formControl]="myControl4" [matAutocomplete]="auto4">
-                                                <mat-autocomplete #auto4="matAutocomplete">
-                                                    <mat-option *ngFor="let option of filteredOptions4 | async"  [value]="option.designation">
-                                                        {{option.designation}}
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                        </mat-form-field>
-                                        <button style="margin-top: 0.5em;" type="submit" [disabled]="myControl4.invalid"
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <mat-form-field style="width: 16em;">
+                                            <input type="text" required  
+                                                           placeholder="Votre ville de residence svp"    [(ngModel)]="ville" aria-label="Number" matInput
+                                                           [formControl]="myControl4" [matAutocomplete]="auto4">
+                                                       <mat-autocomplete #auto4="matAutocomplete">
+                                                           <mat-option *ngFor="let option of filteredOptions4 | async"  [value]="option.designation">
+                                                               {{option.designation}}
+                                                           </mat-option>
+                                                       </mat-autocomplete>
+                                               </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        <mat-form-field style="width: 16em;">
+                                            <input type="text" (mousedown)="mousedown()" (mouseleave)="mouseleave()" required  
+                                                           placeholder="Commune ou département"  [(ngModel)]="commune" aria-label="Number" matInput
+                                                           [formControl]="myControlCommune" [matAutocomplete]="autoCommune">
+                                                       <mat-autocomplete #autoCommune="matAutocomplete">
+                                                           <mat-option *ngFor="let option of filteredOptionsCommunes | async"  [value]="option.libelle">
+                                                               {{option.libelle}}
+                                                           </mat-option>
+                                                       </mat-autocomplete>
+                                               </mat-form-field>
+                                    </div>
+                                </div>
+                                <span *ngIf="!isVille" style="color: red;font-size: 0.8em !important;">Vous avez oublier de saisir votre ville de résidence.</span>
+                                        <button style="margin-top: 0.5em;" type="submit" [disabled]="myControl4.invalid || myControlCommune.invalid"
                                         class="btn btn-outline-info btn-block ">Enregistrer</button>
                 </form>
             </div>
@@ -127,14 +177,15 @@
     </div>
 </div>
 
-<div class="modal fade" id="niveauEnseigne" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="niveauEnseigne"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h5 class="modal-title" id="exampleModalLabel">AJOUTER UN NIVEAU</h5> -->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+            <div  class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">AJOUT D'UN NIVEAU</h5>
+                <p>Enregistrez l'un après l'autre les coûts par niveau.<span style="color: red;">Exemple:</span>Renseignez le premier niveau ainsi que le coût,appuyer le bouton <span style="color: blue;">enregistrer</span>.Cliquer à nouveau le bouton "Niveau enseigné" et renseignez le second niveau et le coût,enregistrez ainsi de suite.</p>
+                <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span style="background-color:white !important;"  aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -144,7 +195,13 @@
                     <div *ngIf="errorNiveaux" class="altert alert-danger">
                         {{errorNiveaux}}
                     </div>
-                    <mat-form-field>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-checkbox *ngIf="!alMod"  [checked]="isAllNiveaux" style="width: 70%;"   (change)="checkAllNiveauxChange()">
+                                <span style="color: red;">Tous les niveaux</span></mat-checkbox>
+                        </div>
+                    </div>
+                    <mat-form-field style="width: 100% !important;" *ngIf="!isAllNiveaux">
                         <input type="text"
                         placeholder="Niveau"
                             [(ngModel)]="niveauForme.designationNiveau"
@@ -158,22 +215,32 @@
                           </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
-                    <div class="row">
+                    <label for="prixMin">Coût:</label>
+                            <input name="prixMin" (ngModelChange)="nombreMinChange($event)" required [(ngModel)]="niveauForme.prixMin" type="number"
+                                id="prixMin" />
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <label for="prixMin">Prix min:</label>
-                            <input name="prixMin" required [(ngModel)]="niveauForme.prixMin" type="number"
+                            <input name="prixMin" (ngModelChange)="nombreMinChange($event)" required [(ngModel)]="niveauForme.prixMin" type="number"
                                 id="prixMin" />
                         </div>
                         <div class="col-md-6">
                             <label for="prixMax">Prix max:</label>
-                            <input name="prixMax" type="number" [(ngModel)]="niveauForme.prixMax" id="prixMax"
+                            <input name="prixMax" (ngModelChange)="nombreMaxChange($event)" type="number" [(ngModel)]="niveauForme.prixMax" id="prixMax"
                                 required />
                         </div>
-                    </div>
-                    <button style="margin-top:0.5em;" *ngIf="!edit" [disabled]="f.invalid || myControl3.invalid" type="submit"
+                    </div> -->
+                    <div *ngIf="!isAllNiveaux">
+                        <button style="margin-top:0.5em;" *ngIf="!edit" [disabled]="f.invalid || myControl3.invalid  || !isNombreMinValid " type="submit"
                         class="btn btn-primary">Enregistrer</button>
-                    <button style="margin-top:0.5em;" *ngIf="edit" [disabled]="f.invalid || myControl3.invalid" type="submit"
+                    <button style="margin-top:0.5em;" *ngIf="edit" [disabled]="f.invalid || myControl3.invalid ||  !isNombreMinValid " type="submit"
                         class="btn btn-success">Enregistrer</button>
+                    </div>
+                    <div *ngIf="isAllNiveaux">
+                        <button style="margin-top:0.5em;"  [disabled]="f.invalid   || !isNombreMinValid" type="submit"
+                        class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    
                 </form>
             </div>
             <div class="modal-footer">
@@ -184,12 +251,13 @@
 </div>
 
 
-<div class="modal fade" id="modules" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modules"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">MODULES</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <p>Enregistrer un à un les matières enseignés.<span style="color: red;">Exemple</span>:Saisir "Mathematique",appuyer le bouton <span style="color: blue;">enregistrer</span>,puis "Music" appuyer le bouton <span style="color: blue;">enregistrer</span>.Repeter ce proceder jusqu'a saisir toutes les matières enseignés.</p>
+                <button type="button" (click)="rechercherProposition()" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -200,9 +268,16 @@
                             <div *ngIf="errorModule" class="alert alert-danger">
                                 {{errorModule}}
                             </div>
-                            <mat-form-field>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-checkbox *ngIf="!alNiv"  [checked]="isAllModule" style="width: 70%;" [checked]="isAllModule"  (change)="checkAllModuleChange()">
+                                        <span style="color: red;">Tous les modules</span></mat-checkbox>
+                                </div>
+                            </div>
+                            <mat-form-field *ngIf="!isAllModule">
                                 <input type="text"
-                                placeholder="Designation du module"
+                                
+                                placeholder="Désignation du module"
                                     [(ngModel)]="module.designation"
                                        aria-label="Number"
                                        matInput
@@ -215,12 +290,12 @@
                                 </mat-autocomplete>
                               </mat-form-field>
                             
-                            <button *ngIf="!editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-primary">Enregistrer</button>
-                            <button *ngIf="editModule" [disabled]="f2.invalid || myControl2.invalid" type="submit" class="btn btn-success">Enregistrer</button>
+                            <button *ngIf="!editModule" [disabled]="f2.invalid || myControl2.invalid && !isAllModule" type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button *ngIf="editModule" [disabled]="f2.invalid || myControl2.invalid && !isAllModule" type="submit" class="btn btn-success">Enregistrer</button>
                             <button *ngIf="editModule" style="margin-left: 1em;"  type="submit" class="btn btn-danger">Annuler</button>
                         </form>
                     </div>
-                    <div class="col-md-6" style="height: 17em; overflow: auto;">
+                    <div *ngIf="!isAllModule" class="col-md-6" style="height: 17em; overflow: auto;">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -229,7 +304,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let m of modules">
-                                    <td>{{m.module.libelle}}</td>
+                                    <td>{{m.module?.libelle}} {{m.moduleTemporaire?.libelle}}</td>
                                     <td><button (click)="getModule(m.id)" class="updateButton"><i class="fa fa-edit"></i></button></td>
                                     <td><button (click)="deleteModule(m.id)" class="deleteButton"><i class="fa fa-times"></i></button></td>
                                 </tr>
@@ -243,20 +318,21 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="button" (click)="rechercherProposition()" class="btn btn-danger" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
 </div>
 
 
-<div class="modal fade" id="disponibilite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="disponibilite"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">MES DISPONIBILITES</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <p>Enregistrer votre disponibilité par jour.<span style="color: red;">Exemple</span>:Samedi de 14:30 à 21:00</p>
+                <button type="button" (click)="rechercherProposition()" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -335,7 +411,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal"  class="btn btn-danger">Fermer</button>
+                <button type="button" (click)="rechercherProposition()" data-dismiss="modal"  class="btn btn-danger">Fermer</button>
             </div>
         </div>
     </div>
@@ -343,12 +419,12 @@
 
 
 
-<div class="modal fade" id="ajouterDescription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="ajouterDescription"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">DESCRITPION</h5>
+                <h5 class="modal-title" id="exampleModalLabel">MODIFIER LA PROPOSITION DE FORMATION</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -358,9 +434,25 @@
                     <div *ngIf="errorProposition" class="alert alert-danger">
                         {{errorProposition}}
                     </div>
-                    <textarea placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" maxChars="1000" class="form-control" (ngModelChange)="changeDescritpion()" [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
-                        {{proposition.description}}
-                    </textarea>
+                    
+                    <div class="form-group">
+                        <label for="tel">Description:</label>
+                        <ckeditor (change)="changeDescritpion()" 
+                        [ngModelOptions]="{standalone: true}" [(ngModel)]="propositionFormation.description" [config]="configEditor" [editor]="Editor" ></ckeditor>
+
+                        <!-- <textarea placeholder="La description ne doit pas contenir d'informations personnelles (Numéro de téléphone, email, ...). 
+                                                Toute modification de la description d'une proposition de formation déjà en ligne doit être validée par l'équipe de ProfAkounda."
+                        
+                                [(ngModel)]="propositionFormation.description" 
+                                maxChars="1000" class="form-control" 
+                                (ngModelChange)="changeDescritpion()" 
+                                [(ngModel)]="propositionFormation.description" 
+                                required name="description" 
+                                id="" cols="30" rows="10">
+                            {{proposition.description}}
+                        </textarea> -->
+                    </div>
+                   
                     <div class="form-group">
                         <label for="tel">Téléphone:</label>
                         <input  required name="telephone" type="text" id="tel"
@@ -376,12 +468,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="addDesc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="addDesc"   tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">DESCRITPION</h5>
+                <h5 class="modal-title" id="exampleModalLabel">NOUVELLE PROPOSITION DE FORMATION</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -391,9 +483,18 @@
                     <div *ngIf="errorProposition" class="alert alert-danger">
                         {{errorProposition}}
                     </div>
-                    <textarea class="form-control" placeholder="La description ne doit pas contenir d'information personnelles.Toute modification de la description d'une proposition de formation déja en ligne doit être validé par l'équipe Akounda."  [(ngModel)]="propositionFormation.description" required name="description" id="" cols="30" rows="10">
+                   
+                        <div class="form-group">
+                            <label for="tel">Description:</label>
+                            <ckeditor [ngModelOptions]="{standalone: true}" [(ngModel)]="propositionFormation.description" [config]="configEditor" [editor]="Editor" ></ckeditor>
 
-                    </textarea>
+                            <!-- <textarea class="form-control" placeholder="La description ne doit pas contenir d'informations personnelles (Numéro de téléphone, email, ...). Toute modification de la description d'une proposition de formation déjà en ligne doit être validée par l'équipe de ProfAkounda."  
+                                [(ngModel)]="propositionFormation.description"
+                                 required name="description" id="" cols="30" rows="10">
+        
+                            </textarea> -->
+                        </div>
+                   
                     <div class="form-group">
                         <label for="tel">Téléphone:</label>
                         <input  required name="telephone" type="text" id="tel"
@@ -411,14 +512,15 @@
 </div>
 
 
-<div class="modal fade" id="zoneIntervention" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="zoneIntervention" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Veuillez manier le cercle pour préciser votre zone
                     d'intervention</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <p>La zone d'intervention est la zone dans laquelle vous pouvez dispenser des cours à domiciles.<span style="color: red;">Exemple</span>:Saisir "Abidjan" si vous donnez les cours dans toutes les communes d'Abidjan.</p>
+                <button (click)="rechercherProposition()"  type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -440,7 +542,7 @@
             <div class="modal-footer">
                 <button (click)="onSaveCoordMap()" type="button" class="btn btn-success"
                     data-dismiss="modal">Enregitrer</button>
-                <button type="button" class=" btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="button" class=" btn btn-danger" (click)="rechercherProposition()" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>

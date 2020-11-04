@@ -20,14 +20,13 @@ export class AdminGuard implements CanActivate {
 
     //Recupere la variable de la route courante
     const role = next.data.role;
-    let authority = sessionStorage.getItem(this.signInService.AUHORITY) ;
+    let authority = localStorage.getItem(this.signInService.AUHORITY) ;
 
     if (authority ===  role ) {
      
       return true;
 
     } else {
-      console.log('TEST');
       
       this.router.navigateByUrl('/error401') ;
       return false;

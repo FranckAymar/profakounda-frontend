@@ -7,9 +7,11 @@
     <div class="row">
         <div class="col-md-12 stepper">
             <ul class="progressbar">
-                <li id="step1" class="active">Détails</li>
-                <li id="step2">Payement</li>
-                <li id="step3">Confirmtation</li>
+                <li id="step1" class="active"><span class="hideLabelStepper">Détails</span> </li>
+                <li id="step2"><span class="hideLabelStepper">Payement</span></li>
+                <li id="step3"><span class="hideLabelStepper">Confirmation</span></li>
+                <li id="step4"><span class="hideLabelStepper">Validation</span></li>
+
             </ul>
         </div>
     </div>
@@ -21,21 +23,21 @@
 
                 <div  style="text-align: center;" >
                     <mat-checkbox  (change)="checkBoxChange()">
-                        Vous êtes vous-mếme le souscripteur ?</mat-checkbox>
+                        Je suis le participant</mat-checkbox>
                 </div>
                 
 
                 <form [formGroup]="identificationForm" (submit)="next()">
                     <div class="input-field s12">
                         <input [attr.disabled]=" isNotCheck ? null : ''" type="text" class="validate" formControlName="nomInscrit">
-                        <label>Votre nom</label>
+                        <label>Nom du participant</label>
                     </div>
                     <small style="color: red;" *ngIf="identificationForm.controls.nomInscrit.errors?.required" class="invalid-feedback">
                         Champ requis
                     </small>
                     <div class="input-field s12">
                         <input [attr.disabled]=" isNotCheck ? null : ''"  type="text" class="validate" formControlName="prenomInscrit">
-                        <label>Votre prenom</label>
+                        <label>Prenoms du participant</label>
                     </div>
                     <small style="color: red;" *ngIf="identificationForm.controls.prenomInscrit.errors?.required" class="invalid-feedback">
                         Champ requis
@@ -59,10 +61,10 @@
                        formControlName="operator" class="filled-in" id="mtn"  />
                     <label for="mtn">MTN CI</label>
 
-                    <input value="MOOV_SKAN" type="radio" name="operator"
+                 <!--    <input value="MOOV_SKAN" type="radio" name="operator"
                        formControlName="operator" class="filled-in" id="moov"  />
                     <label for="moov">MOOV CI</label>
-
+ -->
                     <input value="OM_SKAN" type="radio" name="operator"
                        formControlName="operator" class="filled-in" id="orange" />
                     <label for="orange">ORANGE CI</label>
@@ -71,8 +73,14 @@
 
                 <div class="input-field s12">
                     <input minlength="8" maxlength="8" formControlName="numero"
-                        type="number"  class="validate">
+                        type="tel" pattern="[0-9]*"   class="validate">
                     <label>Entrez votre numéro</label>
+                    <small style="color: red;" 
+                        *ngIf="operatorForm.controls.numero.errors?.required ||
+                        operatorForm.controls.numero.errors?.maxlength ||
+                        operatorForm.controls.numero.errors?.minlength " class="invalid-feedback">
+                            Entrez un numéro de téléphone valide  (8 chiffres)
+                    </small>
                 </div>
 
                 <button id="nextBtnPaiement" [disabled]="operatorForm.invalid" 
@@ -96,11 +104,48 @@
                 </div>
 
                 <div class="form-group">
-                    <button (click)=onSaveInscrit() class="btn btn-bg-color btn-block">Confirmer</button>
+                    <button (click)=next() class="btn btn-bg-color btn-block">Confirmer</button>
                 </div>
 
             </div>
 
+             <!--confirmation ORANGE-->
+             <div id="content4" class=" hide">
+
+                <div class="row center">
+                    <div *ngIf="operatorForm.get('operator').value === 'OM_SKAN'">
+                        <img src="../../../assets/img/logo_OM.jpg" width="100" height="100" alt="">
+                        <p>Veuillez générer un <strong>code de confirmation</strong> en tapant le
+                            code USSD suivant sur votre téléphone :
+                            <br><strong>#144*82#</strong></p>
+
+                        <div class="input-field s12">
+                            <input 
+                                [(ngModel)]="tokenPaymentOrange" type="number" class="validate">
+                            <label>Entrez le code</label>
+                        </div>
+                    </div>
+
+                    <div *ngIf="operatorForm.get('operator').value === 'MOOV_SKAN'">
+                        <img src="../../../assets/img/logo_MOOV_MONEY.png" width="100" height="100"
+                            alt="">
+
+                        <p>Veuillez confirmer la transaction en tapant le code USSD suivant :
+                            <br><strong>*133#</strong></p>
+
+                    </div>
+
+                    <div *ngIf="operatorForm.get('operator').value === 'MOMO_SKAN'">
+                        <img src="../../../assets/img/logo_MOMO.jpg" width="100" height="100" alt="">
+                        <p>Veuillez confirmer la transaction en tapant le code USSD suivant :
+                            <br><strong>*133#</strong></p>
+                    </div>
+                </div>
+
+
+                <button (click)=onSaveInscrit() class="btn btn-bg-color btn-block">Proceder au paiement</button>
+
+            </div>
 
         </div>
 

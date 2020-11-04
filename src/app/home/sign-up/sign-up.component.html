@@ -3,9 +3,9 @@
     <div id="modal2">
         <div class="log-in-pop">
             <div class="log-in-pop-left">
-                <h1>Bienvenu...</h1>
-                <p>Enseignants,répétiteurs,structures éducatives,parents d'élèves,élèves,étudiants ProfAkounda votre ami fidèl.</p>
-                <h4>Login with social media</h4>
+                <h1>Bienvenue...</h1>
+                <p>Enseignants, répétiteurs, formateurs, structures éducatives, organisations, étudiants, parents d'élèves, élèves<br> <strong>ProfAkounda</strong> est votre ami fidèle.</p><br/>
+                <!-- <h4>Login with social media</h4>
                 <ul>
                     <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a>
                     </li>
@@ -13,24 +13,29 @@
                     </li>
                     <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
             <div  class="log-in-pop-right">
-                <h4>Creer un compte</h4>
-                  <div *ngIf="mailSaisi" class="modal-header center" >
-                    <span class="alert alert-warning"> <a (click)="onRevoyerEmail()">renvoyer le mail</a></span>
-
-                </div>
-                    <p>Vous n'avez pas de compte? creez-en un.Cela ne vous prendra que quelques secondes.</p>
+                <h4>Créer un compte</h4>
+                
+                    <p *ngIf="!inscriptionSucess">Vous n'avez pas de compte? Créez-en un. <br> Cela ne vous prendra que quelques secondes.</p>
                    
                 <div *ngIf="error" class="alert alert-danger">
                     {{error}}
+                </div>
+                <div  *ngIf="inscriptionSucess" class="modal-header center alert alert-success">
+                  <div style="padding: 0.5em;"   class="row">
+                    <p><strong>Inscription effectuée !</strong></p>
+                    <p>Un mail de confirmation vous a été envoyé sur votre adresse email. Si le mail ne vous est pas parvenu, vérifiez vos <strong>spams</strong> ou 
+                        <a style="cursor: pointer;color:blue;" (click)="onRevoyerEmail()">renvoyez le mail de confirmation.</a> </p>
+                        <p>Cliquez<a style="cursor: pointer;color:blue;" routerLink="/home/sign-in"> ici</a> pour vous connecter</p>
+                  </div>
                 </div>
                
                 <form [formGroup] = "userForm" (ngSubmit)="onSaveParticulier()" class="s12">
                     
                     <div>
-                        <div class="input-field s12">
+                        <div class="input-field s12"> 
                             <input   type="text" formControlName="nom" class="validate">
                             <label>Nom</label>
                         </div>
@@ -38,7 +43,7 @@
                     <div>
                         <div class="input-field s12">
                             <input   type="text" formControlName="prenoms" class="validate">
-                            <label>Prenoms</label>
+                            <label>Prénoms</label>
                         </div>
                     </div>
                     <div>
@@ -47,13 +52,12 @@
                             <label>Email</label>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6">
                             <div>
                                 <div class="input-field s12">
                                     <input   type="password"  formControlName="password" class="validate">
-                                    <label>mot de passe</label>
+                                    <label>Mot de passe</label>
                                 </div>
                             </div>
                            
@@ -62,7 +66,7 @@
                             <div>
                                 <div class="input-field s12">
                                     <input type="password"  (ngModelChange) ="changement()" formControlName="passwordConfirm"   class="validate">
-                                    <label>confirmez le mot de passe</label>
+                                    <label>Confirmez le mot de passe</label>
                                     
                                 </div>
                             </div>

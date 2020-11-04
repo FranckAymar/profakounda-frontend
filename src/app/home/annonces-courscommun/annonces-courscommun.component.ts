@@ -1,3 +1,5 @@
+import { SignInService } from './../services/sign-in.service';
+import { Router } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,8 +11,10 @@ import { Component, OnInit } from '@angular/core';
 export class AnnoncesCourscommunComponent implements OnInit {
 
   coursCommuns = [] ;
-
-  constructor(private coursCommunService : CoursCommunService) { }
+isNombreMaxAtteint:boolean = false;
+  constructor(private coursCommunService : CoursCommunService,
+    private router : Router,
+      private signInService : SignInService) { }
 
   ngOnInit() {
     this.onFectCoursCommunHome();
@@ -22,9 +26,8 @@ export class AnnoncesCourscommunComponent implements OnInit {
     this.coursCommunService.fetchCoursCommunForHome().subscribe(
 
       (resp)=>{
-        console.log(resp);
-        this.coursCommuns = resp ;
-        
+        this.coursCommuns = resp['cours'] ;
+        this.isNombreMaxAtteint = resp['nombreMaxAtteint'];
       },
       (error)=>{
         console.log(error);
@@ -33,6 +36,21 @@ export class AnnoncesCourscommunComponent implements OnInit {
     )
 
   }
+
+  goToDashboard(){
+
+
+    if(localStorage.getItem(this.signInService.TOKEN) !==null){
+      this.router.navigateByUrl('/customers/courscommun') ;
+
+    }else{
+      this.router.navigateByUrl('home/sign-in') ;
+
+    }
+  
+
+  }
+
 
 
 }

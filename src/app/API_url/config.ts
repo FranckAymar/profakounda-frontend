@@ -54,8 +54,14 @@ export const URL = {
     getPhoto : consts.host+ consts.nameProject +'photoParticulier',
     getParticuliers : consts.host+ consts.nameProject +'admin/particuliers',
     renvoieMail : consts.host+ consts.nameProject +'particulier/renvoieMail',
+    envoyerMessageCompte : consts.host+ consts.nameProject +'admin/envoyerMessageCompte',
+    //COMMUNES
+    listCommunes : consts.host+ consts.nameProject +'/communes',
+    communeParVille : consts.host+ consts.nameProject +'/rechercherCommuneParVille',
+    enregistrerCommune : consts.host+ consts.nameProject +'admin/enregistrerCommune',
     //SIGN IN
     login : consts.host+ consts.nameProject +'login',
+    verifier : consts.host+ consts.nameProject +'verifier',
 
     //sign up
     singUpValidation:consts.host+ consts.nameProject+'sinUp-validation',
@@ -77,7 +83,10 @@ export const URL = {
     rechercherNiveauEnseignes: consts.host+ consts.nameProject +'particulier/contrats' ,
     getContrat: consts.host+ consts.nameProject +'particulier/getContrat',
     getProposition: consts.host+ consts.nameProject +'particulier/getProposition',
+    addAllModule: consts.host+ consts.nameProject +'particulier/addAllModule',
+    addAllNiveaux: consts.host+ consts.nameProject +'particulier/enregistrerContratAllNiveaux',
     getModule: consts.host+ consts.nameProject +'particulier/getModule',
+    allNiveauVerification: consts.host+ consts.nameProject +'particulier/getAllNiveau',
     deleteContrat: consts.host+ consts.nameProject +'particulier/deleteContrat',
     deleteModule: consts.host+ consts.nameProject +'particulier/deleteModule',
     modifierModule: consts.host+ consts.nameProject +'particulier/modifierModule' ,
@@ -91,8 +100,14 @@ export const URL = {
     deleteDisponibiliteByDay: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByDayId',
     deleteDisponibiliteByHour: consts.host+ consts.nameProject +'particulier/deleteDisponibiliteByHourId',
     demandeMiseEnLigne: consts.host+ consts.nameProject +'particulier/demandemiseenligne',
+    demandeMiseHorsLigne: consts.host+ consts.nameProject +'particulier/mettrehorsligne',
     demandeMiseEnLigneObject: consts.host+ consts.nameProject +'particulier/demandemiseenligneObject',
-    
+    envoyerMessageProposition : consts.host+ consts.nameProject +'admin/envoyerMessageProposition',
+    //DASHBOARD PARTICULIER
+    getDashBoardProposition: consts.host+ consts.nameProject +'particulier/dashboard/propositions',
+    getDashBoardCoursCommun: consts.host+ consts.nameProject +'particulier/dashboard/coursCommuns',
+    getDashBoardInscritsCoursCommuns:consts.host+ consts.nameProject +'particulier/dashboard/inscrits',
+    getStatistiquesInscrits:consts.host+ consts.nameProject +'particulier/dashboard/statistiques',
     
    
     //Détails formations
@@ -101,6 +116,7 @@ export const URL = {
     FilterPropositionFormation : consts.host+ consts.nameProject +'details/filterDeFormation',
     filterDeFormationParVille : consts.host+ consts.nameProject +'details/filterDeFormationParVille',
     filterDeFormationParEssai : consts.host+ consts.nameProject +'details/filterDeFormationParEssai',
+    rechercherPropositionEnLigneHome : consts.host+ consts.nameProject +'details/home/listpropositionsenligne',
 
     getContactParticulier : consts.host+ consts.nameProject  + 'details/particulier/contactparticulier', 
 
@@ -121,6 +137,7 @@ export const URL = {
     //Paiement
     processToPayment : consts.host+ consts.nameProject + 'particulier/enregistrerpaiement',
     getPaymentParticulier : consts.host+ consts.nameProject + 'particulier/paiementsparticulier',
+    getPaymentActifDashboard : consts.host+ consts.nameProject + 'particulier/dashboard/paiementsparticulier',
     getPayments : consts.host+ consts.nameProject + 'admin/paiements',
 
     //ParticulierProposition
@@ -145,8 +162,6 @@ export const URL = {
     ajouterFavoris :  consts.host+ consts.nameProject + 'particulier/enregistrerfavoris',
     supprimerFavoris :  consts.host+ consts.nameProject + 'particulier/supprimerfavorisparticulier',
     recupererFavoris : consts.host+ consts.nameProject + 'particulier/favorisparticulier',
-
-
     //COurs commun 
     enregistrerCoursCommun : consts.host+ consts.nameProject + 'particulier/enregistrercourscommun',
     modifierCoursCommun : consts.host+ consts.nameProject + 'particulier/modifiercourscommun',
@@ -156,15 +171,24 @@ export const URL = {
     modifierLieuIntervention : consts.host+ consts.nameProject + 'particulier/modifierlieuintervention',
     recupererCoursCommun : consts.host+ consts.nameProject + 'organisation/coursCommuns',
     recupererCoursCommunHome : consts.host+ consts.nameProject + 'home/coursCommuns',
+    recupererListCoursCommunHome : consts.host+ consts.nameProject + 'home/list/coursCommuns',
     modifierCoutGeneral : consts.host+ consts.nameProject + 'particulier/modifiercoutgeneral',
     demandeMiseEnligneCourCommun : consts.host+ consts.nameProject + 'particulier/demandeMiseEnligneCourCommun',
+    demandeVersement : consts.host+ consts.nameProject + 'particulier/demandeVirement',
+    accepterVirement : consts.host+ consts.nameProject + 'admin/validerVirement',
+    demandeVersementAdmin : consts.host+ consts.nameProject + 'admin/demandeVirements',
+    virements : consts.host+ consts.nameProject + 'admin/virements',
+    nombreDemandeVirement : consts.host+ consts.nameProject + 'admin/nombreDemandeVirement',
     recupererCoursCommunsInscritsParticulier : consts.host+ consts.nameProject + 'particulier/coursCommunsSelects',
     coursCommunsParCode : consts.host+ consts.nameProject + '/home/coursCommunsParCode',
     fermerInscriptionCoursCommun : consts.host+ consts.nameProject + 'particulier/fermerinscriptioncourscommun',
     fermerInscriptionPublicCible : consts.host+ consts.nameProject + 'particulier/fermerinscriptionpubliccible',
     coursCommunsParOrganisation : consts.host+ consts.nameProject + '/home/coursCommunsParOrganisation',
+    modifierLogoCoursCommun : consts.host+ consts.nameProject + 'particulier/uploadLogo',
+    getLogoCoursCommun : consts.host+ consts.nameProject + 'logoCoursCommun',
+    modifierAffichePubCoursCommun : consts.host+ consts.nameProject + 'particulier/uploadaffichepub',
+    getAffichePubCoursCommun : consts.host+ consts.nameProject + 'afficheCoursCommun',
     
-   
     //cours Commun admin
     listeCoursCommuns : consts.host+ consts.nameProject + 'admin/coursCommuns',
     comptabiliteCoursCommun : consts.host+ consts.nameProject + 'admin/comptabilite',
@@ -181,8 +205,16 @@ export const URL = {
     recupererOrganisation : consts.host+ consts.nameProject + 'organisations',
 
     //InscriptionCoursCommun
+    inscritptionCoursOrganise :  consts.host+ consts.nameProject +  'particulier/paiementinscription',
     inscriptioncourscommun : consts.host+ consts.nameProject + 'particulier/inscriptioncourscommun',
     inscriptionpubliccible : consts.host+ consts.nameProject + 'particulier/inscriptionpubliccible',
     recupererInscrit :  consts.host+ consts.nameProject + 'recupererinscrits',
-    verifiedLastInscription :  consts.host+ consts.nameProject + 'particulier/verifiedLastInscription'
+    verifiedLastInscription :  consts.host+ consts.nameProject + 'particulier/verifiedLastInscription',
+
+
+
+    //Contact us
+    sendMessageContactUs :  consts.host+ consts.nameProject + 'enregistrerContact',
+    getAllContactMessage :  consts.host+ consts.nameProject + 'admin/contacts',
+
 }

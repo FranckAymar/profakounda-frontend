@@ -5,6 +5,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import { DatePipe } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { URL } from 'src/app/API_url/config';
 @Component({
   selector: 'app-details-inscrits',
   templateUrl: './details-inscrits.component.html',
@@ -12,7 +13,8 @@ import localeFr from '@angular/common/locales/fr';
 })
 export class DetailsInscritsComponent implements OnInit {
 
-
+  urlServer = URL.getLogoCoursCommun;
+  idCoursCommun:number;
   headersTable = [  
                   new Txt('Nom').bold().end, 
                   new Txt('Prénoms').bold().end, 
@@ -31,7 +33,7 @@ export class DetailsInscritsComponent implements OnInit {
   ngOnInit() { 
 
     this.bodyOfTable.push(this.headersTable);
-    console.log(this.dataReceived);
+    //console.log(this.dataReceived);
 
   }
 
@@ -61,21 +63,43 @@ export class DetailsInscritsComponent implements OnInit {
   //     title: 'Liste des inscrits',
   //     author: 'ProfAkounda'
   // });
-  
 
-    new Img('../../../assets/images/logo.png').width(150).margin([0,40,0,40]).build().then( img => {
+  //console.log(this.dataReceived);
+  
+  
+    if(this.dataReceived.details.id)
+    {
+      this.idCoursCommun = this.dataReceived.details.id;
+    }
+    else{
+      this.idCoursCommun = this.dataReceived.details.cours.id
+    }
+    new Img(this.urlServer+"/"+this.idCoursCommun).width(150).margin([0,40,0,40]).build().then( img => {
     pdf.add( img);
     
 
     this.createBodyOfTable(this.dataReceived.inscrit);
 
-
     //Cas d'un cours avec public cible
     if (this.dataReceived.details.publicCible) {
       pdf.add(new Txt('Organisation : ' + this.dataReceived.details.cours.organisation.libelle).bold().end);
       pdf.add(new Txt('Titre : ' + this.dataReceived.details.cours.titre).margin([0,5,0,0]).end);
-      pdf.add(new Txt('Niveau : ' + this.dataReceived.details.publicCible.niveau.libelle).margin([0,5,0,0]).end);
+
+      if(this.dataReceived.details.publicCible.niveau === null ){
+        pdf.add(new Txt('Niveau : ' + 'Tout niveau confondu').margin([0,5,0,0]).end);
+
+      }else {
+        pdf.add(new Txt('Niveau : ' + this.dataReceived.details.publicCible.niveau.libelle).margin([0,5,0,0]).end);
+
+      }
+     
+     if(this.dataReceived.details.publicCible.filiere !== ""){
       pdf.add(new Txt('Filière : ' + this.dataReceived.details.publicCible.filiere).margin([0,5,0,0]).end);
+
+     }else {
+      pdf.add(new Txt('Filière : ' + 'Toute filière confondue').margin([0,5,0,0]).end);
+
+     }
       pdf.add(new Txt('Formations : ' + this.getFormationsForPublic(this.dataReceived.details.publicCible)).margin([0,5,0,0]).end);
 
      //Cas d'un cours général
@@ -86,12 +110,19 @@ export class DetailsInscritsComponent implements OnInit {
   
     } 
 
-    pdf.add(new Txt('Liste des inscrits').alignment('center').decoration('underline').margin(20).bold().end);
+   
+   
     pdf.add(new Table(this.bodyOfTable).alignment('center').widths([100, 250, 150]).end);  
 
-    pdf.footer('Imprimé le : ' + new Date().toDateString())
-
-    pdf.create().download('Liste_profAkounda_'+ this.dataReceived.details.cours.organisation.libelle + "_"+ new Date().getDate().toString()  );
+    pdf.footer('Imprimé le : ' +this.datePipe.transform(new Date(), 'dd-MMMM-yyyy') )
+    if (this.dataReceived.details.publicCible) {
+      pdf.create().download('Liste_profAkounda_'+ this.dataReceived.details.cours.organisation.libelle + "_"+ new Date().getDate().toString()  );
+    }
+    else{
+      pdf.create().download('Liste_profAkounda_'+ this.dataReceived.details.organisation.libelle + "_"+ new Date().getDate().toString()  );
+    }
+    
+    
     pdf.create().open();
 
       });

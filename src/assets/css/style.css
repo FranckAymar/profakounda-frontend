@@ -79,7 +79,7 @@
      line-height: 24px;
 }
  .com-sp{
-     padding:100px 0px;
+     padding:40px 0px;
 }
  .pad-top-0{
      padding-top:0px;
@@ -1121,9 +1121,11 @@
      color: #000000;
      margin: 0px;
 }
- .home-top-cour-desc h4 {
+
+ .home-top-cour-desc h4 span{
      font-size: 15px;
      padding-bottom: 8px;
+     font-weight: bold;
 }
  .home-top-cour-desc p {
      margin-bottom: 0px;
@@ -1554,7 +1556,6 @@
      background-position-x: 12px;
      color: #464646;
      font-weight: 500;
-     text-transform: capitalize;
      padding: 8px;
      border: 0px solid #ffffff;
      padding: 8px 45px;
@@ -2300,7 +2301,7 @@
  .pro-user-bio ul li:last-child{
      padding-bottom: 0px;
 }
- .pro-user-bio ul li:nth-child(2){
+ .pro-user-bio ul li:nth-child(3){
      border-bottom: 1px solid #e9edf1;
      margin-bottom: 15px;
      padding-bottom: 15px;
@@ -2509,7 +2510,7 @@
      float: left;
      width: 40%;
      background: url('../images/login.html') #002147 no-repeat center center;
-     padding: 12.5% 6%;
+     padding: 26.5% 6%;
      color: #fff;
      height: 100%;
      bottom: 0px;
@@ -2615,7 +2616,7 @@
      margin-top: 15px;
 }
  .log-in-btn {
-     background: #f4364f;
+     background: #5bc0de;
      color: #fff;
      padding: 2px 10px;
      font-weight: 600;
@@ -3296,15 +3297,15 @@ left: 0;
 }
  .ed-advan ul li{
      float: left;
-     width: 33.333%;
-     padding: 25px;
+     width: 50%;
+    /* padding: 10px;
      box-sizing: border-box;
     /* padding: 15px 0px;
      */
     /* height: 210px;
      */
 }
- .ed-advan ul li:nth-child(1){
+ /*.ed-advan ul li:nth-child(1){
      border-bottom: 1px solid #dcdbdb;
      border-right: 1px solid #dcdbdb;
 }
@@ -3320,7 +3321,7 @@ left: 0;
 }
  .ed-advan ul li:nth-child(5){
      border-right: 1px solid #dcdbdb;
-}
+}*/
  .ed-advan ul li:nth-child(6){
 }
  .ed-ad-img{
@@ -4252,7 +4253,7 @@ left: 0;
 .sb2-1 {
     float: left;
     width: 20%;
-    background: #263238;
+    background: #002958;
     color: #fff;
     height: 100%;
     position: absolute;
@@ -5657,7 +5658,7 @@ input:not(:focus):valid ~ .floating-label{
     text-align: center;
     /* margin: 0px 10px; */
     /* background: linear-gradient(to top, #ef612f, #f36b3b); */
-    color: #f4364f !important;
+    color: #f4364f ;
     border: 1px solid #f4364f ;
     margin-top: 10px;
     display: inline-block;
@@ -5684,6 +5685,14 @@ input:not(:focus):valid ~ .floating-label{
 .ed-rese-grid-mar-bot-30{
 	margin-bottom:30px;
 }
+
+@media screen  and (max-width: 990px){
+    .ed-rese-grid{
+         margin: 8px 0px;;
+    }
+
+}
+
 .s17-eve-time {
     width: 100%;
     border-bottom: 1px solid #ececec;

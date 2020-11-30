@@ -1,5 +1,6 @@
 <div style="margin:auto;width:15em;margin-top: 1em;">
- <button data-toggle="modal" (click)="adProposition()" data-target="#addDesc" class="btn btn-info"><i class="fa fa-plus"></i> Nouvelle proposition</button>
+ <button data-toggle="modal" (click)="adProposition()" 
+ data-target="#addDesc" class="btn btn-info"><i class="fa fa-plus"></i> Nouvelle proposition</button>
 </div>
 
 
@@ -183,7 +184,17 @@
         <div class="modal-content">
             <div  class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">AJOUT D'UN NIVEAU</h5>
-                <p>Enregistrez l'un après l'autre les coûts par niveau.<span style="color: red;">Exemple:</span>Renseignez le premier niveau ainsi que le coût,appuyer le bouton <span style="color: blue;">enregistrer</span>.Cliquer à nouveau le bouton "Niveau enseigné" et renseignez le second niveau et le coût,enregistrez ainsi de suite.</p>
+                <p>Enregistrez l'un après l'autre les coûts par niveau <p>
+                <p>    <span style="color: red;">Exemple: </span></p>
+                    
+                <ul style="margin-left: 2em;" >
+                        <li style="list-style-type: decimal;">Renseignez le premier niveau ainsi que le coût</li>
+                        <li style="list-style-type: decimal;"> Cliquez sur le bouton 
+                            <span style="color: blue;">Enregistrer</span></li>
+                    </ul>
+
+                   <p> </p> <p> Si vous voulez préciser un niveau à 
+                    nouveau, cliquez sur le bouton "Niveau enseigné" et renseignez le second niveau et le coût associé.</p>
                 <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span style="background-color:white !important;"  aria-hidden="true">&times;</span>
                 </button>
@@ -256,7 +267,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">MODULES</h5>
-                <p>Enregistrer un à un les matières enseignés.<span style="color: red;">Exemple</span>:Saisir "Mathematique",appuyer le bouton <span style="color: blue;">enregistrer</span>,puis "Music" appuyer le bouton <span style="color: blue;">enregistrer</span>.Repeter ce proceder jusqu'a saisir toutes les matières enseignés.</p>
+               
+                <p>Enregistrer les matières enseignées de façon progressive<p>
+                    <p><span style="color: red;">Exemple: </span></p>
+                        
+                    <ul style="margin-left: 2em;" >
+                            <li style="list-style-type: decimal;">Saisir <strong>Mathematique</strong>,appuyer le bouton <span style="color: blue;">Enregistrer</span></li>
+                            <li style="list-style-type: decimal;">Ensuite <strong>Musique</strong> et cliquez sur le bouton <span style="color: blue;">Enregistrer</span></li>
+                            <li>Remarque : Vous pouvez ajouter autant de matières que vous le souhaitez</li>
+                        </ul>
+                   
                 <button type="button" (click)="rechercherProposition()" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

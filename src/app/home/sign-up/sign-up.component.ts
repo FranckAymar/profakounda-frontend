@@ -72,12 +72,8 @@ getColor(){
     this.particulierService.saveParticulier(particulier)
     .subscribe(
       (response)=>{
-<<<<<<< HEAD
-        sessionStorage.setItem("mail",particulier.email);
-=======
         localStorage.setItem("mail",particulier.email);
         this.mailSaisi = localStorage.getItem("mail");
->>>>>>> 92838e9f2f1c81805594798d1321c99ac2a4de27
         this.formInitialisation();
         this.error =response["error"];      
         if(response["success"])

@@ -18,7 +18,7 @@ deploy_staging:
   only:
     - develop
 
-  deploy_prod:
+deploy_prod:
   type: deploy
   environment:
     name: production

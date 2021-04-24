@@ -14,6 +14,6 @@ deploy_staging:
     name: staging
     url: http://dev.profakounda.com/
   script:
-    - ssh ubuntu@51.83.68.188 "cd /var/www/profakounda-front-dev &&sudo git checkout develop &&sudo git pull origin develop &&sudo ng build && exit"
+    - ssh ubuntu@51.83.68.188 "cd /var/www/profakounda-front-dev &&sudo git pull origin develop &&sudo ng build && exit"
   only:
     - develop

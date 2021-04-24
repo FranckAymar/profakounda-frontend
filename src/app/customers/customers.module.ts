@@ -18,7 +18,10 @@ import { DetailsCoursCommunComponent } from './cours-commun/details-cours-commun
 const customersRouter: Routes = [
 
   {
-    path: 'customers', component: CustomerMainComponent, canActivate: [CustomersGuard], data: { role: 'ROLE_PARTICULIER' },
+    path: 'customers', 
+    component: CustomerMainComponent, 
+    canActivate: [CustomersGuard], 
+    data: { role: 'ROLE_PARTICULIER' },
 
     children: [
       {

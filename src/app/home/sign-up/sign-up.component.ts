@@ -94,6 +94,7 @@ getColor(){
   }
 
   onRevoyerEmail(){
+    this.mailSaisi = sessionStorage.getItem("mail");
     this.particulierService.revoyerEmail(this.mailSaisi).subscribe(
       (response)=>{
         this.snackbarService.openSnackBar('Mail de confirmation renvoyé avec succès')

@@ -18,12 +18,12 @@ deploy_staging:
   only:
     - develop
 
-  deploy_prod:
+deploy_prod:
   type: deploy
   environment:
     name: production
     url: http://profakounda.com/
   script:
-    - ssh ubuntu@51.83.68.188 "cd /var/www/prof-akounda-front &&sudo git pull origin master &&sudo rm package-lock.json &&sudo npm install &&sudo ng build && exit"
+    - ssh ubuntu@51.83.68.188 "cd /var/www/prof-akounda-front &&sudo git pull origin master &&sudo rm package-lock.json &&sudo npm install &&sudo ng build --prod && exit"
   only:
     - master

@@ -5,7 +5,7 @@
     <div class="container com-sp">
         <div class="row">
             <div class="con-title">
-                <h2>Les <span>cours Organisés</span></h2>
+                <h2>Les <span>cours Organisés HOME</span></h2>
             </div>
         </div>
         <div style="text-align: center;" *ngIf="coursCommuns.length == 0" >
@@ -16,7 +16,7 @@
         <div class="container">
 
     <div class="row">
-        <div *ngFor="let cours of coursCommuns" class="col-md-4 col-mobile">
+        <div *ngFor="let cours of coursCommuns" class="col-mobile">
               <app-card-cours-commun [cours]="cours"></app-card-cours-commun>
         </div>
 

@@ -7,3 +7,23 @@ a {
 
     cursor: pointer;
 }
+
+.cardCoursCommun{
+    border-radius: 16px !important;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    height: 210px;
+}
+.coursCommunTitle{
+    color: #002147;
+    opacity: 1;
+    font-size: 20px;
+}
+.coursCommunSubTitle{
+    color: #EF612F;
+    font-size: 15px;
+}
+h1,h2{
+    margin-top: inherit;
+    margin-bottom: inherit;
+}

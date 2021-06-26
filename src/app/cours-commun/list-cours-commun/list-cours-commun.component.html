@@ -11,8 +11,8 @@
         <div *ngIf="coursCommuns.length == 0" style="width: 20em;margin: auto;">
             <span style="color: crimson;"  >Aucun resultat  correspondant.</span>
         </div>
-       <div class="row">
-        <div class="row" *ngFor="let cours of coursCommuns" class="col-md-4">
+       <!-- <div class="row"> -->
+        <div class="row" *ngFor="let cours of coursCommuns">
 
             <div >
                 <app-card-cours-commun [cours]="cours"></app-card-cours-commun>
@@ -20,7 +20,7 @@
             </div>
 
          </div>
-       </div>
+       <!-- </div> -->
 
        
         <div class="row">

@@ -13,6 +13,7 @@ a {
     padding-top: 10px;
     padding-bottom: 15px;
     height: 210px;
+    box-shadow: -3px 3px 6px #00000029;
 }
 .cardCoursCommun:hover{
     cursor: pointer;

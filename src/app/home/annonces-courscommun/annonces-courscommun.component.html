@@ -5,7 +5,7 @@
     <div class="container com-sp">
         <div class="row">
             <div class="con-title">
-                <h2>Les <span>cours Organisés</span></h2>
+                <h2><span style="color: #002147;">Les </span><span>cours</span><span style="color: #002147;"> Organisés</span></h2>
             </div>
         </div>
         <div style="text-align: center;" *ngIf="coursCommuns.length == 0" >
@@ -19,15 +19,20 @@
         <div *ngFor="let cours of coursCommuns" class="col-mobile">
               <app-card-cours-commun [cours]="cours"></app-card-cours-commun>
         </div>
+</div>
+<div *ngIf="isNombreMaxAtteint" style="width: 50px;margin: auto;">
+    <button [routerLink]="['/courscommun']" class="btn"  style="background: #EF612F 0% 0% no-repeat padding-box;color: #002147;border-radius: 25px; font-weight: bold;">Voir plus 
+        <img height="15" width="15"  src="../../../assets/images/fleche_bas.png" alt="">
+    </button>
+</div>
 
 </div>
-  </div>
        
-        <div *ngIf="isNombreMaxAtteint" class="con-title">
+        <!-- <div *ngIf="isNombreMaxAtteint" class="con-title">
             <a [routerLink]="['/courscommun']">
                 <p>Voir plus ...</p>
             </a>
-        </div>
+        </div> -->
        
     </div> 
 </section>

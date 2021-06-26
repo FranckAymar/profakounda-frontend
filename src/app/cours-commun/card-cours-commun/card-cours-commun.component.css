@@ -14,6 +14,9 @@ a {
     padding-bottom: 15px;
     height: 210px;
 }
+.cardCoursCommun:hover{
+    cursor: pointer;
+}
 .coursCommunTitle{
     color: #002147;
     opacity: 1;

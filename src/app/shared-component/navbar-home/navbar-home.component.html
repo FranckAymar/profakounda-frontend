@@ -50,7 +50,7 @@
 </section>
 
 <section>
-    <!-- TOP BAR -->
+    <!-- TOP BAR 
     <div class="ed-top">
         <div class="container">
             <div class="row">
@@ -65,9 +65,9 @@
                         <ul>
                             <li><a href="#" routerLink ="/home/sign-in" >connexion</a>
                             </li>
-                            <li><a href="#" routerLink ="/home/sign-up" >inscription</a>
+                            <li><a href="#" routerLink ="/home/sign-up" >inscriptiION</a>
                             </li>
-                        </ul>
+                        </ul> 
                     </div>
                     <div *ngIf="authenticated" class="ed-com-t1-right">
                         <ul>
@@ -83,13 +83,13 @@
                             <!-- <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                             </li>
                             <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            </li> -->
+                            </li> 
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <!-- LOGO AND MENU SECTION -->
     <div class="top-logo" data-spy="affix" data-offset-top="250">
         <div class="container">
@@ -99,21 +99,40 @@
                         <a routerLink="/home"><img src="../../assets/images/logo.png" alt="" />
                         </a>
                     </div>
-                    <div class="main-menu">
+                    <!--<div class="main-menu">
                         <ul>
                             <li><a routerLink ="/home">Accueil</a>
                             </li>
                             <li class="about-menu">
                                 <a routerLink ="/courscommun" class="mm-arr">Nos cours organisés</a>
-                                <!-- MEGA MENU 1 -->
+                                <!- MEGA MENU 1 
                             </li>
                             <li class="admi-menu">
                                 <a routerLink ="/formations" class="mm-arr">Nos formateurs</a>
-                                <!-- MEGA MENU 1 -->
+                                <!- MEGA MENU 1 
                             </li>
                             <li class="admi-menu">
                                 <a routerLink ="/contactus" class="mm-arr">Contactez-nous</a>
-                                <!-- MEGA MENU 1 -->
+                                 MEGA MENU 1 
+                            </li>
+                        </ul>
+                    </div>-->
+                    <div *ngIf="!authenticated" class="ed-com-t1-right">
+                        <ul>
+                            <li id="cours"><a  [routerLink]="['/courscommun']" class="cours">Cours</a></li>
+                            <li id="form"> <a   [routerLink]="['/formations']" class="form"> Formateurs</a>   </li>
+                            <li  id="sign_in"><a  class="conn"  href="#" routerLink ="/home/sign-in" >Connexion</a>
+                            </li> 
+                            <li  id="sign_up"><a  class="insc"href="#" routerLink ="/home/sign-up" >Inscription</a>
+                            </li>
+                        </ul> 
+                    </div>
+                    <div *ngIf="authenticated" class="ed-com-t1-right">
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li><a href="#"
+                                [routerLink]="profile ==='ROLE_PARTICULIER' ? ['/customers'] : ['/admin']" routerLink ="/customers" >Mon Tableau de bord</a>
                             </li>
                         </ul>
                     </div>

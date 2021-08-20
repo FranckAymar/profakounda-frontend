@@ -912,10 +912,13 @@
      font-size: 12px;
 }
  .ed-com-t1-right ul li:nth-child(1) a{
-     background: #e66030;
+    
 }
  .ed-com-t1-right ul li:nth-child(2) a{
-     background: #013673;
+     
+}
+ .ed-com-t1-right ul li:nth-child(3) a{
+    background: #e66030;
 }
 /*-------------------------------------------------*/
 /* =  2.MAIN MENU
@@ -1665,6 +1668,12 @@
      text-align: center;
      margin:0px 10px;
 }
+ .btn-conn{
+    background: #f36b3b;
+    border-radius: 0.3em;
+    padding: 0.4em; 
+    height: 2em;
+ }
  .bann-btn-1{
      background: #f36b3b;
      background: -webkit-linear-gradient(to top, #ef612f, #f36b3b);

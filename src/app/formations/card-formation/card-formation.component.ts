@@ -24,7 +24,7 @@ export class CardFormationComponent implements OnInit {
 
   @Input() code : string ;
   @Input() idParticulier : number ;
-  @Input() moduleFormations : [] ;
+  @Input() moduleFormations : [{libelle : string}] ;
   @Input() contrats : [] ;
   @Input() isAllModule : boolean = false ;
   @Input() cyclePrimairePresente : boolean = false ;

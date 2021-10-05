@@ -1,5 +1,4 @@
-<div style="border-top: 2px solid #FF5722;border-bottom: 2px solid #FF5722;" (mouseover)="mouseOver()" (mouseleave)="mouseLeave()" class="home-top-cour">
-    <!--POPULAR COURSES IMAGE-->
+<!-- <div style="border-top: 2px solid #FF5722;border-bottom: 2px solid #FF5722;" (mouseover)="mouseOver()" (mouseleave)="mouseLeave()" class="home-top-cour">
     <a [routerLink]="['/formations/details-formation', id]">
 
         <div class="col-md-3">
@@ -8,7 +7,6 @@
             </p>
         </div>
     </a>
-    <!--POPULAR COURSES: CONTENT-->
     <div class="col-md-9 home-top-cour-desc">
         <a [routerLink]="['/formations/details-formation', id]">
             <div>
@@ -49,10 +47,10 @@
             </ul>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Team -->
-<section id="team" style="width: 100%;">
+<!-- <section id="team" style="width: 100%;">
     <div class="container">
         <div class="row">
                 <div class="image-flip">
@@ -109,5 +107,26 @@
 
         </div>
     </div>
-</section>
+</section> -->
 <!-- Team -->
+<div class="card-v2">
+
+       <div class="label">
+        <span class="label-text">{{ville}}</span>
+       </div>
+
+    <div class="text-center">
+        <img class="img-card" src="{{urlServer}}/{{idParticulier}}" alt="">
+    </div>
+    <div class="description">
+        <h4>{{code}}</h4>
+        <h4>
+            <i *ngFor="let e of etoilesBrillants" class="fa fa-star etoileNoteMobile"></i><i
+                *ngFor="let eb of etoilesEteints" class="fa fa-star etoileMobile"></i>
+        </h4>
+        <h4 *ngIf="!isAllModule">{{moduleFormations[0].libelle}}</h4>
+    </div>
+    <div class="text-center">
+        <button class="details-button-card"><i class="fa fa-info-circle fa-lg"></i>Détails</button>
+    </div>
+</div>

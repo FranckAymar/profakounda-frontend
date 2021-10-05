@@ -4,6 +4,9 @@ import { ListFormationsService } from './../../formations/services/list-formatio
 import { URL } from './../../API_url/config';
 import { Component, OnInit } from '@angular/core';
 
+import * as $ from 'jquery/dist/jquery.min.js';
+
+
 @Component({
   selector: 'app-anonces-formation',
   templateUrl: './anonces-formation.component.html',
@@ -75,6 +78,5 @@ isNombreMaxAtteint:boolean = false;
 
     }
   }
-
 
 }

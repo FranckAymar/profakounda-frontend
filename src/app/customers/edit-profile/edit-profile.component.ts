@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { Router } from '@angular/router';
 import { SignInService } from 'src/app/home/services/sign-in.service';
-import { consts } from '../../API_url/const'
 import { FiliereService } from 'src/app/admin/services/filiere.service';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { PasswordModel } from '../models/PasswordModel';
@@ -16,6 +15,8 @@ import { CompressorService } from '../services/CompressorService';
 import { CommuneService } from 'src/app/admin/services/commune.service';
 import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
 import { MatDialog } from '@angular/material';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -211,7 +212,7 @@ getColor(){
         this.filiere = reponse['filiere'];
         this.ville = reponse['ville'];
        this.id = reponse['id'];
-       this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
+       this.url = environment.host+ environment.nameProject+"photoParticulier/"+this.id;
        this.urlFile = this.urlServer +"/" + this.id ;
         this.userForm.patchValue({
           nom: reponse['nom'],

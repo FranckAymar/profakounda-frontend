@@ -61,8 +61,8 @@ export class EditProfileComponent implements OnInit {
   filteredOptions3: Observable<string[]>
   filteredOptions2: Observable<string[]>
   filteredOptions: Observable<string[]>;
-  @ViewChild('firstDialog',null) firstDialog: TemplateRef<any>;
-  @ViewChild('secondDialog',null) secondDialog: TemplateRef<any>;
+  @ViewChild('firstDialog') firstDialog: TemplateRef<any>;
+  @ViewChild('secondDialog') secondDialog: TemplateRef<any>;
   constructor(private filiereService :FiliereService,
               private niveauService:NiveauService,
               private particulierService:ParticulierService,

@@ -13,7 +13,7 @@ export class GooglePlaceComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() adressType: string;
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
-  @ViewChild('addresstext', {static: false}) addresstext: any;
+  @ViewChild('addresstext') addresstext: any;
 
   @Input() autocompleteInput: string;
   queryWait: boolean;

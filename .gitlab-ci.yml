@@ -7,6 +7,20 @@ before_script:
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+merge_request_verify:
+  image: node:12-alpine
+  stage: dependencies
+  script:
+    - npm install
+  only:
+    - merge_requests
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules  
     
 deploy_staging:
   type: deploy

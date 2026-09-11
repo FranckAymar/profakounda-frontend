@@ -1,0 +1,42 @@
+li{
+    background-color: white;
+    border-radius: 1em;
+    height:13em;
+    width: 35em;
+    margin: 1.5em; 
+    
+    
+}
+#desc{
+    background-color: #EEEEEE;
+    box-shadow: -0.5em 0.5em rgba(185, 179, 179, 0.842);
+} 
+
+.col-md-12{ 
+    margin-left: 6em;
+
+}
+ 
+#img{
+    height:8em;
+    width: 10em;
+    margin-top: 1em;
+    margin-left: -1em;
+}
+span{
+   color: rgb(255, 60, 0);
+   font-size: 1em;
+}
+
+#formation{
+    box-shadow: -0.3em -0.3em rgba(185, 179, 179, 0.842);
+}
+#organiser{
+    box-shadow: 0.3em -0.3em rgba(185, 179, 179, 0.842);
+}
+#contacter{
+    box-shadow: -0.3em 0.3em rgba(185, 179, 179, 0.842);
+}
+#inscription{
+    box-shadow: 0.3em 0.5em  rgba(185, 179, 179, 0.842);
+}

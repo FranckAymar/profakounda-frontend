@@ -69,7 +69,7 @@ export class PaymentCoursCommunComponent implements OnInit {
 
         {
           operator : ['', Validators.required],
-          numero : ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]]
+          numero : ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
         }
       )
     

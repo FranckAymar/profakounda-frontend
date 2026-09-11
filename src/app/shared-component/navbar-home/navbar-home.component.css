@@ -1,0 +1,40 @@
+#sign_up{
+    margin-top: 1em;
+    margin-left: 0.5em; 
+    
+}
+
+#sign_in{
+ margin-top: 0.4em;
+background-color: #e66030;
+border: 0.2em solid #e66030;
+border-radius: 0.3em;
+padding: 0.4em;
+ 
+}
+.cours,.form{
+    color:#013673 ;
+    font-size: 1.7em;
+}
+#cours,#form{
+    margin-top: 1em; 
+    
+  
+}
+
+
+ 
+.conn{  
+    font-size: 1.3em;
+    size: 5em;
+    
+}
+
+.insc{
+    
+    border-radius: 0.3em; 
+    font-size: 1.3em;
+    border: 0.2em solid #013673;
+    color: #013673;
+   
+}

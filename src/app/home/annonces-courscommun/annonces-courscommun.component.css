@@ -12,6 +12,37 @@
   
 
   section{
-    padding: 0px !important;
+    padding-bottom: 50px;
   }
-  
+  .com-sp{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+  }
+  .bande{
+    height: 140px;
+    background: #002147 0% 0% no-repeat padding-box;
+    width: 8px;
+    margin-left: 127px;
+  }
+  .bande1{
+    height: 140px;
+    background: #002147 0% 0% no-repeat padding-box;
+    width: 8px;
+    margin-left: 10px;
+  }
+  .bandeR{
+    height: 140px;
+    background: #002147 0% 0% no-repeat padding-box;
+    width: 8px;
+  }
+  .bandeRPrime{
+    height: 140px;
+    background: #002147 0% 0% no-repeat padding-box;
+    width: 8px;
+    margin-right: 10px;
+  }
+  #triangle-topleft {
+    width: 0;
+    height: 0;
+    border-top: 140px solid white;
+    border-right: 100px solid transparent;
+  }

@@ -1,43 +1,51 @@
 <!-- POPULAR COURSES -->
 <section class="pop-cour">
-    <div class="container com-sp pad-bot-70">
-        <div class="row">
-            <div class="con-title">
-                <h2>Les <span>Formateurs</span></h2>
-            </div>
-        </div>
-        <div style="text-align: center;" *ngIf="propositionFormations.length == 0" >
-            <p>Aucun formateurs disponibles</p>
-            <p>Vous êtes un formateur ? Proposez vos cours <a style="color: #FF5722; cursor: pointer;" (click)="goToDashboard()">ici</a></p>
+  <div class="container com-sp pad-bot-70">
+    <div class="row">
+      <div class="con-title">
+        <h2>Les <span>Formateurs</span></h2>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center;" *ngIf="propositionFormations.length == 0">
+    <p>Aucun formateurs disponibles</p>
+    <p>Vous êtes un formateur ? Proposez vos cours <a style="color: #FF5722; cursor: pointer;"
+        (click)="goToDashboard()">ici</a></p>
 
-        </div>
-       <div class="row ">
-        <div class="col-md-6" *ngFor="let propositionFormation of propositionFormations">
-            <app-card-formation
-            [idParticulier]= "propositionFormation.idParticulier"
-            [code] = "propositionFormation.code"
-            [etoilesBrillants] = "propositionFormation.etoilesBrillants"
-            [etoilesEteints] = "propositionFormation.etoilesEteints"
-            [moduleFormations] = "propositionFormation.moduleFormations"
-            [contrats] = "propositionFormation.contrats"
-            [isAllModule] = "propositionFormation.isAllModule"
-            [cyclePrimairePresente] = "propositionFormation.cyclePrimairePresent"
-            [description] = "propositionFormation.description"
-            [ville] = "propositionFormation.ville"
-            [villeTemp] = "propositionFormation.ville"
-            [commune] = "propositionFormation.commune?.libelle"
-            [id] = "propositionFormation.id"
-            ></app-card-formation>
-        </div>
-       </div>
-        <div class="row">
+  </div>
+  <div class="row h-100">
+    <div style="cursor: pointer;" class="col-md-1">
+      <i class="fa fa-arrow-left fa-5x"></i>
+    </div>
+
+    <div class="col-md-10">
+      <div class="row">
+        <app-card-formation class="col-3" *ngFor="let propositionFormation of propositionFormations"
+        [idParticulier]="propositionFormation.idParticulier" [code]="propositionFormation.code"
+        [etoilesBrillants]="propositionFormation.etoilesBrillants"
+        [etoilesEteints]="propositionFormation.etoilesEteints"
+        [moduleFormations]="propositionFormation.moduleFormations" [contrats]="propositionFormation.contrats"
+        [isAllModule]="propositionFormation.isAllModule"
+        [cyclePrimairePresente]="propositionFormation.cyclePrimairePresent"
+        [description]="propositionFormation.description" [ville]="propositionFormation.ville"
+        [villeTemp]="propositionFormation.ville" [commune]="propositionFormation.commune?.libelle"
+        [id]="propositionFormation.id">
+      </app-card-formation>
+      </div>
+    </div>
+
+    <div  style="cursor: pointer;" class="col-md-1">
+      <i class="fa fa-arrow-right fa-5x"></i>
+    </div>
+  </div>
+  <!-- <div class="row">
             <div  class="con-title">
                 <a [routerLink]="['/formations']">
                     <p>Voir plus...</p>
                 </a>
             </div>
-        </div>
-       
-    </div> 
+        </div> -->
 </section>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

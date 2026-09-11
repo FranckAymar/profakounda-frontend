@@ -311,7 +311,7 @@ export class OganiserCoursSheetComponent implements OnInit{
        idOrganisation : [''],
        titre : ['', Validators.required],
        organisation : ['', Validators.required],
-       telephone : ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+       telephone : ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
        dateDebut :  ['', Validators.required],
        dateFin  : ['', Validators.required],
        description  : ['', Validators.required],

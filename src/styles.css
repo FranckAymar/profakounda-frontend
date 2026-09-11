@@ -1,24 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
+html,
+body {
+    height: 100%;
+}
 
+body {
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, Arial, sans-serif; }
-
-
-.add-three-dot{
+.add-three-dot {
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-
 .pac-container {
     z-index: 2001 !important;
 }
 
-.snackbar{
+.snackbar {
     background-color: white;
     border-color: black;
 }
@@ -28,4 +32,4 @@ body { margin: 0; font-family: Roboto, Arial, sans-serif; }
     cursor: not-allowed;
     opacity: 0.5;
     text-decoration: none;
-  }
+}

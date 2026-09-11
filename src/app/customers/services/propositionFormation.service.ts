@@ -2,7 +2,9 @@ import { Observable } from 'rxjs';
 import { CoordMapModel } from './../models/CoordModel';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { URL } from 'src/app/API_url/config';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class PropositionFormationService{
     constructor(private httpClient:HttpClient){}
     onSaveNiveauEnseigne(data){

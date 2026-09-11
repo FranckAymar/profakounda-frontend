@@ -1,26 +1,60 @@
 @media only screen and (max-width: 600px) {
-    .gauche{
-        display: none;
-    }
-    section{
-        margin-top: 4.6em;
-    }
-   
+  .gauche{
+      display: none;
   }
-  @media only screen and (min-width: 600px) {
-    .brightness img{
-        height: 600px !important;
-    }
+  section{
+      margin-top: 4.6em;
   }
-  
+ 
+}
+@media only screen and (min-width: 600px) {
+  .brightness img{
+      height: 600px !important;
+  }
+}
+
 .brightness img
 {
-        filter: brightness(35%);
-        -webkit-filter: brightness(35%);
-        -moz-filter: brightness(35%);
-        -o-filter: brightness(35%);
-        -ms-filter: brightness(35%);
-        max-height: 600px !important;
-        min-height: 250px !important;
-    }
+      filter: brightness(35%);
+      -webkit-filter: brightness(35%);
+      -moz-filter: brightness(35%);
+      -o-filter: brightness(35%);
+      -ms-filter: brightness(35%);
+      max-height: 600px !important;
+      min-height: 250px !important;
+  }
 
+.spam{
+color: #f36b3b;
+font-size: 1em;
+}
+.col-md-12{
+background-color: white;
+}
+.col-md-6{ 
+margin-top: 4em;
+margin-bottom: 4em;
+margin-left: 3em;
+
+}
+#cours{
+background-color: #013673 ;
+border-radius: 0.3em;
+padding: 0.3em;
+margin-left: -27em;
+
+}
+#form{
+border-radius: 0.3em; 
+border: 0.2em solid #f36b3b;
+color: #f36b3b;
+margin-left: -38em;
+
+}
+.form{
+color: #f36b3b;
+font-size:1.7em;
+}
+.cours{
+font-size:1.5em;
+}

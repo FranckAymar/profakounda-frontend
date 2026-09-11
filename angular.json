@@ -18,7 +18,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -52,7 +52,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -61,8 +60,28 @@
                   "type": "initial",
                   "maximumWarning": "3mb",
                   "maximumError": "8mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
+            },
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": false,
+              "namedChunks": false,
+              "extractLicenses": false,
+              "vendorChunk": false,
+              "buildOptimizer": false
             }
           }
         },
@@ -96,7 +115,6 @@
             ],
             "styles": [
               "src/styles.css"
-            
             ],
             "scripts": []
           }
@@ -129,5 +147,8 @@
       }
     }
   },
-  "defaultProject": "prof-akounda-front"
+  "defaultProject": "prof-akounda-front",
+  "cli": {
+    "analytics": "e053dcf4-461a-448e-8038-de497a16b37e"
+  }
 }

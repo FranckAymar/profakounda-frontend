@@ -97,7 +97,7 @@ export class DetailsCoursCommunComponent implements OnInit {
     let data ;
     if(type ==='publicCible'){
       data= {
-
+        
         idCoursCommun : this.idCoursCommun,
         idPublicCible : dataToSend.id
       }

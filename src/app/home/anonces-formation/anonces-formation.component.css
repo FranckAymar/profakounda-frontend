@@ -116,4 +116,21 @@ section .section-title {
         width: 8em;
         height: 5em;
     }
-} */
+} 
+.col-md-3{
+    padding: 0 !important; 
+    margin: 10px; 
+    width: 20% !important;
+}
+*/
+
+.col-md-3{
+    margin-left:-4px;
+    padding: 0 !important; 
+    margin: 10px; 
+    width: 20% !important;
+  }
+  .col-md-3 img{
+    width:100%;
+    height:auto;
+  }

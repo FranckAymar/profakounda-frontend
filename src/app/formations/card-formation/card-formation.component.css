@@ -1,4 +1,4 @@
-.fav{
+.fav {
     border: none !important;
     color: #fff !important;
     background: #fff !important;
@@ -6,68 +6,66 @@
     cursor: pointer !important;
 }
 
-.modules-mob{
-    padding-left: 0.5em; 
+.modules-mob {
+    padding-left: 0.5em;
     padding-right: 0.5em;
 }
 
-.modules-mob p{
+.modules-mob p {
     /*height: 3em;*/
     width: 100%;
     max-height: 2em;
     white-space: pre-wrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    letter-spacing: 0px;
+    color: #002147;
+    margin: 5px;
 }
 
 .card-modules span {
     width: 100%;
 }
 
-
-.modules-mob span{
-    font-weight: bold;
+.modules-mob span {
+    font: normal normal bold 15px/19px Montserrat;
 }
 
 #team {
-   display: none;
+    display: none;
 }
-.etoileNote,.etoile{
+
+.etoileNote,
+.etoile {
     margin-right: 0.7em;
     font-size: 1.2em;
-  }
-  
-  .etoileNoteMobile,.etoileMobile{
+}
+
+.etoileNoteMobile,
+.etoileMobile {
     margin-right: 0.5em;
     font-size: 1em;
-  }
-.etoileNote,.etoileNoteMobile{
+}
+
+.etoileNote,
+.etoileNoteMobile {
     color: #FFD700;
 }
 
-@media screen  and (max-width: 990px){
-    
-    .img-card-mob{
-    
+@media screen and (max-width: 990px) {
+    .img-card-mob {
         width: 200px !important;
         height: 200px !important;
     }
-
-
-    .home-top-cour{
+    .home-top-cour {
         display: none;
     }
-
-  
     #team {
         display: inline;
-     } 
-
-
+    }
 }
 
-.card-text{
-
+.card-text {
     width: 100%;
     max-height: 2em;
     white-space: nowrap;
@@ -75,21 +73,14 @@
     text-overflow: ellipsis;
     padding-right: 1em;
     padding-left: 1em;
-
 }
 
-.card-modules{
-
+.card-modules {
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
 }
-
-
-
-
 
 section {
     padding: 60px 0;
@@ -106,8 +97,6 @@ section .section-title {
     background: #ffffff;
 }
 
-
-
 .frontside .card,
 .backside .card {
     min-height: 312px;
@@ -116,7 +105,6 @@ section .section-title {
 .backside .card a {
     font-size: 18px;
 }
-
 
 .frontside .card .card-body img {
     width: 120px;
@@ -150,11 +138,94 @@ section .section-title {
     cursor: pointer;
 }
 
-
-
-.list-form{
+.list-form {
     display: inline;
     font-size: 1em;
+}
+
+.card-v2 {
+    display: inline-block !important;
+    background: #FDFDFD 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 15px;
+    opacity: 1;
+    padding: 10px;
+    width: 21%;
+    margin: 5px;
+/*     height: 100%;
+ */
+}
+
+
+.img-card {
+    background: transparent 0% 0% no-repeat padding-box;
+    opacity: 1;
+    width: 150px;
+    height: 150px;
+    padding-right: 22px;
+    padding-left: 22px;
+    padding-top: 8px;
+    padding-right: 22px;
+    padding-bottom: 22px;
+    border-radius: 50%;
+}
+
+h4 {
+    font: normal normal bold 15px/19px Montserrat;
+    letter-spacing: 0px;
+    color: #002147;
+    margin: 5px;
+}
+
+.details {}
+
+.description {}
+
+.details-button-card {
+    background: #EF6230 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 5px;
+    opacity: 1;
+    color: white;
+    width: 80%;
+    height: 35px;
+    border-color: #EF6230;
+    font: normal normal bold 15px/19px Montserrat;
+    letter-spacing: 0px;
+    color: #FFFFFF;
     
+}
+
+i{
+    margin-right: 7px;
 
 }
+
+.label-text {
+    font: normal normal normal 14px/18px Montserrat;
+    color: #FFFFFF;
+   
+
+}
+
+.label{
+    /* position:absolute; */
+    background: #002147 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 5px 16px 5px 5px;
+    opacity: 1;
+    right: 0;
+    top: 0;
+}
+
+.list-modules{
+    display: inline;
+    width: 100%;
+    max-height: 2em;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+
+}
+

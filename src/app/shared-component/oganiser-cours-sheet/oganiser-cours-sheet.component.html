@@ -231,11 +231,10 @@
                                     <mat-select [compareWith]="comparer" formControlName="niveau">
                                         <mat-option>
                                         </mat-option>
-                                        <mat-option *ngFor="let niveau of niveaux" [(value)]="niveau">
+                                        <mat-option *ngFor="let niveau of niveaux" [value]="niveau">
                                             {{niveau.libelle}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
-
 
                                 <mat-form-field>
                                     <input type="text" placeholder="Filière (optionnel)" formControlName="filiere"
@@ -292,8 +291,7 @@
                         <div class="col-md-8">
 
                             <ul *ngIf="publicCibleMdels.length > 0" class="list-group">
-                                <li *ngFor="let public of publicCibleMdels;let i =index; 
-                                    let i=index" class="list-group-item">
+                                <li *ngFor="let public of publicCibleMdels; let i =index;" class="list-group-item">
                                     <p style="color: black;">
                                         {{public.niveau ? public.niveau.libelle :  'Tout niveau confondu' }} - Coût :
                                         {{public.cout}}

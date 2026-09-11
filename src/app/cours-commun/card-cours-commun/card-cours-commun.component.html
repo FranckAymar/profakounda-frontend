@@ -1,7 +1,7 @@
-<div class="ed-rese-grid ed-rese-grid-mar-bot-30">
+<!-- <div class="ed-rese-grid ed-rese-grid-mar-bot-30">
     <div class="ed-rsear-img ed-faci-full-top">
         <img  height="250" src="{{urlServer}}/{{cours.coursCommun.id}}" alt="">
-</div>
+    </div>
    <div class="ed-rsear-dec ed-faci-full-bot">
             <h4><p  style="height: 4em;
                         width: 100%;
@@ -44,4 +44,26 @@
             </div>
         
     </div>
+</div>  -->
+
+
+<div [routerLink]="['/courscommun/details',cours.coursCommun.id]" class="row cardCoursCommun ed-rese-grid ed-rese-grid-mar-bot-30">
+    
+        <div class="col-md-4">
+            <div class="ed-rsear-img ed-faci-full-top">
+                <img  height="200" src="{{urlServer}}/{{cours.coursCommun.id}}" alt="">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h1 class="coursCommunTitle">{{cours.coursCommun.titre}}</h1>
+            <h2 class="coursCommunSubTitle">{{cours.coursCommun.organisation.libelle}}</h2>
+            <div style="margin-top: 5px;" class="row">
+                <p  style="margin-left: 5px;color: #002147;font-weight: bold;font-size: 15px;">Cours de préparation pour les examens et les concours notamment les sus-nommés... </p>
+                <img style="float: left;margin-right: 13px; margin-left: 5px;" height="25" width="25"  src="../../../assets/images/calendrier.png" alt="">
+                <p style="justify-items: center; color:  #707070;">{{cours.coursCommun?.dateDebut  |date:"dd MMMM yyyy "}}</p>
+                <img style="float: left;margin-right: 13px; margin-left: 5px;" height="25" width="25"  src="../../../assets/images/location.png" alt="">
+                <p style="justify-items: center;color:  #707070;">{{cours.lieuIntervention.libelle}}</p>
+            </div>
+        </div>
+   
 </div> 

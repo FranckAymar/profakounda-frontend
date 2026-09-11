@@ -7,6 +7,20 @@ before_script:
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+merge_request_verify:
+  image: node:12-alpine
+  stage: dependencies
+  script:
+    - npm install
+  only:
+    - merge_requests
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules  
     
 deploy_staging:
   type: deploy
@@ -14,7 +28,7 @@ deploy_staging:
     name: staging
     url: http://dev.profakounda.com/
   script:
-    - ssh ubuntu@51.83.68.188 "cd /var/www/profakounda-front-dev &&sudo git pull origin develop &&sudo rm package-lock.json &&sudo npm install &&sudo ng build && exit"
+    - ssh ubuntu@51.83.68.188 "cd /var/www/profakounda-front-dev &&sudo git checkout . &&sudo git pull origin develop &&sudo rm package-lock.json &&sudo npm install &&sudo ng build --configuration=dev && exit"
   only:
     - develop
 
@@ -25,5 +39,6 @@ deploy_prod:
     url: http://profakounda.com/
   script:
     - ssh ubuntu@51.83.68.188 "cd /var/www/prof-akounda-front &&sudo git pull origin master &&sudo rm package-lock.json &&sudo npm install &&sudo ng build && exit"
+    - ssh ubuntu@51.83.68.188 "cd /var/www/prof-akounda-front &&sudo git pull origin master &&sudo rm package-lock.json &&sudo npm install &&sudo ng build --configuration=production && exit"
   only:
     - master

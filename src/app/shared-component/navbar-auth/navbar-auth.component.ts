@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { ParticulierService } from './../../customers/services/particulier.service';
 import { SignInService } from './../../home/services/sign-in.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { consts } from '../../API_url/const'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar-auth',
@@ -54,7 +54,7 @@ close(){
     .subscribe(
       (reponse)=>{
        this.id = reponse['id'];
-       this.url = consts.host+ consts.nameProject+"photoParticulier/"+this.id;
+       this.url = environment.host+ environment.nameProject+"photoParticulier/"+this.id;
        this.nom = reponse["nom"];
        this.prenoms = reponse["prenoms"];
       },

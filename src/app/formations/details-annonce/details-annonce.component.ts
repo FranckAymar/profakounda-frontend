@@ -26,10 +26,10 @@ declare var $: any;
 export class DetailsAnnonceComponent implements OnInit {
 
   //ViewChild
-  @ViewChild('openModalPayment',  {static: false}) openModalPayment: ElementRef<HTMLElement>;
-  @ViewChild('closeModalPayment',  {static: false}) closeModalPayment: ElementRef<HTMLElement>;
-  @ViewChild('openParticulierDetails',  {static: false}) openParticulierDetails: ElementRef<HTMLElement>;
-  @ViewChild('goToSignin',  {static: false}) goToSignin: ElementRef<HTMLElement>;
+  @ViewChild('openModalPayment') openModalPayment: ElementRef<HTMLElement>;
+  @ViewChild('closeModalPayment') closeModalPayment: ElementRef<HTMLElement>;
+  @ViewChild('openParticulierDetails') openParticulierDetails: ElementRef<HTMLElement>;
+  @ViewChild('goToSignin') goToSignin: ElementRef<HTMLElement>;
 
   
   //Variable for condition
@@ -278,7 +278,7 @@ changeEtoile5(){
 
       {
         operator : ['', Validators.required],
-        numero : ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]]
+        numero : ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
       }
     )
   

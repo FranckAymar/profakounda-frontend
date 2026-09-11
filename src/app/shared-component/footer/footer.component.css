@@ -1,0 +1,33 @@
+.wed-hom-footer{
+    background-color: white;
+}
+span{
+    color: orangered;
+    font-size: 1em;
+}
+#item{
+    color:red; 
+}
+.prof{
+    margin-top: 15em;
+}
+.col-md-4{
+    margin-top: -4em;
+}
+#rs{
+    background-color: #e66030;
+    font-size: 1em;
+    margin: 0.5em; 
+    border-radius: 0.3em;
+}
+i{
+    color: white;
+   padding: 0.2em;
+}
+.ed-com-t1-right{
+    margin-top: 3em;
+    margin-right: 12em;
+}
+a,h5,h6{
+    color: #013673;
+}

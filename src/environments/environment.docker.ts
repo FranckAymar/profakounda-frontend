@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  host: "https://api.profakounda.com/api",
+  host: "/api",
   nameProject: "/"
 };

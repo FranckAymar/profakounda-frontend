@@ -1,6 +1,15 @@
 .wed-hom-footer{
     background-color: white;
 }
+.wed-hom-footer .container > .col-md-12 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    float: none;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2em 0;
+}
 span{
     color: orangered;
     font-size: 1em;
@@ -9,10 +18,12 @@ span{
     color:red; 
 }
 .prof{
-    margin-top: 15em;
+    margin-top: 0;
 }
-.col-md-4{
-    margin-top: -4em;
+.wed-hom-footer .col-md-4{
+    float: none;
+    margin: 0;
+    padding: 0 1em;
 }
 #rs{
     background-color: #e66030;
@@ -26,8 +37,31 @@ i{
 }
 .ed-com-t1-right{
     margin-top: 3em;
-    margin-right: 12em;
+    margin-right: 0;
 }
 a,h5,h6{
     color: #013673;
+}
+.copy-right {
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .wed-hom-footer .container > .col-md-12 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .wed-hom-footer .col-md-4 {
+        width: 100%;
+        margin-bottom: 2em;
+    }
+
+    .ed-com-t1-right ul {
+        display: flex;
+        justify-content: center;
+        padding-left: 0;
+    }
 }

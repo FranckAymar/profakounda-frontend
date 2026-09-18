@@ -26,14 +26,14 @@
                         </li>
                         <li>{{propositionFormation.niveau?.libelle}}</li>
                         <li>
-                            <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                                
-                                {{propositionFormation?.ville ? propositionFormation.ville : '' }} 
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+
+                                {{propositionFormation?.ville ? propositionFormation.ville : '' }}
                                 <span *ngIf="propositionFormation.commune">,</span>
                                 {{propositionFormation?.commune ? propositionFormation.commune : ''}}
                         </li>
-                        
-                       
+
+
 
                     </ul>
                 </div>
@@ -44,7 +44,7 @@
                 <div *ngIf="paymentWaiting" class="modal-header center alert alert-success">
                     <div style="padding: 0.5em;"   class="row">
                       <p><strong>Demande de paiement envoyée !</strong></p>
-                      <p>Cliquez sur le bouton <strong>Me contacter</strong> une fois le paiement confirmé ! </p> 
+                      <p>Cliquez sur le bouton <strong>Me contacter</strong> une fois le paiement confirmé ! </p>
                     </div>
                   </div>
 
@@ -53,7 +53,7 @@
                     <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
                         <p [innerHTML]="propositionFormation.description"></p>
                  </div>
-  
+
 
                 <div class="udb">
 
@@ -65,7 +65,7 @@
 
                         <button id="meContacterBtn" (click)="contactCustomer()" style="border-radius:10em;
                                                                     background-color:#002147 !important;height: 3.5em;
-                                                                    font-weight: 1000;"  
+                                                                    font-weight: 1000;"
                             class="btn btn-lg btn-block my-2"><i style="font-size: 25px;" class="fa fa-phone"></i> Me contacter </button>
                     </div>
 
@@ -78,7 +78,7 @@
 
                     <div *ngIf="propositionFormation.cyclePrimairePresent"  class="modal-header center">
                         <p class="alert alert-warning">
-                            Pour les niveaux touchant les <strong>cours préparatoires (CP), les cours élémentaires (CE) ou les cours moyens (CM),</strong>  
+                            Pour les niveaux touchant les <strong>cours préparatoires (CP), les cours élémentaires (CE) ou les cours moyens (CM),</strong>
                             toutes les matières seront dispensées par cet enseignant.</p>
                     </div>
 
@@ -111,7 +111,7 @@
                                     <tr>
                                         <th *ngIf="!propositionFormation.isAllNiveau">Niveaux</th>
                                         <th class="align-text-right">Coût</th>
-                                       
+
 
                                     </tr>
                                 </thead>
@@ -265,9 +265,9 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12 stepper">
-                                <div style="text-align: right; margin-bottom: 1em;" class="row">   
+                                <div style="text-align: right; margin-bottom: 1em;" class="row">
                                     <a (click)="initializeModalPayment()" data-dismiss="modal"  id="ed-mi-close" class="ed-mi-close"><i class="fa fa-times" style="color: gainsboro;"></i></a>
-                            
+
                                 </div>
                                 <ul class="progressbar">
                                     <li id="step1" class="active"><span class="headersStepper">Connexion</span></li>
@@ -368,9 +368,9 @@
                                 <!--Forfaits-->
                                 <div id="content2" class="hide">
 
-                                    <p style="margin-top: 0.5em;" style="text-align: center;">Un <strong>forfait</strong> 
+                                    <p style="margin-top: 0.5em;" style="text-align: center;">Un <strong>forfait</strong>
                                         vous donne accès aux contacts d'un formateur.
-                                    <br>Le nombre de <strong>requêtes</strong> d'un forfait constitue le nombre de formateurs que vous pouvez 
+                                    <br>Le nombre de <strong>requêtes</strong> d'un forfait constitue le nombre de formateurs que vous pouvez
                                     consulter sachant qu'un contact vous coûtera une requête.</p>
                                     <div class="tab-inn">
                                         <div style="width: 100%;overflow: auto;" class="table-responsive table-desi">
@@ -419,19 +419,19 @@
                                         <p>Choississez un opérateur :</p>
                                         <div class="row">
                                             <input  type="radio" value="MOMO_SKAN"
-                                            formControlName="operator" name="operator" 
+                                            formControlName="operator" name="operator"
                                             [(ngModel)]="paiementDetails.modePaiement"
                                             class="filled-in" id="mtn" />
                                             <label for="mtn">MTN CI</label>
 
                                          <!--    <input disabled  value="MOOV_SKAN" type="radio"
-                                            formControlName="operator" name="operator" 
+                                            formControlName="operator" name="operator"
                                             [(ngModel)]="paiementDetails.modePaiement"
                                             class="filled-in" id="moov" />
                                             <label for="moov">MOOV CI</label> -->
 
                                             <input  value="OM_SKAN" type="radio"
-                                            formControlName="operator" name="operator" 
+                                            formControlName="operator" name="operator"
                                             [(ngModel)]="paiementDetails.modePaiement"
                                                 class="filled-in" id="orange" />
                                             <label for="orange">ORANGE CI</label>
@@ -440,21 +440,21 @@
                                     </div>
 
                                     <div class="input-field s12">
-                                        <input 
+                                        <input
                                             formControlName="numero"
-                                            [(ngModel)]="paiementDetails.numeroPaiement" 
-                                            type="tel" pattern="[0-9]*" 
+                                            [(ngModel)]="paiementDetails.numeroPaiement"
+                                            pattern="[0-9]*"
                                             data-ng-model="name" class="validate">
                                         <label>Entrez votre numéro</label>
-                                        <small style="color: red;" 
+                                        <small style="color: red;"
                                         *ngIf="operatorForm.controls.numero.errors?.required ||
                                         operatorForm.controls.numero.errors?.maxlength ||
                                         operatorForm.controls.numero.errors?.minlength " class="invalid-feedback">
-                                            Entrez un numéro de téléphone valide  (8 chiffres)
+                                            Entrez un numéro de téléphone valide  (10 chiffres)
                                     </small>
                                     </div>
 
-                                    <button id="nextBtnPaiement" [disabled]="operatorForm.invalid" 
+                                    <button id="nextBtnPaiement" [disabled]="operatorForm.invalid"
                                         class="btn btn-bg-color btn-block">Suivant</button>
                                 </form>
                                 </div>

@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider ng serve",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -35,7 +35,7 @@
     "mdbootstrap": "^4.20.0",
     "ngx-cookie": "^4.1.2",
     "ngx-cookie-service": "^3.1.2",
-    "node-sass": "^4.13.1",
+    "sass": "^1.26.11",
     "pdfmake": "^0.1.72",
     "pdfmake-wrapper": "^2.1.2",
     "rxjs": "~6.6.7",

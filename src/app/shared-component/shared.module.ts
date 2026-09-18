@@ -42,7 +42,7 @@ registerLocaleData(localeFr);
     CommonModule,
     RouterModule,
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCud6-IOzGf04McqnGvz3z-pCdDEhci9Jw'
@@ -57,28 +57,26 @@ registerLocaleData(localeFr);
     CommonModule,
     RouterModule,
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     MaterialDesignModule,
     CKEditorModule,
-     AgmCoreModule ,
-     NavbarAuthComponent,
-     NavbarHomeComponent,
-     SearchBarComponent,
-     CardCoursCommunComponent,
-     SearchBarCoursCommunComponent
-     
-  
+    AgmCoreModule,
+    NavbarAuthComponent,
+    NavbarHomeComponent,
+    SearchBarComponent,
+    CardCoursCommunComponent,
+    SearchBarCoursCommunComponent
   ],
 
   providers : [DatePipe,
-               { 
-                 provide: LOCALE_ID, 
+               {
+                 provide: LOCALE_ID,
                  useValue: 'fr-FR'
                }],
-  entryComponents : [OganiserCoursSheetComponent, 
-                    PaymentCoursCommunComponent, 
-                    DetailsInscritsComponent, 
+  entryComponents : [OganiserCoursSheetComponent,
+                    PaymentCoursCommunComponent,
+                    DetailsInscritsComponent,
                     AlertComponent]
 })
 export class SharedModule { }

@@ -1,7 +1,8 @@
 import { SnackbarService } from './../services/snackbar.service';
 import { InscriptioncourscommunService } from './../../cours-commun/inscriptioncourscommun.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit, Inject } from '@angular/core';
 import * as $ from 'jquery';
 

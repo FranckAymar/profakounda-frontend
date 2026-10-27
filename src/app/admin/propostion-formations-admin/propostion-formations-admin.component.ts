@@ -5,7 +5,7 @@ import { PropostionFormationsAdminService } from './../services/propostion-forma
 import { Component, OnInit } from '@angular/core';
 
 import * as $ from 'jquery';
-import { MatGridTileHeaderCssMatStyler } from '@angular/material';
+import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 import { PropositionFormationService } from 'src/app/customers/services/propositionFormation.service';
 import { Message } from '../model/message';
 

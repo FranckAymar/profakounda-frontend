@@ -14,7 +14,7 @@ import { VilleService } from 'src/app/admin/services/ville.service';
 import { CompressorService } from '../services/CompressorService';
 import { CommuneService } from 'src/app/admin/services/commune.service';
 import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
 
 @Component({

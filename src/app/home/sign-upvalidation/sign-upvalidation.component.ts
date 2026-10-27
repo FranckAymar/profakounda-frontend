@@ -2,7 +2,6 @@ import { signUpvalidationService } from '../services/signUp-validation.service';
 import { SignInComponent } from '../sign-in/sign-in.component';
 import { Routes, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-sign-upvalidation',

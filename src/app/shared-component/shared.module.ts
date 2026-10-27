@@ -23,60 +23,54 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 registerLocaleData(localeFr);
 
 @NgModule({
-  declarations: [
-    CardFormationComponent,
-    NavbarHomeComponent,
-    FooterComponent,
-    NavbarAuthComponent,
-    SearchBarComponent,
-    GooglePlaceComponent,
-    OganiserCoursSheetComponent,
-    CardCoursCommunComponent,
-    PaymentCoursCommunComponent,
-    DetailsInscritsComponent,
-    SearchBarCoursCommunComponent,
-    AlertComponent
-
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCud6-IOzGf04McqnGvz3z-pCdDEhci9Jw'
-    }) ,
-    MaterialDesignModule,
-    CKEditorModule  ,
-  ],
-  exports : [
-    CardFormationComponent,
-    FooterComponent,
-    GooglePlaceComponent,
-    CommonModule,
-    RouterModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialDesignModule,
-    CKEditorModule,
-    AgmCoreModule,
-    NavbarAuthComponent,
-    NavbarHomeComponent,
-    SearchBarComponent,
-    CardCoursCommunComponent,
-    SearchBarCoursCommunComponent
-  ],
-
-  providers : [DatePipe,
-               {
-                 provide: LOCALE_ID,
-                 useValue: 'fr-FR'
-               }],
-  entryComponents : [OganiserCoursSheetComponent,
-                    PaymentCoursCommunComponent,
-                    DetailsInscritsComponent,
-                    AlertComponent]
+    declarations: [
+        CardFormationComponent,
+        NavbarHomeComponent,
+        FooterComponent,
+        NavbarAuthComponent,
+        SearchBarComponent,
+        GooglePlaceComponent,
+        OganiserCoursSheetComponent,
+        CardCoursCommunComponent,
+        PaymentCoursCommunComponent,
+        DetailsInscritsComponent,
+        SearchBarCoursCommunComponent,
+        AlertComponent
+    ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCud6-IOzGf04McqnGvz3z-pCdDEhci9Jw'
+        }),
+        MaterialDesignModule,
+        CKEditorModule,
+    ],
+    exports: [
+        CardFormationComponent,
+        FooterComponent,
+        GooglePlaceComponent,
+        CommonModule,
+        RouterModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialDesignModule,
+        CKEditorModule,
+        AgmCoreModule,
+        NavbarAuthComponent,
+        NavbarHomeComponent,
+        SearchBarComponent,
+        CardCoursCommunComponent,
+        SearchBarCoursCommunComponent
+    ],
+    providers: [DatePipe,
+        {
+            provide: LOCALE_ID,
+            useValue: 'fr-FR'
+        }]
 })
 export class SharedModule { }

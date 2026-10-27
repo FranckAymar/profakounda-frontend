@@ -1,6 +1,6 @@
 import { ResetPasswordService } from './../services/reset-password.service';
 import { PasswordResetModel } from './../models/password-reset';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,10 +11,10 @@ import { Component, OnInit } from '@angular/core';
 export class ForgotPasswordComponent implements OnInit {
 
 
-  forgotPasswordForm : FormGroup ;
+  forgotPasswordForm : UntypedFormGroup ;
 
   isFailed : boolean;
-  constructor(private formBuilder : FormBuilder,
+  constructor(private formBuilder : UntypedFormBuilder,
                private resetPasswordService : ResetPasswordService) {
 
                 this.isFailed = false ;

@@ -1,7 +1,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { SignInService } from '../services/sign-in.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,13 +13,13 @@ export class SignInComponent implements OnInit {
   TOKEN = 'TOKEN';
   USERNAME = 'USERNAME';
   AUHORITY = 'AUTHORITY';
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   isFailed: boolean;
   errorInternet : boolean ;
 
   constructor(private signInService: SignInService,
     private router: Router,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route : ActivatedRoute) {
     this.isFailed = false;
     this.errorInternet = false ;

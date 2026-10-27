@@ -1,5 +1,5 @@
 import { CauserefusService } from './../services/causerefus.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,9 +10,9 @@ import { Component, OnInit } from '@angular/core';
 export class CauserefusComponent implements OnInit {
 
   causeRefus = [] ;
-  causeRefusForm : FormGroup ;
+  causeRefusForm : UntypedFormGroup ;
 
-  constructor(private formBuilder : FormBuilder,
+  constructor(private formBuilder : UntypedFormBuilder,
               private causerefusService : CauserefusService) { }
 
   ngOnInit() {

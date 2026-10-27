@@ -1,4 +1,4 @@
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { SnackbarService } from './../../shared-component/services/snackbar.service';
 import { CauserefusService } from './../services/causerefus.service';
 import { ActivatedRoute } from '@angular/router';
@@ -40,13 +40,13 @@ export class DetailsPropostionFormationAdminComponent implements OnInit {
   } ;
   idPropositionFormation;
 
-  causeRefusForm : FormGroup ;
+  causeRefusForm : UntypedFormGroup ;
 
   constructor(private propostionFormAdminService : PropostionFormationsAdminService,
               private route : ActivatedRoute,
               private causeRefusService : CauserefusService,
               private snackbarService : SnackbarService,
-              private formBuilder : FormBuilder) { }
+              private formBuilder : UntypedFormBuilder) { }
 
 
 

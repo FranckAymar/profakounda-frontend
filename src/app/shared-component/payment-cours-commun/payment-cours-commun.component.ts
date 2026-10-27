@@ -1,6 +1,6 @@
 import { SnackbarService } from './../services/snackbar.service';
 import { InscriptioncourscommunService } from './../../cours-commun/inscriptioncourscommun.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -25,12 +25,12 @@ export class PaymentCoursCommunComponent implements OnInit {
   isNotCheck = true ; 
 
   //Form group
-  identificationForm : FormGroup ;
-  operatorForm : FormGroup ;
+  identificationForm : UntypedFormGroup ;
+  operatorForm : UntypedFormGroup ;
 
   constructor(private dialogRef: MatDialogRef<PaymentCoursCommunComponent>,
              @Inject(MAT_DIALOG_DATA) public dataReceived: any,
-             private formBuilder : FormBuilder,
+             private formBuilder : UntypedFormBuilder,
              private inscriptionService : InscriptioncourscommunService,
              private snackBar: SnackbarService
 

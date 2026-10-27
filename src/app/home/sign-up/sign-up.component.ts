@@ -2,7 +2,7 @@ import { SnackbarService } from './../../shared-component/services/snackbar.serv
 import { Component, OnInit, Input } from '@angular/core';
 import { ParticulierService } from '../../customers/services/particulier.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder,Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder,Validators } from '@angular/forms';
 import { Particulier } from '../models/Particulier.model';
 
 @Component({
@@ -12,7 +12,7 @@ import { Particulier } from '../models/Particulier.model';
 })
 export class SignUpComponent implements OnInit {
 
-  userForm : FormGroup;
+  userForm : UntypedFormGroup;
   @Input() invalidation:boolean = true;
   error :string;
   message:string;
@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
   inscriptionSucess : boolean = false ;
   constructor(private particulierService:ParticulierService,
               private router:Router,
-              private formBuilder:FormBuilder,
+              private formBuilder:UntypedFormBuilder,
               private snackbarService : SnackbarService) { }
  
   ngOnInit() {

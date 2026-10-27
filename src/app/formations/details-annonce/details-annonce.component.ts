@@ -9,7 +9,7 @@ import { SignInService } from './../../home/services/sign-in.service';
 import { URL } from 'src/app/API_url/config';
 import { ActivatedRoute, RouterStateSnapshot, Router } from '@angular/router';
 import { DetaisFormationsService } from './../services/detais-formations.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as $ from 'jquery';
 import { PasswordMatch } from 'src/app/custom-validator/password-match';
@@ -103,15 +103,15 @@ export class DetailsAnnonceComponent implements OnInit {
 
 
   //Form
-  sigInForm : FormGroup ;
-  singUpForm : FormGroup ;
-  operatorForm : FormGroup ;
+  sigInForm : UntypedFormGroup ;
+  singUpForm : UntypedFormGroup ;
+  operatorForm : UntypedFormGroup ;
 
 
   constructor(private detaisFormationsService : DetaisFormationsService,
               private route : ActivatedRoute,
               private signInService : SignInService,
-              private formBuilder : FormBuilder,
+              private formBuilder : UntypedFormBuilder,
               private signUpService : ParticulierService,
               private forfaitService : ForfaitService,
               private paiementService : PaiementService,

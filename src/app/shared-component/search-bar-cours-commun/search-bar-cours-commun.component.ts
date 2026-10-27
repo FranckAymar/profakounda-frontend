@@ -1,7 +1,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class SearchBarCoursCommunComponent implements OnInit {
   myGroup;
   organisationObject:any = [];
   listeOrganisation: Observable<any[]>
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   code ;
   organisationName:String;
   
@@ -40,8 +40,8 @@ export class SearchBarCoursCommunComponent implements OnInit {
     if(this.code){
       this.onFilterCoursCommun();
     }
-    this.myGroup = new FormGroup({
-      organisation: new FormControl()
+    this.myGroup = new UntypedFormGroup({
+      organisation: new UntypedFormControl()
     });
 
   }

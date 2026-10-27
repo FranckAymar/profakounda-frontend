@@ -3,7 +3,7 @@ import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { Niveau } from 'src/app/admin/model/niveau.model';
 import { Classe } from '../model/classe';
 import { CycleService } from '../services/cycle.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-niveau',
@@ -29,10 +29,10 @@ export class NiveauComponent implements OnInit {
   //Nombre de page totals
   totalPage : number 
   totalPageArray : Array<any> ;
-  classForm: FormGroup
+  classForm: UntypedFormGroup
   cycles = [];
   constructor(private niveauService:NiveauService,private cycleService: CycleService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit() {
     this.onFetchNiveaux(this.page);

@@ -1,7 +1,7 @@
 import { Filiere } from '../model/filiere';
 import { FiliereService } from '../services/filiere.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-filiere',
@@ -26,10 +26,10 @@ export class FiliereComponent implements OnInit {
   filiere: Filiere ={}; 
   message: string;
 
-  classForm: FormGroup;
+  classForm: UntypedFormGroup;
 
   constructor(private filiereService: FiliereService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit() {
 

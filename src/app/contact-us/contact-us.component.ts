@@ -1,7 +1,7 @@
 import { SnackbarService } from './../shared-component/services/snackbar.service';
 import { ContactServiceService } from './../shared-component/services/contact-service.service';
 import { SignInService } from './../home/services/sign-in.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,9 +12,9 @@ import { Component, OnInit } from '@angular/core';
 export class ContactUsComponent implements OnInit {
 
   API_KEY = "AIzaSyCud6-IOzGf04McqnGvz3z-pCdDEhci9Jw";
-  contactUsForm : FormGroup ;
+  contactUsForm : UntypedFormGroup ;
   email : string ;
-  constructor(private formBuilder : FormBuilder,
+  constructor(private formBuilder : UntypedFormBuilder,
               private signInService : SignInService,
               private contactService : ContactServiceService,
               private snackBarService : SnackbarService) { }

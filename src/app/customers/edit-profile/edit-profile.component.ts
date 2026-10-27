@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, TemplateRef } from '@angular/core';
 import { URL } from 'src/app/API_url/config';
 import { EMPTY } from 'rxjs';
-import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators,UntypedFormControl } from '@angular/forms';
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { Router } from '@angular/router';
 import { SignInService } from 'src/app/home/services/sign-in.service';
@@ -52,12 +52,12 @@ export class EditProfileComponent implements OnInit {
   data: FileList;
   compressedImages = [];
   passwordModel:PasswordModel;
-  userForm : FormGroup;
-  passwordForm : FormGroup;
-  myControl = new FormControl();
-  myControl2 = new FormControl();
-  myControl3 = new FormControl();
-  myControlCommune = new FormControl();
+  userForm : UntypedFormGroup;
+  passwordForm : UntypedFormGroup;
+  myControl = new UntypedFormControl();
+  myControl2 = new UntypedFormControl();
+  myControl3 = new UntypedFormControl();
+  myControlCommune = new UntypedFormControl();
   filteredOptionsCommunes: Observable<string[]>
   filteredOptions3: Observable<string[]>
   filteredOptions2: Observable<string[]>
@@ -72,7 +72,7 @@ export class EditProfileComponent implements OnInit {
               private router:Router,
               private dialog: MatDialog,
               private snackbarService : SnackbarService,
-              private formBuilder:FormBuilder,
+              private formBuilder:UntypedFormBuilder,
               private signInService:SignInService,
               private compressor: CompressorService) { }
 

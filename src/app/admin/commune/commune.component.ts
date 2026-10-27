@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommuneService } from '../services/commune.service';
 import { VilleService } from '../services/ville.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Commune } from '../model/commune.model';
 
 @Component({
@@ -14,8 +14,8 @@ export class CommuneComponent implements OnInit {
   commune:Commune = {};
   communes:any = [];
   villes:any = [];
-  communeForm: FormGroup
-  constructor(private communeService:CommuneService,private villeService:VilleService,private formBuilder: FormBuilder) { }
+  communeForm: UntypedFormGroup
+  constructor(private communeService:CommuneService,private villeService:VilleService,private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit() {
     this.onFetchCommunes();

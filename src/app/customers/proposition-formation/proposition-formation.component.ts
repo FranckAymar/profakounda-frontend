@@ -12,7 +12,7 @@ import { Heure } from '../models/heure.model';
 import { PropositionFormation } from '../models/PropositionFormation.model';
 import { Lambda } from '../models/lambda.model';
 import { JourService } from '../services/Jour.service';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { FormationService } from 'src/app/admin/services/formation.service';
@@ -94,11 +94,11 @@ export class PropositionFormationComponent implements OnInit {
   errorProposition:string;
   errorJour:string;
   filteredOptions4: Observable<string[]>
-  myControl = new FormControl();
-  myControl2 = new FormControl();
-  myControl3 = new FormControl();
-  myControl4 = new FormControl();
-  myControlCommune = new FormControl();
+  myControl = new UntypedFormControl();
+  myControl2 = new UntypedFormControl();
+  myControl3 = new UntypedFormControl();
+  myControl4 = new UntypedFormControl();
+  myControlCommune = new UntypedFormControl();
   coordMapModel : CoordMapModel ;
   filteredOptions: Observable<string[]>;
   filteredOptions2: Observable<string[]>;

@@ -12,7 +12,7 @@ import { FormationService } from './../../admin/services/formation.service';
 import { publicCibleModel } from './../../home/models/publiccible';
 import { LieuInterventionModel } from './../../home/models/lieuintervention';
 import { CoursCommunModel } from './../../home/models/courscommun';
-import { FormBuilder, FormGroup, Validators, Form, FormArray, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, Form, FormArray, UntypedFormControl } from '@angular/forms';
 import { Component, OnInit, Inject, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -49,11 +49,11 @@ export class OganiserCoursSheetComponent implements OnInit{
   urlServerAffiche = URL.getAffichePubCoursCommun;
 
   //FormGroup
-  coursCommunForm : FormGroup;
-  publicCibleForm : FormGroup;
-  lieuInterventionForm : FormGroup ;
-  formationsListControl = new FormControl();
-  coutGeneralForm : FormGroup ;
+  coursCommunForm : UntypedFormGroup;
+  publicCibleForm : UntypedFormGroup;
+  lieuInterventionForm : UntypedFormGroup ;
+  formationsListControl = new UntypedFormControl();
+  coutGeneralForm : UntypedFormGroup ;
 
   //Variable for map
 
@@ -99,7 +99,7 @@ export class OganiserCoursSheetComponent implements OnInit{
 
   constructor(
     private dialogRef: MatDialogRef<OganiserCoursSheetComponent>,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private formationService : FormationService,
     private niveauService : NiveauService,
     private organisationService : OrganisationService,
@@ -338,10 +338,10 @@ export class OganiserCoursSheetComponent implements OnInit{
     this.publicCibleForm = this.formBuilder.group(
 
       {
-          id : new FormControl(),
+          id : new UntypedFormControl(),
           niveau : [null],
           cout : ['', Validators.required],
-          formations : new FormControl(null, Validators.required),
+          formations : new UntypedFormControl(null, Validators.required),
           nbreMaxInscrits : [''],
           filiere : [null]
       }

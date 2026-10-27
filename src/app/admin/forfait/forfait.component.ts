@@ -1,6 +1,6 @@
 import { ForfaitService } from '../services/forfait.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Forfait } from 'src/app/admin/model/forfait';
 
 @Component({
@@ -14,12 +14,12 @@ export class ForfaitComponent implements OnInit {
   forfait : Forfait = {} ;
   forfaits = [] ;
 
-  forfaitForm : FormGroup ;
+  forfaitForm : UntypedFormGroup ;
 
   message : string =  "" ;
 
   constructor(private forfaitService : ForfaitService,
-              private formBuilder : FormBuilder) { }
+              private formBuilder : UntypedFormBuilder) { }
 
   ngOnInit() {
 

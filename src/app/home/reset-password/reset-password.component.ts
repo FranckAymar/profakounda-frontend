@@ -1,5 +1,5 @@
 import { ResetPasswordService } from './../services/reset-password.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PasswordMatch } from './../../custom-validator/password-match'
@@ -11,11 +11,11 @@ import { PasswordMatch } from './../../custom-validator/password-match'
 export class ResetPasswordComponent implements OnInit {
 
 
-  resetPasswordForm : FormGroup ;
+  resetPasswordForm : UntypedFormGroup ;
   token : string ;
   formVisible : boolean ;
 
-  constructor(private formBuilder : FormBuilder,
+  constructor(private formBuilder : UntypedFormBuilder,
               private resetPassService : ResetPasswordService, 
               private route : ActivatedRoute,
               private router : Router)

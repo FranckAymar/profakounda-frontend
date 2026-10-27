@@ -2,7 +2,7 @@ import { CycleService } from '../services/cycle.service';
 import { ClasseService } from '../services/classe.service';
 import { Classe } from '../model/classe';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import * as $ from 'jquery';
 
 @Component({
@@ -17,11 +17,11 @@ export class ClasseComponent implements OnInit {
   classe: Classe = {};
   message: string;
 
-  classForm: FormGroup
+  classForm: UntypedFormGroup
 
   constructor(private classeService: ClasseService,
     private cycleService: CycleService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit() {
     this.onFetchClasses();

@@ -1,6 +1,6 @@
 import { PropostionFormationsAdminService } from './../../admin/services/propostion-formations-admin.service';
 import { PdfMakeWrapper, Toc, Txt, TocItem, Table, Cell, Img, Stack, Columns } from 'pdfmake-wrapper';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import { Component, OnInit, Inject } from '@angular/core';
 import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import { DatePipe } from '@angular/common';

@@ -14,8 +14,8 @@ import { LieuInterventionModel } from './../../home/models/lieuintervention';
 import { CoursCommunModel } from './../../home/models/courscommun';
 import { UntypedFormBuilder, UntypedFormGroup, Validators, Form, FormArray, UntypedFormControl } from '@angular/forms';
 import { Component, OnInit, Inject, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import * as $ from 'jquery';
 import { CompressorService } from 'src/app/customers/services/CompressorService';
 

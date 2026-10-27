@@ -3,8 +3,8 @@ import { SnackbarService } from './../../shared-component/services/snackbar.serv
 import { InscriptioncourscommunService } from './../inscriptioncourscommun.service';
 import { SignInService } from './../../home/services/sign-in.service';
 import { PaymentCoursCommunComponent } from './../../shared-component/payment-cours-commun/payment-cours-commun.component';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ActivatedRoute, Router, RouterStateSnapshot, RouterState } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
 import { Component, OnInit } from '@angular/core';

@@ -2,7 +2,7 @@ import { URL } from 'src/app/API_url/config';
 import { AlertComponent } from './../../../shared-component/alert/alert.component';
 import { SnackbarService } from './../../../shared-component/services/snackbar.service';
 import { DetailsInscritsComponent } from './../../../shared-component/details-inscrits/details-inscrits.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { InscriptioncourscommunService } from './../../../cours-commun/inscriptioncourscommun.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from '../../services/cours-commun-service.service';

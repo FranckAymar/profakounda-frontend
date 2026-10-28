@@ -1,12 +1,13 @@
 import { Filiere } from '../model/filiere';
 import { FiliereService } from '../services/filiere.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-filiere',
     templateUrl: './filiere.component.html',
     styleUrls: ['./filiere.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FiliereComponent implements OnInit {

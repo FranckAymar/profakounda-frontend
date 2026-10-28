@@ -1,5 +1,5 @@
 import { ForfaitService } from '../services/forfait.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Forfait } from 'src/app/admin/model/forfait';
 
@@ -7,6 +7,7 @@ import { Forfait } from 'src/app/admin/model/forfait';
     selector: 'app-forfait',
     templateUrl: './forfait.component.html',
     styleUrls: ['./forfait.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ForfaitComponent implements OnInit {

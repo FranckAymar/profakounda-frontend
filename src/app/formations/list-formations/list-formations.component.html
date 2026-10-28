@@ -29,7 +29,7 @@
                     [description] = "propositionFormation.description"
                     [ville] = "propositionFormation.ville"
                     [villeTemp] = "propositionFormation.ville"
-                    [commune] = "propositionFormation.commune?.libelle" 
+                    [commune] = "$safeNavigationMigration(propositionFormation.commune?.libelle)" 
                     [id] = "propositionFormation.id"
                     [rayonIntervention] = "propositionFormation.rayonIntervention"
                     [isFavoris] = "propositionFormation.isFavoris"     
@@ -54,12 +54,12 @@
         <div  class="col-md-4">
             <google-map *ngIf="propositionFormations" [center]="{lat: lat, lng: lng}" width="100%" height="700px" [zoom]="zoom">
                 <map-marker 
-                *ngFor="let pf of propositionFormations" [position]="{lat: pf.rayonIntervention?.latitude, lng: pf.rayonIntervention?.longitude}"
+                *ngFor="let pf of propositionFormations" [position]="{lat: $safeNavigationMigration(pf.rayonIntervention?.latitude), lng: $safeNavigationMigration(pf.rayonIntervention?.longitude)}"
                 [label]="pf.code"> 
                 </map-marker>
 
-                <map-circle *ngFor="let pf of propositionFormations" [center]="{lat: pf.rayonIntervention?.latitude, lng: pf.rayonIntervention?.longitude}"
-                    [radius]="pf.rayonIntervention?.rayon" [options]="{draggable: true, editable: false, clickable: false}">
+                <map-circle *ngFor="let pf of propositionFormations" [center]="{lat: $safeNavigationMigration(pf.rayonIntervention?.latitude), lng: $safeNavigationMigration(pf.rayonIntervention?.longitude)}"
+                    [radius]="$safeNavigationMigration(pf.rayonIntervention?.rayon)" [options]="{draggable: true, editable: false, clickable: false}">
                 </map-circle>
             </google-map>
         </div>

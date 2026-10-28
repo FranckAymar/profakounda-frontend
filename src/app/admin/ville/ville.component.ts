@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { VilleService } from '../services/ville.service';
 import { Ville } from '../model/ville.model';
 
@@ -6,6 +6,7 @@ import { Ville } from '../model/ville.model';
     selector: 'app-ville',
     templateUrl: './ville.component.html',
     styleUrls: ['./ville.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class VilleComponent implements OnInit {

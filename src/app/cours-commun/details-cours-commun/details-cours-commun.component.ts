@@ -7,13 +7,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterStateSnapshot, RouterState } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-details-cours-commun',
     templateUrl: './details-cours-commun.component.html',
     styleUrls: ['./details-cours-commun.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DetailsCoursCommunComponent implements OnInit {

@@ -1,11 +1,12 @@
 import { LoadingService } from './services/loading.service';
-import { Component, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-loading',
     templateUrl: './loading.component.html',
     styleUrls: ['./loading.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LoadingComponent implements OnInit, AfterViewInit {

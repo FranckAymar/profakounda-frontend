@@ -1,6 +1,6 @@
 import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
 import { CoordMapModel } from './../models/CoordModel';
-import { Component, OnInit, Input, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { NiveauForme } from '../models/NiveauForme.model';
 import { Module } from '../models/formation.model';
 import { Disponibilite } from '../models/Disponibite.model';
@@ -26,6 +26,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     selector: 'app-proposition-formation',
     templateUrl: './proposition-formation.component.html',
     styleUrls: ['./proposition-formation.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

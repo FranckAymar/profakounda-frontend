@@ -1,10 +1,11 @@
 import { SignInService } from './../../home/services/sign-in.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-navbar-home',
     templateUrl: './navbar-home.component.html',
     styleUrls: ['./navbar-home.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NavbarHomeComponent implements OnInit {

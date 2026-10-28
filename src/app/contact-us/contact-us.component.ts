@@ -2,12 +2,13 @@ import { SnackbarService } from './../shared-component/services/snackbar.service
 import { ContactServiceService } from './../shared-component/services/contact-service.service';
 import { SignInService } from './../home/services/sign-in.service';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-contact-us',
     templateUrl: './contact-us.component.html',
     styleUrls: ['./contact-us.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ContactUsComponent implements OnInit {

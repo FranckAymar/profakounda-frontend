@@ -1,7 +1,7 @@
 import { PropostionFormationsAdminService } from './../../admin/services/propostion-formations-admin.service';
 import { PdfMakeWrapper, Toc, Txt, TocItem, Table, Cell, Img, Stack, Columns } from 'pdfmake-wrapper';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import { DatePipe } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
@@ -10,6 +10,7 @@ import { URL } from 'src/app/API_url/config';
     selector: 'app-details-inscrits',
     templateUrl: './details-inscrits.component.html',
     styleUrls: ['./details-inscrits.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DetailsInscritsComponent implements OnInit {

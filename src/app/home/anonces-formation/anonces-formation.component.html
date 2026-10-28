@@ -28,7 +28,7 @@
         [isAllModule]="propositionFormation.isAllModule"
         [cyclePrimairePresente]="propositionFormation.cyclePrimairePresent"
         [description]="propositionFormation.description" [ville]="propositionFormation.ville"
-        [villeTemp]="propositionFormation.ville" [commune]="propositionFormation.commune?.libelle"
+        [villeTemp]="propositionFormation.ville" [commune]="$safeNavigationMigration(propositionFormation.commune?.libelle)"
         [id]="propositionFormation.id">
       </app-card-formation>
       </div>

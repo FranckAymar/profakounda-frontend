@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormationService } from '../services/formation.service';
 import { FormationModel } from '../model/FormationModel';
 
@@ -6,6 +6,7 @@ import { FormationModel } from '../model/FormationModel';
     selector: 'app-formation',
     templateUrl: './formation.component.html',
     styleUrls: ['./formation.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FormationComponent implements OnInit {

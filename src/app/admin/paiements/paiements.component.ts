@@ -1,11 +1,12 @@
 import { URL } from 'src/app/API_url/config';
 import { PaiementService } from './../../formations/services/paiement.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-paiements',
     templateUrl: './paiements.component.html',
     styleUrls: ['./paiements.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PaiementsComponent implements OnInit {

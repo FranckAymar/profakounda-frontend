@@ -1,6 +1,6 @@
 import { URL } from 'src/app/API_url/config';
 import { ListFormationsService } from './../services/list-formations.service';
-import { Component, OnInit, SimpleChanges, HostListener } from '@angular/core';
+import { Component, OnInit, SimpleChanges, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { Ville } from 'src/app/admin/model/ville.model';
@@ -9,6 +9,7 @@ import * as $ from 'jquery';
     selector: 'app-list-formations',
     templateUrl: './list-formations.component.html',
     styleUrls: ['./list-formations.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

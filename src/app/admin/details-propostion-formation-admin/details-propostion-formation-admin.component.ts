@@ -4,12 +4,13 @@ import { CauserefusService } from './../services/causerefus.service';
 import { ActivatedRoute } from '@angular/router';
 import { URL } from 'src/app/API_url/config';
 import { PropostionFormationsAdminService } from './../services/propostion-formations-admin.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-details-propostion-formation-admin',
     templateUrl: './details-propostion-formation-admin.component.html',
     styleUrls: ['./details-propostion-formation-admin.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DetailsPropostionFormationAdminComponent implements OnInit {

@@ -1,7 +1,7 @@
 import { CycleService } from '../services/cycle.service';
 import { ClasseService } from '../services/classe.service';
 import { Classe } from '../model/classe';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import * as $ from 'jquery';
 
@@ -9,6 +9,7 @@ import * as $ from 'jquery';
     selector: 'app-classe',
     templateUrl: './classe.component.html',
     styleUrls: ['./classe.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ClasseComponent implements OnInit {

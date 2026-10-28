@@ -1,12 +1,13 @@
 import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
 import { CoursCommunAdminService } from './../services/cours-commun-admin.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CauserefusService } from '../services/causerefus.service';
 
 @Component({
     selector: 'app-admin-common-course',
     templateUrl: './admin-common-course.component.html',
     styleUrls: ['./admin-common-course.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdminCommonCourseComponent implements OnInit {

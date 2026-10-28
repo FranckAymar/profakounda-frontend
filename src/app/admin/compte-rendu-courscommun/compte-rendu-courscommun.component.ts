@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CoursCommunAdminService } from '../services/cours-commun-admin.service';
 import { OrganisationService } from '../services/organisation.service';
 
@@ -6,6 +6,7 @@ import { OrganisationService } from '../services/organisation.service';
     selector: 'app-compte-rendu-courscommun',
     templateUrl: './compte-rendu-courscommun.component.html',
     styleUrls: ['./compte-rendu-courscommun.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CompteRenduCourscommunComponent implements OnInit {

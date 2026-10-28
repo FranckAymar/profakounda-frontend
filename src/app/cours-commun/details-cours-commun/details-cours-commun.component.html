@@ -22,14 +22,14 @@
                         <li>Code: <strong>{{cours.coursCommun?.codeCours}}</strong></li>
                         <li>
                             <h5 style="text-align: center;" *ngIf="cours.coursCommun?.cout" class="pro-user-act">
-                                {{cours.coursCommun?.cout | currency:'XOF'}} </h5>
+                                {{$safeNavigationMigration(cours.coursCommun?.cout) | currency:'XOF'}} </h5>
                         </li>
                         <li>
-                            Début : <span>{{cours.coursCommun?.dateDebut  |date:"dd MMMM yyyy "}}</span>
+                            Début : <span>{{$safeNavigationMigration(cours.coursCommun?.dateDebut)  |date:"dd MMMM yyyy "}}</span>
 
                         </li>
                         <li>
-                            fin : <span>{{cours.coursCommun?.dateFin |date:"dd MMMM yyyy "}}</span>
+                            fin : <span>{{$safeNavigationMigration(cours.coursCommun?.dateFin) |date:"dd MMMM yyyy "}}</span>
                         </li>
 
                         <li *ngIf="cours.coursCommun?.cout">

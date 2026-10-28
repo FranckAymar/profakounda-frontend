@@ -1,11 +1,11 @@
 <section>
     <div *ngIf="cours.lieuIntervention" class="pro-cover">
 
-        <google-map [center]="{lat: cours.lieuIntervention?.latitude, lng: cours.lieuIntervention?.longitude}" width="100%" height="300px"
+        <google-map [center]="{lat: $safeNavigationMigration(cours.lieuIntervention?.latitude), lng: $safeNavigationMigration(cours.lieuIntervention?.longitude)}" width="100%" height="300px"
             [zoom]="zoom">
 
-            <map-marker [position]="{lat: cours.lieuIntervention?.latitude, lng: cours.lieuIntervention?.longitude}"
-                [label]="cours.lieuIntervention?.libelle"></map-marker>
+            <map-marker [position]="{lat: $safeNavigationMigration(cours.lieuIntervention?.latitude), lng: $safeNavigationMigration(cours.lieuIntervention?.longitude)}"
+                [label]="$safeNavigationMigration(cours.lieuIntervention?.libelle)"></map-marker>
 
 
         </google-map>
@@ -26,10 +26,10 @@
                         <li>Code: <strong> {{cours.coursCommun.codeCours}}</strong></li>
                         <li>
                             <h5 style="text-align: center;" *ngIf="cours.coursCommun?.cout" class="pro-user-act">
-                                {{cours.coursCommun?.cout | currency:'XOF'}}</h5>
+                                {{$safeNavigationMigration(cours.coursCommun?.cout) | currency:'XOF'}}</h5>
                         </li>
                         <li>
-                            Début : <span>{{cours.coursCommun?.dateDebut  |date:"dd MMMM yyyy "}}</span>
+                            Début : <span>{{$safeNavigationMigration(cours.coursCommun?.dateDebut)  |date:"dd MMMM yyyy "}}</span>
 
                         </li>
                         <li>
@@ -60,14 +60,14 @@
                         </li>
                         <li style="background-color: #DA7F5C; color: white;border-radius: 0.2em;padding-left: 0.1em;">
                             Point Transactions : <span
-                                style="color: white;">{{cours.coursCommun?.compteRendu?.pointGlobale | currency:'XOF'}}</span>
+                                style="color: white;">{{$safeNavigationMigration(cours.coursCommun?.compteRendu?.pointGlobale) | currency:'XOF'}}</span>
                         </li>
                         <li>
                             Pourcentage operateur : <span>{{cours.coursCommun?.compteRendu?.pourcentageOperateur}}%</span>
                         </li>
                         <li style="background-color: #002147; border-radius: 0.2em;padding-left: 0.1em;">
                             <span style="color: white;"> Révénu cours :</span> <span
-                                style="color:#DA7F5C">{{cours.coursCommun?.compteRendu?.revenuClient | currency:'XOF'}}</span>
+                                style="color:#DA7F5C">{{$safeNavigationMigration(cours.coursCommun?.compteRendu?.revenuClient) | currency:'XOF'}}</span>
                         </li>
                         <li style="margin-top: 1em;">
                             <span *ngIf="cours.coursCommun.isVirement" style="color: green;font-weight: bold;">Virement effectué</span>

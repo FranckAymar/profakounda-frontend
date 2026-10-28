@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NiveauService } from 'src/app/admin/services/niveau.service';
 import { Niveau } from 'src/app/admin/model/niveau.model';
 import { Classe } from '../model/classe';
@@ -9,6 +9,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
     selector: 'app-niveau',
     templateUrl: './niveau.component.html',
     styleUrls: ['./niveau.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NiveauComponent implements OnInit {

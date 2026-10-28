@@ -2,13 +2,14 @@ import { SnackbarService } from './../../shared-component/services/snackbar.serv
 import { Router, RouterStateSnapshot, RouterState } from '@angular/router';
 import { SignInService } from './../../home/services/sign-in.service';
 import { URL } from '../../API_url/config';
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FavorisService } from '../services/favoris.service';
 
 @Component({
     selector: 'app-card-formation',
     templateUrl: './card-formation.component.html',
     styleUrls: ['./card-formation.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CardFormationComponent implements OnInit {

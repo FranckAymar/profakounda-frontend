@@ -6,13 +6,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { InscriptioncourscommunService } from './../../../cours-commun/inscriptioncourscommun.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from '../../services/cours-commun-service.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-details-cours-commun',
     templateUrl: './details-cours-commun.component.html',
     styleUrls: ['./details-cours-commun.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DetailsCoursCommunComponent implements OnInit {

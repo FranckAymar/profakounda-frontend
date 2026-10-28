@@ -1,13 +1,14 @@
 import { Router } from '@angular/router';
 import { ParticulierService } from './../../customers/services/particulier.service';
 import { SignInService } from './../../home/services/sign-in.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-navbar-auth',
     templateUrl: './navbar-auth.component.html',
     styleUrls: ['./navbar-auth.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NavbarAuthComponent implements OnInit {

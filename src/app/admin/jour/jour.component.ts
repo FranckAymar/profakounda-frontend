@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { JourService } from 'src/app/customers/services/Jour.service';
 import { Jour } from 'src/app/customers/models/jour.model';
 
@@ -10,6 +10,7 @@ import { startWith, map} from 'rxjs/operators';
     selector: 'app-jour',
     templateUrl: './jour.component.html',
     styleUrls: ['./jour.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class JourComponent implements OnInit {

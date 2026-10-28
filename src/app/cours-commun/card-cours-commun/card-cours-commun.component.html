@@ -60,7 +60,7 @@
             <div style="margin-top: 5px;" class="row">
                 <p  style="margin-left: 5px;color: #002147;font-weight: bold;font-size: 15px;">Cours de préparation pour les examens et les concours notamment les sus-nommés... </p>
                 <img style="float: left;margin-right: 13px; margin-left: 5px;" height="25" width="25"  src="../../../assets/images/calendrier.png" alt="">
-                <p style="justify-items: center; color:  #707070;">{{cours.coursCommun?.dateDebut  |date:"dd MMMM yyyy "}}</p>
+                <p style="justify-items: center; color:  #707070;">{{$safeNavigationMigration(cours.coursCommun?.dateDebut)  |date:"dd MMMM yyyy "}}</p>
                 <img style="float: left;margin-right: 13px; margin-left: 5px;" height="25" width="25"  src="../../../assets/images/location.png" alt="">
                 <p style="justify-items: center;color:  #707070;">{{cours.lieuIntervention.libelle}}</p>
             </div>

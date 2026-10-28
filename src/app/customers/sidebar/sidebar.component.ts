@@ -2,12 +2,13 @@ import { Particulier } from './../../home/models/Particulier.model';
 import { URL } from './../../API_url/config';
 import { SignInService } from './../../home/services/sign-in.service';
 import { ParticulierService } from './../services/particulier.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SidebarComponent implements OnInit {

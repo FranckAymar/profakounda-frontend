@@ -1,12 +1,13 @@
 import { signUpvalidationService } from '../services/signUp-validation.service';
 import { SignInComponent } from '../sign-in/sign-in.component';
 import { Routes, Router, RouterModule, ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-sign-upvalidation',
     templateUrl: './sign-upvalidation.component.html',
     styleUrls: ['./sign-upvalidation.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SignUpvalidationComponent implements OnInit {

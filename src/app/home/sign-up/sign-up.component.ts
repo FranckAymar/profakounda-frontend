@@ -1,5 +1,5 @@
 import { SnackbarService } from './../../shared-component/services/snackbar.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ParticulierService } from '../../customers/services/particulier.service';
 import { Router } from '@angular/router';
 import { UntypedFormGroup, UntypedFormBuilder,Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import { Particulier } from '../models/Particulier.model';
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SignUpComponent implements OnInit {

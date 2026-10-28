@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, OnChanges } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 declare var google; 
 
 
@@ -7,6 +7,7 @@ declare var google;
     selector: 'app-google-place',
     templateUrl: './google-place.component.html',
     styleUrls: ['./google-place.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class GooglePlaceComponent implements OnInit, AfterViewInit, OnChanges {

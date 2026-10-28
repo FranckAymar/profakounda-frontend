@@ -1,11 +1,12 @@
 import { CycleService } from '../services/cycle.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Cycle } from 'src/app/admin/model/cycle.model';
 
 @Component({
     selector: 'app-cycle',
     templateUrl: './cycle.component.html',
     styleUrls: ['./cycle.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CycleComponent implements OnInit {

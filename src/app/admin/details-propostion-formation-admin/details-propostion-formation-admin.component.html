@@ -85,7 +85,7 @@
 
                 <div class="udb-sec udb-prof">
                     <h4><img src="../../assets/images/icon/db1.png" alt="" />Description</h4>
-                    <p [innerHTML]="detailsPropositionFormation.propositionFormation?.description"></p>
+                    <p [innerHTML]="$safeNavigationMigration(detailsPropositionFormation.propositionFormation?.description)"></p>
 
                 </div>
 

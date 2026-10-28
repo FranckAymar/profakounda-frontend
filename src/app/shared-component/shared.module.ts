@@ -4,7 +4,7 @@ import { CardFormationComponent } from './../formations/card-formation/card-form
 import { PaymentCoursCommunComponent } from './payment-cours-commun/payment-cours-commun.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -62,5 +62,5 @@ registerLocaleData(localeFr);
         {
             provide: LOCALE_ID,
             useValue: 'fr-FR'
-        }, provideHttpClient(withInterceptorsFromDi())] })
+        }, provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class SharedModule { }

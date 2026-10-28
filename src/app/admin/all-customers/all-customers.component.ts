@@ -1,12 +1,13 @@
 import { ParticulierService } from 'src/app/customers/services/particulier.service';
 import { URL } from 'src/app/API_url/config';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Message } from '../model/message';
 
 @Component({
     selector: 'app-all-customers',
     templateUrl: './all-customers.component.html',
     styleUrls: ['./all-customers.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AllCustomersComponent implements OnInit {

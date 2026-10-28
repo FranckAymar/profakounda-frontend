@@ -13,7 +13,7 @@ import { publicCibleModel } from './../../home/models/publiccible';
 import { LieuInterventionModel } from './../../home/models/lieuintervention';
 import { CoursCommunModel } from './../../home/models/courscommun';
 import { UntypedFormBuilder, UntypedFormGroup, Validators, Form, FormArray, UntypedFormControl } from '@angular/forms';
-import { Component, OnInit, Inject, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as $ from 'jquery';
@@ -25,6 +25,7 @@ declare var $: any;
     selector: 'app-oganiser-cours-sheet',
     templateUrl: './oganiser-cours-sheet.component.html',
     styleUrls: ['./oganiser-cours-sheet.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class OganiserCoursSheetComponent implements OnInit{

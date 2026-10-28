@@ -26,11 +26,11 @@
                            <h5 style="text-align: center;" *ngIf="detailsCoursCommun.coursCommun?.cout" class="pro-user-act">{{detailsCoursCommun.coursCommun?.cout}} FCFA</h5>
                         </li>
                         <li>
-                            Début : <span>{{detailsCoursCommun.coursCommun?.dateDebut  |date:"dd MMMM yyyy "}}</span>
+                            Début : <span>{{$safeNavigationMigration(detailsCoursCommun.coursCommun?.dateDebut)  |date:"dd MMMM yyyy "}}</span>
 
                         </li>
                         <li>
-                             fin : <span>{{detailsCoursCommun.coursCommun?.dateFin |date:"dd MMMM yyyy "}}</span>
+                             fin : <span>{{$safeNavigationMigration(detailsCoursCommun.coursCommun?.dateFin) |date:"dd MMMM yyyy "}}</span>
                         </li>
                     </ul>
                 </div>

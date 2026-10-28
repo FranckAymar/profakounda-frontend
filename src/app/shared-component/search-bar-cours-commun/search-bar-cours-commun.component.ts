@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { VilleService } from 'src/app/admin/services/ville.service';
 import { Observable } from 'rxjs';
@@ -10,6 +10,7 @@ import { startWith, map } from 'rxjs/operators';
     selector: 'app-search-bar-cours-commun',
     templateUrl: './search-bar-cours-commun.component.html',
     styleUrls: ['./search-bar-cours-commun.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SearchBarCoursCommunComponent implements OnInit {

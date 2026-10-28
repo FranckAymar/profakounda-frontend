@@ -1,10 +1,11 @@
 import { FavorisService } from './../../formations/services/favoris.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-favoris-proposition',
     templateUrl: './favoris-proposition.component.html',
     styleUrls: ['./favoris-proposition.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FavorisPropositionComponent implements OnInit {

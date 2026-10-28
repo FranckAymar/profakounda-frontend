@@ -1,10 +1,11 @@
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-list-cours-commun',
     templateUrl: './list-cours-commun.component.html',
     styleUrls: ['./list-cours-commun.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ListCoursCommunComponent implements OnInit {

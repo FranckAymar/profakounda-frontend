@@ -1,11 +1,12 @@
 import { CauserefusService } from './../services/causerefus.service';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-causerefus',
     templateUrl: './causerefus.component.html',
     styleUrls: ['./causerefus.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CauserefusComponent implements OnInit {

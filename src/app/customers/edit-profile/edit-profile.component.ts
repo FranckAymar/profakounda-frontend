@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { URL } from 'src/app/API_url/config';
 import { EMPTY } from 'rxjs';
 import { UntypedFormGroup, UntypedFormBuilder, Validators,UntypedFormControl } from '@angular/forms';
@@ -21,6 +21,7 @@ import { environment } from 'src/environments/environment';
     selector: 'app-edit-profile',
     templateUrl: './edit-profile.component.html',
     styleUrls: ['./edit-profile.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditProfileComponent implements OnInit {

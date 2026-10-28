@@ -3,7 +3,7 @@ import { PdfMakeWrapper, Img, Txt, QR, Columns } from 'pdfmake-wrapper';
 import { CoursCommunService } from './../services/cours-commun-service.service';
 import { SignInService } from 'src/app/home/services/sign-in.service';
 import { PaiementService } from './../../formations/services/paiement.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import { DatePipe } from '@angular/common';
 import { URL } from 'src/app/API_url/config';
@@ -11,6 +11,7 @@ import { URL } from 'src/app/API_url/config';
     selector: 'app-paiements',
     templateUrl: './paiements.component.html',
     styleUrls: ['./paiements.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PaiementsComponent implements OnInit {

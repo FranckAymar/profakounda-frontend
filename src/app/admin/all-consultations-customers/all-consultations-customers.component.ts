@@ -1,11 +1,12 @@
 import { URL } from 'src/app/API_url/config';
 import { PropositionFormationService } from './../../customers/services/propositionFormation.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-all-consultations-customers',
     templateUrl: './all-consultations-customers.component.html',
     styleUrls: ['./all-consultations-customers.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AllConsultationsCustomersComponent implements OnInit {

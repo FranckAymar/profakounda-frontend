@@ -2,7 +2,7 @@ import { SnackbarService } from 'src/app/shared-component/services/snackbar.serv
 import { URL } from 'src/app/API_url/config';
 import { CauserefusService } from './../services/causerefus.service';
 import { PropostionFormationsAdminService } from './../services/propostion-formations-admin.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import * as $ from 'jquery';
 import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
@@ -14,6 +14,7 @@ import { Message } from '../model/message';
     selector: 'app-propostion-formations-admin',
     templateUrl: './propostion-formations-admin.component.html',
     styleUrls: ['./propostion-formations-admin.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PropostionFormationsAdminComponent implements OnInit {

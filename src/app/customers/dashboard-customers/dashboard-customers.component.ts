@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { InscriptioncourscommunService } from 'src/app/cours-commun/inscriptioncourscommun.service';
 import { CoursCommunService } from '../services/cours-commun-service.service';
 import { PropositionFormationService } from '../services/propositionFormation.service';
@@ -8,6 +8,7 @@ import { PaiementService } from 'src/app/formations/services/paiement.service';
     selector: 'app-dashboard-customers',
     templateUrl: './dashboard-customers.component.html',
     styleUrls: ['./dashboard-customers.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DashboardCustomersComponent implements OnInit {

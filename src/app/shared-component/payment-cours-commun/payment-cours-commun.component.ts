@@ -3,7 +3,7 @@ import { InscriptioncourscommunService } from './../../cours-commun/inscriptionc
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import * as $ from 'jquery';
 
 declare var $: any;
@@ -13,6 +13,7 @@ declare var $: any;
     selector: 'app-payment-cours-commun',
     templateUrl: './payment-cours-commun.component.html',
     styleUrls: ['./payment-cours-commun.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PaymentCoursCommunComponent implements OnInit {

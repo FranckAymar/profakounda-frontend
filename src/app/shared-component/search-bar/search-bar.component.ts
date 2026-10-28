@@ -2,12 +2,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { VilleService } from './../../admin/services/ville.service';
 import { ListFormationsService } from './../../formations/services/list-formations.service';
 import { Ville } from './../../admin/model/ville.model';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-search-bar',
     templateUrl: './search-bar.component.html',
     styleUrls: ['./search-bar.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SearchBarComponent implements OnInit {

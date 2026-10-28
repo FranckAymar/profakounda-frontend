@@ -1,12 +1,13 @@
 import { SignInService } from './../services/sign-in.service';
 import { Router } from '@angular/router';
 import { CoursCommunService } from './../../customers/services/cours-commun-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-annonces-courscommun',
     templateUrl: './annonces-courscommun.component.html',
     styleUrls: ['./annonces-courscommun.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AnnoncesCourscommunComponent implements OnInit {

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CoursCommunAdminService } from '../services/cours-commun-admin.service';
 
 @Component({
     selector: 'app-virement',
     templateUrl: './virement.component.html',
     styleUrls: ['./virement.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class VirementComponent implements OnInit {

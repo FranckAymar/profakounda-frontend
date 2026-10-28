@@ -467,9 +467,9 @@
                                 <div class="columns">
                                     <ul class="price">
                                         <li>{{paiementDetails.forfait?.name}}</li>
-                                        <li class="grey">{{paiementDetails.forfait?.montant | currency : 'XOF'}} </li>
+                                        <li class="grey">{{$safeNavigationMigration(paiementDetails.forfait?.montant) | currency : 'XOF'}} </li>
                                         <li> Numéro de téléphone : {{paiementDetails?.numeroPaiement}}
-                                            <br> Opérateur : {{paiementDetails?.modePaiement | uppercase}}
+                                            <br> Opérateur : {{$safeNavigationMigration(paiementDetails?.modePaiement) | uppercase}}
                                         </li>
                                         <li>Nombre de requêtes : {{paiementDetails.forfait?.nbreRequete}}</li>
                                         <li>Valide pour : {{paiementDetails.forfait?.nbreJour}} Jours </li>

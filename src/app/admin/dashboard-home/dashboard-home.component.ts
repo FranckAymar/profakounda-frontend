@@ -1,11 +1,12 @@
 import { URL } from './../../API_url/config';
 import { DashboardService } from './../services/dashboard.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-dashboard-home',
     templateUrl: './dashboard-home.component.html',
     styleUrls: ['./dashboard-home.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DashboardHomeComponent implements OnInit {

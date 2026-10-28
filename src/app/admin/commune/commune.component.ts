@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommuneService } from '../services/commune.service';
 import { VilleService } from '../services/ville.service';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -8,6 +8,7 @@ import { Commune } from '../model/commune.model';
     selector: 'app-commune',
     templateUrl: './commune.component.html',
     styleUrls: ['./commune.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CommuneComponent implements OnInit {

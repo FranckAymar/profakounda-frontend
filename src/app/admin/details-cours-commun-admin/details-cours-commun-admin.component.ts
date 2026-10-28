@@ -1,5 +1,5 @@
 import { URL } from 'src/app/API_url/config';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CoursCommunAdminService } from '../services/cours-commun-admin.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-details-cours-commun-admin',
     templateUrl: './details-cours-commun-admin.component.html',
     styleUrls: ['./details-cours-commun-admin.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DetailsCoursCommunAdminComponent implements OnInit {

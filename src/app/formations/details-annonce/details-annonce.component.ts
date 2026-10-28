@@ -10,7 +10,7 @@ import { URL } from 'src/app/API_url/config';
 import { ActivatedRoute, RouterStateSnapshot, Router } from '@angular/router';
 import { DetaisFormationsService } from './../services/detais-formations.service';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import * as $ from 'jquery';
 import { PasswordMatch } from 'src/app/custom-validator/password-match';
 import { Avis } from 'src/app/home/models/Avis.model';
@@ -22,6 +22,7 @@ declare var $: any;
     selector: 'app-details-annonce',
     templateUrl: './details-annonce.component.html',
     styleUrls: ['./details-annonce.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DetailsAnnonceComponent implements OnInit {

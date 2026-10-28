@@ -2,7 +2,7 @@ import { SignInService } from './../services/sign-in.service';
 import { Router } from '@angular/router';
 import { ListFormationsService } from './../../formations/services/list-formations.service';
 import { URL } from './../../API_url/config';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import * as $ from 'jquery/dist/jquery.min.js';
 
@@ -11,6 +11,7 @@ import * as $ from 'jquery/dist/jquery.min.js';
     selector: 'app-anonces-formation',
     templateUrl: './anonces-formation.component.html',
     styleUrls: ['./anonces-formation.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AnoncesFormationComponent implements OnInit {

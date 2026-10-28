@@ -3,9 +3,10 @@ import { VilleService } from '../services/ville.service';
 import { Ville } from '../model/ville.model';
 
 @Component({
-  selector: 'app-ville',
-  templateUrl: './ville.component.html',
-  styleUrls: ['./ville.component.css']
+    selector: 'app-ville',
+    templateUrl: './ville.component.html',
+    styleUrls: ['./ville.component.css'],
+    standalone: false
 })
 export class VilleComponent implements OnInit {
 

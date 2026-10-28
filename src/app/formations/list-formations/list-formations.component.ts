@@ -6,9 +6,10 @@ import { VilleService } from 'src/app/admin/services/ville.service';
 import { Ville } from 'src/app/admin/model/ville.model';
 import * as $ from 'jquery';
 @Component({
-  selector: 'app-list-formations',
-  templateUrl: './list-formations.component.html',
-  styleUrls: ['./list-formations.component.css'],
+    selector: 'app-list-formations',
+    templateUrl: './list-formations.component.html',
+    styleUrls: ['./list-formations.component.css'],
+    standalone: false
 })
 
 export class ListFormationsComponent implements OnInit {

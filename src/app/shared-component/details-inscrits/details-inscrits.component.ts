@@ -1,15 +1,16 @@
 import { PropostionFormationsAdminService } from './../../admin/services/propostion-formations-admin.service';
 import { PdfMakeWrapper, Toc, Txt, TocItem, Table, Cell, Img, Stack, Columns } from 'pdfmake-wrapper';
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
 import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import { DatePipe } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { URL } from 'src/app/API_url/config';
 @Component({
-  selector: 'app-details-inscrits',
-  templateUrl: './details-inscrits.component.html',
-  styleUrls: ['./details-inscrits.component.css']
+    selector: 'app-details-inscrits',
+    templateUrl: './details-inscrits.component.html',
+    styleUrls: ['./details-inscrits.component.css'],
+    standalone: false
 })
 export class DetailsInscritsComponent implements OnInit {
 

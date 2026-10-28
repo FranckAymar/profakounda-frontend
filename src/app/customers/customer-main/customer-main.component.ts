@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-customer-main',
-  templateUrl: './customer-main.component.html',
-  styleUrls: ['./customer-main.component.css']
+    selector: 'app-customer-main',
+    templateUrl: './customer-main.component.html',
+    styleUrls: ['./customer-main.component.css'],
+    standalone: false
 })
 export class CustomerMainComponent implements OnInit {
 

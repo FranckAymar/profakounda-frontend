@@ -3,9 +3,10 @@ import { PropositionFormationService } from './../../customers/services/proposit
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-all-consultations-customers',
-  templateUrl: './all-consultations-customers.component.html',
-  styleUrls: ['./all-consultations-customers.component.css']
+    selector: 'app-all-consultations-customers',
+    templateUrl: './all-consultations-customers.component.html',
+    styleUrls: ['./all-consultations-customers.component.css'],
+    standalone: false
 })
 export class AllConsultationsCustomersComponent implements OnInit {
 

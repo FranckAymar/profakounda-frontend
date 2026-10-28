@@ -11,9 +11,10 @@ import { Message } from '../model/message';
 
 
 @Component({
-  selector: 'app-propostion-formations-admin',
-  templateUrl: './propostion-formations-admin.component.html',
-  styleUrls: ['./propostion-formations-admin.component.css']
+    selector: 'app-propostion-formations-admin',
+    templateUrl: './propostion-formations-admin.component.html',
+    styleUrls: ['./propostion-formations-admin.component.css'],
+    standalone: false
 })
 export class PropostionFormationsAdminComponent implements OnInit {
 

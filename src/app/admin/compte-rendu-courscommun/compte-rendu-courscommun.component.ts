@@ -3,9 +3,10 @@ import { CoursCommunAdminService } from '../services/cours-commun-admin.service'
 import { OrganisationService } from '../services/organisation.service';
 
 @Component({
-  selector: 'app-compte-rendu-courscommun',
-  templateUrl: './compte-rendu-courscommun.component.html',
-  styleUrls: ['./compte-rendu-courscommun.component.css']
+    selector: 'app-compte-rendu-courscommun',
+    templateUrl: './compte-rendu-courscommun.component.html',
+    styleUrls: ['./compte-rendu-courscommun.component.css'],
+    standalone: false
 })
 export class CompteRenduCourscommunComponent implements OnInit {
 

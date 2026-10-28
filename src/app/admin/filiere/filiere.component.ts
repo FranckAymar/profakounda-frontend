@@ -4,9 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-filiere',
-  templateUrl: './filiere.component.html',  
-  styleUrls: ['./filiere.component.css']
+    selector: 'app-filiere',
+    templateUrl: './filiere.component.html',
+    styleUrls: ['./filiere.component.css'],
+    standalone: false
 })
 export class FiliereComponent implements OnInit {
 

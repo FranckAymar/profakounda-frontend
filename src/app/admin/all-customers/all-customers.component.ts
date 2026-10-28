@@ -4,9 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { Message } from '../model/message';
 
 @Component({
-  selector: 'app-all-customers',
-  templateUrl: './all-customers.component.html',
-  styleUrls: ['./all-customers.component.css']
+    selector: 'app-all-customers',
+    templateUrl: './all-customers.component.html',
+    styleUrls: ['./all-customers.component.css'],
+    standalone: false
 })
 export class AllCustomersComponent implements OnInit {
 

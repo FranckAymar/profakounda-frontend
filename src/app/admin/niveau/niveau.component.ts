@@ -6,9 +6,10 @@ import { CycleService } from '../services/cycle.service';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-niveau',
-  templateUrl: './niveau.component.html',
-  styleUrls: ['./niveau.component.css']
+    selector: 'app-niveau',
+    templateUrl: './niveau.component.html',
+    styleUrls: ['./niveau.component.css'],
+    standalone: false
 })
 export class NiveauComponent implements OnInit {
 

@@ -4,9 +4,10 @@ import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms
 import { Forfait } from 'src/app/admin/model/forfait';
 
 @Component({
-  selector: 'app-forfait',
-  templateUrl: './forfait.component.html',
-  styleUrls: ['./forfait.component.css']
+    selector: 'app-forfait',
+    templateUrl: './forfait.component.html',
+    styleUrls: ['./forfait.component.css'],
+    standalone: false
 })
 export class ForfaitComponent implements OnInit {
 

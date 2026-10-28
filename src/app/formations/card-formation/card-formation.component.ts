@@ -6,9 +6,10 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 import { FavorisService } from '../services/favoris.service';
 
 @Component({
-  selector: 'app-card-formation',
-  templateUrl: './card-formation.component.html',
-  styleUrls: ['./card-formation.component.css']
+    selector: 'app-card-formation',
+    templateUrl: './card-formation.component.html',
+    styleUrls: ['./card-formation.component.css'],
+    standalone: false
 })
 export class CardFormationComponent implements OnInit {
 

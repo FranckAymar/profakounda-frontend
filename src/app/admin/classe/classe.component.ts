@@ -6,9 +6,10 @@ import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-classe',
-  templateUrl: './classe.component.html',
-  styleUrls: ['./classe.component.css']
+    selector: 'app-classe',
+    templateUrl: './classe.component.html',
+    styleUrls: ['./classe.component.css'],
+    standalone: false
 })
 export class ClasseComponent implements OnInit {
 

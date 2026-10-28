@@ -23,10 +23,10 @@ import { CommuneService } from 'src/app/admin/services/commune.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
-  selector: 'app-proposition-formation',
-  templateUrl: './proposition-formation.component.html',
-  styleUrls: ['./proposition-formation.component.css']
-
+    selector: 'app-proposition-formation',
+    templateUrl: './proposition-formation.component.html',
+    styleUrls: ['./proposition-formation.component.css'],
+    standalone: false
 })
 
 export class PropositionFormationComponent implements OnInit {

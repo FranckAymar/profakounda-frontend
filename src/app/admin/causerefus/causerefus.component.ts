@@ -3,9 +3,10 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-causerefus',
-  templateUrl: './causerefus.component.html',
-  styleUrls: ['./causerefus.component.css']
+    selector: 'app-causerefus',
+    templateUrl: './causerefus.component.html',
+    styleUrls: ['./causerefus.component.css'],
+    standalone: false
 })
 export class CauserefusComponent implements OnInit {
 

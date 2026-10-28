@@ -2,9 +2,10 @@ import { FavorisService } from './../../formations/services/favoris.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-favoris-proposition',
-  templateUrl: './favoris-proposition.component.html',
-  styleUrls: ['./favoris-proposition.component.css']
+    selector: 'app-favoris-proposition',
+    templateUrl: './favoris-proposition.component.html',
+    styleUrls: ['./favoris-proposition.component.css'],
+    standalone: false
 })
 export class FavorisPropositionComponent implements OnInit {
 

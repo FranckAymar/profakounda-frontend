@@ -5,9 +5,10 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { Commune } from '../model/commune.model';
 
 @Component({
-  selector: 'app-commune',
-  templateUrl: './commune.component.html',
-  styleUrls: ['./commune.component.css']
+    selector: 'app-commune',
+    templateUrl: './commune.component.html',
+    styleUrls: ['./commune.component.css'],
+    standalone: false
 })
 export class CommuneComponent implements OnInit {
 

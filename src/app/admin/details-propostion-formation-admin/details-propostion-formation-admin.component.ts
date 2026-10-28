@@ -7,9 +7,10 @@ import { PropostionFormationsAdminService } from './../services/propostion-forma
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-details-propostion-formation-admin',
-  templateUrl: './details-propostion-formation-admin.component.html',
-  styleUrls: ['./details-propostion-formation-admin.component.css']
+    selector: 'app-details-propostion-formation-admin',
+    templateUrl: './details-propostion-formation-admin.component.html',
+    styleUrls: ['./details-propostion-formation-admin.component.css'],
+    standalone: false
 })
 export class DetailsPropostionFormationAdminComponent implements OnInit {
 

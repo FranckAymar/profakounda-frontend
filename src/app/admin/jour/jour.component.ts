@@ -7,9 +7,10 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map} from 'rxjs/operators';
 @Component({
-  selector: 'app-jour',
-  templateUrl: './jour.component.html',
-  styleUrls: ['./jour.component.css']
+    selector: 'app-jour',
+    templateUrl: './jour.component.html',
+    styleUrls: ['./jour.component.css'],
+    standalone: false
 })
 export class JourComponent implements OnInit {
   jours:any = [];

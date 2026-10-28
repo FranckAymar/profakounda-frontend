@@ -4,9 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { CauserefusService } from '../services/causerefus.service';
 
 @Component({
-  selector: 'app-admin-common-course',
-  templateUrl: './admin-common-course.component.html',
-  styleUrls: ['./admin-common-course.component.css']
+    selector: 'app-admin-common-course',
+    templateUrl: './admin-common-course.component.html',
+    styleUrls: ['./admin-common-course.component.css'],
+    standalone: false
 })
 export class AdminCommonCourseComponent implements OnInit {
 

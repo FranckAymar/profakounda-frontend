@@ -8,9 +8,10 @@ import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import { DatePipe } from '@angular/common';
 import { URL } from 'src/app/API_url/config';
 @Component({
-  selector: 'app-paiements',
-  templateUrl: './paiements.component.html',
-  styleUrls: ['./paiements.component.css']
+    selector: 'app-paiements',
+    templateUrl: './paiements.component.html',
+    styleUrls: ['./paiements.component.css'],
+    standalone: false
 })
 export class PaiementsComponent implements OnInit {
 urlServer  = URL.getLogoCoursCommun;

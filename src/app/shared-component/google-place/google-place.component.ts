@@ -4,9 +4,10 @@ declare var google;
 
 
 @Component({
-  selector: 'app-google-place',
-  templateUrl: './google-place.component.html',
-  styleUrls: ['./google-place.component.css']
+    selector: 'app-google-place',
+    templateUrl: './google-place.component.html',
+    styleUrls: ['./google-place.component.css'],
+    standalone: false
 })
 export class GooglePlaceComponent implements OnInit, AfterViewInit, OnChanges {
 

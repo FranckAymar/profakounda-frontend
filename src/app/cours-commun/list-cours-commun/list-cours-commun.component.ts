@@ -2,9 +2,10 @@ import { CoursCommunService } from './../../customers/services/cours-commun-serv
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-list-cours-commun',
-  templateUrl: './list-cours-commun.component.html',
-  styleUrls: ['./list-cours-commun.component.css']
+    selector: 'app-list-cours-commun',
+    templateUrl: './list-cours-commun.component.html',
+    styleUrls: ['./list-cours-commun.component.css'],
+    standalone: false
 })
 export class ListCoursCommunComponent implements OnInit {
 

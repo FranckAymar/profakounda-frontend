@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CoursCommunAdminService } from '../services/cours-commun-admin.service';
 
 @Component({
-  selector: 'app-virement',
-  templateUrl: './virement.component.html',
-  styleUrls: ['./virement.component.css']
+    selector: 'app-virement',
+    templateUrl: './virement.component.html',
+    styleUrls: ['./virement.component.css'],
+    standalone: false
 })
 export class VirementComponent implements OnInit {
 

@@ -4,9 +4,10 @@ import { CoursCommunAdminService } from '../services/cours-commun-admin.service'
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-details-cours-commun-admin',
-  templateUrl: './details-cours-commun-admin.component.html',
-  styleUrls: ['./details-cours-commun-admin.component.css']
+    selector: 'app-details-cours-commun-admin',
+    templateUrl: './details-cours-commun-admin.component.html',
+    styleUrls: ['./details-cours-commun-admin.component.css'],
+    standalone: false
 })
 export class DetailsCoursCommunAdminComponent implements OnInit {
 

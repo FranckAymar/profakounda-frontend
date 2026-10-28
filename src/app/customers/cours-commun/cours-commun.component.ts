@@ -4,12 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursCommunService } from './../services/cours-commun-service.service';
 import { OganiserCoursSheetComponent } from './../../shared-component/oganiser-cours-sheet/oganiser-cours-sheet.component';
 import { Component, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-cours-commun',
-  templateUrl: './cours-commun.component.html',
-  styleUrls: ['./cours-commun.component.css']
+    selector: 'app-cours-commun',
+    templateUrl: './cours-commun.component.html',
+    styleUrls: ['./cours-commun.component.css'],
+    standalone: false
 })
 export class CoursCommunComponent implements OnInit {
 

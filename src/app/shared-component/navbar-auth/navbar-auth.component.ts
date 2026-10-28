@@ -5,9 +5,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-navbar-auth',
-  templateUrl: './navbar-auth.component.html',
-  styleUrls: ['./navbar-auth.component.css']
+    selector: 'app-navbar-auth',
+    templateUrl: './navbar-auth.component.html',
+    styleUrls: ['./navbar-auth.component.css'],
+    standalone: false
 })
 export class NavbarAuthComponent implements OnInit {
   isView ;

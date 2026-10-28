@@ -2,9 +2,10 @@ import { SignInService } from './../../home/services/sign-in.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-navbar-home',
-  templateUrl: './navbar-home.component.html',
-  styleUrls: ['./navbar-home.component.css']
+    selector: 'app-navbar-home',
+    templateUrl: './navbar-home.component.html',
+    styleUrls: ['./navbar-home.component.css'],
+    standalone: false
 })
 export class NavbarHomeComponent implements OnInit {
 

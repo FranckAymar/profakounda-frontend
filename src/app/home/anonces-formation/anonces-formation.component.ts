@@ -8,9 +8,10 @@ import * as $ from 'jquery/dist/jquery.min.js';
 
 
 @Component({
-  selector: 'app-anonces-formation',
-  templateUrl: './anonces-formation.component.html',
-  styleUrls: ['./anonces-formation.component.css']
+    selector: 'app-anonces-formation',
+    templateUrl: './anonces-formation.component.html',
+    styleUrls: ['./anonces-formation.component.css'],
+    standalone: false
 })
 export class AnoncesFormationComponent implements OnInit {
 

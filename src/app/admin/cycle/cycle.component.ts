@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Cycle } from 'src/app/admin/model/cycle.model';
 
 @Component({
-  selector: 'app-cycle',
-  templateUrl: './cycle.component.html',
-  styleUrls: ['./cycle.component.css']
+    selector: 'app-cycle',
+    templateUrl: './cycle.component.html',
+    styleUrls: ['./cycle.component.css'],
+    standalone: false
 })
 export class CycleComponent implements OnInit {
   

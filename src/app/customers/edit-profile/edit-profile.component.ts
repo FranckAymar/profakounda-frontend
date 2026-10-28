@@ -14,13 +14,14 @@ import { VilleService } from 'src/app/admin/services/ville.service';
 import { CompressorService } from '../services/CompressorService';
 import { CommuneService } from 'src/app/admin/services/commune.service';
 import { SnackbarService } from 'src/app/shared-component/services/snackbar.service';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.css']
+    selector: 'app-edit-profile',
+    templateUrl: './edit-profile.component.html',
+    styleUrls: ['./edit-profile.component.css'],
+    standalone: false
 })
 export class EditProfileComponent implements OnInit {
 

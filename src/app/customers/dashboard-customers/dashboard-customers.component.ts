@@ -5,9 +5,10 @@ import { PropositionFormationService } from '../services/propositionFormation.se
 import { PaiementService } from 'src/app/formations/services/paiement.service';
 
 @Component({
-  selector: 'app-dashboard-customers',
-  templateUrl: './dashboard-customers.component.html',
-  styleUrls: ['./dashboard-customers.component.css']
+    selector: 'app-dashboard-customers',
+    templateUrl: './dashboard-customers.component.html',
+    styleUrls: ['./dashboard-customers.component.css'],
+    standalone: false
 })
 export class DashboardCustomersComponent implements OnInit {
 

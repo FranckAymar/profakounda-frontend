@@ -3,9 +3,10 @@ import { PaiementService } from './../../formations/services/paiement.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-paiements',
-  templateUrl: './paiements.component.html',
-  styleUrls: ['./paiements.component.css']
+    selector: 'app-paiements',
+    templateUrl: './paiements.component.html',
+    styleUrls: ['./paiements.component.css'],
+    standalone: false
 })
 export class PaiementsComponent implements OnInit {
 

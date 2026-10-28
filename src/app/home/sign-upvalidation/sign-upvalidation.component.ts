@@ -4,9 +4,10 @@ import { Routes, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-sign-upvalidation',
-  templateUrl: './sign-upvalidation.component.html',
-  styleUrls: ['./sign-upvalidation.component.css']
+    selector: 'app-sign-upvalidation',
+    templateUrl: './sign-upvalidation.component.html',
+    styleUrls: ['./sign-upvalidation.component.css'],
+    standalone: false
 })
 export class SignUpvalidationComponent implements OnInit {
 

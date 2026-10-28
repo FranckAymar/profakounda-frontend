@@ -19,9 +19,10 @@ import { AvisService } from 'src/app/home/services/avis.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-details-annonce',
-  templateUrl: './details-annonce.component.html', 
-  styleUrls: ['./details-annonce.component.css']
+    selector: 'app-details-annonce',
+    templateUrl: './details-annonce.component.html',
+    styleUrls: ['./details-annonce.component.css'],
+    standalone: false
 })
 export class DetailsAnnonceComponent implements OnInit {
 

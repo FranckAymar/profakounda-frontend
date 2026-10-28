@@ -7,9 +7,10 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-search-bar-cours-commun',
-  templateUrl: './search-bar-cours-commun.component.html',
-  styleUrls: ['./search-bar-cours-commun.component.css']
+    selector: 'app-search-bar-cours-commun',
+    templateUrl: './search-bar-cours-commun.component.html',
+    styleUrls: ['./search-bar-cours-commun.component.css'],
+    standalone: false
 })
 export class SearchBarCoursCommunComponent implements OnInit {
   myGroup;

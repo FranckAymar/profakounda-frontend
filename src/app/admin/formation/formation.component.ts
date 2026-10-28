@@ -3,9 +3,10 @@ import { FormationService } from '../services/formation.service';
 import { FormationModel } from '../model/FormationModel';
 
 @Component({
-  selector: 'app-formation',
-  templateUrl: './formation.component.html',
-  styleUrls: ['./formation.component.css']
+    selector: 'app-formation',
+    templateUrl: './formation.component.html',
+    styleUrls: ['./formation.component.css'],
+    standalone: false
 })
 export class FormationComponent implements OnInit {
 error:string;

@@ -1,7 +1,7 @@
 import {SignInService} from './home/services/sign-in.service';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {

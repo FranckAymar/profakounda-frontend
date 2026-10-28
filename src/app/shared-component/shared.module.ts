@@ -4,7 +4,7 @@ import { CardFormationComponent } from './../formations/card-formation/card-form
 import { PaymentCoursCommunComponent } from './payment-cours-commun/payment-cours-commun.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -22,8 +22,7 @@ import localeFr from '@angular/common/locales/fr';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 registerLocaleData(localeFr);
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         CardFormationComponent,
         NavbarHomeComponent,
         FooterComponent,
@@ -37,23 +36,12 @@ registerLocaleData(localeFr);
         SearchBarCoursCommunComponent,
         AlertComponent
     ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        GoogleMapsModule,
-        MaterialDesignModule,
-        CKEditorModule,
-    ],
     exports: [
         CardFormationComponent,
         FooterComponent,
         GooglePlaceComponent,
         CommonModule,
         RouterModule,
-        HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
         MaterialDesignModule,
@@ -64,11 +52,15 @@ registerLocaleData(localeFr);
         SearchBarComponent,
         CardCoursCommunComponent,
         SearchBarCoursCommunComponent
-    ],
-    providers: [DatePipe,
+    ], imports: [CommonModule,
+        RouterModule,
+        FormsModule,
+        ReactiveFormsModule,
+        GoogleMapsModule,
+        MaterialDesignModule,
+        CKEditorModule], providers: [DatePipe,
         {
             provide: LOCALE_ID,
             useValue: 'fr-FR'
-        }]
-})
+        }, provideHttpClient(withInterceptorsFromDi())] })
 export class SharedModule { }

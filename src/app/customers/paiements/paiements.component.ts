@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import { DatePipe } from '@angular/common';
 import { URL } from 'src/app/API_url/config';
-import { async } from '@angular/core/testing';
 @Component({
   selector: 'app-paiements',
   templateUrl: './paiements.component.html',

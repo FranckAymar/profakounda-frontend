@@ -1,14 +1,14 @@
 <section>
     <div *ngIf="cours.lieuIntervention" class="pro-cover">
 
-        <agm-map [latitude]="cours.lieuIntervention?.latitude" [longitude]="cours.lieuIntervention?.longitude"
+        <google-map [center]="{lat: cours.lieuIntervention?.latitude, lng: cours.lieuIntervention?.longitude}" width="100%" height="300px"
             [zoom]="zoom">
 
-            <agm-marker [latitude]="cours.lieuIntervention?.latitude" [longitude]="cours.lieuIntervention?.longitude"
-                [label]="cours.lieuIntervention?.libelle"></agm-marker>
+            <map-marker [position]="{lat: cours.lieuIntervention?.latitude, lng: cours.lieuIntervention?.longitude}"
+                [label]="cours.lieuIntervention?.libelle"></map-marker>
 
 
-        </agm-map>
+        </google-map>
     </div>
     <div class="stu-db">
 

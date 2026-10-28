@@ -52,19 +52,16 @@
 
 
         <div  class="col-md-4">
-            <agm-map *ngIf="propositionFormations" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-                <agm-marker 
-                *ngFor="let pf of propositionFormations" 
-                [latitude]="pf.rayonIntervention?.latitude"
-                [longitude]="pf.rayonIntervention?.longitude"
+            <google-map *ngIf="propositionFormations" [center]="{lat: lat, lng: lng}" width="100%" height="700px" [zoom]="zoom">
+                <map-marker 
+                *ngFor="let pf of propositionFormations" [position]="{lat: pf.rayonIntervention?.latitude, lng: pf.rayonIntervention?.longitude}"
                 [label]="pf.code"> 
-                </agm-marker>
+                </map-marker>
 
-                <agm-circle *ngFor="let pf of propositionFormations" [latitude]="pf.rayonIntervention?.latitude"
-                    [longitude]="pf.rayonIntervention?.longitude" [circleDraggable]="true" [editable]="false"
-                    [radius]="pf.rayonIntervention?.rayon" [clickable]="false">
-                </agm-circle>
-            </agm-map>
+                <map-circle *ngFor="let pf of propositionFormations" [center]="{lat: pf.rayonIntervention?.latitude, lng: pf.rayonIntervention?.longitude}"
+                    [radius]="pf.rayonIntervention?.rayon" [options]="{draggable: true, editable: false, clickable: false}">
+                </map-circle>
+            </google-map>
         </div>
 
     </div>

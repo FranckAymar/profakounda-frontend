@@ -2,14 +2,14 @@
 <section>
     <div *ngIf="propositionFormation.rayonIntervention" class="pro-cover">
 
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+        <google-map [center]="{lat: lat, lng: lng}" width="100%" height="300px" [zoom]="zoom">
 
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            <map-marker [position]="{lat: lat, lng: lng}"></map-marker>
 
-            <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="false" [radius]="radius"
-                [clickable]="false" (radiusChange)="changeRaduis($event)">
-            </agm-circle>
-        </agm-map>
+            <map-circle #circle [center]="{lat: lat, lng: lng}" [radius]="radius"
+                (radiusChanged)="changeRaduis(circle.getRadius())" [options]="{draggable: true, editable: false, clickable: false}">
+            </map-circle>
+        </google-map>
     </div>
 
     <div class="stu-db">

@@ -1,10 +1,10 @@
 <section>
     <div  class="pro-cover">
 
-        <agm-map *ngIf="long !==0 && lat !==0" [latitude]="lat" [longitude]="long" [zoom]="17">
+        <google-map *ngIf="long !==0 && lat !==0" [center]="{lat: lat, lng: long}" width="100%" height="300px" [zoom]="17">
 
-            <agm-marker [label]="libelle" [latitude]="lat" [longitude]="long" draggable="true"></agm-marker>
-        </agm-map>
+            <map-marker [position]="{lat: lat, lng: long}" [options]="{draggable: true}" [label]="libelle"></map-marker>
+        </google-map>
     </div>
 
     <div class="stu-db">

@@ -2,7 +2,7 @@ import { MaterialDesignModule } from './../material-design/material-design.modul
 import { CardCoursCommunComponent } from './../cours-commun/card-cours-commun/card-cours-commun.component';
 import { CardFormationComponent } from './../formations/card-formation/card-formation.component';
 import { PaymentCoursCommunComponent } from './payment-cours-commun/payment-cours-commun.component';
-import { AgmCoreModule } from '@agm/core';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -43,9 +43,7 @@ registerLocaleData(localeFr);
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyCud6-IOzGf04McqnGvz3z-pCdDEhci9Jw'
-        }),
+        GoogleMapsModule,
         MaterialDesignModule,
         CKEditorModule,
     ],
@@ -60,7 +58,7 @@ registerLocaleData(localeFr);
         ReactiveFormsModule,
         MaterialDesignModule,
         CKEditorModule,
-        AgmCoreModule,
+        GoogleMapsModule,
         NavbarAuthComponent,
         NavbarHomeComponent,
         SearchBarComponent,

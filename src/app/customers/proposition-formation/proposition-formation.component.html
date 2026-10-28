@@ -548,14 +548,14 @@
 
                 <app-google-place (setAddress)="getAddress($event)" adressType="geocode"></app-google-place>
 
-                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"
-                    (mapClick)="ajoutMarqueur($event.coords.lat, $event.coords.lng)"
-                    (zoomChange)="setZoom($event)">
+                <google-map #map [center]="{lat: lat, lng: lng}" width="100%" height="400px" [zoom]="zoom"
+                    (mapClick)="ajoutMarqueur($event.latLng.lat(), $event.latLng.lng())"
+                    (zoomChanged)="setZoom(map.getZoom())">
 
-                    <agm-circle [latitude]="lat" [longitude]="lng" [circleDraggable]="true" [editable]="true"
-                        [radius]="radius" (radiusChange)="changeRaduis($event)">
-                    </agm-circle>
-                </agm-map>
+                    <map-circle #circle [center]="{lat: lat, lng: lng}"
+                        [radius]="radius" (radiusChanged)="changeRaduis(circle.getRadius())" [options]="{draggable: true, editable: true}">
+                    </map-circle>
+                </google-map>
 
 
             </div>

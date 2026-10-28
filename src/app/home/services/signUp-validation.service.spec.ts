@@ -5,7 +5,7 @@ describe('signUpvalidationService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: signUpvalidationService = TestBed.get(signUpvalidationService);
+    const service: signUpvalidationService = TestBed.inject(signUpvalidationService);
     expect(service).toBeTruthy();
   });
 });

@@ -6,7 +6,7 @@ describe('ResetPasswordService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ResetPasswordService = TestBed.get(ResetPasswordService);
+    const service: ResetPasswordService = TestBed.inject(ResetPasswordService);
     expect(service).toBeTruthy();
   });
 });

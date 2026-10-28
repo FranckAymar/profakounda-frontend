@@ -6,7 +6,7 @@ describe('DetaisFormationsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DetaisFormationsService = TestBed.get(DetaisFormationsService);
+    const service: DetaisFormationsService = TestBed.inject(DetaisFormationsService);
     expect(service).toBeTruthy();
   });
 });

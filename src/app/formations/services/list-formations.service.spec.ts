@@ -6,7 +6,7 @@ describe('ListFormationsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ListFormationsService = TestBed.get(ListFormationsService);
+    const service: ListFormationsService = TestBed.inject(ListFormationsService);
     expect(service).toBeTruthy();
   });
 });

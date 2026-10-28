@@ -6,7 +6,7 @@ describe('CauserefusService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CauserefusService = TestBed.get(CauserefusService);
+    const service: CauserefusService = TestBed.inject(CauserefusService);
     expect(service).toBeTruthy();
   });
 });

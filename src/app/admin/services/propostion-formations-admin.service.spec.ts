@@ -6,7 +6,7 @@ describe('PropostionFormationsAdminService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PropostionFormationsAdminService = TestBed.get(PropostionFormationsAdminService);
+    const service: PropostionFormationsAdminService = TestBed.inject(PropostionFormationsAdminService);
     expect(service).toBeTruthy();
   });
 });
